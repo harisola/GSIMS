@@ -1,0 +1,317 @@
+<?php /***** ***** ***** Final Consultation - JS ***** ***** *****/ ?>
+
+
+<script type="text/javascript">
+
+
+$('.multiselect').multiselect({ includeSelectAllOption: true }); 
+
+var tableRecords = $('#StaffList').find('.Row');
+
+  
+//Multi Filter prototype
+String.prototype.replaceAll = function(search, replacement) {
+   var target = this;
+   return target.replace(new RegExp(search, 'g'), replacement);
+};
+   
+
+
+
+var removeMark = function removeMark() {
+
+   var b = document.getElementsByTagName('mark');
+
+   while(b.length) {
+	   var parent = b[ 0 ].parentNode;
+	   while( b[ 0 ].firstChild ) {
+		   parent.insertBefore(  b[ 0 ].firstChild, b[ 0 ] );
+	   }
+		parent.removeChild( b[ 0 ] );
+   }
+}
+   
+	
+
+ $("#staffView_StaffList_Search").keyup(function(){
+	//tablesolangi.destroy();
+	 
+    var searchText = $("#staffView_StaffList_Search").val();
+		var arr = searchText.split(' ');
+        var result = "";
+        for (var x=0; x<arr.length; x++)
+            result+=arr[x].substring(0,1).toUpperCase()+arr[x].substring(1)+' ';
+			searchText = result.substring(0, result.length-1);
+       
+        $(tableRecords).each(function(){
+            var lineStr = $(this).text();
+			
+          
+            if( lineStr.indexOf(searchText) === -1 ){
+                $(this).hide();
+            }
+			else 
+			{
+				$(this).show();
+      }
+        });
+        var totalRow =  $('#StaffList tr:visible').length - 1;
+        $('#staffView_StaffList_Total').text('Applicants - ' + totalRow); 
+		
+
+	
+
+    });
+	
+
+ 
+	$('#staffView_filter_btn_Applicant .applyFilter_Applicant').click(function() 
+	{
+		$('#StaffList tr').show();
+		var table = $("#StaffList");
+		var tr = $('#StaffList > tbody  > tr');
+		multiFilter();
+		$('#staffView_StaffList_Search').val('');
+		var totalRow =  $('#StaffList tr:visible').length - 1;
+	});
+	
+	
+$('#staffView_filter_btn_Applicant .clearFilter_Applicant').click(function() 
+{
+	
+	$('#StaffList tr').show();
+	var totalRow =  $('#StaffList tr:visible').length - 1;
+	
+	$('.multiselect').val('');
+	//$('.multiselect').multiselect("deselectAll", false).multiselect("refresh");
+	//$(".multiselect").multiselect("clearSelection");
+	
+	
+
+	//$(tableRecords).each(function(){ $(this).show(); });
+    
+	
+	
+	
+	   //Deselect all if selected 
+       $('#StaffView_Filter_Profile').multiselect("deselectAll", false).multiselect("refresh");
+       $('#StaffView_Filter_Department').multiselect("deselectAll", false).multiselect("refresh");
+       $('#StaffView_Filter_Position').multiselect("deselectAll", false).multiselect("refresh");
+       $('#StaffView_Filter_AtdStd').multiselect("deselectAll", false).multiselect("refresh");
+      
+   
+	$('#StaffView_Filter_Campus').multiselect("deselectAll", false).multiselect("refresh");
+   
+   
+       $('#StaffView_Filter_Profile').val('');
+       $('#StaffView_Filter_Department').val('');
+       $('#StaffView_Filter_Campus').val('');
+	   $('#StaffView_Filter_Position').val('');
+	   
+       $('#StaffView_Filter_AtdStd').val('');
+       $('#staffView_StaffList_Search').val('');
+	   
+	   
+	   $('input[type=date]').each( function resetDate(){
+		  this.value = this.defaultValue;
+		} );
+
+
+
+       tableRecords = $('#StaffList').find('.Row');
+       tableRecords.show();
+   
+       var totalRow =  $('#StaffList tr:visible').length - 1;
+       $('#staffView_StaffList_Total').text('STAFF LIST - ' + totalRow);
+	   
+	  $('#StaffList').DataTable().destroy();
+	  $("#StaffList").dataTable({
+      "bLengthChange": false,
+      "bInfo" : false,
+      "aLengthMenu": [[25, 50, 70, -1], [25, 50, 70, "All"]],
+      "iDisplayLength": 200
+    }); 
+		
+		
+	
+});
+
+
+
+	
+	
+	
+
+    /*
+    * Function Name : multiFilter
+    * Description:  Multiple select checkbox filter function used to filter data on table using multiple values from one or more select checkboxes
+    */
+    var multiFilter = function multiFilter(){
+
+    var ddlFilterTableRow = $('select.ddlFilterTableRow');
+   
+   
+    ddlFilterTableRow.attr('disabled', 'disabled');
+	
+	$("#StaffList").DataTable().destroy();
+	
+	var records = $('#StaffList').find('.Row');
+	records.hide();
+   
+       var critriaAttributes = [];
+       ddlFilterTableRow.each(function() {
+           var $this = $(this),
+               $selectedLength = $this.find(':selected').length,
+               $critriaAttribute = '';
+   
+           if ($selectedLength > 0 && $this.val() != '0') {
+               if ($selectedLength == 1) {
+                   $critriaAttribute += '[data-' + $this.data('attribute') + '*="' + $this.val() + '"]';
+               } else {
+                   var $startDataAttribute = '[data-' + $this.data('attribute') + '*="',
+                       $endDataAttribute = '"]',
+                       $selectedValues = $this.val().toString();
+					   
+
+   
+                   $critriaAttribute += $startDataAttribute + $selectedValues.replaceAll(',', ($endDataAttribute + ',' + $startDataAttribute)) + $endDataAttribute;
+				 
+               }
+               critriaAttributes.push($critriaAttribute);
+           }
+       });
+                   
+   
+       var $showRecords = records;
+       if (critriaAttributes.length > 0) {
+           $.each(critriaAttributes, function(i, filterValue) {
+               $showRecords = $showRecords.filter(filterValue);
+           });
+       }
+   
+       tableRecords = $showRecords.show();
+   
+    ddlFilterTableRow.removeAttr('disabled');
+	
+	   
+	$("#StaffList").dataTable({
+      "bLengthChange": false,
+      "bInfo" : false,
+      "aLengthMenu": [[25, 50, 70, -1], [25, 50, 70, "All"]],
+      "iDisplayLength": 500
+    });
+	
+	
+	var totalRow =  $('#StaffList tr:visible').length - 1;
+    $('#staffView_StaffList_Total').text('Applicants - ' + totalRow); 
+	
+    }
+	
+	$(".Move_To_Archive").click(
+		function()
+		{
+			
+			// href="#MoveTA" data-toggle="modal" 
+			var form_id = $(this).data("form");
+			var stage_id = $(this).data("stage");
+			var name_title = $(this).data("nametitle");
+			
+			
+			$("#Modal_Form_id").val(form_id);
+			$("#Modal_Stage_id").val(stage_id);
+			
+			$("#mname_title").text(name_title);
+			$('#MoveTA').modal({ show: 'show',  backdrop: 'static' }); 
+			
+			
+		}
+	);
+	
+	$("#btn_MoveToArch").click(
+		function()
+		{
+			var form_id = $("#Modal_Form_id").val();
+			var stage_id = $("#Modal_Stage_id").val();
+			var taging = $("#career_tag_move_to_archive2").val();
+			
+			
+			
+			
+		
+			
+			
+			
+			if( parseInt( form_id ) > 0 )
+			{
+				$.ajax({
+					type:'POST',
+					data:{
+						'_token': '{{ csrf_token() }}', "form_id":form_id, "status_id":10,"stage_id":stage_id
+						
+
+						},
+					url:"{{url('/call_for_part_b_presence')}}",
+					dataType: "json",
+					success: function(response)
+					{
+						
+					}
+				});
+				
+				
+				$.ajax({
+					type:'POST',
+					data:{ '_token': '{{ csrf_token() }}', "form_id":form_id, "status_id":10,"stage_id":stage_id,"taging":taging },
+					url:"{{url('/addFormDataMoveToArchive')}}",
+					dataType: "json",
+					success: function(response)
+					{
+						
+					}
+				});
+				
+				
+			}
+			
+			$('#MoveTA').modal('hide');
+			
+			$("#StaffList").DataTable().destroy();
+			
+			// Reload After Move To Archive
+			setTimeout(function(){ 
+			
+				$.ajax({
+					type:'POST',
+					data:{'_token': '{{ csrf_token() }}'},
+					url:"{{url('/addcustomer')}}",
+					dataType: "json",
+					async: false,
+					cache: false,
+					success: function(response)
+					{
+					$('#table_data').html('');
+					$('#table_data').html(response.html);
+					
+					}
+				});
+				$("#StaffList").dataTable({
+				  "bLengthChange": false,
+				  "bInfo" : false,
+				  "aLengthMenu": [[25, 50, 70, -1], [25, 50, 70, "All"]],
+				  "iDisplayLength": 500
+				});
+			}, 1000);
+			
+			
+			
+		}
+	);
+	
+
+  
+  
+  
+
+   
+   
+</script>

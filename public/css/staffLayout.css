@@ -1,0 +1,1066 @@
+/* */
+@media only screen and (max-width: 500px) {
+	.theme-panel {
+		display:block !important;	
+	}
+	input#staffView_StaffList_Search {
+		width: 77% !important;
+		margin-left: 23% !important;
+	}
+	.AttStatusNeww {
+		display:none !important;	
+	}
+	.NoShowOnMob {
+		display:none !important;
+	}
+	.ShowOnMob {
+		display:block !important;	
+	}
+	.theme-panel {
+    	width: 100% !important;
+	}
+	.theme-panel>.theme-options>.theme-option>span,
+	.theme-panel>.theme-options2>.theme-option {
+		width: 100% !important;
+		text-align: center !important;
+	}
+	.theme-panel>.theme-options2>.theme-option>select.form-control {
+		width:100% !important;	
+	}
+	button.multiselect.dropdown-toggle.btn.btn-default {
+		width: 100% !important;
+	}
+	.btn-group {
+		width:100% !important;
+	}
+	ul.multiselect-container.dropdown-menu {
+		width: 261px !important;
+		left: 0 !important;
+	}
+	.theme-panel>.theme-options2 {
+		left: 0px !important;
+	}
+	.paddingRight0 {
+		padding-right: 17px !important;
+	}
+	.marginTop20 .borderRightDashed {
+		margin-bottom: 20px;
+		float: left;
+		width: 100%;
+		border: 0 none;
+		border-bottom: 1px dashed #ccc;
+		padding-bottom: 20px;
+	}	
+	.fixedHeight3 {
+		height: auto !important;
+	}
+	.width20 {
+		width: 9% !important;
+	}
+	.tab-content {
+    	text-align: center;	
+	}
+	img.SchoolPlaceHolder {
+		width: 50% !important;
+	}
+	.positionDetail {
+		float: left !important;
+		width: 100% !important;
+		padding: 0 0 10px 0 !important;
+	}
+	.col-md-11 h5 {
+		padding-top: 10px;
+	}
+	.profile-userpic img {
+		width: 82px !important;
+	}
+	.profile-usertitle-name {
+		font-size: 16px !important;
+	}
+	.MobPaddingRight0 {
+	    padding-right: 0;	
+	}
+	.linkLookalike {
+		font-size: 12px !important;
+	}
+}
+/* #bufferTime .noUi-handle.noUi-handle-lower {
+    display: none;
+}
+#bufferTime .noUi-handle.noUi-handle-upper {
+    display: none;
+}
+*/
+.col-md-11 h5 {
+    font-weight: normal !important;
+    color: #a09f9f !important;	
+}
+.col-md-11 h5 strong {
+	color:#585858 !important;	
+}
+.flowidth100 {
+    float: left;
+    width: 100%;
+}
+.pull-left {
+    float: left!important;
+    width: 100%;
+}
+.NoShowOnMob {
+	display:block;
+}
+.ShowOnMob {
+	display:none;	
+}
+span.multiselect-native-select {
+    width: auto !important;
+}
+ul.multiselect-container.dropdown-menu {
+    width: 287px;
+    left: -147px;
+    text-transform: none !important;
+    top: 24px;
+    overflow: hidden;
+    max-height: 245px;
+    overflow-y: scroll;
+}
+.multiselect-container>li>a>label {
+    padding: 3px 20px 3px 30px !important;
+    color: #666 !important;
+    font-family: calibri !important;
+    line-height: 21px !important;
+}
+button.multiselect.dropdown-toggle.btn.btn-default {
+    width: 140px;
+    overflow: hidden;
+	text-align:left;
+}
+b.caret {
+    float: right;
+    margin-top: 7px;
+}
+.fontSize20 {
+	font-size:20px;	
+}
+.policyList li {
+	line-height:21px;	
+}
+.contentArea p {
+	line-height:21px !important;	
+}
+/* */
+tr.selected {
+	background:#ececec !important;	
+}
+.page-container-bg-solid .theme-panel, .page-content-white .theme-panel {
+    position: relative !important;
+    margin-top: -37px !important;
+    margin-right: 0px !important;
+    left: 0;
+}
+input#staffView_StaffList_Search {
+    width: 81%;
+    margin-left: 19%;
+}
+.input-icon.right>i {
+    left: auto;
+    right: 8px !important;
+    float: right;
+}
+.marginBottom4 {
+	margin-bottom:4px !important;	
+}
+.onlyBorderBottom {
+	border-bottom:1px solid #dedede;	
+}
+.portlet.light.lowPadding2 {
+    padding: 10px 10px 20px;
+}
+.alumni .mt-card-name {
+    color: #888;
+}
+.alumni .mt-overlay {
+    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.68);
+}
+.popover-content,
+.popover-title {
+	font-size:12px;	
+}
+.table.table-light>tbody>tr>td .user-pic {
+    height: 43px !important;
+}
+#staffView_Table_StaffList.table>tbody>tr>td, 
+#staffView_Table_StaffList.table>tbody>tr>th, 
+#staffView_Table_StaffList.table>tfoot>tr>td, 
+#staffView_Table_StaffList.table>tfoot>tr>th, 
+#staffView_Table_StaffList.table>thead>tr>td, 
+#staffView_Table_StaffList.table>thead>tr>th {
+    padding: 4px 5px !important;
+}
+.positionDetail {
+	padding-right: 30px;	
+}
+.theme-panel>.toggler {
+    left: 0;
+	width:10px;
+    position: absolute;
+    background: url(../img/icon-color-filter.png) center no-repeat #536881 !important;
+    border-radius: 4px;
+}
+.theme-panel>.toggler-close {
+    left: 0px;
+}
+.theme-panel>.theme-options {
+    left: 0px;
+}
+.theme-panel>.toggler, .theme-panel>.toggler-close {
+	width:10px;
+    padding: 16px !important;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    top: 4px;
+    cursor: pointer;
+}
+.headTitle {
+    display: none;
+    position: absolute;
+    top: -19px;
+    background: #fff;
+    width: 80%;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef1f5;
+}
+.width20 {
+	width:14%;
+}
+.width80 {
+	width:86%;
+}
+.width100 {
+	width:100%;	
+}
+/***** Toggler 2 *****/
+.theme-panel>.toggler2 {
+    left: 33px;
+    position: absolute;
+    background: url(../img/sort_icon.png) center no-repeat #536881 !important;
+    border-radius: 4px;
+}
+.theme-panel>.toggler2, .theme-panel>.toggler2-close {
+    padding: 16px !important;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    top: 4px;
+    cursor: pointer;
+	width:10px;
+}
+.theme-panel>.toggler2-close {
+    left: 33px;
+}
+.theme-panel>.theme-options2 {
+    left: 33px;
+}
+.theme-panel>.theme-options2 {
+    top: 36px !important;
+}
+/***** END - Toggler 2 *****/
+.theme-panel {
+    width: 420px;
+    margin-top: -13px;
+    margin-right: 0;
+    z-index: 100;
+    float: right;
+    position: relative;
+}
+.theme-panel>.theme-options>.theme-option>span {
+    width: 165px;
+}
+.portlet.light>.portlet-title>.inputs {
+    float: right;
+    display: inline-block;
+    padding: 4px 0;
+    width: 175px !important;
+}
+.theme-panel>.theme-options {
+    top: 36px !important;
+}
+.headRightDetails {
+	display: none;
+    background: #dedede;
+    width: 62.8%;
+    padding: 5px 15px;
+    border-bottom: 1px solid #eef1f5;
+    z-index: 999;
+    position: fixed;
+    margin-top: 0px;
+}
+.staffStatus.A {
+	padding: 0px 3px;
+    color: #fff;
+    background: #cadbde;
+}
+.staffStatus.T {
+	padding: 0px 3px;
+    color: #fff;
+    background: #dddeca;
+}
+.staffStatus.F {
+	padding: 0px 3px;
+    color: #fff;
+    background: #dddeca;
+}
+.staffStatus.X {
+	padding: 0px 3px;
+    color: #fff;
+    background: #dddeca;
+}
+/* */ 
+.theme-panell>.sorter {
+    right: 0;
+    position: absolute;
+    background: url(../img/icon-color-filter.png) center no-repeat #536881 !important;
+    border-radius: 4px;
+}
+.theme-panell>.sorter, .theme-panell>.sorter-close {
+    padding: 16px !important;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    top: 4px;
+    cursor: pointer;
+}
+.theme-panel {
+    width: 348px;
+    margin-top: -13px;
+    margin-right: 0;
+    z-index: 100;
+    float: left;
+    position: relative;
+}
+.theme-panel>.sorter-options {
+    top: 34px !important;
+}
+/* */ 
+.table.table-light>tbody>tr>td {
+    border-bottom: 1px solid #dee1e4 !important;
+}
+.table.table-light>thead>tr>th {
+    border-bottom: 1px solid #dee1e4 !important;
+}
+.table.table-light.table-hover>tbody>tr:hover>td, .table.table-light.table-hover>tbody>tr>td:hover, .table.table-light.table-hover>tbody>tr>th:hover {
+    background: #ececec !important;
+}
+
+/* Profile Right Area CSS */
+img.SchoolPlaceHolder {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+.profile-sidebar {
+	float: left;
+	width: 300px;
+	margin-right: 20px
+}
+.profile-content {
+	overflow: hidden
+}
+.profile-sidebar-portlet {
+	padding: 10px 0 0!important
+}
+.profile-userpic img {
+	float: none;
+	margin: 0 auto;
+	width: 91px;
+	height: 50%;
+	-webkit-border-radius: 50%!important;
+	-moz-border-radius: 50%!important;
+	border-radius: 50%!important
+}
+.profile-usertitle {
+	text-align: center;
+	margin-top: 10px
+}
+.profile-usertitle-name {
+	color: #5a7391;
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 7px
+}
+.profile-usertitle-job {
+	text-transform: uppercase;
+	color: #5b9bd1;
+	font-size: 13px;
+	font-weight: 800;
+	margin-bottom: 7px
+}
+.profile-userbuttons {
+	text-align: center;
+	margin-top: 10px
+}
+.profile-userbuttons .btn {
+	margin-right: 5px
+}
+.profile-userbuttons .btn:last-child {
+	margin-right: 0
+}
+.profile-userbuttons button {
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 6px 15px
+}
+.profile-usermenu {
+	margin-top: 30px;
+	padding-bottom: 20px
+}
+.profile-usermenu ul li {
+	border-bottom: 1px solid #f0f4f7
+}
+.profile-usermenu ul li:last-child {
+	border-bottom: none
+}
+.profile-usermenu ul li a {
+	color: #93a3b5;
+	font-size: 16px;
+	font-weight: 400
+}
+.profile-usermenu ul li a i {
+	margin-right: 8px;
+	font-size: 16px
+}
+.profile-usermenu ul li a:hover {
+	background-color: #fafcfd;
+	color: #5b9bd1
+}
+.profile-usermenu ul li.active a {
+	color: #5b9bd1;
+	background-color: #f6f9fb;
+	border-left: 2px solid #5b9bd1;
+	margin-left: -2px
+}
+.profile-stat {
+	padding-top: 20px;
+	border-top: 1px solid #f0f4f7
+}
+.profile-stat-title {
+	color: #7f90a4;
+	font-size: 20px;
+	text-align: center
+}
+.profile-stat-text {
+	color: #5b9bd1;
+	font-size: 11px;
+	font-weight: 800;
+	text-align: center
+}
+.profile-desc-title {
+	color: #7f90a4;
+	font-size: 17px;
+	font-weight: 600
+}
+.profile-desc-text {
+	color: #7e8c9e;
+	font-size: 14px
+}
+.profile-desc-link i {
+	width: 22px;
+	font-size: 19px;
+	color: #abb6c4;
+	margin-right: 5px;
+	float: left;
+    margin-top: 2px;
+}
+.profile-desc-link a {
+	font-size: 14px;
+	font-weight: 600;
+	color: #5b9bd1
+}
+.profile-stat {
+    background: #f2f2f2;
+    padding-bottom: 13px;
+    /* width: 107%; */
+    margin-left: -16px;
+}
+.greyBorder tr td:first-child {
+	border-right:1px solid #ccc;	
+}
+span.labelHere {
+    color: #888;
+    width: 120px;
+    float: left;
+    text-align: right;
+    padding-right: 3px;
+    margin-right: 30px;
+}
+.shortHeight {
+	 float:left;
+	 width:100%;
+	 height:20px;
+	 overflow:hidden;	
+	 margin-left: 10px;
+}
+.greyBorder {
+	border:1px solid #ccc;	
+}
+.control-label {
+    margin-top: 6px !important;
+    font-weight: 400;
+	    color: #666;
+}
+.tabbable-line>.nav-tabs>li>a {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+}
+.paddingRight0 {
+	padding-right:0;
+}
+.paddingLeft0 {
+	padding-left:0;
+}
+.marginTop0 {
+	margin-top:0;	
+}
+.padding1020 {
+    padding: 10px 20px !important;
+}
+.padding20 {
+	padding:20px !important;	
+}
+.titleSolidBG {
+    background: #e5f2ff;
+    border-bottom: 2px solid #82aad2 !important;	
+}
+.list-separated i {
+	color:#888;
+}
+.fullWidthTabs li {
+	width:16.5%;
+	height: 41px;
+	text-align:center;
+}
+
+
+.profile-desc-link.margin-top-10 {
+    margin-top: 7px!important;
+}
+.portlet.light.lowPadding {
+    padding: 5px 10px 10px;
+    background-color: #fff;
+}
+
+@media (max-width:991px) {
+.profile-sidebar {
+	float: none;
+	width: 100%!important;
+	margin: 0
+}
+.profile-sidebar>.portlet {
+	margin-bottom: 20px
+}
+.profile-content {
+	overflow: visible
+}
+}
+.page-content-wrapper .page-content  {
+	min-height: 600px !important;
+	    padding: 25px 20px 18px !important;
+}
+/***
+Staff List 
+***/
+.number-stats .stat-right .stat-number {
+    width: 100% !important;
+}
+.number-stats .stat-number .number {
+    line-height: 19px !important;
+}
+.fixedHeight250 {
+	height:250px;
+	border: 1px solid #e7ecf1!important;
+}
+.fixedHeight3 {
+    height: 143px;
+}
+.fixed-height {
+    height: 81vh;
+    overflow-y: scroll;
+}
+.fixed-height-NoScroll {
+    height: 81vh;
+	overflow-y:scroll;
+}
+.nameCodeOption {
+	border: 1px solid #ccc;
+    padding: 1px 4px;
+    background: #eaeaea;
+    color: #888;
+    font-size: 12px;
+}
+.AttStatusNew {
+	width:100%;	
+}
+.AttStatusNeww {
+	    width: 24px;
+    float: left;
+    margin-left: 10px;	
+}
+span.tenDayAttStatuss {
+    width: 100%;
+    float: left;
+    border-bottom: 1px dotted;
+}
+.currentAttStatus {
+	float: left;
+	width: 30px;
+	background: ;
+	padding: 15px 0 14px;
+	border: 1px solid #ccc;
+	font-size: 12px;
+	color: #000;
+}
+.tenDayAttStatus {
+	    float: left;
+    width: 30px;
+    background: ;
+    padding: 6px 0 5px;
+    border: 1px solid #ccc;
+    border-left: 0 none;
+	font-size:12px;
+}
+.sixtyDayAttStatus {
+	float: left;
+	font-size:12px;
+    background: ;
+    width: 30px;
+    border: 1px solid #ccc;
+    border-top: 0 none;
+    border-left: 0 none;
+}
+.presnt {
+	font-size:22px;	
+	color: #29d637;
+}
+.absent {
+	font-size:22px;	
+	    color: #d62929;
+}
+th.text-center,
+td.text-center {
+	text-align:center !important;	
+}
+#StaffList {
+	
+}
+.borderRightDashed {
+	border-right:1px dashed #ccc;
+}	
+#StaffList_wrapper thead th:nth-child(2) {
+	text-align:center;
+}
+#StaffList tr td {
+	padding:5px !important;
+}
+#StaffList td {
+	vertical-align:middle;
+}
+#StaffList_paginate {
+	 text-align:right;	
+}
+#StaffList_wrapper .row .col-md-6:nth-child(2) {
+	width:100%;	
+}
+.page-content {
+    background: #eef1f5 !important;
+}
+.marginTop0 {
+    margin-top: 0;
+}
+.marginTop20 {
+	margin-top:20px; 	
+}
+.marginBottom0 {
+    margin-bottom: 0;
+}
+.marginBottom5 {
+    margin-bottom: 5px;
+}
+.paddingLeft0 {
+	padding-left:0;	
+}
+.paddingBottom10 {
+	padding-bottom:10px !important;	
+}
+.paddingBottom20 {
+	padding-bottom:20px !important;	
+}
+.paddingBottom40 {
+	padding-bottom:40px !important;	
+}
+.paddingTop50 {
+	padding-top:50px !important;	
+}
+.staffImage {
+	width: 110px;
+    border: 1px solid #888;
+    padding-bottom: 0px;
+    position: relative;
+    float: left;
+    margin-right: 20px;
+	border-radius: 50% !important;
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+}
+.headingBorderBottom {
+	border-bottom:1px solid #ccc;
+	padding-bottom:10px;
+	margin-bottom:20px;	
+}
+.greyBorder tr td:first-child {
+	border-right:1px solid #ccc;	
+}
+.padding20 {
+	padding:20px !important;	
+}
+.padding0 {
+	padding:0 !important;	
+}
+.SolidBG {
+	background: #e5f2ff;
+    padding: 10px 20px !important;
+    color: #666;
+}
+span.staffTopDetails {
+    float: left;
+    padding-top: 2px;
+}
+.staffTopDetails h4 {
+    font-weight: bold;
+    color: #c75b5b;
+}
+.PP .AttStatus {
+    background: #00ff00;
+    color: #000;
+}
+.Att10Days {
+    width: 33%;
+    background: #fff;
+    text-align: center;
+    float: left;
+    padding: 1px 0;
+}
+.Att60Days {
+    width: 34%;
+    background: #ccc;
+    text-align: center;
+    float: left;
+    padding: 1px 0;
+}
+.AttBox {
+    border: 1px solid;
+    float: left;
+    width: 100%;
+    font-size: 10px;
+}
+.AttStatus {
+    width: 33%;
+    text-align: center;
+    float: left;
+    padding: 1px 0;
+}
+.TpxborderBottom {
+	border-bottom:2px solid #888 !important;
+	-webkit-box-shadow: 0px 1px 9px 0px;
+	-moz-box-shadow: 0px 1px 9px 0px;
+	box-shadow: 0px 1px 9px 0px;
+}
+.fixed-height2 {
+	height:61.5vh;
+	overflow-y:scroll;	
+}
+span.labelHere {
+    color: #888;
+    width: 120px;
+    float: left;
+    text-align: right;
+    padding-right: 3px;
+    margin-right: 30px;
+}
+.greyBorder {
+	border:1px solid #ccc;	
+}
+#tab_basic .form-group {
+    margin-bottom: 0;
+}
+thead tr th {
+    vertical-align: middle !important;
+}
+.tab-content thead {
+	background:#e0e0e0;
+}
+tr.active td {
+	background:#dedede !important;	
+}
+#tab_basic .form-horizontal .control-label {
+    color: #888;
+}
+.border-right {
+	border-right:1px solid #ccc;	
+}
+/* TIF A CSS */
+.primaryReporting {
+    border: 1px solid #ccc;
+}
+.primaryReporting .PrimaryName {
+	background: #d9d9d9;
+    padding: 13px 5px 15px 0;
+    margin: 0;
+	font-size:14px;
+	font-weight:normal;
+	color:#808080;
+}
+.primaryReporting .PrimaryName .namePrimaryCode {
+	background:#f2f2f2;
+	    padding: 12px 15px 12px;	
+		margin-right:10px;
+		color:#808080;
+		font-weight:bold;
+}
+.primaryReporting h5.PrimaryTopLine {
+    margin: 0;
+    background: #f2f2f2;
+    padding: 15px 5px;
+    text-align: center;
+	font-weight:normal;
+	font-size:12px;
+	color:#808191;
+}
+.primaryReporting h5.PrimaryBottomLine {
+    margin: 0;
+    background: #d9d9d9;
+    padding: 15px 5px;
+    text-align: center;
+	font-weight:normal;
+	font-size:12px;
+	color:#868081;
+}
+.summarySection.col-md-12 {
+    padding: 20px 0;
+}
+.reportingPersonal {
+    border: 1px solid #ccc;
+}
+.reportingPersonal .PrimaryName {
+	background: #d9d9d9;
+    padding: 15px 5px 15px 0;
+    margin: 0;
+	font-size:14px;
+	font-weight:normal;
+	color:#000;
+}
+.reportingPersonal .PrimaryName .namePrimaryCode {
+	background:#f2f2f2;
+	    padding: 12px 15px 12px;	
+		margin-right:10px;
+		color:#000;
+		font-weight:bold;
+}
+.reportingPersonal h5.PrimaryTopLine {
+    margin: 0;
+    background: #dce6f1;
+    padding: 15px 5px;
+    text-align: center;
+	font-weight:normal;
+	font-size:12px;
+	color:#000;
+}
+.reportingPersonal h5.PrimaryBottomLine {
+    margin: 0;
+    background: #b8cce4;
+    padding: 15px 5px;
+    text-align: center;
+	font-weight:normal;
+	font-size:12px;
+	color:#000;
+}
+.leftLab3 {
+    float: left;
+    width: 130px;
+    text-align: right;
+    padding-right: 10px;
+}
+.normalFont.pull-right,
+.normalFont.pull-left {
+	margin:5px 0;	
+}
+.TimingSection .col-md-3 h5 {
+	border-bottom:1px solid #ccc;
+	padding-bottom:10px;
+	text-transform:uppercase;	
+	font-weight:normal;
+}
+.TimingSectionTable {
+	background:#f2f2f2;	
+	margin-bottom:20px;
+	border:1px solid #ccc;
+	min-height:200px;
+}
+.TimingSectionTable tr {
+	
+}
+.TimingSectionTable tr td {
+	padding:0 10px;
+}
+small:before {
+	display:none;	
+}
+.MatrixRoles {
+	/* border-bottom: 2px solid #cacaca; */
+    padding-bottom: 10px;
+    margin-bottom: 50px;	
+}
+.FunDaMentalReporting {
+	border:1px solid #000;	
+}
+.FunRep {
+	background:#5b6ef5;
+	color:#fff;
+	font-weight:bold;
+}
+.ClassTeach {
+	background:#bfbfbf;
+}
+.ClassHere {
+	background:#d9d9d9;
+}
+.ClassSectionHere {
+	
+}
+.StuStrength {
+	background:#bfbfbf;
+}
+.TopBottomLine {
+	background:#d9d9d9;
+}
+.ReportingCodeName {
+	background:#dce6f1;
+	font-weight:bold;
+}
+.FunDaMentalReportingChap {
+	
+}
+.FunDaMentalReportingChap .SRNO {
+	background:#d9d9d9;
+	width:8%;
+}
+.FunDaMentalReportingChap .SubjectName {
+	background:#f2f2f2;	
+}
+.FunDaMentalReportingChap .StuStrength {
+	background:#bfbfbf;
+	font-weight:600;
+	width:8%;	
+}
+.FunDaMentalReportingChap .Blocks {
+	background:#d9d9d9;	
+	width:8%;
+}
+.FunDaMentalReportingChap .TopBottomLine {
+	background:#f2f2f2;
+}
+.FunDaMentalReportingChap .NameCodeHere {
+	background:#dce6f1;
+}
+.FunDaMentalReportingChap .RankHere {
+	background:#f2f2f2;
+	width:8%;
+}
+.FunDaMentalReportingChap .FunRep {
+	background:#5b6ef5;
+	width:8%;
+}
+.FunRep.White {
+	background:#fff !important;
+}
+.rotate {
+
+/* Safari */
+-webkit-transform: rotate(-90deg);
+
+/* Firefox */
+-moz-transform: rotate(-90deg);
+
+/* IE */
+-ms-transform: rotate(-90deg);
+
+/* Opera */
+-o-transform: rotate(-90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+.secondLevelReporting {
+	color:#8e8e8e;
+	border-color:#b3b3b3 !important;	
+}
+.firstLevelReporting {
+	color:#000;
+	border-color:#b3b3b3 !important;	
+}
+.blackSolidBorder {
+	position: absolute;
+    background: #000;
+    width: 3px;
+    left: 33%;
+    z-index: 0;
+    height: 694px;
+}
+.graySolidBorder {
+	position: absolute;
+    background: #ccc;
+    width: 3px;
+    left: 66.4%;
+    height: 300px;
+}
+.grayDashedBorder {
+	position: absolute;
+    width: 3px;
+    border: 2px dashed #ccc;
+    left: 66.4%;
+    height: 300px;
+    top: 45%;
+}
+.orgChartSection table {
+	background:#fff;	
+}
+/* TIF A Css end */
+/* 
+.paddingRight0 {
+	padding-right:0 !important;	
+}
+*/
+.design {
+    line-height: 26px;
+    margin-top: -2px;
+}
+.italicGray {
+	color:#666;
+	font-style:italic;	
+}
+.paddingLeft10 {
+	padding-left:10px !important;	
+}
+.paddingTop0 {
+	padding-top:0px !important;	
+}
+.linkLookalike {
+    font-size: 14px;
+    font-weight: 600;
+    color: #5b9bd1;
+}
