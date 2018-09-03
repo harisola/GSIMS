@@ -11,15 +11,34 @@
 			</div>
 			<div id="collapse_3_{{$i}}" class="panel-collapse in">
 				<div class="panel-body">
-				 <form id="form_{{$i}}" method="POST">
-					<div class="form-body">
-						<div class="row">
-							<div class="col-md-6">
-							  <input type="hidden" name="academic_session_id" value="{{$academic_session_id}}" />
-								<div class="form-group">
-									<label class="control-label">Issue Date</label>
-									<input type="date"  class="form-control" name="issue_date" value="{{ $installment->issue_date}}">
-										<span class="help-block"> Installment # {{ $i }} Bill Issuance Date </span>
+					<form id="form_{{$i}}" method="POST">
+						<div class="form-body">
+							<div class="row">
+								
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Adjustments Freeze Date</label>
+										<input type="date" id="" name="adj_freeze_date" class="form-control" placeholder="" value="{{$installment->adjustment_freeze_date}}">
+										<span class="help-block"> Adjustments for Installment # {{ $i }} will not be accepted after given date </span>
+									</div>
+								</div>
+								<!--/span-->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Adjustments Un-Freeze Date</label>
+										<input type="date" id="" name="" class="form-control" placeholder="" value="">
+										<span class="help-block"> Adjustments for Next Installment will be available after given date </span>
+									</div>
+								</div>
+								<!--/span-->
+							</div><!-- row -->
+							<div class="row">
+								<div class="col-md-6">
+								  <input type="hidden" name="academic_session_id" value="{{$academic_session_id}}" />
+									<div class="form-group">
+										<label class="control-label">Issue Date</label>
+										<input type="date"  class="form-control" name="issue_date" value="{{ $installment->issue_date}}">
+											<span class="help-block"> Installment # {{ $i }} Bill Issuance Date </span>
 									</div>
 								</div>
 								<!--/span-->
@@ -28,55 +47,48 @@
 										<label class="control-label">Due Date</label>
 										<input type="date" id="" name="due_date" class="form-control" placeholder="" value="{{$installment->due_date}}">
 											<span class="help-block"> Installment # {{ $i }} Bill Due Date </span>
-										</div>
 									</div>
-									<!--/span-->
 								</div>
-								<!--/row-->
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="control-label">Validy Date</label>
-											<input type="date" id="" name="validy_date" class="form-control" placeholder="" value="{{ $installment->bank_validity_date}}">
-												<span class="help-block"> Installment # {{ $i }} Bank Validity Date </span>
-											</div>
-										</div>
-										<!--/span-->
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="control-label">Adjustments Freeze Date</label>
-												<input type="date" id="" name="adj_freeze_date" class="form-control" placeholder="" value="{{$installment->adjustment_freeze_date}}">
-													<span class="help-block"> Adjustments for Installment # {{ $i }} will not be accepted after given date </span>
-												</div>
-											</div>
-											<!--/span-->
-										</div>
-										<!--/row-->
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													@if($installment->yearly_charges == 1)
-														@php ($checked = 'checked')
-													@else
-														@php ($checked = '')
-													@endif
-													<input type="checkbox" id="yearly_charges" name="yearly_charges" {{$checked}} />
-               										<label class="control-label">Yearly Charges Applied</label>		
-												</div>
-											</div>
-										</div>
-										<!--/row-->
+								<!--/span-->
+							</div>
+							<!--/row-->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Validy Date</label>
+										<input type="date" id="" name="validy_date" class="form-control" placeholder="" value="{{ $installment->bank_validity_date}}">
+										<span class="help-block"> Installment # {{ $i }} Bank Validity Date </span>
 									</div>
-									<!-- form-body -->
-									<div class="form-actions text-center">
-										<button type="button" class="btn default">Cancel</button>
-										<button type="button" class="btn blue" onclick="insertInstallment({{$i}})">
-											<i class="fa fa-check"></i> Save
-										</button>
+								</div>
+								<!--/span-->
+								
+							</div>
+							<!--/row-->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+									@if($installment->yearly_charges == 1)
+									@php ($checked = 'checked')
+									@else
+									@php ($checked = '')
+									@endif
+									<input type="checkbox" id="yearly_charges" name="yearly_charges" {{$checked}} />
+	               					<label class="control-label">Yearly Charges Applied</label>		
 									</div>
-				</form>
-									<!-- form-actions -->
-				</div>			<!-- panel-body -->
+								</div>
+							</div>
+							<!--/row-->
+						</div>
+						<!-- form-body -->
+						<div class="form-actions text-center">
+							<button type="button" class="btn default">Cancel</button>
+							<button type="button" class="btn blue" onclick="insertInstallment({{$i}})">
+								<i class="fa fa-check"></i> Save
+							</button>
+						</div>
+					</form>
+					<!-- form-actions -->
+				</div><!-- panel-body -->
 			</div>
 		</div>
 	</div>
@@ -96,6 +108,24 @@
 				<div class="panel-body">
 				 <form id="form_{{$i}}" method="POST">
 					<div class="form-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">Adjustments Freeze Date</label>
+									<input type="date" id="" name="adj_freeze_date" class="form-control" placeholder="">
+									<span class="help-block"> Adjustments for Installment # {{ $i }} will not be accepted after given date </span>
+								</div>
+							</div>
+							<!--/span-->
+							<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Adjustments Un-Freeze Date</label>
+										<input type="date" id="" name="" class="form-control" placeholder="" value="">
+										<span class="help-block"> Adjustments for Next Installment will be available after given date </span>
+									</div>
+								</div>
+								<!--/span-->
+						</div><!-- row -->
 						<div class="row">
 							<div class="col-md-6">
 							  <input type="hidden" name="academic_session_id" value="{{$academic_session_id}}" />
@@ -125,14 +155,7 @@
 										</div>
 									</div>
 										<!--/span-->
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="control-label">Adjustments Freeze Date</label>
-											<input type="date" id="" name="adj_freeze_date" class="form-control" placeholder="">
-											<span class="help-block"> Adjustments for Installment # {{ $i }} will not be accepted after given date </span>
-										</div>
-									</div>
-											<!--/span-->
+									
 								</div>
 								<!--/row-->
 								
