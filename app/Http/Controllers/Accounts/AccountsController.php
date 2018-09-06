@@ -289,14 +289,7 @@ class AccountsController extends Controller
                 // $total_adjustments=$arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];
                 $total_arriers=
                 $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
-                if($total_adjustments>0){
-                        $roll_over_charges=0;
-                        $total_arriers=$total_arriers;
-                    if($total_arriers>700){
-                        $roll_over_charges=600;
-                        $fee_bill->roll_over_charges=$roll_over_charges;//insert into late fee charges column
-                    }
-                }
+
                 // $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
                 $std_adjustments=$adjustment->getadjustments($list['student_id']);
                 $total_adjustments=($total_arriers+$std_adjustments);
@@ -307,7 +300,15 @@ class AccountsController extends Controller
                 //     $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
 
                 // }
-               
+
+                if($total_adjustments>0){
+                        $roll_over_charges=0;
+                        $total_arriers=$total_arriers;
+                    if($total_arriers>700){
+                        $roll_over_charges=600;
+                        $fee_bill->roll_over_charges=$roll_over_charges;//insert into late fee charges column
+                    }
+                }               
                 $total_current_billing=($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount;
                 $tax_allow=$this->StudentApplicableForTaxes($list, $total_current_billing);
                 if($tax_allow==0){

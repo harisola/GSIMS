@@ -161,8 +161,8 @@ where c.gs_id = '".$gs_id."'";
        {
               if(!empty($grade_id) && empty($section_id) && empty($gs_id) && empty($gf_id) && empty($gt_id)){
                      $StudentClassList=class_list::
-                     whereIn('grade_id',$grade_id)
-                     ->whereIn('std_status_code',['S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
+                      whereIn('grade_id',$grade_id)
+                    ->whereIN("std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
                      ->orderBy('generation_of', 'DESC')
                      ->orderBy('section_id', 'ASC')
                      ->orderBy('class_no', 'ASC')
