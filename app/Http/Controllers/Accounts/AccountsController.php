@@ -796,7 +796,7 @@ public function fetchFeeBill($gs_id){
                     $this->createTable($pdf,$concession_y,$installment_dicount_percentage.'%',26,'',5);//setting discount valuess
                     $this->createTable($pdf,$concession_y,number_format(@$discount_total_monthly),34.2,'',5);//calculate monthly amount total discpount
                     $this->createTable($pdf,$concession_y,number_format(@$discount_total_annual),49.5,'',5);
-                    $this->createTable($pdf,$concession_y,number_format(@$discount_total_this_intallment),66.5,'B',5);
+                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_this_intallment).')',66.5,'B',5);
 
                 }
                 $feedetails['scholarship_codes'];
@@ -815,7 +815,9 @@ public function fetchFeeBill($gs_id){
                     $this->createTable($pdf,$scholarship_y,$feedetails['scholarship_percentage'].'%',26,'',5);//setting discount valuess
                     $this->createTable($pdf,$scholarship_y,number_format(@$scholarship_monthly),34.2,'',5);//calculate monthly amount total discpount
                     $this->createTable($pdf,$scholarship_y,number_format(@$scholarship_yearly),49.5,'',5);
-                    $this->createTable($pdf,$scholarship_y,number_format(@$feedetails['scholarship_amount']),66.5,'B',5);
+                    $scholarship_amount='';
+                    $scholarship_amount=number_format($feedetails['scholarship_amount']);
+                    $this->createTable($pdf,$scholarship_y,'('.$scholarship_amount.')',66.5,'B',5);
 
                 }
 
