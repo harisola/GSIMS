@@ -310,6 +310,7 @@ class AccountsController extends Controller
                     }
                 }               
                 $total_current_billing=($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount;
+                $total_current_billing2=($gross_tution_fee+$additional_charges)-$net_discount_amount;
                 $tax_allow=$this->StudentApplicableForTaxes($list, $total_current_billing);
                 if($tax_allow==0){
                     $applicable_taxes=0;
@@ -350,10 +351,10 @@ class AccountsController extends Controller
                 
                 if($installment_dicount_percentage==100){
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
-                    $total_current_bill=($total_current_billing+$resource_fee);
+                    $total_current_bill=($total_current_billing2+$resource_fee);
 
                 }else{
-                     $total_current_bill=($total_current_billing);
+                     $total_current_bill=($total_current_billing2);
                 }
 
                 $fee_bill->total_current_bill=$total_current_bill;

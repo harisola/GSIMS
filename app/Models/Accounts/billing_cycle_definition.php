@@ -8,7 +8,7 @@ class billing_cycle_definition extends Model
 {
 
 
-	 protected $connection = 'mysql_Career_fee_bill';
+	protected $connection = 'mysql_Career_fee_bill';
     protected $table = 'billing_cycle_definition';
     public $timestamps = false;
 
