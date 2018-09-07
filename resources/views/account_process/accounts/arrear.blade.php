@@ -115,7 +115,7 @@
     position: absolute;
 }
 .Adjustments {
-	color: #1edc1e;
+    color: #1edc1e;
 }
 </style>
 <!-- Start Content section -->
@@ -163,27 +163,28 @@
                     </table>
                     <hr />
                     <div class="form-body">
-				        <div class="row">
-				         <input type="hidden" name="student_id"  />
+                        <div class="row">
+                         <input type="hidden" name="student_id"  />
                          <input type="hidden" name="updated_id" id="updated_id" />
-					        <div class="col-md-12">
-					            <div class="form-group">
-					                <input type="checkbox" id="switchChange2" class="make-switch" checked data-on-text="Arrears" data-off-text="Adjustments"><br />
-					                 <i class="fa"></i>
-					                <input type="number" name="amount"  class="form-control" placeholder="Amount in Numbers" id="amount">
-					            </div>
-					        </div>
-					        <!--/span-->
-					        <div class="col-md-12">
-					            <div class="form-group">
-					                <label>Description</label>
-					                 <i class="fa"></i>
-					                <textarea name="" id="description" class="form-control" placeholder="Write a desription here"></textarea>
-					            </div>
-					        </div>
-					        <!--/span-->
-				    	</div>
-					</div>
+                         <input type="hidden" name="arrear_flag" id="arrear_flag" />
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="checkbox" id="switchChange2" class="make-switch" checked data-on-text="Arrears" data-off-text="Adjustments"><br />
+                                     <i class="fa"></i>
+                                    <input type="number" name="amount"  class="form-control" placeholder="Amount in Numbers" id="amount">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                     <i class="fa"></i>
+                                    <textarea name="" id="description" class="form-control" placeholder="Write a desription here"></textarea>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                    </div>
                     <div class="form-actions right">
                         <button type="button" class="btn default">Cancel</button>
                         <button type="button" class="btn blue" id="add_arrears" onclick="arrearsAddUpdate()">
@@ -290,7 +291,8 @@
                                     <th class="text-center">GF-ID</th>
                                     <th class="">Abridged Name<br /><small>Status</small></th>
                                     <th class="text-center">Arrears/(Adjustments)</th>
-                                    <th class="">For</th>
+                                    <th class="">Description</th>
+                                    <th class="">For Installment #</th>
                                     <th class="text-center">By</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -431,11 +433,14 @@ var fnClassList = function(data){
 
  function arrearsAddUpdate(){
 
+    App.startPageLoading();
     var selectedForm = $('#arrear_form');
     var updated_id = $('#updated_id').val();
+    var arrear_flag = $('#arrear_flag').val();
     
     if($( "input[name=student_id]").val() == ''){
         alert('Please Enter the Student GS-ID');
+        App.startPageLoading();
     }
 
     $(selectedForm).validate({              
@@ -466,6 +471,7 @@ var fnClassList = function(data){
                 amount:$("input[name=amount]").val(),
                 description:$('#description').val(),
                 updated_id:updated_id,
+                arrear_flag:arrear_flag,
                 "_token": "{{ csrf_token() }}",
             },
             success:function(e){
@@ -487,15 +493,18 @@ var fnClassList = function(data){
 
                 $('#callout').css('display','');
                 $('#callout').fadeOut(3000);
+
             }
         });
     }
+    App.stopPageLoading();
 }
 
 
 $( document ).ready(function() {
-
+    App.startPageLoading();
     getArrearAndAdjustmentData();
+    App.stopPageLoading();
 });
 
 
@@ -514,22 +523,24 @@ $( document ).ready(function() {
             },
             success:function(e){
                 var data = JSON.parse(e);
+                console.log(data);
                 var html = '';
                 var  amount = '';
                 for ( var i = 0 ; i < data.length ; i++ ){
 
 
-                    data[i].adjustment_amount < 0 ? amount = '<span class="Adjustments">'+data[i].adjustment_amount.slice(1,data[i].adjustment_amount.length)+'</span>' : amount = data[i].adjustment_amount;
+                    data[i].arrears == 0 ? amount = '<span class="Adjustments">'+data[i].amount+'</span>' : amount = data[i].amount;
 
                     html += '<tr>';
                     html += '<td class="text-center">'+data[i].gs_id+'</td>';
                     html += '<td class="text-center">'+data[i].grade_name+'</td>';
                     html += '<td class="text-center">'+data[i].gfid+'</td>';
-                    html += '<td>'+data[i].abridged_name+'<br /><small>'+data[i].std_status_code+'</small></td>';
+                    html += '<td class="text-center">'+data[i].abridged_name+'<br /><small>'+data[i].std_status_code+'</small></td>';
                     html += '<td class="text-center">'+amount+'</td>'
-                    html += '<td>'+data[i].description+'</td>';
+                    html += '<td class="text-center">'+data[i].description+'</td>';
+                    html += '<td class="text-center">'+data[i].installment_no+'</td>';
                     html += '<td class="text-center">'+data[i].name_code+'<br /><small>'+data[i].created_date+'</small></td>';
-                    html += '<td class="text-center"><a href="javascript:void(0)" onclick=updateArrear('+data[i].id+')>Edit</a></td>';
+                    html += '<td class="text-center"><a href="javascript:void(0)" onclick=updateArrear('+data[i].id+','+data[i].arrears+')>Edit</a></td>';
                     html += '</tr>';
                 }
 
@@ -541,7 +552,7 @@ $( document ).ready(function() {
 
 }
 
-function updateArrear(data){
+function updateArrear(data,arrears_flag){
 
     App.startPageLoading();
     $.ajax({
@@ -550,6 +561,7 @@ function updateArrear(data){
         url:"{{ url('/getArrearAndAdjustmentData') }}",
         data:{
             id:data,
+            arrears_flag:arrears_flag,
             "_token": "{{ csrf_token() }}",
         },
         success:function(e){
@@ -573,24 +585,27 @@ function updateArrear(data){
                 $('.StuStatus').attr('data-original-title','Status: O');
             }
 
-            if(jsonData[0].adjustment_amount < 0){
+
+            if(jsonData[0].arrears == 0){
                 $("#switchChange2").bootstrapSwitch('state', false);
-                adjustment_amount = jsonData[0].adjustment_amount.slice(1,jsonData[0].adjustment_amount.length);
+                //adjustment_amount = jsonData[0].adjustment_amount.slice(1,jsonData[0].adjustment_amount.length);
 
             }else{
                 $("#switchChange2").bootstrapSwitch('state', true);
-                adjustment_amount = jsonData[0].adjustment_amount;
+                //adjustment_amount = jsonData[0].adjustment_amount;
             }
 
-            $('#amount').val(adjustment_amount);
+            $('#amount').val(jsonData[0].amount);
             $('#description').val(jsonData[0].description);
             $( "input[name=student_id]").val(jsonData[0].student_id);
             $('#updated_id').val(jsonData[0].id);
-            App.stopPageLoading();
+            $('#arrear_flag').val(jsonData[0].arrears);
+
         }
 
     });
     
+    App.stopPageLoading();
 }
 
 
