@@ -26,8 +26,8 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label class="control-label">Adjustments Un-Freeze Date</label>
-										<input type="date" id="" name="" class="form-control" placeholder="" value="">
-										<span class="help-block"> Adjustments for Next Installment will be available after given date </span>
+										<input type="date" id="" name="adj_unfreez_date" class="form-control" placeholder="" value="{{$installment->adjustment_unfreeze_date}}">
+										<span class="help-block"> Adjustments for Next Installment # {{ $i }} will be available after given date </span>
 									</div>
 								</div>
 								<!--/span-->
@@ -72,7 +72,7 @@
 									@else
 									@php ($checked = '')
 									@endif
-									<input type="checkbox" id="yearly_charges" name="yearly_charges" {{$checked}} />
+									<input type="checkbox" id="yearly_charges_{{ $i }}" name="yearly_charges" {{$checked}} />
 	               					<label class="control-label">Yearly Charges Applied</label>		
 									</div>
 								</div>
@@ -82,7 +82,7 @@
 						<!-- form-body -->
 						<div class="form-actions text-center">
 							<button type="button" class="btn default">Cancel</button>
-							<button type="button" class="btn blue" onclick="insertInstallment({{$i}})">
+							<button type="button" class="btn blue" onclick="insertInstallment({{ $i }} )">
 								<i class="fa fa-check"></i> Save
 							</button>
 						</div>
@@ -120,8 +120,8 @@
 							<div class="col-md-6">
 									<div class="form-group">
 										<label class="control-label">Adjustments Un-Freeze Date</label>
-										<input type="date" id="" name="" class="form-control" placeholder="" value="">
-										<span class="help-block"> Adjustments for Next Installment will be available after given date </span>
+										<input type="date" name="adj_unfreez_date" class="form-control">
+										<span class="help-block"> Adjustments for Next Installment # {{ $i }} will be available after given date </span>
 									</div>
 								</div>
 								<!--/span-->
@@ -162,7 +162,7 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input type="checkbox" id="yearly_charges" name="yearly_charges" />
+											<input type="checkbox" id="yearly_charges_{{ $i }}" name="yearly_charges" />
                							<label class="control-label">Yearly Charges Applied</label>		
 										</div>
 									</div>
@@ -192,8 +192,9 @@
 <script type="text/javascript">
 var insertInstallment = function(installment_id){
  	var selectedForm = $('#form_'+installment_id);
- 	var yearly_charges = $("#yearly_charges").is(":checked");
+ 	var yearly_charges = $("#yearly_charges_"+installment_id).is(":checked");
  	yearly_charges == true ? yearly_charges = 1: yearly_charges = 0;
+
  	$(selectedForm).validate({              
         rules: {
             issue_date: {
@@ -223,11 +224,12 @@ var insertInstallment = function(installment_id){
     		url:"{{ url('/addInstallment')}}",
     		data:{
     			installment_id:installment_id,
-    			academic_session_id:$("input[name=academic_session_id]").val(),
-    			issue_date:$("input[name=issue_date]").val(),
-	        	due_date:$("input[name=due_date]").val(),
-	        	validy_date:$("input[name=validy_date]").val(),
-	      		adj_freeze_date: $("input[name=adj_freeze_date]").val(),
+    			academic_session_id:$("#form_"+installment_id+" :input[name=academic_session_id]").val(),
+    			issue_date:$("#form_"+installment_id+" :input[name=issue_date]").val(),
+	        	due_date:$("#form_"+installment_id+" :input[name=due_date]").val(),
+	        	validy_date:$("#form_"+installment_id+" :input[name=validy_date]").val(),
+	      		adj_freeze_date: $("#form_"+installment_id+" :input[name=adj_freeze_date]").val(),
+	      		adj_unfreez_date : $("#form_"+installment_id+" :input[name=adj_unfreez_date]").val(),
 	      		yearly_charges:yearly_charges,
 	      		"_token": "{{ csrf_token() }}",
     		},

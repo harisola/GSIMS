@@ -372,6 +372,9 @@ for( $grade_id = 6; $grade_id <=17; $grade_id++ )
 		$validy_date = $request->input('validy_date');
 		$adj_freeze_date = $request->input('adj_freeze_date');
 		$yearly_charges = $request->input('yearly_charges');
+		$adj_unfreeze_date = $request->input('adj_unfreez_date');
+
+		
 
 
 
@@ -425,6 +428,7 @@ for( $grade_id = 6; $grade_id <=17; $grade_id++ )
 						'due_date' => $due_date,
 						'bank_validity_date'=>$validy_date,
 						'adjustment_freeze_date'=>$adj_freeze_date,
+						'adjustment_unfreeze_date' => $adj_unfreeze_date,
 						'yearly_charges' => $yearly_charges,
 						'bill_months' => 2.4,
 						'modified' => time(),
@@ -448,6 +452,7 @@ for( $grade_id = 6; $grade_id <=17; $grade_id++ )
 							'due_date' => $due_date,
 							'bank_validity_date'=>$validy_date,
 							'adjustment_freeze_date'=>$adj_freeze_date,
+							'adjustment_unfreeze_date' => $adj_unfreeze_date,
 							'bill_months' => 2.4,
 							'yearly_charges' => $yearly_charges,
 							'academic_session_id' => $academic_session_id,

@@ -23,13 +23,12 @@
                                                         <th>Discount Percent</th>
                                                         <th>Scholarship Code</th>
                                                         <th>Scholarship Percentage</th>
-                                                        <th>adjustment</th>
+                                                        <th>arrears / (adjustment)</th>
                                                         <th>Roll Over Charges</th>
                                                         <th>gross tuition fee</th>
                                                         <th>additional charges</th>
                                                         <th>total current bill</th>
                                                         <th>oc smart charges</th>
-                                                        <th>oc adv tax</th>
                                                         <th>waive amount</th>
                                                         <th>oc adv tax</th>
                                                         <th>Resource Fee PM</th>
@@ -61,27 +60,36 @@
                                                         <td>{{$get_lastest_bill->bill_due_date}}</td>
                                                         <td>{{$get_lastest_bill->bill_bank_valid_date}}</td>
                                                         <td>2.4</td>
-                                                        <td>{{$get_lastest_bill->arrears_suspended}}</td>
-                                                        <td>{{$get_lastest_bill->fee_a_discount}}</td>
+                                                        <td><?= number_format($get_lastest_bill->arrears_suspended) ?></td>
+                                                        <td><?= number_format($get_lastest_bill->fee_a_discount)?></td>
                                                         <td>{{$get_lastest_bill->concession_code}}</td>
-                                                        <td>{{$get_lastest_bill->concession_percentage}}</td>
+                                                        <td><?php 
+                                                            if($get_lastest_bill->concession_percentage!=0){
+                                                                echo $get_lastest_bill->concession_percentage.'%';
+                                                            }
+                                                            ?></td>
                                                         
-                                                        <td>{{$get_lastest_bill->scholoarship_codes}}</td>
-                                                        <td>{{$get_lastest_bill->scholoarship_percentage}}</td>
+                                                        <td><?= str_lreplace(","," ", $get_lastest_bill->sc_codes) ?></td>
+                                                        <td><?php  
+                                                                if($get_lastest_bill->sc_percentage!=0){
+                                                                echo $get_lastest_bill->sc_percentage.'%';
+                                                                }
+                                                            ?>
+                                                                
+                                                            </td>
                                                        
-                                                        <td>{{$get_lastest_bill->adjustment}}</td>
+                                                        <td><?= number_format($get_lastest_bill->adjustment)?></td>
                                                         <td>{{$get_lastest_bill->roll_over_charges}}</td>
-                                                        <td>{{$get_lastest_bill->gross_tuition_fee}}</td>
-                                                        <td>{{$get_lastest_bill->additional_charges}}</td>
-                                                        <td>{{$get_lastest_bill->total_current_bill}}</td>
+                                                        <td><?= number_format($get_lastest_bill->gross_tuition_fee)?></td>
+                                                        <td><?= number_format($get_lastest_bill->additional_charges)?></td>
+                                                        <td><?= number_format($get_lastest_bill->total_current_bill)?></td>
                                                         <td>{{$get_lastest_bill->oc_smartcard_charges}}</td>
-                                                        <td>{{$get_lastest_bill->oc_adv_tax}}</td>
-                                                        <td>{{$get_lastest_bill->waive_amount}}</td>
-                                                        <td>{{$get_lastest_bill->oc_adv_tax}}</td>
+                                                        <td><?= number_format($get_lastest_bill->waive_amount)?></td>
+                                                        <td><?= number_format($get_lastest_bill->oc_adv_tax)?></td>
                                                         <td><?= ($get_lastest_bill->resource_fee)*2.4; ?></td>
                                                         <td><?= ($get_lastest_bill->musakhar)*2.4; ?></td>
                                                         <td>{{$get_lastest_bill->oc_yearly}}</td>
-                                                        <td>{{$get_lastest_bill->total_payable}}</td>
+                                                        <td><?=number_format($get_lastest_bill->total_payable)?></td>
                                                         <td><?php App\Models\Accounts\remittance::remitanceStatus($get_lastest_bill->student_id) ?></td>
 
 
@@ -117,7 +125,21 @@
                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
                                <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
                                <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-                               
+                               <?php 
+                               function str_lreplace($search, $replace, $subject)
+{
+    $pos = strrpos($subject, $search);
+
+    if($pos !== false)
+    {
+        $subject = substr_replace($subject, $replace, $pos, strlen($search));
+    }
+
+    return $subject;
+}
+
+
+                               ?>
                                 
 
 
