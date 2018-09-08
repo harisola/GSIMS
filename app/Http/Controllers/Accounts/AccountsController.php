@@ -51,9 +51,19 @@ class AccountsController extends Controller
 
         $array_section_names=explode(",",$section_name);
         if($array_ids[0]==""){
-            $array_ids= implode(" ",$array_ids);
-
+             $array_ids= implode(" ",$array_ids);
         }
+        if(!empty($array_ids)){
+            if (@in_array("15", $array_ids) || @in_array("16", $array_ids) ){
+
+            }else{
+                return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
+            }
+        }
+        // if($list['grade_id']!==15 || $list['grade_id']!==16 ){
+        //     return 'bills not allow';
+        // }
+
         if($array_section_names[0]==""){
             $array_section_names= implode(" ",$array_section_names);
         }
@@ -74,7 +84,13 @@ class AccountsController extends Controller
 
             $array_student_ids=substr_replace($array_student_ids, "", -1);
             @$get_lastest_bills=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
-             return view('account_process.accounts.fee_billing_table_1',['get_lastest_bills'=>$get_lastest_bills]);
+              if($get_lastest_bills[0]['grade_id']=='15' || $get_lastest_bills[0]['grade_id']=='16' ){
+                        return view('account_process.accounts.fee_billing_table_1',['get_lastest_bills'=>$get_lastest_bills]);
+
+                }else{
+                        return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
+
+                }
 
         }else{
             @$list=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
@@ -209,6 +225,10 @@ class AccountsController extends Controller
             $fee_bill_type_id=1;
         }
 
+        if($list['grade_id']!==15 || $list['grade_id']!==16 ){
+            return 'bills not allow';
+        }
+
 
 
         $total_bills_genrated=$fee_bill->countBills($list['student_id'],$list['a_session_id']);
@@ -289,14 +309,7 @@ class AccountsController extends Controller
                 // $total_adjustments=$arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];
                 $total_arriers=
                 $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
-                if($total_adjustments>0){
-                        $roll_over_charges=0;
-                        $total_arriers=$total_arriers;
-                    if($total_arriers>700){
-                        $roll_over_charges=600;
-                        $fee_bill->roll_over_charges=$roll_over_charges;//insert into late fee charges column
-                    }
-                }
+
                 // $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
                 $std_adjustments=$adjustment->getadjustments($list['student_id']);
                 $total_adjustments=($total_arriers+$std_adjustments);
@@ -307,8 +320,17 @@ class AccountsController extends Controller
                 //     $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
 
                 // }
-               
+
+                if($total_adjustments>0){
+                        $roll_over_charges=0;
+                        $total_arriers=$total_arriers;
+                    if($total_arriers>700){
+                        $roll_over_charges=600;
+                        $fee_bill->roll_over_charges=$roll_over_charges;//insert into late fee charges column
+                    }
+                }               
                 $total_current_billing=($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount;
+                $total_current_billing2=($gross_tution_fee+$additional_charges)-$net_discount_amount;
                 $tax_allow=$this->StudentApplicableForTaxes($list, $total_current_billing);
                 if($tax_allow==0){
                     $applicable_taxes=0;
@@ -349,10 +371,10 @@ class AccountsController extends Controller
                 
                 if($installment_dicount_percentage==100){
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
-                    $total_current_bill=($total_current_billing+$resource_fee);
+                    $total_current_bill=($total_current_billing2+$resource_fee);
 
                 }else{
-                     $total_current_bill=($total_current_billing);
+                     $total_current_bill=($total_current_billing2);
                 }
 
                 $fee_bill->total_current_bill=$total_current_bill;
@@ -599,6 +621,23 @@ public function fetchFeeBill($gs_id){
                 $branch_code=$this->getBranchCodeByCampus($feedetails['campus']);//South Campus 2 North Campus =1
                 $year=$session->GetAcademicSession($branch_code)['dname'];
 
+                if($feedetails['grade_id']==15 || $feedetails['grade_id']==16 ){
+                }else{
+                  $html = '';
+                        $html .= '<script
+                  src="https://code.jquery.com/jquery-3.3.1.min.js"
+                  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                  crossorigin="anonymous"></script>';
+                        $html .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.7/packaged/jquery.noty.packaged.min.js"></script>
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">';
+                        $html .= '<script>$("document").ready(function(){
+                        noty({text: "You do not have permission to create new bills. Please contact to Software Development department", type: "error",  theme: "defaultTheme"});    
+                        })</script>';
+                    echo $html;
+                    exit;
+
+                }
+
                 if($feedetails['grade_id']==15){
                         $fee_bill_type_id=9;
                         $pdf->setSourceFile(base_path().'/public/pdf/resized_final_fee_bill_alevel.pdf');
@@ -796,7 +835,7 @@ public function fetchFeeBill($gs_id){
                     $this->createTable($pdf,$concession_y,$installment_dicount_percentage.'%',26,'',5);//setting discount valuess
                     $this->createTable($pdf,$concession_y,number_format(@$discount_total_monthly),34.2,'',5);//calculate monthly amount total discpount
                     $this->createTable($pdf,$concession_y,number_format(@$discount_total_annual),49.5,'',5);
-                    $this->createTable($pdf,$concession_y,number_format(@$discount_total_this_intallment),66.5,'B',5);
+                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_this_intallment).')',66.5,'B',5);
 
                 }
                 $feedetails['scholarship_codes'];
@@ -815,7 +854,9 @@ public function fetchFeeBill($gs_id){
                     $this->createTable($pdf,$scholarship_y,$feedetails['scholarship_percentage'].'%',26,'',5);//setting discount valuess
                     $this->createTable($pdf,$scholarship_y,number_format(@$scholarship_monthly),34.2,'',5);//calculate monthly amount total discpount
                     $this->createTable($pdf,$scholarship_y,number_format(@$scholarship_yearly),49.5,'',5);
-                    $this->createTable($pdf,$scholarship_y,number_format(@$feedetails['scholarship_amount']),66.5,'B',5);
+                    $scholarship_amount='';
+                    $scholarship_amount=number_format($feedetails['scholarship_amount']);
+                    $this->createTable($pdf,$scholarship_y,'('.$scholarship_amount.')',66.5,'B',5);
 
                 }
 
