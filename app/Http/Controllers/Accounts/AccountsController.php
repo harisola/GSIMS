@@ -51,9 +51,19 @@ class AccountsController extends Controller
 
         $array_section_names=explode(",",$section_name);
         if($array_ids[0]==""){
-            $array_ids= implode(" ",$array_ids);
-
+             $array_ids= implode(" ",$array_ids);
         }
+        if(!empty($array_ids)){
+            if (@in_array("15", $array_ids) || @in_array("16", $array_ids) ){
+
+            }else{
+                return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
+            }
+        }
+        // if($list['grade_id']!==15 || $list['grade_id']!==16 ){
+        //     return 'bills not allow';
+        // }
+
         if($array_section_names[0]==""){
             $array_section_names= implode(" ",$array_section_names);
         }
@@ -74,7 +84,13 @@ class AccountsController extends Controller
 
             $array_student_ids=substr_replace($array_student_ids, "", -1);
             @$get_lastest_bills=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
-             return view('account_process.accounts.fee_billing_table_1',['get_lastest_bills'=>$get_lastest_bills]);
+              if($get_lastest_bills[0]['grade_id']=='15' || $get_lastest_bills[0]['grade_id']=='16' ){
+                        return view('account_process.accounts.fee_billing_table_1',['get_lastest_bills'=>$get_lastest_bills]);
+
+                }else{
+                        return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
+
+                }
 
         }else{
             @$list=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
@@ -207,6 +223,10 @@ class AccountsController extends Controller
             $arrears_suspended="";
             $scpt_unique_number=0;
             $fee_bill_type_id=1;
+        }
+
+        if($list['grade_id']!==15 || $list['grade_id']!==16 ){
+            return 'bills not allow';
         }
 
 
@@ -600,6 +620,23 @@ public function fetchFeeBill($gs_id){
                 $gs_id=$feedetails['student_gs_id'];
                 $branch_code=$this->getBranchCodeByCampus($feedetails['campus']);//South Campus 2 North Campus =1
                 $year=$session->GetAcademicSession($branch_code)['dname'];
+
+                if($feedetails['grade_id']==15 || $feedetails['grade_id']==16 ){
+                }else{
+                  $html = '';
+                        $html .= '<script
+                  src="https://code.jquery.com/jquery-3.3.1.min.js"
+                  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                  crossorigin="anonymous"></script>';
+                        $html .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.7/packaged/jquery.noty.packaged.min.js"></script>
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">';
+                        $html .= '<script>$("document").ready(function(){
+                        noty({text: "You do not have permission to create new bills. Please contact to Software Development department", type: "error",  theme: "defaultTheme"});    
+                        })</script>';
+                    echo $html;
+                    exit;
+
+                }
 
                 if($feedetails['grade_id']==15){
                         $fee_bill_type_id=9;
