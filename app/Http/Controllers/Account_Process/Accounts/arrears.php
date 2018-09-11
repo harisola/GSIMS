@@ -36,7 +36,7 @@ class arrears extends Controller
         // Model load
         $arrear_adjustment_model = new arrear_adjustment_model();
         $billing_cycle_definition=new billing_cycle_definition;
-        $installment_id=$billing_cycle_definition-> getCurrentInstallmentNumber();
+        $installment_id=$billing_cycle_definition->getCurrentInstallmentNumber();
 
 
         // Ajax POST Request
