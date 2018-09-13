@@ -23,9 +23,9 @@ class adjustment extends Model
     }
 
     public function insertUpdateAdjustment($student_id,$amount){
-            $sql="INSERT INTO atif_fee_student.adjustments (student_id,amount)
+            $sql="INSERT INTO adjustments (student_id,amount)
             VALUES($student_id,$amount)
-            ON DUPLICATE KEY UPDATE adjustment_amount =$amount";
+            ON DUPLICATE KEY UPDATE amount =$amount";
             $details = DB::connection('mysql_Career_fee_bill')->insert($sql);
     }
 

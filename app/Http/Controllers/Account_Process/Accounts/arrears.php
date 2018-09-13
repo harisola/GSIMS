@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Accounts\bill_type_model;
 use App\Models\Accounts\arrear_adjustment_model;
 use Illuminate\Support\Facades\View;
+use App\Models\Accounts\billing_cycle_definition;
 
 class arrears extends Controller
 {
@@ -34,6 +35,8 @@ class arrears extends Controller
     public function insertAndUpdateArrear(Request $request){
         // Model load
         $arrear_adjustment_model = new arrear_adjustment_model();
+        $billing_cycle_definition=new billing_cycle_definition;
+        $installment_id=$billing_cycle_definition->getCurrentInstallmentNumber();
 
 
         // Ajax POST Request
@@ -50,7 +53,7 @@ class arrears extends Controller
             'amount' => $amount,
             'description' => $description,
             'is_arrears' => $state,
-            'installment_id' => 1,
+            'installment_id' => $installment_id,
             'modified' => time(),
             'modified_by' =>  Sentinel::getUser()->id
         );
@@ -72,7 +75,7 @@ class arrears extends Controller
                 'amount' => $amount,
                 'description' => $description,
                 'is_arrears' => $state,
-                'installment_id' => 1,
+                'installment_id' => $installment_id,
                 'register' => time(),
                 'register_by' =>  Sentinel::getUser()->id
             );

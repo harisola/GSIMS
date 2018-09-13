@@ -166,7 +166,7 @@ class fee_bill extends Model
 
 
     public function getLastBillByStudentId($student_id){
-    	$details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill')->Orderby('id','desc')->first();
+    	$details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax')->Orderby('id','desc')->first();
     	return $details;
     }
 
@@ -215,7 +215,10 @@ class fee_bill extends Model
         $counter=fee_bill::where('student_id',$student_id)->Orderby('id','desc')->first();
         return $counter['arrears_suspended'];
     }
-
+    public function getLastBillIssueDate($student_id){
+        $counter=fee_bill::select('bill_issue_date')->where('student_id',$student_id)->Orderby('id','desc')->first();
+        return $counter['bill_issue_date'];
+    }
 
 
 

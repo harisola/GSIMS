@@ -115,7 +115,7 @@
     position: absolute;
 }
 .Adjustments {
-    color: #1edc1e;
+	color: #1edc1e;
 }
 </style>
 <!-- Start Content section -->
@@ -163,33 +163,33 @@
                     </table>
                     <hr />
                     <div class="form-body">
-                        <div class="row">
-                         <input type="hidden" name="student_id"  />
+				        <div class="row">
+				         <input type="hidden" name="student_id"  />
                          <input type="hidden" name="updated_id" id="updated_id" />
                          <input type="hidden" name="arrear_flag" id="arrear_flag" />
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="checkbox" id="switchChange2" class="make-switch" checked data-on-text="Arrears" data-off-text="Adjustments"><br />
-                                     <i class="fa"></i>
-                                    <input type="number" name="amount"  class="form-control" placeholder="Amount in Numbers" id="amount">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                     <i class="fa"></i>
-                                    <textarea name="" id="description" class="form-control" placeholder="Write a desription here"></textarea>
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                    </div>
+					        <div class="col-md-12">
+					            <div class="form-group">
+					                <input type="checkbox" id="switchChange2" class="make-switch" checked data-on-text="Arrears" data-off-text="Adjustments"><br />
+					                 <i class="fa"></i>
+					                <input type="number" name="amount"  class="form-control" placeholder="Amount in Numbers" id="amount">
+					            </div>
+					        </div>
+					        <!--/span-->
+					        <div class="col-md-12">
+					            <div class="form-group">
+					                <label>Description</label>
+					                 <i class="fa"></i>
+					                <textarea name="" id="description" class="form-control" placeholder="Write a desription here"></textarea>
+					            </div>
+					        </div>
+					        <!--/span-->
+				    	</div>
+					</div>
                     <div class="form-actions right">
                         <button type="button" class="btn default">Cancel</button>
                         <?php $freeze=App\Models\Accounts\billing_cycle_definition::freezeBlocks(); ?>
 
-                        <button type="button"  <?php if ($freeze=="Yes"){ echo"disabled"; } ?> class="btn blue" id="add_arrears" onclick="arrearsAddUpdate()">
+                        <button type="button" <?php if ($freeze=="Yes"){ echo"disabled"; } ?> class="btn blue" id="add_arrears" onclick="arrearsAddUpdate()">
                             <i class="fa fa-check"></i> Add</button>
                     </div>
                     </div>

@@ -230,8 +230,10 @@ endif; ?>
 
 <div class="form-actions right">
     <button type="button" class="btn default">Cancel</button>
-    <button type="submit" class="btn blue" id="Create_Installment">
+    <?php $freeze=App\Models\Accounts\billing_cycle_definition::freezeBlocks(); ?>
+    <button type="submit"  <?php if ($freeze=="Yes"){ echo"disabled"; } ?> class="btn blue" id="Create_Installment">
         <i class="fa fa-check"></i>Update</button>
+
 </div>
 </form>
 </div>
