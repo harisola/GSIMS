@@ -165,8 +165,8 @@
                     <div class="form-body">
                         <div class="row">
                          <input type="hidden" name="student_id"  />
+                         <input type="hidden" name="academic_session_id"  />
                          <input type="hidden" name="updated_id" id="updated_id" />
-                         <input type="hidden" name="arrear_flag" id="arrear_flag" />
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="checkbox" id="switchChange2" class="make-switch" checked data-on-text="Arrears" data-off-text="Adjustments"><br />
@@ -410,6 +410,7 @@ var fnClassList = function(data){
             $('#description').attr('disabled',false);
             $('#add_arrears').attr('disabled',false);
             $( "input[name=student_id]").val(findStudent.id);
+            $( "input[name=academic_session_id]").val(findStudent.academic_session_id);
             $('#updated_id').val('');
             $('#amount').val('');
             $('#description').val('');
@@ -438,7 +439,7 @@ var fnClassList = function(data){
     App.startPageLoading();
     var selectedForm = $('#arrear_form');
     var updated_id = $('#updated_id').val();
-    var arrear_flag = $('#arrear_flag').val();
+    
     
     if($( "input[name=student_id]").val() == ''){
         alert('Please Enter the Student GS-ID');
@@ -469,11 +470,11 @@ var fnClassList = function(data){
             url:"{{ url('/addUpdateArrear') }}",
             data:{
                 studentId:$( "input[name=student_id]").val(),
+                academic_session_id:$("input[name=academic_session_id]").val(),
                 state : arrearAndAdjustmentState,
                 amount:$("input[name=amount]").val(),
                 description:$('#description').val(),
                 updated_id:updated_id,
-                arrear_flag:arrear_flag,
                 "_token": "{{ csrf_token() }}",
             },
             success:function(e){
@@ -531,7 +532,7 @@ $( document ).ready(function() {
                 for ( var i = 0 ; i < data.length ; i++ ){
 
 
-                    data[i].arrears == 0 ? amount = '<span class="Adjustments">'+data[i].amount+'</span>' : amount = data[i].amount;
+                    data[i].amount < 0 ? amount = '<span class="Adjustments">'+data[i].amount+'</span>' : amount = data[i].amount;
 
                     html += '<tr>';
                     html += '<td class="text-center">'+data[i].gs_id+'</td>';
@@ -542,7 +543,7 @@ $( document ).ready(function() {
                     html += '<td class="text-center">'+data[i].description+'</td>';
                     html += '<td class="text-center">'+data[i].installment_no+'</td>';
                     html += '<td class="text-center">'+data[i].name_code+'<br /><small>'+data[i].created_date+'</small></td>';
-                    html += '<td class="text-center"><a href="javascript:void(0)" onclick=updateArrear('+data[i].id+','+data[i].arrears+')>Edit</a></td>';
+                    html += '<td class="text-center"><a href="javascript:void(0)" onclick=updateArrear('+data[i].id+','+data[i].amount+')>Edit</a></td>';
                     html += '</tr>';
                 }
 
@@ -554,7 +555,7 @@ $( document ).ready(function() {
 
 }
 
-function updateArrear(data,arrears_flag){
+function updateArrear(data,amount){
 
     App.startPageLoading();
     $.ajax({
@@ -563,7 +564,7 @@ function updateArrear(data,arrears_flag){
         url:"{{ url('/getArrearAndAdjustmentData') }}",
         data:{
             id:data,
-            arrears_flag:arrears_flag,
+            amount:amount,
             "_token": "{{ csrf_token() }}",
         },
         success:function(e){
@@ -588,7 +589,7 @@ function updateArrear(data,arrears_flag){
             }
 
 
-            if(jsonData[0].arrears == 0){
+            if(jsonData[0].amount < 0){
                 $("#switchChange2").bootstrapSwitch('state', false);
                 //adjustment_amount = jsonData[0].adjustment_amount.slice(1,jsonData[0].adjustment_amount.length);
 
@@ -597,11 +598,11 @@ function updateArrear(data,arrears_flag){
                 //adjustment_amount = jsonData[0].adjustment_amount;
             }
 
-            $('#amount').val(jsonData[0].amount);
+            $('#amount').val(Math.abs(jsonData[0].amount));
             $('#description').val(jsonData[0].description);
             $( "input[name=student_id]").val(jsonData[0].student_id);
             $('#updated_id').val(jsonData[0].id);
-            $('#arrear_flag').val(jsonData[0].arrears);
+           
 
         }
 

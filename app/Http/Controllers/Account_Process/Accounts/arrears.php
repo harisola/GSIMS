@@ -44,16 +44,19 @@ class arrears extends Controller
         $amount = $request->input('amount');
         $description = $request->input('description');
         $state = $request->input('state');
-        $arrears_flag = $request->input('arrear_flag');
+        $academic_session_id = $request->input('academic_session_id');
 
-       // $state == 1 ? $amount = (int)$amount : $amount =  (int)("-".$amount) ;
+
+
+        $state == 1 ? $amount = (int)$amount : $amount =  (int)("-".$amount) ;
+
 
         $data = array(
             'student_id' => $student_id,
             'amount' => $amount,
             'description' => $description,
-            'is_arrears' => $state,
             'installment_id' => $installment_id,
+            'academic_session_id' => $academic_session_id,
             'modified' => time(),
             'modified_by' =>  Sentinel::getUser()->id
         );
@@ -74,7 +77,7 @@ class arrears extends Controller
                 'student_id' => $student_id,
                 'amount' => $amount,
                 'description' => $description,
-                'is_arrears' => $state,
+                'academic_session_id' => $academic_session_id,
                 'installment_id' => $installment_id,
                 'register' => time(),
                 'register_by' =>  Sentinel::getUser()->id

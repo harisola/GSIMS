@@ -53,8 +53,8 @@ class arrear_adjustment_model extends Model
 
     public function get_arrear_adjustment_join($id = null){
 
-      $query = "SELECT arad.id,cl.gs_id, CONCAT(cl.grade_dname,'-',cl.section_dname) AS grade_name,cl.abridged_name,cl.std_status_code,arad.amount,arad.description,
-        sr.name_code,FROM_UNIXTIME(arad.register,'%a %b %d %Y') as created_date,gfid,cl.gr_no,cl.std_status_category,cl.id as student_id,arad.is_arrears as arrears,arad.installement_id as installment_no
+      $query = "SELECT arad.id,cl.gs_id, CONCAT(cl.grade_dname,'-',cl.section_dname) AS grade_name,cl.abridged_name,cl.std_status_code,arad.amount,ifnull(arad.description,'') as description,
+        sr.name_code,FROM_UNIXTIME(arad.register,'%a %b %d %Y') as created_date,gfid,cl.gr_no,cl.std_status_category,cl.id as student_id,arad.is_arrears as arrears,arad.installment_id as installment_no
         FROM atif_fee_student.arriers_and_adjustment_manual arad
         LEFT JOIN atif.class_list cl ON 
         arad.student_id = cl.id
