@@ -12,12 +12,14 @@ use App\Models\student\Student_Information\academic_session;
 use App\Models\student\Student_Information\req_student_card;
 use App\Models\Accounts\concessions_for_session;
 use App\Models\Accounts\arriers_adjustment;
+use App\Models\Accounts\arrear_adjustment_model;
 use App\Models\Accounts\tax_amount;
 use App\Models\Accounts\remittance;
 use App\Models\Accounts\fee_bill_type_parameter;
 use App\Models\Accounts\billing_cycle_definition;
 use App\Models\Accounts\fee_bill_received_info;
 use App\Models\Accounts\scholarship_for_session;
+
 
 use App\Models\Accounts\adjustment;
 
@@ -54,13 +56,13 @@ class AccountsController extends Controller
         if($array_ids[0]==""){
              $array_ids= implode(" ",$array_ids);
         }
-        if(!empty($array_ids)){
-            if (@in_array("15", $array_ids) || @in_array("16", $array_ids) ){
+        // if(!empty($array_ids)){
+        //     if (@in_array("15", $array_ids) || @in_array("16", $array_ids) ){
 
-            }else{
-                return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
-            }
-        }
+        //     }else{
+        //         return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
+        //     }
+        // }
         // if($list['grade_id']!==15 || $list['grade_id']!==16 ){
         //     return 'bills not allow';
         // }
@@ -85,13 +87,13 @@ class AccountsController extends Controller
 
             $array_student_ids=substr_replace($array_student_ids, "", -1);
             @$get_lastest_bills=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
-              if($get_lastest_bills[0]['grade_id']=='15' || $get_lastest_bills[0]['grade_id']=='16' ){
-                        return view('account_process.accounts.fee_billing_table_1',['get_lastest_bills'=>$get_lastest_bills]);
+            //   if($get_lastest_bills[0]['grade_id']=='15' || $get_lastest_bills[0]['grade_id']=='16' ){
+            //             return view('account_process.accounts.fee_billing_table_1',['get_lastest_bills'=>$get_lastest_bills]);
 
-                }else{
-                        return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
+            //     }else{
+            //             return '<span style="color:red">You don"t have permission to create new bills. Please contact to Software Development department</span>';
 
-                }
+            //     }
 
         }else{
             @$list=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
@@ -163,6 +165,8 @@ class AccountsController extends Controller
         $adjustment= new adjustment;
         $scholarship_for_session=new scholarship_for_session;
         $req_student_card=new req_student_card;
+        $arrear_adjustment_model= new arrear_adjustment_model;
+
         $billing_cycle_definition::getCurrentInstallmentNumber();
      
         $roll_over_charges=0;
@@ -231,9 +235,9 @@ class AccountsController extends Controller
         $student_id=$list['student_id'];
         $last_issue_date=$fee_bill->getLastBillIssueDate($student_id);
         $smartcard_charges=$req_student_card->GetSmartCardCharges($student_id,$last_issue_date);
-        if($list['grade_id']!==15 || $list['grade_id']!==16 ){
-            return 'bills not allow';
-        }
+        // if($list['grade_id']!==15 || $list['grade_id']!==16 ){
+        //     return 'bills not allow';
+        // }
         $total_bills_genrated=$fee_bill->countBills($list['student_id'],$list['a_session_id']);
 
         $bill_no=$total_bills_genrated+1;
@@ -311,24 +315,21 @@ class AccountsController extends Controller
                      $gross_additional_charges=$gross_tution_fee+$additional_charges;
                      // $tax_allow=$this->StudentApplicableForTaxes($list,$gross_additional_charges);
                     //purani jaga tax calcualte karna ki harmi pan ki waja sa necha kari ha
-
-                // echo $total_adjustments=$class_list->arrier_adjustments($gs_id);
-                // $total_adjustments=$this->calculate_arrier_adjustments($list['student_id']);
-                // $total_adjustments=$arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];
-               
+ 
                 $total_adjustments=$this->calculate_arrier_adjustments($list['student_id']);
-                // $total_adjustments=$total_adjustments-$received_amount;
+                $custom_arrear_adjustment=$arrear_adjustment_model->get_custom_pending_amount_id($list['student_id'],$billing_cycle);
+                $total_adjustments=$total_adjustments+$custom_arrear_adjustment;
                 if($total_adjustments<0){
-                    $adjustment->insertUpdateAdjustment($list['student_id'],str_replace("-","",$total_adjustments));
+                    // $adjustment->insertUpdateAdjustment($list['student_id'],str_replace("-","",$total_adjustments));
                 }elseif($total_adjustments>0){
-                    $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
+                    // $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
                 }else{
-                    $adjustment->insertUpdateAdjustment($list['student_id'],0);
-                    $arriers_adjustment->InsertUpdateArriers($list['student_id'],0);
+                    // $adjustment->insertUpdateAdjustment($list['student_id'],0);
+                    // $arriers_adjustment->InsertUpdateArriers($list['student_id'],0);
                 }
                 $total_arriers=
-                $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
-                 if($total_adjustments>0){
+                 $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
+                if($total_adjustments>0){
                         $roll_over_charges=0;
                         $total_arriers=$total_arriers;
                     if($total_arriers>700){
@@ -340,7 +341,6 @@ class AccountsController extends Controller
                 $std_adjustments=$adjustment->getadjustments($list['student_id']);
                 $total_adjustments=($total_arriers+$std_adjustments);
                 // die;
-               
                 $total_current_billing=($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount;
                 $total_current_billing2=($gross_tution_fee+$additional_charges)-$net_discount_amount;                
                 $tax_allow=$this->StudentApplicableForTaxes($list, $total_current_billing);
@@ -465,8 +465,7 @@ class AccountsController extends Controller
             $taxable_amount=$received_amount+$gross_and_additional_charges;
             $total_previous_bill_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['a_session_id']);
             $admin_set_tax_amount=$tax_amount->getTaxPercentage($list['a_session_id'])['tax_amount'];
-
-            if($taxable_amount>$admin_set_tax_amount){
+            if($total_previous_bill_amount>$admin_set_tax_amount){
                  $taxes=1;
             }
             $student_remitance_applicable=$remittance->verifyRemitanceStudent($list['student_id']);
@@ -494,18 +493,21 @@ class AccountsController extends Controller
                 
                 $tax_percentage=$tax_amount->getTaxPercentage($list['a_session_id'])['tax_percentage'];
                 //last bill taxes
-                $bill_id=$fee_bill->getLastBillTaxes($list['student_id'])['id'];
+                // echo $bill_id=$fee_bill->getLastBillTaxes($list['student_id'])['id'];
                 //subtract tax by previous bill oc_adv_tax
+                $fee_details=$fee_bill->getLastBillByStudentId($list['student_id']);
 
-                $received_taxes=$fee_bill_received_info->getReceivedTaxes($list['student_id']);
+                // $received_taxes=$fee_bill_received_info->getReceivedTaxes($list['student_id']); //old code
+                $previous_bill_taxes = $fee_details['oc_adv_tax'];
+                // $fee_details
 
                 $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
 
-                $received_amount=$this->calculate_arrier_adjustments($list['student_id']);
+                $received_amount= $fee_bill_received->getReceivedAmount($fee_details['id']);
 
-                $total_current_billing=$total_current_billing+$received_amount;
-
-                $applicable_taxes=$this->calculateDiscount(($total_current_billing-$received_taxes)+$admission_fee,$tax_percentage);
+               $total_current_billing=$total_current_billing;
+               $previous_bill_taxes;
+               $applicable_taxes=$this->calculateDiscount(($total_current_billing)+$admission_fee,$tax_percentage);
                 return $applicable_taxes;
     }
 
@@ -633,22 +635,22 @@ public function fetchFeeBill($gs_id){
                 $branch_code=$this->getBranchCodeByCampus($feedetails['campus']);//South Campus 2 North Campus =1
                 $year=$session->GetAcademicSession($branch_code)['dname'];
 
-                if($feedetails['grade_id']==15 || $feedetails['grade_id']==16 ){
-                }else{
-                  $html = '';
-                        $html .= '<script
-                  src="https://code.jquery.com/jquery-3.3.1.min.js"
-                  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                  crossorigin="anonymous"></script>';
-                        $html .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.7/packaged/jquery.noty.packaged.min.js"></script>
-                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">';
-                        $html .= '<script>$("document").ready(function(){
-                        noty({text: "You do not have permission to create new bills. Please contact to Software Development department", type: "error",  theme: "defaultTheme"});    
-                        })</script>';
-                    echo $html;
-                    exit;
+                // if($feedetails['grade_id']==15 || $feedetails['grade_id']==16 ){
+                // }else{
+                //   $html = '';
+                //         $html .= '<script
+                //   src="https://code.jquery.com/jquery-3.3.1.min.js"
+                //   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                //   crossorigin="anonymous"></script>';
+                //         $html .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.7/packaged/jquery.noty.packaged.min.js"></script>
+                // <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">';
+                //         $html .= '<script>$("document").ready(function(){
+                //         noty({text: "You do not have permission to create new bills. Please contact to Software Development department", type: "error",  theme: "defaultTheme"});    
+                //         })</script>';
+                //     echo $html;
+                //     exit;
 
-                }
+                // }
 
                 if($feedetails['grade_id']==15){
                         $fee_bill_type_id=9;
@@ -1208,9 +1210,11 @@ public function fetchFeeBill($gs_id){
 
         $total_payable=$fee_details['total_payable'];//get last bill total payable amount
         
+        $pendings=$total_payable-$received->getReceivedAmount($fee_details['id']);
+        return $pendings;
         // $tax=$fee_details['oc_adv_tax'];//get total advance taxes
-    	$bill_id=$fee_details['id'];//get last bill if
-        return $total_received=$received->getReceivedAmount($bill_id);//checking last bill in fee received table exists  or not
+    	// $bill_id=$fee_details['id'];//get last bill if
+        // return $total_received=$received->getReceivedAmount($bill_id);//checking last bill in fee received table exists  or not
      //    // if last bill not exists in fee bill received table
      //     $total_amount=($total_payable-$total_received);
      //     return $total_amount;

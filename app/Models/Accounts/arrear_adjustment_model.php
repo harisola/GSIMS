@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class arrear_adjustment_model extends Model
 {
     
-    protected $dbCon = 'mysql_Career_fee_bill';
-    //protected $table = 'arriers_adjustments';
+  protected $dbCon = 'mysql_Career_fee_bill';
+  protected $connection = 'mysql_Career_fee_bill';
+  protected $table = 'arriers_and_adjustment_manual';
 
     /*
      * To get all the record
@@ -66,6 +67,12 @@ class arrear_adjustment_model extends Model
       $result = DB::connection($this->dbCon)->select($query);
       return $result;
 
+    }
+
+    public function get_custom_pending_amount_id($student_id,$intallment_id){
+      $total_adjustments=arrear_adjustment_model::where([['student_id',$student_id],['installement_id',$intallment_id]])
+      ->sum('amount');
+      return $total_adjustments;
     }
 
     // public function get_arrear_adjustment_join($id = null,$arrear_flag = null){
