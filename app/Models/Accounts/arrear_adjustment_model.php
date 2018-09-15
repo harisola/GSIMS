@@ -70,7 +70,7 @@ class arrear_adjustment_model extends Model
     }
 
     public function get_custom_pending_amount_id($student_id,$intallment_id){
-      $total_adjustments=arrear_adjustment_model::where([['student_id',$student_id],['installement_id',$intallment_id]])
+      $total_adjustments=arrear_adjustment_model::where([['student_id',$student_id],['installment_id',$intallment_id]])
       ->sum('amount');
       return $total_adjustments;
     }

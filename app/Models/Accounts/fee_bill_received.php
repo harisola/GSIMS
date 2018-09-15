@@ -25,7 +25,10 @@ class fee_bill_received extends Model
     	return $result;	
     }
      public function sumTotalPayments($student_id,$academic_session_id){
-    	$result=fee_bill_received::where([['fee_bill.student_id',$student_id],['fee_bill.academic_session_id',$academic_session_id]])->join('fee_bill','fee_bill_received.fee_bill_id','=','fee_bill.id')->sum('received_amount');
+        $result=fee_bill_received::where([['fee_bill.student_id',$student_id],
+        ['fee_bill.academic_session_id',$academic_session_id]])
+        ->join('fee_bill','fee_bill_received.fee_bill_id','=','fee_bill.id')
+        ->sum('received_amount');
     	return $result;	
     }
 
