@@ -99,9 +99,10 @@ class fee_bill extends Model
                     ->whereIN("fee_bill.academic_session_id",[11,12])
                     ->whereIN("std_info.std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
                     ->where('std_data.parent_type',1)
+                    ->where("fee_bill.bill_cycle_no",$billing_cycle_number)
                     ->groupBy('std_info.gs_id')
                     ->groupBy('fee_bill.fee_bill_type_id')
-                    ->OrderBy('std_info.id','desc')->take(1)->get();
+                    ->OrderBy('fee_bill.id','desc')->take(1)->get();
 
               }elseif(!empty($gf_id) && empty($grade_id) && empty($section_id) && empty($gs_id) && empty($gt_id)){
 

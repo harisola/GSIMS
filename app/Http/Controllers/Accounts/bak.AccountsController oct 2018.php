@@ -100,7 +100,8 @@ class AccountsController extends Controller
 
         }else{
             $array_ids;
-            @$list=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
+            $list=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
+            print_r($list);
             $array_student_ids="";
             foreach ($list as $lists) {
                  $lists->gs_id;
