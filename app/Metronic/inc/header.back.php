@@ -492,7 +492,7 @@
                 */ ?>
 
 
-                    <!-- Menu Start -->
+                	<!-- Menu Start -->
                     <div class="nav-side-menu">
                         <div class="menu-list">
                             <ul id="menu-content" class="menu-content collapse out">
@@ -503,9 +503,7 @@
                                     </a>
                                 </li>
                                 -->
-
-                                <?php echo $LNavMenu ?>
-<!--                                 <li data-toggle="collapse" data-target="#rtl_hr" class="collapsed" aria-expanded="false">
+                                <li data-toggle="collapse" data-target="#rtl_hr" class="collapsed" aria-expanded="false">
                                     <a href="#"><i class="icon-user" data-toggle="dropdown"></i>&nbsp; HR <span class="arrow open"></span></a>
                                       <ul class="sub-menuu collapse" id="rtl_hr" aria-expanded="true" style="" role="menu">
                                         <li><a href="#ttprofile_definition">TT Profile Definition</a></li>
@@ -540,6 +538,7 @@
 
                                       <li><a href = "#waviers_arrears">Current Installment Arrears</a></li>
                                       <li><a href = "#concession">Concessions</a></li>
+                                      <li><a href = "#account_reports">Reports</a></li>
                                     </ul>
                                 </li> 
                                 <li data-toggle="collapse" data-target="#rtl_store" class="collapsed" aria-expanded="false">
@@ -567,7 +566,7 @@
                                   <a href="#">
                                     <i class="fa fa fa-sitemap font-grey-cascade"></i>&nbsp; Users
                                   </a>
-                                </li> -->
+                                </li>
                                 </ul>
                          </div>
                     </div>

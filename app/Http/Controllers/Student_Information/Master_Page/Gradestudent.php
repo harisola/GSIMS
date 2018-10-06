@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student\Student_Information\Student_Information;
 
-class Grade extends Controller
+class Gradestudent extends Controller
 {
 	public function Students(Request $request)
 	{
@@ -124,6 +124,8 @@ class Grade extends Controller
 
 public function Student_Stories(Request $request)
 {
+
+
 	
 	$query = "select
 	cl.id as Student_id, cl.gs_id, cl.abridged_name, cl.call_name, cl.grade_name, cl.section_name, cl.gr_no as Photo_id,
@@ -191,7 +193,7 @@ public function Student_Stories(Request $request)
 	
 
 	
-	return view('master_layout.student.student_stories')->with(['students'=>$result, 'stories'=>$stories, "Stories_limit"=>$Stories_limit, 'login_user'=>Sentinel::getUser()->id,"abridged_name_staff" => $abridged_name, "Current_user_pic"=>$Current_user_pic, "Section_ids" => $Section_ids_full, "Grade_PG" => $Grade_PG,"North" => $North, "Full_School"=>$Section_ids  ]);
+	return view('master_layout.student.student_stories')->with(['students'=>$result, 'stories'=>$stories, "Stories_limit"=>$Stories_limit, 'login_user'=>Sentinel::getUser()->id,"abridged_name_staff" => $abridged_name, "Current_user_pic"=>$Current_user_pic, "Section_ids" => $Section_ids_full, "Grade_PG" => $Grade_PG,"North" => $North, "Full_School"=>$Section_ids]);
 
 }
 

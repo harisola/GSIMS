@@ -225,7 +225,7 @@ class AccountsController extends Controller
             $fee_bill_type_id=1;
         }
 
-        if($list['grade_id']!==15 || $list['grade_id']!==16 ){
+        if($list['grade_id']!==15 && $list['grade_id']!==16 ){
             return 'bills not allow';
         }
 

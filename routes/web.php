@@ -233,7 +233,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 
 	Route::get('/staff_payroll_adjustment', 'spStaffProcess\sp_staffProcess@staff_payroll_adjustment');
-	Route::get('/student_stories', 'Student_Information\Master_Page\Grade@Student_Stories');
+	Route::get('/student_stories', 'Student_Information\Master_Page\Gradestudent@Student_Stories');
 	
 	Route::post('/student/Students_Stories', 'Student_Information\Master_Page\Grade@Students_Stories');
 	Route::post('/student/Stories_Back', 'Student_Information\Master_Page\Grade@Students_Stories_Back');
@@ -265,6 +265,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/waviers_arrears','Account_Process\Accounts\WaviersArrears@index');
 
 	Route::get('/concession','Account_Process\Accounts\ConcessionController@index');
+
+	Route::get('/account_reports','Account_Process\Accounts\AccountReportController@index');
 	
 	Route::get('/accounts/remitance','Account_Process\Accounts\FeeBilling@remitance');
 
@@ -379,8 +381,8 @@ Route::post('/concession_search2','Account_Process\Accounts\ConcessionController
 	Route::post('/preperation_checks','Development\staff_recruitment_initiation@addPreperationChecks');
 	
 	
-	Route::post('/modified_form_list','Development\staff_recruitment_initiation@modified_form_list');
-
+Route::post('/modified_form_list','Development\staff_recruitment_initiation@modified_form_list');
+Route::post('/allposts','Development\staff_recruitment_initiation@allposts');
 	
 
 

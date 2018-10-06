@@ -91,7 +91,12 @@ class Staff_recruitment_model extends Model
 		return $career;
 	}
 
-
+	public function custom_query($query)
+	{
+		$career = DB::connection($this->dbCon)->select($query);
+		$career = collect($career)->map(function($x){ return (array) $x; })->toArray(); 
+		return $career;
+	}
 
 
 	 /**********************************************************************

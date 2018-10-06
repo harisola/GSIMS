@@ -1,9 +1,6 @@
 <?php /***** ***** ***** Form Screening - JS ***** ***** *****/ ?>
 <script type="text/javascript">
 
-loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js",function(){});
-
-
 	var insertForm = function(status_id,stage_id,next_stage){
 
 		var status_id = status_id;
@@ -74,10 +71,10 @@ loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js",fun
                      
                         if(status_id == 11){
 
-                         $('#call_for_part_b_flag_'+form_id).html('');
-                         $('#table_append_'+form_id).append('<small style="color: #888;" id="expected_part_b_flag_'+form_id+'">Expected for Part B on <strong style="color:#000;">'+formatDate(applicant_next_step_allocation_date)+'</strong> at <strong style="color:#000;">'+changeTimeFormat(applicant_next_step_allocation_time)+'</strong></small>');
+                        // $('#call_for_part_b_flag_'+form_id).html('');
+                        // $('#table_append_'+form_id).append('<small style="color: #888;" id="expected_part_b_flag_'+form_id+'">Expected for Part B on <strong style="color:#000;">'+formatDate(applicant_next_step_allocation_date)+'</strong> at <strong style="color:#000;">'+changeTimeFormat(applicant_next_step_allocation_time)+'</strong></small>');
 
-                         $('.part_b_append_ul_'+form_id+' ul').append('<li class="call_for_part_b"  data-status="11" data-stage="4" data-form = "'+form_id+'"> <a href="" data-toggle="modal"><i class="fa fa-user"></i> Part B Presence </a> </li>');
+                        // $('.part_b_append_ul_'+form_id+' ul').append('<li class="call_for_part_b"  data-status="11" data-stage="4" data-form = "'+form_id+'"> <a href="" data-toggle="modal"><i class="fa fa-user"></i> Part B Presence </a> </li>');
                                                              
                         }
 
@@ -616,20 +613,19 @@ loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js",fun
             success:function(e){
                 console.log(status_id);
                 console.log(stage_id);
-
                 if(status_id == 11 && stage_id == 9){
 
 
-                    $('#table_append_'+form_id).append('<br><small style="color: #888;" id="call_for_part_b_flag_'+form_id+'">Call for Part B</small><br />');
+                   // $('#table_append_'+form_id).append('<br><small style="color: #888;" id="call_for_part_b_flag_'+form_id+'">Call for Part B</small><br />');
 
 
                 }
 
                 if(status_id == 11 && stage_id == 4){
-                    $('#call_for_part_b_flag_'+form_id).html('');
-                    $('#expected_part_b_flag_'+form_id).html('');
+                    //$('#call_for_part_b_flag_'+form_id).html('');
+                    //$('#expected_part_b_flag_'+form_id).html('');
 
-                    $('#table_append_'+form_id).append('<br><small style="color: #888;" class="call_for_part_b_presence_flag_">Part B Completed</small><br />');
+                    //$('#table_append_'+form_id).append('<br><small style="color: #888;" class="call_for_part_b_presence_flag_">Part B Completed</small><br />');
 
                   print_online("Online",gc_id);
                 }
@@ -674,62 +670,11 @@ loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js",fun
 
     var refreshTable = function(){ 
 
-        
-var keywords = $("input[type=search]").val();
-$('#empTable').DataTable().destroy();
-var dt = $('#empTable').DataTable({
-      'processing': true,
-      'iDisplayLength': 100,
-      'serverSide': true,
-      'serverMethod': 'post',
-      'ajax': {
-          "url": "{{ url('/allposts') }}", 
-           "dataType": "json",
-           "type": "POST",
-           "data":{ _token: "{{csrf_token()}}"}
-      },
-      'columns': [ 
-       { data: 'gc_id' }, { data: 'name' }, { data: 'position_applied' },
-       {data:'Action'}, { data: 'mobile_phone' }, { data: 'Landline' }, { data: 'nic' },
-       {data: 'Standing'}, { data: 'Apply_Date' }, { data: 'Source' }, { data: 'Comments' }, 
-       { data: 'Modified_date' }
-       ]
-   });
-
-
-  dt.on( 'draw', function () {
-
-    $('tr td:nth-child(10)').each(function (){
-      var Class_name = $(this).text();
-      $(this).parent('tr').addClass( Class_name.toLowerCase() );
-    })
-
-
-    $('.boxidentification').each(function(){
-      $(this).tooltip();
-    })
-
-
-    $('tr td:nth-child(1) > a').each(function (){
-    var ids = $(this).data('id');
-    //console.log($(this).parent());
-    $(this).closest('tr').attr("data-id",ids);
-    });
-
-
-  });
-
-if( keywords != ''){
- dt.search(keywords).draw();   
-}
- 
-
-
-
         /*$('#StaffList').DataTable().destroy();
 
         var search_content = $('.applicant_name_write').text();
        var pathname = $(location).attr('href');  
+           
             $.ajax({
                 type:'POST',
                 data:{'_token': '{{ csrf_token() }}', 'pathname':pathname },
@@ -746,7 +691,7 @@ if( keywords != ''){
             });
 
            
-            //$('#StaffList').dataTable();
+            
             $("#StaffList").dataTable({
 
              "language": {
@@ -775,7 +720,7 @@ if( keywords != ''){
         "order": [[ 0, "desc" ]],
         "lengthMenu": [
             [-1, 40, 60, -1],
-            [-1, 40, 60, "All"] // change per page values here
+            [-1, 40, 60, "All"] 
         ],
 
         "columnDefs": [{
@@ -907,9 +852,9 @@ else
 	App.stopPageLoading();
 }, 2000);
 
-            
-        */
-    } // end table refresh
+       */     
+        
+    }
 
 
 
