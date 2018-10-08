@@ -227,50 +227,53 @@ class DashboardController extends Controller
 
 
 
- public function buildMenu($userMenu, $menu){
-
-        $html = '<li data-toggle="collapse" data-target="#'.$menu->target.'" class="collapsed" aria-expanded="false"">';
+    public function buildMenu($userMenu, $menu){
+        $html = '<li class="nav-item mark-nav">';
         $html .= '<a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="'.$menu->font_icon.'" data-toggle="dropdown"></i>'.$menu->dtitle.'
+                    <i class="'.$menu->font_class.' '.$menu->font_icon.'"></i>
+                    <span class="title">'.$menu->dtitle.'</span>
                     <span class="arrow "></span>
                   </a>
-                  <ul class="sub-menuu collapse" id="'.$menu->target.'" aria-expanded="true" style="" role="menu">';
+                  <ul class="sub-menu">';
 
         $html .= $this->buildMenu2($userMenu, $menu);
         $html .= '</ul>
-            </li>';
+        	</li>';
         return $html;
     }
 
 
 
     public function buildMenu2($userMenu, $menu){
-        $html = '';
-        $onGoing = false;
-        foreach ($userMenu as $m){
-            if($m->parent_id == $menu->id){
-                if($onGoing){
-                    $html .= '</ul>
-                            </li>';
-                }
-                $html .= '<li>
-                            <a href="#'.$m->url.'"> '.$m->dtitle.'
-                            </a>
-                            <ul class="sub-menu">';
-                $onGoing = true;
-                $html .= $this->buildMenu3($userMenu, $m);
-            }
-        }
-        $html .= '</ul>
-            </li>';
+    	$html = '';
+    	$onGoing = false;
+    	foreach ($userMenu as $m){
+    		if($m->parent_id == $menu->id){
+    			if($onGoing){
+	    			$html .= '</ul>
+	        				</li>';
+	    		}
+		    	$html .= '<li class="nav-item  ">
+		                    <a href="javascript:;" class="nav-link nav-toggle">
+		                        <i class="'.$m->font_class.' '.$m->font_icon.'"></i>
+		                        <span class="title"> '.$m->dtitle.'</span>
+		                        <span class="arrow"></span>
+		                    </a>
+		                    <ul class="sub-menu">';
+		        $onGoing = true;
+				$html .= $this->buildMenu3($userMenu, $m);
+			}
+		}
+		$html .= '</ul>
+        	</li>';
         return $html;
     }
 
 
 
     public function buildMenu3($userMenu, $menu){
-        $html = '';
-        foreach ($userMenu as $m) {
+    	$html = '';
+    	foreach ($userMenu as $m) {
             if($m->parent_id == $menu->id){
                 $html .= '<li class="nav-item">
                     <a href="#'.$m->url.'" class="nav-link">

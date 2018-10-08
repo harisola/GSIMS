@@ -21,7 +21,7 @@
 <!-- BEGIN USE PROFILE -->
 <div class="row marginTop20">
    
-  @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_staff_list1_ns')
+  @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_staff_list1')
 
 
    <div class="col-md-8" id="process_detail" style="display: none;">
@@ -29,7 +29,7 @@
           <div class="portlet-title tabbable-line">
               <div class="caption">
                   <i style="color:#888 !important;" class="icon-user font-dark"></i>
-                  <span class="caption-subject font-dark bold uppercase "><span class="applicant_name_write" style="color: #888;"></span> <!-- - <span class="small">Awaiting to be Followed up</span> -->
+                  <span class="caption-subject font-dark bold uppercase "><span class="applicant_name_write" style="color: #888;">Saleem Ahmed Qureshi</span> - <span class="small">Awaiting to be Followed up</span>
               </div>
               <ul class="nav nav-tabs">
                   <li class="active">
@@ -637,126 +637,6 @@ var print_online = function(data,form_id){
     window.open(URL, '_blank');
    }
 }
-
-
-
-
-var pagefunction = function() {
-   Demo.init();
-   App.init();
-
-   setTimeout( function () {
-
-
-            $("#StaffList").dataTable({
-
-             "language": {
-        "aria": {
-            "sortAscending": ": activate to sort column ascending",
-            "sortDescending": ": activate to sort column descending"
-        },
-        "emptyTable": "No data available in table",
-        "info": "Showing _START_ to _END_ of _TOTAL_ records",
-        "infoEmpty": "No records found",
-        "infoFiltered": "(filtered1 from _MAX_ total records)",
-        "lengthMenu": "Show _MENU_",
-        "search": "",
-        "searchPlaceholder": "Search records..",
-        "zeroRecords": "No matching records found",
-        "paginate": {
-            "previous":"Prev",
-            "next": "Next",
-            "last": "Last",
-            "first": "First"
-        }
-    },
-
-
-        "pagingType": "bootstrap_extended",
-        "order": [[ 0, "desc" ]],
-        "lengthMenu": [
-            [-1, 40, 60, -1],
-            [-1, 40, 60, "All"] // change per page values here
-        ],
-
-        "columnDefs": [{
-            //"searchable": false,
-            //"targets": [0]
-        }]
-
-            });
-
-          }, 1000 );
-
-
-
-setTimeout( function () { 
-  Create_Dynamic_Table(); 
-}, 1000 );
-
-
-function Create_Dynamic_Table()
-{
-    var dt = $('#empTable').DataTable({
-      'processing': true,
-      'iDisplayLength': 100,
-      'serverSide': true,
-      'serverMethod': 'post',
-      'ajax': {
-          "url": "{{ url('/allposts') }}", 
-           "dataType": "json",
-           "type": "POST",
-           "data":{ _token: "{{csrf_token()}}"}
-      },
-      'language': { search: "" },
-      'columns': [
-       
-
-         { data: 'gc_id' },
-         { data: 'name' },
-         { data: 'position_applied' },
-         {data:'Action'},
-         { data: 'mobile_phone' },
-         { data: 'Landline' },
-         { data: 'nic' },
-         {data: 'Standing'},
-         { data: 'Apply_Date' },
-         { data: 'Source' },
-         { data: 'Comments' },
-         { data: 'Modified_date' }
-
-        ]
-   });
-
-
-  dt.on( 'draw', function () {
-
-    $('tr td:nth-child(10)').each(function (){
-      var Class_name = $(this).text();
-      $(this).parent('tr').addClass( Class_name.toLowerCase() );
-    })
-
-
-    $('.boxidentification').each(function(){
-      $(this).tooltip();
-    })
-
-
-    $('tr td:nth-child(1) > a').each(function (){
-    var ids = $(this).data('id');
-    //console.log($(this).parent());
-    $(this).closest('tr').attr("data-id",ids);
-    });
-
-
-  });
-
-
-
-}
-
-}
-
 
 
 

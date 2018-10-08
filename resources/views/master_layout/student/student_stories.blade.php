@@ -200,9 +200,11 @@ ul.chats {
 							<div class="theme-option" id="Full_School">
 								<span> Section </span>
 								<select  multiple="multiple" data-attribute="grade_section" id="Multiple_Section_id" class="ddlFilterTableRow Full_School multiselect">
+                                  <?php if( !empty( $Full_School) ){ ?>                                      
 								<?php foreach( $Full_School as $Sec ){ ?>
 										<option value="<?=$Sec->Section_id;?>"><?=$Sec->Section_name;?></option>
 								<?php } ?>
+                                <?php } ?>
 								</select>
 								
 							</div>
@@ -363,11 +365,32 @@ public 'Bdg_Color' => string '#000000' (length=7)
 public 'photo500' => string 'assets/photos/sis/500x500/student/11734.jpg' (length=43)
 public 'photo150' => string 'assets/photos/sis/150x150/student/11734.png' (length=43)
 1 => */
+
+if( empty($abridged_name_staff))
+{
+    $abridged_name_staff='';
+}
+
+
+if( empty($Current_user_pic["photo500"]))
+{
+    $Current_user_picphoto500='';
+}else {
+   $Current_user_picphoto500=$Current_user_pic["photo500"]; 
+}
+
+
+if( empty($Current_user_pic["photo150"]))
+{
+   $Current_user_picphoto150='';
+}else{
+   $Current_user_picphoto150=$Current_user_pic["photo500"]; 
+}
 ?>
 
 <input type="hidden" id="abridged_name_staff" value="<?php echo $abridged_name_staff;?>" />
-<input type="hidden" id="photo500_staff" value="<?php echo $Current_user_pic["photo500"];?>" />
-<input type="hidden" id="photo150_staff" value="<?php echo $Current_user_pic["photo150"];?>" />
+<input type="hidden" id="photo500_staff" value="<?php echo $Current_user_picphoto500;?>" />
+<input type="hidden" id="photo150_staff" value="<?php echo $Current_user_picphoto150;?>" />
 
 
                 <div class="table-scrollable table-scrollable-borderless">
