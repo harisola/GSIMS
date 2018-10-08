@@ -189,7 +189,7 @@ class fee_bill extends Model
     		return $total;
     }
     public function getLastBillTaxes($student_id){
-		$details=fee_bill::where('student_id',$student_id)->select('admission_fee','oc_adv_tax','id')->Orderby('id','desc')->first();
+		$details=fee_bill::where('student_id',$student_id)->select('admission_fee','oc_adv_tax','id','adjustment')->Orderby('id','desc')->first();
     	return $details;   
     }
 

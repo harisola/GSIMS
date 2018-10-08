@@ -282,6 +282,10 @@ class AccountsController extends Controller
         if($lab_avc_fee_show==true){
             $additional_charges=$additional_charges+($lab_avc*2.4);
         }
+        if($smartcard_charges){
+            $additional_charges=$additional_charges+($smartcard_charges);
+        }
+
         if($yearly_charges==true){
             if($codes=='C(TE)'){
                 $yearly=0;
@@ -328,6 +332,12 @@ class AccountsController extends Controller
                     $arriers_adjustment->InsertUpdateArriers($list['student_id'],0);
 
                 }elseif($total_adjustments>0){
+                    $taxes= $fee_bill->getLastBillTaxes($list['student_id']);
+                    @$last_bill_taxes=$taxes['oc_adv_tax'];
+                    @$last_taxes=$taxes['adjustment'];
+                    if($last_taxes!=0){
+                        $amount=($last_taxes*5)/100;
+                    }
                     $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
                 }else{
                     $adjustment->insertUpdateAdjustment($list['student_id'],0);
@@ -337,7 +347,7 @@ class AccountsController extends Controller
                  $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
                 if($total_adjustments>0){
                         $roll_over_charges=0;
-                        $total_arriers=$total_arriers;
+                        $total_arriers=($total_arriers-@$last_bill_taxes);
                     if($total_arriers>700){
                         $roll_over_charges=600+400;
                         $fee_bill->roll_over_charges=$roll_over_charges;//insert into late fee charges column
@@ -908,6 +918,11 @@ public function fetchFeeBill($gs_id){
                     $installment_musakhar_fee=0;    
                     $musakhar=0;
                 }
+                
+                if($feedetails['oc_smartcard_charges']!=0){
+                    $this->createTable($pdf,123,'Smart Card Charges',5.9,'B',4);
+                    $this->createTable($pdf,123,number_format(@$feedetails['oc_smartcard_charges']),67,'B',5);
+                }
 
                 if($yearly_charges!=0){
                     $this->createTable($pdf,124,'Yearly Charges',4.7,'B',4);
@@ -948,7 +963,7 @@ public function fetchFeeBill($gs_id){
                 //additional charges total
                 $total_charges=@$lab_avc+@$musakhar+@$minimum_resource_fee;
                 $total_charges_annual=@$musakhar_fee_annual+@$annual_lab_avc_fee+@$annual_minimum_resource_fee;
-                $total_charges_paid=@$installment_musakhar_fee+@$lab_avc_fee_this_month+@$yearly_charges+@$smart_card_charges+@$installment_minimum_resource_fee;
+                $total_charges_paid=@$installment_musakhar_fee+@$lab_avc_fee_this_month+@$yearly_charges+@$feedetails['oc_smartcard_charges']+@$installment_minimum_resource_fee;
 
                 if($total_charges_paid==0){
 
