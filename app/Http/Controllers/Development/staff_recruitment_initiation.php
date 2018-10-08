@@ -63,8 +63,8 @@ class staff_recruitment_initiation extends Controller
   $searchQuery = " ";
   if($searchValue != ''){
     $searchQuery = " and (af.name like '%".$searchValue."%' or 
-    af.mobile_phone like '%".$searchValue."%' or 
-    af.nic like'%".$searchValue."%' ) ";
+    af.mobile_phone like '%".$searchValue."%' 
+    or af.nic like'%".$searchValue."%' or af.gc_id like'%".$searchValue."%' ) ";
   }
 
 ## Total number of records without filtering

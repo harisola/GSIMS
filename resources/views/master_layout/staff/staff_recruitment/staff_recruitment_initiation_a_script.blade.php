@@ -59,7 +59,7 @@ loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js",fun
                 success: function (response) {
                     App.stopPageLoading();
                     bootbox.dialog({
-                            message: "Your Data has been successfully.",
+                            message: "Your data has been successfully submitted.",
                             title: "Saved.",
                             buttons: {
                             confirm: {
@@ -965,7 +965,7 @@ else
                     success:function(e){
 
                         bootbox.dialog({
-                            message: "Your Data has been successfully.",
+                            message: "Your Data has been successfully submitted.",
                             title: "Saved.",
                             buttons: {
                             confirm: {

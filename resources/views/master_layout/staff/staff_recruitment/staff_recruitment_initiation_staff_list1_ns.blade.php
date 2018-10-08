@@ -1,3 +1,38 @@
+<style type="text/css">
+.table-scrollable, .table-scrollable.table-scrollable-borderless, .table-scrollable>.table-bordered {
+  float: left;
+} 
+ div#empTable_length {
+    display: none !important;
+}
+#empTable_wrapper .row div {
+  width: 100% !important;
+}
+#empTable_wrapper .row div.col-md-7 {
+  text-align: center !important;
+  margin-top: 10px !important;
+}
+#empTable_filter label {
+  width: 100% !important;
+}
+#empTable_filter label input[type="search"] {
+    width: 100% !important;
+    padding: 15px !important;
+}
+#empTable_processing {
+  display: none !important;
+}
+.theme-panel>.toggler {
+    right: -33px !important;
+}
+.theme-panel>.toggler-close {
+    right: -33px !important;
+}
+.theme-panel>.theme-options {
+    right: -33px !important;
+}
+</style>
+
   <div class="col-md-4 borderRightDashed">
       <!-- BEGIN EXAMPLE TABLE PORTLET-->
       <div class="portlet light bordered fixed-height-NoScroll marginBottom0">
@@ -183,6 +218,7 @@
                   <!-- theme-options -->
                </div>
                <!-- theme-panel -->
+               <?php /* 
                <div class="theme-panel hidden-xs hidden-sm" style="margin-top: 0px !important;">
                   <div class="toggler2"> </div>
                   <div class="toggler2-close"> </div>
@@ -214,7 +250,7 @@
                      </div>
                   </div>
                   <!-- theme-options -->
-               </div>
+               </div> */?>
                <!-- updated sorter -->
               <input type="hidden" id="Applicant_id" value="0" />
             </div>
@@ -248,19 +284,19 @@
 
   <thead>
     <tr>
-      <th>Form #</th>
-      <th>Name</th>
-      <th>Postion</th>
-      <th>Action</th>
-      <th>Mobile</th>
-      <th>Landline: </th>
-      <th>CNIC</th>
-      <th>Standing</th>
+      <th class="all">Form #</th>
+      <th class="all">Name</th>
+      <th class="all">Postion</th>
+      <th class="all">Action</th>
+      <th class="none">Mobile</th>
+      <th class="none">Landline: </th>
+      <th class="none">CNIC</th>
+      <th class="none">Standing</th>
       
-      <th>Apply Date:</th>
-      <th>Source: </th>
-      <th>Comments: </th>
-      <th>Modified date: </th>
+      <th class="none">Apply Date:</th>
+      <th class="none">Source: </th>
+      <th class="none">Comments: </th>
+      <th class="none">Modified date: </th>
       
 
   </tr>

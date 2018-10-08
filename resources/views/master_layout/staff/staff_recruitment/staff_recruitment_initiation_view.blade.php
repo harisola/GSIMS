@@ -29,7 +29,7 @@
           <div class="portlet-title tabbable-line">
               <div class="caption">
                   <i style="color:#888 !important;" class="icon-user font-dark"></i>
-                  <span class="caption-subject font-dark bold uppercase "><span class="applicant_name_write" style="color: #888;">Saleem Ahmed Qureshi</span> - <span class="small">Awaiting to be Followed up</span>
+                  <span class="caption-subject font-dark bold uppercase "><span class="applicant_name_write" style="color: #888;"></span> <!-- - <span class="small">Awaiting to be Followed up</span> -->
               </div>
               <ul class="nav nav-tabs">
                   <li class="active">
@@ -708,6 +708,7 @@ function Create_Dynamic_Table()
            "type": "POST",
            "data":{ _token: "{{csrf_token()}}"}
       },
+      'language': { search: "" },
       'columns': [
        
 
