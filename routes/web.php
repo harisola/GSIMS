@@ -267,6 +267,10 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/concession','Account_Process\Accounts\ConcessionController@index');
 
 	Route::get('/account_reports','Account_Process\Accounts\AccountReportController@index');
+
+	Route::get('/account_reports/issuance_report','Account_Process\Accounts\AccountReportController@getReportInformation');
+
+	
 	
 	Route::get('/accounts/remitance','Account_Process\Accounts\FeeBilling@remitance');
 
