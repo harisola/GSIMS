@@ -444,5 +444,62 @@ where cl.grade_dname='A2' and cl.academic_session_id=12 and fb.academic_session_
       return $weeks;
     }
 
+    public function DetailsOfIssuance($academic_session_id,$installment_number,$gs_id,$gf_id){
+
+        if(!empty($academic_session_id) && !empty($installment_number) && empty($gs_id) && empty($gf_id)){
+            $query="SELECT cl.gs_id,cl.gfid,cl.std_status_code,cl.class_no,cl.abridged_name,
+            fb.bill_cycle_no,fb.gb_id,fd.tuition_fee,fd.resource_fee,fd.musakhar,fb.oc_yearly,fb.oc_smartcard_charges,
+            fb.adjustment,fb.roll_over_charges,fb.roll_over_charges,
+            fb.total_payable,fb.oc_adv_tax,fb.total_payable - IFNULL(fb.oc_adv_tax,0) as total_fee_without_tax,
+            fb.admission_fee,fb.security_deposit,fd.lab_avc
+            
+            FROM atif.class_list cl
+            inner join atif_fee_student.fee_bill fb 
+            on fb.student_id=cl.id
+            inner join atif_fee_student.fee_definition fd
+            on fd.academic_session_id=fb.academic_session_id and
+            fd.grade_id=cl.grade_id
+            where fb.academic_session_id=$academic_session_id and fb.bill_cycle_no=$installment_number
+            group by cl.std_status_code,cl.abridged_name";
+
+        } 
+        elseif(!empty($academic_session_id) && !empty($installment_number) && !empty($gs_id) && empty($gf_id)){
+            $query="SELECT cl.gs_id,cl.gfid,cl.std_status_code,cl.class_no,cl.abridged_name,
+            fb.bill_cycle_no,fb.gb_id,fd.tuition_fee,fd.resource_fee,fd.musakhar,fb.oc_yearly,fb.oc_smartcard_charges,
+            fb.adjustment,fb.roll_over_charges,fb.roll_over_charges,
+            fb.total_payable,fb.oc_adv_tax,fb.total_payable - IFNULL(fb.oc_adv_tax,0) as total_fee_without_tax,
+            fb.admission_fee,fb.security_deposit,fd.lab_avc
+            
+            FROM atif.class_list cl
+            inner join atif_fee_student.fee_bill fb 
+            on fb.student_id=cl.id
+            inner join atif_fee_student.fee_definition fd
+            on fd.academic_session_id=fb.academic_session_id and
+            fd.grade_id=cl.grade_id
+            where fb.academic_session_id=$academic_session_id and fb.bill_cycle_no=$installment_number and cl.gs_id='$gs_id'
+            group by cl.std_status_code,cl.abridged_name";
+        }elseif(!empty($academic_session_id) && !empty($installment_number) && empty($gs_id) && !empty($gf_id)){
+            $query="SELECT cl.gs_id,cl.gfid,cl.std_status_code,cl.class_no,cl.abridged_name,
+            fb.bill_cycle_no,fb.gb_id,fd.tuition_fee,fd.resource_fee,fd.musakhar,fb.oc_yearly,fb.oc_smartcard_charges,
+            fb.adjustment,fb.roll_over_charges,fb.roll_over_charges,
+            fb.total_payable,fb.oc_adv_tax,fb.total_payable - IFNULL(fb.oc_adv_tax,0) as total_fee_without_tax,
+            fb.admission_fee,fb.security_deposit,fd.lab_avc
+            
+            FROM atif.class_list cl
+            inner join atif_fee_student.fee_bill fb 
+            on fb.student_id=cl.id
+            inner join atif_fee_student.fee_definition fd
+            on fd.academic_session_id=fb.academic_session_id and
+            fd.grade_id=cl.grade_id
+            where fb.academic_session_id=$academic_session_id and fb.bill_cycle_no=$installment_number and cl.gfid='$gf_id'
+            group by cl.std_status_code,cl.abridged_name";
+        }
+
+        
+        $result = DB::connection($this->dbCon)
+        ->select($query);
+        return $result;
+    }
+
 
 }

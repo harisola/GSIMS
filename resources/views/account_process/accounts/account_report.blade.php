@@ -121,13 +121,17 @@
                                 <li>
                                     <a href="#tab_5_4" data-toggle="tab"> Details of Receiving </a>
                                 </li>
+                                <li>
+                                    <a href="#tab_5_5" data-toggle="tab"> Ledger </a>
+                                </li>
+                                
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_5_1">
                                     <div class="row customRow">
                                         <div class="col-md-5">
                                             <label>Academic Year</label>
-                                            <select class="form-control" id="installment_number">
+                                            <select class="form-control" id="">
                                                     <option value="">2018-19</option>
                                                     <option value="">2017-18</option>
                                                     <option value="">2016-17</option>
@@ -147,7 +151,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>&nbsp;</label><br />
-                                            <input type="button" id="" data-pdf="0" class="btn btn-group green" value="Generate Report" style="width: 100%;">
+                                            <input type="button" id="" data-pdf="0" class="btn btn-group green generate_report" value="Generate Report" style="width: 100%;">
                                         </div>
                                     </div><!-- row -->
                                     <div class="portlet-body padding20" >
@@ -206,48 +210,35 @@
                                 <div class="tab-pane" id="tab_5_2">
                                     <div class="row customRow">
                                         <div class="col-md-2">
-                                            <label>Academic Year</label>
-                                            <select class="form-control" id="Academic">
-                                                    <option value="">2018-19</option>
-                                                    <option value="">2017-18</option>
-                                                    <option value="">2016-17</option>
-                                                    <option value="">2015-16</option>
-                                                    <option value="">2014-15</option>
+                                            <label>Academic Session</label>
+                                            <select class="form-control" id="academic_session">
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Installment Number</label>
-                                            <select class="form-control" id="installment_number">
+                                            <select class="form-control installment_number" >
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                     <option value="4">4</option>
                                                     <option value="5">5</option>
                                             </select>
+                                        </div>
+                                        
+                                        <div class="col-md-2">
+                                            <label>GS ID</label>
+                                            <input type="text" class="form-control gs_id" id="gs_id">
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Class</label>
-                                            <select class="form-control" id="Clas">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                            </select>
+                                            <label>GF ID</label>
+                                            <input type="text" class="form-control gf_id" id="gf_id">
                                         </div>
-                                        <div class="col-md-2">
-                                            <label>Section</label>
-                                            <select class="form-control" id="Clas">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                            </select>
-                                        </div>
+                                        
                                         <div class="col-md-2">
                                             <label>&nbsp;</label><br />
-                                            <input type="button" id="" data-pdf="0" class="btn btn-group green" value="Generate Report" style="width: 100%;">
+                                            <input type="button" id="" data-pdf="0" class="btn btn-group green issuance" value="Generate Report" style="width: 100%;">
                                         </div>
                                     </div><!-- row -->
                                     <div class="portlet-body padding20" >
@@ -344,7 +335,7 @@
                                     <div class="row customRow">
                                         <div class="col-md-5">
                                             <label>Academic Year</label>
-                                            <select class="form-control" id="installment_number">
+                                            <select class="form-control" id="">
                                                     <option value="">2018-19</option>
                                                     <option value="">2017-18</option>
                                                     <option value="">2016-17</option>
@@ -354,7 +345,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <label>Installment Number</label>
-                                            <select class="form-control" id="installment_number">
+                                            <select class="form-control" id="">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -450,7 +441,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>Installment Number</label>
-                                            <select class="form-control" id="installment_number">
+                                            <select class="form-control" id="">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -480,7 +471,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>&nbsp;</label><br />
-                                            <input type="button" id="" data-pdf="0" class="btn btn-group green" value="Generate Report" style="width: 100%;">
+                                            <input type="button" id="" data-pdf="0" class="btn btn-group green " value="Generate Report" style="width: 100%;">
                                         </div>
                                     </div><!-- row -->
                                     <div class="portlet-body padding20" >
@@ -582,6 +573,99 @@
                                         </div><!-- row -->
                                     </div><!-- portlet-body -->
                                 </div><!-- #tab_5_4 -->
+                                <div class="tab-pane" id="tab_5_5">
+                                    <div class="row customRow">
+                                        <div class="col-md-2">
+                                            <label>Academic Year</label>
+                                            <select class="form-control academic_session" id="Academic">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Installment Number</label>
+                                            <select class="form-control installment_number" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>GS-ID</label>
+                                            <input type="text" class="form-control gs_id">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>&nbsp;</label><br />
+                                            <input type="button" id="" data-pdf="0" class="btn btn-group green " value="Generate Report" style="width: 100%;">
+                                        </div>
+                                    </div><!-- row -->
+                                    <div class="portlet-body padding20" >
+                                        <div class="row padding20" >
+                                        <div class="col-md-5">
+                                            <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="DetailsReceivingBillReport">
+                                                <thead>
+                                                    <tr>
+                                                        <th>GS ID:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>GF ID:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>GR No:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>Status:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>Name:</th><td></td>
+                                                        </tr>
+                                                         <tr>
+                                                        <th>Father Name</th><td></td>
+                                                        </tr>
+                                                         <tr>
+                                                        <th>Academic Year.</th><td></td>
+                                                        <!-- <th> Remitance </th> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table><!-- sample_4 -->
+                                        </div>
+                                            
+
+                                        </div><!-- row -->
+                                        <div class="row">
+                                        <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="DetailsReceivingBillReport">
+                                        <thead>
+                                        <tr>
+                                                        
+                                                        <th>Installment No.</th>
+                                                        <th>Issuance Data</th>
+                                                        <th>Fee Payable <br>(Fee + Tax)/th>
+                                                        <th>Receiving Date</th>
+                                                        <th>Fee Received</th>
+                                                        <th>Late / Rollover Fee Received</th>
+                                                        <th>Admission Fee Received Date</th>
+                                                        <th>Admission Fee Received</th>
+                                                        <th>Advance tax Received</th>
+                                                        <th>Advance Fee Received Date</th>
+                                                        <th>Advance Fee Received</th>
+                                                        <th>Outstanding Balance</th>
+                                                        
+                                                        <!-- <th> Remitance </th> -->
+                                                    </tr>
+                                        </thead>
+                                        </table>
+                                            
+                                        </div>
+                                    </div><!-- portlet-body -->
+                                </div><!-- #tab_5_4 -->
+                                
                             </div>
                         </div>
                     </div>
@@ -1031,3 +1115,29 @@ loadScript("http://10.10.10.50/gsims/public/metronic/global/scripts/datatable.js
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
 <!-- END PAGE LEVEL PLUGINS --></div>
+<script>
+url=window.location.pathname;
+data="";
+
+
+
+$('.issuance').click(function(){
+    var data=
+    {
+    'academic_session':$('#academic_session').val(),
+    'installment_number':$('.installment_number').val(),
+    'gs_id':$('.gs_id').val(),
+    'gf_id':$('.gf_id').val(),
+    }
+
+$.ajax({
+	data:data,
+	method:'get',
+	url: url+'/account_reports/issuance_report',
+	success:function(result){
+		$('.fee_billing_result').eq(1).html(result);
+	}
+})
+
+})
+</script>

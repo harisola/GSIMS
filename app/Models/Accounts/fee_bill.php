@@ -99,9 +99,10 @@ class fee_bill extends Model
                     ->whereIN("fee_bill.academic_session_id",[11,12])
                     ->whereIN("std_info.std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
                     ->where('std_data.parent_type',1)
+                    ->where("fee_bill.bill_cycle_no",$billing_cycle_number)
                     ->groupBy('std_info.gs_id')
                     ->groupBy('fee_bill.fee_bill_type_id')
-                    ->OrderBy('std_info.id','desc')->take(1)->get();
+                    ->OrderBy('fee_bill.id','desc')->take(1)->get();
 
               }elseif(!empty($gf_id) && empty($grade_id) && empty($section_id) && empty($gs_id) && empty($gt_id)){
 
@@ -165,8 +166,20 @@ class fee_bill extends Model
     }
 
 
-    public function getLastBillByStudentId($student_id){
-    	$details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill')->Orderby('id','desc')->first();
+    public function getLastBillByStudentId($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){
+    	// $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+        $last_billing_cycle_number=$billing_cycle_number-1;
+        if($status=='S-CPT'){
+                $details=fee_bill::where([['student_id',$student_id],['bill_cycle_no',$last_billing_cycle_number],['academic_session_id',$academic_session_id]])
+                ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')
+                ->Orderby('id','asc')->first();
+        }else{
+            $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+
+        }
+       
+
+
     	return $details;
     }
 
@@ -188,7 +201,7 @@ class fee_bill extends Model
     		return $total;
     }
     public function getLastBillTaxes($student_id){
-		$details=fee_bill::where('student_id',$student_id)->select('admission_fee','oc_adv_tax','id')->Orderby('id','desc')->first();
+		$details=fee_bill::where('student_id',$student_id)->select('admission_fee','oc_adv_tax','id','adjustment')->Orderby('id','desc')->first();
     	return $details;   
     }
 
@@ -215,7 +228,10 @@ class fee_bill extends Model
         $counter=fee_bill::where('student_id',$student_id)->Orderby('id','desc')->first();
         return $counter['arrears_suspended'];
     }
-
+    public function getLastBillIssueDate($student_id){
+        $counter=fee_bill::select('bill_issue_date')->where('student_id',$student_id)->Orderby('id','desc')->first();
+        return $counter['bill_issue_date'];
+    }
 
 
 

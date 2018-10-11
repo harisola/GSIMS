@@ -27,7 +27,17 @@ class AccountReportController extends Controller
     	return view('account_process.accounts.account_report')->with( 'report_data',  $report_data );
     	
 
-    }
+	}
+	
+	public function getReportInformation(request $request){
+		$report_model=new account_reports();
+		$acadmic_session_id =$request->get('academic_session');
+		$installment_number=$request->get('installment_number');
+		$gs_id=$request->get('gs_id');
+		$gf_id=$request->get('gf_id');
+		$data=$report_model->DetailsOfIssuance($acadmic_session_id,$installment_number,$gs_id,$gf_id);
+		return view('account_process.accounts.bill_issuance_table',['issuance_data'=>$data]);
+	}
 
     
 

@@ -427,7 +427,7 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
  if(pdf=="1"){
        if(gs_id!==""){
               App.stopPageLoading(); 
-             window.open(base_url+'accounts/get_student_generated_bills?gs_id='+gs_id+'&pdf='+pdf)
+             window.open(base_url+'accounts/get_student_generated_bills?gs_id='+gs_id+'&pdf='+pdf+'&billing_cycle_number='+installment_number)
 
         }else{
               App.stopPageLoading(); 

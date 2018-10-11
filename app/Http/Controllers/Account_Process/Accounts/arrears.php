@@ -9,24 +9,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Accounts\bill_type_model;
 use App\Models\Accounts\arrear_adjustment_model;
 use Illuminate\Support\Facades\View;
+use App\Models\Accounts\billing_cycle_definition;
 
 class arrears extends Controller
 {
 
     public function index(){
 
-    	// Get Class List Student
-    	$bill_type_model = new bill_type_model();
+        // Get Class List Student
+        $bill_type_model = new bill_type_model();
         
-    	$get_classlist = $bill_type_model->get_record('atif.class_list','');
+        $get_classlist = $bill_type_model->get_record('atif.class_list','');
 
 
-    	// load View if exists
-    	if(View::exists('account_process.accounts.arrear')) {
-        	return view('account_process.accounts.arrear',[
-        		'class_list' => $get_classlist
-        	]);
-    	}
+        // load View if exists
+        if(View::exists('account_process.accounts.arrear')) {
+            return view('account_process.accounts.arrear',[
+                'class_list' => $get_classlist
+            ]);
+        }
 
     }
 
@@ -34,20 +35,29 @@ class arrears extends Controller
     public function insertAndUpdateArrear(Request $request){
         // Model load
         $arrear_adjustment_model = new arrear_adjustment_model();
+        $billing_cycle_definition=new billing_cycle_definition;
+        $installment_id=$billing_cycle_definition->getCurrentInstallmentNumber();
+
+
         // Ajax POST Request
         $student_id = $request->input('studentId');
         $amount = $request->input('amount');
         $description = $request->input('description');
         $state = $request->input('state');
-        $bill_paid_status = 0;
+        $academic_session_id = $request->input('academic_session_id');
 
-        $state == 1 ? $amount = (int)$amount : $amount =  (int)("-".$amount) ; 
+
+
+        $state == 1 ? $amount = (int)$amount : $amount =  (int)("-".$amount) ;
+
 
         $data = array(
             'student_id' => $student_id,
-            'adjustment_amount' => $amount,
+            'amount' => $amount,
             'description' => $description,
-            'status' => $bill_paid_status,
+            'installment_id' => $installment_id,
+            'academic_session_id' => $academic_session_id,
+            'modified' => time(),
             'modified_by' =>  Sentinel::getUser()->id
         );
 
@@ -60,13 +70,20 @@ class arrears extends Controller
             'id' => $id
            );
 
-           $arrear_adjustment_model->udpate_data('arriers_adjustments',$where,$data);
+           $arrear_adjustment_model->udpate_data('arriers_and_adjustment_manual',$where,$data);
 
         }else{
-            
-            $arrear_adjustment_model->insertProcedure('arriers_adjustments',$data);
+            $data = array(
+                'student_id' => $student_id,
+                'amount' => $amount,
+                'description' => $description,
+                'academic_session_id' => $academic_session_id,
+                'installment_id' => $installment_id,
+                'register' => time(),
+                'register_by' =>  Sentinel::getUser()->id
+            );
+                $arrear_adjustment_model->insertProcedure('arriers_and_adjustment_manual',$data);
         }
-
 
     }
 
@@ -76,11 +93,15 @@ class arrears extends Controller
 
         $arrear_adjustment_model = new arrear_adjustment_model();
 
+        // Update Arrear
         if($request->input('id')){
+            
             $id = $request->input('id');
+            $arrears_flag = $request->input('arrears_flag');
             $get_arrear = $arrear_adjustment_model->get_arrear_adjustment_join($id);
             echo json_encode($get_arrear);
-            
+            exit;            
+
         }else{
             
             $get_arrear = $arrear_adjustment_model->get_arrear_adjustment_join($id = null);

@@ -16,12 +16,13 @@ class arriers_adjustment extends Model
             @$total_adjustments=arriers_adjustment::where('student_id',$student_id)
             ->orderBy('id','desc')->first();
             return ($total_adjustments);
-            var_dump($total_adjustments);
+            // var_dump($total_adjustments);
             if(empty($total_adjustments['adjustment_amount'])){
             	return 0;
             }else{
             	return $total_adjustments;
             }
+            
     }
 
     public function InsertUpdateArriers($student_id,$amount){
