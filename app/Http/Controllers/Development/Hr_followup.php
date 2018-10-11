@@ -13,7 +13,8 @@ use App\Models\Staff\Staff_Recruitment\Staff_recruitment_model;
 
 class Hr_followup extends Controller
 {
-	public function index(){
+	public function index()
+	{
 		$userId = Sentinel::getUser()->id;
 	  	$staffRecruiment = new Staff_recruitment_model();
 	  	$RecruimentData = $staffRecruiment->get_recruitment_followup_data();

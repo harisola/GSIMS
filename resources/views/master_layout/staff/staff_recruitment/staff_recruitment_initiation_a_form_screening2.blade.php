@@ -36,7 +36,7 @@
                         <div class="row">
                         <input type="hidden" id="form_id">
                            <h5 class="text-center">Applicant Tagging</h5>
-                           <div class="col-md-12">
+                           <div class="col-md-12 KashifSolangi">
 
                               <select  id="ms_1" multiple="multiple" class="form-control ms">
                               
@@ -52,7 +52,7 @@
                      <td width="25%">
                         <div class="row">
                            <h5 class="text-center">Applicant Allocation</h5>
-                           <div class="col-md-6" style="padding-right: 5px;">
+                           <div class="col-md-6 KashifSolangi" style="padding-right: 5px;">
                               <select class="form-control" id="allocation_staff_1">
                               <option value="">Select Allocation</option>
                               <?php foreach($career_allocation as $career_allocation) { ?>
@@ -61,7 +61,7 @@
 
                               </select>
                            </div><!-- col-md-6 -->
-                           <div class="col-md-6" style="padding-left: 5px;">
+                           <div class="col-md-6 KashifSolangi" style="padding-left: 5px;">
                               <select class="form-control" id="allocation_grade_1">
                               <option value="" disabled selected>Select Grade</option>
                               <?php foreach($grade as $grading) { ?>
@@ -84,8 +84,8 @@
                      <td>
                         <div class="row">
                            <h5 class="text-center">Next Step Decision</h5>
-                           <div class="col-md-12 " style="">
-                              <select class="form-control" id="applicant_status_1">
+                           <div class="col-md-12 KashifSolangi" style="">
+                              <select class="form-control " id="applicant_status_1">
                               <?php foreach($status as $status)  { ?>
                                   <?php if($status->id > 1)  {?>
                                     <option value="<?php echo $status->id ?>" ><?php echo $status->name ?></option>
@@ -101,13 +101,13 @@
                      <td>
                         <div class="row">
                            <h5 class="text-center">Next Step Allocation</h5>
-                           <div class="col-md-6 " style="padding-right:5px;">
+                           <div class="col-md-6 KashifSolangi" style="padding-right:5px;">
                               <input type="date" class="form-control" id="applicant_next_step_allocation_date_1" min="{{ date('Y-m-d') }}">
                            </div><!-- col-md-6 -->
-                           <div class="col-md-6  " style="padding-left:5px;">
+                           <div class="col-md-6  KashifSolangi" style="padding-left:5px;">
                               <input type="time" class="form-control" id="applicant_next_step_allocation_time_1">
                            </div><!-- col-md-6 -->
-                           <div class="col-md-12 marginTop10 " style="">
+                           <div class="col-md-12 marginTop10 KashifSolangi" style="">
                               <select class="form-control" id="applicant_next_step_allocated_campus_1">
                                <option value="" disabled selected>Select Campus</option>
                                <?php foreach($campus as $branch)  {?>

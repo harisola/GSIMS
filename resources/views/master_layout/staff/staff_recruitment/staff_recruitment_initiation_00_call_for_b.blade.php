@@ -17,13 +17,13 @@
          <td>
             <div class="row">
                <h5 class="text-center">Next Step Allocation</h5>
-               <div class="col-md-6 " style="padding-right:5px;">
+               <div class="col-md-6 KashifSolangi" style="padding-right:5px;">
                   <input type="date" class="form-control" id="applicant_next_step_allocation_date_11" min="{{ date('Y-m-d') }}">
                </div><!-- col-md-6 -->
-               <div class="col-md-6  " style="padding-left:5px;">
+               <div class="col-md-6  KashifSolangi" style="padding-left:5px;">
                   <input type="time" class="form-control" id="applicant_next_step_allocation_time_11">
                </div><!-- col-md-6 -->
-               <div class="col-md-12 marginTop10 " style="">
+               <div class="col-md-12 marginTop10 KashifSolangi" style="">
                   <select class="form-control" id="applicant_next_step_allocated_campus_11">
                    <option value="" disabled selected>Select Campus</option>
                    <?php foreach($campus as $branch)  {?>

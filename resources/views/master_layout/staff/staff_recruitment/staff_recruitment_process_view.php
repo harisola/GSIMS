@@ -16,31 +16,83 @@
 
 <style>
 .startTillCSL3 {
-	background: #ccc;
     width: 1220px;
     height: 650px;
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0.4;
+}
+.startTillCSL3 a,
+.CSL3TillDDM3 a,
+.DDM3TillEnd a {
 }
 .CSL3TillDDM3 {
-	background: #888;
     width: 990px;
     height: 650px;
     position: absolute;
     top: 0;
     left:1220px;
-    opacity: 0.4;	
 }
 .DDM3TillEnd {
-	background: #666;
     width: 1300px;
     height: 650px;
     position: absolute;
     top: 0;
     left:2210px;
-    opacity: 0.4;
+}
+/* CSS for individual links start here */
+a.gray {
+	color: #888;
+	font-style: italic;
+	font-weight: normal;
+}
+.absolute {
+	position: absolute;
+	font-size: 16px;
+    font-weight: bold;
+}
+.noFollow {
+	color: red;
+}
+.fillPartA {
+    top: 22px;
+    left: 400px;
+}
+.partAScreeningToRegret {
+    top: 50px;
+    left: 624px;
+}
+.partAScreeningToPartBAllocation {
+    top: 115px;
+    left: 525px;
+}
+.partAScreeningToPartBPresence {
+    top: 259px;
+    left: 525px;
+}
+.partAScreeningToPartBCommunicatedOverall {
+    top: 195px;
+    left: 575px;
+}
+.partAScreeningToPartBFollowupOverall {    
+    top: 405px;
+    left: 575px;
+}
+.partAScreeningToPartBFollowup {
+    top: 485px;
+    left: 590px;
+}
+.partAScreeningToPartBFollowupExtension {
+	top: 405px;
+    left: 515px;
+}
+.partAScreeningToPartBFollowupNotInterested {
+	top: 585px;
+    left: 575px;
+}
+.partAScreeningToPartBPresent{
+	top: 295px;
+    left: 675px;	
 }
 </style>
 <!-- BEGIN USE PROFILE -->
@@ -53,6 +105,55 @@
 	<div class="col-md-12" style="overflow-y: hidden;position:relative;">
     	<img src="img/RecruitmentProcessflow.jpg" width="3500" />
         <div class="startTillCSL3">
+        	<!-- fillPartA: This section indicated the number of candidates submitted the Online form and are waiting for Part A Screening  -->
+        	<span class="fillPartA absolute">
+        		<a href="#" class="tooltips" data-container="body" data-placement="top" data-original-title="Applicants applied Online and completed Part A - Awaiting for Part A screening">20</a>
+        	</span><!-- fillPartA -->
+
+        	<!-- partAScreeningToRegret: Overall applicant moved to Regret from Part A screening of Online forms -->
+        	<span class="partAScreeningToRegret absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Regret from Part A screening">20</a>
+        	</span><!-- partAScreeningToRegret -->
+
+        	<!-- partAScreeningToPartBAllocation: Applicants who were called for Part B and communication to the applicant is still pending  -->
+        	<span class="partAScreeningToPartBAllocation absolute">
+        		<a href="#" class="tooltips" data-container="body" data-placement="top" data-original-title="Applicants triggered for Part B - Awaiting to be communicated">20</a>
+        	</span><!-- partAScreeningToPartBAllocation -->
+
+        	<!-- partAScreeningToPartBCommunicatedOverall: Overall applicants communicated for Part B -->
+        	<span class="partAScreeningToPartBCommunicatedOverall absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants communicated for Part B ">30</a>
+        	</span><!-- partAScreeningToPartBCommunicatedOverall -->
+
+        	<!-- partAScreeningToPartBPresence: Applicants awaited for Part B presence -->
+        	<span class="partAScreeningToPartBPresence absolute">
+        		<a href="#" class="tooltips" data-container="body" data-placement="top" data-original-title="Applicants awating for Part B presence - Communicated for Part B ">50</a>
+        	</span><!-- partAScreeningToPartBPresence -->
+
+        	<!-- partAScreeningToPartBFollowupOverall: Overall applicants moved to Followup for Part B presence -->
+        	<span class="partAScreeningToPartBFollowupOverall absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Part B presence">50</a>
+        	</span><!-- partAScreeningToPartBFollowupOverall -->
+
+        	<!-- partAScreeningToPartBFollowup: Applicants currently in Followup for Part B presence -->
+        	<span class="partAScreeningToPartBFollowup absolute">
+        		<a href="#" class="tooltips" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Part B presence">20</a> &nbsp;<a href="#" class="noFollow tooltips" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">(10)</a>
+        	</span><!-- partAScreeningToPartBFollowup -->
+
+        	<!-- partAScreeningToPartBFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
+        	<span class="partAScreeningToPartBFollowupExtension absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Part B presence">10</a>
+        	</span><!-- partAScreeningToPartBFollowupExtension -->
+
+        	<!-- partAScreeningToPartBFollowupNotInterested: Overall applicants moved to Not Interested from Followup for Part B presence -->
+        	<span class="partAScreeningToPartBFollowupNotInterested absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Part B presence">10</a>
+        	</span><!-- partAScreeningToPartBFollowupNotInterested -->
+
+        	<!-- partAScreeningToPartBPresent: Overall applicants marked Present for Part B -->
+        	<span class="partAScreeningToPartBPresent absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Part B">50</a>
+        	</span><!-- partAScreeningToPartBPresent -->
         	
         </div><!-- startTillCSL2 -->
         <div class="CSL3TillDDM3">
@@ -69,265 +170,7 @@
 
 
 
-$(document).ready(function(){
-    $("#show").click(function(){
-        $("#IssueApplicationForm").slideToggle( "slow" );
-    });
-});
-
-
-
-
-$('#staffView_filter_btn .applyFilter').click(function() {
-   //Remove mark
-   removeMark();
-   multiFilter();
-
-   $('.toggler').show();
-   $('.toggler-close').hide();
-   $('.theme-panel > .theme-options').hide();
-   $('#staffView_StaffList_Search').val('');
-
-   $('.toggler2').show();
-   $('.toggler2-close').hide();
-   $('.theme-panel > .theme-options2').hide();
-   $('#staffView_StaffList_Search').val('');
-
-   var totalRow =  $('#staffView_Table_StaffList tr:visible').length - 1;
-   $('#staffView_StaffList_Total').text('STAFF LIST - ' + totalRow);
-});
-
-
-
-
-
-
-
-
-   
-
-$(document).on('click','#clear_data',function(){
-  $('#career_name').val('');
-  $('#career_nic').val('');
-  $('#career_mobile').val('');
-  $('#career_landline').val('');
-  $('#career_gender').val('');
-  $('#career_tag').val('');
-  $('#career_comments').val('');
-
-  $('#career_name').focus();
-});
-
-
-
-
-$(document).on('click','.career_gc_id',function(){
-
-
-  /*
-  var name = $('#career_name').val();
-  var nic = $('#career_nic').val();
-  var mobile = $('#career_mobile').val();
-  var landline = $('#career_landline').val();
-  var gender = $('#career_gender').val();
-  var tag = $('#career_tag').val();
-  var comments = $('#career_comments').val();
-  var form_id = $('.walkin')
-  */
-  /***** Calling PDF *****/
-  /*
-  $.ajax({
-      type: "GET",
-      url: "http://10.10.10.63/gs/index.php/hcm/career_form_ajax/get_career_form_pdf",
-      data: {
-          name:name,
-          nic:nic,
-          mobile_phone:mobile,
-          land_line:landline,
-          gender:gender,
-          tag:tag,
-          comments:comments
-      },
-      success: function(data){
-      },
-      error: function() {
-
-      }
-  });
-  */
-
-
-});
-
-$(document).on('click','#print_submit',function(){
-  var name = $('#career_name').val();
-  var nic = $('#career_nic').val();
-  var mobile = $('#career_mobile').val();
-  var landline = $('#career_landline').val();
-  var gender = $('#career_gender').val();
-  var tag = $('#career_tag').val();
-  var comments = $('#career_comments').val();
-
-  var errors = "";
-
-  if(name === ""){ errors += "<strong>Name</strong> is required." }
-  if(nic === ""){ if(errors !== "") { errors += "<br>"; } errors += "<strong>NIC</strong> is required." }
-  if(mobile === ""){ if(errors !== "") { errors += "<br>"; } errors += "<strong>Mobile Phone</strong> is required." }
-  if(gender === ""){ if(errors !== "") { errors += "<br>"; } errors += "<strong>Gender</strong> is required." }
-  if(tag === "" || tag === null){ if(errors !== "") { errors += "<br>"; } errors += "<strong>Tag</strong> is required." }
-
-  if(errors === ""){
-    $('#error_div').hide();
-    $.ajax({
-      type:"POST",
-      cache:false,
-      data:{'_token': '{{ csrf_token() }}',
-          name:name,
-          nic:nic,
-          mobile_phone:mobile,
-          land_line:landline,
-          gender:gender,
-          tag:tag,
-          comments:comments
-        },
-      url:"{{url('/staff_recruitment_initiation_addcareerform')}}",
-      success:function(e){
-        if(e.substring(0,5) === "error"){
-          $('#error_div').show();
-          $('#error_div').html(e.substring(5, e.length));          
-        }else{
-          $('#error_div').hide();
-		      $('#career_name').val('');
-          $('#career_nic').val('');
-          $('#career_mobile').val('');
-          $('#career_landline').val('');
-          $('#career_gender').val('');
-          $('#career_tag').val('');
-          $('#career_comments').val('');
-			    $('#career_name').focus();
-
-
-          /***** Calling PDF *****/
-          var URL = "http://10.10.10.63/gs/index.php/hcm/career_form_ajax/get_career_form_pdf_gcid?gc_id="+e;
-          window.open(URL, '_blank');
-          //window.location.href = URL;
-          //console.log(URL);
-
-
-
-          /***** Refresh Data *****/
-		  
-		  
-			$.ajax({
-				type:'POST',
-				data:{'_token': '{{ csrf_token() }}'},
-				url:"{{url('/addcustomer')}}",
-				dataType: "json",
-				async: false,
-				cache: false,
-				success: function(response)
-				{
-				$('#table_data').html('');
-				$('#table_data').html(response.html);
-				
-				}
-			});
-			
-			
-			
-			
-	
-	
-		  /**/
-		  
-		  
-        }
-      }
-    });
-	
-	
-setTimeout( function () {
-
-
-           //$('#StaffList').dataTable();
-            $("#StaffList").dataTable({
-
-             "language": {
-        "aria": {
-            "sortAscending": ": activate to sort column ascending",
-            "sortDescending": ": activate to sort column descending"
-        },
-        "emptyTable": "No data available in table",
-        "info": "Showing _START_ to _END_ of _TOTAL_ records",
-        "infoEmpty": "No records found",
-        "infoFiltered": "(filtered1 from _MAX_ total records)",
-        "lengthMenu": "Show _MENU_",
-        "search": "",
-        "searchPlaceholder": "Search records..",
-        "zeroRecords": "No matching records found",
-        "paginate": {
-            "previous":"Prev",
-            "next": "Next",
-            "last": "Last",
-            "first": "First"
-        }
-    },
-
-
-        "pagingType": "bootstrap_extended",
-        "order": [[ 0, "desc" ]],
-        "lengthMenu": [
-            [-1, 40, 60, -1],
-            [-1, 40, 60, "All"] // change per page values here
-        ],
-
-        "columnDefs": [{
-            //"searchable": false,
-            //"targets": [0]
-        }]
-
-            });
-			
-    
-}, 1000 );
-
-
-  }else{
-    $('#error_div').show();
-    $('#error_div').html(errors);
-  }
-  
-
-
-});
-
-$(document).on('click','.print_form',function(e){
-  var data = $(this).data('walkin');
-   var form_id = $(this).data('id');
-
-
-   print_online(data,form_id);
-
-});
-
-var print_online = function(data,form_id){
-     if(data == 'Online'){
-    var URL = "http://10.10.10.63/gs/index.php/hcm/career_form_ajax/getPDFNow?career_id="+form_id;
-    window.open(URL, '_blank');
-   }
-}
-
-
-
-
-
-
 </script>
-@include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_a_script')
-@include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_b_script')
-@include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_c_script')
-@include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_d_script')
-@include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_e_script')
 
 <script>
  loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){   

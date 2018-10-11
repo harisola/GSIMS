@@ -1,7 +1,7 @@
 <?php /***** ***** ***** Form Screening - JS ***** ***** *****/ ?>
 <script type="text/javascript">
 
-//loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js",function(){});
+loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js",function(){});
 
 
 	var insertForm = function(status_id,stage_id,next_stage){
@@ -15,12 +15,12 @@
 		var allocation_staff = $('#allocation_staff_'+status_id).val();
 		var allocation_grade = $('#allocation_grade_'+status_id).val();
 		var applicant_comment = $('#applicant_comment_'+status_id).val();
-var applicant_next_step_allocation_date = $('#applicant_next_step_allocation_date_'+status_id).val();
-var applicant_next_step_allocation_time = $('#applicant_next_step_allocation_time_'+status_id).val();
-var applicant_next_step_allocated_campus=$('#applicant_next_step_allocated_campus_'+status_id).val();
+		var applicant_next_step_allocation_date = $('#applicant_next_step_allocation_date_'+status_id).val();
+		var applicant_next_step_allocation_time = $('#applicant_next_step_allocation_time_'+status_id).val();
+		var applicant_next_step_allocated_campus = $('#applicant_next_step_allocated_campus_'+status_id).val();
 		var applicant_next_step_comment = $('#applicant_next_step_comment_'+status_id).val();
 		var applicant_status_comment = $('#applicant_status_comment_'+status_id).val();
-var applicant_next_step_allocated_comment=$('#applicant_next_step_allocated_comment_'+status_id).val();
+		var applicant_next_step_allocated_comment = $('#applicant_next_step_allocated_comment_'+status_id).val();
 		var applicant_next_status = $('#applicant_status_'+status_id).val();
 
         if(status_id == 11){
@@ -28,136 +28,11 @@ var applicant_next_step_allocated_comment=$('#applicant_next_step_allocated_comm
         }
 
 
-        
-        var cfpb_txt_date = $('#applicant_next_step_allocation_date_'+status_id);
-        var cfpb_txt_time = $('#applicant_next_step_allocation_time_'+status_id);
-        var cfpb_txt_campus = $('#applicant_next_step_allocated_campus_'+status_id);
-
-        var txt_taging = $('#ms_'+status_id);
-        var txt_allocation_staff = $('#allocation_staff_'+status_id);
-        var txt_allocation_grade = $('#allocation_grade_'+status_id);
-
-        var txt_allocation_d = $('#applicant_status_'+status_id);
-
-        var oerror=0; 
-        if (!$.trim( applicant_next_step_allocation_date )) {
-            cfpb_txt_date.closest(".KashifSolangi").addClass( "has-error" );
-            oerror=1;
-        }else 
-        {
-            cfpb_txt_date.closest(".KashifSolangi").removeClass( "has-error" );
-        }
-
-        if (!$.trim( applicant_next_step_allocation_time )) {
-            cfpb_txt_time.closest(".KashifSolangi").addClass( "has-error" );
-            oerror=1;
-        }else 
-        {
-            cfpb_txt_time.closest(".KashifSolangi").removeClass( "has-error" );    
-        }
-
-        if (!$.trim( applicant_next_step_allocated_campus )) {
-            cfpb_txt_campus.closest(".KashifSolangi").addClass( "has-error" );
-            oerror=1;
-        }
-        else
-        {
-            cfpb_txt_campus.closest(".KashifSolangi").removeClass( "has-error" );   
-        }
-
-
-        
-
-        
-
-
-        if (!$.trim( taging ) && applicant_next_status != 11 ) {
-            txt_taging.closest(".KashifSolangi").addClass( "has-error" );
-            oerror=1;
-        }else
-        {
-            txt_taging.closest(".KashifSolangi").removeClass( "has-error" );   
-        }
-
-
-        if (!$.trim( allocation_staff ) && (applicant_next_status != 11) ) 
-        {
-            txt_allocation_staff.closest(".KashifSolangi").addClass( "has-error" );
-            oerror=1;
-        }else 
-        {
-            txt_allocation_staff.closest(".KashifSolangi").removeClass( "has-error" );
-        }
-
-
-        if (!$.trim( allocation_grade ) && applicant_next_status != 11 ) 
-        {
-            txt_allocation_grade.closest(".KashifSolangi").addClass( "has-error" );
-            oerror=1;
-        }
-        else 
-        {
-            txt_allocation_grade.closest(".KashifSolangi").removeClass( "has-error" );   
-        }
-
-
-
-        if ( (status_id == 1 ) && (!$.trim( applicant_next_status )) ) 
-        {
-           txt_allocation_d.closest(".KashifSolangi").addClass( "has-error" );
-            oerror=1;
-        }
-        else 
-        {
-            txt_allocation_d.closest(".KashifSolangi").removeClass( "has-error" );
-        }
-
-        if( applicant_next_status== 10 || applicant_next_status == 12 )
-         {
-
-            cfpb_txt_date.closest(".KashifSolangi").removeClass( "has-error" );
-            cfpb_txt_time.closest(".KashifSolangi").removeClass( "has-error" );    
-            cfpb_txt_campus.closest(".KashifSolangi").removeClass( "has-error" );   
-            txt_taging.closest(".KashifSolangi").removeClass( "has-error" );   
-            txt_allocation_staff.closest(".KashifSolangi").removeClass( "has-error" );
-            txt_allocation_grade.closest(".KashifSolangi").removeClass( "has-error" );   
-            txt_allocation_d.closest(".KashifSolangi").removeClass( "has-error" );
-            oerror=0;
-         }   
-
-
-   
-        
-
-
-
-
-if( oerror==0 ){
-
-var dialog = bootbox.dialog({
-title: 'Are you sure?',
-message: "<p>Are you sure you want to save changes?</p>",
-buttons: {
-    cancel: {
-        label: "No! cancel",
-        className: 'btn-danger',
-        callback: function(){
-            
-        }
-    },
-    
-    ok: {
-        label: "Yes! proceed",
-        className: 'btn-info',
-        callback: function(){
-            
-
-/////////////////////////////////////////////
 
 
         App.startPageLoading();
 
-        $.ajax({
+		$.ajax({
                 url: "{{url('/staff_recruitment_initiation_add')}}",
                 type:"POST",
                 cache:true,
@@ -168,7 +43,7 @@ buttons: {
                     applicant_next_status:applicant_next_status,
                     stage_id:stage_id,
                     form_id:form_id,
-                    taging:taging,
+           			taging:taging,
                     allocation_staff:allocation_staff,
                     allocation_grade:allocation_grade,
                     applicant_comment:applicant_comment,
@@ -183,13 +58,12 @@ buttons: {
                 },
                 success: function (response) {
                     App.stopPageLoading();
-
                     bootbox.dialog({
-                            message: "Application processed to next steps.",
-                            title: "Application status changed and saved.",
+                            message: "Your data has been successfully submitted.",
+                            title: "Saved.",
                             buttons: {
                             confirm: {
-                                label: " Ok! Close"
+                                label: "Ok"
                                 },
                             }
                         });   
@@ -216,26 +90,9 @@ buttons: {
             });
 
 
-////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-        }
-    }
-}
-});
-
-} // end if error=0
-       
-
-
 		
 		
-// here 
+
 		
 	}
 
@@ -285,7 +142,6 @@ buttons: {
                     }
                     
                     for(var i = 0;i < data.length;i++){
-
                         if(data[i].old_status_id != null){
 							
                             var current_status = data[i].current_status_id;
@@ -314,13 +170,18 @@ buttons: {
                             }else{
                                  $('#applicant_status_'+data[i].old_status_id).val(data[i].current_status_id);
                             }
-                           
+                            //console.log("old_status_id"+data[i].old_status_id);
+                           // console.log('#applicant_status_'+data[i].old_status_id);
                             var selectedOptions = data[i].tag.split(",");
                             console.log(selectedOptions);
-
                             $('#ms_'+data[i].old_status_id).multipleSelect('setSelects', selectedOptions);
 
-                           
+                            // if(data[i].date != null  data[i].date != '1970-01-01'){
+
+                            //     $('#button_'+data[i].old_status_id).hide();
+                            // }else{
+                            //     $('#button_'+data[i].old_status_id).show();
+                            // }
 
                             if(data[i].form_source == 1){
 
@@ -1104,7 +965,7 @@ else
                     success:function(e){
 
                         bootbox.dialog({
-                            message: "Your Data has been successfully.",
+                            message: "Your Data has been successfully submitted.",
                             title: "Saved.",
                             buttons: {
                             confirm: {
