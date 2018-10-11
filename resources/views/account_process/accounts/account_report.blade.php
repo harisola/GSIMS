@@ -121,6 +121,10 @@
                                 <li>
                                     <a href="#tab_5_4" data-toggle="tab"> Details of Receiving </a>
                                 </li>
+                                <li>
+                                    <a href="#tab_5_5" data-toggle="tab"> Ledger </a>
+                                </li>
+                                
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_5_1">
@@ -569,6 +573,99 @@
                                         </div><!-- row -->
                                     </div><!-- portlet-body -->
                                 </div><!-- #tab_5_4 -->
+                                <div class="tab-pane" id="tab_5_5">
+                                    <div class="row customRow">
+                                        <div class="col-md-2">
+                                            <label>Academic Year</label>
+                                            <select class="form-control academic_session" id="Academic">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Installment Number</label>
+                                            <select class="form-control installment_number" id="">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>GS-ID</label>
+                                            <input type="text" class="form-control gs_id">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>&nbsp;</label><br />
+                                            <input type="button" id="" data-pdf="0" class="btn btn-group green " value="Generate Report" style="width: 100%;">
+                                        </div>
+                                    </div><!-- row -->
+                                    <div class="portlet-body padding20" >
+                                        <div class="row padding20" >
+                                        <div class="col-md-5">
+                                            <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="DetailsReceivingBillReport">
+                                                <thead>
+                                                    <tr>
+                                                        <th>GS ID:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>GF ID:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>GR No:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>Status:</th><td></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <th>Name:</th><td></td>
+                                                        </tr>
+                                                         <tr>
+                                                        <th>Father Name</th><td></td>
+                                                        </tr>
+                                                         <tr>
+                                                        <th>Academic Year.</th><td></td>
+                                                        <!-- <th> Remitance </th> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table><!-- sample_4 -->
+                                        </div>
+                                            
+
+                                        </div><!-- row -->
+                                        <div class="row">
+                                        <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="DetailsReceivingBillReport">
+                                        <thead>
+                                        <tr>
+                                                        
+                                                        <th>Installment No.</th>
+                                                        <th>Issuance Data</th>
+                                                        <th>Fee Payable <br>(Fee + Tax)/th>
+                                                        <th>Receiving Date</th>
+                                                        <th>Fee Received</th>
+                                                        <th>Late / Rollover Fee Received</th>
+                                                        <th>Admission Fee Received Date</th>
+                                                        <th>Admission Fee Received</th>
+                                                        <th>Advance tax Received</th>
+                                                        <th>Advance Fee Received Date</th>
+                                                        <th>Advance Fee Received</th>
+                                                        <th>Outstanding Balance</th>
+                                                        
+                                                        <!-- <th> Remitance </th> -->
+                                                    </tr>
+                                        </thead>
+                                        </table>
+                                            
+                                        </div>
+                                    </div><!-- portlet-body -->
+                                </div><!-- #tab_5_4 -->
+                                
                             </div>
                         </div>
                     </div>

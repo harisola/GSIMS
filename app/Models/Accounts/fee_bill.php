@@ -166,8 +166,20 @@ class fee_bill extends Model
     }
 
 
-    public function getLastBillByStudentId($student_id){
-    	$details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+    public function getLastBillByStudentId($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){
+    	// $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+        $last_billing_cycle_number=$billing_cycle_number-1;
+        if($status=='S-CPT'){
+                $details=fee_bill::where([['student_id',$student_id],['bill_cycle_no',$last_billing_cycle_number],['academic_session_id',$academic_session_id]])
+                ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')
+                ->Orderby('id','asc')->first();
+        }else{
+            $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+
+        }
+       
+
+
     	return $details;
     }
 
