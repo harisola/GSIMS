@@ -51,9 +51,21 @@ var removeMark = function removeMark() {
     });
 	
 
+ 	$("#StaffView_Filter_Profile").change(function() {
+		
+
+		if( $(this).val()=='Walkin' )	{
+        $("#StaffView_Filter_Department").multiselect("disable");
+		} else {
+        $("#StaffView_Filter_Department").multiselect("enable");
+        }
+
+	});
+
 	 
 	$("#StaffView_Filter_Department").change(function() {
 		$("#StaffView_Filter_AtdStd").val('');
+
 		if( $(this).val() )	{
         $("#StaffView_Filter_AtdStd").multiselect("disable");
 		} else {
@@ -81,6 +93,7 @@ var removeMark = function removeMark() {
 		      'iDisplayLength': 100,
 		      'serverSide': true,
 		      'serverMethod': 'post',
+		      'language': { search: "" },
 		      'ajax': {
 		          "url": "{{ url('/modified_form_list') }}", 
 		           "dataType": "json",
