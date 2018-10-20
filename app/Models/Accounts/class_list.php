@@ -92,27 +92,16 @@ where c.gs_id = '".$gs_id."'";
        }
 
        public function newFeesInformation($gs_id){
-
-//grade_id, section_id,class_no=0,class_no,created,call_name
-
-       // $details=class_list::
-       //      leftjoin('atif_fee_student.fee_bill as fee_bill','fee_bill.student_id','=','class_list.id')
-       //    ->leftjoin('atif.student_family_record as std_data','class_list.gf_id','=','std_data.gf_id')
-       //    ->select(['fee_bill.*','class_list.abridged_name as student_name','class_list.gender','class_list.gs_id as student_gs_id','class_list.grade_name as grade_name','class_list.campus as campus','class_list.section_name as section_name','std_data.name as parent_name','std_data.parent_type','std_data.gf_id as family_id','class_list.grade_id as std_grade_id'])
-       //   ->where('gs_id',$gs_id)               
-       //   ->whereIn('fee_bill.academic_session_id',[11,12])->OrderBy('class_list.id','desc')->first();
-
-          $query = "SELECT fee_bill.*, cl.abridged_name as student_name,cl.gender,cl.gs_id as student_gs_id,cl.grade_name as grade_name,cl.campus as campus,cl.section_name as section_name,std_data.name as parent_name,std_data.parent_type,std_data.gf_id as family_id,std_data.nic as nic,cl.grade_id as std_grade_id,DATE_FORMAT(fee_bill.bill_issue_date,'%a %d %b ,%y') as bill_issue_date,DATE_FORMAT(fee_bill.bill_bank_valid_date,'%a %d %b ,%y') as bill_bank_valid_date,sr.gt_id as gt_id,cl.grade_id as grade_id,
-          DATE_FORMAT(fee_bill.bill_due_date,'%a %d %b ,%y') as bill_due_date,fee_bill.oc_yearly as total_yearly,cl.std_status_code,CONCAT('GF ',cl.gfid) as gf_id,CONCAT('Installment  0',bill_cycle_no,' of 05') as fee_bill_tittle_show  from atif.class_list as cl
+          $query = "SELECT fee_bill.*, cl.abridged_name AS student_name,cl.gender,cl.gs_id AS student_gs_id,cl.grade_name AS grade_name,cl.campus AS campus,cl.section_name AS section_name,std_data.name AS parent_name,std_data.parent_type,std_data.gf_id AS family_id,std_data.nic AS nic,cl.grade_id AS std_grade_id, DATE_FORMAT(fee_bill.bill_issue_date,'%a %d %b ,%y') AS bill_issue_date, DATE_FORMAT(fee_bill.bill_bank_valid_date,'%a %d %b ,%y') AS bill_bank_valid_date,sr.gt_id AS gt_id,cl.grade_id AS grade_id, DATE_FORMAT(fee_bill.bill_due_date,'%a %d %b ,%y') AS bill_due_date,fee_bill.oc_yearly AS total_yearly,cl.std_status_code, CONCAT('GF ',cl.gfid) AS gf_id, CONCAT('Installment 0',bill_cycle_no,' of 05') AS fee_bill_tittle_show
+          FROM atif.class_list AS cl
           LEFT JOIN atif_fee_student.fee_bill AS fee_bill ON fee_bill.student_id = cl.id
-          LEFT JOIN atif.student_family_record AS std_data ON (cl.gf_id = std_data.gf_id and std_data.parent_type = 1)
-          left join atif.staff_child sc on sc.gf_id = cl.gf_id
-
-          left join atif.staff_registered sr on (sr.id = sc.staff_id and sr.is_active = 1 and sr.staff_status <> 16)  
+          left join atif.students_all as sa on (sa.student_id = cl.id) 
+          LEFT JOIN atif.student_family_record AS std_data ON (cl.gf_id = std_data.gf_id and std_data.nic = sa.tax_nic)
+          LEFT JOIN atif.staff_child sc ON sc.gf_id = cl.gf_id
+          LEFT JOIN atif.staff_registered sr ON (sr.id = sc.staff_id AND sr.is_active = 1 AND sr.staff_status <> 16)
           WHERE cl.gs_id = '$gs_id' AND fee_bill.academic_session_id IN (11, 12) 
-
-          order by fee_bill.id desc";
-         $details = DB::connection('mysql_Career_fee_bill')->select($query);
+          ORDER BY fee_bill.id DESC limit 1";
+          $details = DB::connection('mysql_Career_fee_bill')->select($query);
 
         $details = collect($details)->map(function($x){ return (array) $x; })->toArray(); 
 
@@ -164,6 +153,7 @@ where c.gs_id = '".$gs_id."'";
                       whereIn('grade_id',$grade_id)
                     ->whereIN("std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
                      ->orderBy('generation_of', 'DESC')
+                     ->orderBy('grade_id')
                      ->orderBy('section_id', 'ASC')
                      ->orderBy('class_no', 'ASC')
                      ->orderBy('created', 'ASC')

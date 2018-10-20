@@ -26,7 +26,14 @@ class fee_bill extends Model
               if(!empty($grade_id) && empty($section_id) && empty($gs_id) && empty($gf_id) && empty($gt_id)){
                     $details=fee_bill::
                     join('atif.class_list as std_info','fee_bill.student_id','=','std_info.id')
-                    ->join('atif.student_family_record as std_data','std_info.gf_id','=','std_data.gf_id')
+                    ->leftjoin('atif.students_all as sa',function($join){
+                        $join->on('sa.student_id','=','std_info.id');
+                    })
+                    ->join('atif.student_family_record as std_data',function($join){
+                        $join->on('std_data.gf_id','=','sa.gf_id');
+                        $join->on('std_data.nic','=','sa.tax_nic');
+                    
+                    })
                     ->join('atif_fee_student.fee_definition as fee_def',function($join){
                         $join->on('std_info.grade_id','=','fee_def.grade_id');
                         $join->on('std_info.academic_session_id','=','fee_def.academic_session_id');
@@ -36,7 +43,11 @@ class fee_bill extends Model
                     ->select(['fee_bill.*','std_info.*','std_info.abridged_name as student_name',
                     'std_info.gender','std_info.gs_id as student_gs_id',
                     'std_info.grade_name as grade_name','std_info.campus as campus',
-                    'std_info.section_name as section_name','std_data.name as parent_name',
+                    'std_info.section_name as section_name','std_info.section_id as section_id',
+                    'std_info.generation_of as generation_of',
+                    'std_info.class_no as class_no',
+                    'std_info.created as ra_created',
+                    'std_info.grade_id as my_grade_id','std_data.name as parent_name',
                     'std_data.parent_type','std_data.gf_id as family_id',
                     'std_info.grade_id as std_grade_id','std_data.nic as nic',
                     'fee_def.tuition_fee as tuition_fee','fee_def.resource_fee as resource_fee',
@@ -45,11 +56,15 @@ class fee_bill extends Model
                     ->where("fee_bill.bill_cycle_no",$billing_cycle_number)
                     ->whereIN("fee_bill.academic_session_id",[11,12])
                     ->whereIN("std_info.std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
-                    ->where('std_data.parent_type',1)
-                    ->OrderBy('std_info.id','desc')
-                    ->groupBy('std_info.gs_id')
+                    ->groupBy('std_info.id')
+                    ->orderBy('generation_of', 'DESC')
+                    ->orderBy('my_grade_id')
+                    ->orderBy('section_id', 'ASC')
+                    ->orderBy('class_no', 'ASC')
+                    ->orderBy('ra_created', 'ASC')
                     ->get();
-                    // var_dump($details);
+                    // print_r($details);
+                    // die;
                     return $details;
               }
               elseif(!empty($grade_id) && !empty($section_id) && empty($gs_id) && empty($gf_id) && empty($gt_id)){
@@ -74,19 +89,26 @@ class fee_bill extends Model
                     ->whereIN('std_info.grade_id',$grade_id)
                     ->whereIN('std_info.section_name',$section_name)
                     ->whereIN("std_info.std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
-                    ->where('std_data.parent_type',1)
                     ->groupBy('std_info.gs_id')
                     ->OrderBy('std_info.id','desc')->get();
               }elseif(!empty($gs_id) && empty($grade_id) && empty($section_id) && empty($gf_id) && empty($gt_id)){
                   $details=fee_bill::
                     join('atif.class_list as std_info','fee_bill.student_id','=','std_info.id')
-                    ->join('atif.student_family_record as std_data','std_info.gf_id','=','std_data.gf_id')
+                    ->leftjoin('atif.students_all as sa',function($join){
+                        $join->on('sa.student_id','=','std_info.id');
+                    })
+                    ->join('atif.student_family_record as std_data',function($join){
+                        $join->on('std_data.gf_id','=','sa.gf_id');
+                        $join->on('std_data.nic','=','sa.tax_nic');
+                    
+                    })
                     ->join('atif_fee_student.fee_definition as fee_def',function($join){
                         $join->on('std_info.grade_id','=','fee_def.grade_id');
                         $join->on('std_info.academic_session_id','=','fee_def.academic_session_id');
                     })
                     ->leftjoin('atif.staff_child as sc','sc.gf_id','=','std_info.gf_id')
                     ->leftjoin('atif.staff_registered as sr','sr.id','=','sc.staff_id')
+
                     ->select(['fee_bill.*','std_info.*','std_info.abridged_name as student_name',
                     'std_info.gender','std_info.gs_id as student_gs_id',
                     'std_info.grade_name as grade_name','std_info.campus as campus',
@@ -98,7 +120,6 @@ class fee_bill extends Model
                     ->where('std_info.gs_id',$gs_id)
                     ->whereIN("fee_bill.academic_session_id",[11,12])
                     ->whereIN("std_info.std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
-                    ->where('std_data.parent_type',1)
                     ->where("fee_bill.bill_cycle_no",$billing_cycle_number)
                     ->groupBy('std_info.gs_id')
                     ->groupBy('fee_bill.fee_bill_type_id')
@@ -167,26 +188,44 @@ class fee_bill extends Model
 
 
     public function getLastBillByStudentId($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){
-    	// $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+        // $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
         $last_billing_cycle_number=$billing_cycle_number-1;
         if($status=='S-CPT'){
                 $details=fee_bill::where([['student_id',$student_id],['bill_cycle_no',$last_billing_cycle_number],['academic_session_id',$academic_session_id]])
-                ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')
-                ->Orderby('id','asc')->first();
+                ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment')
+                ->Orderby('id','asc')->get();
         }else{
-            $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+            $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment')->Orderby('id','desc')->first();
 
         }
        
-
-
-    	return $details;
+        return $details;
     }
+    
+
+    public function getScptBillNoDiscount($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){
+        // $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
+        $last_billing_cycle_number=$billing_cycle_number-1;
+        if($status=='S-CPT'){
+                $details=fee_bill::where([['student_id',$student_id],['bill_cycle_no',$last_billing_cycle_number],['academic_session_id',$academic_session_id]])
+                ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment')
+                ->Orderby('id','asc')->first();
+        }
+       
+        return $details;
+    }
+
 
 	public function getLastCurrentBilling($student_id){
 	    	$details=fee_bill::where('student_id',$student_id)->select('id','total_current_bill')->Orderby('id','desc')->first();
 	    	return $details['total_current_bill'];
 	 }
+
+     public function getScptFirstBill($student_id,$billing_cycle_number,$academic_session_id){
+            $billing_cycle_number=$billing_cycle_number-1;
+            $details=fee_bill::where([['student_id',$student_id],['bill_cycle_no',$billing_cycle_number],['academic_session_id',$academic_session_id]])->select('id','total_payable')->Orderby('id','asc')->first();
+            return $details['total_payable'];
+     }
 
     public function getAllBillNumbers($student_id,$academic_session_id){
     	$details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->select('id')->get();
@@ -207,10 +246,19 @@ class fee_bill extends Model
 
     public function getAdmissionFee($student_id,$academic_session_id=""){
         $details=fee_bill::where('student_id',$student_id)
-        ->select('admission_fee')
-        ->whereIN('academic_session_id',[11,12])
+        ->select('admission_fee','gb_id')
+        ->where([['bill_title','Admission'],['bill_cycle_no',0]])
+        ->whereIN('academic_session_id',[9])
         ->Orderby('id','desc')->first();
-        return $details['admission_fee'];
+        $gb_id=$details['gb_id'];
+        $bill_year=substr($gb_id,0,2);
+        $c_year = date('Y');
+        $c_nyear=substr($bill_year,0,2);
+       if($bill_year==$c_nyear){
+            return $details['admission_fee'];
+        }else{
+            return 0;
+        }
     }
 
     public function getLastBillPaidNotPaid($student_id){

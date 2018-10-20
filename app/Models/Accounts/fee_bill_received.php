@@ -11,9 +11,15 @@ class fee_bill_received extends Model
     public $timestamps = false;
 
     public function getReceivedAmount($bill_id){
-    	$fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->sum('received_amount');
-    	return $fee;
+        $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->sum('received_amount');
+        return $fee;
     }
+
+    public function getLastReceivedAmount($bill_id){
+        $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->Orderby('id','desc')->first();
+        return $fee['received_amount'];
+    }
+
 
     public function getPaymentMethod($bill_id){
 		$fee=fee_bill_received::where('fee_bill_id',$bill_id)->select('received_payment_mode')->first();

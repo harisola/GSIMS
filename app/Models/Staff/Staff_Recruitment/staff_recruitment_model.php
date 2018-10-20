@@ -1,11 +1,4 @@
 <?php
-/******************************************************************
-* Author: 	Atif Naseem
-* Email: 	atif.naseem22@gmail.com
-* Cell: 	+92-313-5521122
-*******************************************************************/
-
-
 namespace App\Models\Staff\Staff_Recruitment;
 
 use Illuminate\Support\Facades\DB;
@@ -565,15 +558,255 @@ WHERE cf.id =  ".$form_id." GROUP BY cfd.id";
 	
 	public function Get_Logs( $Form_id ){
 		
-    	 $query = "select final_data.* 
+//     	$query = "select final_data.* 
+// from( 
+
+// select 
+// cf.id as Form_id,
+// cf.gc_id as Form_no,
+// #concat( 'Applicant name ', cf.name , ' Position ', cf.position_applied, ' Status ' , cs.name ) as Applicat_name,
+// '' as Applicat_name,
+// cf.position_applied as Position_Apply,
+// cf.comments as Comments,
+// 1 as Result_Type,
+// cf.status_id as  Status_id,
+// cs.name as Status_name,
+// cf.stage_id as Stage_id,
+// cst.name as Stage_name,
+// cf.created as Created_on,
+// cf.register_by as Created_by,
+// cf.modified as Modified_on,
+// cf.modified_by as Modified_by,
+// ( CASE
+//     WHEN cf.form_source=1 THEN 
+
+//     concat(  ' Online form submission on  <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )
+//     ELSE 
+//     concat( ' Recruitment form issued by ' ,  ifnull( sr.abridged_name,' Admin ') ,' on <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )  
+// END
+// ) as Form_Source,
+
+// sr.abridged_name as Register_by,
+// sr.employee_id as Photo_id,
+// from_unixtime(cf.created, '%a %b %e, %Y %h:%i %p' )as Dated,
+// 0 as order_Date
+
+// from atif_career.career_form as cf
+
+// left join atif_gs_sims.users as users on users.id = cf.register_by
+// left join
+// ( select 
+// sr.abridged_name,
+// sr.employee_id, sr.gg_id
+// from atif_gs_sims.users as u 
+// inner join atif.staff_registered as sr
+// on sr.gg_id = u.email
+// where sr.staff_status=1
+// group by u.email order by u.id ) as sr
+// on sr.gg_id = users.email
+
+
+// left join atif_Career.career_status as cs
+// on cs.id = cf.status_id
+// left join atif_Career.career_stage as cst
+// on cst.id=cf.stage_id
+
+
+
+
+// union all
+
+// select d.* from( 
+// select
+ 
+// lg.form_id as Form_id,
+// '' as Form_no,
+// (
+// 	CASE
+// 	   WHEN (lg.status_id=11 and lg.stage_id=9) THEN 
+// 	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br />Call this candidate for Part B <br />', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+// 		WHEN (lg.status_id=11 and lg.stage_id=10) THEN  
+// 		concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Communicated for Part B - Expected ', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), '</strong>' , ' in ' , '<strong>', if( cf.campus=1, 'North', 'South' ),' </strong> <br />' , '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+// 		WHEN (lg.status_id=11 and lg.stage_id=4) THEN  
+// 	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Part B - Expected ', '<strong>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</strong>' , ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong> <br />'   , '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+// 	   WHEN ( (mcf.status_id=10 or lg.status_id=10 )  ) THEN 
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate moved to Archive - File for Future from <br />', '</span> ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),''), ' </span><small>' ,from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+// 		WHEN ( (mcf.status_id=12 or lg.status_id=12) ) THEN 
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate moved to Archive - Regret from <br />', '</span> ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),'') , ' </span><small>' ,from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+// 		WHEN ( ( mcf.status_id=1 and mcf.stage_id=1 and cf.status_id=1  and cf.stage_id=1  ) ) THEN 
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Form screening, applicant tagged to <br />', '</span> ', if( ca.name is not null, concat(' following tags: ',ca.name),'') , 'allocated to ', ca.name ,' with ', 'grade ', cg.name , ' </span><small>' ,from_unixtime(mcf.modified, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+	   
+// 		WHEN ( lg.status_id=2 and lg.stage_id=8  ) THEN 
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Form Screening </strong> to <strong>Initial Interview </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+// 		WHEN (lg.status_id=2 and lg.stage_id=4) THEN  
+//   	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Initial Interview ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+//   	   WHEN (lg.status_id=3 and lg.stage_id=8) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Initial Interview </strong> to <strong> Formal Interview </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+	   
+	   
+// 	   WHEN (lg.status_id=3 and lg.stage_id=4) THEN  
+//   	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Formal Interview ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+//   	   WHEN (lg.status_id=4 and lg.stage_id=8) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Formal Interview </strong> to <strong> Observation </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		
+// 		WHEN (lg.status_id=4 and lg.stage_id=4) THEN  
+//   	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Observation ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+//   	   WHEN (lg.status_id=5 and lg.stage_id=8) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Observation  </strong> to <strong> Final Consultation </strong>', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+// 		WHEN (lg.status_id=5 and lg.stage_id=4) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Observation ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+// 		WHEN (lg.status_id=6 and lg.stage_id=8) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate Offer ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+
+
+// 		WHEN (lg.status_id=7 and lg.stage_id=8) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Offer Procedure ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+		
+// 		WHEN  ( mcf.status_id=8 and mcf.stage_id=8) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Complete Checklist ', ' </span><small>',from_unixtime(mcf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+// 		WHEN  ( mcf.status_id=9 and mcf.stage_id=8) THEN  
+// 		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Recruitment Complete ', ' </span><small>',from_unixtime(mcf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+  	   
+		
+	   
+		
+// 		ELSE  null
+		
+
+
+// 	END 
+// ) as Applicat_name,
+
+// ca.dname as Position_Apply,
+
+// concat( cf.comments_next_step, '' ,cf.comments_applicant, '', cf.comments_next_decision,'',cf.comments_next_step_aloc) as Comments,
+//  2 as Result_Type,
+// lg.status_id as  Status_id,
+
+// if( lg.status_id=1, 'Initial Form Screening', cs.name ) as Status_name,
+
+// cf.stage_id as Stage_id,
+// cst.name as Stage_name,
+// lg.created as Created_on,
+// lg.register_by as Created_by,
+// lg.modified as Modified_on,
+// lg.modified_by as Modified_by,
+// '' as Form_Source,
+// sr.abridged_name as Register_by,
+// sr.employee_id as Photo_id,
+// from_unixtime(cf.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
+
+// lg.modified as order_Date
+
+//  from atif_career.log_career_form as lg
+
+// left join atif_Career.career_form_data as cf
+// on (
+// cf.form_id = lg.form_id
+// #and  cf.status_id=lg.status_id and  cf.stage_id = lg.stage_id
+// )
+
+
+
+// left join atif_Career.career_status as cs on cs.id = lg.status_id
+// left join atif_Career.career_stage as cst on cst.id=lg.stage_id
+// left outer join atif_career.career_form as mcf on mcf.id=lg.form_id
+// left join atif_career.career_allocation as ca on ca.id= cf.applicant_allocate
+// left join atif_career.career_grade as cg on cg.id = cf.career_grade_id
+// left join atif_gs_sims.users as users on users.id = lg.register_by
+
+// left join
+// ( select 
+// sr.abridged_name,
+// sr.employee_id, sr.gg_id
+// from atif_gs_sims.users as u 
+// inner join atif.staff_registered as sr
+// on sr.gg_id = u.email
+// where sr.staff_status=1
+// group by u.email order by u.id ) as sr
+// on sr.gg_id = users.email
+// #where lg.status_id != 1 
+// group by lg.status_id, lg.stage_id
+// order by lg.created  
+// ) as d
+
+
+
+
+
+// union all
+// select 
+// lg.form_id as Form_id,
+// '' as Form_no,
+
+// concat( ' Follow up comments :', ' ', lg.`comment` ,' ' , 'Dated ',  from_unixtime(lg.created, '%a %b %e, %Y') )  as Applicat_name,
+// '' as Position_Apply,
+
+// concat( lg.`comment`) as Comments,
+// 3  as Result_Type,
+// '' as  Status_id,
+// 'Follow up comments'  as Status_name,
+// '' as Stage_id,
+// 'Follow up comments' as Stage_name,
+// lg.created as Created_on,
+// lg.register_by as Created_by,
+// lg.modified as Modified_on,
+// lg.modified_by as Modified_by,
+// '' as Form_Source,
+// sr.abridged_name as Register_by,
+// sr.employee_id as Photo_id,
+// from_unixtime(lg.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
+// lg.created as order_Date
+
+// from atif_career.career_followup_comments as lg
+// left join atif_gs_sims.users as users on users.id = lg.register_by
+// left join
+// ( select 
+// sr.abridged_name,
+// sr.employee_id, sr.gg_id
+// from atif_gs_sims.users as u 
+// inner join atif.staff_registered as sr
+// on sr.gg_id = u.email
+// where sr.staff_status=1
+// group by u.email order by u.id ) as sr
+// on sr.gg_id = users.email
+
+
+
+
+// ) as final_data
+
+// where final_data.Result_Type=2 and final_data.Applicat_name is not null and final_data.Form_id=".$Form_id."  
+
+
+// order by  final_data.order_Date";
+
+/*
+$query ="select final_data.* 
 from( 
+
 select 
 cf.id as Form_id,
 cf.gc_id as Form_no,
-concat( 'Applicant name ', cf.name , ' Position ', cf.position_applied, ' Status ' , cs.name ) as Applicat_name,
+'' as Applicat_name,
 cf.position_applied as Position_Apply,
 cf.comments as Comments,
-'Career Form' as Result_Type,
+1 as Result_Type,
 cf.status_id as  Status_id,
 cs.name as Status_name,
 cf.stage_id as Stage_id,
@@ -582,123 +815,666 @@ cf.created as Created_on,
 cf.register_by as Created_by,
 cf.modified as Modified_on,
 cf.modified_by as Modified_by,
-concat(  if( cf.form_source=1 ,'Online', 'Walkin') , ' form submission on  <strong> ', from_unixtime(cf.created, '%a %b %e, %Y %h:%i %p' ) , ' </strong>' )  as Form_Source,
+( CASE
+    WHEN cf.form_source=1 THEN 
+
+    concat(  ' Online form submission on  <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )
+    ELSE 
+    concat( ' Recruitment form issued by ' ,  ifnull( sr.abridged_name,' Admin ') ,' on <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )  
+END
+) as Form_Source,
 
 sr.abridged_name as Register_by,
 sr.employee_id as Photo_id,
 from_unixtime(cf.created, '%a %b %e, %Y %h:%i %p' )as Dated,
-from_unixtime(cf.created ) as order_Date
+0 as order_Date
 
 from atif_career.career_form as cf
-left join atif.staff_registered as sr
-on sr.id = cf.register_by
+
+left join atif_gs_sims.users as users on users.id = cf.register_by
+left join
+( select 
+sr.abridged_name,
+sr.employee_id, sr.gg_id
+from atif_gs_sims.users as u 
+inner join atif.staff_registered as sr
+on sr.gg_id = u.email
+where sr.staff_status=1
+group by u.email order by u.id ) as sr
+on sr.gg_id = users.email
+
+
 left join atif_Career.career_status as cs
 on cs.id = cf.status_id
 left join atif_Career.career_stage as cst
 on cst.id=cf.stage_id
 
-/*
-union
 
-select 
-cf.form_id as Form_id,
+
+
+union all
+
+select d.* from( 
+select
+ 
+lg.form_id as Form_id,
 '' as Form_no,
-'' as Applicat_name,
-'' as Position_Apply,
-'' as Comments,
-'Logs Career Form' as Result_Type,
-cf.status_id as  Status_id,
-cs.name as Status_name,
-cf.stage_id as Stage_id,
-cst.name as Stage_name,
-cf.created as Created_on,
-cf.register_by as Created_by,
-cf.modified as Modified_on,
-cf.modified_by as Modified_by,
-'' as Form_Source,
-sr.abridged_name as Register_by,
-sr.employee_id as Photo_id,
-from_unixtime(cf.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
-from_unixtime(cf.created ) as order_Date
-from atif_career.log_career_form as cf
-left join atif.staff_registered as sr
-on sr.id = cf.register_by
-left join atif_Career.career_status as cs
-on cs.id = cf.status_id
-left join atif_Career.career_stage as cst
-on cst.id=cf.stage_id
 
-*/
 
-union
-select 
 
-cf.form_id as Form_id,
-'' as Form_no,
-concat( cs.name ,' ' , 'Dated ',  cf.date, ' at ', cf.time, ' Tags ',cf.tag ) as Applicat_name,
+
+
+(
+	CASE
+		WHEN (lg.status_id=11 and lg.stage_id=9) THEN 
+	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br />Call this candidate for Part B <br />', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		WHEN (lg.status_id=11 and lg.stage_id=10) THEN  
+		concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Communicated for Part B - Expected  on', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), '</strong>' , ' in ' , '<strong>', if( cf.campus=1, 'North', 'South' ),' </strong> <br />' , '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		WHEN (lg.status_id=11 and lg.stage_id=4) THEN  
+	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Part B - Expected ', '<strong>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</strong>' , ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong> <br />'   , '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+	   WHEN ( (mcf.status_id=10 or lg.status_id=10 )  ) THEN 
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate moved to Archive - File for Future from <br />', '</span> ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),''), ' </span><small>' ,from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		WHEN ( (mcf.status_id=12 or lg.status_id=12) ) THEN 
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate moved to Archive - Regret from <br />', '</span> ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),'') , ' </span><small>' ,from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		WHEN ( ( mcf.status_id=1 and mcf.stage_id=1 and cf.status_id=1  and cf.stage_id=1  ) ) THEN 
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Form screening, applicant tagged to <br />', '</span> ', if( ca.name is not null, concat(' following tags: ',ca.name),'') , 'allocated to ', ca.name ,' with ', 'grade ', cg.name , ' </span><small>' ,from_unixtime(mcf.modified, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+	   
+		WHEN ( lg.status_id=2 and lg.stage_id=8  ) THEN 
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Form Screening </strong> to <strong>Initial Interview </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		WHEN (lg.status_id=2 and lg.stage_id=4) THEN  
+  	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Initial Interview ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   WHEN (lg.status_id=3 and lg.stage_id=8) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Initial Interview </strong> to <strong> Formal Interview </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+	   
+	   
+	   WHEN (lg.status_id=3 and lg.stage_id=4) THEN  
+  	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Formal Interview ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+  	   WHEN (lg.status_id=4 and lg.stage_id=8) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Formal Interview </strong> to <strong> Observation </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		
+		WHEN (lg.status_id=4 and lg.stage_id=4) THEN  
+  	   concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Observation ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+  	   WHEN (lg.status_id=5 and lg.stage_id=8) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Next step decision from <strong> Observation  </strong> to <strong> Final Consultation </strong>', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		WHEN (lg.status_id=5 and lg.stage_id=4) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate appeared for Candidate appeared for Observation ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		WHEN (lg.status_id=6 and lg.stage_id=8) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Candidate Offer ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+
+
+		WHEN (lg.status_id=7 and lg.stage_id=8) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Offer Procedure ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+		
+		WHEN  ( mcf.status_id=8 and mcf.stage_id=8) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Complete Checklist ', ' </span><small>',from_unixtime(mcf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+		WHEN  ( mcf.status_id=9 and mcf.stage_id=8) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Recruitment Complete ', ' </span><small>',from_unixtime(mcf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+			WHEN  ( mcf.status_id=1 and mcf.stage_id=1 and cf.id is null ) THEN  
+		concat( ifnull( sr.abridged_name, ' Admin '), ' <br /> Initial Form Screening ', ' </span><small>',from_unixtime(mcf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+		
+		
+		WHEN  ( mcf.status_id=11 and mcf.stage_id=10 ) THEN  
+		concat(ifnull( sr.abridged_name, ' Admin '), ' <br /> Communicated for Part B - Expected ', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), '</strong>' , ' in ' , '<strong>', if( cf.campus=1, 'North', 'South' ),' </strong> <br />' , '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+  	   
+		
+	   
+		
+		ELSE null
+		
+		
+		
+
+    
+    
+    
+	END 
+) as Applicat_name,
+
 ca.dname as Position_Apply,
 
 concat( cf.comments_next_step, '' ,cf.comments_applicant, '', cf.comments_next_decision,'',cf.comments_next_step_aloc) as Comments,
- 'Career Form Data' as Result_Type,
-cf.status_id as  Status_id,
-cs.name as Status_name,
-cf.stage_id as Stage_id,
-cst.name as Stage_name,
-cf.created as Created_on,
-cf.register_by as Created_by,
-cf.modified as Modified_on,
-cf.modified_by as Modified_by,
-'' as Form_Source,
-sr.abridged_name as Register_by,
-sr.employee_id as Photo_id,
-from_unixtime(cf.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
-from_unixtime(cf.created ) as order_Date
-from atif_career.career_form_data as cf
-left join atif.staff_registered as sr
-on sr.id = cf.register_by
-left join atif_Career.career_status as cs
-on cs.id = cf.status_id
-left join atif_Career.career_stage as cst
-on cst.id=cf.stage_id
-left join atif_career.career_allocation as ca
-on ca.id= cf.applicant_allocate
-left join atif_career.career_grade as cg
-on cg.id = cf.career_grade_id
+ 2 as Result_Type,
+lg.status_id as  Status_id,
 
-/*
-union
-select 
-cf.form_id as Form_id,
-'' as Form_no,
-'' as Applicat_name,
-'' as Position_Apply,
-'' as Comments,
-'Logs Career Form Data' as Result_Type,
-cf.status_id as  Status_id,
-cs.name as Status_name,
+if( lg.status_id=1, 'Initial Form Screening', cs.name ) as Status_name,
+
 cf.stage_id as Stage_id,
 cst.name as Stage_name,
-cf.created as Created_on,
-cf.register_by as Created_by,
-cf.modified as Modified_on,
-cf.modified_by as Modified_by,
+lg.created as Created_on,
+lg.register_by as Created_by,
+
+lg.modified as Modified_on,
+lg.modified_by as Modified_by,
 '' as Form_Source,
 sr.abridged_name as Register_by,
 sr.employee_id as Photo_id,
 from_unixtime(cf.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
-from_unixtime(cf.created ) as order_Date
-from atif_career.log_career_form_data as cf
-left join atif.staff_registered as sr
-on sr.id = cf.register_by
-left join atif_Career.career_status as cs
-on cs.id = cf.status_id
-left join atif_Career.career_stage as cst
-on cst.id=cf.stage_id */
+
+if(lg.created is null, mcf.created, lg.created) as order_Date
+
+ from atif_career.log_career_form as lg
+
+left join atif_Career.career_form_data as cf
+on (
+cf.form_id = lg.form_id
+#and  cf.status_id=lg.status_id and  cf.stage_id = lg.stage_id
+)
+
+
+
+left join atif_Career.career_status as cs on cs.id = lg.status_id
+left join atif_Career.career_stage as cst on cst.id=lg.stage_id
+left outer join atif_career.career_form as mcf on mcf.id=lg.form_id
+left join atif_career.career_allocation as ca on ca.id= cf.applicant_allocate
+left join atif_career.career_grade as cg on cg.id = cf.career_grade_id
+left join atif_gs_sims.users as users on users.id = lg.register_by
+
+left join
+( select 
+sr.abridged_name,
+sr.employee_id, sr.gg_id
+from atif_gs_sims.users as u 
+inner join atif.staff_registered as sr
+on sr.gg_id = u.email
+where sr.staff_status=1
+group by u.email order by u.id ) as sr
+on sr.gg_id = users.email
+
+
+group by lg.id, lg.status_id, lg.stage_id
+
+order by lg.created  
+) as d
+
+
+
+
+union all
+select 
+lg.form_id as Form_id,
+'' as Form_no,
+
+concat( ' Follow up comments :', ' ', lg.`comment` , ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )  as Applicat_name,
+
+
+
+
+'' as Position_Apply,
+
+concat( lg.`comment`) as Comments,
+3  as Result_Type,
+'' as  Status_id,
+'Follow up comments'  as Status_name,
+'' as Stage_id,
+'Follow up comments' as Stage_name,
+lg.created as Created_on,
+lg.register_by as Created_by,
+lg.modified as Modified_on,
+lg.modified_by as Modified_by,
+'' as Form_Source,
+sr.abridged_name as Register_by,
+sr.employee_id as Photo_id,
+from_unixtime(lg.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
+lg.created as order_Date
+
+from atif_career.career_followup_comments as lg
+left join atif_gs_sims.users as users on users.id = lg.register_by
+left join
+( select 
+sr.abridged_name,
+sr.employee_id, sr.gg_id
+from atif_gs_sims.users as u 
+inner join atif.staff_registered as sr
+on sr.gg_id = u.email
+where sr.staff_status=1
+group by u.email order by u.id ) as sr
+on sr.gg_id = users.email
+
 ) as final_data
 
-where final_data.Form_id=".$Form_id."  
+where final_data.Applicat_name is not null and final_data.Form_id=".$Form_id." 
 
-order by final_data.order_Date asc ";
+order by  final_data.order_Date ";
+*/
+
+// Start Query
+
+$query = " select final_data.* 
+from( 
+
+
+
+select dd.* from ( 
+select 
+cf.id as Form_id,
+cf.gc_id as Form_no,
+'' as Applicat_name,
+cf.position_applied as Position_Apply,
+cf.comments as Comments,
+0 as Result_Type,
+1 as  Status_id,
+'Initial Sreening' as Status_name,
+1 as Stage_id,
+'Apply' as Stage_name,
+cf.created as Created_on,
+cf.register_by as Created_by,
+cf.modified as Modified_on,
+cf.modified_by as Modified_by,
+( CASE
+    WHEN cf.form_source=1 THEN 
+
+    concat(  ' Online form submission on  <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )
+    ELSE 
+    concat( ' Recruitment form issued by ' ,  ifnull( sr.abridged_name,' Admin ') ,' on <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )  
+END
+) as Form_Source,
+
+sr.abridged_name as Register_by,
+sr.employee_id as Photo_id,
+from_unixtime(cf.created, '%a %b %e, %Y %h:%i %p' )as Dated,
+cf.created as order_Date
+
+from atif_career.career_form as cf
+
+left join atif_gs_sims.users as users on users.id = if(cf.register_by=0,cf.modified_by,cf.register_by)
+left join
+( select 
+sr.abridged_name,
+sr.employee_id, sr.gg_id
+from atif_gs_sims.users as u 
+left join atif.staff_registered as sr
+on sr.gg_id = u.email
+
+group by u.email order by u.id ) as sr
+on sr.gg_id = users.email
+
+) as dd
+
+
+
+
+
+union all
+
+
+
+
+select dd.* from ( 
+select 
+cf.id as Form_id,
+'' as Form_no,
+(
+	CASE
+		
+	   
+	   
+		WHEN (cf.status_id=11 and cf.stage_id=9) THEN 
+	   concat('Call this candidate for Part B <br />', '</span><small>', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		
+		WHEN (cf.status_id=11 and cf.stage_id=10) THEN  
+		concat(' Communicated for Part B - Expected on ', '<strong>', DATE_FORMAT(cff.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cff.time, '%h:%i %p'), '</strong>' , ' in ' , '<strong>', if( cff.campus=1, 'North', 'South' ),' </strong> <br />' , '</span><small>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		WHEN (cf.status_id=11 and cf.stage_id=4) THEN  
+	   concat('Candidate appeared for Part B ', '<strong>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</strong>' , ' in ' , '<strong>' , if( cff.campus=1,'North', 'South' ), '</strong> <br />'   , '</span><small>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+	   WHEN ( (cf.status_id=10 or cf.status_id=10 )  ) THEN 
+		concat( 'Candidate moved to Archive - File for Future from <br />', '</span> ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),''), ' </span><small>' ,from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		
+		WHEN ( (cf.status_id=12 ) ) THEN 
+		concat( ' Candidate moved to Archive - Regret from <br />', '</span> ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),'') , ' </span><small>' ,from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		
+		
+		WHEN ( ( cf.status_id=1 and cf.stage_id=1 and cff.status_id=11  and cff.stage_id=10  ) ) THEN 
+		concat( ' Candidate waiting  at <strong> Form Screening </strong> </span><small>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+
+
+		WHEN ( ( cf.status_id=1 and cf.stage_id=1 and cff.status_id=1  and cff.stage_id=1  ) ) THEN 
+		concat( ' Next step decision from <strong> Form Screening </strong> to <strong>Initial Interview </strong> for', '<strong>', DATE_FORMAT(cff.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cff.time, '%h:%i %p'), ' in ' , '<strong>' , if( cff.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+	   
+		WHEN ( cf.status_id=2 and cf.stage_id=8  ) THEN 
+		concat( ' Form screening, applicant tagged to <strong>', if( ca.name is not null, concat('  ',ca.name),'') , '</strong>',' allocated to <strong>', ca.name , '</strong>',' with ', 'grade <strong>', cg.name , ' in ' , '<strong>' , if( cff.campus=1,'North', 'South' ), '</strong> campus' , '</strong> </span><small>' ,from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		
+		
+	   WHEN ( cf.status_id=2 and cf.stage_id=4) THEN  
+  	   concat(' Candidate Initial Interview ', '</span><small>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small> ' )
+
+
+
+
+
+  	   
+  	   WHEN (cf.status_id=3 and cf.stage_id=8) THEN  
+		concat( ' Candidate Called for <strong> Formal Interview </strong>  at ', '<strong>', DATE_FORMAT(cff.date,'%a, %b %e, %Y') ,  ' on ',  TIME_FORMAT(cff.time, '%h:%i %p'), ' in ' , '<strong>' , if( cff.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+	   
+	   
+	   WHEN (cf.status_id=3 and cf.stage_id=4) THEN  
+  	   concat(' Candidate Formal Interview ', '</span><small>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+  	   WHEN (cf.status_id=4 and cf.stage_id=8) THEN  
+		concat( ' Next step decision from <strong> Formal Interview </strong> to <strong> Observation </strong> for', '<strong>', DATE_FORMAT(cff.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cff.time, '%h:%i %p'), ' in ' , '<strong>' , if( cff.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		
+		WHEN (cf.status_id=4 and cf.stage_id=4) THEN  
+  	   concat(' Candidate for Observation ', '</span><small>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+  	   WHEN (cf.status_id=5 and cf.stage_id=8) THEN  
+		concat( ' Next step decision from <strong> Observation  </strong> to <strong> Final Consultation </strong>', ' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		WHEN (cf.status_id=5 and cf.stage_id=4) THEN  
+		concat( '  Candidate appeared for Observation ', ' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		WHEN (cf.status_id=6 and cf.stage_id=8) THEN  
+		concat( ' Candidate Offer ', ' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+
+
+		WHEN (cf.status_id=7 and cf.stage_id=8) THEN  
+		concat( ' Offer Procedure ', ' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+	
+	
+		
+		
+		
+		WHEN  ( cf.status_id=11 and cf.stage_id=10 ) THEN  
+		concat(' Communicated for Part B - Expected on ', '<strong>', DATE_FORMAT(cff.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cff.time, '%h:%i %p'), '</strong>' , ' in ' , '<strong>', if( cff.campus=1, 'North', 'South' ),' </strong> <br />' , '</span><small>', from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+			
+		WHEN  ( cf.status_id=8 and cf.stage_id=8) THEN  
+		concat( ' Complete Checklist ', ' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+		WHEN  ( cf.status_id=9 and cf.stage_id=8) THEN  
+		concat( ' Recruitment Complete ', ' </span><small>',from_unixtime(cf.modified, '%a, %b %e, %Y %h:%i %p'), '</small>' )		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	   
+		
+		ELSE ''
+		
+	END 
+) as Applicat_name,
+
+
+cf.position_applied as Position_Apply,
+cf.comments as Comments,
+1 as Result_Type,
+cf.status_id as  Status_id,
+cs.name as Status_name,
+cf.stage_id as Stage_id,
+cst.name as Stage_name,
+cf.created as Created_on,
+if(cf.register_by=0, cf.modified_by,cf.register_by) as Created_by,
+cf.modified as Modified_on,
+cf.modified_by as Modified_by,
+( CASE
+    WHEN cf.form_source=1 THEN 
+
+    concat(  ' Online form submission on  <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )
+    ELSE 
+    concat( ' Recruitment form issued by ' ,  ifnull( sr.abridged_name,' Admin ') ,' on <strong> ', from_unixtime(cf.created, '%a, %b %e, %Y %h:%i %p' ) , ' </strong>' )  
+END
+) as Form_Source,
+
+sr.abridged_name as Register_by,
+sr.employee_id as Photo_id,
+from_unixtime(cf.created, '%a %b %e, %Y %h:%i %p' )as Dated,
+cf.modified as order_Date
+
+from atif_career.career_form as cf
+
+left join atif_Career.career_form_data as cff on ( cff.form_id = cf.id )
+
+left join atif_gs_sims.users as users on users.id = if(cf.register_by=0,cf.modified_by,cf.register_by)
+left join
+( select 
+sr.abridged_name,
+sr.employee_id, sr.gg_id
+from atif_gs_sims.users as u 
+left join atif.staff_registered as sr
+on sr.gg_id = u.email
+#where sr.staff_status=1
+group by u.email order by u.id ) as sr
+on sr.gg_id = users.email
+
+left join atif_Career.career_status as cs on cs.id = cf.status_id
+left join atif_Career.career_stage as cst on cst.id=cf.stage_id
+left join atif_career.career_allocation as ca on ca.id= cff.applicant_allocate
+left join atif_career.career_grade as cg on cg.id = cff.career_grade_id
+
+group by cf.id, cf.status_id, cf.stage_id
+order by cf.modified  
+) as dd
+
+
+
+
+
+union all
+
+select d.* from( 
+select
+ 
+lg.form_id as Form_id,
+'' as Form_no,
+
+
+
+
+
+(
+	CASE
+		WHEN (lg.status_id=11 and lg.stage_id=9) THEN 
+	   concat('Call this candidate for Part B <br />', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+		WHEN (lg.status_id=11 and lg.stage_id=10) THEN  
+		concat(' Communicated for Part B - Expected on ', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), '</strong>' , ' in ' , '<strong>', if( cf.campus=1, 'North', 'South' ),' </strong> <br />' , '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+
+		WHEN (lg.status_id=11 and lg.stage_id=4) THEN  
+	   concat(' Candidate appeared for Part B ', '<strong>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</strong>' , ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong> <br />'   , '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+
+	   WHEN ( ( lg.status_id=10 )  ) THEN 
+		concat( ' Candidate moved to Archive - File for Future from ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),''), ' </span><small>' ,from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+
+		WHEN ( ( lg.status_id=12) ) THEN 
+		concat( ' Candidate moved to Archive - Regret from <br />', '</span> ', if( cs.id=1, 'Initial Form Screening', cs.name ), if( ca.name is not null, concat(' following tags: ',ca.name),'') , ' </span><small>' ,from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+
+
+		WHEN ( ( mcf.status_id=1 and mcf.stage_id=1 and cf.status_id=1  and cf.stage_id=1  ) ) THEN 
+		concat( ' Next step decision from <strong> Form Screening </strong> to <strong> Initial Interview </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+
+	   
+		WHEN ( lg.status_id=2 and lg.stage_id=8  ) THEN 
+		concat( ' Form screening, applicant tagged to <strong>', if( ca.name is not null, concat('  ',ca.name),'') , '</strong>',' allocated to <strong>', ca.name , '</strong>',' with ', 'grade <strong>', cg.name , ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong> campus' , '</strong> </span><small>' ,from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p') , '</small>' )
+
+		
+		WHEN (lg.status_id=2 and lg.stage_id=4) THEN  
+  	   concat(' Candidate appeared for Initial Interview ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   WHEN (lg.status_id=3 and lg.stage_id=8) THEN  
+		concat( ' Next step decision from <strong> Initial Interview </strong> to <strong> Formal Interview </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong> campus' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+	   
+	   
+	   WHEN (lg.status_id=3 and lg.stage_id=4) THEN  
+  	   concat(' Candidate appeared for Formal Interview ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+  	   WHEN (lg.status_id=4 and lg.stage_id=8) THEN  
+		concat( ' Next step decision from <strong> Formal Interview </strong> to <strong> Observation </strong> for', '<strong>', DATE_FORMAT(cf.date,'%a, %b %e, %Y') ,  ' at ',  TIME_FORMAT(cf.time, '%h:%i %p'), ' in ' , '<strong>' , if( cf.campus=1,'North', 'South' ), '</strong>' ,' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		
+		WHEN (lg.status_id=4 and lg.stage_id=4) THEN  
+  	   concat(' Candidate appeared for Observation ', '</span><small>', from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small> ' ) 		
+  	   
+  	   
+  	   WHEN (lg.status_id=5 and lg.stage_id=8) THEN  
+		concat( ' Next step decision from <strong> Observation  </strong> to <strong> Final Consultation </strong>', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		WHEN (lg.status_id=5 and lg.stage_id=4) THEN  
+		concat( ' Candidate appeared for Candidate appeared for Observation ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+		
+		
+		WHEN (lg.status_id=6 and lg.stage_id=8) THEN  
+		concat( ' Candidate Offer ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )
+
+
+		WHEN (lg.status_id=7 and lg.stage_id=8) THEN  
+		concat( ' Offer Procedure ', ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )	
+
+
+
+			
+		
+	
+			
+		
+  	   
+	   
+		
+		ELSE ''
+		
+		
+		
+		
+		
+		
+
+    
+    
+    
+	END 
+) as Applicat_name,
+
+ca.dname as Position_Apply,
+
+concat( cf.comments_next_step, '' ,cf.comments_applicant, '', cf.comments_next_decision,'',cf.comments_next_step_aloc) as Comments,
+ 2 as Result_Type,
+lg.status_id as  Status_id,
+
+if( lg.status_id=1, 'Initial Form Screening', cs.name ) as Status_name,
+
+lg.stage_id as Stage_id,
+cst.name as Stage_name,
+lg.created as Created_on,
+lg.register_by as Created_by,
+lg.modified as Modified_on,
+lg.modified_by as Modified_by,
+'' as Form_Source,
+sr.abridged_name as Register_by,
+sr.employee_id as Photo_id,
+from_unixtime(cf.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
+
+lg.created as order_Date
+
+ from atif_career.log_career_form as lg
+
+left join atif_Career.career_form_data as cf
+on (
+cf.form_id = lg.form_id
+#and  cf.status_id=lg.status_id and  cf.stage_id = lg.stage_id
+)
+
+
+
+left join atif_Career.career_status as cs on cs.id = cf.status_id
+left join atif_Career.career_stage as cst on cst.id=lg.stage_id
+left outer join atif_career.career_form as mcf on mcf.id=lg.form_id
+left join atif_career.career_allocation as ca on ca.id= cf.applicant_allocate
+left join atif_career.career_grade as cg on cg.id = cf.career_grade_id
+left join atif_gs_sims.users as users on users.id = lg.register_by
+
+left join
+( select 
+sr.abridged_name,
+sr.employee_id, sr.gg_id
+from atif_gs_sims.users as u 
+inner join atif.staff_registered as sr
+on sr.gg_id = u.email
+#where sr.staff_status=1
+group by u.email order by u.id ) as sr
+on sr.gg_id = users.email
+
+where (lg.status_id != 1 and lg.stage_id != 1)
+group by lg.id, lg.status_id, lg.stage_id
+
+order by lg.id  
+) as d
+
+
+
+
+union all
+select 
+lg.form_id as Form_id,
+'' as Form_no,
+
+concat( ' Follow up comments :', ' ', lg.`comment` , ' </span><small>',from_unixtime(lg.created, '%a, %b %e, %Y %h:%i %p'), '</small>' )  as Applicat_name,
+
+
+
+
+'' as Position_Apply,
+
+concat( lg.`comment`) as Comments,
+3  as Result_Type,
+'' as  Status_id,
+'Follow up comments'  as Status_name,
+'' as Stage_id,
+'Follow up comments' as Stage_name,
+lg.created as Created_on,
+lg.register_by as Created_by,
+lg.modified as Modified_on,
+lg.modified_by as Modified_by,
+'' as Form_Source,
+sr.abridged_name as Register_by,
+sr.employee_id as Photo_id,
+from_unixtime(lg.modified, '%a %b %e, %Y %h:%i %p' )as Dated,
+lg.created as order_Date
+
+from atif_career.career_followup_comments as lg
+left join atif_gs_sims.users as users on users.id = lg.register_by
+left join
+( select 
+sr.abridged_name,
+sr.employee_id, sr.gg_id
+from atif_gs_sims.users as u 
+inner join atif.staff_registered as sr
+on sr.gg_id = u.email
+#where sr.staff_status=1
+group by u.email order by u.id ) as sr
+on sr.gg_id = users.email
+
+) as final_data
+
+where final_data.Applicat_name is not null and final_data.Form_id=".$Form_id."
+order by  final_data.order_Date ";
 
 
 

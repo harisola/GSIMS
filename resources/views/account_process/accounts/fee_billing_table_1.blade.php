@@ -110,11 +110,13 @@
                                 <script type="text/javascript">
                                         $('#sample_4').DataTable({
                                                 "scrollX": true,
+                                                "ordering": false,
                                                 dom: 'Bfrtip',
                                                 buttons: [
                                                 'copy', 'csv', 'excel',  'print'
                                                 ]
                                                 });
+
                                       
                                 </script>
 

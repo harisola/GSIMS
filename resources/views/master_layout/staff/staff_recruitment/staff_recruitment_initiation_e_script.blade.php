@@ -54,17 +54,35 @@ var removeMark = function removeMark() {
  	$("#StaffView_Filter_Profile").change(function() {
 		
 
-		if( $(this).val()=='Walkin' )	{
-        $("#StaffView_Filter_Department").multiselect("disable");
+	
+		$('#StaffView_Filter_Department').multiselect("deselectAll", false).multiselect("refresh");
+		$('#StaffView_Filter_Department').val('');
+
+	  	$.trim( $("#StaffView_Filter_Department").val('') );
+
+	  	//alert( $(this).val() );
+
+		if( $(this).val()=='Walkin' || $(this).val()=='Online,Walkin' )	{
+	    	$("#StaffView_Filter_Department").multiselect("disable");
 		} else {
-        $("#StaffView_Filter_Department").multiselect("enable");
-        }
+			$("#StaffView_Filter_AtdStd").multiselect("enable");
+	    $("#StaffView_Filter_Department").multiselect("enable");
+	    }
 
 	});
 
-	 
-	$("#StaffView_Filter_Department").change(function() {
-		$("#StaffView_Filter_AtdStd").val('');
+	// Part B Drop Down //
+
+	$("#StaffView_Filter_Department").change(function() 
+	{
+		
+
+		$('#StaffView_Filter_AtdStd').multiselect("deselectAll", false).multiselect("refresh");
+		$('#StaffView_Filter_AtdStd').val('');
+
+		$('#StaffView_Filter_Campus').multiselect("deselectAll", false).multiselect("refresh");
+		$('#StaffView_Filter_Campus').val('');
+
 
 		if( $(this).val() )	{
         $("#StaffView_Filter_AtdStd").multiselect("disable");
@@ -72,11 +90,27 @@ var removeMark = function removeMark() {
         $("#StaffView_Filter_AtdStd").multiselect("enable");
         }
 
+       /* if( ($(this).val()) && ($(this).val() == 'CompletedPartB') )
+        {
+        $("#StaffView_Filter_AtdStd").multiselect("enable");
+		}*/
+
+
+        if( ($(this).val()) && ($(this).val() == 'CallForPartB') )
+        {
+        	$("#StaffView_Filter_Campus").multiselect("disable");
+		} else {
+        	$("#StaffView_Filter_Campus").multiselect("enable");
+        }
+
+
 	});
-	 
-	$('#staffView_filter_btn_Applicant .applyFilter_Applicant').click(function() 
+
+
+	var ReloadTableDataServerSide = function()
 	{
-		App.startPageLoading();
+
+
 		$('#empTable').dataTable().fnDestroy();
 		var Source 		= $.trim( $("#StaffView_Filter_Profile").val() );
 		var CForPartB 	= $.trim( $("#StaffView_Filter_Department").val() );
@@ -91,6 +125,7 @@ var removeMark = function removeMark() {
 		var dt = $('#empTable').dataTable({
 		      'processing': true,
 		      'iDisplayLength': 100,
+		       'language': { search: "" },
 		      'serverSide': true,
 		      'serverMethod': 'post',
 		      'language': { search: "" },
@@ -141,6 +176,15 @@ var removeMark = function removeMark() {
 
 
 	  });
+
+
+	}
+	 
+	$('#staffView_filter_btn_Applicant .applyFilter_Applicant').click(function() 
+	{
+		App.startPageLoading();
+		
+		ReloadTableDataServerSide();
 
 		//if( keywords != ''){ dt.search(keywords).draw();   }
  		setTimeout(function()
@@ -458,6 +502,13 @@ var Create_Server_Table = function()
    $('#staffView_StaffList_Search').val('');
    $('#after_modified_date').val(0);
    
+   $("#StaffView_Filter_AtdStd").multiselect("enable");
+
+   $("#StaffView_Filter_Profile").multiselect("enable");
+   $("#StaffView_Filter_Department").multiselect("enable");
+   $("#StaffView_Filter_Position").multiselect("enable");
+
+
    $('input[type=date]').each( function resetDate(){
 	  this.value = this.defaultValue;
 	} );
@@ -468,6 +519,7 @@ var Create_Server_Table = function()
     var dt = $('#empTable').DataTable({
       'processing': true,
       'iDisplayLength': 100,
+      'language': { search: "" },
       'serverSide': true,
       'serverMethod': 'post',
       'ajax': {
@@ -864,7 +916,9 @@ App.stopPageLoading();
 			
 
 
-			Create_Server_Table();
+			//Create_Server_Table();
+
+			ReloadTableDataServerSide();
 			App.stopPageLoading();
 
 
