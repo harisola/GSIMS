@@ -92,7 +92,7 @@ where c.gs_id = '".$gs_id."'";
        }
 
        public function newFeesInformation($gs_id){
-          $query = "SELECT fee_bill.*, cl.abridged_name AS student_name,cl.gender,cl.gs_id AS student_gs_id,cl.grade_name AS grade_name,cl.campus AS campus,cl.section_name AS section_name,std_data.name AS parent_name,std_data.parent_type,std_data.gf_id AS family_id,std_data.nic AS nic,cl.grade_id AS std_grade_id, DATE_FORMAT(fee_bill.bill_issue_date,'%a %d %b ,%y') AS bill_issue_date, DATE_FORMAT(fee_bill.bill_bank_valid_date,'%a %d %b ,%y') AS bill_bank_valid_date,sr.gt_id AS gt_id,cl.grade_id AS grade_id, DATE_FORMAT(fee_bill.bill_due_date,'%a %d %b ,%y') AS bill_due_date,fee_bill.oc_yearly AS total_yearly,cl.std_status_code, CONCAT('GF ',cl.gfid) AS gf_id, CONCAT('Installment 0',bill_cycle_no,' of 05') AS fee_bill_tittle_show
+          $query = "SELECT fee_bill.*, cl.abridged_name AS student_name,cl.gender,cl.gf_id as gfid_integer,cl.gs_id AS student_gs_id,cl.grade_name AS grade_name,cl.campus AS campus,cl.section_name AS section_name,std_data.name AS parent_name,std_data.parent_type,std_data.gf_id AS family_id,std_data.nic AS nic,cl.grade_id AS std_grade_id, DATE_FORMAT(fee_bill.bill_issue_date,'%a %d %b ,%y') AS bill_issue_date, DATE_FORMAT(fee_bill.bill_bank_valid_date,'%a %d %b ,%y') AS bill_bank_valid_date,sr.gt_id AS gt_id,cl.grade_id AS grade_id, DATE_FORMAT(fee_bill.bill_due_date,'%a %d %b ,%y') AS bill_due_date,fee_bill.oc_yearly AS total_yearly,cl.std_status_code, CONCAT('GF ',cl.gfid) AS gf_id, CONCAT('Installment 0',bill_cycle_no,' of 05') AS fee_bill_tittle_show
           FROM atif.class_list AS cl
           LEFT JOIN atif_fee_student.fee_bill AS fee_bill ON fee_bill.student_id = cl.id
           left join atif.students_all as sa on (sa.student_id = cl.id) 
@@ -197,6 +197,10 @@ where c.gs_id = '".$gs_id."'";
               return $StudentClassList;
        }
 
-
+       public static function getTaxnicData($student_id){
+                     $parent_data=students_all::whereIn('student_id',$grade_id)
+                                                 ->first();
+                        return $parent_data;
+    }
 
 }

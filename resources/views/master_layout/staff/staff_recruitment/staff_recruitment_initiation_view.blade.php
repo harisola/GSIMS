@@ -539,7 +539,7 @@ $(document).on('click','#print_submit',function(){
           /***** Refresh Data *****/
 		  
 		  
-			$.ajax({
+			/*$.ajax({
 				type:'POST',
 				data:{'_token': '{{ csrf_token() }}'},
 				url:"{{url('/addcustomer')}}",
@@ -553,7 +553,7 @@ $(document).on('click','#print_submit',function(){
 				
 				}
 			});
-			
+			*/
 			
 			
 			
@@ -565,7 +565,7 @@ $(document).on('click','#print_submit',function(){
         }
       }
     });
-	
+	/*
 	
 setTimeout( function () {
 
@@ -611,13 +611,75 @@ setTimeout( function () {
 			
     
 }, 1000 );
-
+*/
 
   }else{
     $('#error_div').show();
     $('#error_div').html(errors);
   }
   
+
+
+$('#empTable').dataTable().fnDestroy();
+
+   var dt = $('#empTable').DataTable({
+      'processing': true,
+      'iDisplayLength': 100,
+      'serverSide': true,
+      'serverMethod': 'post',
+      'ajax': {
+          "url": "{{ url('/allposts') }}", 
+           "dataType": "json",
+           "type": "POST",
+           "data":{ _token: "{{csrf_token()}}"}
+      },
+      'language': { search: "" },
+      'columns': [
+       
+
+         { data: 'gc_id' },
+         { data: 'name' },
+         { data: 'position_applied' },
+         {data:'Action'},
+         { data: 'mobile_phone' },
+         { data: 'Landline' },
+         { data: 'nic' },
+         {data: 'Standing'},
+         { data: 'Apply_Date' },
+         { data: 'Source' },
+         { data: 'Comments' },
+         { data: 'Modified_date' }
+
+        ]
+   });
+
+
+  dt.on( 'draw', function () {
+
+    $('tr td:nth-child(10)').each(function (){
+      var Class_name = $(this).text();
+      $(this).parent('tr').addClass( Class_name.toLowerCase() );
+    })
+
+
+    $('.boxidentification').each(function(){
+      $(this).tooltip();
+    })
+
+
+    $('tr td:nth-child(1) > a').each(function (){
+    var ids = $(this).data('id');
+    //console.log($(this).parent());
+    $(this).closest('tr').attr("data-id",ids);
+    });
+
+
+  });
+
+
+
+
+
 
 
 });

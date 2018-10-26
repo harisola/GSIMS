@@ -425,7 +425,8 @@ public function addcustomer(Request $request)
         $career_form = array(
                   'status_id' => $status_next, 
                   'stage_id' => $stage_next,
-                  'modified' => time()
+                  'modified' => time(),
+                  'modified_by' => $userID
                 );
         // var_dump($career_form);
         $where_career_form =  array('id' => $form_id );
@@ -472,7 +473,7 @@ public function addcustomer(Request $request)
           //var_dump($id_delete);
           if(!empty($id_delete)){
            //var_dump($id_delete[0]->id);
-            $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data', $id_delete[0]->id);
+$delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data', $id_delete[0]->id);
 
             
           }
@@ -616,9 +617,7 @@ public function addcustomer(Request $request)
         );
         //var_dump($career_form); exit;
 
-        $where_career_form =  array(
-          'id' => $form_id,
-          );
+        $where_career_form =  array( 'id' => $form_id, );
 
         $careerForm = $staffRecruiment->updateFormdata('career_form', $where_career_form, $career_form);
 
@@ -626,19 +625,19 @@ public function addcustomer(Request $request)
         sleep(1);
 
 
-        $career_form = array(
-        'stage_id' => $stage_id,
-        'status_id' => $status_id,
-        'modified' => time(),
-        'modified_by' => Sentinel::getUser()->id
-        );
+       
 
 
 
 
         if($status_id == 11 && $stage_id == 4)
         {
-        $career_form = array('stage_id' => 1,'status_id' => 1 );
+        $career_form = array(
+          'stage_id' => 1,
+          'status_id' => 1, 
+          'modified' => time(),
+          'modified_by' => Sentinel::getUser()->id 
+        );
         $where_career_form =  array( 'id' => $form_id, );
         $careerForm = $staffRecruiment->updateFormdata('career_form', $where_career_form, $career_form);
 

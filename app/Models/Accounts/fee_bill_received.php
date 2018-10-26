@@ -16,8 +16,14 @@ class fee_bill_received extends Model
     }
 
     public function getLastReceivedAmount($bill_id){
-        $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->Orderby('id','desc')->first();
-        return $fee['received_amount'];
+        $received="";
+        $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->Orderby('id','desc')->get();
+        foreach ($fee as $fees) {
+            if($fees->received_amount>200000){
+                $received=$fees->received_amount;
+            }
+        }
+        return  $received;
     }
 
 

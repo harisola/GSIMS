@@ -54,6 +54,18 @@ a.gray {
 .noFollow {
 	color: red;
 }
+.OnlineFormSubmissions {
+    top: 22px;
+    left: 120px;
+}
+.walkinFormSubmissions {
+	top: 300px;
+    left: 120px;
+}
+.walkinFormSubmissionsPartA {
+	top: 300px;
+    left: 120px;
+}
 .fillPartA {
     top: 22px;
     left: 400px;
@@ -105,6 +117,11 @@ a.gray {
 	<div class="col-md-12" style="overflow-y: hidden;position:relative;">
     	<img src="img/RecruitmentProcessflow.jpg" width="3500" />
         <div class="startTillCSL3">
+        	<!-- OnlineFormSubmissions: This section indicated the number of candidates submitted the Online form  -->
+        	<span class="OnlineFormSubmissions absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Applicants applied Online">120</a>
+        	</span><!-- fillPartA -->
+
         	<!-- fillPartA: This section indicated the number of candidates submitted the Online form and are waiting for Part A Screening  -->
         	<span class="fillPartA absolute">
         		<a href="#" class="tooltips" data-container="body" data-placement="top" data-original-title="Applicants applied Online and completed Part A - Awaiting for Part A screening">20</a>
@@ -153,6 +170,17 @@ a.gray {
         	<!-- partAScreeningToPartBPresent: Overall applicants marked Present for Part B -->
         	<span class="partAScreeningToPartBPresent absolute">
         		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Part B">50</a>
+        	</span><!-- partAScreeningToPartBPresent -->
+
+        	<!-- partAScreeningToPartBPresent: Overall applicants marked Present for Part B -->
+        	<span class="partAScreeningToPartBPresent absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Part B">50</a>
+        	</span><!-- partAScreeningToPartBPresent -->
+
+        	<!------------------------------------------ Walkin ---------------------------------->
+        	<!-- walkinFormSubmissions: Walkin applicants  -->
+        	<span class="walkinFormSubmissions absolute">
+        		<a href="#" class="tooltips gray" data-container="body" data-placement="top" data-original-title="Walkin applications">150</a>
         	</span><!-- partAScreeningToPartBPresent -->
         	
         </div><!-- startTillCSL2 -->

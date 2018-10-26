@@ -51,9 +51,11 @@
                                                         <td>{{$get_lastest_bill->grade_dname}}</td>
                                                         <td>{{$get_lastest_bill->section_dname}}</td>
                                                         <td>{{$get_lastest_bill->gfid}}</td>
-                                                        <td>{{$get_lastest_bill->parent_name}}</td>
+                                                        <td><?= 
+                                                        App\Models\Accounts\student_family_records::getFamilyData($get_lastest_bill->gf_id)['name']; ?></td>
                                                         <td>{{$get_lastest_bill->gt_id}}</td>
-                                                        <td>{{$get_lastest_bill->nic}}</td>
+                                                        <td><?= 
+                                                        App\Models\Accounts\students_all::getTaxnicData($get_lastest_bill->student_id)['tax_nic']; ?></td>
                                                         <td>{{$get_lastest_bill->gb_id_mc_a}}</td>
                                                         <td>{{$get_lastest_bill->bill_title}}</td>
                                                         <td>{{$get_lastest_bill->bill_issue_date}}</td>

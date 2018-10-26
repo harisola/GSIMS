@@ -19,6 +19,8 @@ use App\Models\Accounts\fee_bill_type_parameter;
 use App\Models\Accounts\billing_cycle_definition;
 use App\Models\Accounts\fee_bill_received_info;
 use App\Models\Accounts\scholarship_for_session;
+use App\Models\Accounts\students_all;
+use App\Models\Accounts\student_family_records;
 
 
 use App\Models\Accounts\adjustment;
@@ -346,8 +348,8 @@ class AccountsController extends Controller
                 $total_adjustments=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                 
                 @$fee_details=$fee_bill->getLastBillByStudentId($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
-                @$received_amount=$fee_bill_received->getLastReceivedAmount(@$fee_details['id']);
-                     if($received_amount>200000){
+               @$received_amount=$fee_bill_received->getLastReceivedAmount(@$fee_details['id']);
+                   if($received_amount>200000){
                         $amount_exceed=true;
                         $adjustment_taxes=$total_adjustment_taxes=$this->calculate_adjustment_taxes($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                         $total_adjustments=-($adjustment_taxes-$total_adjustments);
@@ -642,6 +644,7 @@ class AccountsController extends Controller
             //    if($adjustment_amount>0){
             //        $adjustment->insertUpdateAdjustment($list['student_id'],$adjustment_amount-$applicable_taxes);
             //    }
+               $applicable_taxes;
                return $applicable_taxes;
     }
 
@@ -738,13 +741,15 @@ public function fetchFeeBill($gs_id){
             $fee_definition = new fee_definition;
             $concession=new concessions_for_session;
             $fee_bill_type_parameter=new fee_bill_type_parameter;
+            $legal_data=new students_all;
+            $parent_data=new student_family_records;
 
-             // $file =  base_path() . '/vendor/setasign/fpdi/fpdi.php';
+
+
             $file =  base_path() . '/vendor/setasign/fpdi/rotation.php';
             include($file);
             $pdf= new FPDI;
             $fpdf= new Fpdf;
-            // $gs_id=$request->get('gs_id');
             $exp_gs_id=explode(",",$gs_id);
             $installment_dicount_percentage="";
             $musakhar_fee_show=false;
@@ -769,30 +774,19 @@ public function fetchFeeBill($gs_id){
                 $branch_code=$this->getBranchCodeByCampus($feedetails['campus']);//South Campus 2 North Campus =1
                 $year=$session->GetAcademicSession($branch_code)['dname'];
 
-                // if($feedetails['grade_id']==15 || $feedetails['grade_id']==16 ){
-                // }else{
-                //   $html = '';
-                //         $html .= '<script
-                //   src="https://code.jquery.com/jquery-3.3.1.min.js"
-                //   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                //   crossorigin="anonymous"></script>';
-                //         $html .= '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.7/packaged/jquery.noty.packaged.min.js"></script>
-                // <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">';
-                //         $html .= '<script>$("document").ready(function(){
-                //         noty({text: "You do not have permission to create new bills. Please contact to Software Development department", type: "error",  theme: "defaultTheme"});    
-                //         })</script>';
-                //     echo $html;
-                //     exit;
-
-                // }
 
                 if($feedetails['grade_id']==15 && $feedetails['bill_cycle_no']==1){
                         $fee_bill_type_id=9;
                         $pdf->setSourceFile(base_path().'/public/pdf/resized_final_fee_bill_alevel.pdf');
                         $bill_number=$this->generateBillNumber($year,84,$gs_id);//get bill number
                 }else{
-                    $pdf->setSourceFile(base_path().'/public/pdf/resized_final_fee_bill_at_com.pdf');
+                    if($feedetails['bill_cycle_no']==2){
+                                        $pdf->setSourceFile(base_path().'/public/pdf/resized_final_fee_bill_installment_2.pdf');
+                      }else{
+                        $pdf->setSourceFile(base_path().'/public/pdf/resized_final_fee_bill_at_com.pdf');
+                     }
                 }
+
                 $actual_year=explode('-',$year)[1];
                 $billing_cycle=$feedetails['bill_cycle_no'];
                 $gs_id_exp=explode('-',$gs_id);
@@ -822,7 +816,15 @@ public function fetchFeeBill($gs_id){
                                         $student_name =$feedetails['student_name'];
                                         $s_or_d =$SorD;
                                         $father_name =ucwords($feedetails['parent_name']);
+
+                                        if($father_name==""){
+                                            $family_data=$parent_data->getFamilyData($feedetails['gfid_integer']);
+                                            $father_name=$family_data['name'];
+                                        }
                                         $cnic =$feedetails['nic'];
+                                        if($cnic==""){
+                                            $cnic=$legal_data->getTaxnicData($feedetails['student_id'])['tax_nic'];
+                                        }
                                         $gs_id =$feedetails['student_gs_id'];
                                         $gf_id =$feedetails['family_id'];
                                         $grade_details=$feedetails['grade_name'].'-'.$feedetails['section_name'];
@@ -869,6 +871,10 @@ public function fetchFeeBill($gs_id){
                   }else{
                          $bill_notes=$parameters['notes'];
                   }
+                  //for more than first billing
+                  if($grade_id==15 ||$grade_id==16){
+                        $bill_notes="This fee bill incorporates Installment 02 of 05 for the Academic Session 2018-19. This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.";
+                  }
                  if($grade_id==17){
                     $resource_fee_show=true;
                  }        
@@ -892,9 +898,11 @@ public function fetchFeeBill($gs_id){
             if($feedetails['adjustment']>0){
                   $this->rotateText($pdf,185,"",10.5,'',5);//arrier notes
             }
-    
-            $Title = $feedetails['fee_bill_tittle_show']; 
+
             if($feedetails['grade_id']==15){
+                 if($feedetails['bill_cycle_no']==2){
+                       $this->createTable($pdf,29.5,$feedetails['fee_bill_tittle_show'],13,'B',6);//title
+                  }
             }else{
                 $this->createTable($pdf,29.5,$feedetails['fee_bill_tittle_show'],13,'B',6);//title
 
@@ -905,14 +913,16 @@ public function fetchFeeBill($gs_id){
             $bill_due_date = str_replace(",", "'",$feedetails['bill_due_date']);
             $bill_bank_valid_date = str_replace(",", "'",$feedetails['bill_bank_valid_date']);
             $this->createTable($pdf,36,$feedetails['student_name'],55,'B',6);
-            $this->createTable($pdf,41,$SorD.' '.ucwords($feedetails['parent_name']),55,'',5);
+            $this->createTable($pdf,41,$SorD.' '.ucwords($father_name),55,'',5);
             $this->createTable($pdf,38.5,'GS   ',42.5,'',5);
             $this->createTable($pdf,38.5,$feedetails['student_gs_id'].'                              '.$grade_details,56.2,'B',5);
             $this->createTable($pdf,54.5,$bill_issue_date,4,'B',5);
             $this->createTable($pdf,54.5,$bill_due_date,32,'B',5);
             $this->createTable($pdf,54.5,$bill_bank_valid_date,64.5,'B',5);
             $this->createTable($pdf,46.5,$cnic,14,'B',6);
-            $this->createTable($pdf,46.5,'(in case of changes, pls inform billing@generations.edu.pk by 20th August)',50,'B',3);
+            if($feedetails['bill_cycle_no']==1){
+                $this->createTable($pdf,46.5,'(in case of changes, pls inform billing@generations.edu.pk by 20th August)',50,'B',3);
+             }
 
             $this->createTable($pdf,57.5,$feedetails['std_status_code'],32,'',4);
             $this->createTable($pdf,57.5,$feedetails['gf_id'],64.5,'',4);
@@ -1112,7 +1122,7 @@ public function fetchFeeBill($gs_id){
                     $this->createTable($pdf,152.2,'-',67,'B',5);
                 }
                 //Preferred / Early Admission Offer
-                if($grade_id==15){
+                if($grade_id==15 && $feedetails['bill_cycle_no']==1){
                     $this->createTable($pdf,145.5,'Preferred / Early Admission Offer',15,'B',5);
 
                 }else{
@@ -1137,7 +1147,7 @@ public function fetchFeeBill($gs_id){
                         $this->createTable($pdf,166,0,70,'',6);     
                 }else{
                         $this->createTable($pdf,159,number_format($feedetails['total_payable']),70,'B',6);
-                        if($grade_id==15){
+                        if($grade_id==15 && $billing_cycle==1){
                             $this->createTable($pdf,166,'N/A',70,'',6);                
                         }else{
                             $this->createTable($pdf,166,number_format($feedetails['total_payable']+600),70,'',6);                

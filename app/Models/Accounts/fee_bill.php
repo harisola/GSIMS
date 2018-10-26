@@ -97,7 +97,7 @@ class fee_bill extends Model
                     ->leftjoin('atif.students_all as sa',function($join){
                         $join->on('sa.student_id','=','std_info.id');
                     })
-                    ->join('atif.student_family_record as std_data',function($join){
+                    ->leftjoin('atif.student_family_record as std_data',function($join){
                         $join->on('std_data.gf_id','=','sa.gf_id');
                         $join->on('std_data.nic','=','sa.tax_nic');
                     
@@ -253,7 +253,7 @@ class fee_bill extends Model
         $gb_id=$details['gb_id'];
         $bill_year=substr($gb_id,0,2);
         $c_year = date('Y');
-        $c_nyear=substr($bill_year,0,2);
+        $c_nyear=substr($c_year,2,3);
        if($bill_year==$c_nyear){
             return $details['admission_fee'];
         }else{
