@@ -195,9 +195,6 @@ foreach ($empRecords as $row) {
               }
 
 
-
-
-
               $action = '';
               if($row["form_source2"] == 1) { 
                 $action .= '<div class="btn-group pull-right part_b_append_ul_'.$row['career_id'].'">';
@@ -400,6 +397,92 @@ public function addcustomer(Request $request)
           $stage_id=1;
         }
 
+
+
+
+$applicant_status = $request->input('applicant_status');
+$stage_id = (int)$request->input('stage_id');
+$applicant_next_status = $request->input('applicant_next_status');
+$next_stage = $request->input('next_stage');
+
+$Get_Last_Record = "select u.id as id from atif_Career.career_form_data_updation as u where u.form_id=".$form_id." 
+and u.status_id=".$status_id." and u.stage_id=".$stage_id." ";
+
+$Lr = $staffRecruiment->custom_query($Get_Last_Record);
+
+if( !empty($Lr) )
+{
+  foreach ($Lr as $v) 
+  {
+  $Action_Status_id = $v["id"]; 
+  $data_KS = array('record_deleted' =>1 );
+  $where_KS = array( 'id' => $Action_Status_id );
+  $staffRecruiment->updateFormdata('atif_career.career_form_data_updation', $where_KS, $data_KS);
+  }
+}
+
+
+
+$new_Data = array(
+"comment_type"  => "allocation",
+'form_id' => $form_id,
+'status_id' => $applicant_status,
+'stage_id' => $stage_id,
+"applicant_next_status" =>  $applicant_next_status,
+"next_stage" => $next_stage,
+'tag' => $tag,
+'applicant_allocate' => $applicant_allocate,
+'career_grade_id' => $career_grade_id,
+'comments_applicant' => $comments_applicant,
+'comments_next_decision' => $comments_next_decision,
+'date' => $date,
+'time' => $time,
+'campus' => $campus,
+'comments_next_step_aloc' => $comments_next_step_aloc,
+'comments_next_step' => $comments_next_step,
+'created' => $timeNow,
+'register_by' => $userID,
+'modified' => $timeNow,
+'modified_by' => $userID,                    
+'record_deleted' => 0
+);
+
+$new_Data2 = array(
+"comment_type"  => "decision",
+'form_id' => $form_id,
+'status_id' => $applicant_status,
+'stage_id' => $stage_id,
+"applicant_next_status" =>  $applicant_next_status,
+"next_stage" => $next_stage,
+'tag' => $tag,
+'applicant_allocate' => $applicant_allocate,
+'career_grade_id' => $career_grade_id,
+'comments_applicant' => $comments_applicant,
+'comments_next_decision' => $comments_next_decision,
+'date' => $date,
+'time' => $time,
+'campus' => $campus,
+'comments_next_step_aloc' => $comments_next_step_aloc,
+'comments_next_step' => $comments_next_step,
+'created' => $timeNow,
+'register_by' => $userID,
+'modified' => $timeNow,
+'modified_by' => $userID,                    
+'record_deleted' => 0
+);
+if( ((int)$status_id == 11 && (int)$stage_id == 4 ) )
+{
+}else 
+{
+$staffRecruiment->insertFormData('career_form_data_updation',$new_Data);
+$staffRecruiment->insertFormData('career_form_data_updation',$new_Data2); 
+}
+
+
+
+
+
+
         
         $data = array(
           'form_id' => $form_id,
@@ -578,11 +661,12 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
 
       $staffRecruiment = new Staff_recruitment_model();
 
-      $career_form = array('stage_id' => 4,'status_id' => $status_id,'modified' => time() );
+      //$career_form = array('stage_id' => 4,'status_id' => $status_id,'modified' => time() );
+      $career_form = array('stage_id' => 4,'status_id' => $status_id,'modified' => time(), 
+  'modified_by'=>Sentinel::getUser()->id);
+
         // var_dump($career_form);
-        $where_career_form =  array(
-          'id' => $form_id,
-          );
+        $where_career_form =  array( 'id' => $form_id, );
 
         $careerForm = $staffRecruiment->updateFormdata('career_form', $where_career_form, $career_form);
 
@@ -622,7 +706,7 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
         $careerForm = $staffRecruiment->updateFormdata('career_form', $where_career_form, $career_form);
 
 
-        sleep(1);
+        //sleep(1);
 
 
        
@@ -640,6 +724,16 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
         );
         $where_career_form =  array( 'id' => $form_id, );
         $careerForm = $staffRecruiment->updateFormdata('career_form', $where_career_form, $career_form);
+
+        $NowTime = time();
+        $log_data = array( 
+                 'created'=>$NowTime, 
+                'register_by'=> Sentinel::getUser()->id, 
+                'modified'=>$NowTime, 
+                'modified_by'=>Sentinel::getUser()->id
+            );
+          $where_career_form =  array( 'form_id' => $form_id, "status_id"=>11, "stage_id"=>4 );
+        $staffRecruiment->updateFormdata('log_career_form', $where_career_form, $log_data);
 
         }
 

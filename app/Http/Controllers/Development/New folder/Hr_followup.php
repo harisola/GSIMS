@@ -90,34 +90,6 @@ class Hr_followup extends Controller
 
 
 
-if( $followupType == 'Extension')
-{
-	$stage_id = 13;
- }
-
- else if ($followupType == 'No Response')
- {
- 	$stage_id = 12;
- }
-
- else{
- 	$stage_id = 6;
- }
-$data = array(
-          
-          'form_id' => $form_id,
-          'status_id' => $status_id,
-          'stage_id' => $stage_id,
-          'created' => $formTime,
-          'register_by' => $userID,
-          'modified' => $formTime,
-          'modified_by' => $userID,
-          'record_deleted' => 0
-        );
-        
-       echo $followupData = $staffRecruiment->insertFormData('log_career_form',$data);
-
-
 	}	
 }
 

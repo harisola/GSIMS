@@ -973,6 +973,191 @@ dt.search(keywords).draw();
 }
 
 
+
+
+/*$('#StaffList').DataTable().destroy();
+
+var search_content = $('.applicant_name_write').text();
+var pathname = $(location).attr('href');  
+$.ajax({
+type:'POST',
+data:{'_token': '{{ csrf_token() }}', 'pathname':pathname },
+url:"{{url('/addcustomer')}}",
+dataType: "json",
+async: false,
+cache: false,
+success: function(response)
+{
+$('#table_data').html('');
+$('#table_data').html(response.html);
+
+}
+});
+
+
+//$('#StaffList').dataTable();
+$("#StaffList").dataTable({
+
+"language": {
+"aria": {
+"sortAscending": ": activate to sort column ascending",
+"sortDescending": ": activate to sort column descending"
+},
+"emptyTable": "No data available in table",
+"info": "Showing _START_ to _END_ of _TOTAL_ records",
+"infoEmpty": "No records found",
+"infoFiltered": "(filtered1 from _MAX_ total records)",
+"lengthMenu": "Show _MENU_",
+"search": "",
+"searchPlaceholder": "Search records..",
+"zeroRecords": "No matching records found",
+"paginate": {
+"previous":"Prev",
+"next": "Next",
+"last": "Last",
+"first": "First"
+}
+},
+
+
+"pagingType": "bootstrap_extended",
+"order": [[ 0, "desc" ]],
+"lengthMenu": [
+[-1, 40, 60, -1],
+[-1, 40, 60, "All"] // change per page values here
+],
+
+"columnDefs": [{
+//"searchable": false,
+//"targets": [0]
+}]
+
+});
+var table = $('#StaffList').DataTable();
+table.search( search_content);
+table.draw();
+
+multiFilter();
+
+
+
+App.startPageLoading();
+
+setTimeout(function(){
+var from_date = ( $("#from_date").val() );	
+var to_date = ( $("#to_date").val() );	
+var testing = 0;
+
+
+if ($.trim( $("#from_date").val()  ).length == 0)
+{
+
+}
+else
+{
+
+
+if( (from_date != '') && (to_date=='') )
+{
+$(tableRecords).each(function(){
+
+var lineStr = $(this).attr("data-from_date");	
+
+
+if( lineStr >= from_date )
+{ 
+$(this).show(); 
+} else { 
+$(this).hide(); 
+} 
+
+});
+
+testing = 1;
+}
+else if( (from_date != '') && (to_date !='') ) {
+
+$(tableRecords).each(function(){
+var lineStr = $(this).attr("data-from_date");
+var secondDate = $(this).attr("data-to_date");
+if( lineStr >= from_date && secondDate <= to_date ){ 
+$(this).show(); 
+} else { 
+$(this).hide(); 
+} 
+
+});
+
+testing = 1;
+}else{ 
+testing = 0;
+}
+
+if( testing == 1 ){
+var totalRow =  $('#StaffList tr:visible').length - 1;
+$('#staffView_StaffList_Total').text('Applicants - ' + totalRow); 	
+}
+
+}
+App.stopPageLoading();
+}, 2000); 
+
+
+// Modified Date
+
+setTimeout(function(){
+var from_date_m = ( $("#from_date_m").val() );	
+var to_date_m = ( $("#to_date_m").val() );	
+
+
+if ($.trim( $("#from_date_m").val()  ).length == 0)
+{
+
+}
+else
+{
+var testing = 0;
+if( (from_date_m != '') && (to_date_m=='') )
+{
+$(tableRecords).each(function(){
+var lineStr_m = $(this).attr("data-from_date_mo");
+if( lineStr_m >= from_date_m ){ 
+$(this).show(); 
+} else { 
+$(this).hide(); 
+} 
+
+});
+
+testing = 1;
+}
+else if( (from_date_m != '') && (to_date_m !='') ) {
+
+$(tableRecords).each(function(){
+
+var lineStr_m = $(this).attr("data-from_date_mo");
+var secondDate_m = $(this).attr("data-to_date_mo");
+if( (lineStr_m >= from_date_m && secondDate_m <= to_date_m) ){ 
+$(this).show(); 
+} else { 
+$(this).hide(); 
+} 
+
+});
+testing = 1;
+
+}else{ testing = 0; }
+
+if( testing == 1 ){
+var totalRow =  $('#StaffList tr:visible').length - 1;
+$('#staffView_StaffList_Total').text('Applicants - ' + totalRow); 	
+}
+}
+App.stopPageLoading();
+}, 2000);
+
+
+*/
 } // end table refresh
 
 

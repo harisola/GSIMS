@@ -124,7 +124,7 @@ class Haris extends StaffReportController
         $i = 0;
         foreach ($StaffReportee as $rr) {
           if($StaffReportee[$i]['report_ok'] == 'TRP'){
-            $StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee[$i]['role_id'], 'INDIR', $StaffReportee[$i]['name_code']);
+            $StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee[$i]['Role_id_So'], 'INDIR', $StaffReportee[$i]['name_code']);
             foreach ($StaffReportee_TRP as $trp) {
               //array_push($StaffReportee, $trp);
               array_push($staff, $trp);
