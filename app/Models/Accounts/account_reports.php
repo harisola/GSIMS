@@ -501,5 +501,113 @@ where cl.grade_dname='A2' and cl.academic_session_id=12 and fb.academic_session_
         return $result;
     }
 
+    public function get_academic(){
+    	$query  = "select group_concat(id) as session_id,dname 
+					from atif._academic_session
+					group by dname order by id desc";
+		$result = DB::connection($this->dbCon)
+        ->select($query);
+        print_r($query);
+        return $result;
+    }
+
+    public function fee_detail_grade_wise($academic_session_id,$installment_id){
+    	$query = "SELECT fee_data.generation_of,fee_data.grade_id,fee_data.grade_dname, SUM(fd.tuition_fee) * 2.4 AS tution_fee, SUM(fd.resource_fee) * 2.4 AS resource_fee, SUM(fd.musakhar)* 2*4 AS musakhar_charges, SUM(fee_data.oc_yearly) AS yearly_charges, SUM(fee_data.oc_smartcard_charges) AS smart_card_charges, SUM(fee_data.fee_arrerars) AS fee_arrerars, SUM(fee_data.fee_adjustments) AS fee_adjustments,SUM(late_fee) AS late_fee, SUM(fee_data.roll_over_charges) AS roll_over_charges, SUM(received_amount) AS received_amount, SUM(fee_data.oc_adv_tax) AS advance_tax,(SUM(received_amount) - SUM(fee_data.oc_adv_tax)) AS total_fee_without_adv_tax, SUM(received_amount) + SUM(fee_data.oc_adv_tax) AS total_fee_advance_tax, ROUND(SUM(fee_data.concession_amount)) AS concession_amount, ROUND(SUM(fee_data.scholarship_amount)) AS scholarship_amount, SUM(fd.lab_avc) AS lab_charges
+			FROM (
+			SELECT cl.generation_of,cl.grade_id,cl.grade_dname,fb.*,fbr.received_late_fee AS late_fee,fbr.received_amount AS received_amount,
+			IF(fb.adjustment > 0,fb.adjustment,0) as fee_arrerars,IF(fb.adjustment < 0,fb.adjustment,0) as fee_adjustments
+			FROM atif_fee_student.fee_bill AS fb
+			LEFT JOIN atif_fee_student.fee_bill_received AS fbr ON fbr.fee_bill_id = fb.id
+			LEFT JOIN atif.class_list AS cl ON cl.id = fb.student_id
+			LEFT JOIN atif_fee_student.billing_cycle_definition AS bcd ON bcd.academic_session_id = fb.academic_session_id AND bcd.grade_id = cl.grade_id AND bcd.bill_cycle_no = fb.bill_cycle_no
+			WHERE fb.academic_session_id IN ($academic_session_id) AND fb.bill_cycle_no = $installment_id AND fbr.id IS NOT NULL) AS fee_data
+			LEFT JOIN atif_fee_student.fee_definition AS fd ON fd.academic_session_id = fee_data.academic_session_id AND fee_data.grade_id = fd.grade_id
+			GROUP BY fee_Data.grade_id
+
+
+			ORDER BY fee_Data.generation_of DESC";
+		$result = DB::connection($this->dbCon)
+        ->select($query);
+        return $result;
+    }
+
+    public function fee_admission_grade_wise(){
+    	$query = "SELECT  this_order,grade_name,grade_id,SUM(received_amount) as admission_amount,sum(security_deposit) as security_deposit FROM (
+
+			select 
+			 if(grade_id = 17,0,grade_id) as this_order ,af.grade_name,grade_id,af.form_no,af.official_name,fb.id as bill_id,fb.gb_id,fb.security_deposit from 
+			atif_gs_admission.admission_form af
+
+			inner join atif_fee_student.fee_bill as fb
+				on af.form_no = IF(length(af.form_no ) >= 5, SUBSTR(fb.gb_id,5,5),SUBSTR(fb.gb_id,6,4))
+				AND (SUBSTR(fb.gb_id,3,2) = 81 OR SUBSTR(fb.gb_id,3,2) = 82 )  AND fb.bill_title = 'Admission'
+
+
+
+			where af.grade_id >= 1 and af.grade_id <= 14 OR af.grade_id = 17) as adm_data
+
+			inner join atif_fee_student.fee_bill_received as fbr
+				on fbr.fee_bill_id = adm_data.bill_id
+
+			group by grade_id
+
+
+			UNION
+
+			SELECT if(grade_id = 17,0,grade_id) as this_order,grade_name,grade_id,SUM(received_amount) as admission_amount,sum(security_deposit) as security_deposit FROM (
+
+			select af.grade_name,grade_id,af.form_no,af.official_name,fb.id as bill_id,fb.gb_id,fb.security_deposit from 
+			atif_gs_admission.admission_form af
+
+			inner join atif_fee_student.fee_bill as fb
+				on af.form_no = IF(length(af.form_no ) >= 5, SUBSTR(fb.gb_id,5,5),SUBSTR(fb.gb_id,6,4))
+				AND (SUBSTR(fb.gb_id,3,2) = 85 OR SUBSTR(fb.gb_id,3,2) = 86 OR  SUBSTR(fb.gb_id,3,2) = 72)  AND fb.bill_title = 'Admission'
+
+
+
+			where af.grade_id >= 15 and af.grade_id <= 16) as adm_data
+
+			inner join atif_fee_student.fee_bill_received as fbr
+				on fbr.fee_bill_id = adm_data.bill_id
+
+			group by grade_id
+
+			order by this_order";
+
+		$result = DB::connection($this->dbCon)
+        ->select($query);
+        return $result;
+
+    }
+
+    public function get_prefered_bill(){
+    	$query  = "SELECT fee_data.generation_of,fee_data.grade_id,fee_data.grade_dname, SUM(fd.tuition_fee) * 2.4 AS tution_fee, SUM(fd.resource_fee) * 2.4 AS resource_fee, SUM(fd.musakhar)* 2*4 AS musakhar_charges, SUM(fee_data.oc_yearly) AS yearly_charges, SUM(fee_data.oc_smartcard_charges) AS smart_card_charges, SUM(fee_data.fee_arrerars) AS fee_arrerars, SUM(fee_data.fee_adjustments) AS fee_adjustments,SUM(late_fee) AS late_fee, SUM(fee_data.roll_over_charges) AS roll_over_charges, SUM(received_amount) AS received_amount, SUM(fee_data.oc_adv_tax) AS advance_tax,(SUM(received_amount) - SUM(fee_data.oc_adv_tax)) AS total_fee_without_adv_tax, SUM(received_amount) + SUM(fee_data.oc_adv_tax) AS total_fee_advance_tax, ROUND(SUM(fee_data.concession_amount)) AS concession_amount, ROUND(SUM(fee_data.scholarship_amount)) AS scholarship_amount, SUM(fd.lab_avc) AS lab_charges
+			FROM (
+			SELECT cl.generation_of,cl.grade_id,cl.grade_dname,fb.*,fbr.received_late_fee AS late_fee,fbr.received_amount AS received_amount,
+			IF(fb.adjustment > 0,fb.adjustment,0) as fee_arrerars,IF(fb.adjustment < 0,fb.adjustment,0) as fee_adjustments
+			FROM atif_fee_student.fee_bill AS fb
+			LEFT JOIN atif_fee_student.fee_bill_received AS fbr ON fbr.fee_bill_id = fb.id
+			LEFT JOIN atif.class_list AS cl ON cl.id = fb.student_id
+			LEFT JOIN atif_fee_student.billing_cycle_definition AS bcd ON bcd.academic_session_id = fb.academic_session_id AND bcd.grade_id = cl.grade_id AND bcd.bill_cycle_no = fb.bill_cycle_no
+			WHERE fb.academic_session_id IN (11,12) AND fb.bill_cycle_no = 1 AND fbr.id IS NOT NULL AND fb.fee_bill_type_id IN (9)
+			) AS fee_data
+			LEFT JOIN atif_fee_student.fee_definition AS fd ON fd.academic_session_id = fee_data.academic_session_id AND fee_data.grade_id = fd.grade_id
+			GROUP BY fee_Data.grade_id
+
+
+			ORDER BY fee_Data.generation_of DESC";
+		$result = DB::connection($this->dbCon)
+        ->select($query);
+        return $result;	
+    }
+
+    public function all_grade(){
+    	$query = "select * from 
+				atif._grade
+				order by complete_in_years desc";
+		$result = DB::connection($this->dbCon)
+        ->select($query);
+        return $result;	
+    }
 
 }

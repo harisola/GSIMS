@@ -238,7 +238,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/student/Students_Stories', 'Student_Information\Master_Page\Grade@Students_Stories');
 	Route::post('/student/Stories_Back', 'Student_Information\Master_Page\Grade@Students_Stories_Back');
 	
-	Route::post('/student/Get_Section', 'Student_Information\Master_Page\Grade@Get_Section');
+	Route::post('/student/Get_Section', 'Student_Information\Master_Page\Gradestudent@Get_Section');
 
 
 	// //******************** Accounts *****************************//
@@ -269,6 +269,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/account_reports','Account_Process\Accounts\AccountReportController@index');
 
 	Route::get('/account_reports/issuance_report','Account_Process\Accounts\AccountReportController@getReportInformation');
+
+	Route::get('/account_reports/get_receiving_report','Account_Process\Accounts\AccountReportController@get_receiving_report');
 
 	
 	

@@ -16,15 +16,17 @@ class AccountReportController extends Controller
     {
     	// Get Class List Student
     	$report_model = new account_reports();
+
+        $acadmic_session_id = $report_model->get_academic();
         
         $ASession_id_From=11;
         $ASession_id_To=12;
     	$report_data = $report_model->Get_Grade_Fee_Report($ASession_id_From, $ASession_id_To);
+        $grade = $report_model->all_grade();
     	
-    	#var_dump($report_data); exit;
 
     	// load View if exists
-    	return view('account_process.accounts.account_report')->with( 'report_data',  $report_data );
+    	return view('account_process.accounts.account_report')->with( ['report_data'=>$report_data,'academic_session_id' => $acadmic_session_id,'grade'=>$grade] );
     	
 
 	}
@@ -38,6 +40,17 @@ class AccountReportController extends Controller
 		$data=$report_model->DetailsOfIssuance($acadmic_session_id,$installment_number,$gs_id,$gf_id);
 		return view('account_process.accounts.bill_issuance_table',['issuance_data'=>$data]);
 	}
+
+    public function get_receiving_report(request $request){
+        $report_model=new account_reports();
+        $academic_session_id = $request->get('academic_session_id');
+        $installment_id = $request->get('installment_id');
+
+        $data['installment_billing'] = $report_model->fee_detail_grade_wise($academic_session_id,$installment_id);
+        $data['admission_billing'] = $report_model->fee_admission_grade_wise();
+        $data['prefered_bill'] = $report_model->get_prefered_bill();
+        echo json_encode($data);
+    }
 
     
 
