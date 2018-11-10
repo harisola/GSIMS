@@ -13,15 +13,13 @@ use App\Models\Staff\Staff_Recruitment\Staff_recruitment_model;
 
 class Hr_followup extends Controller
 {
-	public function index(){
+	public function index()
+	{
 		$userId = Sentinel::getUser()->id;
 	  	$staffRecruiment = new Staff_recruitment_model();
 	  	$RecruimentData = $staffRecruiment->get_recruitment_followup_data();
 
 	  	$tag = $staffRecruiment->get_tag();
-	 
-
-
 
 	  	$grade = $staffRecruiment->get_grade();
 	  	$status = $staffRecruiment->get_status();
@@ -90,6 +88,34 @@ class Hr_followup extends Controller
         
        echo $followupData = $staffRecruiment->insertFormData('career_followup_comments',$data);
 
+
+
+if( $followupType == 'Extension')
+{
+	$stage_id = 13;
+ }
+
+ else if ($followupType == 'No Response')
+ {
+ 	$stage_id = 12;
+ }
+
+ else{
+ 	$stage_id = 6;
+ }
+$data = array(
+          
+          'form_id' => $form_id,
+          'status_id' => $status_id,
+          'stage_id' => $stage_id,
+          'created' => $formTime,
+          'register_by' => $userID,
+          'modified' => $formTime,
+          'modified_by' => $userID,
+          'record_deleted' => 0
+        );
+        
+       echo $followupData = $staffRecruiment->insertFormData('log_career_form',$data);
 
 
 	}	

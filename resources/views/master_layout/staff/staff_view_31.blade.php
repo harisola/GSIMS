@@ -257,6 +257,27 @@ display: none;
   position: absolute;
   z-index: 9;
 }
+.edit-button {
+	position: absolute;
+    right: 14px;
+    top: 0;
+    background: #e2e2e273;
+    color: #88888880;
+    padding: 2px 10px;
+}
+.edit-button:hover {
+	color: #888;
+	background: #e2e2e2;
+	text-decoration: none;
+	border-bottom: 1px solid #888;
+	border-left: 1px solid #888;
+}
+#EditDetails .modal-dialog {
+    width: 90%;
+}
+.marginBottom20 {
+	margin-bottom: 20px;
+}
 </style>
 <link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet" type="text/css" />
@@ -1147,6 +1168,961 @@ display: none;
        <div class="col-md-3 col-xs-6 MobPaddingRight0">
           <div class="profile-sidebar-portlet portlet light fixedHeight3">
              <!-- SIDEBAR USERPIC -->
+             <a href="#EditDetails" data-toggle="modal" class="edit-button">Edit details</a>
+             <div class="modal fade" id="EditDetails" tabindex="-1" role="basic" aria-hidden="true">
+	             <div class="modal-dialog">
+	                <div class="modal-content">
+	                   <div class="modal-header">
+	                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	                      <h3 class="modal-title">Edit Information for <strong>Aamir Hussain</strong></h3>
+	                   </div>
+	                   <div class="modal-body" style="float:left;width:100%;">
+	                   		<div class="tabbable-line">
+		                         <ul class="nav nav-tabs ">
+		                            <li class="active">
+		                               <a href="#tab_basic_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-info"></span> Basics </a>
+		                            </li>
+		                            <li>
+		                               <a href="#tab_education_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-graduation"></span> Education </a>
+		                            </li>
+		                            <li>
+		                               <a href="#tab_employment_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-briefcase"></span> Employments </a>
+		                            </li>
+		                            <li class="">
+		                               <a href="#tab_parent_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-users"></span> Parent / Spouse </a>
+		                            </li>
+		                            <li>
+		                               <a href="#tab_alternate_edit" data-toggle="tab"> <i class="fa fa-phone"></i> Alternate Contacts </a>
+		                            </li>
+		                            <li>
+		                               <a href="#tab_other_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-plus"></span> Other </a>
+		                            </li>
+		                         </ul>
+		                         <!-- nav -->
+		                         <div class="tab-content">
+		                            <div class="tab-pane active" id="tab_basic_edit">
+		                               <div class="form-body">
+		                                  <h3 class="form-section marginTop0 headingBorderBottom">Person Info</h3>
+		                                  <div class="row ">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Employee ID:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="" value="123" disabled="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">GT ID:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="" value="16-070" disabled="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <hr />
+		                                  <div class="row marginBottom20">
+		                                  	<div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Staff Title:</label>
+		                                           <div class="col-md-9">
+		                                           	  <select class="form-control">
+														    <option value="0" selected="" disabled="">Staff Title</option>
+						                                    <option value="2">Ms</option>
+						                                    <option value="3">Mrs</option>
+						                                    <option value="1">Mr</option>
+						                                    <option value="4">Dr.</option>
+														</select>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Gender:</label>
+		                                           <div class="col-md-9">
+		                                              <select class="form-control">
+														    <option value="">Male</option>
+														    <option value="">Female</option>
+														</select>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">CNIC Name:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="Full Name">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Full Name:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="Full Name">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Nationality:</label>
+		                                           <div class="col-md-9">
+		                                                <select class="form-control">
+														    <option value="">Pakistani</option>
+														    <option value="">Afghani</option>
+														</select>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Religion:</label>
+		                                           <div class="col-md-9">
+		                                              <select class="form-control">
+														    <option value="">Muslim</option>
+														    <option value="">Non-Muslim</option>
+														</select>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Name Code:</label>
+		                                           <div class="col-md-9">
+		                                           	  <!-- NIC masking: XXXXX-XXXXXXX-X -->
+		                                              <input type="text" class="form-control" placeholder="Name Code" min="3" max="3">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">DOB <small>(as per NIC)</small>:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="date" class="form-control" placeholder="DoB">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <hr />
+		                                  <div class="row">
+		                                  	 <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Father Name:</label>
+		                                           <div class="col-md-9">
+		                                           	  <input type="text" class="form-control" placeholder="Father Name">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <hr />
+		                                  <div class="row marginBottom20">
+		                                  	 <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">CNIC:</label>
+		                                           <div class="col-md-9">
+		                                           	  <!-- NIC masking: XXXXX-XXXXXXX-X -->
+		                                              <input type="text" class="form-control" placeholder="CNIC">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Email <small>(personal)</small>:</label>
+		                                           <div class="col-md-9">
+		                                           	  <input type="email" class="form-control" placeholder="CNIC">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Mobile Phone:</label>
+		                                           <div class="col-md-9">
+		                                           		<!-- Mobile phone Masking: XXXX-XXXXXXX -->
+														<input type="phone" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Landline:</label>
+		                                           <div class="col-md-9">
+		                                              <!-- Mobile phone Masking: XXX-XXXXXXX -->
+														<input type="phone" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <hr />
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Date of Joining:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="date" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Employment Status:</label>
+		                                           <div class="col-md-9">
+		                                                <select class="form-control">
+														    <option value="">Contractual</option>
+														    <option value="">Permanent</option>
+														</select>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->		                                  
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Generations Google ID:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Tap IN Campus:</label>
+		                                           <div class="col-md-9">
+		                                              <select class="form-control">
+														    <option value="">South</option>
+														    <option value="">North</option>
+														</select>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <h3 class="form-section headingBorderBottom">Address Info</h3>
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Apartment No:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Street Name:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Building Name:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Plot No:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Region:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Sub Region:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                               </div>
+		                               <!-- form-body -->
+		                            </div>
+		                            <!-- tab_basic -->
+		                            <div class="tab-pane" id="tab_education_edit">
+		                               <h4 class="form-section headingBorderBottom">Others</h4>
+		                               <div class="row">
+		                                  <div class="col-md-6">
+		                                     <div class="portlet light bordered lowPadding">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-3 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-9 paddingRight0">
+		                                              <h5 class=" marginBottom0"><strong>Skill Development Council</strong></h5>
+		                                              <h5 class="font-grey-cascade"><strong>Certification</strong>, HRM</h5>
+		                                              <div class="col-md-6 padding0">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;1st Division</h5>
+		                                              </div>
+		                                              <div class="col-md-6">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;2010</h5>
+		                                              </div>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                                  <div class="col-md-6">
+		                                     <div class="portlet light bordered lowPadding">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-3 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-9 paddingRight0">
+		                                              <h5 class=" marginBottom0"><strong>Skill Development Council</strong></h5>
+		                                              <h5 class="font-grey-cascade"><strong>Certification</strong>, Essentials of Management</h5>
+		                                              <div class="col-md-6 padding0">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;1st Division</h5>
+		                                              </div>
+		                                              <div class="col-md-6">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;2011</h5>
+		                                              </div>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                               </div>
+		                               <!-- row -->
+		                               <h4 class="form-section headingBorderBottom">Professional</h4>
+		                               <h4 class="form-section headingBorderBottom">University</h4>
+		                               <div class="row">
+		                                  <div class="col-md-6">
+		                                     <div class="portlet light bordered lowPadding">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-3 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/uoklogo.png" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-9 paddingRight0">
+		                                              <h5 class=" marginBottom0"><strong>University of Karachi</strong></h5>
+		                                              <h5 class="font-grey-cascade"><strong>M.P.A</strong>, Public Administration</h5>
+		                                              <div class="col-md-6 padding0">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;2nd Division</h5>
+		                                              </div>
+		                                              <div class="col-md-6">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;2001</h5>
+		                                              </div>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                               </div>
+		                               <!-- row -->
+		                               <h4 class="form-section headingBorderBottom">College</h4>
+		                               <div class="row">
+		                                  <div class="col-md-6">
+		                                     <div class="portlet light bordered lowPadding">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-3 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-9 paddingRight0">
+		                                              <h5 class=" marginBottom0"><strong>P.A.F (Faisal Base)</strong></h5>
+		                                              <h5 class="font-grey-cascade"><strong>B.Sc</strong>, Computer Science, Economics & Maths</h5>
+		                                              <div class="col-md-6 padding0">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;2nd Division</h5>
+		                                              </div>
+		                                              <div class="col-md-6">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;1997</h5>
+		                                              </div>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                               </div>
+		                               <!-- row -->
+		                               <h4 class="form-section headingBorderBottom">School</h4>
+		                               <div class="row">
+		                                  <div class="col-md-6">
+		                                     <div class="portlet light bordered lowPadding">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-3 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-9 paddingRight0">
+		                                              <h5 class=" marginBottom0"><strong>National High School</strong></h5>
+		                                              <h5 class="font-grey-cascade"><strong>Matric</strong>, Science</h5>
+		                                              <div class="col-md-6 padding0">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;1st Division</h5>
+		                                              </div>
+		                                              <div class="col-md-6">
+		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;1991</h5>
+		                                              </div>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                               </div>
+		                               <!-- row -->
+		                               <?php /* ?>
+		                               <table width="100%" border="0" class="table table-bordered">
+		                                  <thead class="bg-grey">
+		                                     <tr>
+		                                        <th class="" width="40%">Institute</th>
+		                                        <th width="20%">Subjects</th>
+		                                        <th width="20%">Qualification</th>
+		                                        <th width="10%">Result</th>
+		                                        <th width="10%">Year of<br>Completion</th>
+		                                     </tr>
+		                                  </thead>
+		                                  <!-- thead -->
+		                                  <tbody>
+		                                     <tr class="bBottomD">
+		                                        <td colspan="5" class=""><strong>School</strong></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>National High School</td>
+		                                        <td>Science</td>
+		                                        <td>Matric</td>
+		                                        <td>Ist-Div</td>
+		                                        <td>1992</td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                     </tr>
+		                                     <tr class="bBottomD">
+		                                        <td colspan="5" class=""><strong>College</strong></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>P.A.F (Faisl Base)</td>
+		                                        <td>Computer Science, Economics &amp; Maths</td>
+		                                        <td>B.Sc.</td>
+		                                        <td>IInd-Div</td>
+		                                        <td>1997</td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                     </tr>
+		                                     <tr class="bBottomD">
+		                                        <td colspan="5" class=""><strong>University</strong></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>University of Karachi  UoK  Karachi</td>
+		                                        <td>Public Administration</td>
+		                                        <td>M.P.A</td>
+		                                        <td>IInd-Div</td>
+		                                        <td>2001</td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                     </tr>
+		                                     <tr class="bBottomD">
+		                                        <td colspan="5" class=""><strong>Professional</strong></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                        <td>-</td>
+		                                     </tr>
+		                                     <tr class="bBottomD">
+		                                        <td colspan="5" class=""><strong>Others</strong></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>Skill Development Council</td>
+		                                        <td>HRM</td>
+		                                        <td>Certification</td>
+		                                        <td>Ist-Div</td>
+		                                        <td>2010</td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td>Skill Development Council</td>
+		                                        <td>Essentials of Management</td>
+		                                        <td>Certification</td>
+		                                        <td>Ist-Div</td>
+		                                        <td>2011</td>
+		                                     </tr>
+		                                  </tbody>
+		                                  <!-- tbody -->
+		                               </table>
+		                               <!-- tale -->
+		                               <?php */ ?>
+		                            </div>
+		                            <!-- tab_education -->
+		                            <div class="tab-pane" id="tab_employment_edit">
+		                               <div class="row">
+		                                  <div class="col-md-12">
+		                                     <div class="portlet light lowPadding2 onlyBorderBottom marginBottom0">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-1 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/aflogo.jpg" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-11 paddingRight0">
+		                                              <h5 class=" marginBottom0 font-grey-mint marginTop0"><strong>IT Business Analyst</strong> at <strong>Assessment Fund</strong></h5>
+		                                              <h5 class="font-grey-salsa marginBottom4">
+		                                                 <span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>10,000</strong></span>
+		                                                 <span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>2001</strong> to <strong>2005</strong></span>
+		                                                 <span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>10,000</strong></span>
+		                                                 <span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>Islamiat, Islamiat English, Urdu</strong></span>
+		                                              </h5>
+		                                              <p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">Lorem Ipsum dolor sit amet, Lorem Ipsum dolor sit amet Lorem Ipsum dolor</span> </p>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                               </div>
+		                               <!-- row -->
+		                               <div class="row">
+		                                  <div class="col-md-12">
+		                                     <div class="portlet light lowPadding2 onlyBorderBottom marginBottom0">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-1 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/BriefacaseIcon.jpg" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-11 paddingRight0">
+		                                              <h5 class=" marginBottom0 font-grey-mint marginTop0">Formerly worked at <strong>HireLabs</strong> on the position of <strong>UI/UX Lead</strong></h5>
+		                                              <h5 class="font-grey-salsa marginBottom4">
+		                                                 <span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>10,000</strong></span>
+		                                                 <span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>2001</strong> to <strong>2005</strong></span>
+		                                                 <span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>I, II, III </strong></span>
+		                                                 <span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>Islamiat, Islamiat English, Urdu</strong></span>
+		                                              </h5>
+		                                              <p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">-</span> </p>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                               </div>
+		                               <!-- row -->
+		                               <div class="row">
+		                                  <div class="col-md-12">
+		                                     <div class="portlet light lowPadding2 marginBottom0">
+		                                        <div class="portlet-body">
+		                                           <div class="col-md-1 padding0">
+		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/BriefacaseIcon.jpg" class="SchoolPlaceHolder" />
+		                                           </div>
+		                                           <!-- col-md-3 -->
+		                                           <div class="col-md-11 paddingRight0">
+		                                              <h5 class=" marginBottom0 font-grey-mint marginTop0">Web Developer at <strong>TechiBits</strong></h5>
+		                                              <h5 class="font-grey-salsa marginBottom4">
+		                                                 <span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>10,000</strong></span>
+		                                                 <span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>2001</strong> to <strong>2005</strong></span>
+		                                                 <span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>10,000</strong></span>
+		                                                 <span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>Islamiat, Islamiat English, Urdu</strong></span>
+		                                              </h5>
+		                                              <p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">Personal Growth</span> </p>
+		                                           </div>
+		                                           <!-- col-md-9 -->
+		                                        </div>
+		                                        <!-- portlet-body -->
+		                                     </div>
+		                                     <!-- portlet -->
+		                                  </div>
+		                                  <!-- col-md-6 -->
+		                               </div>
+		                               <!-- row -->
+		                               <!-- 
+		                                  <table width="100%" border="0" class="table table-bordered">
+		                                      <thead class="bg-grey">
+		                                          <tr>
+		                                              <th class="">Institution</th>
+		                                              <th>Designation</th>
+		                                              <th>Class(s)<br>taught</th>
+		                                              <th>Subject(s)<br>taught</th>
+		                                              <th>Salary</th>
+		                                              <th>From<br><small>(year)</small></th>
+		                                              <th>To<br><small>(year)</small></th>
+		                                              <th>Reasons for Leaving</th>
+		                                          </tr>
+		                                      </thead>
+		                                      <tbody>
+		                                          <tr>
+		                                              <td>Mobilink GSM (POS)</td>
+		                                              <td>Proprietor</td>
+		                                              <td></td>
+		                                              <td></td>
+		                                              <td>100000</td>
+		                                              <td>2001</td>
+		                                              <td>2009</td>
+		                                              <td>Security Reasons....</td>
+		                                          </tr>        
+		                                      </tbody>
+		                                  </table>
+		                                  -->
+		                            </div>
+		                            <!-- tab_employment -->
+		                            <div class="tab-pane " id="tab_parent_edit">
+		                               <table width="100%" border="0" class="table table-bordered">
+		                                  <thead class="bg-grey">
+		                                     <tr>
+		                                        <th class="text-center" width="40%">Father</th>
+		                                        <th class="text-center" width="20%">&nbsp;</th>
+		                                        <th class="text-center" width="40%">Spouse</th>
+		                                     </tr>
+		                                  </thead>
+		                                  <tbody id="tab_parent_table_edit">
+		                                     <tr>
+		                                        <td class=""><input type="text" class="form-control" placeholder="" value="123"></td>
+		                                        <td class="text-center"><strong>Name</strong></td>
+		                                        <td class=""><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>Profession</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>Qualification</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>Designation</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>Department</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>Organisation</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>CNIC</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>Mobile</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                        <td class="text-center"><strong>Address</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
+		                                     </tr>
+		                                  </tbody>
+		                               </table>
+		                            </div>
+		                            <!-- tab_parent -->
+		                            <div class="tab-pane" id="tab_alternate_edit">
+		                               <table width="100%" border="0" class="table table-bordered">
+		                                  <thead class="bg-grey">
+		                                     <tr>
+		                                        <th class="text-center" width="40%">Next of Kin</th>
+		                                        <th class="text-center" width="20%">&nbsp;</th>
+		                                        <th class="text-center" width="40%">Emergency Contact</th>
+		                                     </tr>
+		                                  </thead>
+		                                  <tbody id="tab_alternate_contact_edit">
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                        <td class="text-center"><strong>Name</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                        <td class="text-center"><strong>Address</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                        <td class="text-center"><strong>Email</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                        <td class="text-center"><strong>Mobile</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                     </tr>
+		                                     <tr>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                        <td class="text-center"><strong>Relationship</strong></td>
+		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
+		                                     </tr>
+		                                  </tbody>
+		                               </table>
+		                            </div>
+		                            <!-- tab_alternate -->
+		                            <div class="tab-pane" id="tab_other_edit">
+		                               <div class="form-body">
+		                                  <h3 class="form-section marginTop0 headingBorderBottom">Other Details</h3>
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Provident Fund:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">NTN No:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">EOBI No:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">SESSI No:</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <h3 class="form-section headingBorderBottom">Bank Details</h3>
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Bank Name : </label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Branch :</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Account Number :</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <h3 class="form-section headingBorderBottom">Takaful</h3>
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Self :</label>
+		                                           <div class="col-md-9"  style="padding-left: 40px;">
+		                                              <div class="radio-list">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="SelfTakaful" value="option1"> Yes </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="SelfTakaful" value="option2" checked=""> No </label>
+                                                      </div>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Spouse :</label>
+		                                           <div class="col-md-9"  style="padding-left: 40px;">
+		                                              <div class="radio-list">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="SpouseTakaful" value="option1"> Yes </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="SpouseTakaful" value="option2" checked=""> No </label>
+                                                      </div>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row marginBottom20">
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Children :</label>
+		                                           <div class="col-md-9" style="padding-left: 40px;">
+		                                              <div class="radio-list">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="ChildTakaful" value="option1"> Yes </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="ChildTakaful" value="option2" checked=""> No </label>
+                                                      </div>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                     <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">Certificate :</label>
+		                                           <div class="col-md-9">
+		                                              <input type="text" class="form-control" placeholder="">
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                                  <div class="row">
+		                                  	 <div class="col-md-6">
+		                                        <div class="form-group">
+		                                           <label class="control-label col-md-3 text-right paddingRight0">If no, please mention the reasons (mandatory) :</label>
+		                                           <div class="col-md-9">
+		                                              <textarea class="form-control" rows="3"></textarea>
+		                                           </div>
+		                                        </div>
+		                                     </div>
+		                                     <!--/span-->
+		                                  </div>
+		                                  <!--/row-->
+		                               </div>
+		                               <!-- form-body -->
+		                            </div>
+		                            <!-- tab_other -->
+		                         </div>
+		                         <!-- tab-content -->
+		                      </div>
+		                      <!-- tabbable-line -->
+	                   </div>
+	                   <hr />
+	                   <div class="modal-footer text-center" style="text-align:center;">
+	                      <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+	                      <button onClick="add_leave()" type="button" class="btn dark btn-outline active" data-dismiss="">Add</button>
+	                      <!--button type="button" class="btn green">Add Badge</button -->
+	                   </div>
+	                </div>
+	                <!-- /.modal-content -->
+	             </div>
+	             <!-- /.modal-dialog -->
+	        </div>
              <div class="profile-userpic">
                 <img src="" class="img-responsive" alt=""> 
              </div>

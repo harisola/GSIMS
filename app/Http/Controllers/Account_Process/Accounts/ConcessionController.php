@@ -69,7 +69,7 @@ class ConcessionController extends Controller
     	 parse_str($request->Formdata, $output);
 
     	 $Student_id    = $output['Student_id'];
-       $Concession_id = $output['Concession_id'];
+        $Concession_id = $output['Concession_id'];
          
 
     	 $Academic_id = $output['Academic_session_id'];
@@ -81,7 +81,7 @@ class ConcessionController extends Controller
     	 $Installment_3 = $output['Installment_3'];
     	 $Installment_4 = $output['Installment_4'];
     	 $Installment_5 = $output['Installment_5'];
-       $Operation = $output['Operation'];
+         $Operation = $output['Operation'];
 
 
   	
@@ -122,10 +122,12 @@ $Insert_query = "INSERT INTO `atif_fee_student`.`concessions_for_session` ( `stu
 		else{
 			$concession_type2=2;
 		}
+        for ($j=1; $j < 6; $j++) { 
+            $Insert_query2 = "INSERT INTO `atif_fee_student`.`scholarship_for_session` ( `student_id`, `scholarship_type`, `percentage`, `academic_session_id`, `billing_cycle_no`, `created`, `created_by`, `modified`, `modified_by`, `record_deleted`) VALUES ('".$Student_id."','".$concession_type2."', '".$Installment_1."','".$Academic_id."','".$j."','".$created_at."','".$userID."','".$created_at."','".$userID."',  '0');";
 
-		$Insert_query2 = "INSERT INTO `atif_fee_student`.`scholarship_for_session` ( `student_id`, `scholarship_type`, `percentage`, `academic_session_id`, `billing_cycle_no`, `created`, `created_by`, `modified`, `modified_by`, `record_deleted`) VALUES ('".$Student_id."','".$concession_type2."', '".$Installment_1."','".$Academic_id."','".$billing_cycle_no."','".$created_at."','".$userID."','".$created_at."','".$userID."',  '0');";
-
- 		echo $return = $model->Fun_insert($Insert_query2);
+               echo $return = $model->Fun_insert($Insert_query2);
+        }
+		
 	}else 
 	{
 		 echo $return = $model->Fun_insert($Insert_query);

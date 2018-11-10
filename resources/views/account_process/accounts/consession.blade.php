@@ -132,12 +132,13 @@
 <td class="text-center"><?=$cf->Concession_Type;?></td>
 <td class="text-center">
     <?php 
+    
     if( !empty($cf->Installment_1) && $cf->Concession_Type_id != 9 )  
     {
         echo $cf->Installment_1.'%';
     }else 
     {
-        echo number_format($cf->Installment_1,0,'',',');
+        echo ($cf->Installment_1);
     }
     ?>
  </td>
@@ -149,7 +150,7 @@
         echo $cf->Installment_2.'%';
         }else 
         {
-echo number_format($cf->Installment_2, 0,'',',');
+echo ($cf->Installment_2);
         }
     ?>
 </td>
@@ -161,7 +162,7 @@ echo number_format($cf->Installment_2, 0,'',',');
         }else 
         {
 
-echo number_format($cf->Installment_3,0,'',',');
+echo ($cf->Installment_3);
         }
     ?>
 </td>
@@ -173,7 +174,7 @@ echo number_format($cf->Installment_3,0,'',',');
         }else 
         {
 
-echo number_format($cf->Installment_4,0,'',',');
+echo ($cf->Installment_4);
         }
     ?>
 </td>
@@ -184,7 +185,7 @@ echo number_format($cf->Installment_4,0,'',',');
         echo $cf->Installment_5.'%';
         }else 
         {
- echo number_format($cf->Installment_5,0,'',',');
+ echo ($cf->Installment_5);
         }
     ?>
 </td>

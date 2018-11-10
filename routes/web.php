@@ -175,6 +175,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 	// Attendance - in - absentia
 	//Route::get('/attendance_in_absentia', 'Attendance\Staff\AttendanceInAbsentia@mainPage');
 		//Route::post('/masterLayout/staff/addAbsentia', 'Development\Haris@addAbsentia');
+
+
 	Route::get('/masterLayout/staff/report', 'Development\StaffReportController@attendanceReport');
 	Route::get('/masterLayout/staff/leaveReport', 'Development\StaffReportController@leaveReport');
 	Route::post('/masterLayout/staff/getManualAttendance','Development\Haris@getManualAttendance');
@@ -388,6 +390,8 @@ Route::post('/concession_search2','Account_Process\Accounts\ConcessionController
 	
 	
 Route::post('/modified_form_list','Development\staff_recruitment_initiation@modified_form_list');
+
+
 Route::post('/allposts','Development\staff_recruitment_initiation@allposts');
 	
 
@@ -416,7 +420,14 @@ Route::group(['middleware' => 'authenticated'],function(){
 	Route::get("/calendar", "Calendar\Master_Calendar\Calendar@MCalendar");
 
 
-		Route::get('/staff_recruitment_initiation_archive','Development\staff_recruitment_initiation_archive@index');
+
+
+Route::get('/staff_recruitment_initiation_archive','Development\staff_recruitment_initiation_archive_ns@index');
+
+
+
+
+
 
 
 

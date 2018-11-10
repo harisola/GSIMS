@@ -400,7 +400,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
         left join atif_role_org.role_category as rc
             on rc.id = ro.staff_role_category_id
 
-        where sr.gt_id = '".$GTID."'
+        where sr.gt_id = '".$GTID."' and ro.record_deleted=0
 
         order by ro.fundamentalRole desc;";
 
@@ -506,7 +506,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			on rc.id = ro.staff_role_category_id
 			
 
-		where ro.id = ".$RoleID;
+		where ro.id = ".$RoleID." and ro.record_deleted=0";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -577,7 +577,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 		where sr.gt_id = '".$GTID."') as sbjRole
 		on sbjRole.sbjRoleID = ro.id
 
-		where ro.id = ".$RoleID;
+		where ro.id = ".$RoleID." and ro.record_deleted=0";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -689,7 +689,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				and ssgg.academic_session_id <= 10
 
 
-			where sr.gt_id = '".$GTID."') as data
+			where sr.gt_id = '".$GTID."' and ro.record_deleted=0) as data
 
 			order by abridged_name desc
 			limit 1";
@@ -714,7 +714,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     public function get_StaffReporteeInfo($RoleID, $ReportingType=null, $NameCode=null)
     {
     	/***** ***** ***** Class Teachers for Year Tutor ***** ***** *****/
-        $query = "select grade_id from atif_role_org.role_position where id = " . $RoleID . 
+        $query = "select grade_id from atif_role_org.role_position where record_deleted=0 and id = " . $RoleID . 
         	" and (role_title_tl like 'YT%'
         	or role_title_tl like '%Mentor%')";
         $queryResult = DB::connection($this->dbCon)->select($query);
@@ -795,7 +795,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
         $query = "select sr.gt_id from atif_role_org.role_position as p
 		left join atif.staff_registered as sr
 			on sr.id = p.staff_id
-		where p.id = $RoleID and p.role_title_tl like 'LT%'";
+		where p.record_deleted=0 and p.id = $RoleID and p.role_title_tl like 'LT%'";
         $queryResult = DB::connection($this->dbCon)->select($query);
         $queryST = '';
         if(!empty($queryResult)){
@@ -864,7 +864,8 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				on rc.id = ro.staff_role_category_id
 				
 
-			where ro.pm_report_to = $RoleID
+			where ro.pm_report_to = $RoleID and ro.record_deleted=0
+
 
 			$queryYT
 
@@ -888,7 +889,8 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				on rc.id = ro.staff_role_category_id
 				
 
-			where ro.pm_report_to = $RoleID
+			where ro.pm_report_to = $RoleID and ro.record_deleted=0
+
 
 			$queryYT
 
@@ -937,7 +939,8 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			on rc.id = ro.staff_role_category_id
 			
 
-		where ro.sc_report_to = $RoleID
+		where ro.sc_report_to = $RoleID and ro.record_deleted=0
+
 
 		order by rc.position";
 
@@ -988,7 +991,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			on st_gs.grade_name = gg.name
 			and st_gs.section_name = ss.name
 
-		where sr.gt_id = '".$GTID."'";
+		where sr.gt_id = '".$GTID."' and ro.record_deleted=0";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -1067,7 +1070,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				on st_gs.grade_name = gg.name
 				and st_gs.section_name = ss.name
 
-			where sr.gt_id = '".$GTID."'";
+			where sr.gt_id = '".$GTID."' and ro.record_deleted=0";
 			$staff = DB::connection($this->dbCon)->select($query);
 		}
 
@@ -1148,7 +1151,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			and ssgg.academic_session_id <= 10
 
 
-		where sr.gt_id = '".$GTID."') as data
+		where sr.gt_id = '".$GTID."' and ro.record_deleted=0) as data
 		where students is not null
 
 		order by gp_id asc";
@@ -1203,7 +1206,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 						on st_gs.grade_name = gg.name
 						and st_gs.section_name = ss.name
 			
-					where sr.gt_id = '".$GTID."') as data
+					where sr.gt_id = '".$GTID."' and ro.record_deleted=0) as data
 					
 			UNION
 			
@@ -1264,7 +1267,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 						and ssgg.academic_session_id <= 10
 			
 			
-					where sr.gt_id = '".$GTID."'
+					where sr.gt_id = '".$GTID."' and ro.record_deleted=0
 					group by gg.name, ss.name) as data
 					where students is not null
 			) as data
