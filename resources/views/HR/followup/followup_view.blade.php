@@ -623,12 +623,7 @@ button.multiselect.dropdown-toggle.btn.btn-default {
                          <td id="table_append_<?=$sr["career_id"];?>"><span  data-container="body" data-placement="top" data-original-title="<?=$sr["status_name"]?>" class="tooltips boxidentification <?=str_replace(' ', '', $sr["status_name"]);?>">&nbsp;</span><?=ucfirst($sr["name"]);?>
                          <?php /***** ***** ***** Part B ***** ***** *****/ ?>
                        
-       
-              
-              
-              
-              
-              
+      
                             <br>
                             <small style="color: #888;">Followup <?=$sr["status_name"]?></small><br />
                     
@@ -762,6 +757,11 @@ button.multiselect.dropdown-toggle.btn.btn-default {
                         </div><!-- col-md-12 -->
                         <div class="row marginTop20">
                           <div class="col-md-12">
+
+                            <div id="followupCommentsErrorDivs" style="display: none;">
+                                    <p>Fill the comment </p>
+                                  </div> 
+
                             <input onclick="saveComments()" type="button" class="btn btn-group green-jungle" value="Submit">
                           </div><!-- -->
                         </div><!-- col-md-12 -->
@@ -786,6 +786,14 @@ button.multiselect.dropdown-toggle.btn.btn-default {
     var date =  $('#followupDate').val();
     var time =  $('#followupTime').val();
 
+ App.startPageLoading();
+
+  if(comments == ""){
+$('#followupCommentsErrorDivs').show();
+}
+else{
+  $('#followupCommentsErrorDivs').hide();
+  
     //insert comments
     $.ajax({
         type:'POST',
@@ -809,9 +817,13 @@ button.multiselect.dropdown-toggle.btn.btn-default {
           $('#followupComments').val(''); 
         }, error : function(err){
 
-        }
+      }
     });
   }
+setTimeout(function(){
+            App.stopPageLoading();
+          }, 1000);
+}
 
 
   var showDateTime = function showDateTime(){
@@ -947,8 +959,6 @@ $('#staffView_filter_btn .applyFilter').click(function() {
 });
 
 
-
-   
 
 $(document).on('click','#clear_data',function(){
   $('#career_name').val('');
@@ -1168,15 +1178,13 @@ var getLogs  = function getLogs(id, name, status_id){
   $(".showLogs").html('');
   $(".logsArea").show();
   
-  
-
     App.startPageLoading(); 
 
 
     $.ajax({
       type:'POST',
       data:{ '_token': '{{ csrf_token() }}', "Form_id":Form_id },
-      url:"{{url('/staff_recruitment_followup_logs')}}",
+      url:"{{url('/loadLogs')}}",
       dataType: "json",
       success: function(response)
       {
@@ -1186,17 +1194,11 @@ var getLogs  = function getLogs(id, name, status_id){
       }
     });
 
-
-
-
     setTimeout(function(){
       App.stopPageLoading();
     }, 5000);
     
 }
-
-
-
 
 </script>
 

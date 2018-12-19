@@ -115,12 +115,16 @@
     position: absolute;
 }
 .Adjustments {
-    color: #1edc1e;
+    color: green;
+}
+.Kashif_red
+{
+    color:red;
 }
 </style>
 <!-- Start Content section -->
 <div class="row marginTop20">
-    <div class="col-md-3">
+    <div class="col-md-3 borderRightDashed">
         <div class="portlet light bordered padding0 marginBottom0">
             <div class="portlet-title">
                 <div class="caption add_profile_label">
@@ -138,7 +142,7 @@
                 </div>
                 <hr />
                 <form  id="arrear_form">
-                    <div class="table-scrollable table-scrollable-borderless" id="Student_info_div_m">
+                    <div class="table-scrollable-borderless" id="Student_info_div_m">
                      <table>
                         <tbody>
                             <tr>
@@ -285,6 +289,14 @@
                                 </div><!-- theme-options -->
                             </div><!-- theme-panel -->
                         </div><!-- inputs -->
+                            <style type="text/css">
+        #arrear_adjustment_table th {
+            background: #ebebeb;
+            color: #888;
+        }
+        #arrear_adjustment_table tbody tr td {vertical-align: middle;}
+    </style>
+                        <!-- zk datatable -->
                         <table class="table table-bordered table-hover " width="100%" id="arrear_adjustment_table">
                             <thead>
                                 <tr>
@@ -338,15 +350,20 @@
 
 
 
+
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-
-
-
-
 <script type="text/javascript">
+ $('#arrear_form').hide();
+//datatable
+//setTimeout(function(){ $('#arrear_adjustment_table').DataTable(); }, 2000);
+    setTimeout(function(){ 
+    $('#arrear_adjustment_table').DataTable(); 
+    $( "span" ).tooltip(); $( "img" ).tooltip();
+    }, 2000);
 
 $(document).ready(function() {
+
     $('#search_gsid').inputmask({
         mask:'99-999',
         placeholder:'X'
@@ -367,6 +384,18 @@ $(document).ready(function() {
         numberDisplayed: 1
     });
 });
+
+            //zk Enter Event Start here...
+    var input = document.getElementById("search_gsid");
+        input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("btn_search").click();
+                $('#arrear_form').show();
+            }
+    });
+        //Enter Event End here...
+
     //Create all select box to multi select with checkbox 
     $('#requestList').multiselect({ numberDisplayed: 3 });
     //$('#departFilter').multiselect({ numberDisplayed: 3 });
@@ -374,12 +403,16 @@ $(document).ready(function() {
 var pagefunction = function() {
     Demo.init();
     App.init();
-
+    
+    
 
 };
-
+  //zk Working
 var fnClassList = function(data){
+    
     App.startPageLoading();
+    $('#arrear_form').show();
+
     var data = jQuery.parseJSON(JSON.stringify(data));
     var searchString = $('#search_gsid').val();
     var stringToBeFound = ['X'];
@@ -480,6 +513,8 @@ var fnClassList = function(data){
             success:function(e){
                 getArrearAndAdjustmentData();
                 
+                //var t = $('#example').DataTable();
+
                 $('#search_gsid').val('');
                 $( "input[name=student_id]").val('');
                 $('#updated_id').val('');
@@ -510,12 +545,19 @@ $( document ).ready(function() {
     App.stopPageLoading();
 });
 
+//zk Function for Add Comma In Amount Numbers//
+  function commaSeparateNumber(val){
+    while (/(\d+)(\d{3})/.test(val.toString())){
+      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+    }
+    return val;
+  }
+
 
 
  function  getArrearAndAdjustmentData() {
 
     $('#arrear_adjustment_table_body').html('');
-
     
     $.ajax({
 
@@ -526,13 +568,25 @@ $( document ).ready(function() {
             },
             success:function(e){
                 var data = JSON.parse(e);
-                console.log(data);
+                //console.log(data);
                 var html = '';
                 var  amount = '';
+
                 for ( var i = 0 ; i < data.length ; i++ ){
 
 
-                    data[i].amount < 0 ? amount = '<span class="Adjustments">'+data[i].amount+'</span>' : amount = data[i].amount;
+                    // data[i].amount < 0 ? amount = '<span class="Adjustments" id="adjust-coma">'+commaSeparateNumber(data[i].amount)+'</span>' : 
+                    // amount = '<span class="Kashif_red">'+ commaSeparateNumber(data[i].amount)+'</span>';
+
+                    if( data[i].amount < 0 )
+                    {
+                        amount = '<span class="Adjustments" id="adjust-coma">'+commaSeparateNumber(data[i].amount)+'</span>';
+                    }
+                    else 
+                    {
+                        amount = '<span class="Kashif_red">'+ commaSeparateNumber(data[i].amount)+'</span>';
+
+                    }
 
                     html += '<tr>';
                     html += '<td class="text-center">'+data[i].gs_id+'</td>';
@@ -546,9 +600,8 @@ $( document ).ready(function() {
                     html += '<td class="text-center"><a href="javascript:void(0)" onclick=updateArrear('+data[i].id+','+data[i].amount+')>Edit</a></td>';
                     html += '</tr>';
                 }
-
                 $('#arrear_adjustment_table').append(html);
-
+             
             }
 
     });
@@ -556,7 +609,7 @@ $( document ).ready(function() {
 }
 
 function updateArrear(data,amount){
-
+    $('#arrear_form').show();
     App.startPageLoading();
     $.ajax({
 

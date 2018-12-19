@@ -208,6 +208,7 @@ class AccountsController extends Controller
         $scholarship_percentage_1="";
         $scholarship_percentage_2="";
         $amount_exceed=false;
+        $arrears=false;
 
 
 
@@ -339,7 +340,7 @@ class AccountsController extends Controller
         $bill_found=$fee_bill->checkBillExistance($bill_number_remove_dash);
      
     if($bill_found<1){
-        if($gs_id!=="" && $billing_cycle!==""){
+        if($gs_id!="" && $billing_cycle!=""){
         
               $gross_additional_charges=$gross_tution_fee+$additional_charges;
                      // $tax_allow=$this->StudentApplicableForTaxes($list,$gross_additional_charges);
@@ -347,19 +348,18 @@ class AccountsController extends Controller
  
                 $total_adjustments=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                 
-                @$fee_details=$fee_bill->getLastBillByStudentId($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
+               @$fee_details=$fee_bill->getLastBillByStudentId($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                @$received_amount=$fee_bill_received->getLastReceivedAmount(@$fee_details['id']);
+                if($billing_cycle==2){
                    if($received_amount>200000){
                         $amount_exceed=true;
                         $adjustment_taxes=$total_adjustment_taxes=$this->calculate_adjustment_taxes($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                         $total_adjustments=-($adjustment_taxes-$total_adjustments);
-
                     }
+                }
             
                 $custom_arrear_adjustment=$arrear_adjustment_model->get_custom_pending_amount_id($list['student_id'],$billing_cycle);
-
                 $total_adjustments=$total_adjustments+$custom_arrear_adjustment;
-                
                 if($total_adjustments<0){
 
                     $adjustment->insertUpdateAdjustment($list['student_id'],str_replace("-","",$total_adjustments));
@@ -367,6 +367,7 @@ class AccountsController extends Controller
 
 
                 }elseif($total_adjustments>0){
+                    $arrears=true;
                     $taxes= $fee_bill->getLastBillTaxes($list['student_id']);
                     @$last_bill_taxes=$taxes['oc_adv_tax'];
                     @$last_taxes=$taxes['adjustment'];
@@ -380,7 +381,9 @@ class AccountsController extends Controller
                     $adjustment->insertUpdateAdjustment($list['student_id'],0);
                     $arriers_adjustment->InsertUpdateArriers($list['student_id'],0);
                 }
-                $total_arriers=
+                 $total_arriers=
+                 $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
+                 $total_arriers_with_taxes=
                  $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
                 if($total_adjustments>0){
                         $roll_over_charges=0;
@@ -390,10 +393,13 @@ class AccountsController extends Controller
                         $fee_bill->roll_over_charges=$roll_over_charges;//insert into late fee charges column
                     }
                 }
+
                 // $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
                 $std_adjustments=$adjustment->getadjustments($list['student_id']);
                 $total_adjustments=($total_arriers+$std_adjustments);
                 $total_current_billing=($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount;
+                $total_current_billing_with_arrears=($gross_tution_fee+$additional_charges)-$net_discount_amount;//if student paid first bill and 2nd bill paid partially e.g payable 2 lac and received 1 lac so for tax calculation
+
                 $total_current_billing2=($gross_tution_fee+$additional_charges)-$net_discount_amount;   
                 if($amount_exceed==true){
                     $tax_allow=$this->StudentApplicableForTaxes($list,$total_current_billing,$billing_cycle);
@@ -404,12 +410,8 @@ class AccountsController extends Controller
                 }  
                
                 $billing_amount_with_adjustment="";
-               // echo  $tax_allow;
-               //  die;
-                 // if($total_adjustments<0){
-                 //    $billing_amount_with_adjustment=str_replace("-","",$total_adjustments)+$total_current_billing;
-                 // }
-                
+                $total_current_billing;
+               $tax_allow;
                 if($tax_allow==0){
                     $applicable_taxes=0;
                 }else{
@@ -418,7 +420,7 @@ class AccountsController extends Controller
                         $total=$this->calculateDiscount($admission_fee,5);
                         $applicable_taxes=$adjustment_taxes+$total;
                     }else{
-                        $applicable_taxes=$this->calculateTaxes($list,$total_current_billing);
+                        $applicable_taxes=$this->calculateTaxes($list,$total_current_billing,$bill_cycle_no,$total_current_billing_with_arrears,$arriers);
                     }
                 }
                 $fee_bill->fee_bill_type_id=$fee_bill_type_id;//by default 1 for regular bill
@@ -446,6 +448,7 @@ class AccountsController extends Controller
                 if($total_adjustments==""){
                     $total_adjustments=0;
                 }
+
 
                 $fee_bill->adjustment=$total_adjustments;
                 $fee_bill->arrears_suspended=$arrears_suspended;
@@ -551,7 +554,6 @@ class AccountsController extends Controller
             $received_amount=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
 
 
-
             @$arriers_amount=$arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount']; 
             $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
             $adjustment_amount=$adjustment->getadjustments($list['student_id']);
@@ -585,7 +587,7 @@ class AccountsController extends Controller
            return $taxes;
     }
 
-    public function calculateTaxes($list,$total_current_billing){
+    public function calculateTaxes($list,$total_current_billing,$billing_cycle="",$total_current_billing_with_arrears="",$arrears){
                 $fee_bill = new fee_bill;
                 $class_list = new class_list;
                 $session = new academic_session;
@@ -595,11 +597,13 @@ class AccountsController extends Controller
                 $fee_bill_received=new fee_bill_received;
                 $fee_bill_received_info=new fee_bill_received_info;
                 $adjustment=new adjustment;
+                if($arrears==true){
+                    $total_current_billing=$total_current_billing-1000;
+                    $total_current_billing_with_arrears=$total_current_billing_with_arrears-1000;
+                }
 
                 $tax_percentage=$tax_amount->getTaxPercentage($list['a_session_id'])['tax_percentage'];
-                //last bill taxes
-                // echo $bill_id=$fee_bill->getLastBillTaxes($list['student_id'])['id'];
-                //subtract tax by previous bill oc_adv_tax
+
                 $fee_details=$fee_bill->getLastBillByStudentId($list['student_id']);
 
                 // $received_taxes=$fee_bill_received_info->getReceivedTaxes($list['student_id']); //old code
@@ -608,8 +612,7 @@ class AccountsController extends Controller
                 $status=$list['std_status_code'];
                 $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
                 // echo $received_amount= $fee_bill_received->getReceivedAmount($fee_details['id']);
-               $received_amount=$fee_bill_received->getReceivedAmount($fee_details['id']);
-
+                $received_amount=$fee_bill_received->getReceivedAmount($fee_details['id']);
 
                 if($status=='S-CPT'){
 
@@ -633,18 +636,32 @@ class AccountsController extends Controller
                   }
 
                 
-                // $billing_cycle=2;
-                // $adjustment_amount=str_replace('-','', $adjustment_amount);//simply adjustment amount without minus
-                // $total_current_billing=$total_current_billing+($adjustment_amount);
-               $previous_bill_taxes;
-               $total_current_billing+$admission_fee+$received_amount;
-               $total_current_billing;
-               $applicable_taxes=$this->calculateDiscount(($total_current_billing)+$admission_fee+$received_amount,$tax_percentage);
-               
-            //    if($adjustment_amount>0){
-            //        $adjustment->insertUpdateAdjustment($list['student_id'],$adjustment_amount-$applicable_taxes);
-            //    }
-               $applicable_taxes;
+              
+               if($billing_cycle>2){
+                    if($received_amount>0 &&$previous_bill_taxes!=0){
+                        //if received amount greater than 0 (paid bill amount or  more than bill amoount)
+                        $received_amount=$received_amount-($previous_bill_taxes+$fee_details->roll_over_charges);
+                        $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
+                       $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
+                    }else if($received_amount>0 && $previous_bill_taxes==0){
+                        //if received amount greater than 0 (paid bill amount or  more than bill amoount)
+                        $received_amount=$received_amount-($previous_bill_taxes+ @$fee_details->roll_over_charges);
+                        $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
+                        $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+$total_current_billing,$tax_percentage);
+                       // $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
+                    }else if(($received_amount<@$fee_details['total_payable'] && $received_amount!=0) && $previous_bill_taxes!=0){
+                        //if received amount paid but less than total payable
+                         $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
+                        $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing_with_arrears,$tax_percentage);
+                    }else if($received_amount==0){
+                       $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
+                       $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
+                    }
+                   
+               }else{
+                     $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
+               }
+            
                return $applicable_taxes;
     }
 
@@ -1395,14 +1412,16 @@ public function fetchFeeBill($gs_id){
                 $total_current_bill=$fee_details['total_current_bill'];//get last bill total payable amount
                 $previous_bill_adjsutment=$fee_details['adjustment'];//get last bill total payable amount
                 $received_amount=$received->getReceivedAmount($fee_details['id']);
-                if($received_amount>200000){
-                    $received_amount=($received_amount/1.05);
+                if($billing_cycle_number==2){
+                    if($received_amount>200000){
+                        $received_amount=($received_amount/1.05);
+                    }
                 }
 
         }
 
 
-       $last_remaining_amount=$total_payable+($previous_bill_adjsutment);
+      $last_remaining_amount=$total_payable+($previous_bill_adjsutment);
         if($total_payable==$received_amount){
             return $pendings=0;
         }
@@ -1410,12 +1429,12 @@ public function fetchFeeBill($gs_id){
             if($total_payable<0){
               $pendings=$previous_bill_adjsutment+$total_current_bill;
             }else{
-                 $pendings=$last_remaining_amount;
+              $pendings=$last_remaining_amount;
             }
         }else{
-            $pendings=$total_payable-$received_amount;
+           
+           $pendings=$total_payable-$received_amount;
         }
-        // echo $pendings;
         return $pendings;
     }
     public function calculate_adjustment_taxes($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){

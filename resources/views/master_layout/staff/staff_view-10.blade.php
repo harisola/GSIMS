@@ -6755,6 +6755,7 @@
                    $('.profile-usertitle-email').prop("href", 'mailto:'+data['info'][0]['email']+'@generations.edu.pk');
                $('.profile-usertitle-campus').html(data['info'][0]['campus']);
                $('.currentLeave').text(data['current_leave'][0]['currentLeave']);
+               debugger;
                $('.profile-usertitle-mobilePhone').html(data['info'][0]['mobile_phone']);
                $('.profile-usertitle-bottomline').html(data['info'][0]['c_bottomline']+':<br>'+data['info'][0]['c_topline']+'</br>');
                $('.tap_in_campus').text(data['info'][0]['campus']);

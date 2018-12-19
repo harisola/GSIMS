@@ -115,7 +115,8 @@
                         		<label>Installment Number</label>
                         		<select class="form-control" id="installment_number">
 <!--                                         <option value="1">1</option>
- -->                                        <option value="2">2</option>
+ -->                                        
+ <!-- <option value="2">2</option> -->
                                         <option value="3">3</option>
                                         <option value="4">4</option>
                                         <option value="5">5</option>
@@ -147,7 +148,7 @@
                           </div>
                         	<div class="col-md-3">
                         		<label>GT-ID</label>
-                        		<input type="text" class="form-control">
+                        		<input type="text" class="form-control" id="txt_gt_id">
                         	</div>
                         	<div class="col-md-3">
                         		<label>&nbsp;</label><br />
@@ -183,6 +184,22 @@
 <script type="text/javascript">
 
  $(document).ready(function() {
+//masking function
+
+// if ($('#txt_gs_id').length) {
+//   $('#txt_gs_id').mask('99-9999', {
+//     placeholder: 'X'
+//   });
+// }
+        //Mask for GS-ID.
+        $("#txt_gs_id").inputmask("mask", {
+            "mask": "99-999"
+          });
+
+        //Mask for GT-ID.
+        $("#txt_gt_id").inputmask("mask", {
+            "mask": "99-999"
+          });
      $('#gradeFilter').multiselect({
          enableFiltering: true,
          filterBehavior: 'value',

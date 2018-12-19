@@ -27,7 +27,7 @@ class billing_cycle_definition extends Model
         $data=billing_cycle_definition::select('bill_cycle_no','adjustment_freeze_date')
         ->orderBy('id','desc')->first();
         if($data['adjustment_freeze_date']>date('Y-m-d')){
-            $installment_number=$data['bill_cycle_no']+1;
+            $installment_number=$data['bill_cycle_no'];
         }else{
             $installment_number=$data['bill_cycle_no'];
         }

@@ -123,7 +123,7 @@ class fee_bill extends Model
 
 
     public function getLastBillByStudentId($student_id){
-    	$details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill')->Orderby('id','desc')->first();
+    	$details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','roll_over_charges')->Orderby('id','desc')->first();
     	return $details;
     }
 

@@ -862,6 +862,8 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				on sr.id = ro.staff_id
 			left join atif_role_org.role_category as rc
 				on rc.id = ro.staff_role_category_id
+
+				
 				
 
 			where ro.pm_report_to = $RoleID and ro.record_deleted=0
@@ -1734,7 +1736,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     public function get_StaffReporteeInfo_UTeam($RoleID, $ReportingType=null, $NameCode=null)
     {
 		
-		$query="select
+		/*$query="select
 	    sr.role_id_solangi as Role_id_So, sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.abridged_name, sr.nic, sr.gender, tl.title as staff_title,
 	    sr.dob, sr.doj, SUBSTRING(sr.gg_id, 1, LOCATE('@',sr.gg_id)-1) as email, IF(sr.branch_id=1, 'North', 'South') as campus,
 	    sr.mobile_phone, sr.staff_category, sr.c_topline, sr.c_bottomline, st.code as status_code, st.name as status_name, MID(st.code, 3, 1) as status_name_code, ttp.name as tt_profile_name, CONCAT(st.code, ': ', st.name) as status_description, sr.report_ok,
@@ -1830,7 +1832,7 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 			left join atif_role_org.role_category as rc
 				on rc.id = ro.staff_role_category_id
 				
-			where ro.pm_report_to = $RoleID) as sr
+			where ro.pm_report_to = $RoleID  ) as sr
 	    left join atif._title_person as tl
 	    	on tl.id = sr.title_person_id
 	    left join atif._staffstatus as st
@@ -1850,7 +1852,116 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 		left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and wts.date = curdate() ) 	
 	    where sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0
 	    group by sr.id
-	    order by sr.abridged_name";
+	    order by sr.abridged_name";*/
+
+	    $query = "SELECT
+ ro.id as Role_id_So,
+  sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.abridged_name, sr.nic, sr.gender, tl.title as staff_title,
+	    sr.dob, sr.doj, SUBSTRING(sr.gg_id, 1, LOCATE('@',sr.gg_id)-1) as email, IF(sr.branch_id=1, 'North', 'South') as campus,
+	    sr.mobile_phone, sr.staff_category, sr.c_topline, sr.c_bottomline, st.code as status_code, st.name as status_name, MID(st.code, 3, 1) as status_name_code, ttp.name as tt_profile_name, CONCAT(st.code, ': ', st.name) as status_description, 
+		 
+		 IF(ro.is_transparent =2, 'TRP', 'OPQ') as report_ok,
+		 
+
+	    
+
+	    
+
+	   if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'Waiting',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'Absent',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'On Time',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'Late',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'In Buffer', 'No profile assigned'  ))))) as atd_title,
+
+
+	    if(atd.time is null, 'awaited', concat('at ', TIME_FORMAT(atd.time, '%h:%i %p'))) as atd_content,
+
+	    
+
+
+
+	     if(WEEKDAY(date(curdate())) = 5  and tt.sat_working=1,
+	    if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'WaitingIcon.png',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'AbsentIcon.png',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'OnTimeicon.png',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'LateIcon.png',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBufferIcon.png', 'WaitingIcon.png'  )))))
+		  
+	    ,
+
+	    if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'WaitingIcon.png',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'AbsentIcon.png',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'OnTimeicon.png',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'LateIcon.png',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBufferIcon.png', 'WaitingIcon.png'  )))))) as atd_icon,
+		  
+
+if(WEEKDAY(date(curdate())) = 5  and tt.sat_working=1,
+
+if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'Waiting',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'Absent',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'On_Time',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'Late',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBuffer', ''  ))))),
+
+
+if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'Waiting',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'Absent',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'On_Time',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'Late',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBuffer', ''  )))))) as Time_Checked
+
+
+
+FROM atif_role_org.role_position AS ro
+LEFT JOIN atif.staff_registered AS sr ON sr.id = ro.staff_id
+LEFT JOIN atif_role_org.role_category AS rc ON rc.id = ro.staff_role_category_id
+LEFT JOIN atif._title_person AS tl ON tl.id = sr.title_person_id
+LEFT JOIN atif._staffstatus AS st ON st.id = sr.staff_status
+LEFT JOIN 
+		 	(
+SELECT atd.staff_id, MIN(atd.time) AS TIME
+FROM atif_attendance_staff.staff_attendance_in AS atd
+WHERE atd.date = CURDATE() AND (atd.location_id = 3 OR atd.location_id = 4 OR atd.location_id=18)
+GROUP BY atd.staff_id
+			) AS atd ON atd.staff_id = sr.id
+LEFT JOIN atif_gs_events.tt_profile_time_staff AS tt ON tt.staff_id = sr.id
+LEFT JOIN atif_gs_events.tt_profile AS ttp ON ttp.id = tt.profile_id
+LEFT JOIN atif_gs_events.weekly_time_sheet AS wts ON (wts.staff_id = sr.id AND wts.date = CURDATE())
+WHERE (ro.pm_report_to=".$RoleID.")  
+#and sr.is_active = 1 and sr.is_posted = 1 
+and ro.record_deleted=0
+";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -1956,12 +2067,12 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 
 			from atif_role_org.role_position as ro
 			left join atif.staff_registered as sr
-				on sr.id = ro.staff_id
+				on sr.id = ro.staff_id 
 			left join atif_role_org.role_category as rc
 				on rc.id = ro.staff_role_category_id
 				
 
-			where ro.sc_report_to = $RoleID) as sr
+			where ro.sc_report_to = $RoleID  ) as sr
 	    left join atif._title_person as tl
 	    	on tl.id = sr.title_person_id
 	    left join atif._staffstatus as st
@@ -1981,7 +2092,7 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 
 		left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and wts.date = curdate() ) 
 		 	
-	    where sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0
+	    where sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0 
 	    group by sr.id
 	    order by sr.abridged_name";
 

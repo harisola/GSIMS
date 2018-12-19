@@ -127,7 +127,7 @@ txt_allocation_d.closest(".KashifSolangi").removeClass( "has-error" );
 
 
 
-if( applicant_next_status== 10 || applicant_next_status == 12 )
+if( applicant_next_status== 10 || applicant_next_status == 12 || applicant_next_status == 14 )
 {
 
 cfpb_txt_date.closest(".KashifSolangi").removeClass( "has-error" );
@@ -301,14 +301,14 @@ var data = JSON.parse(response).data;
 $("#Applicant_id").val( data[0].Form_id  );
 
 $('.tab-pane').each(function(){
-//	$(this).removeClass('active');
+//  $(this).removeClass('active');
 });
 
 $('.tab-pane a[href="#portlet_tab2_1"]').tab('show');
 
 //$('.nav-tabs ul li a').each(function(i){
-	//$('.nav-tabs ul li a').removeClass('active');
-	// $(this).parent().addClass('active');
+    //$('.nav-tabs ul li a').removeClass('active');
+    // $(this).parent().addClass('active');
 //});
 
 var status = [1,2,3,4,5];
@@ -319,21 +319,35 @@ for(var i = 0;i < status.length;i++){
 for(var i = 0;i < data.length;i++){
 
     if(data[i].old_status_id != null){
-		
+        
         var current_status = data[i].current_status_id;
         $('#allocation_staff_'+data[i].old_status_id).val(data[i].applicant_allocate);
         $('#allocation_grade_'+data[i].old_status_id).val(data[i].career_grade_id);
-		$('#applicant_comment_'+data[i].old_status_id).val(data[i].comments_applicant);
+        $('#applicant_comment_'+data[i].old_status_id).val(data[i].comments_applicant);
         $('#applicant_status_comment_'+data[i].old_status_id).val(data[i].comments_next_decision);
         if(data[i].date == '1970-01-01'){
             data[i].date = "{{date('Y-m-d')}}"
         }                            
-        $('#applicant_next_step_allocation_date_'+data[i].old_status_id).val(data[i].date);
-        $('#applicant_next_step_allocation_time_'+data[i].old_status_id).val(data[i].time);
-		
-		
-		
-		
+        //$('#applicant_next_step_allocation_date_'+data[i].old_status_id).val(data[i].date);
+       // $('#applicant_next_step_allocation_time_'+data[i].old_status_id).val(data[i].time);
+        
+        if((data[i].old_status_id==data[i].current_status_id) && (data[i].current_status_id == 14))
+        {
+            
+            data[i].date='';
+            data[i].time='';
+            $('#applicant_next_step_allocation_date_'+data[i-1].old_status_id).val(data[i].date);
+            $('#applicant_next_step_allocation_time_'+data[i-1].old_status_id).val(data[i].time);
+            
+        }else
+        {
+            //console.log(data[i].old_status_id + ' '+ data[i].date)
+            $('#applicant_next_step_allocation_date_'+data[i].old_status_id).val(data[i].date);
+            $('#applicant_next_step_allocation_time_'+data[i].old_status_id).val(data[i].time);
+            
+        }
+        
+        
         
         $('#applicant_next_step_allocated_campus_'+data[i].old_status_id).val(data[i].campus);
         $('#applicant_next_step_allocated_comment_'+data[i].old_status_id).val(data[i].comments_next_step_aloc);

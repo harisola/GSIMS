@@ -200,6 +200,28 @@ var removeMark = function removeMark() {
 
 });
 
+$('.classSahar').click(function() 
+	{
+var Form_id = $(this).attr("data-id");
+
+$.ajax({
+			type:'POST',
+			data:{ '_token': '{{ csrf_token() }}', "Form_id":Form_id },
+			url:"{{url('/loadLogs')}}",
+			dataType: "json",
+			success: function(response)
+			{
+				$("#Followup_Logs_container").html('');
+				$("#Followup_Logs_container").html(response.html);
+			}
+		});
+
+		setTimeout(function(){
+			App.stopPageLoading();
+		}, 5000);
+
+
+	});
 function ReloadTableData()
 {
 	

@@ -39,7 +39,7 @@
 <div class="row marginTop20">
     <div class="col-md-3 borderRightDashed">
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered fixed-height marginBottom0 padding0 fixed-height-NoScroll">
+        <div class="portlet light bordered marginBottom0 padding0" id="add_height_con">
             
             <div class="portlet-title">
                 <div class="caption">
@@ -56,11 +56,13 @@
                 <div class="inputs">
                     <div class="portlet-input">
                         <div class="input-icon right">
+                            <!-- zk -->
                             <a class="icon-magnifier" id="btn_search" href="javascript:void(0)"></a>
                             <input id="Search_Student" type="text" class="form-control form-control-solid" placeholder="GS-ID"> </div>
+                            <hr>
                     </div>
-                </div><!-- inputs -->
 
+                </div><!-- inputs -->
             <div id="Concession_Form_info">
                 <!-- form will be here -->
             </div>
@@ -219,6 +221,16 @@ echo ($cf->Installment_4);
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script type="text/javascript">
 
+            //zk Enter Event Start here...
+    var input = document.getElementById("Search_Student");
+        input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("btn_search").click();
+                $('#Student_info_div_m').show();
+            }
+    });
+        //Enter Event End here...
 
         var FormInputMask = function () {
     
@@ -259,9 +271,6 @@ setTimeout(function(){ $('#sample_1_kashif').DataTable(); }, 2000);
 
 $(document).on("click", "#btn_search", function(){
     var Gs_id = $("#Search_Student").val();
-
-    
-
     if( Gs_id != '' ){
     //$("#hidden_value_1").val(Gs_id);
     App.startPageLoading(); 
@@ -276,6 +285,7 @@ $(document).on("click", "#btn_search", function(){
        {
         $("#Concession_Form_info").html('');
         $("#Concession_Form_info").html(response.html);
+        $("#add_height_con").addClass('fixed-height-NoScroll');
         setTimeout(function(){ App.stopPageLoading(); }, 2000);
 
        }
@@ -369,6 +379,7 @@ App.startPageLoading();
        {
         $("#Concession_Form_info").html('');
         $("#Concession_Form_info").html(response.html);
+        $("#add_height_con").addClass('fixed-height-NoScroll');
         setTimeout(function(){ App.stopPageLoading(); }, 1000);
        }
     });

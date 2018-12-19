@@ -23,7 +23,7 @@ class Staff_role_position_distance extends StaffReportController
 		
 		$staffInfo = new StaffInformationModel();
 		
-		$Sql_query = "select p.id as Role_id, if( (right(p.roleCode,1)='A' or right(p.roleCode,1)='I'), 'Primary','Secondary') as SRole_Type from atif_role_org.role_position as p where p.staff_id=".$Staff_id."  order by p.roleCode ";
+		$Sql_query = "select p.id as Role_id, if( (right(p.roleCode,1)='A' or right(p.roleCode,1)='I'), 'Primary','Secondary') as SRole_Type from atif_role_org.role_position as p where p.staff_id=".$Staff_id." and p.record_deleted=0  order by p.roleCode ";
 		$Staff_role = $staffInfo->GetKashif($Sql_query);
 		
 		$StaffRole = count($Staff_role);
@@ -621,8 +621,8 @@ class Staff_role_position_distance extends StaffReportController
 		
 		if( sizeof( $Double_Role_Array_id ) > 1 ){
 			
-			$DRole_id_one= $Double_Role_Array_id[1]; 
-			$DRole_id_Two= $Double_Role_Array_id[2];
+			$DRole_id_one= $Double_Role_Array_id[0]; 
+			$DRole_id_Two= $Double_Role_Array_id[1];
 			
 			
 			$DRoleIdOne = $staffInfo->Get_Current_Staff_Role($DRole_id_one);

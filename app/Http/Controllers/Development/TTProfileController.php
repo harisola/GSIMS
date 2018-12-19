@@ -115,6 +115,12 @@ class TTProfileController extends Controller
             unset($data['form_type']);
 
             $staff = $staffInfo->updateCustomProfileTimeStaff($data, $staff_id);
+
+            // Update Weekly Time Sheet
+            $from_date = date("Y-m-d");
+            $to_date = date("Y-m-d",strtotime('+360 days'));
+            $update_weeklySheet =  $staffInfo->updateWeeklyTimeSheetByStaff($staff_id, $from_date,$to_date);
+            
             return  $data;
         }
     }
@@ -182,6 +188,8 @@ class TTProfileController extends Controller
 
     public function insertTtProfile(Request $request){
 
+
+        
         $profile_name = $request->input('profile_name');
         $profile_type_id = $request->input('profile_type_id');
 
@@ -209,13 +217,14 @@ class TTProfileController extends Controller
     ***********************************************************************/
     public function insertStandardProfile(Request $request){
 
-        // var_dump($request);
-        // exit;
         $profile_id =   $request->input('profile_id');
         $morning_time = $request->input('morning_time');
         $afternoon_time = $request->input('afternoon_time');
-        $wed_time = $request->input('wed_time');
-        $fri_time = $request->input('fri_time');
+        $mon_time_out = $request->input('mon_time_out');
+        $tues_time_out = $request->input('tues_time_out');
+        $wed_time_out = $request->input('wed_time');
+        $thurs_time_out = $request->input('thurs_time_out');
+        $fri_time_out = $request->input('fri_time');
         $ext_time = $request->input('ext_time');
         $ext_frequency = $request->input('ext_frequency');
         $july_start = $request->input('july_start');
@@ -237,25 +246,65 @@ class TTProfileController extends Controller
         }
 
         // IS on Flag Morning And Afternoon
-        if($morning_time != '' && $afternoon_time != ''){
-            $is_on_mon = 1;
-            $is_on_tue = 1;
-            $is_on_wed = 1;
-            $is_on_thu = 1;
-            $is_on_fri = 1;
-            //$is_on_sat = 1;
-            $is_on_sun = 0;
+        
+        $is_on_mon = $this->get_on_off_flag($morning_time,$mon_time_out);
+        $is_on_tue = $this->get_on_off_flag($morning_time,$tues_time_out);
+        $is_on_wed = $this->get_on_off_flag($morning_time,$wed_time_out);
+        $is_on_thu = $this->get_on_off_flag($morning_time,$thurs_time_out);
+        $is_on_fri = $this->get_on_off_flag($morning_time,$fri_time_out);
+        $is_on_sun = 0;
+   
+
+        // Set date in week day
+
+        if($is_on_mon == 1){
+            $mon_in = $morning_time;
+            $mon_out = $mon_time_out;
         }else{
-
-            $is_on_mon = 0;
-            $is_on_tue = 0;
-            $is_on_wed = 0;
-            $is_on_thu = 0;
-            $is_on_fri = 0;
-            //$is_on_sat = 0;
-            $is_on_sun = 0;
-
+            $mon_in = '00:00:00';
+            $mon_out = '00:00:00';
         }
+
+        if($is_on_tue == 1){
+            $tue_in = $morning_time;
+            $tue_out = $tues_time_out;
+        }else{
+            $tue_in = '00:00:00';
+            $tue_out = '00:00:00';
+        }
+
+        if($is_on_wed == 1){
+            $wed_in = $morning_time;
+            $wed_out = $wed_time_out;
+        }else{
+            $wed_in= '00:00:00';
+            $wed_out = '00:00:00';
+        }
+
+        if($is_on_thu == 1){
+            $thur_in = $morning_time;
+            $thur_out = $thurs_time_out;
+        }else{
+            $thur_in= '00:00:00';
+            $thur_out = '00:00:00';
+        }
+
+        if($is_on_fri == 1){
+            $fri_in = $morning_time;
+            $fri_out = $fri_time_out;
+        }else{
+            $fri_in= '00:00:00';
+            $fri_out = '00:00:00';
+        }
+
+        if($is_on_sun == 1){
+            $sun_in= '00:00:00';
+            $sun_out = '00:00:00';
+        }else{
+            $sun_in= '00:00:00';
+            $sun_out = '00:00:00';
+        }
+
 
         // Is On Flag on EXT Time
 
@@ -347,7 +396,6 @@ class TTProfileController extends Controller
             $monthly_relax_out =  $monthly_relax_out;
         }
         
-
         $data = array(
             'profile_id' => $profile_id,
             'is_on_mon' => $is_on_mon,
@@ -359,18 +407,18 @@ class TTProfileController extends Controller
             'is_on_sun' => $is_on_sun,
             'is_on_flexy' => $is_on_flexy,
             //'is_on_relaxation' => $is_on_relaxation,
-            'mon_in' => $morning_time,
-            'tue_in' => $morning_time,
-            'wed_in' => $morning_time,
-            'thu_in' => $morning_time,
-            'fri_in' => $morning_time,
+            'mon_in' => $mon_in,
+            'tue_in' => $tue_in,
+            'wed_in' => $wed_in,
+            'thu_in' => $thur_in,
+            'fri_in' => $fri_in,
             'sat_in' => $sat_in,
-            'sun_in' => $morning_time,
-            'mon_out' => $afternoon_time,
-            'tue_out' => $afternoon_time,
-            'wed_out' => $afternoon_time,
-            'thu_out' => $afternoon_time,
-            'fri_out' => $afternoon_time,
+            'sun_in' => $sun_in,
+            'mon_out' => $mon_out,
+            'tue_out' => $tue_out,
+            'wed_out' => $wed_out,
+            'thu_out' => $thur_out,
+            'fri_out' => $fri_out,
             'sat_out' => $total_sat_hour,
             'sun_out' => '00:00:00',
             'avg_week_hrs' => $avg_hrs,
@@ -387,6 +435,7 @@ class TTProfileController extends Controller
             'monthly_relax_in' => $monthly_relax_in,
             'daily_relax_out' => $daily_relax_out,
             'monthly_relax_out' => $monthly_relax_out,
+            'standard_out' => $afternoon_time,
             'created' => time(),
             'created_by' => Sentinel::getUser()->id,
             'modified' => time(),
@@ -394,37 +443,10 @@ class TTProfileController extends Controller
         );
 
         $last_id =  DB::table('atif_gs_events.tt_profile_time')->insertGetId($data);
+
+        echo $last_id;
         
-         // Update WED TIME 
-        if($wed_time != ''){
 
-            $where = array(
-                'id' => $last_id
-            );
-
-            $update_data = array(
-                'wed_out' => $wed_time
-            );
-
-
-            $affected_row = DB::table('atif_gs_events.tt_profile_time')->where($where)->update($update_data);
-            echo $affected_row;
-        }
-
-        if($fri_time != ''){
-
-            $where = array(
-                'id' => $last_id
-            );
-
-            $update_data = array(
-                'fri_out' => $fri_time
-            );
-
-
-            $affected_row = DB::table('atif_gs_events.tt_profile_time')->where($where)->update($update_data);
-            echo $affected_row;
-        }
     }
 
     /**********************************************************************
@@ -437,6 +459,8 @@ class TTProfileController extends Controller
 
     function insertCustomProfile(Request $request){
 
+        var_dump($request->input());
+        exit;
         $profile_id =   $request->input('profile_id');
         $morning_time = $request->input('morning_time');
         $afternoon_time = $request->input('afternoon_time');
@@ -852,8 +876,11 @@ class TTProfileController extends Controller
         $profile_id = $request->input('profile_id');
         $morning_time = $request->input('morning_time');
         $afternoon_time = $request->input('afternoon_time');
-        $wed_time = $request->input('wed_time');
-        $fri_time = $request->input('fri_time');
+        $mon_time_out = $request->input('mon_time_out');
+        $tue_time_out = $request->input('tue_time_out');
+        $wed_time_out = $request->input('wed_time_out');
+        $thus_time_out = $request->input('thus_time_out');
+        $fri_time_out = $request->input('fri_time_out');
         $ext_time = $request->input('ext_time');
         $ext_frequency = $request->input('ext_frequency');
         $july_start = $request->input('july_start');
@@ -873,24 +900,85 @@ class TTProfileController extends Controller
             'profile_id' => $profile_id
         );
 
-        if($morning_time != '' && $afternoon_time != ''){
-            $is_on_mon = 1;
-            $is_on_tue = 1;
-            $is_on_wed = 1;
-            $is_on_thu = 1;
-            $is_on_fri = 1;
-            //$is_on_sat = 1;
-            $is_on_sun = 0;
+        // if($morning_time != '' && $afternoon_time != ''){
+        //     $is_on_mon = 1;
+        //     $is_on_tue = 1;
+        //     $is_on_wed = 1;
+        //     $is_on_thu = 1;
+        //     $is_on_fri = 1;
+        //     //$is_on_sat = 1;
+        //     $is_on_sun = 0;
+        // }else{
+
+        //     $is_on_mon = 0;
+        //     $is_on_tue = 0;
+        //     $is_on_wed = 0;
+        //     $is_on_thu = 0;
+        //     $is_on_fri = 0;
+        //     //$is_on_sat = 0;
+        //     $is_on_sun = 0;
+
+        // }
+
+
+        // IS on Flag Morning And Afternoon
+        
+        $is_on_mon = $this->get_on_off_flag($morning_time,$mon_time_out);
+        $is_on_tue = $this->get_on_off_flag($morning_time,$tue_time_out);
+        $is_on_wed = $this->get_on_off_flag($morning_time,$wed_time_out);
+        $is_on_thu = $this->get_on_off_flag($morning_time,$thus_time_out);
+        $is_on_fri = $this->get_on_off_flag($morning_time,$fri_time_out);
+        $is_on_sun = 0;
+   
+
+        // Set date in week day
+
+        if($is_on_mon == 1){
+            $mon_in = $morning_time;
+            $mon_out = $mon_time_out;
         }else{
+            $mon_in = '00:00:00';
+            $mon_out = '00:00:00';
+        }
 
-            $is_on_mon = 0;
-            $is_on_tue = 0;
-            $is_on_wed = 0;
-            $is_on_thu = 0;
-            $is_on_fri = 0;
-            //$is_on_sat = 0;
-            $is_on_sun = 0;
+        if($is_on_tue == 1){
+            $tue_in = $morning_time;
+            $tue_out = $tue_time_out;
+        }else{
+            $tue_in = '00:00:00';
+            $tue_out = '00:00:00';
+        }
 
+        if($is_on_wed == 1){
+            $wed_in = $morning_time;
+            $wed_out = $wed_time_out;
+        }else{
+            $wed_in= '00:00:00';
+            $wed_out = '00:00:00';
+        }
+
+        if($is_on_thu == 1){
+            $thur_in = $morning_time;
+            $thur_out = $thus_time_out;
+        }else{
+            $thur_in= '00:00:00';
+            $thur_out = '00:00:00';
+        }
+
+        if($is_on_fri == 1){
+            $fri_in = $morning_time;
+            $fri_out = $fri_time_out;
+        }else{
+            $fri_in= '00:00:00';
+            $fri_out = '00:00:00';
+        }
+
+        if($is_on_sun == 1){
+            $sun_in= '00:00:00';
+            $sun_out = '00:00:00';
+        }else{
+            $sun_in= '00:00:00';
+            $sun_out = '00:00:00';
         }
 
         if($july_start == ''){
@@ -996,7 +1084,6 @@ class TTProfileController extends Controller
             'is_on_sat' => $is_on_sat,
             'is_on_sun' => $is_on_sun,
             'is_on_flexy' => $is_on_flexy,
-            //'is_on_relaxation' => $is_on_relaxation,
             'mon_in' => $morning_time,
             'tue_in' => $morning_time,
             'wed_in' => $morning_time,
@@ -1004,11 +1091,12 @@ class TTProfileController extends Controller
             'fri_in' => $morning_time,
             'sat_in' => $sat_in,
             'sun_in' => '00:00',
-            'mon_out' => $afternoon_time,
-            'tue_out' => $afternoon_time,
-            'wed_out' => $afternoon_time,
-            'thu_out' => $afternoon_time,
-            'fri_out' => $afternoon_time,
+            'standard_out' => $afternoon_time,
+            'mon_out' => $mon_time_out,
+            'tue_out' => $tue_time_out,
+            'wed_out' => $wed_time_out,
+            'thu_out' => $thus_time_out,
+            'fri_out' => $fri_time_out,
             'sat_out' => $total_sat_hour,
             'sun_out' => '00:00',
             'avg_week_hrs' => $avg_hrs,
@@ -1032,7 +1120,6 @@ class TTProfileController extends Controller
 
         $affected_row = DB::table('atif_gs_events.tt_profile_time')->where($where_timing_update)->update($data_time_update);
         
-
         // UPDATE TT PROFILE TIME STAFF
         $where_ttprofile = array(
             'profile_id' => $profile_id
@@ -1045,55 +1132,7 @@ class TTProfileController extends Controller
         }
 
 
-        // Update WED TIME 
-        if($wed_time != ''){
 
-
-
-            $update_data = array(
-                'wed_out' => $wed_time
-            );
-
-
-            $affected_row = DB::table('atif_gs_events.tt_profile_time')->where($where_timing_update)->update($update_data);
-            echo $affected_row;
-
-            // UPDATE TT PROFILE TIME STAFF
-            $where_ttprofile = array(
-                'profile_id' => $profile_id
-            );
-
-            $ttProfile = DB::table('atif_gs_events.tt_profile_time_staff')->where($where_ttprofile)->get();
-
-            if(count($ttProfile) != 0){
-                $affected_row = DB::table('atif_gs_events.tt_profile_time_staff')->where($where_timing_update)->update($update_data);
-            }
-        }
-
-        //Updated Fri Time
-        if($fri_time != ''){
-
-
-
-            $update_data = array(
-                'fri_out' => $fri_time
-            );
-
-
-            $affected_row = DB::table('atif_gs_events.tt_profile_time')->where($where_timing_update)->update($update_data);
-            echo $affected_row;
-
-            // UPDATE TT PROFILE TIME STAFF
-            $where_ttprofile = array(
-                'profile_id' => $profile_id
-            );
-
-            $ttProfile = DB::table('atif_gs_events.tt_profile_time_staff')->where($where_ttprofile)->get();
-
-            if(count($ttProfile) != 0){
-                $affected_row = DB::table('atif_gs_events.tt_profile_time_staff')->where($where_timing_update)->update($update_data);
-            }
-        }
 
     }
 
@@ -1477,6 +1516,20 @@ class TTProfileController extends Controller
             /********* If Yesterday Date found ***********************/
             $staffInfo->updateDailyRecord($yesterdayDate[0]->yesterdayDate,$staff_id,$leaveBalance,$leaveRemaining);
         }
+
+    }
+
+    public function get_on_off_flag($morning_time,$day_time){
+        
+        // IS on Flag Morning And Afternoon
+        $flag = 0;
+        if($morning_time != '' && $day_time != ''){
+            $flag = 1;
+        }else{
+            $flag = 0;
+        }
+
+        return $flag;
 
     }
 

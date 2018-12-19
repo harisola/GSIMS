@@ -20,7 +20,7 @@ class arrears extends Controller
         $bill_type_model = new bill_type_model();
         
         $get_classlist = $bill_type_model->get_record('atif.class_list','');
-
+         
 
         // load View if exists
         if(View::exists('account_process.accounts.arrear')) {
@@ -31,13 +31,13 @@ class arrears extends Controller
 
     }
 
-    // insert or update function
+    // insert or update function addUpdateArrear this 
     public function insertAndUpdateArrear(Request $request){
         // Model load
         $arrear_adjustment_model = new arrear_adjustment_model();
         $billing_cycle_definition=new billing_cycle_definition;
         $installment_id=$billing_cycle_definition->getCurrentInstallmentNumber();
-
+        
 
         // Ajax POST Request
         $student_id = $request->input('studentId');
@@ -60,7 +60,6 @@ class arrears extends Controller
             'modified' => time(),
             'modified_by' =>  Sentinel::getUser()->id
         );
-
         // Update Flag
         if($request->input('updated_id')){
 

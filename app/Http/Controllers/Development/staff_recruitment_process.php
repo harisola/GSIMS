@@ -16,24 +16,24 @@ class staff_recruitment_process extends Controller{
 
   public function index()
   {
-  	$userId = Sentinel::getUser()->id;
+    $userId = Sentinel::getUser()->id;
     
     $query_resultant = $this->Create_Query();
 
     //var_dump($query_resultant); exit;
 
     return view('master_layout.staff.staff_recruitment.staff_recruitment_process_view')
-    	->with(
-    			array('query_resultant' => $query_resultant)
-    		);
+      ->with(
+          array('query_resultant' => $query_resultant)
+        );
   }
 
   public function Create_Query()
   {
 
-  	$RecM_Obj = new RecM();
+    $RecM_Obj = new RecM();
 
-  	$Query = "
+    $Query = "
 
 
 
@@ -46,7 +46,9 @@ union
 select 
 2 as Query_num,
 count( cf.id ) as Total_form
-from atif_career.career_form as cf where cf.form_source=1 and cf.register_by=0 and cf.status_id < 2
+from atif_career.career_form as cf 
+left join atif_career.log_career_form as l on l.form_id=cf.id
+where cf.form_source=1 and l.id is null
 
 union
 select 
@@ -59,15 +61,10 @@ select
 4 as Query_num,
 count( cf.id ) as Total_form
 from atif_career.career_form as cf 
-left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id= cf.status_id
+left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id=cf.status_id
 where cf.status_id=11 and cf.stage_id=10 and ( u.date is null or u.date >= curdate() )
 
-/*union
-select 
-4.1 as Query_num,
-count( l.form_id ) as Total_form
-from atif_career.log_career_form as l where l.status_id=11 and l.stage_id=10*/
-
+# Moved to call for part b presence followup
 union
 select 
 4.1 as Query_num,
@@ -77,7 +74,8 @@ select
 4.1 as Query_num,
 count( l.form_id ) as Total_form
 from atif_career.log_career_form as l where l.status_id=11 
-and (l.stage_id=5 or l.stage_id=6 or l.stage_id=13 or l.stage_id=12)
+and (l.stage_id=5 or l.stage_id=6 or l.stage_id=13 )
+
 union
 select 
 4.2 as Query_num,
@@ -87,7 +85,7 @@ left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id= 
 where cf.status_id=11 and cf.stage_id=10 and ( u.date is null or u.date < curdate() )
 ) as d
 
-
+# Call for part b presence currently in followup
 union
 select 
 4.2 as Query_num,
@@ -96,6 +94,7 @@ from atif_career.career_form as cf
 left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id= cf.status_id
 where cf.status_id=11 and cf.stage_id=10 and ( u.date is null or u.date < curdate() )
 
+# Call for part b presence currently in followup 7 day passed
 union
 select 
 4.3 as Query_num,
@@ -103,14 +102,14 @@ count( cf.id ) as Total_form
 from atif_career.career_form as cf 
 left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id= cf.status_id
 where cf.status_id=11 and cf.stage_id=10 and ( u.date is null or u.date < curdate() )
-and from_unixtime(cf.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 3 day )
+and from_unixtime(cf.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 7 day )
 
 
-union
-select 
-4.4 as Query_num,
-(count(l.form_id) - count(distinct(l.form_id))) as Total_form
-from atif_career.log_career_form as l  where l.status_id=11 and l.stage_id=11
+union 
+select  
+4.4 as Query_num, 
+(count(l.form_id) - count(distinct(l.form_id))) as Total_form 
+from atif_career.log_career_form as l  where l.status_id=11 and l.stage_id=11 
 
 union
 select 
@@ -130,28 +129,30 @@ union
 select 
 6 as Query_num,
 count( cf.id ) as Total_form
-from atif_career.career_form as cf where cf.form_source=0 and cf.status_id=1 and cf.stage_id=1
+from atif_career.career_form as cf 
+left join atif_career.log_career_form as l on l.form_id=cf.id
+where cf.form_source=0 
+and l.id is not null
 
 
 
 union
 select 7 as Query_num,
-count( d.id ) as Total_form
+sum( d.id ) as Total_form
 from( 
-select
-cf.id 
-from  atif_career.career_form as cf
-left join  atif_career.log_career_form as l  on cf.id = l.form_id
-where cf.form_source=1 and ( l.status_id=11  ) and (l.stage_id=4  )
+select count(l.id) as id  from atif_career.log_career_form as l 
+where l.status_id=11 and l.stage_id =4
+union
+select count(l.id) as id  from atif_career.career_form as l 
+where l.status_id=11 and l.stage_id =4
 
-group by l.form_id
 ) as d
 
 union
 select 
 8 as Query_num,
-count( cf.form_id ) as Total_form
-from atif_career.career_form_data  as cf  where  cf.status_id=1 
+count( l.form_id ) as Total_form
+from atif_career.log_career_form as l where l.status_id=1 and l.register_by > 0
 
 
 
@@ -167,7 +168,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id  )
  ) as dd
 on dd.form_id = cf.id
-where cf.status_id=12 and dd.status_id=1
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
 
 
 union
@@ -182,7 +183,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id  )
  ) as dd
 on dd.form_id = cf.id
-where cf.status_id=12 and dd.status_id=2
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
 
 UNION
 select 
@@ -194,12 +195,24 @@ where cf.status_id=2
  and cf.stage_id=8
 And ( u.date is null or u.date >= curdate() )
 
+
+
 union
-select 
+/*select 
 12 as Query_num,
 count( l.form_id ) as Total_form
-from atif_career.LOG_career_form as l where l.status_id=2 and l.stage_id=4
-
+from atif_career.LOG_career_form as l where l.status_id=2 and l.stage_id=4*/
+select 
+12 as Query_num,
+count( f.form_id ) as Total_form
+from (
+select  count(l.form_id) as form_id from atif_career.log_career_form as l 
+where l.status_id > 1 
+and l.status_id != 10 
+and l.status_id != 11 
+and l.status_id != 12 
+and l.stage_id != 8
+group by l.form_id ) as f
 
 
 union
@@ -210,7 +223,7 @@ select
 count( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
-and (cf.stage_id=5 or cf.stage_id=6 or cf.stage_id=12 or cf.stage_id=13)  
+and (cf.stage_id=5 or cf.stage_id=6 or cf.stage_id=13)  
 union
 select
 count( cf.id ) as Total_form
@@ -218,7 +231,6 @@ from atif_Career.career_form as cf
 left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
 where cf.status_id=2 and ( u.date is null or u.date < curdate() )
 ) as dd
-
 
 
 union
@@ -229,7 +241,7 @@ select
 count( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
-and (cf.stage_id=12)  
+and (cf.status_id=12 or cf.status_id=10 )  
 union
 select
 count( cf.id ) as Total_form
@@ -247,14 +259,14 @@ select
 count( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
-and (cf.stage_id=12)  
+and (cf.status_id=12 or cf.status_id=10 ) 
 union
 select
 count( cf.id ) as Total_form
 from atif_Career.career_form as cf 
 left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
 where cf.status_id=2 and ( u.date is null or u.date < curdate() )
-and from_unixtime(cf.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 3 day )
+and from_unixtime(cf.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 7 day )
 ) as dd
 
 union 
@@ -295,14 +307,43 @@ and ( u.date is null or u.date >= curdate() )
 
 
 UNION
-select 
+/*select 
 20 as Query_num,
 count( cf.id ) as Total_form
 from atif_career.career_form as cf 
 left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id=2
 where cf.status_id=3
  and cf.stage_id=8
-And ( u.date is null or u.date >= curdate() )
+And ( u.date is null or u.date >= curdate() )*/
+
+select 
+20 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=3 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  >=  curdate() ) as ff
+
 
 
 /* Form Interview Presence */
@@ -345,9 +386,8 @@ where f_data.p_date >= curdate()
 /* Form Interview, wait for next step */
 union
 select 
-
 23 as Query_num, 
-sum(ff.Total_form)
+sum(ff.Total_form) as Total_form
 
 from(
 
@@ -357,7 +397,7 @@ curdate() as p_date,
 count( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=3 
-and (cf.stage_id=5 or cf.stage_id=6 or cf.stage_id=12 or cf.stage_id=13)  
+and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)  
 
 union
 select 
@@ -383,9 +423,539 @@ case when d.date = '1970-01-01' then
 else d.date
 end
 )  < curdate()
+) as ff
 
 
-) as ff";
+
+
+
+union
+select 
+24 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=3 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() ) as ff
+
+
+
+
+union
+select 
+25 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=3 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() and from_unixtime(f.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 7 day ) ) as ff
+
+
+union
+select 
+26 as Query_num,
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=3 and l.stage_id=6
+
+
+
+
+union
+select 
+27 as Query_num,
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=2 and l.stage_id=6
+
+
+union
+select 
+28 as Query_num,
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=3 and l.stage_id=13
+
+
+union
+select 
+29 as Query_num,
+count( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+
+
+union
+select 
+30 as Query_num,
+count( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+
+
+# Start Formal Obervation
+
+
+UNION
+select 
+31 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=4 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  >=  curdate() ) as ff
+
+
+
+/* Form Interview Presence */
+union 
+select 
+32 as Query_num, 
+count( cf.id ) as Total_form 
+from atif_Career.log_career_form as cf 
+where cf.status_id=4
+and (cf.stage_id=4)  
+
+
+/* Form Interview, wait for next step */
+union
+select 
+33 as Query_num, 
+count( f_data.p_date ) as Total_form 
+from (
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=4
+) as f_data
+where f_data.p_date >= curdate()
+
+
+
+/* Form Interview, wait for next step */
+union
+select 
+34 as Query_num, 
+sum(ff.Total_form) as Total_form
+
+from(
+select 
+curdate() as p_date,
+count( cf.id ) as Total_form
+from atif_Career.log_career_form as cf 
+where cf.status_id=4 
+and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)  
+
+union
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=4 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  < curdate()
+) as ff
+
+
+union
+select 
+35 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=4 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() ) as ff
+
+
+
+
+union
+select 
+36 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=4 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() and from_unixtime(f.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 7 day ) ) as ff
+
+
+union
+select 
+37 as Query_num,
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=4 and l.stage_id=6
+
+
+
+union
+select 
+38 as Query_num,
+count( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where f.status_id=12 and d.status_id=4
+
+
+union
+select 
+39 as Query_num,
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=4 and l.stage_id=13
+
+# End Obervation
+
+
+
+
+# Final Consultation
+
+
+
+UNION
+select 
+40 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=5 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  >=  curdate() ) as ff
+
+
+
+/* Form Interview Presence */
+union 
+select 
+41 as Query_num, 
+count( cf.id ) as Total_form 
+from atif_Career.log_career_form as cf 
+where cf.status_id=5
+and (cf.stage_id=4)  
+
+
+/*  wait for next step */
+union
+select 
+42 as Query_num, 
+count( f_data.p_date ) as Total_form 
+from (
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=5
+) as f_data
+where f_data.p_date >= curdate()
+
+
+
+/* Form Interview, wait for next step */
+union
+select 
+43 as Query_num, 
+sum(ff.Total_form) as Total_form
+
+from(
+select 
+curdate() as p_date,
+count( cf.id ) as Total_form
+from atif_Career.log_career_form as cf 
+where cf.status_id=5 
+and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)  
+
+union
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=5 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  < curdate()
+) as ff
+
+
+union
+select 
+44 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=5 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() ) as ff
+
+
+
+
+union
+select 
+45 as Query_num, 
+sum(ff.Total_form) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+count( d.date ) as Total_form
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=5 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() and from_unixtime(f.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 7 day ) ) as ff
+
+
+union
+select 
+46 as Query_num,
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=5 and l.stage_id=6
+
+
+
+union
+select 
+47 as Query_num,
+count( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5
+
+
+union
+select 
+48 as Query_num,
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=5 and l.stage_id=13
+
+
+# End Final Consultation
+
+";
 
 
 

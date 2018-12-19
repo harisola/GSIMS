@@ -31,18 +31,7 @@
                   <i style="color:#888 !important;" class="icon-user font-dark"></i>
                   <span class="caption-subject font-dark bold uppercase "><span class="applicant_name_write" style="color: #888;"></span> <!-- - <span class="small">Awaiting to be Followed up</span> -->
               </div>
-              <ul class="nav nav-tabs">
-                  <li class="active">
-                      <a href="#portlet_tab2_1" data-toggle="tab" aria-expanded="true"> Recruitment Process </a>
-                  </li>
-                  <li class="">
-                      <a href="#portlet_tab2_2" data-toggle="tab" aria-expanded="false" id="portlet_tab2_21"> Logs </a>
-                  </li>
-                  <li class="">
-                      <a href="#portlet_tab2_3" data-toggle="tab" aria-expanded="false"> Applicant Details </a>
-                  </li>
-                  
-              </ul>
+       
           </div>
           <style>
 li.statement {
@@ -54,180 +43,7 @@ li.statement {
         </style>
           <div class="portlet-body">
               <div class="tab-content">
-                  <div class="tab-pane active" id="portlet_tab2_1">
-                      <div class="panel-group accordion" id="accordion3">
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle accordion-toggle-styled " data-toggle="collapse" data-parent="#accordion3" href="#collapse_1"> Vetting Process </a>
-                                  </h4>
-                              </div>
-                              <div id="collapse_1" class="panel-collapse in">
-                                  <div class="panel-body">
-                                        @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_00_call_for_b')
-
-                                        @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_a_form_screening1')
-
-                                        @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_b_initial_interview1')
-
-                                        @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_c_formal_interview1')
-                                        
-                                        @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_d_observation1')
-
-                                        @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_e_final_consultation1')
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4 class="panel-title">
-                                      <a class="accordion-toggle accordion-toggle-styled collapsed offer-process" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2"> Offer Process </a>
-                                  </h4>
-                              </div>
-                              <div id="collapse_2" class="panel-collapse collapse">
-                                  <div class="panel-body" style="">
-                                      <table class="table table-bordered">
-                                        <tr>
-                                          <td class="offerPrep"><h3 class="text-center marginTop10">Offer Preparation</h3></td>
-                                          <td class="offerProc"><h3 class="text-center marginTop10">Offer Procedure</h3></td>
-                                          <td class="compltCheck"><h3 class="text-center marginTop10">Complete Checklist</h3></td>
-                                        </tr>
-                                        <tr>
-                                          <td style="vertical-align: top;">
-                                            <form id="Offer_Preparation_Form">
-                                                <div class="mt-checkbox-list">
-                                                    <label class="mt-checkbox NPF"> New Personal Form <small class="required">*</small>
-                                                        <input type="checkbox" id="NPF" value="NPF" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox SAF"> Staff Application Form - <small>duly filled</small> <small class="required">*</small>
-                                                        <input type="checkbox" id="SAF" value="SAF" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox AFRS"> Applicant Flow Record Sheet <small class="required">*</small>
-                                                        <input type="checkbox" id="AFRS"  value="AFRS" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox OS"> Observation Sheet <small>(academic only)</small> 
-                                                        <input type="checkbox" id="OS"  value="OS" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox RCS"> Reference Check Sheet <small class="required">*</small>
-                                                        <input type="checkbox" id="RCS"  value="RCS" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox CV"> Curriculum Vitae 
-                                                        <input type="checkbox" id="CV"  value="CV" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox ED"> Education Documents <small class="required">*</small><br /><small>(degrees, marksheets, certificates etc)</small> 
-                                                        <input type="checkbox" id="ED"  value="ED" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox COC"> Copy of CNIC <small class="required">*</small>
-                                                        <input type="checkbox" id="COC"  value="COC" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox EL"> Experience Letters <small>(previous/current)</small> 
-                                                        <input type="checkbox" id="EL"  value="EL" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox LDP"> Last Drawn Payslip 
-                                                        <input type="checkbox" id="LDP"  value="LDP" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox PHO"> Photographs <Small>(2 passport size)</Small> <small class="required">*</small>
-                                                        <input type="checkbox" id="PHO"  value="PHO" name="preperation_checks[]" />
-                                                        <span></span>
-                                                    </label>
-                                                </div>
-                                            </form>
-                                          </td>
-                                          <td style="vertical-align: top;">
-                                              <form id="Offer_Procedure_Form">
-                                                  <div class="mt-checkbox-list">
-                                                    <label class="mt-checkbox OL"> Offer Letter 
-                                                        <input type="checkbox" id="OL" value="OL" name="preperation_checks[]"/>
-                                                        <span></span>
-                                                    </label>
-                                                    <label class="mt-checkbox JDC"> Joining Date Confirmation <small class="required">*</small>
-                                                        <input type="checkbox" id="JDC" value="JDC" name="preperation_checks[]"  />
-                                                        <span></span>
-                                                    </label>
-                                                  </div>
-                                              </form>
-                                          </td>
-                                          <td style="vertical-align: top;">
-                                              <form id="Complete_Checklist_Form">
-                                                  <div class="mt-checkbox-list">
-                                                      <label class="mt-checkbox"> New Personal Form <small class="required">*</small>
-                                                          <input type="checkbox" id="NPF1" value="NPF1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox SAF1"> Staff Application Form - <small>duly filled</small> <small class="required">*</small>
-                                                          <input type="checkbox" id="SAF1" value="SAF1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox AFRS1"> Applicant Flow Record Sheet <small class="required">*</small>
-                                                          <input type="checkbox" type="checkbox" id="AFRS1" value="AFRS1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox"> Observation Sheet <small>(academic only)</small> <small class="required">*</small>
-                                                          <input type="checkbox" id="OS1" value="OS1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox RCS1"> Reference Check Sheet <small class="required">*</small>
-                                                          <input type="checkbox" id="RCS1" value="RCS1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox CV1"> Curriculum Vitae <small class="required">*</small>
-                                                          <input type="checkbox" id="CV1" value="CV1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox ED1"> Education Documents <small class="required">*</small><br /><small>(degrees, marksheets, certificates etc)</small> 
-                                                          <input type="checkbox" id="ED1" value="ED1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox COC1"> Copy of CNIC <small class="required">*</small>
-                                                          <input type="checkbox" id="COC1" value="COC1" name="preperation_checks[]" />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox EL1"> Experience Letters <small>(previous/current)</small> <small class="required">*</small>
-                                                          <input type="checkbox" id="EL1" value="EL1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox LDP1"> Last Drawn Payslip <small class="required">*</small>
-                                                          <input type="checkbox" id="LDP1" value="LDP1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox PHO1"> Photographs <Small>(2 passport size)</Small> <small class="required">*</small>
-                                                          <input type="checkbox" id="PHO1" value="PHO1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox OL1"> Offer Letter <small class="required">*</small>
-                                                          <input type="checkbox" id="OL1" value="OL1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                      <label class="mt-checkbox JDC1"> Joining Date Confirmation <small class="required">*</small>
-                                                          <input type="checkbox" id="JDC1" value="JDC1" name="preperation_checks[]"  />
-                                                          <span></span>
-                                                      </label>
-                                                  </div>
-                                              </form>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td class="text-center"><input type="submit" class="btn btn-group gray" value="Offer Preperation" disabled="" onclick="addChecks(6, 'Offer_Preparation_Form')" id="offer_preperation" ></td>
-                                          <td class="text-center"><input type="submit" class="btn btn-group gray" value="Offer Procedure" disabled="" onclick ="addChecks(7, 'Offer_Procedure_Form')" id="offer_procedure"></td>
-                                          <td class="text-center"><input type="submit" class="btn btn-group gray" value="Compelete Checklist" onclick="addChecks(8,'Complete_Checklist_Form')" id="complete_check"></td>
-                                        </tr>
-                                      </table>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                       
-                  </div><!-- portlet_tab2_1 -->
+                  
 				  
                   <div class="tab-pane" id="portlet_tab2_2">
                       <div class="col-md-12 col-sm-12">
@@ -259,85 +75,7 @@ li.statement {
                                             <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
                                         </div>
                                     </li>
-                                    <li class="out">
-                                        <img class="avatar" alt="" src="http://10.10.10.70/gsims/public/assets/photos/hcm/150x150/staff/298.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Lisa Wong </a>
-                                            <span class="datetime"> at 20:11 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-                                    <li class="statement">
-                                        <div class="message">
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-                                    <li class="in">
-                                        <img class="avatar" alt="" src="http://10.10.10.50/gsims/public/assets/photos/hcm/150x150/staff/1014.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Bob Nilson </a>
-                                            <span class="datetime"> at 20:30 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-                                    <li class="in">
-                                        <img class="avatar" alt="" src="http://10.10.10.50/gsims/public/assets/photos/hcm/150x150/staff/1014.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Bob Nilson </a>
-                                            <span class="datetime"> at 20:30 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-                                    <li class="out">
-                                        <img class="avatar" alt="" src="http://10.10.10.70/gsims/public/assets/photos/hcm/150x150/staff/298.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Richard Doe </a>
-                                            <span class="datetime"> at 20:33 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-                                    <li class="in">
-                                        <img class="avatar" alt="" src="http://10.10.10.50/gsims/public/assets/photos/hcm/150x150/staff/1014.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Richard Doe </a>
-                                            <span class="datetime"> at 20:35 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-
-                                    <li class="out">
-                                        <img class="avatar" alt="" src="http://10.10.10.70/gsims/public/assets/photos/hcm/150x150/staff/298.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Bob Nilson </a>
-                                            <span class="datetime"> at 20:40 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-                                    <li class="in">
-                                        <img class="avatar" alt="" src="http://10.10.10.50/gsims/public/assets/photos/hcm/150x150/staff/1014.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Richard Doe </a>
-                                            <span class="datetime"> at 20:40 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </span>
-                                        </div>
-                                    </li>
-                                    <li class="out">
-                                        <img class="avatar" alt="" src="http://10.10.10.70/gsims/public/assets/photos/hcm/150x150/staff/298.png" />
-                                        <div class="message">
-                                            <span class="arrow"> </span>
-                                            <a href="javascript:;" class="name"> Bob Nilson </a>
-                                            <span class="datetime"> at 20:54 </span>
-                                            <span class="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. sed diam nonummy nibh euismod tincidunt ut laoreet.
-                                                </span>
-                                        </div>
-                                    </li>
+                        
                                 </ul>
                             </div>
                         </div>
@@ -346,38 +84,13 @@ li.statement {
                 </div>
                   </div><!-- portlet_tab2_2 -->
                  
-				 <div class="tab-pane" id="portlet_tab2_3">
-                      
-                  </div><!-- portlet_tab2_3 -->
               </div><!-- tab-content -->
           </div><!-- portlet-body -->
       </div><!-- portlet -->
-      <?php /* ?><div class="portlet light bordered fixed-height-NoScroll marginBottom0">
-         <div class="portlet-title">
-            <h2 class="marginTop10">Saleem Ahmed Qureshi</h2>
-         </div><!-- portlet-title -->
-         <div class="portlet-body">
 
-            @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_a_form_screening')
-
-            @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_b_initial_interview')
-
-            @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_c_formal_interview')
-            
-            @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_d_observation')
-
-            @include('master_layout/staff/staff_recruitment/staff_recruitment_initiation_e_final_consultation')
-            
-            
-         </div><!-- portlet-body --><?php */ ?>
       </div><!-- portlet -->
    </div><!-- col-md-8 -->
 </div><!-- row -->
-
-
-
-
-
 
 
 

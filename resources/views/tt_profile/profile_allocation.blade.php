@@ -825,6 +825,9 @@
                                         <input type="time" name="sun_out" class="sun_out form-control" placeholder="07:30 AM">
                                     </div><!-- col-md-3 -->
                                 </div><!-- row -->
+                                <div class="alert alert-success msg-success" style="display: none">
+                                    <strong>Success!</strong> Data Insert Successfully.
+                                </div>
                                 <div class="form-actions">
                                     <button type="button" onclick="postData('parttimeProfileForm')" id="add_profile" class="btn blue">Add Profile</button>
                                     <button type="button" class="btn default">Clear</button>
@@ -1456,26 +1459,41 @@ loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
 
     var setPartTimeIsOn = function setPartTimeIsOn(data){
 
+
         if( $('.mon_in').val() !== "" && $('.mon_out').val() !== "" ){
             data["is_on_mon"] = 1; 
-        } 
+        }else{
+            data["is_on_mon"] = 0;
+        }
         if( $('.tue_in').val() !== "" && $('.tue_out').val() !== ""  ){
             data["is_on_tue"] = 1; 
+        }else{
+            data["is_on_tue"] = 0;
         }
         if( $('.wed_in').val() !== "" && $('.wed_out').val() !== ""  ){
             data["is_on_wed"] = 1; 
+        }else{
+             data["is_on_wed"] = 0;
         }
         if( $('.thu_in').val() !== "" && $('.thu_out').val() !== ""  ){
             data["is_on_thu"] = 1; 
+        }else{
+            data["is_on_thu"] = 0;
         }
         if( $('.fri_in').val() !== "" && $('.fri_out').val() !== ""  ){
             data["is_on_fri"] = 1; 
+        }else{
+            data["is_on_fri"] = 0;
         }
         if( $('.sat_in').val() !== "" && $('.sat_out').val() !== ""  ){
             data["is_on_sat"] = 1; 
+        }else{
+            data["is_on_sat"] = 0;
         }
         if( $('.sun_in').val() !== "" && $('.sun_out').val() !== ""  ){
             data["is_on_sun"] = 1; 
+        }else{
+            data["is_on_sun"] = 0;
         }
         return data;
     }
@@ -1565,14 +1583,15 @@ loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
         } else if(form_id == "customProfileForm") {
             data = setCustomIsOn(data);
         }
-        console.log(data)
+       
         $.ajax({
             url: "{{url('/ttprofile_allocation/ttCustomProfile_update')}}",
             type:"POST",
             cache:true,
             data: data,
             success: function (response) {
-
+                $('.msg-success').show();
+                $(".msg-success").fadeOut(3000);
             },
             error: function(jqXHR, textStatus, errorThrown) {
                console.log(errorThrown)

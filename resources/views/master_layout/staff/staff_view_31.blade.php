@@ -366,7 +366,7 @@ display: none;
        <div class="portlet-title padding0">
           <div class="caption caption-md">
              <h3 id="staffView_StaffList_Total" class="marginTop0 marginBottom0 padding0">Staff List</h3>
-          </div>
+          </div><!-- caption -->
           <div class="actions">
               <div class="btn-group btn-group-devided" data-toggle="buttons">
                       <!-- <input type="radio" name="options" class="toggle" id="profileDefinationAdd">Add New Profile</label> -->
@@ -1163,7 +1163,7 @@ display: none;
           </tr>
        </table>
        <!-- col-md-4 -->
-    </div>
+    </div><!-- headRightDetails -->
     <div class="row">
        <div class="col-md-3 col-xs-6 MobPaddingRight0">
           <div class="profile-sidebar-portlet portlet light fixedHeight3">
@@ -1231,12 +1231,12 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Staff Title:</label>
 		                                           <div class="col-md-9">
 		                                           	  <select class="form-control">
-														    <option value="0" selected="" disabled="">Staff Title</option>
-						                                    <option value="2">Ms</option>
-						                                    <option value="3">Mrs</option>
-						                                    <option value="1">Mr</option>
-						                                    <option value="4">Dr.</option>
-														</select>
+                      														    <option value="0" selected="" disabled="">Staff Title</option>
+      						                                    <option value="2">Ms</option>
+      						                                    <option value="3">Mrs</option>
+      						                                    <option value="1">Mr</option>
+      						                                    <option value="4">Dr.</option>
+                      														</select>
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1246,9 +1246,9 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Gender:</label>
 		                                           <div class="col-md-9">
 		                                              <select class="form-control">
-														    <option value="">Male</option>
-														    <option value="">Female</option>
-														</select>
+                      														    <option value="">Male</option>
+                      														    <option value="">Female</option>
+                      														</select>
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1282,9 +1282,9 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Nationality:</label>
 		                                           <div class="col-md-9">
 		                                                <select class="form-control">
-														    <option value="">Pakistani</option>
-														    <option value="">Afghani</option>
-														</select>
+                      														    <option value="">Pakistani</option>
+                      														    <option value="">Afghani</option>
+                        														</select>
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1294,9 +1294,9 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Religion:</label>
 		                                           <div class="col-md-9">
 		                                              <select class="form-control">
-														    <option value="">Muslim</option>
-														    <option value="">Non-Muslim</option>
-														</select>
+                    														    <option value="">Muslim</option>
+                    														    <option value="">Non-Muslim</option>
+                      														</select>
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1367,7 +1367,7 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Mobile Phone:</label>
 		                                           <div class="col-md-9">
 		                                           		<!-- Mobile phone Masking: XXXX-XXXXXXX -->
-														<input type="phone" class="form-control" placeholder="">
+														                      <input type="phone" class="form-control" placeholder="">
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1377,7 +1377,7 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Landline:</label>
 		                                           <div class="col-md-9">
 		                                              <!-- Mobile phone Masking: XXX-XXXXXXX -->
-														<input type="phone" class="form-control" placeholder="">
+														                      <input type="phone" class="form-control" placeholder="">
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1400,9 +1400,9 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Employment Status:</label>
 		                                           <div class="col-md-9">
 		                                                <select class="form-control">
-														    <option value="">Contractual</option>
-														    <option value="">Permanent</option>
-														</select>
+                        														    <option value="">Contractual</option>
+                        														    <option value="">Permanent</option>
+                        														</select>
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1424,9 +1424,9 @@ display: none;
 		                                           <label class="control-label col-md-3 text-right paddingRight0">Tap IN Campus:</label>
 		                                           <div class="col-md-9">
 		                                              <select class="form-control">
-														    <option value="">South</option>
-														    <option value="">North</option>
-														</select>
+                    														    <option value="">South</option>
+                    														    <option value="">North</option>
+                      														</select>
 		                                           </div>
 		                                        </div>
 		                                     </div>
@@ -1502,358 +1502,772 @@ display: none;
 		                            </div>
 		                            <!-- tab_basic -->
 		                            <div class="tab-pane" id="tab_education_edit">
-		                               <h4 class="form-section headingBorderBottom">Others</h4>
-		                               <div class="row">
-		                                  <div class="col-md-6">
-		                                     <div class="portlet light bordered lowPadding">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-3 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-9 paddingRight0">
-		                                              <h5 class=" marginBottom0"><strong>Skill Development Council</strong></h5>
-		                                              <h5 class="font-grey-cascade"><strong>Certification</strong>, HRM</h5>
-		                                              <div class="col-md-6 padding0">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;1st Division</h5>
-		                                              </div>
-		                                              <div class="col-md-6">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;2010</h5>
-		                                              </div>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                                  <div class="col-md-6">
-		                                     <div class="portlet light bordered lowPadding">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-3 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-9 paddingRight0">
-		                                              <h5 class=" marginBottom0"><strong>Skill Development Council</strong></h5>
-		                                              <h5 class="font-grey-cascade"><strong>Certification</strong>, Essentials of Management</h5>
-		                                              <div class="col-md-6 padding0">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;1st Division</h5>
-		                                              </div>
-		                                              <div class="col-md-6">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;2011</h5>
-		                                              </div>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                               </div>
-		                               <!-- row -->
-		                               <h4 class="form-section headingBorderBottom">Professional</h4>
-		                               <h4 class="form-section headingBorderBottom">University</h4>
-		                               <div class="row">
-		                                  <div class="col-md-6">
-		                                     <div class="portlet light bordered lowPadding">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-3 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/uoklogo.png" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-9 paddingRight0">
-		                                              <h5 class=" marginBottom0"><strong>University of Karachi</strong></h5>
-		                                              <h5 class="font-grey-cascade"><strong>M.P.A</strong>, Public Administration</h5>
-		                                              <div class="col-md-6 padding0">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;2nd Division</h5>
-		                                              </div>
-		                                              <div class="col-md-6">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;2001</h5>
-		                                              </div>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                               </div>
-		                               <!-- row -->
-		                               <h4 class="form-section headingBorderBottom">College</h4>
-		                               <div class="row">
-		                                  <div class="col-md-6">
-		                                     <div class="portlet light bordered lowPadding">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-3 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-9 paddingRight0">
-		                                              <h5 class=" marginBottom0"><strong>P.A.F (Faisal Base)</strong></h5>
-		                                              <h5 class="font-grey-cascade"><strong>B.Sc</strong>, Computer Science, Economics & Maths</h5>
-		                                              <div class="col-md-6 padding0">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;2nd Division</h5>
-		                                              </div>
-		                                              <div class="col-md-6">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;1997</h5>
-		                                              </div>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                               </div>
-		                               <!-- row -->
-		                               <h4 class="form-section headingBorderBottom">School</h4>
-		                               <div class="row">
-		                                  <div class="col-md-6">
-		                                     <div class="portlet light bordered lowPadding">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-3 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/schoolIcon.jpg" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-9 paddingRight0">
-		                                              <h5 class=" marginBottom0"><strong>National High School</strong></h5>
-		                                              <h5 class="font-grey-cascade"><strong>Matric</strong>, Science</h5>
-		                                              <div class="col-md-6 padding0">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;1st Division</h5>
-		                                              </div>
-		                                              <div class="col-md-6">
-		                                                 <h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;1991</h5>
-		                                              </div>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                               </div>
-		                               <!-- row -->
-		                               <?php /* ?>
-		                               <table width="100%" border="0" class="table table-bordered">
-		                                  <thead class="bg-grey">
-		                                     <tr>
-		                                        <th class="" width="40%">Institute</th>
-		                                        <th width="20%">Subjects</th>
-		                                        <th width="20%">Qualification</th>
-		                                        <th width="10%">Result</th>
-		                                        <th width="10%">Year of<br>Completion</th>
-		                                     </tr>
-		                                  </thead>
-		                                  <!-- thead -->
-		                                  <tbody>
-		                                     <tr class="bBottomD">
-		                                        <td colspan="5" class=""><strong>School</strong></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>National High School</td>
-		                                        <td>Science</td>
-		                                        <td>Matric</td>
-		                                        <td>Ist-Div</td>
-		                                        <td>1992</td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                     </tr>
-		                                     <tr class="bBottomD">
-		                                        <td colspan="5" class=""><strong>College</strong></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>P.A.F (Faisl Base)</td>
-		                                        <td>Computer Science, Economics &amp; Maths</td>
-		                                        <td>B.Sc.</td>
-		                                        <td>IInd-Div</td>
-		                                        <td>1997</td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                     </tr>
-		                                     <tr class="bBottomD">
-		                                        <td colspan="5" class=""><strong>University</strong></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>University of Karachi  UoK  Karachi</td>
-		                                        <td>Public Administration</td>
-		                                        <td>M.P.A</td>
-		                                        <td>IInd-Div</td>
-		                                        <td>2001</td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                     </tr>
-		                                     <tr class="bBottomD">
-		                                        <td colspan="5" class=""><strong>Professional</strong></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                        <td>-</td>
-		                                     </tr>
-		                                     <tr class="bBottomD">
-		                                        <td colspan="5" class=""><strong>Others</strong></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>Skill Development Council</td>
-		                                        <td>HRM</td>
-		                                        <td>Certification</td>
-		                                        <td>Ist-Div</td>
-		                                        <td>2010</td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td>Skill Development Council</td>
-		                                        <td>Essentials of Management</td>
-		                                        <td>Certification</td>
-		                                        <td>Ist-Div</td>
-		                                        <td>2011</td>
-		                                     </tr>
-		                                  </tbody>
-		                                  <!-- tbody -->
-		                               </table>
-		                               <!-- tale -->
-		                               <?php */ ?>
+                                  <form class="form-horizontal">
+                                    <!-------------------------------------------- School ----------------------------------------------------------->
+		                                <h4 class="form-section headingBorderBottom School">School</h4> 
+                                    <div class="row" style="padding-bottom: 20px;">
+                                      <div class="form-body">
+                                        <div class="col-md-12">
+                                          <div class="col-md-4">
+                                              <label class="control-label">School Name <span class="required">*</span></label>
+                                              <select name="schoolName[]" class="txt_schName form-control">
+                                                <option value="">Choose name</option>
+                                                <option value="ACE_School"> ACE School </option>  
+                                                <option value="Aga_Khan_Education"> Aga Khan Education </option>  
+                                                <option value="Aga_Khan_Higher_Secondary_School"> Aga Khan Higher Secondary School </option>  
+                                                <option value="Aga_Khan_School"> Aga Khan School </option>  
+                                                <option value="Agha_Khan_School"> Agha Khan School </option>  
+                                                <option value="Ahsan_Public_Secondary_School"> Ahsan Public Secondary School </option>  
+                                                <option value="Aisha_Bawany_Academy_Boys_Campus"> Aisha Bawany Academy Boys Campus </option>  
+                                                <option value="Al_Saqib_Public_School"> Al Saqib Public School </option>  
+                                                <option value="Almurtaza_School"> Almurtaza School </option>  
+                                                <option value="Army_Public_School"> Army Public School </option>  
+                                                <option value="ASF_Public_School"> ASF Public School </option>  
+                                                <option value="B_V_S_Parsi_High_School_Saddar"> B V S Parsi High School Saddar </option>  
+                                                <option value="Bay_View_Academy"> Bay View Academy </option>  
+                                                <option value="Bay_View_High_School"> Bay View High School </option>  
+                                                <option value="Beaconhouse_School"> Beaconhouse School </option>  
+                                                <option value="DHA_Model_High_School"> DHA Model High School </option>  
+                                                <option value="Education_Bay"> Education Bay </option>  
+                                                <option value="Falcon_House_Grammar_School"> Falcon House Grammar School </option>  
+                                                <option value="Falconhouse_Grammar_School"> Falconhouse Grammar School </option>  
+                                                <option value="Fatimiyah_School"> Fatimiyah School </option>  
+                                                <option value="Foundation_Public_School"> Foundation Public School </option>  
+                                                <option value="Generations_School"> Generations School </option>  
+                                                <option value="Government_Delhi_Boys_Secondary_School"> Government Delhi Boys Secondary School </option>  
+                                                <option value="Government_Delhi_Girls_Secondary_School"> Government Delhi Girls Secondary School </option>  
+                                                <option value="Government_Pilot_High_School_Dadu"> Government Pilot High School Dadu </option>  
+                                                <option value="Habib_Public_School"> Habib Public School </option>  
+                                                <option value="Habib_Public_School_HPS"> Habib Public School HPS </option>  
+                                                <option value="Hamdard_Public_School"> Hamdard Public School </option>  
+                                                <option value="Hamdard_Public_School,_Madinat_ul_Hikmah"> Hamdard Public School, Madinat ul Hikmah </option>  
+                                                <option value="Happy_Palace_Grammar_School"> Happy Palace Grammar School </option>  
+                                                <option value="Hyderi_Public_School_Saddar"> Hyderi Public School Saddar </option>  
+                                                <option value="Indus_Academy"> Indus Academy </option>  
+                                                <option value="Karachi_Grammar_School"> Karachi Grammar School </option>  
+                                                <option value="Ladybird_Grammar_School"> Ladybird Grammar School </option>  
+                                                <option value="Little_Folks_School"> Little Folks School </option>  
+                                                <option value="Meritorious_School"> Meritorious School </option>  
+                                                <option value="Metropolis_Academy"> Metropolis Academy </option>  
+                                                <option value="Metropolitan_Academy"> Metropolitan Academy </option>  
+                                                <option value="NAKHLAH_Educational_House"> NAKHLAH Educational House </option>  
+                                                <option value="Nasra_School"> Nasra School </option>  
+                                                <option value="Nixor_College"> Nixor College </option>  
+                                                <option value="Progressive_Childrens_Academy"> Progressive Childrens Academy </option>  
+                                                <option value="Progressive_Public_School"> Progressive Public School </option>  
+                                                <option value="Reflections"> Reflections </option>  
+                                                <option value="Sadequain_Academy"> Sadequain Academy </option>  
+                                                <option value="Saqib_Public_School"> Saqib Public School </option>  
+                                                <option value="Shaheen_Cambridge"> Shaheen Cambridge </option>  
+                                                <option value="Shaheen_Cambridge_School"> Shaheen Cambridge School </option>  
+                                                <option value="Shaheen_Public_School"> Shaheen Public School </option>  
+                                                <option value="Shaheen_Public_School_Campus"> Shaheen Public School Campus </option>  
+                                                <option value="Shahwilayat_Public_School"> Shahwilayat Public School </option>  
+                                                <option value="Sindh_Madrasa_tul_Islam"> Sindh Madrasa tul Islam </option>  
+                                                <option value="Sir_Syed_Childrens_Academy"> Sir Syed Childrens Academy </option>  
+                                                <option value="St_Josephs_School"> St Josephs School </option>  
+                                                <option value="St_Patricks_High_School"> St Patricks High School </option>  
+                                                <option value="St_Peters_High_School"> St Peters High School </option>  
+                                                <option value="St_Johns_High_School"> St Johns High School </option>  
+                                                <option value="St_Judes_High_School"> St Judes High School </option>  
+                                                <option value="St_Lawrences"> St Lawrences </option>  
+                                                <option value="St_Michaels_Convent_School" selected=""> St Michaels Convent School </option>  
+                                                <option value="St_Patricks_High_School"> St Patricks High School </option>  
+                                                <option value="St_Pauls_High_School"> St Pauls High School </option>  
+                                                <option value="Sultan_Mohammed_Shah_Aga_Khan_School"> Sultan Mohammed Shah Aga Khan School </option>  
+                                                <option value="The_Academy"> The Academy </option>  
+                                                <option value="The_British_International_School"> The British International School </option>  
+                                                <option value="The_City_School"> The City School </option>  
+                                                <option value="The_City_School_Paf_Chapter"> The City School Paf Chapter </option>  
+                                                <option value="The_Educators"> The Educators </option>  
+                                                <option value="The_Intellect_School"> The Intellect School </option>  
+                                                <option value="The_Knowledge_Academy"> The Knowledge Academy </option>  
+                                                <option value="The_Mama_Parsi"> The Mama Parsi </option>  
+                                                <option value="The_Metropolis_Academy"> The Metropolis Academy </option>  
+                                                <option value="The_Metropolitan_Academy"> The Metropolitan Academy </option>  
+                                                <option value="The_Suffah_Academy"> The Suffah Academy </option>  
+                                                <option value="Trinity_Private_School"> Trinity Private School </option>  
+                                                <option value="Trinity_Private_School_Karachi"> Trinity Private School Karachi </option>  
+                                                <option value="Yaqeen_Education_Foundation"> Yaqeen Education Foundation </option>  
+                                                <option value="Other"> Other </option>
+                                              </select><!-- -->
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-4 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Qualification <span class="required">*</span></label>
+                                              <select name="schoolQualification[]" class="schoolQ valid form-control">
+                                                <option value="">Choose name</option>
+                                                <option value="A_Level"> A Level </option>
+                                                <option value="O_Level"> O Level </option>
+                                                <option value="Matric" selected=""> Matric  </option>
+                                                <option value="Other"> Other </option>
+                                              </select><!-- -->
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Subject <span class="required">*</span></label>
+                                              <select name="schoolSubject[]" class="schoolSubjct valid form-control">
+                                                <option value="">Choose name</option>
+                                                <option value="Science" selected=""> Science </option>
+                                                <option value="Arts"> Arts </option>
+                                                <option value="Other"> Other </option>
+                                              </select>
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Result <span class="required">*</span></label>
+                                              <input type="text" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Year <span class="required">*</span></label>
+                                              <input type="date" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                        </div>
+                                      </div><!-- form-body -->
+                                    </div>
+                                    <!-- row -->
+                                    <!-- Add another School --> 
+                                    <div class="row">
+                                      <div class="col-md-12 text-right">
+                                        <div class="col-md-12">
+                                          <a href="#" class="btn btn-group green">+ Add Another School</a>
+                                        </div><!-- col-md-12 -->
+                                      </div><!-- col-md-12 -->
+                                    </div><!-- row -->
+                                    <!-------------------------------------------- College ----------------------------------------------------------->
+                                    <h4 class="form-section headingBorderBottom College">College</h4>
+                                    <div class="row" style="padding-bottom: 20px;">
+                                      <div class="form-body">
+                                        <div class="col-md-12">
+                                          <div class="col-md-4">
+                                              <label class="control-label">College Name <span class="required">*</span></label>
+                                              <input type="text" class="form-control">
+                                          </div><!-- col-md-4 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Qualification <span class="required">*</span></label>
+                                              <select name="collegeQualification[]" class="collegeQ valid form-control">
+                                                <option value="">Choose Qualification</option>
+                                                <option value="Intermediate" selected=""> Intermediate </option>
+                                                <option value="Diploma"> Diploma </option>
+                                                <option value="Other"> Other </option>
+                                              </select><!-- -->
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Subject <span class="required">*</span></label>
+                                              <select name="collegeSubject[]" class="slct_clgSub valid form-control">
+                                                <option value="">Choose Subjects</option>
+                                                <option value="Pre_Engineering"> Pre Engineering </option>
+                                                <option value="Pre_Medical"> Pre Medical </option>
+                                                <option value="Computer"> Computer </option>
+                                                <option value="Commerce" selected=""> Commerce </option>
+                                                <option value="Arts"> Arts </option>
+                                                <option value="Other"> Other </option>
+                                              </select>
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Result <span class="required">*</span></label>
+                                              <input type="text" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Year <span class="required">*</span></label>
+                                              <input type="date" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                        </div>
+                                      </div><!-- form-body -->
+                                    </div>
+                                    <!-- row -->
+                                    <!-- Add another College --> 
+                                    <div class="row">
+                                      <div class="col-md-12 text-right">
+                                        <div class="col-md-12">
+                                          <a href="#" class="btn btn-group green">+ Add College</a>
+                                        </div><!-- col-md-12 -->
+                                      </div><!-- col-md-12 -->
+                                    </div><!-- row -->
+                                    <!-------------------------------------------- University ----------------------------------------------------------->
+                                    <h4 class="form-section headingBorderBottom University">University</h4>
+                                    <div class="row" style="padding-bottom: 20px;">
+                                      <div class="form-body">
+                                        <div class="col-md-12">
+                                          <div class="col-md-4">
+                                              <label class="control-label">University Name <span class="required">*</span></label>
+                                              <select name="universityName[]" class="slct_uniname form-control">
+                                                <option value="">University name</option>
+                                                <option value="Air_University_AU_Islamabad"> Air University AU Islamabad </option>  
+                                                <option value="Allama_Iqbal_Open_University_AIOU_Islamabad"> Allama Iqbal Open University AIOU Islamabad </option>  
+                                                <option value="Bahria_University_BU_Islamabad"> Bahria University BU Islamabad </option>  
+                                                <option value="COMSATS_Institute_of_Information_Technology_Islamabad"> COMSATS Institute of Information Technology Islamabad </option>  
+                                                <option value="Federal_Urdu_University_of_Arts_Sciences_and_Technology_Islamabad"> Federal Urdu University of Arts Sciences and Technology Islamabad </option>  
+                                                <option value="Foundation_University_Islamabad"> Foundation University Islamabad </option>  
+                                                <option value="Institute_of_Space_Technology__IST__Islamabad"> Institute of Space Technology  IST  Islamabad </option>  
+                                                <option value="International_Islamic_University__IIU__Islamabad"> International Islamic University  IIU  Islamabad </option>  
+                                                <option value="National_University_of_Computer_and_Emerging_Sciences_Islamabad"> National University of Computer and Emerging Sciences Islamabad </option>  
+                                                <option value="National_University_of_Modern_Languages_Islamabad"> National University of Modern Languages Islamabad </option>  
+                                                <option value="Pakistan_Institute_of_Engineering_&amp;_Applied_Sciences_Islamabad"> Pakistan Institute of Engineering &amp; Applied Sciences Islamabad </option>  
+                                                <option value="Quaid_i_Azam_University_Islamabad"> Quaid i Azam University Islamabad </option>  
+                                                <option value="Riphah_International_University__Islamabad"> Riphah International University  Islamabad </option>  
+                                                <option value="Bahauddin_Zakariya_University__Multan"> Bahauddin Zakariya University  Multan </option>  
+                                                <option value="Beaconhouse_National_University__BNU__Lahore"> Beaconhouse National University  BNU  Lahore </option>  
+                                                <option value="College_of_Buisness_Administration&amp;_Economics__NCBA&amp;E__Lahore"> College of Buisness Administration&amp; Economics  NCBA&amp;E  Lahore </option>  
+                                                <option value="Fatima_Jinnah_Women_University__FJWU__Rawalpindi"> Fatima Jinnah Women University  FJWU  Rawalpindi </option>  
+                                                <option value="Forman_Christian_College__FCC__Lahore"> Forman Christian College  FCC  Lahore </option>  
+                                                <option value="GIFT_University_Gujranwala"> GIFT University Gujranwala </option>  
+                                                <option value="Government_College_University__GCU__Faisalabad"> Government College University  GCU  Faisalabad </option>  
+                                                <option value="Government_College_University__GCU__Lahore"> Government College University  GCU  Lahore </option>  
+                                                <option value="Hajvery_University__HU__Lahore"> Hajvery University  HU  Lahore </option>  
+                                                <option value="Imperial_College_of_Business_Studies_Lahore"> Imperial College of Business Studies Lahore </option>  
+                                                <option value="Institute_of_Management_Sciences__IMS__Lahore"> Institute of Management Sciences  IMS  Lahore </option>  
+                                                <option value="Islamia_University_Bahawalpur"> Islamia University Bahawalpur </option>  
+                                                <option value="Kinnaird_College_for_Women_Lahore"> Kinnaird College for Women Lahore </option>  
+                                                <option value="Lahore_College_for_Women_University__LCWU__Lahore"> Lahore College for Women University  LCWU  Lahore </option>  
+                                                <option value="Lahore_School_of_Economics__LSE__Lahore"> Lahore School of Economics  LSE  Lahore </option>  
+                                                <option value="Lahore_University_of_Management_Sciences__LUMS__Lahore"> Lahore University of Management Sciences  LUMS  Lahore </option>  
+                                                <option value="Minhaj_University_Lahore"> Minhaj University Lahore </option>  
+                                                <option value="National_College_of_Arts__NCA__Lahore"> National College of Arts  NCA  Lahore </option>  
+                                                <option value="National_Textile_University__NTU__Faisalabad__Federal_Chartered"> National Textile University  NTU  Faisalabad  Federal Chartered </option>  
+                                                <option value="National_University_of_Sciences_&amp;_Technology__NUST__Rawalpindi"> National University of Sciences &amp; Technology  NUST  Rawalpindi </option>  
+                                                <option value="The_Superior_College_Lahore"> The Superior College Lahore </option>  
+                                                <option value="The_University_of_Management_&amp;_Technology__UMT__Lahore"> The University of Management &amp; Technology  UMT  Lahore </option>  
+                                                <option value="University_of_Agriculture_Faisalabad"> University of Agriculture Faisalabad </option>  
+                                                <option value="University_of_Arid_Agriculture_Murree_Road_Rawalpindi"> University of Arid Agriculture Murree Road Rawalpindi </option>  
+                                                <option value="University_of_Central_Punjab__UCP__Lahore"> University of Central Punjab  UCP  Lahore </option>  
+                                                <option value="University_of_Education_Lahore"> University of Education Lahore </option>  
+                                                <option value="University_of_Engineering_&amp;_Technology__UET__Lahore"> University of Engineering &amp; Technology  UET  Lahore </option>  
+                                                <option value="University_of_Engineering_&amp;_Technology__UET__Taxila"> University of Engineering &amp; Technology  UET  Taxila </option>  
+                                                <option value="University_of_Faisalabad_Faisalabad"> University of Faisalabad Faisalabad </option>  
+                                                <option value="University_of_Gujrat__Gujrat"> University of Gujrat  Gujrat </option>  
+                                                <option value="University_of_Health_Sciences__UHS__Lahore"> University of Health Sciences  UHS  Lahore </option>  
+                                                <option value="University_of_Lahore_Lahore"> University of Lahore Lahore </option>  
+                                                <option value="University_of_Sargodha_Sargodha"> University of Sargodha Sargodha </option>  
+                                                <option value="University_of_South_Asia__USA__Lahore"> University of South Asia  USA  Lahore </option>  
+                                                <option value="University_of_Veterinary_and_Animal_Sciences__UVAS__Lahore"> University of Veterinary and Animal Sciences  UVAS  Lahore </option>  
+                                                <option value="Virtual_University_of_Pakistan__VU__Lahore"> Virtual University of Pakistan  VU  Lahore </option>  
+                                                <option value="Agha_Khan_University__AKU__Karachi"> Agha Khan University  AKU  Karachi </option>  
+                                                <option value="Baqai_Medical_University_Karachi"> Baqai Medical University Karachi </option>  
+                                                <option value="Dadabhoy_Institute_of_Higher_Education_Karachi"> Dadabhoy Institute of Higher Education Karachi </option>  
+                                                <option value="Dow_University_of_Health_Sciences_Karachi"> Dow University of Health Sciences Karachi </option>  
+                                                <option value="Greenwich_University_Karachi"> Greenwich University Karachi </option>  
+                                                <option value="Hamdard_University_Karachi"> Hamdard University Karachi </option>  
+                                                <option value="Indus_Institute_of_Higher_EducationÂ&nbsp;Karachi"> Indus Institute of Higher EducationÂ&nbsp;Karachi </option>  
+                                                <option value="Indus_Valley_School_of_Art_and_Architecture_Karachi"> Indus Valley School of Art and Architecture Karachi </option>  
+                                                <option value="Institute_of_Business_&amp;_Technology_BIZTEK_Karachi"> Institute of Business &amp; Technology BIZTEK Karachi </option>  
+                                                <option value="Institute_of_Business_Administration__IBA__Karachi"> Institute of Business Administration  IBA  Karachi </option>  
+                                                <option value="Institute_of_Business_Management__IoBM__Karachi"> Institute of Business Management  IoBM  Karachi </option>  
+                                                <option value="Iqra_University_Karachi"> Iqra University Karachi </option>  
+                                                <option value="Isra_University_Hyderabad"> Isra University Hyderabad </option>  
+                                                <option value="Jinnah_University_for_Women_Karachi"> Jinnah University for Women Karachi </option>  
+                                                <option value="Karachi_Institute_of_Economics_&amp;_Technology__KIET__Karachi"> Karachi Institute of Economics &amp; Technology  KIET  Karachi </option>  
+                                                <option value="KASB__Khadim_Ali_Shah_Bukhari__Institute_of_Technology_Karachi"> KASB  Khadim Ali Shah Bukhari  Institute of Technology Karachi </option>  
+                                                <option value="Liaquat_University_of_Medical_and_Health_Sciences__LUMHS__Jamshoro_Sindh"> Liaquat University of Medical and Health Sciences  LUMHS  Jamshoro Sindh </option>  
+                                                <option value="Mehran_University_of_Eng_&amp;_Technology_Jamshoro"> Mehran University of Eng &amp; Technology Jamshoro </option>  
+                                                <option value="Mohammad_Ali_Jinnah_University__MAJU__Karachi"> Mohammad Ali Jinnah University  MAJU  Karachi </option>  
+                                                <option value="NED_University_of_Engineering_&amp;_Technology_Karachi"> NED University of Engineering &amp; Technology Karachi </option>  
+                                                <option value="Newports_Institute_of_Communications_and_Economics_Karachi"> Newports Institute of Communications and Economics Karachi </option>  
+                                                <option value="Pakistan_Naval_Academy_Karachi"> Pakistan Naval Academy Karachi </option>  
+                                                <option value="Preston_Institute_of_Management_Sciences_and_Technology__PIMSAT__Karachi"> Preston Institute of Management Sciences and Technology  PIMSAT  Karachi </option>  
+                                                <option value="Preston_University_Karachi"> Preston University Karachi </option>  
+                                                <option value="Quaid_e_Awam_University_of_Engineering_Science_&amp;_Technology_Nawabshah"> Quaid e Awam University of Engineering Science &amp; Technology Nawabshah </option>  
+                                                <option value="Shah_Abdul_Latif_University_Khairpur"> Shah Abdul Latif University Khairpur </option>  
+                                                <option value="Shaheed_Zulfikar_Ali_Bhutto_Institute_of_Science_&amp;_Technology__SZABIST__Karachi"> Shaheed Zulfikar Ali Bhutto Institute of Science &amp; Technology  SZABIST  Karachi </option>  
+                                                <option value="Sindh_Agriculture_University_Tandojam"> Sindh Agriculture University Tandojam </option>  
+                                                <option value="Sir_Syed_University_of_Engg_&amp;_Technology__SSUET__Karachi"> Sir Syed University of Engg &amp; Technology  SSUET  Karachi </option>  
+                                                <option value="Sukkur_Institute_of_Business_Administration_Sukkur"> Sukkur Institute of Business Administration Sukkur </option>  
+                                                <option value="Textile_Institute_of_Pakistan__TIP__Karachi"> Textile Institute of Pakistan  TIP  Karachi </option>  
+                                                <option value="University_of_East_Hyderabad"> University of East Hyderabad </option>  
+                                                <option value="University_of_Karachi__UoK__Karachi"> University of Karachi  UoK  Karachi </option>  
+                                                <option value="University_of_Sindh_Jamshoro"> University of Sindh Jamshoro </option>  
+                                                <option value="Zia_ud_Din_Medical_University_Karachi"> Zia ud Din Medical University Karachi </option>  
+                                                <option value="Balochistan_University_of_Engineering_and_Technology_Khuzdar"> Balochistan University of Engineering and Technology Khuzdar </option>  
+                                                <option value="Balochistan_University_of_Information_Technology_and_Management_Sciences_Quetta"> Balochistan University of Information Technology and Management Sciences Quetta </option>  
+                                                <option value="Iqra_University_Quetta"> Iqra University Quetta </option>  
+                                                <option value="Sardar_Bahadur_Khan_Women_University_Quetta"> Sardar Bahadur Khan Women University Quetta </option>  
+                                                <option value="University_of_Balochistan_Quetta"> University of Balochistan Quetta </option>  
+                                                <option value="Khyber_PakhtunkhwaÂ&nbsp;_formerly_NWFP"> Khyber PakhtunkhwaÂ&nbsp; formerly NWFP </option>  
+                                                <option value="Frontier_Women_University_Peshawar"> Frontier Women University Peshawar </option>  
+                                                <option value="CECOS_University_of_Information_Technology_and_Emerging_Sciences_Peshawar"> CECOS University of Information Technology and Emerging Sciences Peshawar </option>  
+                                                <option value="City_University_of_Science_&amp;_Information_Technology_Peshawar"> City University of Science &amp; Information Technology Peshawar </option>  
+                                                <option value="Gandhara_University_Peshawar"> Gandhara University Peshawar </option>  
+                                                <option value="Ghulam_Ishaq_Khan_Institute_of_Engineering_Sciences_&amp;_Technology_Swabi"> Ghulam Ishaq Khan Institute of Engineering Sciences &amp; Technology Swabi </option>  
+                                                <option value="Gomal_University_DI_Khan"> Gomal University DI Khan </option>  
+                                                <option value="Hazara_University_Dodhial_Mansehra"> Hazara University Dodhial Mansehra </option>  
+                                                <option value="Institute_of_Management_Sciences__IMSciences__Peshawar"> Institute of Management Sciences  IMSciences  Peshawar </option>  
+                                                <option value="Karakuram_International_University_Gilgit"> Karakuram International University Gilgit </option>  
+                                                <option value="Kohat_University_of_Science_&amp;_Technology__KUST__Kohat"> Kohat University of Science &amp; Technology  KUST  Kohat </option>  
+                                                <option value="Lasbelaa_University_of_Agriculture_Water_&amp;_Marine_Science_Othal"> Lasbelaa University of Agriculture Water &amp; Marine Science Othal </option>  
+                                                <option value="Northern_University_Nowshera_Cantonment"> Northern University Nowshera Cantonment </option>  
+                                                <option value="NWFP_Agriculture_University_Peshawar"> NWFP Agriculture University Peshawar </option>  
+                                                <option value="NWFP_University_of_Engineering_&amp;_Technology_Peshawar"> NWFP University of Engineering &amp; Technology Peshawar </option>  
+                                                <option value="Pakistan_Military_Academy_Abbottabad"> Pakistan Military Academy Abbottabad </option>  
+                                                <option value="Preston_University_Kohat"> Preston University Kohat </option>  
+                                                <option value="Qurtaba_University_of_Science_&amp;_Information_Technology_D_I_Khan"> Qurtaba University of Science &amp; Information Technology D I Khan </option>  
+                                                <option value="Sarhad_University_of_Science_&amp;_Information_Technology_Peshawar__Approved_Distance_Education_Centers_of__SUIT__Peshawar"> Sarhad University of Science &amp; Information Technology Peshawar  Approved Distance Education Centers of  SUIT  Peshawar </option>  
+                                                <option value="University_of_Malakand_Chakdara_Dir_Malakand"> University of Malakand Chakdara Dir Malakand </option>  
+                                                <option value="University_of_Peshawar_Peshawar"> University of Peshawar Peshawar </option>  
+                                                <option value="University_of_Science_&amp;_Technology_Bannu"> University of Science &amp; Technology Bannu </option>  
+                                                <option value="Other"> Other </option>
+                                              </select><!-- -->
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-4 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Qualification <span class="required">*</span></label>
+                                              <select name="universityQualification[]" class="slct_uniqual form-control">
+                                                <option value="">Choose Qualification</option>
+                                                <option value="Bachelor_in_Business_Administration"> Bachelor in Business Administration </option>  
+                                                <option value="Bachelor_ in_Commerce_Honours"> Bachelor  in Commerce Honours </option>  
+                                                <option value="Bachelor_in_Engineering"> Bachelor in Engineering </option>  
+                                                <option value="Bachelor_in_Science_Engineering"> Bachelor in Science Engineering </option>  
+                                                <option value="Bachelor_ in_Science_Honours"> Bachelor  in Science Honours </option>  
+                                                <option value="Bachelor_in_Education"> Bachelor in Education </option>  
+                                                <option value="Bachelor_in_Fine_Arts"> Bachelor in Fine Arts </option>  
+                                                <option value="Bachelor_in_Pharmacy"> Bachelor in Pharmacy </option>  
+                                                <option value="Bachelor_in_Science"> Bachelor in Science </option>  
+                                                <option value="Doctor_in_Pharmacy"> Doctor in Pharmacy </option>  
+                                                <option value="Bachelor_in_Dental_Surgery"> Bachelor in Dental Surgery </option>  
+                                                <option value="Doctor_in_Veterinary_Medicine"> Doctor in Veterinary Medicine </option>  
+                                                <option value="Bachelor_in_Law"> Bachelor in Law </option>  
+                                                <option value="Masters_in_Accounting"> Masters in Accounting </option>  
+                                                <option value="Master_in_Advertising"> Master in Advertising </option>  
+                                                <option value="Masters_in_Agriculture"> Masters in Agriculture </option>  
+                                                <option value="Masters_in_ArtÂ&nbsp;andÂ&nbsp;Design"> Masters in ArtÂ&nbsp;andÂ&nbsp;Design </option>  
+                                                <option value="Masters_in_Biochemistry"> Masters in Biochemistry </option>  
+                                                <option value="Masters_in_CivilÂ&nbsp;Engineering"> Masters in CivilÂ&nbsp;Engineering </option>  
+                                                <option value="Masters_in_Botany"> Masters in Botany </option>  
+                                                <option value="Masters_in_Journalism"> Masters in Journalism </option>  
+                                                <option value="Masters_in_Business_Administration_Management"> Masters in Business Administration Management </option>  
+                                                <option value="Masters_in_Chemical_Engineering"> Masters in Chemical Engineering </option>  
+                                                <option value="Masters_in_Chemistry"> Masters in Chemistry </option>  
+                                                <option value="Masters_in_Commerce"> Masters in Commerce </option>  
+                                                <option value="Masters_in_Communication"> Masters in Communication </option>  
+                                                <option value="Masters_in_ComputerÂ&nbsp;Science"> Masters in ComputerÂ&nbsp;Science </option>  
+                                                <option value="Masters_in_Consulting"> Masters in Consulting </option>  
+                                                <option value="Masters_in_Mechanical_Engineering"> Masters in Mechanical Engineering </option>  
+                                                <option value="Masters_in_Economics"> Masters in Economics </option>  
+                                                <option value="Masters_in_Education"> Masters in Education </option>  
+                                                <option value="Masters_in_Electrical_and_Electronics_Engineering"> Masters in Electrical and Electronics Engineering </option>  
+                                                <option value="Masters_in_English_Literature"> Masters in English Literature </option>  
+                                                <option value="Masters_in_English_Linguistics"> Masters in English Linguistics </option>  
+                                                <option value="Masters_in_Environmental_Health"> Masters in Environmental Health </option>  
+                                                <option value="Masters_in_Library_Science"> Masters in Library Science </option>  
+                                                <option value="Masters_in_Fashion_Merchandising"> Masters in Fashion Merchandising </option>  
+                                                <option value="Masters_in_Finance_Accounting"> Masters in Finance Accounting </option>  
+                                                <option value="Masters_in_Finance_&amp;_Banking"> Masters in Finance &amp; Banking </option>  
+                                                <option value="Masters_in_Finance"> Masters in Finance </option>  
+                                                <option value="Masters_in_Food_Science"> Masters in Food Science </option>  
+                                                <option value="Masters_in_Materials_Science"> Masters in Materials Science </option>  
+                                                <option value="Masters_in_Geography"> Masters in Geography </option>  
+                                                <option value="Masters_in_Geology"> Masters in Geology </option>  
+                                                <option value="Masters_in_Health_Science"> Masters in Health Science </option>  
+                                                <option value="Masters_in_History"> Masters in History </option>  
+                                                <option value="Masters_in_Human_Resources"> Masters in Human Resources </option>  
+                                                <option value="Masters_in_Humanities"> Masters in Humanities </option>  
+                                                <option value="Masters_in_Information_Technology"> Masters in Information Technology </option>  
+                                                <option value="Masters_in_Logistics"> Masters in Logistics </option>  
+                                                <option value="Masters_in_International_Business"> Masters in International Business </option>  
+                                                <option value="Masters_in_Islamic_Studies"> Masters in Islamic Studies </option>  
+                                                <option value="Masters_in_Law"> Masters in Law </option>  
+                                                <option value="Masters_in_Management"> Masters in Management </option>  
+                                                <option value="Masters_in_Marketing"> Masters in Marketing </option>  
+                                                <option value="Masters_in_Mathematics"> Masters in Mathematics </option>  
+                                                <option value="Masters_in_Nursing"> Masters in Nursing </option>  
+                                                <option value="Masters_in_Paramedical"> Masters in Paramedical </option>  
+                                                <option value="Masters_in_Pharmacy"> Masters in Pharmacy </option>  
+                                                <option value="Masters_in_Philosophy"> Masters in Philosophy </option>  
+                                                <option value="Masters_in_Physics"> Masters in Physics </option>  
+                                                <option value="Masters_in_Psychology"> Masters in Psychology </option>  
+                                                <option value="Masters_in_Public_Health_Education"> Masters in Public Health Education </option>  
+                                                <option value="Masters_in_Risk_Management"> Masters in Risk Management </option>  
+                                                <option value="Masters_in_Science"> Masters in Science </option>  
+                                                <option value="Masters_in_Social_Studies"> Masters in Social Studies </option>  
+                                                <option value="Masters_in_Sociology"> Masters in Sociology </option>  
+                                                <option value="Masters_in_Software_Engineering"> Masters in Software Engineering </option>  
+                                                <option value="Masters_in_Sports"> Masters in Sports </option>  
+                                                <option value="Masters_in_Statistics"> Masters in Statistics </option>  
+                                                <option value="Masters_in_Strategic_Management"> Masters in Strategic Management </option>  
+                                                <option value="Masters_in_Zoology"> Masters in Zoology </option>  
+                                                <option value="Other"> Other </option>
+                                              </select><!-- -->
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Subject <span class="required">*</span></label>
+                                              <select name="universitySubject[]" class="slct_unisubjct form-control">
+                                                <option value="">Choose Subject</option>
+                                                <option value="Accounting"> Accounting </option>  
+                                                <option value="Additional_Mathematics"> Additional Mathematics </option>  
+                                                <option value="Advertising"> Advertising </option>  
+                                                <option value="Agriculture"> Agriculture </option>  
+                                                <option value="Art_and_Design"> Art and Design </option>  
+                                                <option value="Biochemistry"> Biochemistry </option>  
+                                                <option value="Biology"> Biology </option>  
+                                                <option value="Botany"> Botany </option>  
+                                                <option value="Business_Studies"> Business Studies </option>  
+                                                <option value="Chemical"> Chemical </option>  
+                                                <option value="Chemistry"> Chemistry </option>  
+                                                <option value="Commerce"> Commerce </option>  
+                                                <option value="Communication"> Communication </option>  
+                                                <option value="Computer_Science"> Computer Science </option>  
+                                                <option value="Economics"> Economics </option>  
+                                                <option value="Education"> Education </option>  
+                                                <option value="Electrical_and_Electronics"> Electrical and Electronics </option>  
+                                                <option value="English"> English </option>  
+                                                <option value="English_Language"> English Language </option>  
+                                                <option value="English_Literature"> English Literature </option>  
+                                                <option value="Environmental_Management"> Environmental Management </option>  
+                                                <option value="Environmental_Health"> Environmental Health </option>  
+                                                <option value="Finance"> Finance </option>  
+                                                <option value="Food_&amp;_Nutrition"> Food &amp; Nutrition </option>  
+                                                <option value="Food_Science"> Food Science </option>  
+                                                <option value="Geography"> Geography </option>  
+                                                <option value="Geology"> Geology </option>  
+                                                <option value="Health_Science"> Health Science </option>  
+                                                <option value="History"> History </option>  
+                                                <option value="Human_&amp;_Social_Biology"> Human &amp; Social Biology </option>  
+                                                <option value="Human_Resources"> Human Resources </option>  
+                                                <option value="Humanities"> Humanities </option>  
+                                                <option value="Information_Technology"> Information Technology </option>  
+                                                <option value="International_Business"> International Business </option>  
+                                                <option value="Islamic_Studies"> Islamic Studies </option>  
+                                                <option value="Islamiyat"> Islamiyat </option>  
+                                                <option value="Journalism"> Journalism </option>  
+                                                <option value="Law"> Law </option>  
+                                                <option value="Library_Science"> Library Science </option>  
+                                                <option value="Logistics"> Logistics </option>  
+                                                <option value="Management"> Management </option>  
+                                                <option value="Marketing"> Marketing </option>  
+                                                <option value="Mathematics"> Mathematics </option>  
+                                                <option value="Nursing"> Nursing </option>  
+                                                <option value="Pakistan_Studies"> Pakistan Studies </option>  
+                                                <option value="Paramedical"> Paramedical </option>  
+                                                <option value="Pharmacy"> Pharmacy </option>  
+                                                <option value="Philosophy"> Philosophy </option>  
+                                                <option value="Physics"> Physics </option>  
+                                                <option value="Psychology"> Psychology </option>  
+                                                <option value="Public_Health"> Public Health </option>  
+                                                <option value="Risk_Management"> Risk Management </option>  
+                                                <option value="Science"> Science </option>  
+                                                <option value="Sindhi"> Sindhi </option>  
+                                                <option value="Social_Studies"> Social Studies </option>  
+                                                <option value="Sociology"> Sociology </option>  
+                                                <option value="Sports"> Sports </option>  
+                                                <option value="Statistics"> Statistics </option>  
+                                                <option value="Strategic_Management"> Strategic Management </option>  
+                                                <option value="Urdu"> Urdu </option>  
+                                                <option value="Urdu_First_Language"> Urdu First Language </option>  
+                                                <option value="Urdu_Second_Language"> Urdu Second Language </option>  
+                                                <option value="World_history"> World history </option>  
+                                                <option value="Zoology"> Zoology </option>  
+                                                <option value="Other"> Other </option>
+                                              </select><!-- -->
+                                              <input type="text" class="form-control" style="display: none;">
+                                              <a href="#" class="closeOther" style="display: none;">close</a>
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Result <span class="required">*</span></label>
+                                              <input type="text" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Year <span class="required">*</span></label>
+                                              <input type="date" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                        </div>
+                                      </div><!-- form-body -->
+                                    </div>
+                                    <!-- row -->
+                                    <!-- Add another College --> 
+                                    <div class="row">
+                                      <div class="col-md-12 text-right">
+                                        <div class="col-md-12">
+                                          <a href="#" class="btn btn-group green">+ Add University</a>
+                                        </div><!-- col-md-12 -->
+                                      </div><!-- col-md-12 -->
+                                    </div><!-- row -->
+                                    <!-------------------------------------------- Professional ----------------------------------------------------------->
+                                    <h4 class="form-section headingBorderBottom Professional">Professional</h4>
+                                    <div class="row" style="padding-bottom: 20px;">
+                                      <div class="form-body">
+                                        <div class="col-md-12">
+                                          <div class="col-md-4">
+                                              <label class="control-label">Professional Name <span class="required">*</span></label>
+                                              <input type="text" class="form-control">
+                                              
+                                          </div><!-- col-md-4 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Qualification <span class="required">*</span></label>
+                                              <input type="text" class="form-control">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Subject <span class="required">*</span></label>
+                                              <input type="text" class="form-control">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Result <span class="required">*</span></label>
+                                              <input type="text" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Year <span class="required">*</span></label>
+                                              <input type="date" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                        </div>
+                                      </div><!-- form-body -->
+                                    </div>
+                                    <!-- row -->
+                                    <!-- Add another College --> 
+                                    <div class="row">
+                                      <div class="col-md-12 text-right">
+                                        <div class="col-md-12">
+                                          <a href="#" class="btn btn-group green">+ Add Professional</a>
+                                        </div><!-- col-md-12 -->
+                                      </div><!-- col-md-12 -->
+                                    </div><!-- row -->
+                                    <!---------------------------------------------------------- Others ---------------------------------------------------->
+                                    <h4 class="form-section headingBorderBottom Others">Others</h4>
+                                    <div class="row" style="padding-bottom: 20px;">
+                                      <div class="form-body">
+                                        <div class="col-md-12">
+                                          <div class="col-md-4">
+                                              <label class="control-label">Others Name <span class="required">*</span></label>
+                                              <input type="text" class="form-control">
+                                              
+                                          </div><!-- col-md-4 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Qualification <span class="required">*</span></label>
+                                              <input type="text" class="form-control">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Subject <span class="required">*</span></label>
+                                              <input type="text" class="form-control">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Result <span class="required">*</span></label>
+                                              <input type="text" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                          <div class="col-md-2">
+                                              <label class="control-label">Year <span class="required">*</span></label>
+                                              <input type="date" class="form-control" name="">
+                                          </div><!-- col-md-2 -->
+                                        </div>
+                                      </div><!-- form-body -->
+                                    </div>
+                                    <!-- row -->
+                                    <!-- Add another College --> 
+                                    <div class="row">
+                                      <div class="col-md-12 text-right">
+                                        <div class="col-md-12">
+                                          <a href="#" class="btn btn-group green">+ Add Other</a>
+                                        </div><!-- col-md-12 -->
+                                      </div><!-- col-md-12 -->
+                                    </div><!-- row -->
+                                  </form>
 		                            </div>
 		                            <!-- tab_education -->
+                                
 		                            <div class="tab-pane" id="tab_employment_edit">
-		                               <div class="row">
-		                                  <div class="col-md-12">
-		                                     <div class="portlet light lowPadding2 onlyBorderBottom marginBottom0">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-1 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/aflogo.jpg" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-11 paddingRight0">
-		                                              <h5 class=" marginBottom0 font-grey-mint marginTop0"><strong>IT Business Analyst</strong> at <strong>Assessment Fund</strong></h5>
-		                                              <h5 class="font-grey-salsa marginBottom4">
-		                                                 <span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>10,000</strong></span>
-		                                                 <span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>2001</strong> to <strong>2005</strong></span>
-		                                                 <span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>10,000</strong></span>
-		                                                 <span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>Islamiat, Islamiat English, Urdu</strong></span>
-		                                              </h5>
-		                                              <p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">Lorem Ipsum dolor sit amet, Lorem Ipsum dolor sit amet Lorem Ipsum dolor</span> </p>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                               </div>
-		                               <!-- row -->
-		                               <div class="row">
-		                                  <div class="col-md-12">
-		                                     <div class="portlet light lowPadding2 onlyBorderBottom marginBottom0">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-1 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/BriefacaseIcon.jpg" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-11 paddingRight0">
-		                                              <h5 class=" marginBottom0 font-grey-mint marginTop0">Formerly worked at <strong>HireLabs</strong> on the position of <strong>UI/UX Lead</strong></h5>
-		                                              <h5 class="font-grey-salsa marginBottom4">
-		                                                 <span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>10,000</strong></span>
-		                                                 <span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>2001</strong> to <strong>2005</strong></span>
-		                                                 <span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>I, II, III </strong></span>
-		                                                 <span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>Islamiat, Islamiat English, Urdu</strong></span>
-		                                              </h5>
-		                                              <p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">-</span> </p>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                               </div>
-		                               <!-- row -->
-		                               <div class="row">
-		                                  <div class="col-md-12">
-		                                     <div class="portlet light lowPadding2 marginBottom0">
-		                                        <div class="portlet-body">
-		                                           <div class="col-md-1 padding0">
-		                                              <img src="http://10.10.10.50/gsims/public/metronic/pages/img/BriefacaseIcon.jpg" class="SchoolPlaceHolder" />
-		                                           </div>
-		                                           <!-- col-md-3 -->
-		                                           <div class="col-md-11 paddingRight0">
-		                                              <h5 class=" marginBottom0 font-grey-mint marginTop0">Web Developer at <strong>TechiBits</strong></h5>
-		                                              <h5 class="font-grey-salsa marginBottom4">
-		                                                 <span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>10,000</strong></span>
-		                                                 <span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>2001</strong> to <strong>2005</strong></span>
-		                                                 <span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>10,000</strong></span>
-		                                                 <span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>Islamiat, Islamiat English, Urdu</strong></span>
-		                                              </h5>
-		                                              <p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">Personal Growth</span> </p>
-		                                           </div>
-		                                           <!-- col-md-9 -->
-		                                        </div>
-		                                        <!-- portlet-body -->
-		                                     </div>
-		                                     <!-- portlet -->
-		                                  </div>
-		                                  <!-- col-md-6 -->
-		                               </div>
-		                               <!-- row -->
-		                               <!-- 
-		                                  <table width="100%" border="0" class="table table-bordered">
-		                                      <thead class="bg-grey">
-		                                          <tr>
-		                                              <th class="">Institution</th>
-		                                              <th>Designation</th>
-		                                              <th>Class(s)<br>taught</th>
-		                                              <th>Subject(s)<br>taught</th>
-		                                              <th>Salary</th>
-		                                              <th>From<br><small>(year)</small></th>
-		                                              <th>To<br><small>(year)</small></th>
-		                                              <th>Reasons for Leaving</th>
-		                                          </tr>
-		                                      </thead>
-		                                      <tbody>
-		                                          <tr>
-		                                              <td>Mobilink GSM (POS)</td>
-		                                              <td>Proprietor</td>
-		                                              <td></td>
-		                                              <td></td>
-		                                              <td>100000</td>
-		                                              <td>2001</td>
-		                                              <td>2009</td>
-		                                              <td>Security Reasons....</td>
-		                                          </tr>        
-		                                      </tbody>
-		                                  </table>
-		                                  -->
+                                  <div class="form-body">
+                                    <h3 class="form-section marginTop0 headingBorderBottom">Employment History</h3>
+                                    <div class="row ">
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 text-right paddingRight0">Employee ID:</label>
+                                             <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="123" disabled="">
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!--/span-->
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 text-right paddingRight0">GT ID:</label>
+                                             <div class="col-md-9">
+                                                <input type="text" class="form-control" placeholder="" value="16-070" disabled="">
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <hr />
+                                  </div><!-- form-body -->
+	                                <table class="table table-striped table-hover" id="empHistory" style="width:100%">
+                                  	<tbody>
+                                    	<tr>
+                                    		<td>
+                                          <div class="row">
+                                      		  <div class="col-md-6">
+                                      			 <div class="form-group">
+                                                <label class="control-label col-md-3 text-right paddingRight0">Inst/Org:</label>
+                                      				  <div class="col-md-9">
+                                                  <input type="text" name="institutionName[]" class="form-control" placeholder="" value="">
+                                                </div><!-- col-md-9 -->
+                                              </div><!-- form-group -->
+                                              <div class="form-group">
+                                                <div class="col-md-6">
+                                                  <label class="control-label col-md-3 text-right paddingRight0">Designation:</label>
+                                                  <div class="col-md-9">
+                                                    <input type="text" name="institutionName[]" class="form-control" placeholder="" value="">
+                                                  </div><!-- col-md-9 -->
+                                                </div><!-- col-md-6 -->
+                                                <div class="col-md-6">
+                                                  <label class="control-label col-md-3 text-right paddingRight0">Salary:</label>
+                                                  <div class="col-md-9">
+                                                    <input type="text" name="institutionName[]" class="form-control" placeholder="" value="">
+                                                  </div><!-- col-md-9 -->
+                                                </div><!-- col-md-6 -->
+                                              </div><!-- form-group -->
+                                            </div><!-- col-md-6-->
+                                            <div class="col-md-6">
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3 text-right paddingRight0">Subject(s) Taught</label>
+                                                <div class="col-md-9">
+                                                  <textarea name="institutionClass[]" rows="3" class="form-control"></textarea>
+                                                </div><!-- col-md-9 -->
+                                              </div><!-- form-group -->
+                                            </div><!-- col-md-6-->
+                                          </div><!-- row -->
+
+
+
+
+                                      			<div class="row">
+                                      				<section class="col-12">
+                                      				  <section class="col col-3">
+                                      				    <label class="label"> Designation  </label>
+                                      				    <label class="input">
+                                      				      <input type="text" name="institutionDesignation[]" class="form-control" value="" />
+                                      				      <b class="tooltip tooltip-top-right">Designation hold.</b>
+                                      				    </label>
+                                      				  </section>
+
+                                      			    <section class="col col-2">
+                                      				    <label class="label">Salary</label>
+                                      				    <label class="input">
+                                      				      <input type="text" name="institutionSalary[]" class="form-control" value="" />
+                                      				    </label>
+                                      				  </section>
+
+                                      					<section class="col col-3">
+                                      					  <label class="label">From (Date)</label>
+                                      					  <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                                    <input type="text" name="institutionFrom[]" class="experienceFromYear form-control" value="" id="efYear_0" />
+                                                  </label>
+                                                </section>
+
+                                      				  <section class="presentSection col col-3"  style="padding-left:0;display:none;" id="toDateH_0">
+                                      						<label class="label">To (Date)</label>
+                                      						<label class="input"> <i class="icon-append fa fa-calendar" style="width:20%"></i>
+                                      						  <input type="text" name="institutionTo[]" class="experienceToYear form-control" value=""  id="etYear_0" style="padding-right:0px;" />
+                                                  </label>
+                                      					</section>
+
+                                      					<section class="col col-1"  style="margin-bottom: 0;margin-left: 0;margin-top: 43px; padding: 0;">
+                                        					<div class="inline-group" style="padding:0;">
+                                                    <label class="checkbox" style="font-size:12px;font-weight:bold;">
+                                                      <input type="checkbox" checked="checked" name="present[]" class="presentCheckBox">
+                                                      <i></i>Present
+                                                    </label>
+                                        					</div>
+                                      					</section>
+                                              </section>
+                                            </div>
+                                            <section>
+                                              <label class="label">Class(s) taught</label>
+                                              <label class="textarea"> <i class="icon-append fa fa-question"></i>
+                                                <textarea name="institutionClass[]" rows="3"></textarea>
+                                                <b class="tooltip tooltip-top-right">Please tell us Class(s) you have taught</b> 
+                                              </label>
+                                            </section>
+                                          </div>
+
+                                          <section class="col-md-6">
+                                            <section>
+                                              <label class="label">Subject(s) taught</label>
+                                              <label class="textarea"> <i class="icon-append fa fa-question"></i>
+                                                <textarea name="institutionSubject[]" rows="3"></textarea>
+                                                <b class="tooltip tooltip-top-right">Please tell us Subject(s) you have taught</b> 
+                                              </label>
+                                            </section>
+
+                                      			<section>
+                                      				<label class="label">Reason For Leaving</label>
+                                      				<label class="textarea"> <i class="icon-append fa fa-question"></i>
+                                      				  <textarea name="institutionLeavingReason[]" rows="3"></textarea>
+                                      				  <b class="tooltip tooltip-top-right">Reason for leaving you current job</b> 
+                                              </label>
+                                      			</section>
+                                      		</section>
+                                          <a href="javascript:void(0);" class="remHistory" style="float: right;position: relative;top: 1px;"> <i class="fa fa-trash-o"></i>  </a>
+                                    		</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table class="table">
+                                    <tr>
+                                      <td>
+                                        <input type="button" id="btnAdd" onclick="AddHistory()" value="+ Add Another Institution"  class="btn btn-primary btn-sm" name="addAnotherInstitution" /> 		
+                                      </td>
+                                    </tr>
+                                  </table>
+<script type="text/javascript">
+function AddHistory(){
+$('.experienceFromYear').datepicker('destroy');
+$('.experienceToYear').datepicker('destroy');
+var $tableBody = $('#empHistory').find("tbody"),
+$trLast = $tableBody.find("tr:last"),
+$trNew = $trLast.clone();
+$trNew.find('input,select,textarea').val('');
+$trLast.after($trNew);
+
+/* */
+
+$(".remHistory").show();
+$("#empHistory").on('click','.remHistory',function(){
+	var rowCount = $('#empHistory tr').length;
+	//alert(rowCount);
+	if( rowCount > 1 ){ $(this).parent().parent().remove();	 }else{ $(".remHistory").hide(); }
+});
+
+
+//$(".experienceFromYear").datepicker('distory');
+if ( $('input[name^="institutionFrom[]"').length) {
+	$('input[name^="institutionFrom[]"').each(function(i){
+	var newID = 'efYear_'+i;
+	$(this).attr( 'id',newID );
+	$( "#" + newID + "" ).datepicker();
+	});
+
+
+}
+//var presentSection = ;
+
+$(".presentSection").each(function(i){
+	var newID = 'toDateH_'+i;
+	$(this).attr( 'id',newID );
+});
+
+$('.experienceToYear').datepicker('destroy');
+
+if ( $('input[name^="institutionTo[]"').length) {
+	$('input[name^="institutionTo[]"').each(function(i){
+		var newIDs = 'etYear_'+i;
+		//alert( newIDs )
+		$(this).attr( 'id',newIDs );
+		$( "#" + newIDs + "" ).datepicker();
+
+
+	});
+}
+
+}
+</script>
+
 		                            </div>
 		                            <!-- tab_employment -->
 		                            <div class="tab-pane " id="tab_parent_edit">

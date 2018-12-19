@@ -192,10 +192,10 @@ class fee_bill extends Model
         $last_billing_cycle_number=$billing_cycle_number-1;
         if($status=='S-CPT'){
                 $details=fee_bill::where([['student_id',$student_id],['bill_cycle_no',$last_billing_cycle_number],['academic_session_id',$academic_session_id]])
-                ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment')
+                ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')
                 ->Orderby('id','asc')->get();
         }else{
-            $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment')->Orderby('id','desc')->first();
+            $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')->Orderby('id','desc')->first();
 
         }
        

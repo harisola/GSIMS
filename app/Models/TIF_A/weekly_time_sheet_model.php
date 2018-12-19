@@ -46,8 +46,9 @@ class weekly_time_sheet_model extends Model
             left join atif_gs_events.tt_profile tp on tp.id =  tpts.profile_id 
 
             where wts.`date` > curdate()";
-        $staff = DB::connection($this->dbCon)
+            $staff = DB::connection($this->dbCon)
                 ->select($query);
+
         return $staff;
     }
 

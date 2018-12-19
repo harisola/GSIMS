@@ -304,7 +304,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::post('/concession_search','Account_Process\Accounts\ConcessionController@concession_search');
 
-Route::post('/concession_search2','Account_Process\Accounts\ConcessionController@concession_search2');
+	Route::post('/concession_search2','Account_Process\Accounts\ConcessionController@concession_search2');
 
 	Route::post('/add_concession','Account_Process\Accounts\ConcessionController@add_concession');
 
@@ -365,6 +365,7 @@ Route::post('/concession_search2','Account_Process\Accounts\ConcessionController
 	Route::get('/staff_recruitment_followup','Development\hr_followup@index');
 	Route::post('/staff_recruitment_followup_logs','Development\hr_followup@followupLogs');
 	Route::post('/addFollowComments','Development\hr_followup@addFollowComments');
+	Route::post('/update_archieve','Development\staff_recruitment_initiation_archive_ns@update_archieve');
 	
 	
 	Route::post('/addcustomer','Development\staff_recruitment_initiation@addcustomer');
@@ -394,6 +395,9 @@ Route::post('/allposts','Development\staff_recruitment_initiation@allposts');
 	
 
 
+Route::post('/Search_followup_list','Development\hr_followup@Search_followup_list');
+Route::post('/Followup_list','Development\hr_followup@Followup_list');
+
 
 /* *******************************************************************************
  * Master Page(Student)
@@ -422,13 +426,12 @@ Route::group(['middleware' => 'authenticated'],function(){
 
 Route::get('/staff_recruitment_initiation_archive','Development\staff_recruitment_initiation_archive_ns@index');
 
+Route::post('/archiveLogs','Development\staff_recruitment_initiation_archive_ns@archiveLogs');
 
 
+	Route::post('/modified_form_archive','Development\staff_recruitment_initiation_archive_ns@modified_form_archive');
 
-
-
-
-
+Route::post('/allarchive','Development\staff_recruitment_initiation_archive_ns@allarchive');
 		
 
 

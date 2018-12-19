@@ -49,7 +49,7 @@ endif; ?>
 
 
 
-<div class="table-scrollable table-scrollable-borderless" id="Student_info_div_m">
+<div class="table-scrollable-borderless" id="Student_info_div_m">
 <table>
 <tr>
     <td>

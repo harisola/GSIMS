@@ -69,7 +69,7 @@ class staff_recruitment_initiation extends Controller
   }
 
 ## Total number of records without filtering
-$query = "select count( af.id) as allcount from atif_career.career_form as af
+/*$query = "select count( af.id) as allcount from atif_career.career_form as af
 
 left join atif_career.career_status as cs
         on cs.id = af.status_id
@@ -85,7 +85,61 @@ left join atif_career.career_status as cs
         order by lcf.created limit 1) as lcf
         on lcf.form_id = af.id
         
- WHERE 1 ".$Where." and  af.status_id != 10 and af.status_id != 12 ";
+ WHERE 1 ".$Where." and  af.status_id != 10 and af.status_id != 12 ";*/
+
+ $query ="select 
+
+count( af.id) as allcount
+      
+      
+from atif_career.career_form as af 
+left outer join (
+select 
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.date
+end
+) as p_date,
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.time
+end
+) as p_time,
+(
+case when s.date = '1970-01-01' then 
+(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.campus
+end
+) as p_campus,
+
+
+
+s.* from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id 
+)
+) 
+as d on d.form_id = af.id
+left join atif_career.career_status as cs on cs.id = af.status_id 
+left join atif_career.career_stage as ct on ct.id = af.stage_id 
+left join (
+select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
+from atif_career.log_career_form as lcf 
+order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+WHERE 1 ".$Where." and af.status_id != 10 and af.status_id != 12 
+and (d.p_date is null or d.p_date >= curdate() )";
+
+
+
 $count_result = $staffRecruiment->custom_query($query);
 
 if(!empty($count_result))
@@ -97,11 +151,12 @@ else
   $totalRecords = 0;
 }
 
-
+/*
 $sQu="select count(af.id) as allcount from atif_career.career_form as af 
 left join atif_career.career_status as cs
         on cs.id = af.status_id
       left join atif_career.career_stage as ct on ct.id = af.stage_id
+
       left join atif_career.career_form_data as part_b 
       on part_b.form_id = af.id and part_b.status_id = 11
       
@@ -114,7 +169,54 @@ left join atif_career.career_status as cs
         on lcf.form_id = af.id
 
 
-WHERE 1 ".$searchQuery."  ".$Where."  and  af.status_id != 10 and af.status_id != 12 ";
+WHERE 1 ".$searchQuery."  ".$Where."  and  af.status_id != 10 and af.status_id != 12 ";*/
+
+$sQu = " select 
+count( af.id) as allcount
+from atif_career.career_form as af 
+left outer join (
+select 
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.date
+end
+) as p_date,
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.time
+end
+) as p_time,
+(
+case when s.date = '1970-01-01' then 
+(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.campus
+end
+) as p_campus,
+s.* from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id 
+)
+) 
+as d on d.form_id = af.id
+left join atif_career.career_status as cs on cs.id = af.status_id 
+left join atif_career.career_stage as ct on ct.id = af.stage_id 
+left join (
+select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
+from atif_career.log_career_form as lcf 
+order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+WHERE 1 ".$searchQuery."  ".$Where." and af.status_id != 10 and af.status_id != 12 
+and (d.p_date is null or d.p_date >= curdate() )";
+
+
 $scount_result = $staffRecruiment->custom_query($sQu);
 
 
@@ -132,45 +234,86 @@ else
 ## Fetch records
 $empQuery = "select 
 
+
 af.id as career_id, af.gc_id, af.name, af.email, af.mobile_phone, af.land_line,
-af.nic, af.gender, af.position_applied, af.comments,
-af.status_id, af.stage_id,
-cs.name as status_name, cs.name_code as status_code,
-ct.name as stage_name, ct.name_code as stage_code, from_unixtime(af.created) as created, if(af.form_source=1, 'Online', 'Walkin' ) as form_source,
-af.form_source as form_source2,
-part_b.date as part_b_date, part_b.time as part_b_time,
-if(part_b.campus=2, 'South',if(part_b.campus=1, 'North', '')) as Campus,
-if(af.status_id != 11 and part_b.time is not null, 'Part-B completed', '') as part_b_complete,
+      af.nic, af.gender, af.position_applied, af.comments,
+      af.status_id, af.stage_id,
+      cs.name as status_name, cs.name_code as status_code,
+      ct.name as stage_name, ct.name_code as stage_code, from_unixtime(af.created) as created, if(af.form_source=1, 'Online', 'Walkin' ) as form_source,
+      af.form_source as form_source2,
+      
+      d.p_date as part_b_date, 
+      d.p_time as part_b_time,
+      
+      
+      if(d.p_campus=2, 'South',if(d.p_campus=1, 'North', '')) as Campus,
+      
+      if(af.status_id != 11 and d.p_time is not null, 'Part-B completed', '') as part_b_complete,
+      
+      (case 
+      when af.status_id=11 and af.stage_id=9 then 'CallForPartB'
+      when af.status_id=11 and af.stage_id=10 then 'CommunicatedForPartB'
+      when af.status_id != 11 and d.p_time is not null then 'CompletedPartB'
+      else ''
+      end ) as PartB,
+      
+     
+      
+      from_unixtime(af.created,'%b %e, %Y %h:%i:%S %p') as Created_date,
+      from_unixtime(af.modified,'%b %e, %Y %h:%i:%S %p') as Modified_date,
+        
+      
+      from_unixtime(af.modified, '%b %e, %Y %h:%i:%S %p') as Date_of_application,
 
-(case 
-when af.status_id=11 and af.stage_id=9 then 'CallForPartB'
-when af.status_id=11 and af.stage_id=10 then 'CommunicatedForPartB'
-when af.status_id != 11 and part_b.time is not null then 'CompletedPartB'
-else ''
-end ) as PartB,
-
-from_unixtime(af.created,'%b %e, %Y %h:%i:%S %p') as Created_date,
-from_unixtime(af.modified,'%b %e, %Y %h:%i:%S %p') as Modified_date,
-
-from_unixtime(af.modified, '%b %e, %Y %h:%i:%S %p') as Date_of_application,
-
-if( lcf.created is null, from_unixtime(af.modified,'%Y-%m-%d'), from_unixtime(lcf.created,'%Y-%m-%d')) as log_created
-
-
+      if( lcf.created is null, from_unixtime(af.modified,'%Y-%m-%d'), from_unixtime(lcf.created,'%Y-%m-%d')) as log_created
+      
+      
+      
 from atif_career.career_form as af 
+left outer join (
+select 
 
-left join atif_career.career_status as cs
-on cs.id = af.status_id
-left join atif_career.career_stage as ct on ct.id = af.stage_id
-left join atif_career.career_form_data as part_b 
-on part_b.form_id = af.id and part_b.status_id = 11
+(
+case when s.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.date
+end
+) as p_date,
 
-left join (select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified
+(
+case when s.date = '1970-01-01' then 
+(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.time
+end
+) as p_time,
+(
+case when s.date = '1970-01-01' then 
+(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.campus
+end
+) as p_campus,
+
+
+
+s.* from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id 
+)
+) 
+as d on d.form_id = af.id
+left join atif_career.career_status as cs on cs.id = af.status_id 
+left join atif_career.career_stage as ct on ct.id = af.stage_id 
+left join (
+select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
-order by lcf.created limit 1) as lcf
-on lcf.form_id = af.id
-
-WHERE 1 ".$searchQuery."  and  af.status_id != 10 and af.status_id != 12 ".$Where." 
+order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12  ".$Where."
+and (d.p_date is null or d.p_date >= curdate() )
 order by af.created desc  limit ".$row.",".$rowperpage;
 
 $empRecords = $staffRecruiment->custom_query($empQuery);
@@ -405,23 +548,32 @@ $stage_id = (int)$request->input('stage_id');
 $applicant_next_status = $request->input('applicant_next_status');
 $next_stage = $request->input('next_stage');
 
-$Get_Last_Record = "select u.id as id from atif_Career.career_form_data_updation as u where u.form_id=".$form_id." 
+$Get_Last_Record = "select u.id as id, u.date, u.time from atif_Career.career_form_data_updation as u where u.form_id=".$form_id." 
 and u.status_id=".$status_id." and u.stage_id=".$stage_id." ";
 
 $Lr = $staffRecruiment->custom_query($Get_Last_Record);
+
+$previous_date=date("Y-m-d");
+$previous_time=date('h:i:s');
 
 if( !empty($Lr) )
 {
   foreach ($Lr as $v) 
   {
   $Action_Status_id = $v["id"]; 
+  $previous_date = $v["date"];
+  $previous_time = $v["time"];
   $data_KS = array('record_deleted' =>1 );
   $where_KS = array( 'id' => $Action_Status_id );
   $staffRecruiment->updateFormdata('atif_career.career_form_data_updation', $where_KS, $data_KS);
   }
 }
 
-
+if( $applicant_next_status == 14 )
+{
+  $date = $previous_date;
+  $time = $previous_time;
+}
 
 $new_Data = array(
 "comment_type"  => "allocation",
@@ -588,13 +740,6 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
      
     }
 
-
-
-
-
-
-
-
     /**********************************************************************
     * Add Career Form Data 
     * Author:   Atif Naseem Ahmed
@@ -709,11 +854,6 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
         //sleep(1);
 
 
-       
-
-
-
-
         if($status_id == 11 && $stage_id == 4)
         {
         $career_form = array(
@@ -736,16 +876,7 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
         $staffRecruiment->updateFormdata('log_career_form', $where_career_form, $log_data);
 
         }
-
-        
-
     }
-  
-  
-  
-  
-  
-  
   
     public function addFormDataMoveToArchive(Request $request)
     {
@@ -834,7 +965,7 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
   
     $form_id = $request->input('Form_id');
   
-  $RecruimentData = $staffRecruiment->Get_Logs($form_id); 
+  $RecruimentData = $staffRecruiment->Get_Logs($form_id);
     
    $returnHTML = view('master_layout.staff.staff_recruitment.staff_recruitment_initiation_view_load_logs')->with( array('staffRecruiment' => $RecruimentData,'userID'=> $userID ) )->render();
   return response()->json(array('success' => true, 'html'=>$returnHTML));
@@ -1076,12 +1207,12 @@ $To_Date_m =  $request->input('from_date_m');
   {
     $Campus = $request->input('Campus');
     if( strpos($Campus, $searchString) !== false ) {
-      $Where .= " AND ( part_b.campus=1 or part_b.campus=2 )";
+      //$Where .= " AND ( part_b.campus=1 or part_b.campus=2 )";
     }else{
       if( $Campus == 'South' ){
-        $Where .= " AND ( part_b.campus=2 )";
+       // $Where .= " AND ( part_b.campus=2 )";
       }else{
-        $Where .= " AND ( part_b.campus=1 )";
+       // $Where .= " AND ( part_b.campus=1 )";
       }
     }
   }
@@ -1139,20 +1270,26 @@ if($searchValue != ''){
 ## Fetch records
 $empQuery = "select 
 
+
 af.id as career_id, af.gc_id, af.name, af.email, af.mobile_phone, af.land_line,
       af.nic, af.gender, af.position_applied, af.comments,
       af.status_id, af.stage_id,
       cs.name as status_name, cs.name_code as status_code,
       ct.name as stage_name, ct.name_code as stage_code, from_unixtime(af.created) as created, if(af.form_source=1, 'Online', 'Walkin' ) as form_source,
       af.form_source as form_source2,
-      part_b.date as part_b_date, part_b.time as part_b_time,
-      if(part_b.campus=2, 'South',if(part_b.campus=1, 'North', '')) as Campus,
-      if(af.status_id != 11 and part_b.time is not null, 'Part-B completed', '') as part_b_complete,
+      
+      d.p_date as part_b_date, 
+    d.p_time as part_b_time,
+      
+      
+      if(d.p_campus=2, 'South',if(d.p_campus=1, 'North', '')) as Campus,
+      
+      if(af.status_id != 11 and d.p_time is not null, 'Part-B completed', '') as part_b_complete,
       
       (case 
       when af.status_id=11 and af.stage_id=9 then 'CallForPartB'
       when af.status_id=11 and af.stage_id=10 then 'CommunicatedForPartB'
-      when af.status_id != 11 and part_b.time is not null then 'CompletedPartB'
+      when af.status_id != 11 and d.p_time is not null then 'CompletedPartB'
       else ''
       end ) as PartB,
       
@@ -1165,31 +1302,61 @@ af.id as career_id, af.gc_id, af.name, af.email, af.mobile_phone, af.land_line,
       from_unixtime(af.modified, '%b %e, %Y %h:%i:%S %p') as Date_of_application,
 
       if( lcf.created is null, from_unixtime(af.modified,'%Y-%m-%d'), from_unixtime(lcf.created,'%Y-%m-%d')) as log_created
-
-
+      
+      
+      
 from atif_career.career_form as af 
+left outer join (
+select 
 
+(
+case when s.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.date
+end
+) as p_date,
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.time
+end
+) as p_time,
+(
+case when s.date = '1970-01-01' then 
+(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.campus
+end
+) as p_campus,
+
+
+
+s.* from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id 
+)
+) 
+as d on d.form_id = af.id
 left join atif_career.career_status as cs on cs.id = af.status_id 
 left join atif_career.career_stage as ct on ct.id = af.stage_id 
-left join atif_career.career_form_data as part_b on part_b.form_id = af.id and part_b.status_id = 11 
-left join (select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified,
-      lcf.status_id, lcf.stage_id
-
-
-        from atif_career.log_career_form as lcf 
-        order by lcf.created limit 1) as lcf
-        on lcf.form_id = af.id
-
-WHERE 1 ".$searchQuery."  and  af.status_id != 10 and af.status_id != 12 ".$Where." order by af.created desc  limit ".$row.",".$rowperpage;
-
-
-
+left join (
+select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
+from atif_career.log_career_form as lcf 
+order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12  ".$Where."
+and (d.p_date is null or d.p_date >= curdate() )
+order by af.created desc  limit ".$row.",".$rowperpage;
 
 
 
 
 ## Total number of records without filtering
-$query = "select count(af.id) as allcount from atif_career.career_form as af 
+/*$query = "select count(af.id) as allcount from atif_career.career_form as af 
 
 left join atif_career.career_status as cs
         on cs.id = af.status_id
@@ -1205,11 +1372,64 @@ left join atif_career.career_status as cs
         order by lcf.created limit 1) as lcf
         on lcf.form_id = af.id
 
-WHERE 1 and  af.status_id != 10 and af.status_id != 12 ".$Where." ";
+WHERE 1 and  af.status_id != 10 and af.status_id != 12 ".$Where." ";*/
+
+ $query ="select 
+
+count( af.id) as allcount
+      
+      
+from atif_career.career_form as af 
+left outer join (
+select 
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.date
+end
+) as p_date,
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.time
+end
+) as p_time,
+(
+case when s.date = '1970-01-01' then 
+(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.campus
+end
+) as p_campus,
+
+
+
+s.* from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id 
+)
+) 
+as d on d.form_id = af.id
+left join atif_career.career_status as cs on cs.id = af.status_id 
+left join atif_career.career_stage as ct on ct.id = af.stage_id 
+left join (
+select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
+from atif_career.log_career_form as lcf 
+order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+WHERE 1 ".$Where." and af.status_id != 10 and af.status_id != 12 
+and (d.p_date is null or d.p_date >= curdate() )";
+
+
 $count_result = $staffRecruiment->custom_query($query);
 $totalRecords = $count_result[0]['allcount'];
 
-$sQu="select count(af.id) as allcount from atif_career.career_form as af 
+/*$sQu="select count(af.id) as allcount from atif_career.career_form as af 
 
 left join atif_career.career_status as cs
         on cs.id = af.status_id
@@ -1225,7 +1445,53 @@ left join atif_career.career_status as cs
         order by lcf.created limit 1) as lcf
         on lcf.form_id = af.id
 
-WHERE 1 ".$searchQuery ." and  af.status_id != 10 and af.status_id != 12 ".$Where."  ";
+WHERE 1 ".$searchQuery ." and  af.status_id != 10 and af.status_id != 12 ".$Where."  ";*/
+
+$sQu = " select 
+count( af.id) as allcount
+from atif_career.career_form as af 
+left outer join (
+select 
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.date
+end
+) as p_date,
+
+(
+case when s.date = '1970-01-01' then 
+(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.time
+end
+) as p_time,
+(
+case when s.date = '1970-01-01' then 
+(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
+and dd.form_id= s.form_id order by dd.id desc limit 1)
+else s.campus
+end
+) as p_campus,
+s.* from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id 
+)
+) 
+as d on d.form_id = af.id
+left join atif_career.career_status as cs on cs.id = af.status_id 
+left join atif_career.career_stage as ct on ct.id = af.stage_id 
+left join (
+select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
+from atif_career.log_career_form as lcf 
+order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+WHERE 1 ".$searchQuery."  ".$Where." and af.status_id != 10 and af.status_id != 12 
+and (d.p_date is null or d.p_date >= curdate() )";
+
 
 $scount_result = $staffRecruiment->custom_query($sQu);
 $totalRecordwithFilter = $scount_result[0]['allcount'];

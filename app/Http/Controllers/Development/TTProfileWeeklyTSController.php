@@ -29,13 +29,19 @@ class TTProfileWeeklyTSController extends Controller
         /***** Getting Weeks *****/
         $get_weeks = $weeklyTimeSheet->get_weeks();
 
+
+
         /***** Getting Staff Profile Details *****/
         $staff_profile_detail = $weeklyTimeSheet->staff_profile_desc();
+
+
         
         /***** Getting Staff List *****/
         $staff = $weeklyTimeSheet->get_staff();
         
         $dates = $this->get_dates($get_weeks);
+
+
 
         
         $weeklyTimeSheetData =  $weeklyTimeSheet->get_weekly_timesheet( $dates );

@@ -54,57 +54,54 @@ class Haris extends StaffReportController
 
       /************************************************** Staff Team **************************************************/
       $staffData = $staffInfo->get_Staff_Info($userID);
-	  
-	  
-	  
-	  
-	  $staffData2 = $staffInfo->get_StaffInfo($staffData['info'][0]->gt_id);
-	  
+      $staffData2 = $staffInfo->get_StaffInfo($staffData['info'][0]->gt_id);
+      // var_dump($staffData2); exit;
       $StaffReportee = array();
       $StaffReportee_SC = array();
       $StaffReportee2 = array();
       $StaffReportee2_SC = array();
       $StaffReportee_TRP = array();
-	  $StaffReportee2 = array();
-		$staff = array();
+  	  $StaffReportee2 = array();
+  		$staff = array();
+
+
+
       if(!empty($staffData2[0]['role_id'])){
+
+
         $StaffReportee = $staffInfo->get_StaffReporteeInfo_UTeam($staffData2[0]['role_id']);
         $StaffReportee_SC = $staffInfo->get_StaffReporteeSCInfo_UTeam($staffData2[0]['role_id']);
 		
-		$StaffRole = $staffInfo->Get_Current_Staff_Role($staffData2[0]['role_id']);
-		$StaffRole = collect($StaffRole)->map(function($x){ return (array) $x; })->toArray();
-		
-		
-		$i=0;
-		foreach( $StaffRole as $rrr ){
-			unset( $StaffRole[$i]['id']);
-			unset( $StaffRole[$i]['roleCode']);
-		
-			unset($StaffRole[$i]['abridged_name']);
-			//unset($StaffRole[$i]['name_code']);
-			unset($StaffRole[$i]['gg_id']);
-			
-			unset($StaffRole[$i]['gt_id']);
-			unset($StaffRole[$i]['employee_id']);
-			unset($StaffRole[$i]['gender']);
-			unset($StaffRole[$i]['role_title_tl']);
-			unset($StaffRole[$i]['role_title_bl']);
-			unset($StaffRole[$i]['photo500']);
-			unset($StaffRole[$i]['photo150']);
-			//array_push($staff, $StaffRole[$i]);
-			$i++;
-		}
-	
-	
-	
-		
-		
-		
-		
-        foreach ($StaffReportee as $data) {
-        array_push($staff, $data);
-		
-		}
+    		$StaffRole = $staffInfo->Get_Current_Staff_Role($staffData2[0]['role_id']);
+    		$StaffRole = collect($StaffRole)->map(function($x){ return (array) $x; })->toArray();
+    		
+    		
+    		$i=0;
+    		foreach( $StaffRole as $rrr ){
+    			unset( $StaffRole[$i]['id']);
+    			unset( $StaffRole[$i]['roleCode']);
+    		
+    			unset($StaffRole[$i]['abridged_name']);
+    			//unset($StaffRole[$i]['name_code']);
+    			unset($StaffRole[$i]['gg_id']);
+    			
+    			unset($StaffRole[$i]['gt_id']);
+    			unset($StaffRole[$i]['employee_id']);
+    			unset($StaffRole[$i]['gender']);
+    			unset($StaffRole[$i]['role_title_tl']);
+    			unset($StaffRole[$i]['role_title_bl']);
+    			unset($StaffRole[$i]['photo500']);
+    			unset($StaffRole[$i]['photo150']);
+    			//array_push($staff, $StaffRole[$i]);
+    			$i++;
+    		}
+	     foreach ($StaffReportee as $data) {
+        //array_push($staff, $data);
+          if($data['photo_id'] != '')
+          {
+          array_push($staff, $data); 
+          }
+        }
 		
 		
 		
@@ -125,12 +122,34 @@ class Haris extends StaffReportController
         foreach ($StaffReportee as $rr) {
           if($StaffReportee[$i]['report_ok'] == 'TRP'){
             $StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee[$i]['Role_id_So'], 'INDIR', $StaffReportee[$i]['name_code']);
+            $ii = 0;
             foreach ($StaffReportee_TRP as $trp) {
-              //array_push($StaffReportee, $trp);
-              array_push($staff, $trp);
-			 
+            $StaffReportee_TRP3 = $staffInfo->get_StaffReporteeInfo_UTeam($trp['Role_id_So'], 'INDIR', $StaffReportee[$i]['name_code']);
+
+                if(!empty($StaffReportee_TRP3)):
+                  foreach( $StaffReportee_TRP3 as $trp3):
+                  if($trp3['photo_id'] != '')
+                  {
+                    array_push($staff, $trp3); 
+                  }
+
+                  endforeach;
+
+                else:
+
+                if($trp['photo_id'] != ''){
+                  array_push($staff, $trp);
+                }
+
+                endif;
+
+              
+              
+              $ii++;
             }
-          }
+
+          }// end transperent TRP
+
           $i++;
         }
 		
@@ -139,8 +158,7 @@ class Haris extends StaffReportController
 		
 		
 		
-		
-        
+      // exit;
 		
 		
       }
@@ -172,7 +190,7 @@ class Haris extends StaffReportController
           if($StaffReportee2[$i]['report_ok'] == 'TRP'){
             $StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee2[$i]['Role_id_So'], 'INDIR', $StaffReportee2[$i]['name_code']);
             foreach ($StaffReportee_TRP as $trp) {
-              //array_push($StaffReportee2, $trp);
+             
               array_push($staff, $trp);
             }
           }
@@ -199,14 +217,19 @@ class Haris extends StaffReportController
 				  if($StaffReportee2[$i]['report_ok'] == 'TRP'){
 					$StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee2[$i]['Role_id_So'], 'INDIR', $StaffReportee2[$i]['name_code']);
 					foreach ($StaffReportee_TRP as $trp) {
-					  //array_push($StaffReportee2, $trp);
+					  
 					  array_push($staff, $trp);
 					}
+
 				  }
 				  $i++;
 				}
 			}// endif role exist
 		}
+
+
+
+
 	}
 	 
       /************************************************** Staff Team **************************************************/
@@ -920,26 +943,6 @@ class Haris extends StaffReportController
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**********************************************************************
     * Staff Information - TIF A
     * Author:   Atif Naseem, a.naseem@generations.edu.pk, +92-313-5521122 
@@ -1123,25 +1126,45 @@ class Haris extends StaffReportController
 
 
 
-
+      //echo $staffData[0]['role_id']; exit;
 
       $StaffReportee_TRP = array();
       if(!empty($staffData[0]['role_id'])){
         $StaffReportee = $staffInfo->get_StaffReporteeInfo($staffData[0]['role_id']);
         $StaffReportee_SC = $staffInfo->get_StaffReporteeSCInfo($staffData[0]['role_id']);
 
+
+        
+
+
+
+
         $i = 0;
         foreach ($StaffReportee as $rr) {
           if($StaffReportee[$i]['report_ok'] == 'TRP'){
             $StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo($StaffReportee[$i]['role_id'], 'INDIR', $StaffReportee[$i]['name_code']);
+
+            
+
+
+
+
             foreach ($StaffReportee_TRP as $trp) {
               array_push($StaffReportee, $trp);
             }
           }
           $i++;
         }
+
+
+
+
+        
       }
 
+
+
+     # var_dump($StaffReportee); exit;
 
       $StaffReportee2 = array();
       if(!empty($staffData[1]['role_id'])){
@@ -1676,8 +1699,11 @@ class Haris extends StaffReportController
                                       </tr>
                                     </table>
                   
-                                </div><!-- col-md-6 -->
-                                <div class="col-md-6 text-center">
+                                </div><!-- col-md-6 -->';
+                                
+                                if(!empty($staff_SR_PR[0]['gp_id'])):
+
+                                $html .= '<div class="col-md-6 text-center">
                                   <table width="100%" border="1" class="secondLevelReporting">
                                       <tr>
                                         <td colspan="3"><h5>SECONDARY GRANDREPORTOO</h5></td>
@@ -1698,8 +1724,10 @@ class Haris extends StaffReportController
                                         <td colspan="3" height="30">'.$staff_SR_PR[0]['abridged_name'].'</td>
                                       </tr>
                                     </table>
-                                </div><!-- col-md-6 -->
-                            </div><!-- col-md-12 -->
+                                </div>';
+                              endif;
+
+                            $html .= '</div><!-- col-md-12 -->
                             <div class="col-md-12 paddingTop50">
                               <div class="col-md-6 text-center">
                                   <table width="100%" border="1" class="firstLevelReporting">
@@ -1726,12 +1754,12 @@ class Haris extends StaffReportController
                                 <div class="col-md-6 text-center">
                                   <table width="100%" border="1" class="firstLevelReporting">
                                       <tr>
-                                        <td colspan="3"><h5>SECONDARY REPORTOO</h5></td>
+                                        <td colspan="3"><h5>SECONDARY REPORTOO3</h5></td>
                                       </tr>
                                       <tr>
                                         <td width="30%" height="40">'.$staff_SR[0]['gp_id'].'</td>
                                         <td width="30%">'.$staff_SR[0]['report_ok'].'</td>
-                                        <td width="30%">5</td>
+                                        <td width="30%"> </td>
                                       </tr>
                                       <tr>
                                         <td colspan="3" height="30">'.$staff_SR[0]['c_topline'].'</td>
@@ -1949,12 +1977,12 @@ class Haris extends StaffReportController
                                 <div class="col-md-6 text-center">
                                   <table width="100%" border="1" class="firstLevelReporting">
                                       <tr>
-                                        <td colspan="3"><h5>SECONDARY REPORTOO</h5></td>
+                                        <td colspan="3"><h5>SECONDARY REPORTOO2</h5></td>
                                       </tr>
                                       <tr>
                                         <td width="30%" height="40">'.$staff_2_SR[0]['gp_id'].'</td>
                                         <td width="30%">'.$staff_2_SR[0]['report_ok'].'</td>
-                                        <td width="30%">5</td>
+                                        <td width="30%"></td>
                                       </tr>
                                       <tr>
                                         <td colspan="3" height="30">'.$staff_2_SR[0]['role_title_tl'].'</td>
