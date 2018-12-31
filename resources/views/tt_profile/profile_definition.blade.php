@@ -422,36 +422,63 @@
                                 </div>
                                 <!--/row-->
                             </div><!-- standardProfile -->
-                            <div id="customProfile" class="profileTypeArea">
+                                                        <div id="customProfile" class="profileTypeArea">
                                 <h4 class="form-section headingBorderBottom">Custom Timings</h4>
                                 
                                 <div class="row">
                                     <div class="col-md-6 paddingBottom10">
                                         <div class="form-group">
-                                            <label class="control-label col-md-5 text-right paddingRight0">Standard IN <span class="required">*</span>:</label>
+                                            <label class="control-label col-md-5 text-right paddingRight0">Custom IN:</label>
                                             <div class="col-md-7">
-                                                <input type="time" class="form-control" name="morning_time" id="morning_time">
+                                                <input type="time" class="form-control" id="cus_morning" name="custom_morning">
                                             </div>
                                         </div>
                                     </div>
                                     <!--/span-->
                                     <div class="col-md-6 paddingBottom10">
                                         <div class="form-group">
-                                            <label class="control-label col-md-5 text-right paddingRight0">Standard OUT <span class="required">*</span>:</label>
+                                            <label class="control-label col-md-5 text-right paddingRight0">Custom OUT:</label>
                                             <div class="col-md-7">
-                                                <input type="time" class="form-control" name="afternoon_time" id="afternoon_time">
+                                                <input type="time" class="form-control" id="cus_afternoon" name="custom_afternoon">
                                             </div>
                                         </div>
                                     </div>
                                     <!--/span-->
-                                    <div class="col-md-6 paddingBottom10">
+                                    <!-- <div class="col-md-6 paddingBottom10">
                                         &nbsp;
                                     </div>
                                     <div class="col-md-6 paddingBottom10">
                                         <div class="form-group">
+                                            <label class="control-label col-md-5 text-right paddingRight0">Wednesday OUT:</label>
+                                            <div class="col-md-7">
+                                                <input type="time" class="form-control" id="cus_wed" name="custom_wed">
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!--/span-->
+                                   <!--  <div class="col-md-6 paddingBottom10">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-6 paddingBottom10">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-5 text-right paddingRight0">Friday OUT:</label>
+                                            <div class="col-md-7">
+                                                <input type="time" class="form-control" id="cus_fri" name="custom_fri">
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!--/span-->
+
+                                 <!--/span-->
+                                    <div class="col-md-6 paddingBottom10">
+                                        &nbsp;
+                                    </div>
+                                    <!--/span-->
+                                     <div class="col-md-6 paddingBottom10">
+                                        <div class="form-group">
                                             <label class="control-label col-md-5 text-right paddingRight0">Monday OUT:</label>
                                             <div class="col-md-7">
-                                                <input type="time" class="form-control" name='mon_time' id="mon_time">
+                                                <input type="time" class="form-control" name='cus_mon' id="cus_mon">
                                             </div>
                                         </div>
                                     </div>
@@ -464,7 +491,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-5 text-right paddingRight0">Tuesday OUT:</label>
                                             <div class="col-md-7">
-                                                <input type="time" class="form-control" name='tues_time' id="tues_time">
+                                                <input type="time" class="form-control" name='cus_tues' id="cus_tues">
                                             </div>
                                         </div>
                                     </div>
@@ -477,7 +504,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-5 text-right paddingRight0">Wednesday OUT:</label>
                                             <div class="col-md-7">
-                                                <input type="time" class="form-control" name='wed_time' id="wed_time">
+                                                <input type="time" class="form-control" name='cus_wed' id="cus_wed">
                                             </div>
                                         </div>
                                     </div>
@@ -490,7 +517,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-5 text-right paddingRight0">Thursday OUT:</label>
                                             <div class="col-md-7">
-                                                <input type="time" class="form-control" name="thus_time" id="thus_time">
+                                                <input type="time" class="form-control" name="cus_thus" id="cus_thus">
                                             </div>
                                         </div>
                                     </div>
@@ -504,11 +531,12 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-5 text-right paddingRight0">Friday OUT:</label>
                                             <div class="col-md-7">
-                                                <input type="time" class="form-control" name="fri_time" id="fri_time">
+                                                <input type="time" class="form-control" name="cus_fri" id="cus_fri">
                                             </div>
                                         </div>
                                     </div>
                                     <!--/span-->
+
                                 </div><!-- -->
 
                                 <h4 class="form-section headingBorderBottom">Relaxation</h4>
@@ -1015,34 +1043,16 @@ var pagefunction = function() {
 
     function CustomProfileTimeInsert(profile_id){
 
-var morning_time = $('#morning_time').val();
-      var afternoon_time = $('#afternoon_time').val();
-      var mon_time_out = $('#mon_time').val();
-      var tues_time_out = $('#tues_time').val();
-      var wed_time = $('#wed_time').val();
-      var thurs_time_out = $('#thus_time').val();
-      var fri_time = $('#fri_time').val();
-      var ext_time = $('#ext_time').val();
-      var ext_frequency = $('#ext_frequency').val();
-      var july_start = $('#july_start').val();
-      var sat_hour = $('#sat_hour').val();
-      var sat_off = $('#sat_off').val();
-      var sat_on = $('#sat_on').val();
-      var avg_hrs = $('#avg_hrs').text();
-      var flexy_time = $('#flexy_time_std').val();
-       // var relaxtion_time = $('#relaxation_time_cus').val();
-
-       
-      var daily_relax_in = $('#std_daily_relax_in').val();
-      var daily_relax_out = $('#std_daily_relax_out').val();
-      var monthly_relax_in = $('#std_monthly_relax_in').val();
-      var monthly_relax_out = $('#std_monthly_relax_out').val();
-
-        /*var profile_name = $('#profile_name').val();
+        console.log("At Custom Profile");
+                
+        var profile_name = $('#profile_name').val();
         var morning_time  = $('#cus_morning').val();
         var afternoon_time = $('#cus_afternoon').val();
+        var mon_time_out = $('#cus_mon').val();
+        var tues_time_out = $('#cus_tues').val();
         var wed_time = $('#cus_wed').val();
-        var cus_fri = $('#cus_fri').val();
+        var thurs_time_out = $('#cus_thus').val();
+        var fri_time = $('#cus_fri').val();
         var cus_ext_time = $('#cus_ext_time').val();
         var cus_ext_freq = $('#cus_ext_freq').val();
         var cus_july_start = $('#cus_july_start').val();
@@ -1051,12 +1061,10 @@ var morning_time = $('#morning_time').val();
         var cus_sat_working = $('#cus_sat_working').val();
         var avg_hrs = $('#cus_avg_weekly').text();
         var flexy_time = $('#flexy_time_cus').val();
-       // var relaxtion_time = $('#relaxation_time_cus').val();
-
         var daily_relax_in = $('#cus_daily_relax_in').val();
         var daily_relax_out = $('#cus_daily_relax_out').val();
         var monthly_relax_in = $('#cus_monthly_relax_in').val();
-        var monthly_relax_out = $('#cus_monthly_relax_out').val();*/
+        var monthly_relax_out = $('#cus_monthly_relax_out').val();
 
         $.ajax({
 
@@ -1064,33 +1072,15 @@ var morning_time = $('#morning_time').val();
             cache:false,
             url:"{{url('/profileDefination/insertCustomProfile')}}",
             data:{
-  profile_id:profile_id,
-                morning_time:morning_time,
-                afternoon_time:afternoon_time,
-                mon_time_out:mon_time_out,
-                tues_time_out:tues_time_out,
-                wed_time:wed_time,
-                fri_time:fri_time,
-                thurs_time_out:thurs_time_out,
-                ext_time:ext_time,
-                ext_frequency:ext_frequency,
-                july_start:july_start,
-                sat_hour:sat_hour,
-                sat_off:sat_off,
-                sat_on:sat_on,
-                avg_hrs:avg_hrs,
-                flexy_time:flexy_time,
-                //relaxtion_time:relaxtion_time,
-                daily_relax_in:daily_relax_in,
-                daily_relax_out:daily_relax_out,
-                monthly_relax_in:monthly_relax_in,
-                monthly_relax_out:monthly_relax_out,
-                "_token": "{{ csrf_token() }}",
-              /*profile_id:profile_id,
+  
+              profile_id:profile_id,
               morning_time:morning_time,
               afternoon_time:afternoon_time,
+              mon_time_out:mon_time_out,
+              tues_time_out:tues_time_out,
               wed_time:wed_time,
-              fri_time:cus_fri,
+              fri_time:fri_time,
+              thurs_time_out:thurs_time_out,
               ext_time:cus_ext_time,
               ext_frequency:cus_ext_freq,
               july_start:cus_july_start,
@@ -1104,7 +1094,7 @@ var morning_time = $('#morning_time').val();
               daily_relax_out:daily_relax_out,
               monthly_relax_in:monthly_relax_in,
               monthly_relax_out:monthly_relax_out,
-              "_token":"{{csrf_token()}}",*/
+              "_token":"{{csrf_token()}}",
             },
             success:function(){
 
@@ -1431,7 +1421,7 @@ var morning_time = $('#morning_time').val();
         }
         
         //Comments by rohail.... 
-       // standardCalculation();
+        standardCalculation();
     }
 
     // UPDATION STANDARD CALCULATION
@@ -1440,106 +1430,148 @@ var morning_time = $('#morning_time').val();
       var morning_time = $('#morning_time_update').val();
       var afternoon_time = $('#afternoon_time_update').val();
       var fri_hours = $('#fri_time_update').val();
+      var mon_time = $('#mon_time_update').val();
+      var tue_time = $('#tues_time_update').val();
+      var wed_time = $('#wed_time_update').val();
+      var thus_time = $('#thus_time_update').val();
       var sat_hours = $('#sat_hour_update').val();
       var sat_off = $('#sat_off_update').val();
       var sat_on = $('#sat_on_update').val();
       var ext_time = $('#ext_time_update').val();
       var ext_frequency = $('#ext_frequency_update').val();
-   
-          
-   
+
+       // Calculate AVG WEEK HOUR New Layout
+
+        var average_weekly_time = [];
+        var friday_weekly_time = [];
+
+        // Mon time
+        if(morning_time.length != 0 && mon_time.length != 0){
+            average_weekly_time.push(time_difference(morning_time,mon_time));
+        }
+
+        // Tue Time
+        if(morning_time.length != 0 && tue_time.length != 0){
+            average_weekly_time.push(time_difference(morning_time,tue_time));
+        }
+
+        // Wed Time
+        if(morning_time.length != 0 && wed_time.length != 0){
+            average_weekly_time.push(time_difference(morning_time,wed_time));
+        }
+
+        // Thurs Time
+        if(morning_time.length != 0 && thus_time.length != 0){
+            average_weekly_time.push(time_difference(morning_time,thus_time));
+        }
+
+        // Fri Time
+        if(morning_time.length != 0 && fri_hours.length != 0){
+            friday_weekly_time.push(time_difference(morning_time,fri_hours));
+        }
+
+
+        var hour_minute =  sum_time(average_weekly_time);
+        var hour_minute_friday = sum_time(friday_weekly_time);
+
+
+        // Pasting the Mon Thursday Hour
+
+        $('#counter_mon_thu_hrs').text(hour_minute.hour);
+        $('#counter_mon_thu_min').text(hour_minute.minute);
+
+        // Pasting Average Mon Thursday hour in below
+
+        $('#mon_thurs_hours').text((hour_minute.hour+":"+hour_minute.minute));  
+
+        // Pasting the Friday Hour
+
+        $('#counter_fri_hrs').text(hour_minute_friday.hour);
+        $('#counter_fri_min').text(hour_minute_friday.minute);
+
+        // Pasting Friday hour in below
+
+        $('#fri_hrs').text((hour_minute_friday.hour+":"+hour_minute_friday.minute));
+
+
+
+       // Standard Morning And Afternoon Timing Comments 
        if(morning_time.length != 0 && afternoon_time.length != 0){
-        var p = "1/1/1970 ";
-        difference_mt = new Date(new Date(p+afternoon_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-        difference_f = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-        
-        $('#mon_thurs_hours').text(difference_mt);
+            var p = "1/1/1970 ";
+            difference_mt = new Date(new Date(p+afternoon_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
+            difference_f = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
+            console.log("Difference of Mon-Thur"+difference_mt);
 
-              
-          var t1 = difference_mt.split(':');
-          var t2 = difference_f.split(':');
+                                 
+                var t1 = difference_mt.split(':');
+                var t2 = difference_f.split(':');
+                // $('#counter_mon_thu_hrs').text(t1[0]);
+                // $('#counter_mon_thu_min').text(t1[1]);
+                if(difference_f == '17:00:00'){
+                    t2 = "00:00:00";
+                }
+                mins = Number(t1[1]*4) + Number(t2[1]);
+                minhrs = Math.floor(parseInt(mins / 60));
+                hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
+                mins = mins % 60;
+                t1 = hrs + ':' + mins
 
-          $('#counter_mon_thu_hrs').text(t1[0]);
-          $('#counter_mon_thu_min').text(t1[1]);
-          //console.log('counter_mon_thu_min'+)
-          if(difference_f == '17:00:00'){
-            t2 = "00:00:00";
-          }
-          mins = Number(t1[1]*4) + Number(t2[1]);
-          minhrs = Math.floor(parseInt(mins / 60));
-          hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
-          mins = mins % 60;
-          t1 = hrs + ':' + mins
+              if(sat_on.length > 0){
+                var sat = sat_hours * sat_on;
+                sat = sat/4;
+                console.log(sat);
+                var n = new Date(0,0);
+                n.setSeconds(+sat * 60 * 60);
+                var sat_avg = (n.toTimeString().slice(0, 8));
+              }else{
 
-          if(sat_on.length > 0){
-          var sat = sat_hours * sat_on;
-          sat = sat/4;
-          console.log(sat);
-          var n = new Date(0,0);
-          n.setSeconds(+sat * 60 * 60);
-          var sat_avg = (n.toTimeString().slice(0, 8));
-        }else{
+                var sat = sat_hours * (4-sat_off);
+                sat = sat/4;
+                var n = new Date(0,0);
+                n.setSeconds(+sat * 60 * 60);
+                var sat_avg = (n.toTimeString().slice(0, 8));
 
-          var sat = sat_hours * (4-sat_off);
-          sat = sat/4;
-          var n = new Date(0,0);
-          n.setSeconds(+sat * 60 * 60);
-          var sat_avg = (n.toTimeString().slice(0, 8));
+              }
 
-        }
+              if(ext_frequency.length > 0){
+                    var p = "1/1/1970 ";
+                    difference_ext = new Date(new Date(p+ext_time) - new Date(p+afternoon_time)).toUTCString().split(" ")[4];
+                    var arr = difference_ext.split(':');
+                    var ext_working_hours =  parseFloat(parseInt(arr[0], 10) + '.' + parseInt((arr[1]/6)*10, 10));
+                    ext_working_hours = ext_working_hours * ext_frequency;
+                    var n = new Date(0,0);
+                    n.setSeconds(+ext_working_hours * 60 * 60);
+                    var ext_avg = (n.toTimeString().slice(0, 8));
+                    console.log(ext_avg);
+                }else{
+                    var  ext_avg = '00:00:00';
+                }
 
-        if(ext_frequency.length > 0){
-          var p = "1/1/1970 ";
-          difference_ext = new Date(new Date(p+ext_time) - new Date(p+afternoon_time)).toUTCString().split(" ")[4];
-          var arr = difference_ext.split(':');
-          var ext_working_hours =  parseFloat(parseInt(arr[0], 10) + '.' + parseInt((arr[1]/6)*10, 10));
-          ext_working_hours = ext_working_hours * ext_frequency;
-          var n = new Date(0,0);
-          n.setSeconds(+ext_working_hours * 60 * 60);
-          var ext_avg = (n.toTimeString().slice(0, 8));
-          console.log(ext_avg);
-        }else{
-          var  ext_avg = '00:00:00';
-        }
-
-
-          var time1 = t1;
-          var time2 = sat_avg;
-          var time3 = ext_avg;
-          
-          var hour=0;
-          var minute=0;
-          var second=0;
-          
-          var splitTime1= time1.split(':');
-          var splitTime2= time2.split(':');
-          var splitTime3= time3.split(':');
-
-          console.log(splitTime1);
-          console.log(splitTime2);
-          console.log(splitTime3);
-
-          mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
-          minhrs = Math.floor(parseInt(mins / 60));
-          hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
-          mins = mins % 60;
-          t1 = hrs+':'+mins;
-              
-            $('#avg_hrs').text(t1);
-            $('#counter_avg_hrs').text(hrs);
-            $('#counter_avg_min').text(mins);
-
-            }
-
-           // Standard Friday Timing
-            if(fri_hours.length != 0){
-            difference = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-            $('#fri_hrs').text(difference);
-            $('#counter_fri_hrs').text(difference.split(':')[0]);
-            $('#counter_fri_min').text(difference.split(':')[1]);
+                var time1 = t1;
+                var time2 = sat_avg;
+                var time3 = ext_avg;
+                
+                var hour=0;
+                var minute=0;
+                var second=0;
+                
+                var splitTime1= time1.split(':');
+                var splitTime2= time2.split(':');
+                var splitTime3= time3.split(':');
 
 
-            }     
+                mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
+                minhrs = Math.floor(parseInt(mins / 60));
+                hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
+                mins = mins % 60;
+                t1 = hrs+':'+mins;
+            
+                $('#counter_avg_hrs').text(hrs);
+                $('#counter_avg_min').text(mins);
+                $('#avg_hrs').text(t1);
+       }
+   
+               
     }
 
     //UPDATION CUSTOM DATA
@@ -1548,6 +1580,11 @@ var morning_time = $('#morning_time').val();
         clearAll();
         $('#cus_morning').attr('id','custom_morning_update');
         $('#cus_afternoon').attr('id','custom_afternoon_udpate');
+
+        $('#cus_mon').attr('id','cus_mon_update');
+        $('#cus_tues').attr('id','cus_tues_update');
+        $('#cus_thus').attr('id','cus_thus_update');
+
         $('#cus_wed').attr('id','cus_wed_update');
         $('#cus_ext_time').attr('id','cus_ext_time_update');
         $('#cus_fri').attr('id','cus_fri_update');
@@ -1570,26 +1607,65 @@ var morning_time = $('#morning_time').val();
         $('.profileDefination_editProfileClass').text('Edit Profile');
 
 
+        //  Monday In
 
         if(profile_obj[0]['is_on_mon'] == 1){
             $('#custom_morning_update').val(profile_obj[0]['mon_in']);
-            $('#custom_afternoon_udpate').val(profile_obj[0]['thu_out']);
+            $('#cus_mon_update').val(profile_obj[0]['mon_out']);
         }else{
             $('#custom_morning_update').val('');
-            $('#custom_afternoon_udpate').val('');
+            $('#cus_mon_update').val('');
         }
 
 
-        if(profile_obj[0]['wed_out'] != profile_obj[0]['mon_out']){
+        // Tuesday Out
+
+        if(profile_obj[0]['is_on_tue'] == 1){
+            $('#custom_morning_update').val(profile_obj[0]['mon_in']);
+            $('#cus_tues_update').val(profile_obj[0]['tue_out']);
+        }else{
+            $('#custom_morning_update').val('');
+            $('#cus_tues_update').val('');
+        }
+
+
+        // Wednesday Out
+
+        if(profile_obj[0]['is_on_wed'] == 1){
+            $('#custom_morning_update').val(profile_obj[0]['mon_in']);
             $('#cus_wed_update').val(profile_obj[0]['wed_out']);
         }else{
+            $('#custom_morning_update').val('');
             $('#cus_wed_update').val('');
         }
 
-        if(profile_obj[0]['fri_out']){
+        // Thursday out
+
+        if(profile_obj[0]['is_on_thu'] == 1){
+            $('#custom_morning_update').val(profile_obj[0]['mon_in']);
+            $('#cus_thus_update').val(profile_obj[0]['thu_out']);
+        }else{
+            $('#custom_morning_update').val('');
+            $('#cus_thus_update').val('');
+        }
+
+
+        // Friday Out
+
+        if(profile_obj[0]['is_on_fri'] == 1){
+            $('#custom_morning_update').val(profile_obj[0]['mon_in']);
             $('#cus_fri_update').val(profile_obj[0]['fri_out']);
         }else{
+            $('#custom_morning_update').val('');
             $('#cus_fri_update').val('');
+        }
+
+        if(profile_obj[0]['standard_out'] != '00:00:00'){
+            $('#morning_time_update').val(profile_obj[0]['mon_in']);
+            $('#custom_afternoon_udpate').val(profile_obj[0]['standard_out']);
+        }else{
+            $('#morning_time_update').val('');
+            $('#custom_afternoon_udpate').val('');
         }
 
         if(profile_obj[0]['use_ext'] == 1){
@@ -1684,110 +1760,147 @@ var morning_time = $('#morning_time').val();
     // UPDATION CUSTOM CALCULATION
     function customCalculation(){
 
-          var custom_morning = $('#custom_morning_update').val();
-          var custom_afternoon = $('#custom_afternoon_udpate').val();
-          var custom_friday = $('#cus_fri_update').val();
-          var sat_hours = $('#cus_sat_hour_update').val();
-          var sat_off = $('#cus_sat_off_update').val();
-          var sat_on = $('#cus_sat_working_update').val();
-          var ext_time = $('#cus_ext_time_update').val();
-          var ext_frequency = $('#cus_ext_freq_update').val();
-          var difference_time;
-          
+            var custom_morning = $('#custom_morning_update').val();
+              var custom_afternoon = $('#custom_afternoon_udpate').val();
+              
+              var mon_time = $('#cus_mon_update').val();
+              var tue_time = $('#cus_tues_update').val();
+              var wed_time = $('#cus_wed_update').val();
+              var thus_time = $('#cus_thus_update').val();
+              var custom_friday = $('#cus_fri_update').val();
+
+              var sat_hours = $('#cus_sat_hour_update').val();
+              var sat_off = $('#cus_sat_off_update').val();
+              var sat_on = $('#cus_sat_working_update').val();
+              var ext_time = $('#cus_ext_time_update').val();
+              var ext_frequency = $('#cus_ext_freq_update').val();
+              var difference_time;
 
 
-          if(custom_morning.length != 0 && custom_afternoon.length != 0){
+           // Calculate AVG WEEK HOUR New Layout
 
-          var p = "1/1/1970 ";
-          difference_mt = new Date(new Date(p+custom_afternoon) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
-          difference_f = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
-            
+        var average_weekly_time = [];
+        var friday_weekly_time = [];
 
-            
-            $('#cus_mon_thu_hrs').text(difference_mt);
-            $('#counter_mon_thu_hrs').text(difference_mt.split(":")[0]);
-            $('#counter_mon_thu_min').text(difference_mt.split(":")[1]);   
+        // Mon time
+        if(custom_morning.length != 0 && mon_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,mon_time));
+        }
 
-                
-            var t1 = difference_mt.split(':');
-            var t2 = difference_f.split(':');
-            if(difference_f == '17:00:00'){
-              t2 = "00:00:00";
-            }
-            mins = Number(t1[1]*4) + Number(t2[1]);
-            minhrs = Math.floor(parseInt(mins / 60));
-            hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
-            mins = mins % 60;
-            t1 = hrs + ':' + mins;
+        // Tue Time
+        if(custom_morning.length != 0 && tue_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,tue_time));
+        }
 
-            if(sat_on.length > 0){
+        // Wed Time
+        if(custom_morning.length != 0 && wed_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,wed_time));
+        }
+
+        // Thurs Time
+        if(custom_morning.length != 0 && thus_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,thus_time));
+        }
+
+        // Fri Time
+        if(custom_morning.length != 0 && custom_friday.length != 0){
+            friday_weekly_time.push(time_difference(custom_morning,custom_friday));
+        }
+
+
+        var hour_minute =  sum_time(average_weekly_time);
+        var hour_minute_friday = sum_time(friday_weekly_time);
+
+
+        // Pasting the Mon Thursday Hour
+
+        $('#counter_mon_thu_hrs').text(hour_minute.hour);
+        $('#counter_mon_thu_min').text(hour_minute.minute);
+
+        // Pasting Average Mon Thursday hour in below
+
+        $('#cus_mon_thu_hrs').text((hour_minute.hour+":"+hour_minute.minute));  
+
+        // Pasting the Friday Hour
+
+        $('#counter_fri_hrs').text(hour_minute_friday.hour);
+        $('#counter_fri_min').text(hour_minute_friday.minute);
+
+        // Pasting Friday hour in below
+
+        $('#cus_fri_hrs').text((hour_minute_friday.hour+":"+hour_minute_friday.minute));
+
+
+        var p = "1/1/1970 ";
+        difference_mt = new Date(new Date(p+custom_afternoon) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
+        difference_f = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
+        
+
+        var t1 = difference_mt.split(':');
+        var t2 = difference_f.split(':');
+        if(difference_f == '17:00:00'){
+            t2 = "00:00:00";
+        }
+        mins = Number(t1[1]*4) + Number(t2[1]);
+        minhrs = Math.floor(parseInt(mins / 60));
+        hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
+        mins = mins % 60;
+        t1 = hrs + ':' + mins
+
+        if(sat_on.length > 0){
             var sat = sat_hours * sat_on;
             sat = sat/4;
-            console.log(sat);
             var n = new Date(0,0);
             n.setSeconds(+sat * 60 * 60);
             var sat_avg = (n.toTimeString().slice(0, 8));
-            }else{
+        }else{
+            var sat = sat_hours * (4-sat_off);
+            sat = sat/4;
+            var n = new Date(0,0);
+            n.setSeconds(+sat * 60 * 60);
+            var sat_avg = (n.toTimeString().slice(0, 8));
+        }
 
-              var sat = sat_hours * (4-sat_off);
-              sat = sat/4;
-              var n = new Date(0,0);
-              n.setSeconds(+sat * 60 * 60);
-              var sat_avg = (n.toTimeString().slice(0, 8));
-            }
-
-            if(ext_frequency.length > 0){
-              var p = "1/1/1970 ";
-              difference_ext = new Date(new Date(p+ext_time) - new Date(p+custom_afternoon)).toUTCString().split(" ")[4];
-              var arr = difference_ext.split(':');
-              var ext_working_hours =  parseFloat(parseInt(arr[0], 10) + '.' + parseInt((arr[1]/6)*10, 10));
-              ext_working_hours = ext_working_hours * ext_frequency;
-              var n = new Date(0,0);
-              n.setSeconds(+ext_working_hours * 60 * 60);
-              var ext_avg = (n.toTimeString().slice(0, 8));
-              console.log(ext_avg);
-            }else{
-              var  ext_avg = '00:00:00';
-            }
-
-              var time1 = t1;
-              var time2 = sat_avg;
-              var time3 = ext_avg;
-              
-              var hour=0;
-              var minute=0;
-              var second=0;
-              
-              var splitTime1= time1.split(':');
-              var splitTime2= time2.split(':');
-              var splitTime3= time3.split(':');
-
-              console.log(splitTime1);
-              console.log(splitTime2);
-              console.log(splitTime3);
-
-              mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
-              minhrs = Math.floor(parseInt(mins / 60));
-              hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
-              mins = mins % 60;
-              t1 = hrs+':'+mins;
-              
-              $('#avg_cus_cal').text(t1);
-              $('#counter_avg_hrs').text(hrs);
-              $('#counter_avg_min').text(mins);
-
-          
+          if(ext_frequency.length > 0){
+            var p = "1/1/1970 ";
+            difference_ext = new Date(new Date(p+ext_time) - new Date(p+custom_afternoon)).toUTCString().split(" ")[4];
+            var arr = difference_ext.split(':');
+            var ext_working_hours =  parseFloat(parseInt(arr[0], 10) + '.' + parseInt((arr[1]/6)*10, 10));
+            ext_working_hours = ext_working_hours * ext_frequency;
+            var n = new Date(0,0);
+            n.setSeconds(+ext_working_hours * 60 * 60);
+            var ext_avg = (n.toTimeString().slice(0, 8));
+            console.log(ext_avg);
+          }else{
+            var  ext_avg = '00:00:00';
           }
 
-          if(custom_friday.length != 0){
+        var time1 = t1;
+        var time2 = sat_avg;
+        var time3 = ext_avg;
+        
+        var hour=0;
+        var minute=0;
+        var second=0;
+        
+        var splitTime1= time1.split(':');
+        var splitTime2= time2.split(':');
+        var splitTime3= time3.split(':');
 
-            difference = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
-            
-            $('#cus_fri_hrs').text(difference);
-            $('#counter_fri_hrs').text(difference.split(':')[0]);
-            $('#counter_fri_min').text(difference.split(':')[1]);
-            
-          }
+        mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
+        minhrs = Math.floor(parseInt(mins / 60));
+        hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
+        mins = mins % 60;
+        t1 = hrs+':'+mins;
+      
+        $('#cus_avg_weekly').text(t1);
+        $('#counter_avg_hrs').text(hrs);
+        $('#counter_avg_min').text(mins);
+
+
+         
+
+      
     }
 
     //UPDATION DATA PART TIMER
@@ -2127,6 +2240,9 @@ var morning_time = $('#morning_time').val();
         // Standard Clear
         $('#morning_time').val('');
         $('#afternoon_time').val('');
+        $('#mon_time').val('');
+        $('#tues_time').val('');
+        $('#thus_time').val('');
         $('#wed_time').val('');
         $('#fri_time').val('');
         $('#ext_time').val('');
@@ -2151,9 +2267,12 @@ var morning_time = $('#morning_time').val();
         // Custom Clear
         $('#cus_morning').val('');
         $('#cus_afternoon').val('');
+        $('#cus_mon').val('');
+        $('#cus_tues').val('');
         $('#cus_wed').val('');
-        $('#cus_ext_time').val('');
+        $('#cus_thus').val('');
         $('#cus_fri').val('');
+        $('#cus_ext_time').val('');
         $('#cus_ext_freq').val('');
         $('#flexy_time_cus').val('');
         //$('#relaxation_time_cus').val('');
@@ -2344,7 +2463,10 @@ var morning_time = $('#morning_time').val();
     function updateCustomProfile(profile_id){
         var morning_time = $('#custom_morning_update').val();
         var afternoon_time = $('#custom_afternoon_udpate').val();
+        var cus_mon_time = $('#cus_mon_update').val();
+        var cus_tue_time = $('#cus_tues_update').val();
         var wed_time = $('#cus_wed_update').val();
+        var cus_thus_time = $('#cus_thus_update').val();
         var fri_time = $('#cus_fri_update').val();
         var ext_time = $('#cus_ext_time_update').val();
         var ext_frequency = $('#cus_ext_freq_update').val();
@@ -2371,7 +2493,10 @@ var morning_time = $('#morning_time').val();
                 profile_id:profile_id,
                 morning_time:morning_time,
                 afternoon_time:afternoon_time,
+                mon_time:cus_mon_time,
+                tue_time:cus_tue_time,
                 wed_time:wed_time,
+                thus_time:cus_thus_time,
                 fri_time:fri_time,
                 ext_time:ext_time,
                 ext_frequency:ext_frequency,
@@ -2452,7 +2577,10 @@ var morning_time = $('#morning_time').val();
 
         $('#morning_time_update').val('');
         $('#afternoon_time_update').val('');
+        $('#mon_time_update').val('');
+        $('#tues_time_update').val('');
         $('#wed_time_update').val('');
+        $('#thus_time_update').val('');
         $('#fri_time_update').val('');
         $('#ext_time_update').val('');
         $('#ext_frequency_update').val('');
@@ -2500,6 +2628,9 @@ var morning_time = $('#morning_time').val();
 
         $('#custom_morning_update').val('');
         $('#custom_afternoon_udpate').val('');
+        $('#cus_mon_update').val('');
+        $('#cus_tues_update').val('');
+        $('#cus_thus_update').val('');
         $('#cus_wed_update').val('');
         $('#cus_fri_update').val('');
         $('#cus_ext_time_update').val('');
@@ -2586,7 +2717,7 @@ var morning_time = $('#morning_time').val();
 
 
     // Calculating Average Hours,Mon-Thurs,Fri Hours
-    $(document).on('keypress change keyup','#morning_time,#afternoon_time,#mon_time,#tues_time,#wed_time,#thus_time,#fri_time,#cus_morning,#cus_afternoon,#cus_fri,#sat_hour,#sat_on,#sat_off,#ext_frequency,#ext_time,#cus_ext_time,#cus_ext_freq,#cus_sat_hour,#cus_sat_off,#cus_sat_working',function(e){
+    $(document).on('keypress change keyup','#morning_time,#afternoon_time,#mon_time,#tues_time,#wed_time,#thus_time,#fri_time,#cus_morning,#cus_afternoon,#cus_mon,#cus_tues,#cus_wed,#cus_thus,#cus_fri,#sat_hour,#sat_on,#sat_off,#ext_frequency,#ext_time,#cus_ext_time,#cus_ext_freq,#cus_sat_hour,#cus_sat_off,#cus_sat_working',function(e){
         
        var morning_time = $('#morning_time').val();
        var afternoon_time = $('#afternoon_time').val();
@@ -2660,57 +2791,21 @@ var morning_time = $('#morning_time').val();
         $('#counter_mon_thu_hrs').text(hour_minute.hour);
         $('#counter_mon_thu_min').text(hour_minute.minute);
 
+        // Pasting Average Mon Thursday hour in below
+
+        $('#mon_thurs_hours').text((hour_minute.hour+":"+hour_minute.minute));  
+
         // Pasting the Friday Hour
 
         $('#counter_fri_hrs').text(hour_minute_friday.hour);
         $('#counter_fri_min').text(hour_minute_friday.minute);
 
-        // var p = "1/1/1970 ";
-        // difference_f = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-        // if(difference_f == '17:00:00'){
-        //     t2 = "00:00:00";
-        // }
-        // difference_mt = new Date(new Date(p+mon_time) + new Date(p+tue_time)).toUTCString().split(" ")[4];
+        // Pasting Friday hour in below
 
-        // console.log(difference_mt);
-        // difference_mon = new Date(new Date(p+mon_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-        // difference_tue = new Date(new Date(p+tue_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-        // difference_wed = new Date(new Date(p+wed_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-        // difference_thur = new Date(new Date(p+thus_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-
-       
-        // if(difference_mon == '17:00:00'){
-        //     difference_mon = "00:00:00";
-        // }
-
-        // if(difference_tue == '17:00:00'){
-        //     difference_tue = "00:00:00";
-        // }
-
-        // if(difference_wed == '17:00:00'){
-        //     difference_wed = "00:00:00";
-        // }
-
-        //  if(difference_thur == '17:00:00'){
-        //     difference_thur = "00:00:00";
-        // }
+        $('#fri_hrs').text((hour_minute_friday.hour+":"+hour_minute_friday.minute));
 
 
 
-        // var add_mon_tue = addTimes(difference_mon,difference_tue);
-        // var add_wed_thurs = addTimes(difference_wed,difference_thur);
-
-        // console.log(add_mon_tue);
-        // console.log(add_wed_thurs);
-        // console.log(addTimes(add_mon_tue,add_wed_thurs));
-
-
-
-
-
-
-
-        // console.log("afternoon_time"+afternoon_time);
        // Standard Morning And Afternoon Timing Comments 
        if(morning_time.length != 0 && afternoon_time.length != 0){
             var p = "1/1/1970 ";
@@ -2718,7 +2813,7 @@ var morning_time = $('#morning_time').val();
             difference_f = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
             console.log("Difference of Mon-Thur"+difference_mt);
 
-            $('#mon_thurs_hours').text(difference_mt);                       
+                                 
                 var t1 = difference_mt.split(':');
                 var t2 = difference_f.split(':');
                 // $('#counter_mon_thu_hrs').text(t1[0]);
@@ -2775,9 +2870,6 @@ var morning_time = $('#morning_time').val();
                 var splitTime2= time2.split(':');
                 var splitTime3= time3.split(':');
 
-                console.log(splitTime1);
-                console.log(splitTime2);
-                console.log(splitTime3);
 
                 mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
                 minhrs = Math.floor(parseInt(mins / 60));
@@ -2791,63 +2883,111 @@ var morning_time = $('#morning_time').val();
        }
        // End Comments
 
-        // Standard Friday Timing Comment
-        // if(fri_hours.length != 0){
-         
-        //   difference = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-        //   var friday_split = difference.split(':');
-        //   $('#counter_fri_hrs').text(friday_split[0]);
-        //   $('#counter_fri_min').text(friday_split[1]);
-        //   $('#fri_hrs').text(difference);
-        // }
-        // End Comment
 
 
         // Custom Morning And Afternoon Timing
 
+
+
         if(custom_morning.length != 0 && custom_afternoon.length != 0){
 
-        var sat_hours = $('#cus_sat_hour').val();
-        var sat_off = $('#cus_sat_off').val();
-        var sat_on = $('#cus_sat_working').val();
-        var ext_time = $('#cus_ext_time').val();
-        var ext_frequency = $('#cus_ext_freq').val();
+            var sat_hours = $('#cus_sat_hour').val();
+            var sat_off = $('#cus_sat_off').val();
+            var sat_on = $('#cus_sat_working').val();
+            var ext_time = $('#cus_ext_time').val();
+            var ext_frequency = $('#cus_ext_freq').val();
 
-        if(target == 'cus_afternoon'){
-            $('#cus_fri').val(custom_afternoon);
-            $('#cus_wed').val(custom_afternoon);
-       }
+            if(target == 'cus_afternoon'){
+                $('#cus_mon').val(custom_afternoon);
+                $('#cus_tues').val(custom_afternoon);
+                $('#cus_wed').val(custom_afternoon);
+                $('#cus_thus').val(custom_afternoon);
+                $('#cus_fri').val(custom_afternoon);
+            }
 
-          var p = "1/1/1970 ";
+           var mon_time = $('#cus_mon').val();
+           var tue_time = $('#cus_tues').val();
+           var wed_time = $('#cus_wed').val();
+           var thus_time = $('#cus_thus').val();
+           var fri_hours = $('#cus_fri').val();
+
+           // Calculate AVG WEEK HOUR New Layout
+
+        var average_weekly_time = [];
+        var friday_weekly_time = [];
+
+        // Mon time
+        if(custom_morning.length != 0 && mon_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,mon_time));
+        }
+
+        // Tue Time
+        if(custom_morning.length != 0 && tue_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,tue_time));
+        }
+
+        // Wed Time
+        if(custom_morning.length != 0 && wed_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,wed_time));
+        }
+
+        // Thurs Time
+        if(custom_morning.length != 0 && thus_time.length != 0){
+            average_weekly_time.push(time_difference(custom_morning,thus_time));
+        }
+
+        // Fri Time
+        if(custom_morning.length != 0 && fri_hours.length != 0){
+            friday_weekly_time.push(time_difference(custom_morning,fri_hours));
+        }
+
+
+        var hour_minute =  sum_time(average_weekly_time);
+        var hour_minute_friday = sum_time(friday_weekly_time);
+
+
+        // Pasting the Mon Thursday Hour
+
+        $('#counter_mon_thu_hrs').text(hour_minute.hour);
+        $('#counter_mon_thu_min').text(hour_minute.minute);
+
+        // Pasting Average Mon Thursday hour in below
+
+        $('#cus_mon_thu_hrs').text((hour_minute.hour+":"+hour_minute.minute));  
+
+        // Pasting the Friday Hour
+
+        $('#counter_fri_hrs').text(hour_minute_friday.hour);
+        $('#counter_fri_min').text(hour_minute_friday.minute);
+
+        // Pasting Friday hour in below
+
+        $('#cus_fri_hrs').text((hour_minute_friday.hour+":"+hour_minute_friday.minute));
+
+
+        var p = "1/1/1970 ";
         difference_mt = new Date(new Date(p+custom_afternoon) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
         difference_f = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
         
-        $('#cus_mon_thu_hrs').text(difference_mt);
-        $('#counter_mon_thu_hrs').text(difference_mt.split(":")[0]);
-        $('#counter_mon_thu_min').text(difference_mt.split(":")[1]);   
-
-              
-          var t1 = difference_mt.split(':');
-          var t2 = difference_f.split(':');
-          console.log(difference_f);
-          if(difference_f == '17:00:00'){
+    
+        var t1 = difference_mt.split(':');
+        var t2 = difference_f.split(':');
+        if(difference_f == '17:00:00'){
             t2 = "00:00:00";
-          }
-          mins = Number(t1[1]*4) + Number(t2[1]);
-          minhrs = Math.floor(parseInt(mins / 60));
-          hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
-          mins = mins % 60;
-          t1 = hrs + ':' + mins
+        }
+        mins = Number(t1[1]*4) + Number(t2[1]);
+        minhrs = Math.floor(parseInt(mins / 60));
+        hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
+        mins = mins % 60;
+        t1 = hrs + ':' + mins
 
-          if(sat_on.length > 0){
+        if(sat_on.length > 0){
             var sat = sat_hours * sat_on;
             sat = sat/4;
-            console.log(sat);
             var n = new Date(0,0);
             n.setSeconds(+sat * 60 * 60);
             var sat_avg = (n.toTimeString().slice(0, 8));
         }else{
-
             var sat = sat_hours * (4-sat_off);
             sat = sat/4;
             var n = new Date(0,0);
@@ -2893,13 +3033,6 @@ var morning_time = $('#morning_time').val();
 
         }
 
-        if(custom_friday.length != 0){
-            difference = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
-            $('#cus_fri_hrs').text(difference);
-            $('#counter_fri_hrs').text(difference.split(':')[0]);
-            $('#counter_fri_min').text(difference.split(':')[1]);
-        }
-
     });
 
     // Calculating difference In Attendance
@@ -2937,30 +3070,6 @@ var morning_time = $('#morning_time').val();
 
     function sum_time(time_array){
 
-        // console.log(time_array);
-        
-        // var time1 = "01:00:00";
-        // var time2 = "00:30:00";
-        // var time3 = "00:30:00";
-        
-        // var hour=0;
-        // var minute=0;
-        // var second=0;
-        
-        // var splitTime1= time1.split(':');
-        // var splitTime2= time2.split(':');
-        // var splitTime3= time3.split(':');
-        
-        // hour = parseInt(splitTime1[0])+parseInt(splitTime2[0])+parseInt(splitTime3[0]);
-        // minute = parseInt(splitTime1[1])+parseInt(splitTime2[1])+parseInt(splitTime3[1]);
-        // hour = hour + minute/60;
-        // minute = minute%60;
-        // second = parseInt(splitTime1[2])+parseInt(splitTime2[2])+parseInt(splitTime3[2]);
-        // minute = minute + second/60;
-        // second = second%60;
-        
-        // alert('sum of above time= '+hour+':'+minute+':'+second);
-        
         // New Function of add array
         
         var time =  [];
@@ -2982,10 +3091,7 @@ var morning_time = $('#morning_time').val();
                 second.push(splitTime1[j][2]);
         }
 
-        // console.log(splitTime1);
-        // console.log(hour);
-        // console.log(minute);
-        // console.log(second);
+
 
         var sum_of_hour = 0;
         var sum_of_minute = 0;
@@ -3025,13 +3131,17 @@ var morning_time = $('#morning_time').val();
   // Commit By Rohail 
   // Standard Updation
   
-  /*
+  
 
-   $(document).on('keypress change keyup','#morning_time_update,#afternoon_time_update,#fri_time_update,#sat_hour_update,#ext_time_update,#ext_frequency_update,#sat_off_update,#sat_on_update',function(e){
+   $(document).on('keypress change keyup','#morning_time_update,#afternoon_time_update,#mon_time_update,#tues_time_update,#wed_time_update,#thus_time_update,#fri_time_update,#sat_hour_update,#ext_time_update,#ext_frequency_update,#sat_off_update,#sat_on_update',function(e){
    
    var morning_time = $('#morning_time_update').val();
    var afternoon_time = $('#afternoon_time_update').val();
    var fri_hours = $('#fri_time_update').val();
+   var mon_time = $('#mon_time_update').val();
+   var tue_time = $('#tues_time_update').val();
+   var wed_time = $('#wed_time_update').val();
+   var thus_time = $('#thus_time_update').val();
    var sat_hours = $('#sat_hour_update').val();
    var sat_off = $('#sat_off_update').val();
    var sat_on = $('#sat_on_update').val();
@@ -3041,106 +3151,153 @@ var morning_time = $('#morning_time').val();
    
  
 
-   // Standard Morning And Afternoon Timing
+     // Calculate AVG WEEK HOUR New Layout
 
+    var average_weekly_time = [];
+    var friday_weekly_time = [];
+
+    // Mon time
+    if(morning_time.length != 0 && mon_time.length != 0){
+        average_weekly_time.push(time_difference(morning_time,mon_time));
+    }
+
+    // Tue Time
+    if(morning_time.length != 0 && tue_time.length != 0){
+        average_weekly_time.push(time_difference(morning_time,tue_time));
+    }
+
+    // Wed Time
+    if(morning_time.length != 0 && wed_time.length != 0){
+        average_weekly_time.push(time_difference(morning_time,wed_time));
+    }
+
+    // Thurs Time
+    if(morning_time.length != 0 && thus_time.length != 0){
+        average_weekly_time.push(time_difference(morning_time,thus_time));
+    }
+
+    // Fri Time
+    if(morning_time.length != 0 && fri_hours.length != 0){
+        friday_weekly_time.push(time_difference(morning_time,fri_hours));
+    }
+
+
+    var hour_minute =  sum_time(average_weekly_time);
+    var hour_minute_friday = sum_time(friday_weekly_time);
+
+
+    // Pasting the Mon Thursday Hour
+
+    $('#counter_mon_thu_hrs').text(hour_minute.hour);
+    $('#counter_mon_thu_min').text(hour_minute.minute);
+
+    // Pasting Average Mon Thursday hour in below
+
+    $('#mon_thurs_hours').text((hour_minute.hour+":"+hour_minute.minute));  
+
+    // Pasting the Friday Hour
+
+    $('#counter_fri_hrs').text(hour_minute_friday.hour);
+    $('#counter_fri_min').text(hour_minute_friday.minute);
+
+    // Pasting Friday hour in below
+
+    $('#fri_hrs').text((hour_minute_friday.hour+":"+hour_minute_friday.minute));
+
+
+
+   // Standard Morning And Afternoon Timing Comments 
    if(morning_time.length != 0 && afternoon_time.length != 0){
-    var p = "1/1/1970 ";
-    difference_mt = new Date(new Date(p+afternoon_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-    difference_f = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-    
-    $('#mon_thurs_hours').text(difference_mt);  
-
-          
-      var t1 = difference_mt.split(':');
-      var t2 = difference_f.split(':');
-      //console.log(difference_f);
-      $('#counter_mon_thu_hrs').text(t1[0]); 
-      $('#counter_mon_thu_min').text(t1[1]); 
-
-      if(difference_f == '17:00:00'){
-        t2 = "00:00:00";
-      }
-      mins = Number(t1[1]*4) + Number(t2[1]);
-      minhrs = Math.floor(parseInt(mins / 60));
-      hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
-      mins = mins % 60;
-      t1 = hrs + ':' + mins
-
-      if(sat_on.length > 0){
-        var sat = sat_hours * sat_on;
-        sat = sat/4;
-        console.log(sat);
-        var n = new Date(0,0);
-        n.setSeconds(+sat * 60 * 60);
-        var sat_avg = (n.toTimeString().slice(0, 8));
-      }else{
-
-        var sat = sat_hours * (4-sat_off);
-        sat = sat/4;
-        var n = new Date(0,0);
-        n.setSeconds(+sat * 60 * 60);
-        var sat_avg = (n.toTimeString().slice(0, 8));
-
-      }
-
-      if(ext_frequency.length > 0){
         var p = "1/1/1970 ";
-        difference_ext = new Date(new Date(p+ext_time) - new Date(p+afternoon_time)).toUTCString().split(" ")[4];
-        var arr = difference_ext.split(':');
-        var ext_working_hours =  parseFloat(parseInt(arr[0], 10) + '.' + parseInt((arr[1]/6)*10, 10));
-        ext_working_hours = ext_working_hours * ext_frequency;
-        var n = new Date(0,0);
-        n.setSeconds(+ext_working_hours * 60 * 60);
-        var ext_avg = (n.toTimeString().slice(0, 8));
-        console.log(ext_avg);
-      }else{
-        var  ext_avg = '00:00:00';
-      }
+        difference_mt = new Date(new Date(p+afternoon_time) - new Date(p+morning_time)).toUTCString().split(" ")[4];
+        difference_f = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
+        console.log("Difference of Mon-Thur"+difference_mt);
 
-        var time1 = t1;
-        var time2 = sat_avg;
-        var time3 = ext_avg;
+                             
+            var t1 = difference_mt.split(':');
+            var t2 = difference_f.split(':');
+            // $('#counter_mon_thu_hrs').text(t1[0]);
+            // $('#counter_mon_thu_min').text(t1[1]);
+            if(difference_f == '17:00:00'){
+                t2 = "00:00:00";
+            }
+            mins = Number(t1[1]*4) + Number(t2[1]);
+            minhrs = Math.floor(parseInt(mins / 60));
+            hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
+            mins = mins % 60;
+            t1 = hrs + ':' + mins
+
+          if(sat_on.length > 0){
+            var sat = sat_hours * sat_on;
+            sat = sat/4;
+            console.log(sat);
+            var n = new Date(0,0);
+            n.setSeconds(+sat * 60 * 60);
+            var sat_avg = (n.toTimeString().slice(0, 8));
+          }else{
+
+            var sat = sat_hours * (4-sat_off);
+            sat = sat/4;
+            var n = new Date(0,0);
+            n.setSeconds(+sat * 60 * 60);
+            var sat_avg = (n.toTimeString().slice(0, 8));
+
+          }
+
+          if(ext_frequency.length > 0){
+                var p = "1/1/1970 ";
+                difference_ext = new Date(new Date(p+ext_time) - new Date(p+afternoon_time)).toUTCString().split(" ")[4];
+                var arr = difference_ext.split(':');
+                var ext_working_hours =  parseFloat(parseInt(arr[0], 10) + '.' + parseInt((arr[1]/6)*10, 10));
+                ext_working_hours = ext_working_hours * ext_frequency;
+                var n = new Date(0,0);
+                n.setSeconds(+ext_working_hours * 60 * 60);
+                var ext_avg = (n.toTimeString().slice(0, 8));
+                console.log(ext_avg);
+            }else{
+                var  ext_avg = '00:00:00';
+            }
+
+            var time1 = t1;
+            var time2 = sat_avg;
+            var time3 = ext_avg;
+            
+            var hour=0;
+            var minute=0;
+            var second=0;
+            
+            var splitTime1= time1.split(':');
+            var splitTime2= time2.split(':');
+            var splitTime3= time3.split(':');
+
+
+            mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
+            minhrs = Math.floor(parseInt(mins / 60));
+            hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
+            mins = mins % 60;
+            t1 = hrs+':'+mins;
         
-        var hour=0;
-        var minute=0;
-        var second=0;
-        
-        var splitTime1= time1.split(':');
-        var splitTime2= time2.split(':');
-        var splitTime3= time3.split(':');
-
-        console.log(splitTime1);
-        console.log(splitTime2);
-        console.log(splitTime3);
-
-        mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
-        minhrs = Math.floor(parseInt(mins / 60));
-        hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
-        mins = mins % 60;
-        t1 = hrs+':'+mins;
-      
-        $('#counter_avg_hrs').text(hrs);
-        $('#counter_avg_min').text(mins);
-        $('#avg_hrs').text(t1);
-    }
-
-   // Standard Friday Timing
-    if(fri_hours.length != 0){
-    difference = new Date(new Date(p+fri_hours) - new Date(p+morning_time)).toUTCString().split(" ")[4];
-    $('#fri_hrs').text(difference);
-    $('#counter_fri_hrs').text(difference.split(':')[0]);
-    $('#counter_fri_min').text(difference.split(':')[1]);
-    }
+            $('#counter_avg_hrs').text(hrs);
+            $('#counter_avg_min').text(mins);
+            $('#avg_hrs').text(t1);
+   }
+   // End Comments
 
 });
 
-*/
+
     // Custom Updation
-    $(document).on('keypress change','#custom_morning_update,#custom_afternoon_udpate,#cus_fri_update,#cus_sat_hour_update,#cus_ext_time_update,#cus_ext_freq_update,#cus_sat_off_update,#cus_sat_working_update',function(){
+    $(document).on('keypress change','#custom_morning_update,#custom_afternoon_udpate,#cus_mon_update,#cus_tues_update,#cus_wed_update,#cus_thus_update,#cus_fri_update,#cus_sat_hour_update,#cus_ext_time_update,#cus_ext_freq_update,#cus_sat_off_update,#cus_sat_working_update',function(){
 
       var custom_morning = $('#custom_morning_update').val();
       var custom_afternoon = $('#custom_afternoon_udpate').val();
+      
+      var mon_time = $('#cus_mon_update').val();
+      var tue_time = $('#cus_tues_update').val();
+      var wed_time = $('#cus_wed_update').val();
+      var thus_time = $('#cus_thus_update').val();
       var custom_friday = $('#cus_fri_update').val();
+
       var sat_hours = $('#cus_sat_hour_update').val();
       var sat_off = $('#cus_sat_off_update').val();
       var sat_on = $('#cus_sat_working_update').val();
@@ -3148,43 +3305,90 @@ var morning_time = $('#morning_time').val();
       var ext_frequency = $('#cus_ext_freq_update').val();
       var difference_time;
 
-     if(custom_morning.length != 0 && custom_afternoon.length != 0){
 
-      var p = "1/1/1970 ";
-      difference_mt = new Date(new Date(p+custom_afternoon) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
-      difference_f = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
-      
+       // Calculate AVG WEEK HOUR New Layout
+
+    var average_weekly_time = [];
+    var friday_weekly_time = [];
+
+    // Mon time
+    if(custom_morning.length != 0 && mon_time.length != 0){
+        average_weekly_time.push(time_difference(custom_morning,mon_time));
+    }
+
+    // Tue Time
+    if(custom_morning.length != 0 && tue_time.length != 0){
+        average_weekly_time.push(time_difference(custom_morning,tue_time));
+    }
+
+    // Wed Time
+    if(custom_morning.length != 0 && wed_time.length != 0){
+        average_weekly_time.push(time_difference(custom_morning,wed_time));
+    }
+
+    // Thurs Time
+    if(custom_morning.length != 0 && thus_time.length != 0){
+        average_weekly_time.push(time_difference(custom_morning,thus_time));
+    }
+
+    // Fri Time
+    if(custom_morning.length != 0 && custom_friday.length != 0){
+        friday_weekly_time.push(time_difference(custom_morning,custom_friday));
+    }
 
 
-      $('#cus_mon_thu_hrs').text(difference_mt);   
-          
-      var t1 = difference_mt.split(':');
-      var t2 = difference_f.split(':');
-      console.log(difference_f);
-      if(difference_f == '17:00:00'){
+    var hour_minute =  sum_time(average_weekly_time);
+    var hour_minute_friday = sum_time(friday_weekly_time);
+
+
+    // Pasting the Mon Thursday Hour
+
+    $('#counter_mon_thu_hrs').text(hour_minute.hour);
+    $('#counter_mon_thu_min').text(hour_minute.minute);
+
+    // Pasting Average Mon Thursday hour in below
+
+    $('#cus_mon_thu_hrs').text((hour_minute.hour+":"+hour_minute.minute));  
+
+    // Pasting the Friday Hour
+
+    $('#counter_fri_hrs').text(hour_minute_friday.hour);
+    $('#counter_fri_min').text(hour_minute_friday.minute);
+
+    // Pasting Friday hour in below
+
+    $('#cus_fri_hrs').text((hour_minute_friday.hour+":"+hour_minute_friday.minute));
+
+
+    var p = "1/1/1970 ";
+    difference_mt = new Date(new Date(p+custom_afternoon) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
+    difference_f = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
+    
+
+    var t1 = difference_mt.split(':');
+    var t2 = difference_f.split(':');
+    if(difference_f == '17:00:00'){
         t2 = "00:00:00";
-      }
-      mins = Number(t1[1]*4) + Number(t2[1]);
-      minhrs = Math.floor(parseInt(mins / 60));
-      hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
-      mins = mins % 60;
-      t1 = hrs + ':' + mins
+    }
+    mins = Number(t1[1]*4) + Number(t2[1]);
+    minhrs = Math.floor(parseInt(mins / 60));
+    hrs = Number(t1[0]*4) + Number(t2[0]) + minhrs;
+    mins = mins % 60;
+    t1 = hrs + ':' + mins
 
-      if(sat_on.length > 0){
+    if(sat_on.length > 0){
         var sat = sat_hours * sat_on;
         sat = sat/4;
-        console.log(sat);
         var n = new Date(0,0);
         n.setSeconds(+sat * 60 * 60);
         var sat_avg = (n.toTimeString().slice(0, 8));
-      }else{
-
+    }else{
         var sat = sat_hours * (4-sat_off);
         sat = sat/4;
         var n = new Date(0,0);
         n.setSeconds(+sat * 60 * 60);
         var sat_avg = (n.toTimeString().slice(0, 8));
-      }
+    }
 
       if(ext_frequency.length > 0){
         var p = "1/1/1970 ";
@@ -3200,38 +3404,30 @@ var morning_time = $('#morning_time').val();
         var  ext_avg = '00:00:00';
       }
 
-        var time1 = t1;
-        var time2 = sat_avg;
-        var time3 = ext_avg;
-        
-        var hour=0;
-        var minute=0;
-        var second=0;
-        
-        var splitTime1= time1.split(':');
-        var splitTime2= time2.split(':');
-        var splitTime3= time3.split(':');
+    var time1 = t1;
+    var time2 = sat_avg;
+    var time3 = ext_avg;
+    
+    var hour=0;
+    var minute=0;
+    var second=0;
+    
+    var splitTime1= time1.split(':');
+    var splitTime2= time2.split(':');
+    var splitTime3= time3.split(':');
 
-        console.log(splitTime1);
-        console.log(splitTime2);
-        console.log(splitTime3);
+    mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
+    minhrs = Math.floor(parseInt(mins / 60));
+    hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
+    mins = mins % 60;
+    t1 = hrs+':'+mins;
+  
+    $('#cus_avg_weekly').text(t1);
+    $('#counter_avg_hrs').text(hrs);
+    $('#counter_avg_min').text(mins);
 
-        mins = Number(splitTime1[1]) + Number(splitTime2[1]) + Number(splitTime3[1]);
-        minhrs = Math.floor(parseInt(mins / 60));
-        hrs = Number(splitTime1[0]) + Number(splitTime2[0]) + Number(splitTime3[0]) + minhrs;
-        mins = mins % 60;
-        t1 = hrs+':'+mins;
-      
-      $('#cus_avg_weekly').text(t1);   
-    }
 
-      if(custom_friday.length != 0){
-
-        difference = new Date(new Date(p+custom_friday) - new Date(p+custom_morning)).toUTCString().split(" ")[4];
         
-      $('#cus_fri_hrs').text(difference);
-        
-      }
 
     });
 

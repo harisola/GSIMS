@@ -358,6 +358,13 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/staff_recruitment_initiation','Development\staff_recruitment_initiation@index');
 
 	Route::get('/staff_recruitment_process','Development\staff_recruitment_process@index');
+
+	Route::get('/staff_recruitment_process1','Development\staff_recruitment_process@process_flow');
+	Route::post( '/get_form', 'Development\staff_recruitment_process@get_process');
+
+
+
+	
 	Route::post('/staff_recruitment_initiation_add','Development\staff_recruitment_initiation@addFormData');
 	Route::post('/staff_recruitment_initiation_addcareerform','Development\staff_recruitment_initiation@addCareerForm');
 	Route::get('/hr_configurations','Development\hr_settings@configurations');
