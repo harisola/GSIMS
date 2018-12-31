@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Core\SelectionList;
 use App\Models\Staff\Staff_Information\StaffInformationModel;
 use App\Models\Staff\Staff_Information\Edit_delete_management_model;
+use App\Models\Staff\Staff_Information\daily_attendance_report;
 
 class Edit_delete_management_controller extends StaffReportController
 {
@@ -727,6 +728,7 @@ $html .= '   <div class="row">
 		$adjustment_description = $request->input('adjustment_description');
 		$staff_id = $request->input('staff_id');
 		$adjustment_id = $request->input('adjustment_id');
+		$events = new daily_attendance_report;
 		
 		$data = array(
 			'adjustment_title' => $adjustment_title,
@@ -749,6 +751,10 @@ $html .= '   <div class="row">
 			$updation = $staffInfo->update_data('atif.staff_registered',$where,$update);
 		}
 		$id = array("id"=>$adjustment_id);
+		 $exception_adjustment_array = array('exceptional_adjustments' =>$adjustment_no);
+		 
+      	 $events->updateExceptionalLeave($staff_id,$exception_adjustment_array);
+     
 		echo json_encode($id);
 	}
 	

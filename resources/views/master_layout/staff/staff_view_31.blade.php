@@ -7575,7 +7575,7 @@ if ( $('input[name^="institutionTo[]"').length) {
     var confirmation = confirm("Are you sure you want to save multiple exceptional adjustments?");
     if(confirmation){
 
-      var staff_ids = $('.selectPenalty').val();
+      var staff_ids = $('.selectAdjustments').val();
 
       for (var i = 0; i < staff_ids.length; i++) {
            var adjustment_title = $('#multiple_adjustment_title').val();
@@ -8242,9 +8242,14 @@ if ( $('input[name^="institutionTo[]"').length) {
      var staffAtd_status = $(this).attr('data-title');
      var staffAtd_content = $(this).attr('data-content');
      $('#tab_1_3').data('staffID',staffID);
-
+     var width='';
+     if(window.innerWidth==1366){
+          width=800;
+     }else if(window.innerWidth>1366){
+          width=1150;
+     }
     var option = {
-       //'width':'750'
+       'width':width
     }
     $('#datepaginator').datepaginator(option);
     $('#datepaginator').on('selectedDateChanged', function(event, date) {
@@ -8301,6 +8306,7 @@ if ( $('input[name^="institutionTo[]"').length) {
              $('.profile-usertitle-email').html(data['info'][0]['email']);
                  $('.profile-usertitle-email').prop("href", 'mailto:'+data['info'][0]['email']+'@generations.edu.pk');
              $('.profile-usertitle-campus').html(data['info'][0]['campus']);
+
              $('.currentLeave').text(data['current_leave'][0]['currentLeave']);
              $('.profile-usertitle-mobilePhone').html(data['info'][0]['mobile_phone']);
              $('.profile-usertitle-bottomline').html(data['info'][0]['c_bottomline']+':<br>'+data['info'][0]['c_topline']+'</br>');
@@ -12075,20 +12081,40 @@ bootbox.dialog({
 
             // Leave Mapping                           
             if(new Date(date) < new Date(data[0].today_date)){
+
+               if(current_leave==null){
+                  current_leave=0;
+                }
+               if(previous_leave==null){
+                  previous_leave=0;
+                }
+
               $('.previous_el_balance').text(previous_leave);
               $('.current_el_balance').text(current_leave);
+               
               $('.currentLeave').text(current_leave + ' / 10');
 
             }else{
-              $('.previous_el_balance').text(previous_leave);
+                if(previous_leave==null){
+                  previous_leave=0;
+                }
+               $('.previous_el_balance').text(previous_leave);
 
               // If Exception Adjustment Date Occur
               if(data[0].adjustment_day > 0){
+                if(current_leave==null){
+                  current_leave=0;
+                }
                 $('.current_el_balance').text(current_leave);
               }else{
+                if(previous_leave==null){
+                  previous_leave=0;
+                }
                 $('.current_el_balance').text(previous_leave);
               }
-              
+              if(previous_leave==null){
+                previous_leave=0;
+              }
               $('.currentLeave').text(previous_leave + ' / 10');
             }
             

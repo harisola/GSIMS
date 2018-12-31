@@ -6274,6 +6274,7 @@
    
    
    var clearStaffInfo = function() {
+    debugger;
    $('.profile-userpic img').attr("src", '');
    $('.profile-usertitle-name').text('');
    $('.profile-usertitle-job').text('');

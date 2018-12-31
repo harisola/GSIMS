@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Core\SelectionList;
 use App\Models\Staff\Staff_Information\StaffInformationModel;
-use App\Models\Staff\Staff_Adjustment\StaffAdjustmentModel;
+use App\Models\Staff\Staff_Information\daily_attendance_report;
 
 class Haris extends StaffReportController
 {
@@ -690,6 +690,7 @@ class Haris extends StaffReportController
       $adjustment_no = $request->input('adjustment_no');
       $adjustment_description = $request->input('adjustment_description');
       $staff_id = $request->input('staff_id');
+      $events = new daily_attendance_report;
 	  $adjustment=0;
 
       $data = array(
@@ -725,6 +726,10 @@ class Haris extends StaffReportController
       }
 	  
 	  $id = array("id"=>$adjustment);
+      $exception_adjustment_array = array('exceptional_adjustments' =>$adjustment_no);
+      $events->updateExceptionalLeave($staff_id,$exception_adjustment_array);
+      
+      
 	  echo json_encode($id);
 	  
     }
@@ -738,6 +743,7 @@ class Haris extends StaffReportController
       $date = $request->input('date');
       $staff_id = $request->input('staff_id');
       $getReport = $staffInfo->getDailyReportData($staff_id,$date,$date);
+      print_r($getReport);
       echo json_encode($getReport);
 
 
