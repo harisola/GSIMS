@@ -99,7 +99,7 @@ where c.gs_id = '".$gs_id."'";
           LEFT JOIN atif.student_family_record AS std_data ON (cl.gf_id = std_data.gf_id and std_data.nic = sa.tax_nic)
           LEFT JOIN atif.staff_child sc ON sc.gf_id = cl.gf_id
           LEFT JOIN atif.staff_registered sr ON (sr.id = sc.staff_id AND sr.is_active = 1 AND sr.staff_status <> 16)
-          WHERE cl.gs_id = '$gs_id' AND fee_bill.academic_session_id IN (11, 12) 
+          WHERE cl.gs_id = '$gs_id' AND fee_bill.academic_session_id IN (9, 10) 
           ORDER BY fee_bill.id DESC limit 1";
           $details = DB::connection('mysql_Career_fee_bill')->select($query);
 

@@ -83,7 +83,7 @@ class AccountsController extends Controller
                  $current_acadmic_session=$lists->academic_session_id;
 
                  if($lists->gs_id!=="" && $billing_cycle!==""){
-                    $this->insertFeeBill($lists->gs_id,$billing_cycle);
+                    // $this->insertFeeBill($lists->gs_id,$billing_cycle);
                  }
             }
 
@@ -111,7 +111,7 @@ class AccountsController extends Controller
             }
             $gs_ids=substr_replace($array_student_ids, "", -1);
             $this->fetchFeeBill($gs_ids);
-
+            
 
 
         }

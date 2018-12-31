@@ -118,7 +118,7 @@ class fee_bill extends Model
                     'fee_def.tuition_fee as tuition_fee','fee_def.resource_fee as resource_fee',
                     'fee_def.musakhar as musakhar','sr.gt_id as gt_id','fee_bill.gb_id as gb_id_mc_a','fee_bill.scholarship_codes as sc_codes','fee_bill.scholarship_percentage as sc_percentage'])
                     ->where('std_info.gs_id',$gs_id)
-                    ->whereIN("fee_bill.academic_session_id",[11,12])
+                    ->whereIN("fee_bill.academic_session_id",[9,10])
                     ->whereIN("std_info.std_status_code",['F-SNS','S-CFS','S-CPT','F-LLV','F-NAD','S-WNT','F-O2A'])
                     ->where("fee_bill.bill_cycle_no",$billing_cycle_number)
                     ->groupBy('std_info.gs_id')
