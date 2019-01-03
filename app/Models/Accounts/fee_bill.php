@@ -228,9 +228,15 @@ class fee_bill extends Model
      }
 
     public function getAllBillNumbers($student_id,$academic_session_id){
-    	$details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->select('id')->get();
-    	return $details;
+        $details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->select('id')->get();
+        return $details;
     }
+
+    public function getLastBillRollOver($student_id,$academic_session_id){
+        $details=fee_bill::select('roll_over_charges')->where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->Orderby('id','desc')->first();
+        return $details['roll_over_charges'];
+    }
+
      public function getLastBillNumber($student_id,$academic_session_id){
     	$details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->select('gb_id')->Orderby('id','desc')->first();
     	return $details;

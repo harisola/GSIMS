@@ -374,6 +374,9 @@ class AccountsController extends Controller
                     if($last_taxes!=0){
                         $amount=($last_taxes*5)/100;
                     }
+                    $previos_roll_over=$fee_bill->getLastBillRollOver($list['student_id'],$list['academic_session_id']);
+                    //for temp use only next time we have to remove this line we have to remove rollover charges rollover charges only be added in rollover charges. it will never calculated in taxes
+                    $total_adjustments=$total_adjustments-$previos_roll_over;
                     $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
                     $adjustment->insertUpdateAdjustment($list['student_id'],0);
 
@@ -389,8 +392,9 @@ class AccountsController extends Controller
                         $roll_over_charges=0;
                         $total_arriers=($total_arriers-@$last_bill_taxes);
                     if($total_arriers>700){
-                        $roll_over_charges=600+400;
+                        $roll_over_charges=(600+400)+$previos_roll_over;
                         $fee_bill->roll_over_charges=$roll_over_charges;//insert into late fee charges column
+
                     }
                 }
 
@@ -598,8 +602,8 @@ class AccountsController extends Controller
                 $fee_bill_received_info=new fee_bill_received_info;
                 $adjustment=new adjustment;
                 if($arrears==true){
-                    $total_current_billing=$total_current_billing-1000;
-                    $total_current_billing_with_arrears=$total_current_billing_with_arrears-1000;
+                    $total_current_billing=$total_current_billing;
+                    $total_current_billing_with_arrears=$total_current_billing_with_arrears;
                 }
 
                 $tax_percentage=$tax_amount->getTaxPercentage($list['a_session_id'])['tax_percentage'];
@@ -655,12 +659,14 @@ class AccountsController extends Controller
                         $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing_with_arrears,$tax_percentage);
                     }else if($received_amount==0){
                        $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
+                       $admission_fee;
                        $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
                     }
                    
                }else{
                      $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
                }
+
             
                return $applicable_taxes;
     }
