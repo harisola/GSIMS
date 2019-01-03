@@ -183,7 +183,7 @@
                                                         <?php foreach ($report_data as $value) : ?> 
                                                         <tr>
                                                         <td><?=$value->Grade_name;?></td>
-                                                        <td><?=$value->Total_Tuition_Fee_PG;?></td>
+                                                        <td class="tution_fee"><?=$value->Total_Tuition_Fee_PG;?></td>
                                                         <td><?=$value->Total_resourdes_fee;?></td>
                                                         <td><?=$value->SCEOPTDISC;?></td>
                                                         <td><?=$value->Total_Concession_Amount;?></td>
