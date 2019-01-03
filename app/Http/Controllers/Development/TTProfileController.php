@@ -1571,9 +1571,13 @@ class TTProfileController extends Controller
     */
     public function setDailyAttendanceReport($staff_id,$profile_id){
         $staffInfo = new StaffInformationModel();
+
             /***** GET YESTERDAY DATE *****/
         $yesterdayDate = $staffInfo->getYesterdayDate($staff_id);
         if(is_null($yesterdayDate[0]->yesterdayDate)){
+
+            var_dump($yesterdayDate);
+            exit;
             /************ If Yesterday Date Not Found *****************/
             $yesterday = strtotime(date('w') == 0 ? 'last saturday' : 'yesterday');
             $yesterday = date('Y-m-d', $yesterday);
