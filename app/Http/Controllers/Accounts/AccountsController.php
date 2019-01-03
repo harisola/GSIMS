@@ -209,7 +209,7 @@ class AccountsController extends Controller
         $scholarship_percentage_2="";
         $amount_exceed=false;
         $arrears=false;
-
+        $total_arriers="";
 
 
         // $gs_id=$request->get('gs_id');
@@ -420,7 +420,7 @@ class AccountsController extends Controller
                         $total=$this->calculateDiscount($admission_fee,5);
                         $applicable_taxes=$adjustment_taxes+$total;
                     }else{
-                        $applicable_taxes=$this->calculateTaxes($list,$total_current_billing,$bill_cycle_no,$total_current_billing_with_arrears,$arriers);
+                        $applicable_taxes=$this->calculateTaxes($list,$total_current_billing,$bill_cycle_no,$total_current_billing_with_arrears,$total_arriers);
                     }
                 }
                 $fee_bill->fee_bill_type_id=$fee_bill_type_id;//by default 1 for regular bill
