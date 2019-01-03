@@ -43,7 +43,7 @@
 		<?php  if( $sr->Photo_id == '' ) { $Photo = 'gs_logo.png'; } else{  $Photo = $sr->Photo_id.'.png'; } ?>
 		
 		
-			<img class="avatar" alt="" src="http://10.10.10.12/gsims/public/assets/photos/hcm/150x150/staff/<?=$Photo;?>" />
+			<img class="avatar" alt="" src="http://10.10.10.50/gsims/public/assets/photos/hcm/150x150/staff/<?=$Photo;?>" />
 
 			<div class="message">
 				<span class="arrow"> </span>

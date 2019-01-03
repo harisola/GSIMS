@@ -65,6 +65,7 @@ class TTProfileController extends Controller
                 $from_date = date("Y-m-d");
                 $to_date = date("Y-m-d",strtotime('+360 days'));
                 $update_weeklySheet =  $staffInfo->updateWeeklyTimeSheetByStaff($staff_ids[$i], $from_date,$to_date);
+                
 
                 $this->setDailyAttendanceReport($staff_ids[$i],$staff_profile);
             }

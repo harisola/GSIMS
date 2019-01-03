@@ -203,6 +203,27 @@
                                                         <?php endforeach; ?>  
                                                     <?php endif; ?>    
                                                 </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td style="width: 200px;" width="200"><strong>Total</strong></td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <!-- <th> Remitance </th> -->
+                                                    </tr>
+                                                </tfoot>
                                             </table><!-- sample_4 -->
                                         </div><!-- row -->
                                     </div><!-- portlet-body -->

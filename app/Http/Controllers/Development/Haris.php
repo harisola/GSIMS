@@ -727,7 +727,7 @@ class Haris extends StaffReportController
 	  
 	  $id = array("id"=>$adjustment);
       $exception_adjustment_array = array('exceptional_adjustments' =>$adjustment_no);
-      $events->updateExceptionalLeave($staff_id,$exception_adjustment_array);
+      // $events->updateExceptionalLeave($staff_id,$exception_adjustment_array);
       
       
 	  echo json_encode($id);
@@ -743,7 +743,6 @@ class Haris extends StaffReportController
       $date = $request->input('date');
       $staff_id = $request->input('staff_id');
       $getReport = $staffInfo->getDailyReportData($staff_id,$date,$date);
-      print_r($getReport);
       echo json_encode($getReport);
 
 

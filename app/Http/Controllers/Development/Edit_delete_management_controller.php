@@ -753,7 +753,7 @@ $html .= '   <div class="row">
 		$id = array("id"=>$adjustment_id);
 		 $exception_adjustment_array = array('exceptional_adjustments' =>$adjustment_no);
 		 
-      	 $events->updateExceptionalLeave($staff_id,$exception_adjustment_array);
+      	 // $events->updateExceptionalLeave($staff_id,$exception_adjustment_array);
      
 		echo json_encode($id);
 	}

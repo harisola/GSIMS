@@ -311,15 +311,11 @@ group by l.form_id ) as f
   else if($Stage_id == 'Applicants_currently_initial')
   {
     $Where =" and af.id in(
-select 
-
-( cf.id ) as Total_form
-from atif_career.career_form as cf 
-left join atif_career.career_form_data as u on u.form_id=cf.id 
-and u.status_id= 1
-where cf.status_id=2 
-and cf.stage_id=4 
-and ( u.date is null or u.date >= curdate() )
+select
+ ( cf.id ) as Total_form
+from atif_Career.career_form as cf 
+left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
+where cf.status_id=2 and ( u.date is null or u.date < curdate() )
 
   )";
   }
@@ -388,6 +384,12 @@ where cf.status_id=2 and ( u.date is null or u.date < curdate() )
   )";
   }
 
+  else if($Stage_id == '7_Days_passed')
+  {
+    $Where =" and af.id in(
+
+  )";
+  }
 
   else if($Stage_id == 'Overall_applicants_given')
   {
@@ -572,32 +574,16 @@ end
     $Where =" and af.id in(
 
 select 
- 
-(ff.form_id) as Total_form
-from(
-select 
-(
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-) as p_date,
-( d.date ) as Total_form, f.id as form_id
-from atif_career.career_form as f
-left outer join (
-select * from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id )
-) as d on d.form_id = f.id
-where f.status_id=3 and (
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-)  <  curdate() ) as ff
+cf.id
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as l
+where l.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id  )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
 
 
 
@@ -642,34 +628,6 @@ from atif_career.career_form as lcf where lcf.status_id=2 and lcf.stage_id=6
   {
     $Where =" and af.id in(
 
-    select 
-
-(ff.Total_form) as Total_form
-from(
-select 
-(
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-) as p_date,
-( d.date ) as Total_form
-from atif_career.career_form as f
-left outer join (
-select * from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id )
-) as d on d.form_id = f.id
-where f.status_id=4 and (
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-)  >=  curdate() ) as ff
-
   )";
   }
   else if($Stage_id == 'marked_Present_for_job')
@@ -688,28 +646,6 @@ and (cf.stage_id=4)
   else if($Stage_id == 'currently_in_Observatio_for')
   {
     $Where =" and af.id in(
-select 
-
-( f_data.p_date ) as Total_form 
-from (
-select 
-(
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-) as p_date
-from atif_career.career_form as f
-left outer join (
-select * from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id )
-) as d on d.form_id = f.id
-where f.status_id=4
-) as f_data
-where f_data.p_date >= curdate()
 
   )";
   }
@@ -1065,11 +1001,7 @@ af.id as career_id, af.gc_id, af.name, af.email, af.mobile_phone, af.land_line,
       
       from_unixtime(af.modified, '%b %e, %Y %h:%i:%S %p') as Date_of_application,
 
-      if( lcf.created is null, from_unixtime(af.modified,'%Y-%m-%d'), from_unixtime(lcf.created,'%Y-%m-%d')) as log_created,
-         d.comments_next_step,
-      d.comments_applicant,
-      d.comments_next_decision,
-      d.comments_next_step_aloc 
+      if( lcf.created is null, from_unixtime(af.modified,'%Y-%m-%d'), from_unixtime(lcf.created,'%Y-%m-%d')) as log_created
       
 
 
@@ -1245,12 +1177,12 @@ and l.id is not null
 
 union
 select 7 as Query_num,
-count( d.id ) as Total_form
+sum( d.id ) as Total_form
 from( 
-select (l.form_id) as id  from atif_career.log_career_form as l  
+select count(l.id) as id  from atif_career.log_career_form as l 
 where l.status_id=11 and l.stage_id =4
 union
-select (l.id) as id  from atif_career.career_form as l 
+select count(l.id) as id  from atif_career.career_form as l 
 where l.status_id=11 and l.stage_id =4
 
 ) as d

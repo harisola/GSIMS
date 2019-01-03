@@ -74,7 +74,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 /*************************************************************** Development *****/
 /*********************************************************************************/
 Route::group(['middleware' => 'authenticated'], function () {
-	Route::get('/haris', 'Development\Haris@development');
+	Route::get('/masterLayoutStaff', 'Development\Haris@development');
 	Route::get('/staff_layout_team', 'Development\Haris@development_UserTeam');
 	//Route::get('/student_layout', 'Development\StdMasterLayout@development');
 	Route::get('/student_layout', 'Student_Information\Master_Page\Grade@Students');

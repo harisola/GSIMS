@@ -275,65 +275,38 @@
 @endphp
 
 <div class="row marginTop20">
+  <div class="modal fade" id="allocateProfileModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Recruitment Applicants</h3>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+              <div class="col-md-4 borderRightDashed">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered marginBottom0">
+              <div class="portlet-body">
+                  <div class="table-scrollable table-scrollable-borderless" id="table_data">
+                    
+                  </div><!-- table_data -->
+              </div><!-- portlet-body -->
+            </div><!-- portlet -->
+          </div><!-- col-md-4 -->
+          <div class="col-md-8 ">
+            <div id="modal_logs">  </div>
+          </div>
+          </div><!-- row -->
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div><!-- modal -->
 
    <div class="col-md-12" style="overflow-y: hidden;position:relative;">
        <img src="img/RecruitmentProcessflow.jpg" width="3500" />
 
-
-        <div class="modal fade" id="allocateProfileModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                  
-                   <h3 class="modal-title">Recruitment Applicants</h3>
-                  </div>
-                  <div class="modal-body"> 
-                      
-                          <div class="portlet-body fixedHeightmodalPortlet">
-                              <div class="col-md-4 borderRightDashed">
-                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                                <div class="portlet light bordered fixed-height-NoScroll marginBottom0">
-                                   <div class="portlet-title padding0">
-                                      <div class="caption caption-md">
-                                         <h3 id="staffView_StaffList_Total" class="marginTop0 marginBottom0 padding0">  Applicants</h3>
-                                      </div>
-                                   </div><!-- portlet-title -->
-
-                                   <!-- portlet-title -->
-                                   <div class="portlet-body">
-                                      <div class="inputs">
-                                      <!-- inputs -->
-                                      <div class="table-scrollable table-scrollable-borderless" id="table_data">
-                                         
-                                      </div><!-- table_data -->
-                                  <!--------------------------->
-                                        
-                                      <!-- table-scrollable-borderless -->
-                                   </div><!-- portlet-body -->
-                                </div><!-- portlet -->
-                             </div><!-- col-md-4 -->
-                           </div>
-                           <div class="col-md-8 ">
-                            <div id="modal_logs">  </div>
-                           </div>
-
-
-
-
-
-
-
-                          </div><!-- portlet-body fixedHeightmodalPortlet-->
-                      
-                  </div>
-                  <div class="modal-footer text-center">
-                      <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                  </div>
-              </div>
-              <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div><!-- modal -->
         
                <div class="startTillCSL3">
            <span class="OnlineFormSubmissions absolute">
@@ -371,7 +344,7 @@
 
           <!-- partAScreeningToPartBFollowupOverall: Overall applicants moved to Followup for Part B presence -->
           <span class="partAScreeningToPartBFollowupOverall absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Part B presence">
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Part B presence">
               {!! $num_4_1 !!}
             </a>
           </span><!-- partAScreeningToPartBFollowupOverall -->
@@ -724,6 +697,9 @@ $.ajax({
 </script>
 
 <style>
+#empTable_wrapper .row div {
+    width: 100% !important;
+}
 .modal-dialog {
     width: 80% !important;
     margin: 30px auto;
@@ -1020,22 +996,21 @@ a.gray {
                                                                 loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/vue.min.js", function(){
                                                                     loadScript("{{ URL::to('metronic') }}/global/plugins/select2/js/select2.full.min.js", function(){
                                                                         loadScript("{{ URL::to('metronic') }}/pages/scripts/components-select2.min.js", function(){
-                                                                            loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/flatpickr.min.js", function(){
-
-                                                                            loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/nouislider.min.js", function(){
-                                                                            loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/moment.min.js", function(){
-                                                                            //loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/index.js", function(){
-
-                                                                            loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
-                                                                            loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
-                                                                            loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
-                                                                            });
-                                                                            });
-                                                                            });
-                                                                            //});
+                                                                          loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/flatpickr.min.js", function(){
+                                                                                loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/nouislider.min.js", function(){
+                                                                                    loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/moment.min.js", function(){
+                                                                                        //loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/index.js", function(){
+                                                                                            loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
+                                                                                                loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
+                                                                                                    loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
+                                                                                                    });
+                                                                                                });
+                                                                                            });
+                                                                                        //});
+                                                                                    });
+                                                                                });
                                                                             });
                                                                         });
-                                                                        });});
                                                                 });
                                                             });
                                                          });
