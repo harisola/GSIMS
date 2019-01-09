@@ -202,7 +202,7 @@
                          @foreach ($staff as $data)
                         <tr style="display: none;" id="map{{ $data->staff_id }}">
                             <td class="fit">
-                                <div class="roundedTwo tooltips" style="background:url({{ $data->photo150 }}); background-size: contain;" data-container="body" data-placement="top" data-original-title="16-070">
+                                <div class="roundedTwo tooltips" style="background:url({{ $data->photo150 }}); background-size: contain;" data-container="body" data-placement="top" data-original-title="{{ $data->gt_id }}">
                                   <input  disabled="disabled" class="allocationCheckbox" onchange="unmarkCheckbox('roundedTwo_{{ $data->staff_id }}', 'roundedTwo{{ $data->staff_id }}', {{ $data->staff_id }}), updateCount()" type="checkbox" value="{{ $data->staff_id }}" id="roundedTwo{{ $data->staff_id }}" name="check[]" />
                                   <label for="roundedTwo{{ $data->staff_id }}"></label>
                                 </div>
@@ -219,7 +219,7 @@
                         </tr>
                         <tr class="Row" data-attendance="{{ $data->atd_title }}"   data-campus="{{ $data->campus }}" data-profile="{{ $data->tt_profile_name }}" data-department="{{ $data->c_topline }}, {{ $data->c_bottomline }}">
                             <td class="fit">
-                                <div class="roundedTwo tooltips" style="background:url({{ $data->photo150 }}); background-size: contain;" data-container="body" data-placement="top" data-original-title="16-070">
+                                <div class="roundedTwo tooltips" style="background:url({{ $data->photo150 }}); background-size: contain;" data-container="body" data-placement="top" data-original-title="{{ $data->gt_id }}">
                                   <input  onchange="markCheckbox('roundedTwo{{ $data->staff_id }}', {{ $data->staff_id }} ), updateCount()" type="checkbox" value="{{ $data->staff_id }}" id="roundedTwo_{{ $data->staff_id }}" name="check[]" />
                                     <label for="roundedTwo_{{ $data->staff_id }}"></label>
                                 </div>

@@ -208,12 +208,12 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 	public function getStaffInformation($staffID){
 
 		$query = "select
-	    sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.abridged_name,sr.leave_balance, sr.nic, sr.gender, tl.title as staff_title,
+	    sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.father_name as fathername,sr.spouse_name as spousename, sr.abridged_name,sr.leave_balance, sr.nic, sr.gender, tl.title as staff_title,
 	    DATE_FORMAT(sr.dob, '%d-%b-%Y') as dob, sr.doj, SUBSTRING(sr.gg_id, 1, LOCATE('@',sr.gg_id)-1) as email, IF(sr.branch_id=1, 'North', 'South') as campus,
 	    sr.mobile_phone, sr.land_line, sr.staff_category, sr.c_topline, sr.c_bottomline, st.code as status_code, st.name as staff_status_name,
 	    if(sup.religion=1 or sup.religion is null, 'Muslim', 'Non-Muslim') as religion, sup.emailpersonal, sup.nationality,
 	    if(sup.employment_status=1, 'Married', if(sup.employment_status=2, 'Single', if(sup.employment_status=3, 'Divorced', if(sup.employment_status=4, 'Widow', '')))) as marital_status,
-	    cnt.apartment_no, cnt.building_name, cnt.plot_no, cnt.street_name, sub_region.name as sub_region, region.name as region
+	    cnt.apartment_no, cnt.building_name, cnt.plot_no, cnt.street_name, sub_region.name as sub_region, region.name as region,sr.dob as date_of_birth
 	    from atif.staff_registered as sr
 	    left join atif._title_person as tl
 	    	on tl.id = sr.title_person_id
@@ -230,9 +230,9 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 	    where (sr.id = $staffID)
 	    AND (sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0)
 	    limit 1";
-
+      //print_r($query);
 		$staff = DB::connection($this->dbCon)->select($query);
-		
+
 		$i = 0;
 	    foreach ($staff as $u) {
 		    $pic = $this->get_Staff_Pic($u->photo_id, $u->gender);
@@ -243,6 +243,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 
 		return $staff;
 	}
+
 
 
 

@@ -2073,201 +2073,53 @@ display: none;
 		                            <div class="tab-pane" id="tab_employment_edit">
                                   <div class="form-body">
                                     <h3 class="form-section marginTop0 headingBorderBottom">Employment History</h3>
-                                    <div class="row ">
-                                       <div class="col-md-6">
-                                          <div class="form-group">
-                                             <label class="control-label col-md-3 text-right paddingRight0">Employee ID:</label>
-                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="123" disabled="">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <!--/span-->
-                                       <div class="col-md-6">
-                                          <div class="form-group">
-                                             <label class="control-label col-md-3 text-right paddingRight0">GT ID:</label>
-                                             <div class="col-md-9">
-                                                <input type="text" class="form-control" placeholder="" value="16-070" disabled="">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <!--/span-->
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="col-md-12">
+                                            <label class="control-label">Institution / Organization <span class="required">*</span></label>
+                                            <input type="text" class="form-control" name="">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">Designation <span class="required">*</span></label>
+                                            <input type="text" class="form-control" name="">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">Salary <span class="required">*</span></label>
+                                            <input type="text" class="form-control" name="">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">From <span class="required">*</span></label>
+                                            <input type="text" class="form-control" name="">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="control-label">To <span class="required">*</span></label>
+                                            <input type="text" class="form-control" name="">
+                                            <input type="checkbox"> Present
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="control-label">Reason for Leaving <span class="required">*</span></label>
+                                            <textarea class="form-control" name=""></textarea>
+                                        </div>
+                                      </div><!-- col-md-6 -->
+                                      
+                                      <div class="col-md-6">
+                                        <div class="col-md-12">
+                                            <label class="control-label">Classes Taught <span class="required">*</span></label>
+                                            <textarea class="form-control" rows="4" name=""></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="control-label">Subjects Taught <span class="required">*</span></label>
+                                            <textarea class="form-control" rows="4" name=""></textarea>
+                                        </div>
+                                      </div><!-- col-md-6 -->
+                                      <div class="col-md-12 text-right" style="padding-top: 20px;">
+                                        <div class="col-md-12">
+                                          <a href="#" class="btn btn-group green">+ Add Another</a>
+                                        </div><!-- col-md-12 -->
+                                      </div>
                                     </div>
-                                    <!--/row-->
                                     <hr />
                                   </div><!-- form-body -->
-	                                <table class="table table-striped table-hover" id="empHistory" style="width:100%">
-                                  	<tbody>
-                                    	<tr>
-                                    		<td>
-                                          <div class="row">
-                                      		  <div class="col-md-6">
-                                      			 <div class="form-group">
-                                                <label class="control-label col-md-3 text-right paddingRight0">Inst/Org:</label>
-                                      				  <div class="col-md-9">
-                                                  <input type="text" name="institutionName[]" class="form-control" placeholder="" value="">
-                                                </div><!-- col-md-9 -->
-                                              </div><!-- form-group -->
-                                              <div class="form-group">
-                                                <div class="col-md-6">
-                                                  <label class="control-label col-md-3 text-right paddingRight0">Designation:</label>
-                                                  <div class="col-md-9">
-                                                    <input type="text" name="institutionName[]" class="form-control" placeholder="" value="">
-                                                  </div><!-- col-md-9 -->
-                                                </div><!-- col-md-6 -->
-                                                <div class="col-md-6">
-                                                  <label class="control-label col-md-3 text-right paddingRight0">Salary:</label>
-                                                  <div class="col-md-9">
-                                                    <input type="text" name="institutionName[]" class="form-control" placeholder="" value="">
-                                                  </div><!-- col-md-9 -->
-                                                </div><!-- col-md-6 -->
-                                              </div><!-- form-group -->
-                                            </div><!-- col-md-6-->
-                                            <div class="col-md-6">
-                                             <div class="form-group">
-                                                <label class="control-label col-md-3 text-right paddingRight0">Subject(s) Taught</label>
-                                                <div class="col-md-9">
-                                                  <textarea name="institutionClass[]" rows="3" class="form-control"></textarea>
-                                                </div><!-- col-md-9 -->
-                                              </div><!-- form-group -->
-                                            </div><!-- col-md-6-->
-                                          </div><!-- row -->
-
-
-
-
-                                      			<div class="row">
-                                      				<section class="col-12">
-                                      				  <section class="col col-3">
-                                      				    <label class="label"> Designation  </label>
-                                      				    <label class="input">
-                                      				      <input type="text" name="institutionDesignation[]" class="form-control" value="" />
-                                      				      <b class="tooltip tooltip-top-right">Designation hold.</b>
-                                      				    </label>
-                                      				  </section>
-
-                                      			    <section class="col col-2">
-                                      				    <label class="label">Salary</label>
-                                      				    <label class="input">
-                                      				      <input type="text" name="institutionSalary[]" class="form-control" value="" />
-                                      				    </label>
-                                      				  </section>
-
-                                      					<section class="col col-3">
-                                      					  <label class="label">From (Date)</label>
-                                      					  <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                    <input type="text" name="institutionFrom[]" class="experienceFromYear form-control" value="" id="efYear_0" />
-                                                  </label>
-                                                </section>
-
-                                      				  <section class="presentSection col col-3"  style="padding-left:0;display:none;" id="toDateH_0">
-                                      						<label class="label">To (Date)</label>
-                                      						<label class="input"> <i class="icon-append fa fa-calendar" style="width:20%"></i>
-                                      						  <input type="text" name="institutionTo[]" class="experienceToYear form-control" value=""  id="etYear_0" style="padding-right:0px;" />
-                                                  </label>
-                                      					</section>
-
-                                      					<section class="col col-1"  style="margin-bottom: 0;margin-left: 0;margin-top: 43px; padding: 0;">
-                                        					<div class="inline-group" style="padding:0;">
-                                                    <label class="checkbox" style="font-size:12px;font-weight:bold;">
-                                                      <input type="checkbox" checked="checked" name="present[]" class="presentCheckBox">
-                                                      <i></i>Present
-                                                    </label>
-                                        					</div>
-                                      					</section>
-                                              </section>
-                                            </div>
-                                            <section>
-                                              <label class="label">Class(s) taught</label>
-                                              <label class="textarea"> <i class="icon-append fa fa-question"></i>
-                                                <textarea name="institutionClass[]" rows="3"></textarea>
-                                                <b class="tooltip tooltip-top-right">Please tell us Class(s) you have taught</b> 
-                                              </label>
-                                            </section>
-                                          </div>
-
-                                          <section class="col-md-6">
-                                            <section>
-                                              <label class="label">Subject(s) taught</label>
-                                              <label class="textarea"> <i class="icon-append fa fa-question"></i>
-                                                <textarea name="institutionSubject[]" rows="3"></textarea>
-                                                <b class="tooltip tooltip-top-right">Please tell us Subject(s) you have taught</b> 
-                                              </label>
-                                            </section>
-
-                                      			<section>
-                                      				<label class="label">Reason For Leaving</label>
-                                      				<label class="textarea"> <i class="icon-append fa fa-question"></i>
-                                      				  <textarea name="institutionLeavingReason[]" rows="3"></textarea>
-                                      				  <b class="tooltip tooltip-top-right">Reason for leaving you current job</b> 
-                                              </label>
-                                      			</section>
-                                      		</section>
-                                          <a href="javascript:void(0);" class="remHistory" style="float: right;position: relative;top: 1px;"> <i class="fa fa-trash-o"></i>  </a>
-                                    		</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                  <table class="table">
-                                    <tr>
-                                      <td>
-                                        <input type="button" id="btnAdd" onclick="AddHistory()" value="+ Add Another Institution"  class="btn btn-primary btn-sm" name="addAnotherInstitution" /> 		
-                                      </td>
-                                    </tr>
-                                  </table>
-<script type="text/javascript">
-function AddHistory(){
-$('.experienceFromYear').datepicker('destroy');
-$('.experienceToYear').datepicker('destroy');
-var $tableBody = $('#empHistory').find("tbody"),
-$trLast = $tableBody.find("tr:last"),
-$trNew = $trLast.clone();
-$trNew.find('input,select,textarea').val('');
-$trLast.after($trNew);
-
-/* */
-
-$(".remHistory").show();
-$("#empHistory").on('click','.remHistory',function(){
-	var rowCount = $('#empHistory tr').length;
-	//alert(rowCount);
-	if( rowCount > 1 ){ $(this).parent().parent().remove();	 }else{ $(".remHistory").hide(); }
-});
-
-
-//$(".experienceFromYear").datepicker('distory');
-if ( $('input[name^="institutionFrom[]"').length) {
-	$('input[name^="institutionFrom[]"').each(function(i){
-	var newID = 'efYear_'+i;
-	$(this).attr( 'id',newID );
-	$( "#" + newID + "" ).datepicker();
-	});
-
-
-}
-//var presentSection = ;
-
-$(".presentSection").each(function(i){
-	var newID = 'toDateH_'+i;
-	$(this).attr( 'id',newID );
-});
-
-$('.experienceToYear').datepicker('destroy');
-
-if ( $('input[name^="institutionTo[]"').length) {
-	$('input[name^="institutionTo[]"').each(function(i){
-		var newIDs = 'etYear_'+i;
-		//alert( newIDs )
-		$(this).attr( 'id',newIDs );
-		$( "#" + newIDs + "" ).datepicker();
-
-
-	});
-}
-
-}
-</script>
-
 		                            </div>
 		                            <!-- tab_employment -->
 		                            <div class="tab-pane " id="tab_parent_edit">

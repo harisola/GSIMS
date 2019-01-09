@@ -132,10 +132,9 @@ class Staff_recruitment_model extends Model
 
 
 			from atif_career.career_form as c
-			left join atif_career.career_status as cs
-				on cs.id = c.status_id
-			left join atif_career.career_stage as ct
-				on ct.id = c.stage_id
+
+			left join atif_career.career_status as cs on cs.id = c.status_id
+			left join atif_career.career_stage as ct on ct.id = c.stage_id
 			left join atif_career.career_form_data as part_b on part_b.form_id = c.id and part_b.status_id = 11
 			
 			left join (select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified
@@ -145,7 +144,91 @@ class Staff_recruitment_model extends Model
 				
 			
 			
-			where ( c.status_id=10 or c.status_id=12 or c.status_id=6 )
+			where c.id in( select 
+ 
+cf.id
+
+ 
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as lcf
+where lcf.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id  )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+
+union 
+
+select 
+distinct( cf.id )  
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as l
+where l.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+
+union
+select 
+ 
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+ 
+ union
+ select 
+
+( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+
+
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where f.status_id=12 and d.status_id=4
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )
 			order by c.created desc";
 
 	    $career = DB::connection($this->dbCon)->select($query);
@@ -1988,8 +2071,119 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+
+
 WHERE 1  and af.status_id != 10 and af.status_id != 12  
-and (d.p_date < curdate() )
+ 
+
+and af.id in (     select 
+cf.id as Total_form
+    from atif_career.career_form as cf 
+left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id= cf.status_id
+where cf.status_id=11 and cf.stage_id=10 and ( u.date is null or u.date < curdate() )
+
+union
+
+select 
+cf.id  as Total_form
+from atif_Career.career_form as cf 
+left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
+where cf.status_id=2 and ( u.date is null or u.date < curdate() )
+
+union
+
+select 
+ 
+(ff.form_id) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+( d.date ) as Total_form, f.id as form_id
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=3 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() ) as ff
+
+
+union
+
+
+
+    select 
+  ff.form_id as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+( d.date ) as Total_form, f.id as form_id
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=4 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() ) as ff
+
+
+
+union 
+
+    select 
+ 
+ (ff.form_id) as Total_form
+from(
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+ ( d.date ) as Total_form, f.id as form_id
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=5 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  <  curdate() ) as ff
+ )
 order by af.created desc";
 
 

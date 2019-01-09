@@ -35,21 +35,21 @@ class weekly_time_sheet_model extends Model
     ***********************************************************************/
     public function staff_profile_desc() {
         
-        $query = "SELECT 
+    $query = "SELECT 
             wts.id,sr.abridged_name,sr.id as staff_id,
             sr.c_topline,sr.c_bottomline,wts.`date`,tp.name as profile_name,
             wts.time_in,wts.time_out
             FROM 
             atif_gs_events.weekly_time_sheet wts
-            inner join atif.staff_registered sr on sr.id = wts.staff_id
+            
             left join atif_gs_events.tt_profile_time_staff tpts on tpts.staff_id = wts.staff_id
             left join atif_gs_events.tt_profile tp on tp.id =  tpts.profile_id 
+            inner join atif.staff_registered sr on sr.id = wts.staff_id
+            where wts.`date` > curdate() and wts.date <= DATE_ADD(curdate(), INTERVAL 7 DAY) ";
 
-            where wts.`date` > curdate()";
-            $staff = DB::connection($this->dbCon)
-                ->select($query);
+    $staff = DB::connection($this->dbCon)->select($query);
 
-        return $staff;
+    return $staff;
     }
 
 

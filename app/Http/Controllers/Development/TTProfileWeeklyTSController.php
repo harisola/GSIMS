@@ -27,12 +27,16 @@ class TTProfileWeeklyTSController extends Controller
         //$staff = $staffInfo->get_Staff_List();
 
         /***** Getting Weeks *****/
+        /*Get 7 days date with hijri dates*/
         $get_weeks = $weeklyTimeSheet->get_weeks();
+        
 
 
 
         /***** Getting Staff Profile Details *****/
         $staff_profile_detail = $weeklyTimeSheet->staff_profile_desc();
+
+        #var_dump( $staff_profile_detail ); exit;
 
 
         

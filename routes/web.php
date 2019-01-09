@@ -156,7 +156,10 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 
 	Route::post('/weekly_timesheet/update_mutiple_staff_weekly_sheet_time','Development\TTProfileWeeklyTSController@update_mutiple_staff_weekly_sheet_time');
+
+	
 	Route::get('/weekly_timesheet', 'Development\TTProfileWeeklyTSController@mainPage');
+
 	Route::post('/weekly_timesheet/update_weekly_sheet_holidayFlag','Development\TTProfileWeeklyTSController@update_weekly_sheet_holidayFlag');
 	Route::post('/weekly_timesheet/update_weekly_sheet_time_saturday','Development\TTProfileWeeklyTSController@update_weekly_sheet_time_saturday');
 	Route::get('/weekly_timesheet/get_weekly_sheet_time_saturday','Development\TTProfileWeeklyTSController@get_weekly_sheet_time_saturday');
@@ -343,12 +346,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::post('/getArrearAndAdjustmentData','Account_Process\Accounts\arrears@get_arrear_and_adjustment_data');
 
-
-
-
-
-
-	
+	Route::get('/set_el_balance','Development\hr_settings@set_leave_balance');
 });	
 /*********************************************************************************/
 
@@ -356,6 +354,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 /************************* Staff Recuriment Process ************************/
 
 	Route::get('/staff_recruitment_initiation','Development\staff_recruitment_initiation@index');
+
+	Route::get('/staff_recruitment_all_applicants','Development\staff_recruitment_all_applicants@index');
 
 	Route::get('/staff_recruitment_process','Development\staff_recruitment_process@index');
 

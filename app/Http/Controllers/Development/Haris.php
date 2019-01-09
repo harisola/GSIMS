@@ -12,8 +12,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Core\SelectionList;
+use App\Models\Staff\Information\_region;
+use App\Models\Staff\Information\_region_sub;
+use App\Models\Staff\Staff_Information\staff_registered;
+use App\Models\Staff\Staff_Information\staff_contact_info;
+use App\Models\Staff\Staff_Adjustment\StaffAdjustmentModel;
 use App\Models\Staff\Staff_Information\StaffInformationModel;
 use App\Models\Staff\Staff_Information\daily_attendance_report;
+use App\Models\Staff\Staff_Information\staff_registered_takaful;
+use App\Models\Staff\Staff_Information\staff_registered_supporting;
+use App\Models\Staff\Staff_Information\staff_registered_employement;
+use App\Models\Staff\Staff_Information\staff_registered_bank_account;
+use App\Models\Staff\Staff_Information\staff_registered_qualification;
+use App\Models\Staff\Staff_Information\staff_registered_father_spouse;
+use App\Models\Staff\Staff_Information\staff_registered_alternativecontact;
+
 
 class Haris extends StaffReportController
 {
@@ -21,10 +34,10 @@ class Haris extends StaffReportController
         $userID = Sentinel::getUser()->id;
         $staffInfo = new StaffInformationModel();
         $selectionList = new SelectionList();
-		/***** Getting Staff Information of Login User *****/
-        $user = $staffInfo->get_Staff_Info(34);
-		/***** Getting Staff List *****/
-        $staff = $staffInfo->get_Staff_List();
+  		/***** Getting Staff Information of Login User *****/
+          $user = $staffInfo->get_Staff_Info(34);
+  		/***** Getting Staff List *****/
+          $staff = $staffInfo->get_Staff_List();
 		
 		
 		/***** Getting Staff Filterable List *****/
@@ -39,11 +52,111 @@ class Haris extends StaffReportController
         return view('master_layout.staff.staff_view_31')->with(array('staff' => $staff, 'user' => $user, 'filter' => $staffFilter, 'staffCategory' => $staffCategory,'leaveType' => $leaveType));
     }
 
+    //Add AnOther School Row Function...ZK. 
+    public function AddRow(Request $request){
+      // $userID = Sentinel::getUser()->id;
+      // $staffInfo = new StaffInformationModel();
+      //return view('master_layout.staff.add_school_row');
+          $next_div_id= $request->next_div;
+          $view_name= $request->view_name;
+
+         return view('master_layout.staff.'.$view_name, compact('next_div_id'));
+        // var_dump($next_div);
+        // die;
+    
+    }
+
+    //Add institute Row Function.... 
+    public function Add_Employment_Row(){
+      // $userID = Sentinel::getUser()->id;
+      // $staffInfo = new StaffInformationModel();
+        return view('master_layout.staff.add_employment_row');
+    
+    }
+
+    //Add AnOther College Row Function.... 
+    public function Add_College_Row(){
+      // $userID = Sentinel::getUser()->id;
+      // $staffInfo = new StaffInformationModel();
+        return view('master_layout.staff.add_college_row');
+    
+    }
+
+    //Add AnOther University Row Function.... 
+    public function Add_University_Row(){
+      // $userID = Sentinel::getUser()->id;
+      // $staffInfo = new StaffInformationModel();
+        return view('master_layout.staff.add_university_row');
+    
+    }
+
+    //Add AnOther Professional Row Function.... 
+    public function Add_Professional_Row(){
+      // $userID = Sentinel::getUser()->id;
+      // $staffInfo = new StaffInformationModel();
+        return view('master_layout.staff.add_professional_row');
+    
+    }
+
+    //Add AnOther Others Row Function.... 
+    public function Add_Others_Row(){
+      // $userID = Sentinel::getUser()->id;
+      // $staffInfo = new StaffInformationModel();
+        return view('master_layout.staff.add_others_row');
+    
+    }
+
+    //GetStaffInfo Function
+    public function getStaffInfo(Request $request){
+
+        $staffID = $request->input('staff_id');
+        $staffInfo = new StaffInformationModel();
+
+        $staff['info'] = $staffInfo->getStaffInformation($staffID);
+
+       // $staffRegion['region'] = $staffInfo->get_region($staffID);
+
+        //var_dump($getStaffStatus);
+        $staff['roles'] = $staffInfo->get_StaffInfo($staff['info'][0]->gt_id);
+        $staff['profile_description'] = $staffInfo->getStaff_TTProfile($staff['info'][0]->gt_id);
+
+        if(empty($staff['profile_description'])){
+          $staff['profile_description'] = '';
+        }
+
+        $staff['reporting1'] = '';
+        $staff['reporting2'] = '';
+        if(!empty($staff['roles'][0]['pm_report_to'])){
+          $staff['reporting1'] = $staffInfo->get_StaffReportingInfo($staff['roles'][0]['pm_report_to']);
+          if(!empty($staff['roles'][1]['pm_report_to'])){
+            $staff['reporting2'] = $staffInfo->get_StaffReportingInfo($staff['roles'][1]['pm_report_to']);
+          }
+        }
+        $staff['absentia'] = $staffInfo->getStaffAbsentia($staffID);
+
+        $staff['manual'] = $staffInfo->getStaffManual($staffID);
 
 
 
+        $staff['comments'] = $staffInfo->getStaffComments($staffID);
 
 
+        $staff['leave_description']= $staffInfo->get_leave_desscription($staffID);
+
+        $staff['penalty'] = $staffInfo->getPenalty($staffID);
+
+        $staff['exception_adjustment'] = $staffInfo->getExceptionAdjustment($staffID);
+
+        $staff['current_leave'] = $staffInfo->getCurrentLeave($staffID);
+
+        $staff['get_cut_date'] = $staffInfo->get_cut_date();
+
+       // $staff['daily_report_attendance'] = $staffInfo->getDailyReportData(date('Y-m-d'),$staffID);
+
+
+        echo json_encode($staff);
+    
+    }
 
     public function development_UserTeam(Request $request){
       $userID = Sentinel::getUser()->id;
@@ -170,9 +283,9 @@ class Haris extends StaffReportController
      
       if(!empty($staffData2[1]['role_id'])){
 		  
-		$Second_Role_Id = $staffData2[1]['role_id'];
-		$StaffReportee2 = $staffInfo->get_StaffReporteeInfo_UTeam($Second_Role_Id);
-		$StaffReportee2_SC = $staffInfo->get_StaffReporteeSCInfo_UTeam( $Second_Role_Id );
+  		$Second_Role_Id = $staffData2[1]['role_id'];
+  		$StaffReportee2 = $staffInfo->get_StaffReporteeInfo_UTeam($Second_Role_Id);
+  		$StaffReportee2_SC = $staffInfo->get_StaffReporteeSCInfo_UTeam( $Second_Role_Id );
 		
         foreach ($StaffReportee2 as $data) {
           array_push($staff, $data);
@@ -201,36 +314,36 @@ class Haris extends StaffReportController
 		
 		
 		
-		if( !empty( $StaffReportee2[0]["Role_id_So"]) ){
-			$StaffReportee2_staff_id =  $StaffReportee2[0]["Role_id_So"];
-			$StaffReportee2 = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee2_staff_id);
-			if( !empty($StaffReportee2)){
-				$StaffReportee2_SC = $staffInfo->get_StaffReporteeSCInfo_UTeam( $Second_Role_Id );
-				foreach ($StaffReportee2 as $data) {
-				  array_push($staff, $data);
-				}
-				foreach ($StaffReportee2_SC as $data) {
-				  array_push($staff, $data);
-				}
-				$i = 0;
-				foreach ($StaffReportee2 as $rr) {
-				  if($StaffReportee2[$i]['report_ok'] == 'TRP'){
-					$StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee2[$i]['Role_id_So'], 'INDIR', $StaffReportee2[$i]['name_code']);
-					foreach ($StaffReportee_TRP as $trp) {
-					  
-					  array_push($staff, $trp);
-					}
+  		if( !empty( $StaffReportee2[0]["Role_id_So"]) ){
+  			$StaffReportee2_staff_id =  $StaffReportee2[0]["Role_id_So"];
+  			$StaffReportee2 = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee2_staff_id);
+  			if( !empty($StaffReportee2)){
+  				$StaffReportee2_SC = $staffInfo->get_StaffReporteeSCInfo_UTeam( $Second_Role_Id );
+  				foreach ($StaffReportee2 as $data) {
+  				  array_push($staff, $data);
+  				}
+  				foreach ($StaffReportee2_SC as $data) {
+  				  array_push($staff, $data);
+  				}
+  				$i = 0;
+  				foreach ($StaffReportee2 as $rr) {
+  				  if($StaffReportee2[$i]['report_ok'] == 'TRP'){
+  					$StaffReportee_TRP = $staffInfo->get_StaffReporteeInfo_UTeam($StaffReportee2[$i]['Role_id_So'], 'INDIR', $StaffReportee2[$i]['name_code']);
+  					foreach ($StaffReportee_TRP as $trp) {
+  					  
+  					  array_push($staff, $trp);
+  					}
 
-				  }
-				  $i++;
-				}
-			}// endif role exist
-		}
-
-
+  				  }
+  				  $i++;
+  				}
+  			}// endif role exist
+  		}
 
 
-	}
+
+
+  	   }
 	 
       /************************************************** Staff Team **************************************************/
 
@@ -262,17 +375,17 @@ class Haris extends StaffReportController
       }
 	  
 	 
-		$duplicated=array();
-        $index = 0;
-		
-        foreach ( $staff as $v) {
-			if(!in_array($v["name_code"], $duplicated, true)){
-				array_push($duplicated, $v["name_code"]);
-			}else{
-				unset($staff[$index]);
-			}
-			$index++;
-		}
+    		$duplicated=array();
+            $index = 0;
+    		
+            foreach ( $staff as $v) {
+    			if(!in_array($v["name_code"], $duplicated, true)){
+    				array_push($duplicated, $v["name_code"]);
+    			}else{
+    				unset($staff[$index]);
+    			}
+    			$index++;
+    		}
 		
 		
 		
@@ -294,42 +407,36 @@ class Haris extends StaffReportController
 		
 		
 
-/*array_push($staff, array(
-		"role_cat"=>$s['role_cat'],
-		"s1"=>$s['s1'],
-		"is_transparent"=>$s['is_transparent'],
-		"finalDistance"=>$s['finalDistance'],
-		"fst10"=>$s['fst10'],
-		"finalGrade"=>$s['finalGrade']
-		
-		)
-	);*/
+        /*array_push($staff, array(
+        		"role_cat"=>$s['role_cat'],
+        		"s1"=>$s['s1'],
+        		"is_transparent"=>$s['is_transparent'],
+        		"finalDistance"=>$s['finalDistance'],
+        		"fst10"=>$s['fst10'],
+        		"finalGrade"=>$s['finalGrade']
+        		
+        		)
+        	);*/
 
 
 		
 		
-		
-		$user = $staffInfo->get_Staff_Info(34);
-		
-		
-		$staffCategory = $staffInfo->getCategory('atif_gs_events.comment_category');
-		$leaveType = $staffInfo->get('atif_gs_events.leave_type','');
-		
-		$staff = collect($staff)->map(function($x){ return (object) $x; })->toArray();
-		$staffFilter = collect($staffFilter)->map(function($x){ return (object) $x; })->toArray();
+    		
+    		$user = $staffInfo->get_Staff_Info(34);
+    		
+    		
+    		$staffCategory = $staffInfo->getCategory('atif_gs_events.comment_category');
+    		$leaveType = $staffInfo->get('atif_gs_events.leave_type','');
+    		
+    		$staff = collect($staff)->map(function($x){ return (object) $x; })->toArray();
+    		$staffFilter = collect($staffFilter)->map(function($x){ return (object) $x; })->toArray();
 		
 		
 		
         return view('master_layout.staff.staff_view_31')->with(array('staff' => $staff, 'user' => $user, 'filter' => $staffFilter, 'staffCategory' => $staffCategory,'leaveType' => $leaveType));
    
-       
-	   
-	   
-	  
     }
 
-
-	
     /**********************************************************************
     * Staff Information 
     * Author:   Rohail Aslam, r.aslam@generations.edu.pk, +92-340-2133372 
@@ -380,6 +487,773 @@ class Haris extends StaffReportController
 
 
         echo json_encode($staff);
+    
+    }
+
+    /**********************************************************************
+    * Staff Information Update
+    * Author:   Zia Khan, z.qureshi@generations.edu.pk, +92-342-2775588
+    * @input:   Key words
+    * @output:  JSON encoded Staff Information Fields
+    ***********************************************************************/
+    //add_staff_info update values zzkk
+    public function Update_Staff(Request $request){
+      $staff_id=$request->staff_id;
+      $staftitle=$request->staftitle;
+      $genderselect=$request->genderselect;
+      $cnicname=$request->cnicname;
+      $fullname=$request->fullname;
+      $namecodetxt=$request->namecodetxt;
+      $dobdate=$request->dobdate;
+      $cnictxt=$request->cnictxt;
+      $phonenumtxt=$request->phonenumtxt;
+      $landlinetxt=$request->landlinetxt;
+      $dojdate=$request->dojdate;
+      $satffstatustxt=$request->satffstatustxt;
+      $tapincampus=$request->tapincampus;
+      $eobino=$request->eobino;
+      $sessino=$request->sessino;
+      //Staff Supporting Registered
+      $maritalstatus=$request->maritalstatus;
+      $religiontxt=$request->religiontxt;
+      $nationalitytxt=$request->nationalitytxt;
+      $emailtxt=$request->emailtxt;
+      $providentfund=$request->providentfund;
+      $ntnno=$request->ntnno;
+      //Staff Address Info Registered 
+      $apartmenttxt=$request->apartmenttxt;
+      $streetnametxt=$request->streetnametxt;
+      $buildingnametxt=$request->buildingnametxt;
+      $plotnotxt=$request->plotnotxt;
+      //Staff Region Info Registered
+      $regiontxt=$request->regiontxt;
+      //Staff Sub Region Info Registered
+      $subregiontxt=$request->subregiontxt;
+      //Staff Education School
+      // $staff_id=$request->staff_id;
+      $sch_names=$request->sch_names;
+      $sch_qualifications=$request->sch_qualifications;
+      $sch_subjects=$request->sch_subjects;
+      $sch_results=$request->sch_results;
+      $sch_years=$request->sch_years;
+      //Staff Education college
+      // $staff_id=$request->staff_id;
+      $col_names=$request->col_names;
+      $col_qualifications=$request->col_qualifications;
+      $col_subjects=$request->col_subjects;
+      $col_results=$request->col_results;
+      $col_years=$request->col_years;
+      //Staff Education University
+      // $staff_id=$request->staff_id;
+      $uni_names=$request->uni_names;
+      $uni_qualifications=$request->uni_qualifications;
+      $uni_subjects=$request->uni_subjects;
+      $uni_results=$request->uni_results;
+      $uni_years=$request->uni_years;
+      //Staff Education Professional
+      // $staff_id=$request->staff_id;
+      $pro_names=$request->pro_names;
+      $pro_qualifications=$request->pro_qualifications;
+      $pro_subjects=$request->pro_subjects;
+      $pro_results=$request->pro_results;
+      $pro_years=$request->pro_years;
+      //Staff Education Others
+      // $staff_id=$request->staff_id;
+      $oth_names=$request->oth_names;
+      $oth_qualifications=$request->oth_qualifications;
+      $oth_subjects=$request->oth_subjects;
+      $oth_results=$request->oth_results;
+      $oth_years=$request->oth_years;
+      //Staff Employment Details
+      $employ_orgs=$request->employ_orgs;
+      $employ_desgs=$request->employ_desgs;
+      $employ_salarys=$request->employ_salarys;
+      $employ_fyears=$request->employ_fyears;
+      $employ_tyears=$request->employ_tyears;
+      $employ_reasons=$request->employ_reasons;
+      $employ_classess=$request->employ_classess;
+      $employ_subjects=$request->employ_subjects;  
+      //Staff Father Details
+      $namefather=$request->namefather;
+      $fprofession=$request->fprofession;
+      $fqualification=$request->fqualification;
+      $fdesignation=$request->fdesignation;
+      $fdepartment=$request->fdepartment;
+      $forganisation=$request->forganisation;
+      $fcnic=$request->fcnic;
+      $fmobile=$request->fmobile;
+      $faddress=$request->faddress;
+      //Staff Spouse Details 
+      $namespouse=$request->namespouse;
+      $sprofession=$request->sprofession;
+      $squalification=$request->squalification;
+      $sdesignation=$request->sdesignation;
+      $sdepartment=$request->sdepartment;
+      $sorganisation=$request->sorganisation;
+      $scnic=$request->scnic;
+      $smobile=$request->smobile;
+      $saddress=$request->saddress;
+      //Next Of Kin Details
+      $noknamefirst=$request->noknamefirst;
+      $nokaddressfirst=$request->nokaddressfirst;
+      $nokemailfirst=$request->nokemailfirst;
+      $nokmobilefirst=$request->nokmobilefirst;
+      $nokrelationshipfirst=$request->nokrelationshipfirst;
+      //Emergency Contact Details
+      $noknamesecond=$request->noknamesecond;
+      $nokaddresssecond=$request->nokaddresssecond;
+      $nokemailsecond=$request->nokemailsecond;
+      $nokmobilesecond=$request->nokmobilesecond;
+      $nokrelationshipsecond=$request->nokrelationshipsecond;
+      //Bank Details 
+      $banknametxt=$request ->banknametxt;
+      $bankbranchname=$request ->bankbranchname;
+      $bankaccountnumber=$request ->bankaccountnumber;
+      //Takaful Registered
+      $radioSelfTakaful=$request ->radioSelfTakaful;
+      $radioSpouseTakaful=$request ->radioSpouseTakaful;
+      $radioChildTakaful=$request ->radioChildTakaful;
+      $ctakaful=$request ->ctakaful;
+      $reasonfortakaful=$request ->reasonfortakaful;
+
+      //code code start here
+      //code code end here
+
+      //Staff Registered Code goes here///
+      $staff_registered = new staff_registered;
+      $tapincampus = $this->getStaffBranchId($tapincampus);
+      $staftitle = $this->getStaffTitle($staftitle);
+      $satffstatustxt = $this->getStaffStatus($satffstatustxt);
+      $staff_reg_record_found=$staff_registered->checkStaffRegRecordExistance($staff_id);
+          if($staff_reg_record_found>0){
+              $data=array(
+                  'title_person_id' => $staftitle,
+                  'gender' => $genderselect,
+                  'name' => $cnicname,
+                  'abridged_name' => $fullname,
+                  'name_code' => $namecodetxt,
+                  'dob' => $dobdate,
+                  'nic' => $cnictxt,
+                  'mobile_phone' => $phonenumtxt,
+                  'land_line' => $landlinetxt,
+                  'doj' => $dojdate,
+                  'staff_status'=> $satffstatustxt,
+                  'branch_id' => $tapincampus,
+                  'eobi_no' => $eobino,
+                  'sessi_no' => $sessino,
+              );
+                  $data_get_staff_reg= $staff_registered->updateStaffRegRecord($staff_id,$data);
+                  //return 'updated';
+          }
+          // else{
+          //         $staff_registered->title_person_id = $staftitle;
+          //         $staff_registered->gender = $genderselect;
+          //         $staff_registered->name = $cnicname;
+          //         $staff_registered->abridged_name = $fullname;
+          //         $staff_registered->name_code = $namecodetxt;
+          //         $staff_registered->dob = $dobdate;
+          //         $staff_registered->nic = $cnictxt;
+          //         $staff_registered->mobile_phone = $phonenumtxt;
+          //         $staff_registered->land_line = $landlinetxt;
+          //         $staff_registered->doj = $dojdate;
+          //         $staff_registered->staff_status = $satffstatustxt;
+          //         $staff_registered->branch_id = $tapincampus;
+          //         $staff_registered->eobi_no = $eobino;
+          //         $staff_registered->sessi_no = $sessino;
+          //         $staff_registered->save();
+          //       }
+
+      //Staff Supporting Registered Code goes here///
+      $staff_reg_support = new staff_registered_supporting;
+      $providentfund =$this->getStaffProvidentFund($providentfund);
+      $maritalstatus = $this->getStaffMaritalStatus($maritalstatus);
+      $religiontxt = $this->getstaffReligion($religiontxt);
+       $staff_reg_support_record_found=$staff_reg_support->checkStaffRegSupportRecordExistance($staff_id);
+          if($staff_reg_support_record_found>0){
+              $data=array(
+                      'employment_status' => $maritalstatus,
+                      'religion' => $religiontxt,
+                      'nationality' => $nationalitytxt,
+                      'emailpersonal' => $emailtxt,
+                      'providentFund' => $providentfund,
+                      'nationalTaxNumber' => $ntnno,
+              );
+                  $data_get_staff_reg_support= $staff_reg_support->updateStaffRegSupportRecord($staff_id,$data);
+                  //return 'Support updated';
+          }
+          else{
+                  $staff_reg_support->employment_status = $maritalstatus;
+                  $staff_reg_support->religion = $religiontxt;
+                  $staff_reg_support->nationality = $nationalitytxt;
+                  $staff_reg_support->emailpersonal = $emailtxt;
+                  $staff_reg_support->providentFund = $providentfund;
+                  $staff_reg_support->nationalTaxNumber = $ntnno;
+                  $staff_reg_support->save();
+                }
+
+      //Staff Address Registered Code goes here///
+      $staff_contact_info = new staff_contact_info;
+      $staff_contact_info_record_found=$staff_contact_info->checkStaffContactInfoRecordExistance($staff_id);
+          if($staff_contact_info_record_found>0){
+              $data=array(
+                      'apartment_no' => $apartmenttxt,
+                      'street_name' => $streetnametxt,
+                      'building_name' => $buildingnametxt,
+                      'plot_no' => $plotnotxt,
+                      'region'  => $regiontxt,
+                      'sub_region' => $subregiontxt,
+              );
+                  $data_get_staff_contact_info= $staff_contact_info->updateStaffContactInfoRecord($staff_id,$data);
+                  //return 'Contact updated';
+          }
+          else{
+                  $staff_contact_info->apartment_no = $apartmenttxt;
+                  $staff_contact_info->street_name = $streetnametxt;
+                  $staff_contact_info->building_name = $buildingnametxt;
+                  $staff_contact_info->plot_no = $plotnotxt;
+                  $staff_contact_info->regiontxt = $regiontxt;
+                  $staff_contact_info->subregiontxt = $subregiontxt;
+                  $staff_contact_info->save();
+                }
+
+      //Staff Region Registered Code goes here///
+      //Region Staff Model
+
+      //Staff Sub Region Registered Code goes here///
+
+      //Staff Father Registered Code goes Start here///
+      $staff_reg_father_spouse = new staff_registered_father_spouse;
+      $father_record_found=$staff_reg_father_spouse->checkStaffFatherSpouseRegRecordExistance($staff_id,1);
+        if($father_record_found>0){
+          $data=array(
+                  //'staff_id' =>$staff_id,
+                  'name' =>$namefather,
+                  'profession' =>$fprofession,
+                  'qualification' =>$fqualification,
+                  'designation' =>$fdesignation,
+                  'department' =>$fdepartment,
+                  'company' =>$forganisation,
+                  'nic' =>$fcnic,
+                  'mobile_phone' =>$fmobile,
+                  'address' =>$faddress,
+                   );
+
+            $data_get_father= $staff_reg_father_spouse->updateStaffFatherSpouseRegRecord($staff_id,1,$data);
+            //return 'Father update';
+        }else{
+          // $staff_reg_father_spouse->staff_id = $staff_id;
+          // $staff_reg_father_spouse->name = $namefather;
+          // $staff_reg_father_spouse->profession = $fprofession;
+          // $staff_reg_father_spouse->qualification = $fqualification;
+          // $staff_reg_father_spouse->designation = $fdesignation;
+          // $staff_reg_father_spouse->department = $fdepartment;
+          // $staff_reg_father_spouse->company = $forganisation;
+          // $staff_reg_father_spouse->nic = $fcnic;
+          // $staff_reg_father_spouse->mobile_phone = $fmobile;
+          // $staff_reg_father_spouse->address = $faddress;
+          // $staff_reg_father_spouse->save();
+          //console.log('Insert');
+        }
+      //Staff Father Registered Code goes End here///
+
+      //Staff Spouse Registered Code goes Start here///
+      $spouse_record_found=$staff_reg_father_spouse->checkStaffFatherSpouseRegRecordExistance($staff_id,2);
+          if($spouse_record_found>0){
+            $data=array(
+                    //'staff_id' =>$staff_id,
+                    'name' =>$namespouse,
+                    'profession' =>$sprofession,
+                    'qualification' =>$squalification,
+                    'designation' =>$sdesignation,
+                    'department' =>$sdepartment,
+                    'company' =>$sorganisation,
+                    'nic' =>$scnic,
+                    'mobile_phone' =>$smobile,
+                    'address' =>$saddress,
+                     );
+            $data_get_spouse= $staff_reg_father_spouse->updateStaffFatherSpouseRegRecord($staff_id,2,$data);
+            //return 'Spouse Update';
+          }else{
+            // $staff_reg_father_spouse->staff_id = $staff_id;
+            // $staff_reg_father_spouse->spouseType = 2;
+            // $staff_reg_father_spouse->name = $namespouse;
+            // $staff_reg_father_spouse->profession = $sprofession;
+            // $staff_reg_father_spouse->qualification = $squalification;
+            // $staff_reg_father_spouse->designation = $sdesignation;
+            // $staff_reg_father_spouse->department = $sdepartment;
+            // $staff_reg_father_spouse->company = $sorganisation;
+            // $staff_reg_father_spouse->nic = $scnic;
+            // $staff_reg_father_spouse->mobile_phone = $smobile;
+            // $staff_reg_father_spouse->address = $saddress;
+            // $staff_reg_father_spouse->save();
+            //console.log('Insert');
+          }
+      //Staff Spouse Registered Code goes End here///
+
+      //Staff Next Of Kin Registered Code goes here start///
+      $staff_reg_next_of_kin = new staff_registered_alternativecontact;
+      $kin_record_found=$staff_reg_next_of_kin->checkStaffAlternativeContactRegRecordExistance($staff_id,1);
+        if($kin_record_found>0){
+          $data=array(
+                  //'staff_id' =>$staff_id,
+                  'name' =>$noknamefirst,
+                  'address' =>$nokaddressfirst,
+                  'email' =>$nokemailfirst,
+                  'phone' =>$nokmobilefirst,
+                  'relationships' =>$nokrelationshipfirst,
+                   );
+          $data_get_kin= $staff_reg_next_of_kin->updateStaffAlternativeContactRegRecord($staff_id,1,$data);
+        }else{
+          $staff_reg_next_of_kin->staff_id = $staff_id;
+          $staff_reg_next_of_kin->name = $noknamefirst;
+          $staff_reg_next_of_kin->address = $nokaddressfirst;
+          $staff_reg_next_of_kin->email = $nokemailfirst;
+          $staff_reg_next_of_kin->phone = $nokmobilefirst;
+          $staff_reg_next_of_kin->relationships = $nokrelationshipfirst;
+          $staff_reg_next_of_kin->save();
+          //console.log('Insert');
+        }
+      //Staff Next Of Kin Registered Code goes here End///
+
+      //Staff Emergency Contact Registered Code goes here start///
+      $emergency_record_found=$staff_reg_next_of_kin->checkStaffAlternativeContactRegRecordExistance($staff_id,2);
+        if($emergency_record_found>0){
+          $data=array(
+                  //'staff_id' =>$staff_id,
+                  'name' =>$noknamesecond,
+                  'address' =>$nokaddresssecond,
+                  'email' =>$nokemailsecond,
+                  'phone' =>$nokmobilesecond,
+                  'relationships' =>$nokrelationshipsecond,
+                   );
+          $data_get_emergency= $staff_reg_next_of_kin->updateStaffAlternativeContactRegRecord($staff_id,2,$data);
+        }else{
+          $staff_reg_next_of_kin->staff_id = $staff_id;
+          $staff_reg_next_of_kin->name = $noknamesecond;
+          $staff_reg_next_of_kin->address = $nokaddresssecond;
+          $staff_reg_next_of_kin->email = $nokemailsecond;
+          $staff_reg_next_of_kin->phone = $nokmobilesecond;
+          $staff_reg_next_of_kin->relationships = $nokrelationshipsecond;
+          $staff_reg_next_of_kin->save();
+          //console.log('Insert');
+        }
+      //Staff Emergency Contact Registered Code goes here End///
+
+      //Staff Bank Registered Code Goes here Start///
+      $staff_reg_bank_details = new staff_registered_bank_account;
+      $bank_details_record_found=$staff_reg_bank_details->checkStaffBankRegRecordExistance($staff_id);
+              if($bank_details_record_found>0){
+                $data=array(
+                        'bank_name' => $banknametxt,
+                        'branch' => $bankbranchname,
+                        'account_number' => $bankaccountnumber,
+                         );
+                $data_get= $staff_reg_bank_details->updateStaffBankRegRecord($staff_id,$data);
+              }else{
+                $staff_reg_bank_details->bank_name = $banknametxt;
+                $staff_reg_bank_details->branch = $bankbranchname;
+                $staff_reg_bank_details->account_number = $bankaccountnumber;
+                $staff_reg_bank_details->save();
+                //console.log('Insert');
+              }
+      //Staff Bank Registered Code Goes here End///
+
+      //Staff Takaful Registered Code Goes Here Start///
+      $staff_reg_takaful = new staff_registered_takaful;
+      $radioSelfTakaful =$this->getStaffSelfTakaful($radioSelfTakaful);
+      $radioSpouseTakaful =$this->getStaffSpouseTakaful($radioSpouseTakaful);
+      $radioChildTakaful =$this->getStaffChildTakaful($radioChildTakaful);
+      $takaful_record_found=$staff_reg_takaful->checkStafftakafulRegRecordExistance($staff_id);
+              if($takaful_record_found>0){
+                $data=array(
+                        'self' => $radioSelfTakaful,              // radio button
+                        'spouse' => $radioSpouseTakaful,          // radio button
+                        'children' => $radioChildTakaful,        // radio button
+                        'certificate_no' => $ctakaful,
+                        'reasons' => $reasonfortakaful,
+                         );
+                $data_get= $staff_reg_takaful->updateStafftakafulRegRecord($staff_id,$data);
+              }else{
+                $staff_reg_takaful->self = $radioSelfTakaful;
+                $staff_reg_takaful->spouse = $radioSpouseTakaful;
+                $staff_reg_takaful->children = $radioChildTakaful;
+                $staff_reg_takaful->certificate_no = $ctakaful;
+                $staff_reg_takaful->reasons = $reasonfortakaful;
+                $staff_reg_takaful->save();
+                //console.log('Insert');
+              }
+      //Staff Takaful Registered Code Goes Here End///
+
+      //Staff Employmnet details here
+      $emp_increment=0;
+      if(!empty($employ_orgs)){
+            foreach ($employ_orgs as $row_number) {
+                    $staff_employment = new staff_registered_employement;
+                    $key=$emp_increment++;
+                    $record_found=$staff_employment->checkRecordEmployExistance($staff_id,$employ_orgs[$key]);
+                    if($record_found>0){
+
+                      $data=array(
+                              //'staff_id' =>$staff_id,
+                              'organization' =>$employ_orgs[$key],
+                              'designation' =>$employ_desgs[$key],
+                              'department' =>$employ_desgs[$key],
+                              'salary' =>$employ_salarys[$key],
+                              'from_year' =>$employ_fyears[$key],
+                              'to_year' =>$employ_tyears[$key],
+                              'classes_taught' =>$employ_classess[$key],
+                              'description' =>$employ_reasons[$key],
+                              'reason_for_leaving' =>$employ_reasons[$key],
+                              'subject_taught' =>$employ_subjects[$key],
+                              );
+                      $data_get= $staff_employment->updateEmployRecord($staff_id,$employ_orgs[$key],$data);
+                      // var_dump($data_get);
+                      // die;
+                    }else{
+                      $staff_employment->staff_id = $staff_id;
+                      $staff_employment->organization = $employ_orgs[$key];
+                      $staff_employment->designation = $employ_desgs[$key];
+                      $staff_employment->department = $employ_desgs[$key];
+                      $staff_employment->salary = $employ_salarys[$key];
+                      $staff_employment->from_year = $employ_fyears[$key];
+                      $staff_employment->to_year = $employ_tyears[$key];
+                      $staff_employment->classes_taught = $employ_classess[$key];
+                      $staff_employment->description = $employ_reasons[$key];
+                      $staff_employment->reason_for_leaving = $employ_reasons[$key];
+                      $staff_employment->subject_taught = $employ_subjects[$key];
+                      $staff_employment->save();
+                    }
+            }
+      }
+
+      // education staff          
+      $school_increment=0;
+      if(!empty($sch_names)){
+            foreach ($sch_names as $row_number){
+                    $staff_qualification = new staff_registered_qualification;
+                    $key=$school_increment++;
+                    $record_found=$staff_qualification->checkRecordExistance($staff_id,$sch_names[$key]);
+                    if($record_found>0){
+                      $data=array(
+                              //'staff_id' =>$staff_id,
+                              'title' =>$sch_names[$key],
+                              'level' =>1,
+                              'institute' =>$sch_names[$key],
+                              'subjects' =>$sch_subjects[$key],
+                              'qualification' =>$sch_qualifications[$key],
+                              'result' =>$sch_results[$key],
+                              'year_of_completion' =>$sch_years[$key],
+                               );
+                      $data_get= $staff_qualification->updateRecord($staff_id,$sch_names[$key],$data);
+                    }else{
+                      $staff_qualification->staff_id = $staff_id;
+                      $staff_qualification->level = 1;
+                      $staff_qualification->title = $sch_names[$key];
+                      $staff_qualification->institute = $sch_names[$key];
+                      $staff_qualification->subjects = $sch_subjects[$key];
+                      $staff_qualification->qualification = $sch_qualifications[$key];
+                      $staff_qualification->result = $sch_results[$key];
+                      $staff_qualification->year_of_completion = $sch_years[$key];
+                      $staff_qualification->save();
+                      //console.log('Insert');
+                    }
+            }
+      }
+      //college data Insert
+      $college_increment=0;
+      if(!empty($col_names)){
+            foreach ($col_names as $row_number) {
+                    $staff_qualification = new staff_registered_qualification;
+                    $key=$college_increment++;
+                    $record_found=$staff_qualification->checkRecordExistance($staff_id,$col_names[$key]);
+                    if($record_found>0){
+
+                      $data=array(
+                              //'staff_id' =>$staff_id,
+                              'title' =>$col_names[$key],
+                              'level' =>2,
+                              'institute' =>$col_names[$key],
+                              'subjects' =>$col_subjects[$key],
+                              'qualification' =>$col_qualifications[$key],
+                              'result' =>$col_results[$key],
+                              'year_of_completion' =>$col_years[$key],
+                               );
+                      $data_get= $staff_qualification->updateRecord($staff_id,$col_names[$key],$data);
+                    }else{
+                      $staff_qualification->staff_id = $staff_id;
+                      $staff_qualification->level = 2;
+                      $staff_qualification->title = $col_names[$key];
+                      $staff_qualification->institute = $col_names[$key];
+                      $staff_qualification->subjects = $col_qualifications[$key];
+                      $staff_qualification->qualification = $col_subjects[$key];
+                      $staff_qualification->result = $col_results[$key];
+                      $staff_qualification->year_of_completion = $col_years[$key];
+                      $staff_qualification->save();
+                    }
+            }
+      }
+      //university data Insert
+      $university_increment=0;
+      if(!empty($uni_names)){
+            foreach ($uni_names as $row_number) {
+                    $staff_qualification = new staff_registered_qualification;
+                    $key=$university_increment++;
+                    $record_found=$staff_qualification->checkRecordExistance($staff_id,$uni_names[$key]);
+                    if($record_found>0){
+
+                      $data=array(
+                             // 'staff_id' =>$staff_id,
+                              'title' =>$uni_names[$key],
+                              'level' =>3,
+                              'institute' =>$uni_names[$key],
+                              'subjects' =>$uni_subjects[$key],
+                              'qualification' =>$uni_qualifications[$key],
+                              'result' =>$uni_results[$key],
+                              'year_of_completion' =>$uni_years[$key],
+                               );
+                      $data_get= $staff_qualification->updateRecord($staff_id,$uni_names[$key],$data);
+                    }else{
+                      $staff_qualification->staff_id = $staff_id;
+                      $staff_qualification->level = 3;
+                      $staff_qualification->title = $uni_names[$key];
+                      $staff_qualification->institute = $uni_names[$key];
+                      $staff_qualification->subjects = $uni_qualifications[$key];
+                      $staff_qualification->qualification = $uni_subjects[$key];
+                      $staff_qualification->result = $uni_results[$key];
+                      $staff_qualification->year_of_completion = $uni_years[$key];
+                      $staff_qualification->save();
+                    }
+            }
+      }
+      //professional data Insert
+      $professional_increment=0;
+      if(!empty($pro_names)){
+            foreach ($pro_names as $row_number) {
+                    $staff_qualification = new staff_registered_qualification;
+                    $key=$professional_increment++;
+                    $record_found=$staff_qualification->checkRecordExistance($staff_id,$pro_names[$key]);
+                    if($record_found>0){
+
+                      $data=array(
+                              //'staff_id' =>$staff_id,
+                              'title' =>$pro_names[$key],
+                              'level' =>4,
+                              'institute' =>$pro_names[$key],
+                              'subjects' =>$pro_subjects[$key],
+                              'qualification' =>$pro_qualifications[$key],
+                              'result' =>$pro_results[$key],
+                              'year_of_completion' =>$pro_years[$key],
+                               );
+                      $data_get= $staff_qualification->updateRecord($staff_id,$pro_names[$key],$data);
+                    }else{
+                      $staff_qualification->staff_id = $staff_id;
+                      $staff_qualification->level = 4;
+                      $staff_qualification->title = $pro_names[$key];
+                      $staff_qualification->institute = $pro_names[$key];
+                      $staff_qualification->subjects = $pro_qualifications[$key];
+                      $staff_qualification->qualification = $pro_subjects[$key];
+                      $staff_qualification->result = $pro_results[$key];
+                      $staff_qualification->year_of_completion = $pro_years[$key];
+                      $staff_qualification->save();
+                    }
+            }
+      }
+      //others data Insert
+      $others_increment=0;
+      if(!empty($oth_names)){
+            foreach ($oth_names as $row_number) {
+                    $staff_qualification = new staff_registered_qualification;
+                    $key=$others_increment++;
+                    $record_found=$staff_qualification->checkRecordExistance($staff_id,$oth_names[$key]);
+                    if($record_found>0){
+
+                      $data=array(
+                              //'staff_id' =>$staff_id,
+                              'title' =>$oth_names[$key],
+                              'level' =>5,
+                              'institute' =>$oth_names[$key],
+                              'subjects' =>$oth_subjects[$key],
+                              'qualification' =>$oth_qualifications[$key],
+                              'result' =>$oth_results[$key],
+                              'year_of_completion' =>$oth_years[$key],
+                               );
+                      $data_get= $staff_qualification->updateRecord($staff_id,$oth_names[$key],$data);
+                    }else{
+                      $staff_qualification->staff_id = $staff_id;
+                      $staff_qualification->level = 5;
+                      $staff_qualification->title = $oth_names[$key];
+                      $staff_qualification->institute = $oth_names[$key];
+                      $staff_qualification->subjects = $oth_qualifications[$key];
+                      $staff_qualification->qualification = $oth_subjects[$key];
+                      $staff_qualification->result = $oth_results[$key];
+                      $staff_qualification->year_of_completion = $oth_years[$key];
+                      $staff_qualification->save();
+                    }
+            }
+      }
+
+    }
+
+    private function getStaffSelfTakaful($radioSelfTakaful){
+      if($radioSelfTakaful == 'No'){
+        $radioSelfTakaful = 0;
+      }else{
+        $radioSelfTakaful = 1;
+      }
+      return $radioSelfTakaful;
+    
+    }
+
+    private function getStaffSpouseTakaful($radioSpouseTakaful){
+      if($radioSpouseTakaful == 'No'){
+        $radioSpouseTakaful = 0;
+      }else{
+        $radioSpouseTakaful = 1;
+      }
+      return $radioSpouseTakaful;
+    
+    }
+
+    private function getStaffChildTakaful($radioChildTakaful){
+      if($radioChildTakaful == 'No'){
+        $radioChildTakaful = 0;
+      }else{
+        $radioChildTakaful = 1;
+      }
+      return $radioChildTakaful;
+    
+    }
+
+    private function getStaffBranchId($tapincampus){
+      if($tapincampus == 'North'){
+        $tapincampus = 1;
+      }elseif($tapincampus == 'South'){
+        $tapincampus = 2;
+      }
+      return $tapincampus;
+    
+    }
+
+    private function getStaffTitle($staftitle){
+    
+      if($staftitle == 'Mr'){
+        $staftitle = 1;
+      }elseif ($staftitle == 'Ms'){
+        $staftitle = 2;
+      }elseif ($staftitle == 'Mrs'){
+        $staftitle = 3;
+      }elseif ($staftitle == 'Dr'){
+        $staftitle = 4;
+      }
+      return $staftitle;
+    
+    }
+
+    private function getStaffStatus($satffstatustxt){
+        if($satffstatustxt == 'Permanent'){
+         $satffstatustxt = 1;
+       }elseif ($satffstatustxt == 'Contractual'){
+         $satffstatustxt = 2;
+       }elseif ($satffstatustxt == 'Family'){
+         $satffstatustxt = 3;
+       }elseif ($satffstatustxt == 'Probation'){
+         $satffstatustxt = 4;
+       }elseif ($satffstatustxt == 'Internship'){
+         $satffstatustxt = 5;
+       }elseif ($satffstatustxt == 'Substitute'){
+         $satffstatustxt = 6;
+       }elseif ($satffstatustxt == 'NonDirectStaff'){
+         $satffstatustxt = 7;
+       }elseif ($satffstatustxt == 'Resignation Notice'){
+         $satffstatustxt = 8;
+       }elseif ($satffstatustxt == 'Termination Notice'){
+         $satffstatustxt = 9;
+       }elseif ($satffstatustxt == 'Registration No Show'){
+         $satffstatustxt = 10;
+       }elseif ($satffstatustxt == 'Summer No Show'){
+         $satffstatustxt = 11;
+       }elseif ($satffstatustxt == 'Extended No Show'){
+         $satffstatustxt = 12;
+       }elseif ($satffstatustxt == 'Leave'){
+         $satffstatustxt = 13;
+       }elseif ($satffstatustxt == 'New Staff'){
+         $satffstatustxt = 14;
+       }elseif ($satffstatustxt == 'Re Joining'){
+         $satffstatustxt = 15;
+       }elseif ($satffstatustxt == 'Resigned'){
+         $satffstatustxt = 16;
+       }elseif ($satffstatustxt == 'Terminated'){
+         $satffstatustxt = 17;
+       }
+       return $satffstatustxt;
+    
+    }
+
+    private function getStaffProvidentFund($providentfund){
+        if($providentfund == 'No'){
+          $providentfund = 0;
+        }else{$providentfund = 1;
+        }
+        return $providentfund;
+    
+    }
+
+    private function getstaffReligion($religiontxt){
+        if($religiontxt == 'Muslim'){
+          $religiontxt = 1;
+        }elseif($religiontxt == 'Non-Muslim'){
+          $religiontxt = 0;
+        }
+        return $religiontxt;
+    
+    }
+
+    private function getStaffMaritalStatus($maritalstatus){
+        if($maritalstatus == 'Married'){
+          $maritalstatus = 1;
+        }elseif($maritalstatus == 'Single'){
+          $maritalstatus = 2;
+        }elseif($maritalstatus == 'Divorced'){
+          $maritalstatus = 3;
+        }elseif($maritalstatus == 'Widow'){
+          $maritalstatus = 4;
+        }
+        return $maritalstatus;
+    
+    }
+
+    public function AteebRecModal(Request $request){
+
+            $userID = Sentinel::getUser()->id;
+            $staffID = $request->input('staff_id');
+            $staffInfo = new StaffInformationModel();
+            $personalInfo = $staffInfo->getStaffInformation($staffID);
+            $education = $staffInfo->getStaffQualification($staffID);
+            $employment = $staffInfo->getStaffEmployment($staffID);
+            $fs = $staffInfo->getStaffFS($staffID);
+            $sc = $staffInfo->getStaffChild($staffID);
+            $ac = $staffInfo->getStaffAlternateContact($staffID);
+            $other = $staffInfo->getStaffOtherInfo($staffID);
+            $staff_region = new _region;
+            $staff_sub_region = new _region_sub;
+            $regions=$staff_region->get_region($staffID);
+            $sub_regions=$staff_sub_region->get_sub_region($staffID);
+
+            // print_r($sub_regions);
+            // die;
+
+            return view('master_layout.staff.staff_recruitment_modal',[
+              'personalInfo'=>$personalInfo,
+              'education'=>$education,
+              'employment'=>$employment,
+              'fs'=>$fs,
+              'sc'=>$sc,
+              'ac'=>$ac,
+              'other'=>$other,
+              'region'=>$regions,
+              'sub_region'=>$sub_regions,
+            ]);
+
     }
 
 

@@ -30,7 +30,8 @@ tr.walkin {
           <?php foreach($Stage_info as $sr ) : ?>
           
   <tr class="<?= ( $sr["form_source2"] == 1 ? 'online' : 'walkin') ;?> Row" data-source="<?= ( $sr["form_source2"] == 1 ? 'Online' : 'Walkin') ;?>" data-position="<?=$sr["position_applied"];?>" data-standing="<?=$sr["status_name"]?>" data-campus="<?=$sr["Campus"];?>" data-id="<?=$sr["career_id"];?>" data-partB="<?=$sr["PartB"];?>" data-from_date="<?=$sr["Created_date"];?>" data-to_date="<?=$sr["Created_date"];?>" data-from_date_m="<?=($sr["Modified_date"]);?>" data-to_date_m="<?=$sr["Modified_date"];?>" data-from_date_mo="<?=$sr["log_created"];?>" data-to_date_mo="<?=$sr["log_created"];?>" >
-                         <td><a data-id="<?=$sr["career_id"];?>" class="process_logs" ><?=$sr["gc_id"];?></a></td>
+                        <td><a data-id="<?=$sr["career_id"];?>" class="process_logs"  data-applicant_name_write="<?php echo ($sr["name"]);?>" ><?=$sr["gc_id"];?></a></td>
+
 
                          <td id="table_append_<?=$sr["career_id"];?>">
 

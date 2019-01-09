@@ -14,6 +14,7 @@ class staff_recruitment_initiation_archive_ns extends Controller
   public function index()
   {
 
+
   	$userId = Sentinel::getUser()->id;
   	$staffRecruiment = new Staff_recruitment_model();
   	$RecruimentData = $staffRecruiment->get_recruitment_archive_data();
@@ -75,7 +76,91 @@ left join atif_career.career_status as cs
         order by lcf.created limit 1) as lcf
         on lcf.form_id = af.id
         
- WHERE 1 ".$Where." and ( af.status_id = 10 or af.status_id = 12 )";
+ WHERE 1 ".$Where." and af.id in ( select 
+ 
+cf.id
+
+ 
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as lcf
+where lcf.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id  )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+
+union 
+
+select 
+distinct( cf.id )  
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as l
+where l.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+
+union
+select 
+ 
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+ 
+ union
+ select 
+
+( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+
+
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where f.status_id=12 and d.status_id=4
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5)";
 $count_result = $staffRecruiment->custom_query($query);
 
 if(!empty($count_result))
@@ -104,7 +189,91 @@ left join atif_career.career_status as cs
         on lcf.form_id = af.id
 
 
-WHERE 1 ".$searchQuery."  ".$Where."  and  ( af.status_id = 10 or af.status_id = 12 )";
+WHERE 1 ".$searchQuery."  ".$Where."  and  af.id in ( select 
+ 
+cf.id
+
+ 
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as lcf
+where lcf.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id  )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+
+union 
+
+select 
+distinct( cf.id )  
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as l
+where l.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+
+union
+select 
+ 
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+ 
+ union
+ select 
+
+( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+
+
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where f.status_id=12 and d.status_id=4
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )";
 $scount_result = $staffRecruiment->custom_query($sQu);
 
 
@@ -158,7 +327,91 @@ from atif_career.log_career_form as lcf
 order by lcf.created limit 1) as lcf
 on lcf.form_id = af.id
 
-WHERE 1 ".$searchQuery."  and  ( af.status_id = 10 or af.status_id = 12 ) ".$Where." 
+WHERE 1 ".$searchQuery." and af.id in( select 
+ 
+cf.id
+
+ 
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as lcf
+where lcf.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id  )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+
+union 
+
+select 
+distinct( cf.id )  
+from atif_Career.career_form as cf
+left join ( 
+select * from atif_career.log_Career_form as l
+where l.id in (
+select max(cff.id) as id
+from atif_career.log_career_form as cff  group by cff.form_id )
+ ) as dd
+on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+
+union
+select 
+ 
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+ 
+ union
+ select 
+
+( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+
+
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where f.status_id=12 and d.status_id=4
+
+union
+select 
+
+f.id
+
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(lcf.id) as id
+from atif_career.log_career_form as lcf  group by lcf.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )  and ( af.status_id = 10 or af.status_id = 12 ) ".$Where." 
 order by af.created desc  limit ".$row.",".$rowperpage;
 
 $empRecords = $staffRecruiment->custom_query($empQuery);

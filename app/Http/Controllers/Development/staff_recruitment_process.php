@@ -294,16 +294,16 @@ And ( u.date is null or u.date >= curdate() )
     $Where =" and af.id in(
 
 select 
- 
- ( f.form_id ) as Total_form
+( f.form_id ) as Total_form
 from (
-select   (l.form_id) as form_id from atif_career.log_career_form as l 
+select  (l.form_id) as form_id from atif_career.log_career_form as l 
 where l.status_id > 1 
 and l.status_id != 10 
 and l.status_id != 11 
 and l.status_id != 12 
+and l.status_id != 13
 and l.stage_id != 8
-group by l.form_id ) as f 
+group by l.form_id ) as f
 
   )";
   }
@@ -351,16 +351,15 @@ where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
     $Where =" and af.id in(
 
 select 
- 
- (dd.Total_form) from(
+(dd.Total_form) from(
 select 
- ( cf.id ) as Total_form
+ ( cf.form_id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
 and (cf.stage_id=5 or cf.stage_id=6 or cf.stage_id=13)  
 union
 select
- ( cf.id ) as Total_form
+( cf.id ) as Total_form
 from atif_Career.career_form as cf 
 left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
 where cf.status_id=2 and ( u.date is null or u.date < curdate() )
@@ -392,14 +391,13 @@ where cf.status_id=2 and ( u.date is null or u.date < curdate() )
   else if($Stage_id == 'Overall_applicants_given')
   {
     $Where =" and af.id in(
+select 
 
-  select 
- 
-cf.id 
-
+( cf.form_id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
 and (cf.stage_id=13)  
+
 )";
   }
 
@@ -510,13 +508,16 @@ where f_data.p_date >= curdate()
   {
     $Where =" and af.id in(
 select 
- 
- cf.id  
-from atif_career.career_form as cf 
-left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id=1
-where cf.status_id=2
- and cf.stage_id=8
-And ( u.date is null or u.date >= curdate() )
+
+( f.id ) as Total_form
+from atif_career.career_form as f
+left join ( 
+select * from atif_career.log_career_form as lf where lf.id in(
+select max(l.id) as id
+from atif_career.log_career_form as l  group by l.form_id )
+) as d
+on d.form_id = f.id
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
   )";
   }
 
@@ -736,6 +737,43 @@ where f.status_id=12 and d.status_id=4
   else if($Stage_id == 'Observation_Presence_Followup')
   {
     $Where =" and af.id in(
+    select 
+
+(ff.Total_form) as Total_form
+
+from(
+select 
+curdate() as p_date,
+  (cf.form_id)  as Total_form
+from atif_Career.log_career_form as cf 
+where cf.status_id=4 
+and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13) 
+union
+select 
+(
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+) as p_date,
+( f.id ) as Total_form
+
+from atif_career.career_form as f
+left outer join (
+select * from atif_career.career_form_data as s where s.id in(
+select 
+max( cf.id ) as latest
+from atif_career.career_form_data as cf 
+group by cf.form_id )
+) as d on d.form_id = f.id
+where f.status_id=4 and (
+case when d.date = '1970-01-01' then 
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+else d.date
+end
+)  < curdate()
+) as ff
+
 
   )";
   }
@@ -906,19 +944,15 @@ where (f.status_id=12 or f.status_id=10 ) and d.status_id=5
 {
     $Where =" and af.id in(
 
-
-    select 
- 
- (ff.form_id) as Total_form
-
+select  
+(ff.Total_form) as Total_form
 from(
 select 
 curdate() as p_date,
- ( cf.id ) as Total_form, cf.form_id as form_id
+( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=5 
 and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)  
-
 union
 select 
 (
@@ -927,7 +961,7 @@ case when d.date = '1970-01-01' then
 else d.date
 end
 ) as p_date,
- ( d.date ) as Total_form, f.id as form_id
+( f.id ) as Total_form
 
 from atif_career.career_form as f
 left outer join (
@@ -944,7 +978,6 @@ else d.date
 end
 )  < curdate()
 ) as ff
-
 
   )";
   }
@@ -1272,10 +1305,11 @@ left join (
 select * from atif_career.log_Career_form as l
 where l.id in (
 select max(cff.id) as id
-from atif_career.log_career_form as cff  group by cff.form_id  )
+from atif_career.log_career_form as cff  
+where  cff.status_id != 10 and cff.status_id != 12 group by cff.form_id )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1 and cf.form_source=1
 
 
 union
@@ -1728,7 +1762,7 @@ sum(ff.Total_form) as Total_form
 from(
 select 
 curdate() as p_date,
-count( cf.id ) as Total_form
+count( Distinct (cf.form_id) ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=4 
 and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)  

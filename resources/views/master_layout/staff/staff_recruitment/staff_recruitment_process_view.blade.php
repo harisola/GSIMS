@@ -294,10 +294,19 @@
             </div><!-- portlet -->
           </div><!-- col-md-4 -->
           <div class="col-md-8 ">
+
+                    <div class="caption">
+                  <i style="color:#888 !important;" class="icon-user font-dark"></i>
+                  <span id ="process_name" class="caption-subject font-dark bold uppercase "><span id="applicant_name_write" style="color: #888;"> </span> <!-- - <span class="small">Awaiting to be Followed up</span> -->
+              </span></div>
+
             <div id="modal_logs">  </div>
           </div>
           </div><!-- row -->
         </div>
+         <div class="modal-footer text-center">
+                      <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                  </div>
       </div>
       <!-- /.modal-content -->
     </div>
@@ -310,7 +319,7 @@
         
                <div class="startTillCSL3">
            <span class="OnlineFormSubmissions absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Online_Application" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants applied Online" >{!! $num_1 !!} </a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Online_Application" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Applicants applied Online" >{!! $num_1 !!} </a>
           </span>
 
           <span class="fillPartA absolute">
@@ -453,7 +462,7 @@
                  {!! $num_14 !!}
               </a> &nbsp;
 
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="7_Days_passed" class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">
+              <a data-toggle="modal" data-status="7_Days_passed" class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">
               ({!! $num_15 !!})
             </a>
           </span><!-- InitialInterviewPresenceFollowupCurrent -->
@@ -501,7 +510,8 @@
 
       <!-- FormalInterviewPresenceFollowupCurrent: Applicants currently in Followup for Part B presence -->
       <span class="FormalInterviewPresenceFollowupCurrent absolute">
-          <a href="#allocateProfileModal" data-toggle="modal" data-status="currently_in_Followup_presence" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Formal Interview presence">{!! $num_24 !!}</a> &nbsp;<a href="#allocateProfileModal" class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">({!! $num_25 !!})</a>
+          <a href="#allocateProfileModal" data-toggle="modal" data-status="currently_in_Followup_presence" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Formal Interview presence">{!! $num_24 !!}</a> &nbsp;
+          <a  class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">({!! $num_25 !!})</a>
       </span><!-- FormalInterviewPresenceFollowupCurrent -->
 
       <!-- FormalInterviewFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
@@ -547,7 +557,8 @@
 
       <!-- ObservationPresenceFollowupCurrent: Applicants currently in Followup for Part B presence -->
       <span class="ObservationPresenceFollowupCurrent absolute">
-          <a href="#allocateProfileModal" data-toggle="modal" data-status="no_actions" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Observation presence"> {!! $num_35 !!}</a> &nbsp;<a href="#allocateProfileModal" class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">({!! $num_36 !!})</a>
+          <a href="#allocateProfileModal" data-toggle="modal" data-status="no_actions" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Observation presence"> {!! $num_35 !!}</a> &nbsp;
+          <a  class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">({!! $num_36 !!})</a>
       </span><!-- ObservationPresenceFollowupCurrent -->
 
       <!-- ObservationFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
@@ -595,7 +606,8 @@
 
       <!-- FinalConsPresenceFollowupCurrent: Applicants currently in Followup for Final Consultation presence -->
       <span class="FinalConsPresenceFollowupCurrent absolute">
-          <a href="#allocateProfileModal" data-toggle="modal" data-status="recenntly_in_Followup_for_F" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Final Consultation presence">{!! $num_44 !!}</a> &nbsp;<span class="noFollow tooltips" data-original-title="7 Days passed no action taken">({!! $num_45 !!})</span>
+          <a href="#allocateProfileModal" data-toggle="modal" data-status="recenntly_in_Followup_for_F" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Final Consultation presence">{!! $num_44 !!}</a> &nbsp;
+          <span class="noFollow tooltips" data-original-title="7 Days passed no action taken">({!! $num_45 !!})</span>
       </span><!-- FinalConsPresenceFollowupCurrent -->
 
       <!-- FinalConsFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
@@ -672,6 +684,9 @@ function Create_new_table()
 
 $(document).on("click",".process_logs",function(){
 var Form_id = $(this).attr("data-id");
+var name = $(this).attr("data-applicant_name_write");
+$("#applicant_name_write").text('');
+$("#applicant_name_write").text(name);
 // var stage = $(this).data("status");
 
 $.ajax({
