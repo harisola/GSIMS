@@ -282,45 +282,30 @@
                                                         <td>{{$issuance_report->std_status_code}}</td>
                                                         <td>{{$issuance_report->grade_dname}}</td>
                                                         <td>{{$issuance_report->student_name}}</td>
-                                                        <td>{{$issuance_report->section_dname}}</td>
-                                                        <td>{{$issuance_report->gb_id_mc_a}}</td>
-                                                        <td>{{$issuance_report->gt_id}}</td>
-                                                        
                                                         <td>{{$issuance_report->bill_title}}</td>
-                                                        <td>{{$issuance_report->bill_issue_date}}</td>
-                                                        <td>{{$issuance_report->bill_due_date}}</td>
-                                                        <td>{{$issuance_report->bill_bank_valid_date}}</td>
-                                                        <td>2.4</td>
-                                                        <td><?= number_format($issuance_report->arrears_suspended) ?></td>
-                                                        <td><?= number_format($issuance_report->fee_a_discount)?></td>
-                                                        <td>{{$issuance_report->concession_code}}</td>
-                                                        <td><?php 
-                                                            if($issuance_report->concession_percentage!=0){
-                                                                echo $issuance_report->concession_percentage.'%';
-                                                            }
-                                                            ?></td>
-                                                        
-                                                        <td><?php  
-                                                                if($issuance_report->sc_percentage!=0){
-                                                                echo $issuance_report->sc_percentage.'%';
-                                                                }
-                                                            ?>
-                                                                
-                                                            </td>
-                                                       
-                                                        <td><?= number_format($issuance_report->adjustment)?></td>
-                                                        <td>{{$issuance_report->roll_over_charges}}</td>
+                                                        <td>{{$issuance_report->gb_id_mc_a}}</td>
                                                         <td><?= number_format($issuance_report->gross_tuition_fee)?></td>
-                                                        <td><?= number_format($issuance_report->additional_charges)?></td>
-                                                        <td><?= number_format($issuance_report->total_current_bill)?></td>
-                                                        <td>{{$issuance_report->oc_smartcard_charges}}</td>
-                                                        <td><?= number_format($issuance_report->waive_amount)?></td>
-                                                        <td><?= number_format($issuance_report->oc_adv_tax)?></td>
+                                                        
                                                         <td><?= ($issuance_report->resource_fee)*2.4; ?></td>
                                                         <td><?= ($issuance_report->musakhar)*2.4; ?></td>
+
                                                         <td>{{$issuance_report->oc_yearly}}</td>
-                                                        <td><?=number_format($issuance_report->total_payable)?></td>
-                                                        <td><?php App\Models\Accounts\remittance::remitanceStatus($issuance_report->student_id) ?></td>
+                                                        <td>{{$issuance_report->oc_smartcard_charges}}</td>
+                                                        <td><?= number_format($issuance_report->adjustment)?></td>
+                                                        <td></td>
+                                                        <td>{{$issuance_report->roll_over_charges}}</td>
+                                                        <td><?= $issuance_report->total_payable- $issuance_report->oc_adv_tax?></td>
+                                                        <td><?= $issuance_report->oc_adv_tax?></td>
+                                                        <td><?= $issuance_report->total_payable ?></td>
+                                                        <td><?= $issuance_report->admission_fee ?></td>
+                                                        <td><?= $issuance_report->security_deposit ?></td>
+                                                        <td><?= $issuance_report->lab_avc ?></td>
+                                                        <td></td>
+
+
+
+
+                                                       
 
 
                                     </tr>

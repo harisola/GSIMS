@@ -30,7 +30,7 @@ class AccountReportController extends Controller
         $academic_session_id=11;
         $bill_cycle_no=1;
         $issuance_report=$fee_bill->getReportByAcademicSession($grade_id,$academic_session_id,$bill_cycle_no);
-        
+        $receiving_report=$fee_bill->getReceivingReport($grade_id,$academic_session_id,$bill_cycle_no);
     	return view('account_process.accounts.account_report',
             [
                 'report_data'=>  $report_data,
