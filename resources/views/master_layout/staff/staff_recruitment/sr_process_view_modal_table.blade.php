@@ -133,7 +133,15 @@ var pagefunction = function() {
 Demo.init();
 App.init();
 
- $('#Ajax_Table_info').dataTable()
+  $('#Ajax_Table_info').dataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
   setTimeout(function(){
    App.stopPageLoading();
   

@@ -1173,1217 +1173,16 @@ display: none;
 	             <div class="modal-dialog">
 	                <div class="modal-content">
 	                   <div class="modal-header">
-	                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-	                      <h3 class="modal-title">Edit Information for <strong>Aamir Hussain</strong></h3>
-	                   </div>
-	                   <div class="modal-body" style="float:left;width:100%;">
-	                   		<div class="tabbable-line">
-		                         <ul class="nav nav-tabs ">
-		                            <li class="active">
-		                               <a href="#tab_basic_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-info"></span> Basics </a>
-		                            </li>
-		                            <li>
-		                               <a href="#tab_education_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-graduation"></span> Education </a>
-		                            </li>
-		                            <li>
-		                               <a href="#tab_employment_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-briefcase"></span> Employments </a>
-		                            </li>
-		                            <li class="">
-		                               <a href="#tab_parent_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-users"></span> Parent / Spouse </a>
-		                            </li>
-		                            <li>
-		                               <a href="#tab_alternate_edit" data-toggle="tab"> <i class="fa fa-phone"></i> Alternate Contacts </a>
-		                            </li>
-		                            <li>
-		                               <a href="#tab_other_edit" data-toggle="tab"> <span aria-hidden="true" class="icon-plus"></span> Other </a>
-		                            </li>
-		                         </ul>
-		                         <!-- nav -->
-		                         <div class="tab-content">
-		                            <div class="tab-pane active" id="tab_basic_edit">
-		                               <div class="form-body">
-		                                  <h3 class="form-section marginTop0 headingBorderBottom">Person Info</h3>
-		                                  <div class="row ">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Employee ID:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="" value="123" disabled="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">GT ID:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="" value="16-070" disabled="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <hr />
-		                                  <div class="row marginBottom20">
-		                                  	<div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Staff Title:</label>
-		                                           <div class="col-md-9">
-		                                           	  <select class="form-control">
-                      														    <option value="0" selected="" disabled="">Staff Title</option>
-      						                                    <option value="2">Ms</option>
-      						                                    <option value="3">Mrs</option>
-      						                                    <option value="1">Mr</option>
-      						                                    <option value="4">Dr.</option>
-                      														</select>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Gender:</label>
-		                                           <div class="col-md-9">
-		                                              <select class="form-control">
-                      														    <option value="">Male</option>
-                      														    <option value="">Female</option>
-                      														</select>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">CNIC Name:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="Full Name">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Full Name:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="Full Name">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Nationality:</label>
-		                                           <div class="col-md-9">
-		                                                <select class="form-control">
-                      														    <option value="">Pakistani</option>
-                      														    <option value="">Afghani</option>
-                        														</select>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Religion:</label>
-		                                           <div class="col-md-9">
-		                                              <select class="form-control">
-                    														    <option value="">Muslim</option>
-                    														    <option value="">Non-Muslim</option>
-                      														</select>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Name Code:</label>
-		                                           <div class="col-md-9">
-		                                           	  <!-- NIC masking: XXXXX-XXXXXXX-X -->
-		                                              <input type="text" class="form-control" placeholder="Name Code" min="3" max="3">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">DOB <small>(as per NIC)</small>:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="date" class="form-control" placeholder="DoB">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <hr />
-		                                  <div class="row">
-		                                  	 <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Father Name:</label>
-		                                           <div class="col-md-9">
-		                                           	  <input type="text" class="form-control" placeholder="Father Name">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <hr />
-		                                  <div class="row marginBottom20">
-		                                  	 <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">CNIC:</label>
-		                                           <div class="col-md-9">
-		                                           	  <!-- NIC masking: XXXXX-XXXXXXX-X -->
-		                                              <input type="text" class="form-control" placeholder="CNIC">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Email <small>(personal)</small>:</label>
-		                                           <div class="col-md-9">
-		                                           	  <input type="email" class="form-control" placeholder="CNIC">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Mobile Phone:</label>
-		                                           <div class="col-md-9">
-		                                           		<!-- Mobile phone Masking: XXXX-XXXXXXX -->
-														                      <input type="phone" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Landline:</label>
-		                                           <div class="col-md-9">
-		                                              <!-- Mobile phone Masking: XXX-XXXXXXX -->
-														                      <input type="phone" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <hr />
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Date of Joining:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="date" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Employment Status:</label>
-		                                           <div class="col-md-9">
-		                                                <select class="form-control">
-                        														    <option value="">Contractual</option>
-                        														    <option value="">Permanent</option>
-                        														</select>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->		                                  
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Generations Google ID:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Tap IN Campus:</label>
-		                                           <div class="col-md-9">
-		                                              <select class="form-control">
-                    														    <option value="">South</option>
-                    														    <option value="">North</option>
-                      														</select>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <h3 class="form-section headingBorderBottom">Address Info</h3>
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Apartment No:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Street Name:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Building Name:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Plot No:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Region:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Sub Region:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                               </div>
-		                               <!-- form-body -->
-		                            </div>
-		                            <!-- tab_basic -->
-		                            <div class="tab-pane" id="tab_education_edit">
-                                  <form class="form-horizontal">
-                                    <!-------------------------------------------- School ----------------------------------------------------------->
-		                                <h4 class="form-section headingBorderBottom School">School</h4> 
-                                    <div class="row" style="padding-bottom: 20px;">
-                                      <div class="form-body">
-                                        <div class="col-md-12">
-                                          <div class="col-md-4">
-                                              <label class="control-label">School Name <span class="required">*</span></label>
-                                              <select name="schoolName[]" class="txt_schName form-control">
-                                                <option value="">Choose name</option>
-                                                <option value="ACE_School"> ACE School </option>  
-                                                <option value="Aga_Khan_Education"> Aga Khan Education </option>  
-                                                <option value="Aga_Khan_Higher_Secondary_School"> Aga Khan Higher Secondary School </option>  
-                                                <option value="Aga_Khan_School"> Aga Khan School </option>  
-                                                <option value="Agha_Khan_School"> Agha Khan School </option>  
-                                                <option value="Ahsan_Public_Secondary_School"> Ahsan Public Secondary School </option>  
-                                                <option value="Aisha_Bawany_Academy_Boys_Campus"> Aisha Bawany Academy Boys Campus </option>  
-                                                <option value="Al_Saqib_Public_School"> Al Saqib Public School </option>  
-                                                <option value="Almurtaza_School"> Almurtaza School </option>  
-                                                <option value="Army_Public_School"> Army Public School </option>  
-                                                <option value="ASF_Public_School"> ASF Public School </option>  
-                                                <option value="B_V_S_Parsi_High_School_Saddar"> B V S Parsi High School Saddar </option>  
-                                                <option value="Bay_View_Academy"> Bay View Academy </option>  
-                                                <option value="Bay_View_High_School"> Bay View High School </option>  
-                                                <option value="Beaconhouse_School"> Beaconhouse School </option>  
-                                                <option value="DHA_Model_High_School"> DHA Model High School </option>  
-                                                <option value="Education_Bay"> Education Bay </option>  
-                                                <option value="Falcon_House_Grammar_School"> Falcon House Grammar School </option>  
-                                                <option value="Falconhouse_Grammar_School"> Falconhouse Grammar School </option>  
-                                                <option value="Fatimiyah_School"> Fatimiyah School </option>  
-                                                <option value="Foundation_Public_School"> Foundation Public School </option>  
-                                                <option value="Generations_School"> Generations School </option>  
-                                                <option value="Government_Delhi_Boys_Secondary_School"> Government Delhi Boys Secondary School </option>  
-                                                <option value="Government_Delhi_Girls_Secondary_School"> Government Delhi Girls Secondary School </option>  
-                                                <option value="Government_Pilot_High_School_Dadu"> Government Pilot High School Dadu </option>  
-                                                <option value="Habib_Public_School"> Habib Public School </option>  
-                                                <option value="Habib_Public_School_HPS"> Habib Public School HPS </option>  
-                                                <option value="Hamdard_Public_School"> Hamdard Public School </option>  
-                                                <option value="Hamdard_Public_School,_Madinat_ul_Hikmah"> Hamdard Public School, Madinat ul Hikmah </option>  
-                                                <option value="Happy_Palace_Grammar_School"> Happy Palace Grammar School </option>  
-                                                <option value="Hyderi_Public_School_Saddar"> Hyderi Public School Saddar </option>  
-                                                <option value="Indus_Academy"> Indus Academy </option>  
-                                                <option value="Karachi_Grammar_School"> Karachi Grammar School </option>  
-                                                <option value="Ladybird_Grammar_School"> Ladybird Grammar School </option>  
-                                                <option value="Little_Folks_School"> Little Folks School </option>  
-                                                <option value="Meritorious_School"> Meritorious School </option>  
-                                                <option value="Metropolis_Academy"> Metropolis Academy </option>  
-                                                <option value="Metropolitan_Academy"> Metropolitan Academy </option>  
-                                                <option value="NAKHLAH_Educational_House"> NAKHLAH Educational House </option>  
-                                                <option value="Nasra_School"> Nasra School </option>  
-                                                <option value="Nixor_College"> Nixor College </option>  
-                                                <option value="Progressive_Childrens_Academy"> Progressive Childrens Academy </option>  
-                                                <option value="Progressive_Public_School"> Progressive Public School </option>  
-                                                <option value="Reflections"> Reflections </option>  
-                                                <option value="Sadequain_Academy"> Sadequain Academy </option>  
-                                                <option value="Saqib_Public_School"> Saqib Public School </option>  
-                                                <option value="Shaheen_Cambridge"> Shaheen Cambridge </option>  
-                                                <option value="Shaheen_Cambridge_School"> Shaheen Cambridge School </option>  
-                                                <option value="Shaheen_Public_School"> Shaheen Public School </option>  
-                                                <option value="Shaheen_Public_School_Campus"> Shaheen Public School Campus </option>  
-                                                <option value="Shahwilayat_Public_School"> Shahwilayat Public School </option>  
-                                                <option value="Sindh_Madrasa_tul_Islam"> Sindh Madrasa tul Islam </option>  
-                                                <option value="Sir_Syed_Childrens_Academy"> Sir Syed Childrens Academy </option>  
-                                                <option value="St_Josephs_School"> St Josephs School </option>  
-                                                <option value="St_Patricks_High_School"> St Patricks High School </option>  
-                                                <option value="St_Peters_High_School"> St Peters High School </option>  
-                                                <option value="St_Johns_High_School"> St Johns High School </option>  
-                                                <option value="St_Judes_High_School"> St Judes High School </option>  
-                                                <option value="St_Lawrences"> St Lawrences </option>  
-                                                <option value="St_Michaels_Convent_School" selected=""> St Michaels Convent School </option>  
-                                                <option value="St_Patricks_High_School"> St Patricks High School </option>  
-                                                <option value="St_Pauls_High_School"> St Pauls High School </option>  
-                                                <option value="Sultan_Mohammed_Shah_Aga_Khan_School"> Sultan Mohammed Shah Aga Khan School </option>  
-                                                <option value="The_Academy"> The Academy </option>  
-                                                <option value="The_British_International_School"> The British International School </option>  
-                                                <option value="The_City_School"> The City School </option>  
-                                                <option value="The_City_School_Paf_Chapter"> The City School Paf Chapter </option>  
-                                                <option value="The_Educators"> The Educators </option>  
-                                                <option value="The_Intellect_School"> The Intellect School </option>  
-                                                <option value="The_Knowledge_Academy"> The Knowledge Academy </option>  
-                                                <option value="The_Mama_Parsi"> The Mama Parsi </option>  
-                                                <option value="The_Metropolis_Academy"> The Metropolis Academy </option>  
-                                                <option value="The_Metropolitan_Academy"> The Metropolitan Academy </option>  
-                                                <option value="The_Suffah_Academy"> The Suffah Academy </option>  
-                                                <option value="Trinity_Private_School"> Trinity Private School </option>  
-                                                <option value="Trinity_Private_School_Karachi"> Trinity Private School Karachi </option>  
-                                                <option value="Yaqeen_Education_Foundation"> Yaqeen Education Foundation </option>  
-                                                <option value="Other"> Other </option>
-                                              </select><!-- -->
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-4 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Qualification <span class="required">*</span></label>
-                                              <select name="schoolQualification[]" class="schoolQ valid form-control">
-                                                <option value="">Choose name</option>
-                                                <option value="A_Level"> A Level </option>
-                                                <option value="O_Level"> O Level </option>
-                                                <option value="Matric" selected=""> Matric  </option>
-                                                <option value="Other"> Other </option>
-                                              </select><!-- -->
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Subject <span class="required">*</span></label>
-                                              <select name="schoolSubject[]" class="schoolSubjct valid form-control">
-                                                <option value="">Choose name</option>
-                                                <option value="Science" selected=""> Science </option>
-                                                <option value="Arts"> Arts </option>
-                                                <option value="Other"> Other </option>
-                                              </select>
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Result <span class="required">*</span></label>
-                                              <input type="text" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Year <span class="required">*</span></label>
-                                              <input type="date" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                        </div>
-                                      </div><!-- form-body -->
-                                    </div>
-                                    <!-- row -->
-                                    <!-- Add another School --> 
-                                    <div class="row">
-                                      <div class="col-md-12 text-right">
-                                        <div class="col-md-12">
-                                          <a href="#" class="btn btn-group green">+ Add Another School</a>
-                                        </div><!-- col-md-12 -->
-                                      </div><!-- col-md-12 -->
-                                    </div><!-- row -->
-                                    <!-------------------------------------------- College ----------------------------------------------------------->
-                                    <h4 class="form-section headingBorderBottom College">College</h4>
-                                    <div class="row" style="padding-bottom: 20px;">
-                                      <div class="form-body">
-                                        <div class="col-md-12">
-                                          <div class="col-md-4">
-                                              <label class="control-label">College Name <span class="required">*</span></label>
-                                              <input type="text" class="form-control">
-                                          </div><!-- col-md-4 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Qualification <span class="required">*</span></label>
-                                              <select name="collegeQualification[]" class="collegeQ valid form-control">
-                                                <option value="">Choose Qualification</option>
-                                                <option value="Intermediate" selected=""> Intermediate </option>
-                                                <option value="Diploma"> Diploma </option>
-                                                <option value="Other"> Other </option>
-                                              </select><!-- -->
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Subject <span class="required">*</span></label>
-                                              <select name="collegeSubject[]" class="slct_clgSub valid form-control">
-                                                <option value="">Choose Subjects</option>
-                                                <option value="Pre_Engineering"> Pre Engineering </option>
-                                                <option value="Pre_Medical"> Pre Medical </option>
-                                                <option value="Computer"> Computer </option>
-                                                <option value="Commerce" selected=""> Commerce </option>
-                                                <option value="Arts"> Arts </option>
-                                                <option value="Other"> Other </option>
-                                              </select>
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Result <span class="required">*</span></label>
-                                              <input type="text" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Year <span class="required">*</span></label>
-                                              <input type="date" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                        </div>
-                                      </div><!-- form-body -->
-                                    </div>
-                                    <!-- row -->
-                                    <!-- Add another College --> 
-                                    <div class="row">
-                                      <div class="col-md-12 text-right">
-                                        <div class="col-md-12">
-                                          <a href="#" class="btn btn-group green">+ Add College</a>
-                                        </div><!-- col-md-12 -->
-                                      </div><!-- col-md-12 -->
-                                    </div><!-- row -->
-                                    <!-------------------------------------------- University ----------------------------------------------------------->
-                                    <h4 class="form-section headingBorderBottom University">University</h4>
-                                    <div class="row" style="padding-bottom: 20px;">
-                                      <div class="form-body">
-                                        <div class="col-md-12">
-                                          <div class="col-md-4">
-                                              <label class="control-label">University Name <span class="required">*</span></label>
-                                              <select name="universityName[]" class="slct_uniname form-control">
-                                                <option value="">University name</option>
-                                                <option value="Air_University_AU_Islamabad"> Air University AU Islamabad </option>  
-                                                <option value="Allama_Iqbal_Open_University_AIOU_Islamabad"> Allama Iqbal Open University AIOU Islamabad </option>  
-                                                <option value="Bahria_University_BU_Islamabad"> Bahria University BU Islamabad </option>  
-                                                <option value="COMSATS_Institute_of_Information_Technology_Islamabad"> COMSATS Institute of Information Technology Islamabad </option>  
-                                                <option value="Federal_Urdu_University_of_Arts_Sciences_and_Technology_Islamabad"> Federal Urdu University of Arts Sciences and Technology Islamabad </option>  
-                                                <option value="Foundation_University_Islamabad"> Foundation University Islamabad </option>  
-                                                <option value="Institute_of_Space_Technology__IST__Islamabad"> Institute of Space Technology  IST  Islamabad </option>  
-                                                <option value="International_Islamic_University__IIU__Islamabad"> International Islamic University  IIU  Islamabad </option>  
-                                                <option value="National_University_of_Computer_and_Emerging_Sciences_Islamabad"> National University of Computer and Emerging Sciences Islamabad </option>  
-                                                <option value="National_University_of_Modern_Languages_Islamabad"> National University of Modern Languages Islamabad </option>  
-                                                <option value="Pakistan_Institute_of_Engineering_&amp;_Applied_Sciences_Islamabad"> Pakistan Institute of Engineering &amp; Applied Sciences Islamabad </option>  
-                                                <option value="Quaid_i_Azam_University_Islamabad"> Quaid i Azam University Islamabad </option>  
-                                                <option value="Riphah_International_University__Islamabad"> Riphah International University  Islamabad </option>  
-                                                <option value="Bahauddin_Zakariya_University__Multan"> Bahauddin Zakariya University  Multan </option>  
-                                                <option value="Beaconhouse_National_University__BNU__Lahore"> Beaconhouse National University  BNU  Lahore </option>  
-                                                <option value="College_of_Buisness_Administration&amp;_Economics__NCBA&amp;E__Lahore"> College of Buisness Administration&amp; Economics  NCBA&amp;E  Lahore </option>  
-                                                <option value="Fatima_Jinnah_Women_University__FJWU__Rawalpindi"> Fatima Jinnah Women University  FJWU  Rawalpindi </option>  
-                                                <option value="Forman_Christian_College__FCC__Lahore"> Forman Christian College  FCC  Lahore </option>  
-                                                <option value="GIFT_University_Gujranwala"> GIFT University Gujranwala </option>  
-                                                <option value="Government_College_University__GCU__Faisalabad"> Government College University  GCU  Faisalabad </option>  
-                                                <option value="Government_College_University__GCU__Lahore"> Government College University  GCU  Lahore </option>  
-                                                <option value="Hajvery_University__HU__Lahore"> Hajvery University  HU  Lahore </option>  
-                                                <option value="Imperial_College_of_Business_Studies_Lahore"> Imperial College of Business Studies Lahore </option>  
-                                                <option value="Institute_of_Management_Sciences__IMS__Lahore"> Institute of Management Sciences  IMS  Lahore </option>  
-                                                <option value="Islamia_University_Bahawalpur"> Islamia University Bahawalpur </option>  
-                                                <option value="Kinnaird_College_for_Women_Lahore"> Kinnaird College for Women Lahore </option>  
-                                                <option value="Lahore_College_for_Women_University__LCWU__Lahore"> Lahore College for Women University  LCWU  Lahore </option>  
-                                                <option value="Lahore_School_of_Economics__LSE__Lahore"> Lahore School of Economics  LSE  Lahore </option>  
-                                                <option value="Lahore_University_of_Management_Sciences__LUMS__Lahore"> Lahore University of Management Sciences  LUMS  Lahore </option>  
-                                                <option value="Minhaj_University_Lahore"> Minhaj University Lahore </option>  
-                                                <option value="National_College_of_Arts__NCA__Lahore"> National College of Arts  NCA  Lahore </option>  
-                                                <option value="National_Textile_University__NTU__Faisalabad__Federal_Chartered"> National Textile University  NTU  Faisalabad  Federal Chartered </option>  
-                                                <option value="National_University_of_Sciences_&amp;_Technology__NUST__Rawalpindi"> National University of Sciences &amp; Technology  NUST  Rawalpindi </option>  
-                                                <option value="The_Superior_College_Lahore"> The Superior College Lahore </option>  
-                                                <option value="The_University_of_Management_&amp;_Technology__UMT__Lahore"> The University of Management &amp; Technology  UMT  Lahore </option>  
-                                                <option value="University_of_Agriculture_Faisalabad"> University of Agriculture Faisalabad </option>  
-                                                <option value="University_of_Arid_Agriculture_Murree_Road_Rawalpindi"> University of Arid Agriculture Murree Road Rawalpindi </option>  
-                                                <option value="University_of_Central_Punjab__UCP__Lahore"> University of Central Punjab  UCP  Lahore </option>  
-                                                <option value="University_of_Education_Lahore"> University of Education Lahore </option>  
-                                                <option value="University_of_Engineering_&amp;_Technology__UET__Lahore"> University of Engineering &amp; Technology  UET  Lahore </option>  
-                                                <option value="University_of_Engineering_&amp;_Technology__UET__Taxila"> University of Engineering &amp; Technology  UET  Taxila </option>  
-                                                <option value="University_of_Faisalabad_Faisalabad"> University of Faisalabad Faisalabad </option>  
-                                                <option value="University_of_Gujrat__Gujrat"> University of Gujrat  Gujrat </option>  
-                                                <option value="University_of_Health_Sciences__UHS__Lahore"> University of Health Sciences  UHS  Lahore </option>  
-                                                <option value="University_of_Lahore_Lahore"> University of Lahore Lahore </option>  
-                                                <option value="University_of_Sargodha_Sargodha"> University of Sargodha Sargodha </option>  
-                                                <option value="University_of_South_Asia__USA__Lahore"> University of South Asia  USA  Lahore </option>  
-                                                <option value="University_of_Veterinary_and_Animal_Sciences__UVAS__Lahore"> University of Veterinary and Animal Sciences  UVAS  Lahore </option>  
-                                                <option value="Virtual_University_of_Pakistan__VU__Lahore"> Virtual University of Pakistan  VU  Lahore </option>  
-                                                <option value="Agha_Khan_University__AKU__Karachi"> Agha Khan University  AKU  Karachi </option>  
-                                                <option value="Baqai_Medical_University_Karachi"> Baqai Medical University Karachi </option>  
-                                                <option value="Dadabhoy_Institute_of_Higher_Education_Karachi"> Dadabhoy Institute of Higher Education Karachi </option>  
-                                                <option value="Dow_University_of_Health_Sciences_Karachi"> Dow University of Health Sciences Karachi </option>  
-                                                <option value="Greenwich_University_Karachi"> Greenwich University Karachi </option>  
-                                                <option value="Hamdard_University_Karachi"> Hamdard University Karachi </option>  
-                                                <option value="Indus_Institute_of_Higher_EducationÂ&nbsp;Karachi"> Indus Institute of Higher EducationÂ&nbsp;Karachi </option>  
-                                                <option value="Indus_Valley_School_of_Art_and_Architecture_Karachi"> Indus Valley School of Art and Architecture Karachi </option>  
-                                                <option value="Institute_of_Business_&amp;_Technology_BIZTEK_Karachi"> Institute of Business &amp; Technology BIZTEK Karachi </option>  
-                                                <option value="Institute_of_Business_Administration__IBA__Karachi"> Institute of Business Administration  IBA  Karachi </option>  
-                                                <option value="Institute_of_Business_Management__IoBM__Karachi"> Institute of Business Management  IoBM  Karachi </option>  
-                                                <option value="Iqra_University_Karachi"> Iqra University Karachi </option>  
-                                                <option value="Isra_University_Hyderabad"> Isra University Hyderabad </option>  
-                                                <option value="Jinnah_University_for_Women_Karachi"> Jinnah University for Women Karachi </option>  
-                                                <option value="Karachi_Institute_of_Economics_&amp;_Technology__KIET__Karachi"> Karachi Institute of Economics &amp; Technology  KIET  Karachi </option>  
-                                                <option value="KASB__Khadim_Ali_Shah_Bukhari__Institute_of_Technology_Karachi"> KASB  Khadim Ali Shah Bukhari  Institute of Technology Karachi </option>  
-                                                <option value="Liaquat_University_of_Medical_and_Health_Sciences__LUMHS__Jamshoro_Sindh"> Liaquat University of Medical and Health Sciences  LUMHS  Jamshoro Sindh </option>  
-                                                <option value="Mehran_University_of_Eng_&amp;_Technology_Jamshoro"> Mehran University of Eng &amp; Technology Jamshoro </option>  
-                                                <option value="Mohammad_Ali_Jinnah_University__MAJU__Karachi"> Mohammad Ali Jinnah University  MAJU  Karachi </option>  
-                                                <option value="NED_University_of_Engineering_&amp;_Technology_Karachi"> NED University of Engineering &amp; Technology Karachi </option>  
-                                                <option value="Newports_Institute_of_Communications_and_Economics_Karachi"> Newports Institute of Communications and Economics Karachi </option>  
-                                                <option value="Pakistan_Naval_Academy_Karachi"> Pakistan Naval Academy Karachi </option>  
-                                                <option value="Preston_Institute_of_Management_Sciences_and_Technology__PIMSAT__Karachi"> Preston Institute of Management Sciences and Technology  PIMSAT  Karachi </option>  
-                                                <option value="Preston_University_Karachi"> Preston University Karachi </option>  
-                                                <option value="Quaid_e_Awam_University_of_Engineering_Science_&amp;_Technology_Nawabshah"> Quaid e Awam University of Engineering Science &amp; Technology Nawabshah </option>  
-                                                <option value="Shah_Abdul_Latif_University_Khairpur"> Shah Abdul Latif University Khairpur </option>  
-                                                <option value="Shaheed_Zulfikar_Ali_Bhutto_Institute_of_Science_&amp;_Technology__SZABIST__Karachi"> Shaheed Zulfikar Ali Bhutto Institute of Science &amp; Technology  SZABIST  Karachi </option>  
-                                                <option value="Sindh_Agriculture_University_Tandojam"> Sindh Agriculture University Tandojam </option>  
-                                                <option value="Sir_Syed_University_of_Engg_&amp;_Technology__SSUET__Karachi"> Sir Syed University of Engg &amp; Technology  SSUET  Karachi </option>  
-                                                <option value="Sukkur_Institute_of_Business_Administration_Sukkur"> Sukkur Institute of Business Administration Sukkur </option>  
-                                                <option value="Textile_Institute_of_Pakistan__TIP__Karachi"> Textile Institute of Pakistan  TIP  Karachi </option>  
-                                                <option value="University_of_East_Hyderabad"> University of East Hyderabad </option>  
-                                                <option value="University_of_Karachi__UoK__Karachi"> University of Karachi  UoK  Karachi </option>  
-                                                <option value="University_of_Sindh_Jamshoro"> University of Sindh Jamshoro </option>  
-                                                <option value="Zia_ud_Din_Medical_University_Karachi"> Zia ud Din Medical University Karachi </option>  
-                                                <option value="Balochistan_University_of_Engineering_and_Technology_Khuzdar"> Balochistan University of Engineering and Technology Khuzdar </option>  
-                                                <option value="Balochistan_University_of_Information_Technology_and_Management_Sciences_Quetta"> Balochistan University of Information Technology and Management Sciences Quetta </option>  
-                                                <option value="Iqra_University_Quetta"> Iqra University Quetta </option>  
-                                                <option value="Sardar_Bahadur_Khan_Women_University_Quetta"> Sardar Bahadur Khan Women University Quetta </option>  
-                                                <option value="University_of_Balochistan_Quetta"> University of Balochistan Quetta </option>  
-                                                <option value="Khyber_PakhtunkhwaÂ&nbsp;_formerly_NWFP"> Khyber PakhtunkhwaÂ&nbsp; formerly NWFP </option>  
-                                                <option value="Frontier_Women_University_Peshawar"> Frontier Women University Peshawar </option>  
-                                                <option value="CECOS_University_of_Information_Technology_and_Emerging_Sciences_Peshawar"> CECOS University of Information Technology and Emerging Sciences Peshawar </option>  
-                                                <option value="City_University_of_Science_&amp;_Information_Technology_Peshawar"> City University of Science &amp; Information Technology Peshawar </option>  
-                                                <option value="Gandhara_University_Peshawar"> Gandhara University Peshawar </option>  
-                                                <option value="Ghulam_Ishaq_Khan_Institute_of_Engineering_Sciences_&amp;_Technology_Swabi"> Ghulam Ishaq Khan Institute of Engineering Sciences &amp; Technology Swabi </option>  
-                                                <option value="Gomal_University_DI_Khan"> Gomal University DI Khan </option>  
-                                                <option value="Hazara_University_Dodhial_Mansehra"> Hazara University Dodhial Mansehra </option>  
-                                                <option value="Institute_of_Management_Sciences__IMSciences__Peshawar"> Institute of Management Sciences  IMSciences  Peshawar </option>  
-                                                <option value="Karakuram_International_University_Gilgit"> Karakuram International University Gilgit </option>  
-                                                <option value="Kohat_University_of_Science_&amp;_Technology__KUST__Kohat"> Kohat University of Science &amp; Technology  KUST  Kohat </option>  
-                                                <option value="Lasbelaa_University_of_Agriculture_Water_&amp;_Marine_Science_Othal"> Lasbelaa University of Agriculture Water &amp; Marine Science Othal </option>  
-                                                <option value="Northern_University_Nowshera_Cantonment"> Northern University Nowshera Cantonment </option>  
-                                                <option value="NWFP_Agriculture_University_Peshawar"> NWFP Agriculture University Peshawar </option>  
-                                                <option value="NWFP_University_of_Engineering_&amp;_Technology_Peshawar"> NWFP University of Engineering &amp; Technology Peshawar </option>  
-                                                <option value="Pakistan_Military_Academy_Abbottabad"> Pakistan Military Academy Abbottabad </option>  
-                                                <option value="Preston_University_Kohat"> Preston University Kohat </option>  
-                                                <option value="Qurtaba_University_of_Science_&amp;_Information_Technology_D_I_Khan"> Qurtaba University of Science &amp; Information Technology D I Khan </option>  
-                                                <option value="Sarhad_University_of_Science_&amp;_Information_Technology_Peshawar__Approved_Distance_Education_Centers_of__SUIT__Peshawar"> Sarhad University of Science &amp; Information Technology Peshawar  Approved Distance Education Centers of  SUIT  Peshawar </option>  
-                                                <option value="University_of_Malakand_Chakdara_Dir_Malakand"> University of Malakand Chakdara Dir Malakand </option>  
-                                                <option value="University_of_Peshawar_Peshawar"> University of Peshawar Peshawar </option>  
-                                                <option value="University_of_Science_&amp;_Technology_Bannu"> University of Science &amp; Technology Bannu </option>  
-                                                <option value="Other"> Other </option>
-                                              </select><!-- -->
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-4 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Qualification <span class="required">*</span></label>
-                                              <select name="universityQualification[]" class="slct_uniqual form-control">
-                                                <option value="">Choose Qualification</option>
-                                                <option value="Bachelor_in_Business_Administration"> Bachelor in Business Administration </option>  
-                                                <option value="Bachelor_ in_Commerce_Honours"> Bachelor  in Commerce Honours </option>  
-                                                <option value="Bachelor_in_Engineering"> Bachelor in Engineering </option>  
-                                                <option value="Bachelor_in_Science_Engineering"> Bachelor in Science Engineering </option>  
-                                                <option value="Bachelor_ in_Science_Honours"> Bachelor  in Science Honours </option>  
-                                                <option value="Bachelor_in_Education"> Bachelor in Education </option>  
-                                                <option value="Bachelor_in_Fine_Arts"> Bachelor in Fine Arts </option>  
-                                                <option value="Bachelor_in_Pharmacy"> Bachelor in Pharmacy </option>  
-                                                <option value="Bachelor_in_Science"> Bachelor in Science </option>  
-                                                <option value="Doctor_in_Pharmacy"> Doctor in Pharmacy </option>  
-                                                <option value="Bachelor_in_Dental_Surgery"> Bachelor in Dental Surgery </option>  
-                                                <option value="Doctor_in_Veterinary_Medicine"> Doctor in Veterinary Medicine </option>  
-                                                <option value="Bachelor_in_Law"> Bachelor in Law </option>  
-                                                <option value="Masters_in_Accounting"> Masters in Accounting </option>  
-                                                <option value="Master_in_Advertising"> Master in Advertising </option>  
-                                                <option value="Masters_in_Agriculture"> Masters in Agriculture </option>  
-                                                <option value="Masters_in_ArtÂ&nbsp;andÂ&nbsp;Design"> Masters in ArtÂ&nbsp;andÂ&nbsp;Design </option>  
-                                                <option value="Masters_in_Biochemistry"> Masters in Biochemistry </option>  
-                                                <option value="Masters_in_CivilÂ&nbsp;Engineering"> Masters in CivilÂ&nbsp;Engineering </option>  
-                                                <option value="Masters_in_Botany"> Masters in Botany </option>  
-                                                <option value="Masters_in_Journalism"> Masters in Journalism </option>  
-                                                <option value="Masters_in_Business_Administration_Management"> Masters in Business Administration Management </option>  
-                                                <option value="Masters_in_Chemical_Engineering"> Masters in Chemical Engineering </option>  
-                                                <option value="Masters_in_Chemistry"> Masters in Chemistry </option>  
-                                                <option value="Masters_in_Commerce"> Masters in Commerce </option>  
-                                                <option value="Masters_in_Communication"> Masters in Communication </option>  
-                                                <option value="Masters_in_ComputerÂ&nbsp;Science"> Masters in ComputerÂ&nbsp;Science </option>  
-                                                <option value="Masters_in_Consulting"> Masters in Consulting </option>  
-                                                <option value="Masters_in_Mechanical_Engineering"> Masters in Mechanical Engineering </option>  
-                                                <option value="Masters_in_Economics"> Masters in Economics </option>  
-                                                <option value="Masters_in_Education"> Masters in Education </option>  
-                                                <option value="Masters_in_Electrical_and_Electronics_Engineering"> Masters in Electrical and Electronics Engineering </option>  
-                                                <option value="Masters_in_English_Literature"> Masters in English Literature </option>  
-                                                <option value="Masters_in_English_Linguistics"> Masters in English Linguistics </option>  
-                                                <option value="Masters_in_Environmental_Health"> Masters in Environmental Health </option>  
-                                                <option value="Masters_in_Library_Science"> Masters in Library Science </option>  
-                                                <option value="Masters_in_Fashion_Merchandising"> Masters in Fashion Merchandising </option>  
-                                                <option value="Masters_in_Finance_Accounting"> Masters in Finance Accounting </option>  
-                                                <option value="Masters_in_Finance_&amp;_Banking"> Masters in Finance &amp; Banking </option>  
-                                                <option value="Masters_in_Finance"> Masters in Finance </option>  
-                                                <option value="Masters_in_Food_Science"> Masters in Food Science </option>  
-                                                <option value="Masters_in_Materials_Science"> Masters in Materials Science </option>  
-                                                <option value="Masters_in_Geography"> Masters in Geography </option>  
-                                                <option value="Masters_in_Geology"> Masters in Geology </option>  
-                                                <option value="Masters_in_Health_Science"> Masters in Health Science </option>  
-                                                <option value="Masters_in_History"> Masters in History </option>  
-                                                <option value="Masters_in_Human_Resources"> Masters in Human Resources </option>  
-                                                <option value="Masters_in_Humanities"> Masters in Humanities </option>  
-                                                <option value="Masters_in_Information_Technology"> Masters in Information Technology </option>  
-                                                <option value="Masters_in_Logistics"> Masters in Logistics </option>  
-                                                <option value="Masters_in_International_Business"> Masters in International Business </option>  
-                                                <option value="Masters_in_Islamic_Studies"> Masters in Islamic Studies </option>  
-                                                <option value="Masters_in_Law"> Masters in Law </option>  
-                                                <option value="Masters_in_Management"> Masters in Management </option>  
-                                                <option value="Masters_in_Marketing"> Masters in Marketing </option>  
-                                                <option value="Masters_in_Mathematics"> Masters in Mathematics </option>  
-                                                <option value="Masters_in_Nursing"> Masters in Nursing </option>  
-                                                <option value="Masters_in_Paramedical"> Masters in Paramedical </option>  
-                                                <option value="Masters_in_Pharmacy"> Masters in Pharmacy </option>  
-                                                <option value="Masters_in_Philosophy"> Masters in Philosophy </option>  
-                                                <option value="Masters_in_Physics"> Masters in Physics </option>  
-                                                <option value="Masters_in_Psychology"> Masters in Psychology </option>  
-                                                <option value="Masters_in_Public_Health_Education"> Masters in Public Health Education </option>  
-                                                <option value="Masters_in_Risk_Management"> Masters in Risk Management </option>  
-                                                <option value="Masters_in_Science"> Masters in Science </option>  
-                                                <option value="Masters_in_Social_Studies"> Masters in Social Studies </option>  
-                                                <option value="Masters_in_Sociology"> Masters in Sociology </option>  
-                                                <option value="Masters_in_Software_Engineering"> Masters in Software Engineering </option>  
-                                                <option value="Masters_in_Sports"> Masters in Sports </option>  
-                                                <option value="Masters_in_Statistics"> Masters in Statistics </option>  
-                                                <option value="Masters_in_Strategic_Management"> Masters in Strategic Management </option>  
-                                                <option value="Masters_in_Zoology"> Masters in Zoology </option>  
-                                                <option value="Other"> Other </option>
-                                              </select><!-- -->
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Subject <span class="required">*</span></label>
-                                              <select name="universitySubject[]" class="slct_unisubjct form-control">
-                                                <option value="">Choose Subject</option>
-                                                <option value="Accounting"> Accounting </option>  
-                                                <option value="Additional_Mathematics"> Additional Mathematics </option>  
-                                                <option value="Advertising"> Advertising </option>  
-                                                <option value="Agriculture"> Agriculture </option>  
-                                                <option value="Art_and_Design"> Art and Design </option>  
-                                                <option value="Biochemistry"> Biochemistry </option>  
-                                                <option value="Biology"> Biology </option>  
-                                                <option value="Botany"> Botany </option>  
-                                                <option value="Business_Studies"> Business Studies </option>  
-                                                <option value="Chemical"> Chemical </option>  
-                                                <option value="Chemistry"> Chemistry </option>  
-                                                <option value="Commerce"> Commerce </option>  
-                                                <option value="Communication"> Communication </option>  
-                                                <option value="Computer_Science"> Computer Science </option>  
-                                                <option value="Economics"> Economics </option>  
-                                                <option value="Education"> Education </option>  
-                                                <option value="Electrical_and_Electronics"> Electrical and Electronics </option>  
-                                                <option value="English"> English </option>  
-                                                <option value="English_Language"> English Language </option>  
-                                                <option value="English_Literature"> English Literature </option>  
-                                                <option value="Environmental_Management"> Environmental Management </option>  
-                                                <option value="Environmental_Health"> Environmental Health </option>  
-                                                <option value="Finance"> Finance </option>  
-                                                <option value="Food_&amp;_Nutrition"> Food &amp; Nutrition </option>  
-                                                <option value="Food_Science"> Food Science </option>  
-                                                <option value="Geography"> Geography </option>  
-                                                <option value="Geology"> Geology </option>  
-                                                <option value="Health_Science"> Health Science </option>  
-                                                <option value="History"> History </option>  
-                                                <option value="Human_&amp;_Social_Biology"> Human &amp; Social Biology </option>  
-                                                <option value="Human_Resources"> Human Resources </option>  
-                                                <option value="Humanities"> Humanities </option>  
-                                                <option value="Information_Technology"> Information Technology </option>  
-                                                <option value="International_Business"> International Business </option>  
-                                                <option value="Islamic_Studies"> Islamic Studies </option>  
-                                                <option value="Islamiyat"> Islamiyat </option>  
-                                                <option value="Journalism"> Journalism </option>  
-                                                <option value="Law"> Law </option>  
-                                                <option value="Library_Science"> Library Science </option>  
-                                                <option value="Logistics"> Logistics </option>  
-                                                <option value="Management"> Management </option>  
-                                                <option value="Marketing"> Marketing </option>  
-                                                <option value="Mathematics"> Mathematics </option>  
-                                                <option value="Nursing"> Nursing </option>  
-                                                <option value="Pakistan_Studies"> Pakistan Studies </option>  
-                                                <option value="Paramedical"> Paramedical </option>  
-                                                <option value="Pharmacy"> Pharmacy </option>  
-                                                <option value="Philosophy"> Philosophy </option>  
-                                                <option value="Physics"> Physics </option>  
-                                                <option value="Psychology"> Psychology </option>  
-                                                <option value="Public_Health"> Public Health </option>  
-                                                <option value="Risk_Management"> Risk Management </option>  
-                                                <option value="Science"> Science </option>  
-                                                <option value="Sindhi"> Sindhi </option>  
-                                                <option value="Social_Studies"> Social Studies </option>  
-                                                <option value="Sociology"> Sociology </option>  
-                                                <option value="Sports"> Sports </option>  
-                                                <option value="Statistics"> Statistics </option>  
-                                                <option value="Strategic_Management"> Strategic Management </option>  
-                                                <option value="Urdu"> Urdu </option>  
-                                                <option value="Urdu_First_Language"> Urdu First Language </option>  
-                                                <option value="Urdu_Second_Language"> Urdu Second Language </option>  
-                                                <option value="World_history"> World history </option>  
-                                                <option value="Zoology"> Zoology </option>  
-                                                <option value="Other"> Other </option>
-                                              </select><!-- -->
-                                              <input type="text" class="form-control" style="display: none;">
-                                              <a href="#" class="closeOther" style="display: none;">close</a>
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Result <span class="required">*</span></label>
-                                              <input type="text" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Year <span class="required">*</span></label>
-                                              <input type="date" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                        </div>
-                                      </div><!-- form-body -->
-                                    </div>
-                                    <!-- row -->
-                                    <!-- Add another College --> 
-                                    <div class="row">
-                                      <div class="col-md-12 text-right">
-                                        <div class="col-md-12">
-                                          <a href="#" class="btn btn-group green">+ Add University</a>
-                                        </div><!-- col-md-12 -->
-                                      </div><!-- col-md-12 -->
-                                    </div><!-- row -->
-                                    <!-------------------------------------------- Professional ----------------------------------------------------------->
-                                    <h4 class="form-section headingBorderBottom Professional">Professional</h4>
-                                    <div class="row" style="padding-bottom: 20px;">
-                                      <div class="form-body">
-                                        <div class="col-md-12">
-                                          <div class="col-md-4">
-                                              <label class="control-label">Professional Name <span class="required">*</span></label>
-                                              <input type="text" class="form-control">
-                                              
-                                          </div><!-- col-md-4 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Qualification <span class="required">*</span></label>
-                                              <input type="text" class="form-control">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Subject <span class="required">*</span></label>
-                                              <input type="text" class="form-control">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Result <span class="required">*</span></label>
-                                              <input type="text" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Year <span class="required">*</span></label>
-                                              <input type="date" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                        </div>
-                                      </div><!-- form-body -->
-                                    </div>
-                                    <!-- row -->
-                                    <!-- Add another College --> 
-                                    <div class="row">
-                                      <div class="col-md-12 text-right">
-                                        <div class="col-md-12">
-                                          <a href="#" class="btn btn-group green">+ Add Professional</a>
-                                        </div><!-- col-md-12 -->
-                                      </div><!-- col-md-12 -->
-                                    </div><!-- row -->
-                                    <!---------------------------------------------------------- Others ---------------------------------------------------->
-                                    <h4 class="form-section headingBorderBottom Others">Others</h4>
-                                    <div class="row" style="padding-bottom: 20px;">
-                                      <div class="form-body">
-                                        <div class="col-md-12">
-                                          <div class="col-md-4">
-                                              <label class="control-label">Others Name <span class="required">*</span></label>
-                                              <input type="text" class="form-control">
-                                              
-                                          </div><!-- col-md-4 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Qualification <span class="required">*</span></label>
-                                              <input type="text" class="form-control">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Subject <span class="required">*</span></label>
-                                              <input type="text" class="form-control">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Result <span class="required">*</span></label>
-                                              <input type="text" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                          <div class="col-md-2">
-                                              <label class="control-label">Year <span class="required">*</span></label>
-                                              <input type="date" class="form-control" name="">
-                                          </div><!-- col-md-2 -->
-                                        </div>
-                                      </div><!-- form-body -->
-                                    </div>
-                                    <!-- row -->
-                                    <!-- Add another College --> 
-                                    <div class="row">
-                                      <div class="col-md-12 text-right">
-                                        <div class="col-md-12">
-                                          <a href="#" class="btn btn-group green">+ Add Other</a>
-                                        </div><!-- col-md-12 -->
-                                      </div><!-- col-md-12 -->
-                                    </div><!-- row -->
-                                  </form>
-		                            </div>
-		                            <!-- tab_education -->
-                                
-		                            <div class="tab-pane" id="tab_employment_edit">
-                                  <div class="form-body">
-                                    <h3 class="form-section marginTop0 headingBorderBottom">Employment History</h3>
-                                    <div class="row">
-                                      <div class="col-md-6">
-                                        <div class="col-md-12">
-                                            <label class="control-label">Institution / Organization <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="control-label">Designation <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="control-label">Salary <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="control-label">From <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="control-label">To <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="">
-                                            <input type="checkbox"> Present
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="control-label">Reason for Leaving <span class="required">*</span></label>
-                                            <textarea class="form-control" name=""></textarea>
-                                        </div>
-                                      </div><!-- col-md-6 -->
-                                      
-                                      <div class="col-md-6">
-                                        <div class="col-md-12">
-                                            <label class="control-label">Classes Taught <span class="required">*</span></label>
-                                            <textarea class="form-control" rows="4" name=""></textarea>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="control-label">Subjects Taught <span class="required">*</span></label>
-                                            <textarea class="form-control" rows="4" name=""></textarea>
-                                        </div>
-                                      </div><!-- col-md-6 -->
-                                      <div class="col-md-12 text-right" style="padding-top: 20px;">
-                                        <div class="col-md-12">
-                                          <a href="#" class="btn btn-group green">+ Add Another</a>
-                                        </div><!-- col-md-12 -->
-                                      </div>
-                                    </div>
-                                    <hr />
-                                  </div><!-- form-body -->
-		                            </div>
-		                            <!-- tab_employment -->
-		                            <div class="tab-pane " id="tab_parent_edit">
-		                               <table width="100%" border="0" class="table table-bordered">
-		                                  <thead class="bg-grey">
-		                                     <tr>
-		                                        <th class="text-center" width="40%">Father</th>
-		                                        <th class="text-center" width="20%">&nbsp;</th>
-		                                        <th class="text-center" width="40%">Spouse</th>
-		                                     </tr>
-		                                  </thead>
-		                                  <tbody id="tab_parent_table_edit">
-		                                     <tr>
-		                                        <td class=""><input type="text" class="form-control" placeholder="" value="123"></td>
-		                                        <td class="text-center"><strong>Name</strong></td>
-		                                        <td class=""><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>Profession</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>Qualification</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>Designation</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>Department</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>Organisation</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>CNIC</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>Mobile</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                        <td class="text-center"><strong>Address</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value="123" ></td>
-		                                     </tr>
-		                                  </tbody>
-		                               </table>
-		                            </div>
-		                            <!-- tab_parent -->
-		                            <div class="tab-pane" id="tab_alternate_edit">
-		                               <table width="100%" border="0" class="table table-bordered">
-		                                  <thead class="bg-grey">
-		                                     <tr>
-		                                        <th class="text-center" width="40%">Next of Kin</th>
-		                                        <th class="text-center" width="20%">&nbsp;</th>
-		                                        <th class="text-center" width="40%">Emergency Contact</th>
-		                                     </tr>
-		                                  </thead>
-		                                  <tbody id="tab_alternate_contact_edit">
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                        <td class="text-center"><strong>Name</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                        <td class="text-center"><strong>Address</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                        <td class="text-center"><strong>Email</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                        <td class="text-center"><strong>Mobile</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                     </tr>
-		                                     <tr>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                        <td class="text-center"><strong>Relationship</strong></td>
-		                                        <td><input type="text" class="form-control" placeholder="" value=""></td>
-		                                     </tr>
-		                                  </tbody>
-		                               </table>
-		                            </div>
-		                            <!-- tab_alternate -->
-		                            <div class="tab-pane" id="tab_other_edit">
-		                               <div class="form-body">
-		                                  <h3 class="form-section marginTop0 headingBorderBottom">Other Details</h3>
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Provident Fund:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">NTN No:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">EOBI No:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">SESSI No:</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <h3 class="form-section headingBorderBottom">Bank Details</h3>
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Bank Name : </label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Branch :</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Account Number :</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <h3 class="form-section headingBorderBottom">Takaful</h3>
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Self :</label>
-		                                           <div class="col-md-9"  style="padding-left: 40px;">
-		                                              <div class="radio-list">
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="SelfTakaful" value="option1"> Yes </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="SelfTakaful" value="option2" checked=""> No </label>
-                                                      </div>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Spouse :</label>
-		                                           <div class="col-md-9"  style="padding-left: 40px;">
-		                                              <div class="radio-list">
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="SpouseTakaful" value="option1"> Yes </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="SpouseTakaful" value="option2" checked=""> No </label>
-                                                      </div>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row marginBottom20">
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Children :</label>
-		                                           <div class="col-md-9" style="padding-left: 40px;">
-		                                              <div class="radio-list">
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="ChildTakaful" value="option1"> Yes </label>
-                                                        <label class="radio-inline">
-                                                            <input type="radio" name="ChildTakaful" value="option2" checked=""> No </label>
-                                                      </div>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                     <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">Certificate :</label>
-		                                           <div class="col-md-9">
-		                                              <input type="text" class="form-control" placeholder="">
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                                  <div class="row">
-		                                  	 <div class="col-md-6">
-		                                        <div class="form-group">
-		                                           <label class="control-label col-md-3 text-right paddingRight0">If no, please mention the reasons (mandatory) :</label>
-		                                           <div class="col-md-9">
-		                                              <textarea class="form-control" rows="3"></textarea>
-		                                           </div>
-		                                        </div>
-		                                     </div>
-		                                     <!--/span-->
-		                                  </div>
-		                                  <!--/row-->
-		                               </div>
-		                               <!-- form-body -->
-		                            </div>
-		                            <!-- tab_other -->
-		                         </div>
-		                         <!-- tab-content -->
-		                      </div>
-		                      <!-- tabbable-line -->
-	                   </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h3 class="modal-title" id="modal-title-staff">Edit Information for <strong>Aamir Hussain</strong></h3>
+                     </div>
+                      <div class="modal_body_fetch"></div>
 	                   <hr />
 	                   <div class="modal-footer text-center" style="text-align:center;">
-	                      <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
-	                      <button onClick="add_leave()" type="button" class="btn dark btn-outline active" data-dismiss="">Add</button>
-	                      <!--button type="button" class="btn green">Add Badge</button -->
-	                   </div>
+                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn dark btn-outline active add_staff_info" data-dismiss="">Update</button>
+                        <!--button type="button" class="btn green">Add Badge</button -->
+                     </div>
 	                </div>
 	                <!-- /.modal-content -->
 	             </div>
@@ -7196,17 +5995,686 @@ display: none;
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script type="text/javascript">
-  $(document).ready(function () {
-    $('#DayBaseLeave').change(function () {
-      $('#showHourly').fadeToggle();
-    });
-});
 
- $('.toggler4').show();
- $('.toggler4-close').hide();
- $('.theme-panel > .theme-options4').hide();
- $('#staffView_StaffList_Search').val('');
- 
+      $(document).ready(function () {
+      //onfocus load in serch text box
+      $('#staffView_StaffList_Search').focus();
+      $('#DayBaseLeave').change(function () {
+
+          $('#showHourly').fadeToggle();
+      });
+      
+    });
+
+
+  //Zk Code Adding Start Here TIF-B Foam
+
+
+    //On Click Function for add_staff_info
+    $(document).on("click",".add_staff_info",function(){
+        //FUNCTION input id and type for edit TIF-B
+        function returnData(id,type){
+          if(type == 'input_box'){
+            return $(id).val();
+          }
+          if(type == 'select_box'){
+            return $(id).val();
+          }
+          if(type == 'date_box'){
+            return $(id).val();
+          }
+          if(type == 'radio_box'){
+            return $("input[name='"+id+"']:checked").val();
+          }
+        }
+        
+        ///new script code updated///
+        //push array loop for school row
+        var school_rows=$('.school_row').length
+        var i;
+        school_names=[];
+        school_qualifications=[];
+        school_subjects=[];
+        school_results=[];
+        school_years=[];
+        for (let i = 0; i < school_rows; i++) {
+          //for school names txt_schName for get dd value or schoolname_textbox for get textbox value
+          var school_class='.school_text_name_'+(parseInt(i)+1); 
+          var dd_school_name = $(school_class).val();//text feild value
+          var row_name='.school_row_'+(parseInt(i)+1);
+          school_name=$(row_name).find('#txt_schName').val();  //drop down value
+          if(school_name=="Other"){
+            //console.log('i am insider');
+            school_name = dd_school_name
+          }
+
+          //for school qualification 
+          var school_qua_class='.school_text_qualification_'+(parseInt(i)+1); 
+          var dd_school_qua = $(school_qua_class).val();
+          var row_name='.school_row_'+(parseInt(i)+1);
+          school_qualification=$(row_name).find('#schoolQ').val(); 
+          if(school_qualification=="Other"){
+            school_qualification = dd_school_qua
+          }
+          //for school subject
+          var school_sub_class='.school_text_subject_'+(parseInt(i)+1); 
+          var dd_school_sub = $(school_sub_class).val();
+          var row_name='.school_row_'+(parseInt(i)+1);
+          school_subject=$(row_name).find('#schoolS').val(); 
+          if(school_subject=="Other"){
+            school_subject = dd_school_sub
+          }
+
+          var school_result=$(row_name).find('#result_school').val();
+          var school_year=$(row_name).find('#school_year').val();
+          //console.log(feild_name)
+          school_names.push(school_name);
+          school_qualifications.push(school_qualification);
+          school_subjects.push(school_subject);
+          school_results.push(school_result);
+          school_years.push(school_year);
+        }
+
+        ///new script code updated///
+        //push array loop for college row
+        var college_rows=$('.college_row').length
+        var i;
+        college_names=[];
+        college_qualifications=[];
+        college_subjects=[];
+        college_results=[];
+        college_years=[];
+        for (let i = 0; i < college_rows; i++) {
+          //for college names 
+          var college_class='.college_text_name_'+i; 
+          var dd_college_name = $(college_class).val();
+          var row_name='.college_row_'+(parseInt(i)+1); 
+          var college_name=$(row_name).find('#college_name').val();
+          //for college Qualification
+          var college_qua_class='.college_text_qualification_'+(parseInt(i)+1); 
+          var dd_college_qua = $(college_qua_class).val();
+          var row_name='.college_row_'+(parseInt(i)+1);
+          var college_qualification=$(row_name).find('#collegeQ').val(); 
+          if(college_qualification=="Other"){
+            college_qualification = dd_college_qua
+          }
+          //for college subject
+          var college_sub_class='.college_text_subject_'+(parseInt(i)+1); 
+          var dd_college_sub = $(college_sub_class).val();
+          var row_name='.college_row_'+(parseInt(i)+1);
+          var college_subject=$(row_name).find('#collegeS').val(); 
+          if(college_subject=="Other"){
+            college_subject = dd_college_sub
+          }
+          //var college_name=$(row_name).find('#collegename_textbox').val(); 
+          var college_result=$(row_name).find('#result_college').val();
+          var college_year=$(row_name).find('#year_college').val();
+          college_names.push(college_name);
+          college_qualifications.push(college_qualification);
+          college_subjects.push(college_subject);
+          college_results.push(college_result);
+          college_years.push(college_year);
+        }
+
+        ///new script code updated///
+        //push array loop for university row
+        var university_rows=$('.university_row').length
+        var i;
+        university_names=[];
+        university_qualifications=[];
+        university_subjects=[];
+        university_results=[];
+        university_years=[];
+        for (let i = 0; i < university_rows; i++) {
+          //for university names 
+          var university_class='.university_text_name_'+(parseInt(i)+1); 
+          var dd_university_name = $(university_class).val();
+          var row_name='.university_row_'+(parseInt(i)+1);
+          var university_name=$(row_name).find('#university_name').val(); 
+          if(university_name=="Other"){
+            university_name = dd_university_name
+          }
+
+          //for university qualification 
+          var university_qua_class='.university_text_qualification_'+(parseInt(i)+1); 
+          var dd_university_qua = $(university_qua_class).val();
+          var row_name='.university_row_'+(parseInt(i)+1);
+          var university_qualification=$(row_name).find('#universityQ').val(); 
+          if(university_qualification=="Other"){
+            university_qualification = dd_university_qua
+          }
+
+          //for university subject
+          var university_sub_class='.university_text_subject_'+(parseInt(i)+1); 
+          var dd_university_sub = $(university_sub_class).val();
+          var row_name='.university_row_'+(parseInt(i)+1);
+          var university_subject=$(row_name).find('#universityS').val(); 
+          if(university_subject=="Other"){
+            university_subject = dd_university_sub
+          }
+
+          var university_result=$(row_name).find('#result_university').val();
+          var university_year=$(row_name).find('#university_year').val();
+          university_names.push(university_name);
+          university_qualifications.push(university_qualification);
+          university_subjects.push(university_subject);
+          university_results.push(university_result);
+          university_years.push(university_year);
+        }        
+
+        //university End here
+
+        ///new script code updated///
+        //push array loop for professional row
+        var professional_rows=$('.professional_row').length
+        var i;
+        professional_names=[];
+        professional_qualifications=[];
+        professional_subjects=[];
+        professional_results=[];
+        professional_years=[];
+        for (let i = 0; i < professional_rows; i++) {
+          var row_name='.professional_row_'+(parseInt(i)+1); 
+          var professional_name=$(row_name).find('#professional_name').val(); 
+          var professional_qualification=$(row_name).find('#professionalQ').val(); 
+          var professional_subject=$(row_name).find('#professionalS').val(); 
+          var professional_result=$(row_name).find('#result_professional').val();
+          var professional_year=$(row_name).find('#year_professional').val();
+          professional_names.push(professional_name);
+          professional_qualifications.push(professional_qualification);
+          professional_subjects.push(professional_subject);
+          professional_results.push(professional_result);
+          professional_years.push(professional_year);
+        }
+
+        ///professional End Here///
+
+        ///new script code updated///
+        //push array loop for others row
+        var others_rows=$('.others_row').length
+        var i;
+        others_names=[];
+        others_qualifications=[];
+        others_subjects=[];
+        others_results=[];
+        others_years=[];
+        for (let i = 0; i < others_rows; i++) {
+          var row_name='.others_row_'+(parseInt(i)+1); 
+          var others_name=$(row_name).find('#others_name').val(); 
+          var others_qualification=$(row_name).find('#othersQ').val(); 
+          var others_subject=$(row_name).find('#othersS').val();
+          var others_result=$(row_name).find('#result_others').val();
+          var others_year=$(row_name).find('#others_year').val();
+          others_names.push(others_name);
+          others_qualifications.push(others_qualification);
+          others_subjects.push(others_subject);
+          others_results.push(others_result);
+          others_years.push(others_year);
+        }
+
+        //push array loop for employment
+        var emp_rows=$('.emp_row').length
+        var year = (new Date).getFullYear();
+        var i;
+        emp_orgs=[];
+        emp_desgs=[];
+        emp_salarys=[];
+        emp_fyears=[];
+        emp_tyears=[];
+        emp_reasons=[];
+        emp_classess=[];
+        emp_subjects=[];
+
+        for (let i = 0; i < emp_rows; i++) {
+          var row_name='.emp_row_'+(parseInt(i)+1); 
+          var emp_org=$(row_name).find('#emp_org').val(); 
+          var emp_desg=$(row_name).find('#emp_desg').val(); 
+          var emp_salary=$(row_name).find('#emp_salary').val();
+          var emp_fyear=$(row_name).find('#emp_fyear').val();
+          //if (emp_tyear.val() != null && emp_tyear.val() != ''){
+          if ($(row_name).find('#emp_fyear').val() != null && $(row_name).find('#emp_fyear').val() != ''){
+            var emp_tyear = year;
+          }else{
+            
+            var emp_tyear=$(row_name).find('#emp_tyear').val();
+          }
+          var emp_reason=$(row_name).find('#emp_reason').val();
+          var emp_classes=$(row_name).find('#emp_classes').val();
+          var emp_subject=$(row_name).find('#emp_subject').val();
+          emp_orgs.push(emp_org);
+          emp_desgs.push(emp_desg);
+          emp_salarys.push(emp_salary);
+          emp_fyears.push(emp_fyear);
+          emp_tyears.push(emp_tyear);
+          emp_reasons.push(emp_reason);
+          emp_classess.push(emp_classes);
+          emp_subjects.push(emp_subject);
+        }
+        
+
+           $.ajax({
+              type: "GET",
+              cache: true,
+              url:'/gsims/public/update_staff',
+              data: {
+                //"staff_info": staff_data,
+                "staff_id":$('#employe_id').val(),
+                "staftitle": returnData('#staf_title','select_box'),
+                "genderselect": returnData('#gender_select','select_box'),
+                "cnicname": returnData('#cnic_fullnum','input_box'),
+                "fullname": returnData('#full_num','input_box'),
+                "namecodetxt": returnData('#namecode_txt','input_box'),
+                "dobdate": returnData('#dob_date','date_box'),
+                "cnictxt": returnData('#cnic_txt','input_box'),
+                "phonenumtxt": returnData('#phonenum_txt','input_box'),
+                "landlinetxt": returnData('#landline_txt','input_box'),
+                "dojdate": returnData('#doj_date','date_box'),
+                "satffstatustxt": returnData('#emp_status_txt','select_box'),
+                "tapincampus": returnData('#tap_in_campus','select_box'),
+                "eobino": returnData('#eobi_no','input_box'),
+                "sessino": returnData('#sessi_no','input_box'),
+                //Staff Supporting Staff
+                "maritalstatus": returnData('#marital_status','select_box'),
+                "religiontxt": returnData('#religion_txt','select_box'),
+                "nationalitytxt": returnData('#nationality_txt','select_box'),
+                "emailtxt": returnData('#email_txt','input_box'),
+                "providentfund": returnData('PFund','radio_box'), // radio button
+                "ntnno": returnData('#ntn_no','input_box'),
+                //Staff Address Info
+                "apartmenttxt": returnData('#apartment_txt','input_box'),
+                "streetnametxt": returnData('#street_name_txt','input_box'),
+                "buildingnametxt": returnData('#building_name_txt','input_box'),
+                "plotnotxt": returnData('#plot_no_txt','input_box'),
+                "regiontxt": returnData('#region_txt','input_box'),
+                "subregiontxt": returnData('#sub_region_txt','input_box'),
+                  //"school_rows":school_rows,
+                "sch_names":school_names,
+                "sch_qualifications":school_qualifications,
+                "sch_subjects":school_subjects,
+                "sch_results":school_results,
+                "sch_years":school_years,
+                  //"college_rows":college_rows,
+                "col_names":college_names,
+                "col_qualifications":college_qualifications,
+                "col_subjects":college_subjects,
+                "col_results":college_results,
+                "col_years":college_years,
+                  //"university_rows":university_rows,
+                "uni_names":university_names,
+                "uni_qualifications":university_qualifications,
+                "uni_subjects":university_subjects,
+                "uni_results":university_results,
+                "uni_years":university_years,
+                  //"professional_rows":professional_rows,
+                "pro_names":professional_names,
+                "pro_qualifications":professional_qualifications,
+                "pro_subjects":professional_subjects,
+                "pro_results":professional_results,
+                "pro_years":professional_years,
+                  //"others_rows":others_rows,
+                "oth_names":others_names,
+                "oth_qualifications":others_qualifications,
+                "oth_subjects":others_subjects,
+                "oth_results":others_results,
+                "oth_years":others_years,
+                //Employment details Information
+                "employ_orgs": emp_orgs,
+                "employ_desgs": emp_desgs,
+                "employ_salarys": emp_salarys,
+                "employ_fyears": emp_fyears,
+                "employ_tyears": emp_tyears,
+                "employ_reasons": emp_reasons,
+                "employ_classess": emp_classess,
+                "employ_subjects": emp_subjects,
+                //Parent And Spouse details Information
+                "namefather": returnData('#name_father','input_box'),
+                "namespouse": returnData('#name_spouse','input_box'),
+                "fprofession": returnData('#f_profession','input_box'),
+                "sprofession": returnData('#s_profession','input_box'),
+                "fqualification": returnData('#f_qualification','input_box'),
+                "squalification": returnData('#s_qualification','input_box'),
+                "fdesignation": returnData('#f_designation','input_box'),
+                "sdesignation": returnData('#s_designation','input_box'),
+                "fdepartment": returnData('#f_department','input_box'),
+                "sdepartment": returnData('#s_department','input_box'),
+                "forganisation": returnData('#f_organisation','input_box'),
+                "sorganisation": returnData('#s_organisation','input_box'),
+                "fcnic": returnData('#f_cnic','input_box'),
+                "scnic": returnData('#s_cnic','input_box'),
+                "fmobile": returnData('#f_mobile','input_box'),
+                "smobile": returnData('#s_mobile','input_box'),
+                "faddress": returnData('#f_address','input_box'),
+                "saddress": returnData('#s_address','input_box'),
+                //Next Of Kin Details Information 
+                "noknamefirst": returnData('#nok_name_first','input_box'),
+                "nokaddressfirst": returnData('#nok_address_first','input_box'),
+                "nokemailfirst": returnData('#nok_email_first','input_box'),
+                "nokmobilefirst": returnData('#nok_mobile_first','input_box'),
+                "nokrelationshipfirst": returnData('#nok_relationship_first','input_box'),
+                //Emergency Contact Details Information 
+                "noknamesecond": returnData('#nok_name_second','input_box'),
+                "nokaddresssecond": returnData('#nok_address_second','input_box'),
+                "nokemailsecond": returnData('#nok_email_second','input_box'),
+                "nokmobilesecond": returnData('#nok_mobile_second','input_box'),
+                "nokrelationshipsecond": returnData('#nok_relationship_second','input_box'),
+                //other tab detail set zk... Bank Details zk
+                "banknametxt": returnData('#bank_name_txt','input_box'),
+                "bankbranchname": returnData('#bank_branch_name','input_box'),
+                "bankaccountnumber": returnData('#bank_account_number','input_box'),
+                //other tab detail set zk... Takaful Radio button zk ..  SelfTakaful .... SpouseTakaful .... ChildTakaful
+                "radioSelfTakaful": returnData('SelfTakaful','radio_box'),        // radio button
+                "radioSpouseTakaful": returnData('SpouseTakaful','radio_box'),    // radio button
+                "radioChildTakaful": returnData('ChildTakaful','radio_box'),      // radio button
+                "ctakaful": returnData('#c_takaful','input_box'),
+                "reasonfortakaful": returnData('#reason_for_takaful','input_box'),
+                //   // "staff_status":
+
+              },
+              success: function(result) {
+                console.log(result);
+                 alert(''+result+'Data Update Sucessfully');
+
+                  $('#EditDetails').modal('toggle');
+              },
+              error: function (result) {
+
+                 alert('Error: Data Not Updated');
+                 // Somehow process the validation messages,
+                 // like you seem to be doing already.
+              }  
+        })
+    });
+
+        //for Checkbox of Employment Present
+          //zzzkkkk
+
+        //  emp_row_id=(parseInt($(this).data('rowid')));
+        //  employ_row='.emp_todate_'+emp_row_id;
+        // $(document).on('click',employ_row,function(){
+        //   //emp_row_id=(parseInt($(this).data('rowid')));
+        //   value=$(this).val();
+        //   employ_present='.emp_pre_'+emp_row_id;
+        //   emp_pre_check='#to_date_check_'+emp_row_id;
+        //     if($(emp_pre_check).is(':checked')){
+        //       $(this).hide();
+        //     }else{
+        //       $(this).show();
+        //     }
+        //     console.log($emp_pre_check);
+            
+        // })
+
+        $(document).on('click','.to_date_check',function(){
+            emp_row_id = ($(this).data('rowid'));
+            employ_textbox='.toyear_'+emp_row_id;
+            employ_checkbox='.to_date_check_'+emp_row_id;
+             if($(employ_checkbox).is(':checked')){
+                  $(employ_textbox).hide();
+                }else{
+                  $(employ_textbox).show();
+                }
+        })
+
+        //for school name Event
+        $(document).on('change','.schoolName',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          school_class_name='.school_text_name_'+row_id;
+          school_close_name='.close_school_name_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(school_class_name).show();
+              $(school_close_name).show();
+            }
+        })
+        //for school qualification Event
+        $(document).on('change','.schoolQualification',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          school_class_qua='.school_text_qualification_'+row_id;
+          school_close_qua='.close_school_qua_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(school_class_qua).show();
+              $(school_close_qua).show();
+            }
+        })
+        //for school subject Event
+        $(document).on('change','.schoolSubject',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          school_class_sub='.school_text_subject_'+row_id;
+          school_close_sub='.close_school_sub_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(school_class_sub).show();
+              $(school_close_sub).show();
+            }
+        })
+        //for college qualification Event
+        $(document).on('change','.collegeQ',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          college_class_qua='.college_text_qualification_'+row_id;
+          college_close_qua='.close_college_qua_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(college_class_qua).show();
+              $(college_close_qua).show();
+            }
+        })
+        //for college subject Event
+        $(document).on('change','.collegeS',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          college_class_sub='.college_text_subject_'+row_id;
+          college_close_sub='.close_college_sub_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(college_class_sub).show();
+              $(college_close_sub).show();
+            }
+        })
+        //for university name Event
+        $(document).on('change','.universityN',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          university_class_name='.university_text_name_'+row_id; 
+          university_close_name='.close_university_name_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(university_class_name).show();
+              $(university_close_name).show();
+            }
+        })
+        //for university qualification Event
+        $(document).on('change','.universityQ',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          university_class_qua='.university_text_qualification_'+row_id;
+          university_close_qua='.close_university_qua_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(university_class_qua).show();
+              $(university_close_qua).show();
+            }
+        })
+        //for university subject Event
+        $(document).on('change','.universityS',function(){
+          row_id=(parseInt($(this).data('rowid')));
+          value=$(this).val();
+          university_class_sub='.university_text_subject_'+row_id;
+          university_close_sub='.close_university_sub_'+row_id;
+            if(value=='Other'){
+              $(this).hide();
+              $(university_class_sub).show();
+              $(university_close_sub).show();
+            }
+        })
+
+        //hide employment row on click event
+        $(document).on('click','.close_employment_row',function(){
+          var hide_row_school_name_number=$(this).attr('id');
+          $('.add_emp_more_'+hide_row_school_name_number).remove();
+        })
+
+        //hide School name row on click event
+        $(document).on('click','.close_school_name',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.school_text_name_','.school_row_','.schoolName');
+          $(this).hide(); 
+        })
+        //hide School qualification row on click event
+        $(document).on('click','.close_school_qua',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.school_text_qualification_','.school_row_','.schoolQualification');
+          $(this).hide(); 
+        })
+        //hide School subject row on click event
+        $(document).on('click','.close_school_sub',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.school_text_subject_','.school_row_','.schoolSubject');
+          $(this).hide(); 
+        })
+        //hide College qualification row on click event
+        $(document).on('click','.close_college_qua',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.college_text_qualification_','.college_row_','.collegeQ');
+          $(this).hide(); 
+        })
+        //hide College subject row on click event
+        $(document).on('click','.close_college_sub',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.college_text_subject_','.college_row_','.collegeS');
+          $(this).hide(); 
+        })
+        //hide university name row on click event
+        $(document).on('click','.close_university_name',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.university_text_name_','.university_row_','.universityN');
+          $(this).hide(); 
+        })
+        //hide university qualification row on click event
+        $(document).on('click','.close_university_qua',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.university_text_qualification_','.university_row_','.universityQ');
+          $(this).hide(); 
+        })
+        //hide university subject row on click event
+        $(document).on('click','.close_university_sub',function(){
+          var hide_row_number=$(this).attr('id');
+          revert_row(hide_row_number,'.university_text_subject_','.university_row_','.universityS');
+          $(this).hide(); 
+        })
+
+        // remove row butoon for school
+        $(document).on('click','.close_school_row',function(){
+          var hide_row_school_name_number=$(this).attr('id');
+          $('.add_school_more_'+hide_row_school_name_number).remove();
+        })
+        // remove row butoon for college
+        $(document).on('click','.close_college_row',function(){
+          var hide_row_school_name_number=$(this).attr('id');
+          $('.add_college_more_'+hide_row_school_name_number).remove();
+        })
+        // remove row butoon for university
+        $(document).on('click','.close_university_row',function(){
+          var hide_row_school_name_number=$(this).attr('id');
+          $('.add_university_more_'+hide_row_school_name_number).remove();
+        })
+        // remove row butoon for professional
+        $(document).on('click','.close_professional_row',function(){
+          var hide_row_school_name_number=$(this).attr('id');
+          $('.add_professional_more_'+hide_row_school_name_number).remove();
+        })
+        // remove row butoon for others
+        $(document).on('click','.close_others_row',function(){
+          var hide_row_school_name_number=$(this).attr('id');
+          $('.add_others_more_'+hide_row_school_name_number).remove();
+        })
+
+        // remove row butoon for Employment
+        // $(document).on('click','.close_school_row',function(){
+        //   var hide_row_school_name_number=$(this).attr('id');
+        //   $('.add_school_more_'+hide_row_school_name_number).remove();
+        // })
+
+        function revert_row(hide_row_number,textbox_class,div_class,select_class){
+          //var hide_row_number=$(this).attr('id');
+          $(textbox_class+hide_row_number).hide();
+          $(div_class+hide_row_number).find(select_class).show();
+          $(div_class+hide_row_number).find(select_class).val('');
+          $(textbox_class+hide_row_number).val('');
+          // $(this).hide(); 
+        }
+
+        //add eduction school rows jquery function zzkk....
+        function add_row(next_div,view_name,load_view_div){
+          next_div=next_div+1;
+          // console.log(next_div,view_name);
+          // debugger;
+                $.ajax({
+                     type: "GET",
+                     cache: true,
+                     url: "{{url('/masterLayout/staff/add_row')}}",
+                     data: {
+                          "next_div": next_div,
+                          "view_name": view_name,
+                     },
+                     success: function(result) {
+                      load_view_div='.'+load_view_div; 
+                      $(load_view_div).append(result);
+                     }
+                });
+        }
+
+        //add Employment rows jquery event zk.... 
+        $(document).on("click",".emp_btn",function(){
+              var next_div = $('.emp_row').length;
+              add_row(next_div,'add_employment_row','new_row_employment');
+        });
+
+        //add education school rows jquery event zk.... 
+        $(document).on("click",".school_btn",function(){
+              var next_div = $('.school_row').length;
+              add_row(next_div,'add_school_row','new_row_school');
+        });
+
+        //add education college rows jquery event zk.... 
+        $(document).on("click",".college_btn",function(){
+           var next_div = $('.college_row').length;
+           add_row(next_div,'add_college_row','new_row_college');
+            //AddCollegeRow();
+        });
+
+        //add education university rows jquery event zk.... 
+        $(document).on("click",".university_btn",function(){
+           var next_div = $('.university_row').length;
+           add_row(next_div,'add_university_row','new_row_university');
+            //AddCollegeRow();
+        });
+
+        //add education professional rows jquery event zk.... 
+        $(document).on("click",".professional_btn",function(){
+           var next_div = $('.professional_row').length;
+           add_row(next_div,'add_professional_row','new_row_professional');
+            //AddCollegeRow(); 
+        });
+
+        //add education others rows jquery event zk.... 
+        $(document).on("click",".others_btn",function(){
+           var next_div = $('.others_row').length;
+           add_row(next_div,'add_others_row','new_row_others');
+            //AddCollegeRow();
+        });
+
+      //Zk Code Adding End Here TIF-B Foam
+        
+$('.toggler4').show();
+$('.toggler4-close').hide();
+$('.theme-panel > .theme-options4').hide();
+$('#staffView_StaffList_Search').val('');
+     
  
  //Show total count of table records
  var totalRow =  $('#staffView_Table_StaffList tr:visible').length - 1;
@@ -8167,6 +7635,7 @@ display: none;
              $('.absentia_staff_name').text(data['info'][0]['abridged_name']);
              $('.absentia_name_code').text(data['info'][0]['name_code']);
              $('.absentia_bottom_line').html(data['info'][0]['c_bottomline']+' & '+data['info'][0]['c_topline']);
+             $('#modal-title-staff').text(data['info'][0]['abridged_name']);
  
  
  
@@ -11982,6 +11451,25 @@ bootbox.dialog({
 
  }
  
+//var staffID = $(this).attr('data-staffID');
+//********Ateeb Modal Show Function On Click Start ********//
+  $(document).on('click','.profile_StaffName',function(){
+      var staffID = $(this).attr('data-staffID');
+      //console.log(staffID);
+    $.ajax({
+        type:'GET',
+        data: {
+                "staff_id":staffID,
+                "_token": "{{ csrf_token() }}"
+        },
+        url:'/gsims/public/ateeb_rec_modal',
+        success:function(res){
+
+          $('.modal_body_fetch').html(res);
+        }
+        })
+  })
+
 
   // ================ Weekly Slider ========================//
  //=====================================================//

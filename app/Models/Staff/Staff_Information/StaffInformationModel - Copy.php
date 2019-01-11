@@ -1446,15 +1446,17 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     * @output:  Staff TIF-B, Other Detail: PF/Bank/Takaful/NTN
     * Date:     Jul 29, 2017 (Thu)
     ***********************************************************************/
+    //add reasons column in that query for takaful table zk
     public function getStaffOtherInfo($StaffID)
     {
         $query="select
-		IFNULL(b.bank_name, '-') as bank_name, IFNULL(b.branch, '-') as bank_branch, 
+		IFNULL(b.bank_name, '-') as bank_name, IFNULL(b.branch, '-') as bank_branch,
 		IFNULL(b.branch_code, '-') as branch_code, IFNULL(b.account_number, '-') as account_number,
 		IF(s.providentFund=1, 'Yes', 'No') as pf, IFNULL(s.nationalTaxNumber, '-') as ntn,
 		IFNULL(sr.eobi_no, '-') as eobi, IFNULL(sr.sessi_no, '-') as sessi,
-		IF(t.self=1, 'Yes', 'No') as takaful_self, IF(t.children=1, 'Yes', 'No') as takaful_children, 
-		IF(t.spouse=1, 'Yes', 'No') as takaful_spouse, IFNULL(t.certificate_no, '-') as takaful_crt
+		IF(t.self=1, 'Yes', 'No') as takaful_self, IF(t.children=1, 'Yes', 'No') as takaful_children,
+		IF(t.spouse=1, 'Yes', 'No') as takaful_spouse, IFNULL(t.certificate_no, '-') as takaful_crt,
+    	t.reasons as takaful_reasons
 		from atif.staff_registered as sr
 		left join atif.staff_registered_bank_account as b
 			on b.staff_id = sr.id

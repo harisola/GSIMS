@@ -1,6 +1,6 @@
 <?php
 /******************************************************************
-* Author : Rohail Aslam
+* Author : Kashif solangi
 *******************************************************************/
 
 namespace App\Http\Controllers\Development;
@@ -84,26 +84,25 @@ from atif_career.career_form as cf where cf.form_source=0
   ) ";
 
   }
-
-  else if($Stage_id == 'Part_A_Screening')
+/*select *
+from atif_Career.career_form as cf where (cf.status_id=10 or cf.status_id=12)
+and (cf.stage_id=9 or cf.stage_id=10)
+and cf.form_source=1*/
+else if($Stage_id == 'Part_A_Screening')
 {
-    $Where =" and af.id in(
-select 
- 
-cf.id
-
- 
+$Where =" and af.id in(select cf.id
 from atif_Career.career_form as cf
 left join ( 
-select * from atif_career.log_Career_form as lcf
-where lcf.id in (
-select max(cff.id) as id
-from atif_career.log_career_form as cff  group by cff.form_id  )
- ) as dd
-on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
-
-  )";
+ select * from atif_career.log_career_form as cf
+ where cf.id in(   
+select max(cff.id)
+from atif_career.log_career_form as cff  
+where cff.status_id <> 10 and cff.status_id <> 12
+group by cff.form_id 
+)
+) as dd on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) 
+and dd.status_id=1 and cf.stage_id=1 and cf.form_source=1 )";
 
   }
 
@@ -251,18 +250,22 @@ from atif_career.career_form as cf where cf.form_source=0
   {
     $Where =" and af.id in(
   
-select 
-distinct( cf.id ) as Total_form
+select cf.id 
 from atif_Career.career_form as cf
 left join ( 
-select * from atif_career.log_Career_form as l
-where l.id in (
-select max(cff.id) as id
-from atif_career.log_career_form as cff  group by cff.form_id )
- ) as dd
-on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
- 
+
+ select * from atif_career.log_career_form as cf
+ where cf.id in(   
+select max(cff.id)
+from atif_career.log_career_form as cff  
+where cff.status_id <> 10 and cff.status_id <> 12
+group by cff.form_id 
+)
+) as dd on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) 
+and (dd.status_id=1 or dd.status_id=11 )
+and cf.stage_id != 1
+
  
 
   )";
@@ -1081,7 +1084,7 @@ af.id as career_id, af.gc_id, af.name, af.email, af.mobile_phone, af.land_line,
       
       if(d.p_campus=2, 'South',if(d.p_campus=1, 'North', '')) as Campus,
       
-      if(af.status_id != 11 and d.p_time is not null, 'Part-B completed', '') as part_b_complete,
+      '' as part_b_complete,
       
       (case 
       when af.status_id=11 and af.stage_id=9 then 'CallForPartB'
@@ -1297,19 +1300,21 @@ from atif_career.log_career_form as l where l.status_id=1 and l.register_by > 0
 
 
 union
-select 
-9 as Query_num,
-count( cf.id ) as Total_form
+select 9 as Query_num,
+count( cf.id ) as Total_form 
 from atif_Career.career_form as cf
 left join ( 
-select * from atif_career.log_Career_form as l
-where l.id in (
-select max(cff.id) as id
+ select * from atif_career.log_career_form as cf
+ where cf.id in(   
+select max(cff.id)
 from atif_career.log_career_form as cff  
-where  cff.status_id != 10 and cff.status_id != 12 group by cff.form_id )
- ) as dd
-on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1 and cf.form_source=1
+where cff.status_id <> 10 and cff.status_id <> 12
+group by cff.form_id 
+)
+) as dd on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) 
+
+and dd.status_id=1 and cf.stage_id=1 and cf.form_source=1
 
 
 union
@@ -1318,13 +1323,18 @@ select
 count( cf.id ) as Total_form
 from atif_Career.career_form as cf
 left join ( 
-select * from atif_career.log_Career_form as l
-where l.id in (
-select max(cff.id) as id
-from atif_career.log_career_form as cff  group by cff.form_id  having l.status_id=1)
- ) as dd
-on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+
+ select * from atif_career.log_career_form as cf
+ where cf.id in(   
+select max(cff.id)
+from atif_career.log_career_form as cff  
+where cff.status_id <> 10 and cff.status_id <> 12
+group by cff.form_id 
+)
+) as dd on dd.form_id = cf.id
+where (cf.status_id=12 or cf.status_id=10 ) 
+and (dd.status_id=1 or dd.status_id=11 )
+and cf.stage_id != 1
 
 UNION
 select 

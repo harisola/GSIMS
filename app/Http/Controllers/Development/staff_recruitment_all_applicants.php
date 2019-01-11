@@ -27,7 +27,7 @@ class staff_recruitment_all_applicants extends Controller
     $campus = $staffRecruiment->get_branch();
     $career_allocation = $staffRecruiment->get_allocation();
     $get_getTags = $staffRecruiment->get_getTags();
-    return view('master_layout.staff.staff_recruitment.staff_recruitment_initiation_view')
+    return view('master_layout.staff.staff_recruitment.staff_recruitment_initiation_view_all_applicants')
         ->with(array('staffRecruiment' => $RecruimentData,'tag'=> $tag,'grade'=>$grade,'status'=> $status,'campus' => $campus,'career_allocation'=>$career_allocation,"get_getTags"=>$get_getTags));
   }
 
@@ -135,8 +135,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$Where." 
-and (d.p_date is null or d.p_date >= curdate() )";
+WHERE 1 ".$Where." ";
 
 
 
@@ -213,8 +212,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery."  ".$Where." 
-and (d.p_date is null or d.p_date >= curdate() )";
+WHERE 1 ".$searchQuery."  ".$Where." ";
 
 
 $scount_result = $staffRecruiment->custom_query($sQu);
@@ -313,7 +311,6 @@ select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.st
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
 WHERE 1 ".$searchQuery."  ".$Where."
-and (d.p_date is null or d.p_date >= curdate() )
 order by af.created desc  limit ".$row.",".$rowperpage;
 
 $empRecords = $staffRecruiment->custom_query($empQuery);

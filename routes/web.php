@@ -74,6 +74,11 @@ Route::group(['middleware' => 'authenticated'], function () {
 /*************************************************************** Development *****/
 /*********************************************************************************/
 Route::group(['middleware' => 'authenticated'], function () {
+	//zk edit add route Start
+	Route::get('/ateeb_rec_modal', 'Development\Haris@AteebRecModal'); 
+	Route::get('/update_staff', 'Development\Haris@Update_Staff');
+	Route::get('/masterLayout/staff/add_row', 'Development\Haris@AddRow');
+	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
 	Route::get('/staff_layout_team', 'Development\Haris@development_UserTeam');
 	//Route::get('/student_layout', 'Development\StdMasterLayout@development');
@@ -356,6 +361,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/staff_recruitment_initiation','Development\staff_recruitment_initiation@index');
 
 	Route::get('/staff_recruitment_all_applicants','Development\staff_recruitment_all_applicants@index');
+	Route::post('/allposts_all_app','Development\staff_recruitment_all_applicants@allposts');
 
 	Route::get('/staff_recruitment_process','Development\staff_recruitment_process@index');
 
@@ -399,6 +405,8 @@ Route::post('/modified_form_list','Development\staff_recruitment_initiation@modi
 
 
 Route::post('/allposts','Development\staff_recruitment_initiation@allposts');
+
+
 	
 
 

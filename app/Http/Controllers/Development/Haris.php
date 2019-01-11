@@ -438,59 +438,6 @@ class Haris extends StaffReportController
     }
 
     /**********************************************************************
-    * Staff Information 
-    * Author:   Rohail Aslam, r.aslam@generations.edu.pk, +92-340-2133372 
-    * @input:   Key words
-    * @output:  JSON encoded Staff Information Fields
-    ***********************************************************************/
-    public function getStaffInfo(Request $request){
-        
-        $staffID = $request->input('staff_id');
-        $staffInfo = new StaffInformationModel();
-
-        $staff['info'] = $staffInfo->getStaffInformation($staffID);
-        $staff['roles'] = $staffInfo->get_StaffInfo($staff['info'][0]->gt_id);
-        $staff['profile_description'] = $staffInfo->getStaff_TTProfile($staff['info'][0]->gt_id);
-
-        if(empty($staff['profile_description'])){
-          $staff['profile_description'] = '';
-        }
-
-        $staff['reporting1'] = '';
-        $staff['reporting2'] = '';
-        if(!empty($staff['roles'][0]['pm_report_to'])){
-          $staff['reporting1'] = $staffInfo->get_StaffReportingInfo($staff['roles'][0]['pm_report_to']);
-          if(!empty($staff['roles'][1]['pm_report_to'])){
-            $staff['reporting2'] = $staffInfo->get_StaffReportingInfo($staff['roles'][1]['pm_report_to']);
-          }
-        }
-        $staff['absentia'] = $staffInfo->getStaffAbsentia($staffID);
-
-        $staff['manual'] = $staffInfo->getStaffManual($staffID);
-
-
-
-        $staff['comments'] = $staffInfo->getStaffComments($staffID);
-        
-
-        $staff['leave_description']= $staffInfo->get_leave_desscription($staffID);
-
-        $staff['penalty'] = $staffInfo->getPenalty($staffID);
-
-        $staff['exception_adjustment'] = $staffInfo->getExceptionAdjustment($staffID);
-
-        $staff['current_leave'] = $staffInfo->getCurrentLeave($staffID);
-
-        $staff['get_cut_date'] = $staffInfo->get_cut_date();
-
-       // $staff['daily_report_attendance'] = $staffInfo->getDailyReportData(date('Y-m-d'),$staffID); 
-
-
-        echo json_encode($staff);
-    
-    }
-
-    /**********************************************************************
     * Staff Information Update
     * Author:   Zia Khan, z.qureshi@generations.edu.pk, +92-342-2775588
     * @input:   Key words
