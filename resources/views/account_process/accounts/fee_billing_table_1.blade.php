@@ -61,7 +61,7 @@
                                                         <td>{{$get_lastest_bill->bill_issue_date}}</td>
                                                         <td>{{$get_lastest_bill->bill_due_date}}</td>
                                                         <td>{{$get_lastest_bill->bill_bank_valid_date}}</td>
-                                                        <td>2.4</td>
+                                                        <td>1.2</td>
                                                         <td><?= number_format($get_lastest_bill->arrears_suspended) ?></td>
                                                         <td><?= number_format($get_lastest_bill->fee_a_discount)?></td>
                                                         <td>{{$get_lastest_bill->concession_code}}</td>
