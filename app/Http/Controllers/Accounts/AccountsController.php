@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Accounts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Accounts\fee_bill;
+use App\Models\Accounts\fee_bill_setup;
 use App\Models\Accounts\class_list;
 use App\Models\Accounts\fee_bill_received;
 use App\Models\Accounts\fee_definition;
@@ -39,6 +40,11 @@ use fpdi;
 class AccountsController extends Controller
 {
 
+    public function __construct()
+    {
+        $fee_bill_setup=new fee_bill_setup;
+        $this->bill_number_of_months =$fee_bill_setup->getInstallmentNumberOfMonths();
+    }
 
 
     public function getStudentGeneratedBills(request $request){
@@ -225,17 +231,17 @@ class AccountsController extends Controller
         
         //$billing_cycle=$list['bill_no'];
         $billing_cycle = $bill_cycle_no;
-        $resource_fee=$list['resource_fee']*1.2;
+        $resource_fee=$list['resource_fee']*$this->bill_number_of_months;
         $musakhar=$list['musakhar'];
         $yearly=$list['yearly'];
         $lab_avc=$list['lab_avc'];
         $student_id=$list['student_id'];
         $academic_session_id=$list['a_session_id'];
         $std_status_code=$list['std_status_code'];
-        $tuition_fee=($list['tuition_fee']*1.2);
+        $tuition_fee=($list['tuition_fee']*$this->bill_number_of_months);
         $gross_tution_fee=$tuition_fee+$resource_fee;
         $south_campus_discount=$concession->southCampusDiscount($list['student_id'],$list['a_session_id'],$billing_cycle);
-        $gross_tution_fee=$gross_tution_fee-($south_campus_discount*1.2);
+        $gross_tution_fee=$gross_tution_fee-($south_campus_discount*$this->bill_number_of_months);
         if($std_status_code=="S-CPT"){
              $arrears_suspended=$fee_bill->getSuspendedBarriers($list['student_id']);
              $scpt_unique_number=1;
@@ -286,10 +292,10 @@ class AccountsController extends Controller
         $lab_avc_fee_show=$this->IncudeCharges($list['grade_id'],16,15);
         
         if($musakhar_fee_show==true){
-            $additional_charges=($additional_charges+($musakhar*1.2));
+            $additional_charges=($additional_charges+($musakhar*$this->bill_number_of_months));
         }
         if($lab_avc_fee_show==true){
-            $additional_charges=$additional_charges+($lab_avc*1.2);
+            $additional_charges=$additional_charges+($lab_avc*$this->bill_number_of_months);
         }
         if($smartcard_charges){
             $additional_charges=$additional_charges+($smartcard_charges);
@@ -436,7 +442,7 @@ class AccountsController extends Controller
                 $fee_bill->bill_issue_date=$list['issue_date'];
                 $fee_bill->bill_due_date=$list['due_date'];
                 $fee_bill->bill_bank_valid_date=$list['bank_validity_date'];
-                $fee_bill->bill_months=1.2;
+                $fee_bill->bill_months=$this->bill_number_of_months;
                 $fee_bill->student_id=$list['student_id'];
 
                 //these columns not  required now not mandatory asif by create these columns for personal use start
@@ -910,11 +916,11 @@ public function fetchFeeBill($gs_id){
             $pdf->AddPage('L', array($size['w'], $size['h']));
             $pdf->useTemplate($templateId);
             if($feedetails['arrears_suspended']){
-                 $this->createTableHeading($pdf,61.2,$bill_title,35,'B',8);
+                 $this->createTableHeading($pdf,62.4,$bill_title,35,'B',8);
 
-                  // $this->createTableHeading($pdf,61.2,$bill_title.'(with Suspended Arriers)',35,'B',8);
+                  // $this->createTableHeading($pdf,6$this->bill_number_of_months,$bill_title.'(with Suspended Arriers)',35,'B',8);
             }else{
-                 $this->createTableHeading($pdf,61.2,$bill_title,35,'B',8);
+                 $this->createTableHeading($pdf,62.4,$bill_title,35,'B',8);
             }
             $this->setBilldescription($pdf,11,64,$bill_notes,$fontsize="");
             // $this->rotateText($pdf,185,"",10.5,'',5);//arrier notes
@@ -961,7 +967,7 @@ public function fetchFeeBill($gs_id){
 
 
             $annual_tuition_fee=$tution_fee*12;
-            $installment_tution_fee=$tution_fee*1.2;
+            $installment_tution_fee=$tution_fee*$this->bill_number_of_months;
             $this->createTable($pdf,96,'Tuition Fee',3.2,'B',5);
             $this->createTable($pdf,96,number_format($tution_fee),34.2,'',5);
             $this->createTable($pdf,96,number_format($annual_tuition_fee),49.5,'',5);
@@ -971,7 +977,7 @@ public function fetchFeeBill($gs_id){
 
             if($resource_fee_show==true){
                 $annual_resource_fee=$resource_fee*12;
-                $installment_resource_fee=$resource_fee*1.2;
+                $installment_resource_fee=$resource_fee*$this->bill_number_of_months;
                 $this->createTable($pdf,100,'Resource Fee',4.7,'B',5);
                 $this->createTable($pdf,100,number_format($resource_fee),34.2,'',5);
                 $this->createTable($pdf,100,number_format($annual_resource_fee),49.5,'',5);
@@ -982,7 +988,7 @@ public function fetchFeeBill($gs_id){
             }
             if($south_campus_discount!=="0"){
                 $annual_sounth_discount=$south_campus_discount*12;
-                $installment_sounth_discount=$south_campus_discount*1.2;
+                $installment_sounth_discount=$south_campus_discount*$this->bill_number_of_months;
                 $this->createTable($pdf,103,'South Campus Discount',9,'B',5);
                 $this->createTable($pdf,103,'('.$south_campus_discount.')',34.2,'',5);
                 $this->createTable($pdf,103,'('.$annual_sounth_discount.')',49.5,'',5);
@@ -1030,7 +1036,7 @@ public function fetchFeeBill($gs_id){
                     $scholarship_codes=strrev($scholarship_codes); //output: this is my world, not my farm
                     $scholarship_text='Scholarship '.$scholarship_codes;
                     $scholarship_y=110;
-                    $scholarship_monthly=$feedetails['scholarship_amount']/1.2;
+                    $scholarship_monthly=$feedetails['scholarship_amount']/$this->bill_number_of_months;
                     $scholarship_yearly=$scholarship_monthly*12;
                     $this->createTable($pdf,$scholarship_y,$scholarship_text,7.5,'B',5);
                     $this->createTable($pdf,$scholarship_y,$feedetails['scholarship_percentage'].'%',26,'',5);//setting discount valuess
@@ -1048,7 +1054,7 @@ public function fetchFeeBill($gs_id){
                // $yearly_charges=1;
                 if($lab_avc_fee_show==true){
                     $annual_lab_avc_fee=$lab_avc*12;
-                    $lab_avc_fee_this_month=$lab_avc*1.2;
+                    $lab_avc_fee_this_month=$lab_avc*$this->bill_number_of_months;
 
                     $this->createTable($pdf,118.5,'Resource Charges',7,'B',5);
                     $this->createTable($pdf,118.5,number_format(@$lab_avc),34.2,'',5);
@@ -1060,7 +1066,7 @@ public function fetchFeeBill($gs_id){
                 }
                 if($musakhar!=0){
                     $musakhar_fee_annual=$musakhar*12;
-                    $installment_musakhar_fee=$musakhar*1.2;
+                    $installment_musakhar_fee=$musakhar*$this->bill_number_of_months;
                     $this->createTable($pdf,121,'Musakhar Charges',5.7,'B',4);
                     $this->createTable($pdf,121,number_format(@$musakhar),34.5,'',5);
                     $this->createTable($pdf,121,number_format(@$musakhar_fee_annual),49.5,'',5);
@@ -1270,7 +1276,7 @@ public function fetchFeeBill($gs_id){
         $pdf->SetXY($margin_left + 7.2, $margin_top);
         $pdf->Cell(20, 5,$value, $bo, 0, 'C', 0);
 
-        $pdf->SetXY($margin_left + 101.2, $margin_top);
+        $pdf->SetXY($margin_left + 102.4, $margin_top);
         $pdf->Cell(20, 5,$value, $bo, 0, 'C', 0);
 
         $pdf->SetXY($margin_left + 195.3, $margin_top);
