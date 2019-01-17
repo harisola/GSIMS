@@ -136,34 +136,34 @@ class AccountsController extends Controller
     public function uploadStudentList(){
                 ini_set('max_execution_time', 50000); //3 minutes
         $class_list=  new class_list;
-        $query="SELECT * FROM adjustment_tmp";
+        $query="select 
+
+( ifnull(s.adjustment_amount,0) - ifnull(ff.admission_fee,0) ) as Total_remaining_arriers,
+s.*, ff.*
+
+from atif_fee_student.arriers_adjustments as s 
+inner join ( select * from atif_fee_Student.fee_bill as fb where fb.academic_session_id=13
+and fb.bill_title='Admission' and fb.fee_bill_type_id=1
+and fb.bill_due_date='2019-01-02' ) as ff
+on ff.student_id = s.student_id
+where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff.admission_fee,0))>-1
+";
 
         $details = DB::connection('mysql_Career_fee_bill')->select($query);
 
         $details= collect($details)->map(function($x){ return (array) $x; })->toArray(); 
         $i=0;
         foreach ($details as  $detail) {
-          // echo $i++;
+          echo $i++.'<br>';
           //  echo '<br>'; 
-            @$student_id=$class_list->classListInformation($detail['gs_id'])['id'];
-            @$academic_session_id=$class_list->classListInformation($detail['gs_id'])['academic_session_id'];
-            if(!empty($student_id)){
+            // @$student_id=$class_list->classListInformation($detail['gs_id'])['id'];
+            // @$academic_session_id=$class_list->classListInformation($detail['gs_id'])['academic_session_id'];
                 $data=array(
-                    'student_id' =>$student_id,
-                    'amount' =>$detail['amount'],
-                    'is_arrears' =>0,
-                    'academic_session_id' =>$academic_session_id,
-                    'installment_id' =>2,
-                    'description' =>'bulk entry',
-                    'register' =>time(),
-                    'register_by' =>1,
-                    );            
+                        'adjustment_amount' =>$detail['Total_remaining_arriers']
+                        );     
             // echo str_replace(",","",$amount);
-            $details = DB::connection('mysql_Career_fee_bill')->table('arriers_and_adjustment_manual')->insert($data);
-            }
-            if($details){
-                echo 'done all';
-            }
+            $details = DB::connection('mysql_Career_fee_bill')->table('arriers_adjustments')->where('student_id',$detail['student_id'])->update($data);
+            
         }
         
 
@@ -232,6 +232,7 @@ class AccountsController extends Controller
         //$billing_cycle=$list['bill_no'];
         $billing_cycle = $bill_cycle_no;
         $resource_fee=$list['resource_fee']*$this->bill_number_of_months;
+        $difference=$list['difference']*$this->bill_number_of_months;
         $musakhar=$list['musakhar'];
         $yearly=$list['yearly'];
         $lab_avc=$list['lab_avc'];
@@ -239,7 +240,9 @@ class AccountsController extends Controller
         $academic_session_id=$list['a_session_id'];
         $std_status_code=$list['std_status_code'];
         $tuition_fee=($list['tuition_fee']*$this->bill_number_of_months);
-        $gross_tution_fee=$tuition_fee+$resource_fee;
+        $gross_tution_fee=($tuition_fee+$resource_fee)-$difference;
+
+        // die;
         $south_campus_discount=$concession->southCampusDiscount($list['student_id'],$list['a_session_id'],$billing_cycle);
         $gross_tution_fee=$gross_tution_fee-($south_campus_discount*$this->bill_number_of_months);
         if($std_status_code=="S-CPT"){
@@ -287,6 +290,7 @@ class AccountsController extends Controller
         }else{
              $gross_tution_fee=$tuition_fee;
         }
+
         $musakhar_fee_show=$this->IncudeCharges($list['grade_id'],13,5);
         $resource_fee_show=$this->IncudeCharges($list['grade_id'],14,1);
         $lab_avc_fee_show=$this->IncudeCharges($list['grade_id'],16,15);
@@ -474,6 +478,7 @@ class AccountsController extends Controller
                      $total_current_bill=($total_current_billing2);
                 }
                 $fee_bill->total_current_bill=$total_current_bill;
+                $fee_bill->difference=$difference;
                 $scholarship_percent_code_1="";
                 $scholarship_percent_code_2="";
                 
@@ -870,6 +875,7 @@ public function fetchFeeBill($gs_id){
                 
                  $tution_fee=$fee['tuition_fee'];
                  $resource_fee=$fee['resource_fee'];
+                 $difference=$fee['difference'];
                  $musakhar=$fee['musakhar'];
                  $lab_avc=$fee['lab_avc'];
                  $yearly_charges=$feedetails['total_yearly'];
@@ -973,6 +979,15 @@ public function fetchFeeBill($gs_id){
             $this->createTable($pdf,96,number_format($annual_tuition_fee),49.5,'',5);
             $this->createTable($pdf,96,number_format($installment_tution_fee),66,'B',5);
 
+            $installment_difference=$difference*$this->bill_number_of_months;
+            $annual_difference=$difference*12;
+            // $this->createTable($pdf,96,'Tuition Fee',3.2,'B',5);
+            // $this->createTable($pdf,96,number_format($difference),34.2,'',5);
+            // $this->createTable($pdf,96,number_format($annual_difference),49.5,'',5);
+            // $this->createTable($pdf,96,number_format($installment_difference),66,'B',5);
+
+
+
 
 
             if($resource_fee_show==true){
@@ -999,9 +1014,10 @@ public function fetchFeeBill($gs_id){
 
             }
                 //gross tution fee calculation
-                $total_monthly=((@$tution_fee+@$resource_fee)-@$south_campus_discount);
+
+                $total_monthly=(((@$tution_fee+@$resource_fee)-@$difference)-@$south_campus_discount);
                 $total_annual=(@$annual_tuition_fee+@$annual_resource_fee)-$annual_sounth_discount;
-                $total_this_intallment=(@$installment_tution_fee+@$installment_resource_fee)-$installment_sounth_discount;
+                $total_this_intallment=((@$installment_tution_fee+@$installment_resource_fee)-$installment_difference)-$installment_sounth_discount;
 
                 $this->createTable($pdf,106.2,number_format($total_monthly),34.2,'',5);//sum total monthly amoun
                 $this->createTable($pdf,106.2,number_format($total_annual),49.5,'',5);//sum annual amount

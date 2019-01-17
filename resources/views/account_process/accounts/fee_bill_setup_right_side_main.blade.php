@@ -102,6 +102,9 @@ $Academic_End_date   = '';
                                             <th class="text-center">Tution Fee</th>
                                             <th class="text-center">Resorce Fee</th>
                                             <th class="text-center">Musakhar</th>
+                                            <!-- Addded ZK -->
+                                            <th class="text-center">Difference</th>
+                                            <!-- Addded ZK -->
                                             <th class="text-center">LAB/AVC/SPT/LIB</th>
                                             <th class="text-center">Total</th>
                                             <th class="text-center">Yearly Charges</th>
@@ -131,6 +134,9 @@ $Academic_End_date   = '';
 
                                                     <td class="text-center"><input type="number" class="shortField" value="{{ $sr->Resource_fee }}"  name="Resource_fee_{{$sr->Definition_id}}" /> </td>
                                                     <td class="text-center"><input type="number" class="shortField" value="{{ $sr->Musakhar }}" name="Musakhar_{{$sr->Definition_id}}" /> </td>
+                                                    <!-- Addded ZK -->
+                                                    <td class="text-center"><input type="number" class="shortField" value="{{ $sr->Difference }}" name="Difference_{{$sr->Definition_id}}" /> </td>
+                                                    <!-- Addded ZK -->
                                                     <td class="text-center"><input type="number" class="shortField" value="{{ $sr->Lab_avc }}" name="Lab_avc_{{$sr->Definition_id}}"  /></td>
                                                     <td class="text-center">
                                                         {{ 

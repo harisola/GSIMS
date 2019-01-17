@@ -195,10 +195,12 @@ class fee_bill extends Model
                 ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')
                 ->Orderby('id','asc')->get();
         }else{
-            $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')->Orderby('id','desc')->first();
+            $details=fee_bill::where([['student_id',$student_id],['academic_session_id','<>',13]])->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')->Orderby('id','desc')->first();
 
         }
-       
+
+
+        
         return $details;
     }
     

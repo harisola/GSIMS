@@ -626,7 +626,10 @@
       </span><!-- FinalConsCommunicationNotInterested -->
   </div><!-- startTillCSL2 -->
   <div class="DDM3TillEnd">
-
+      <!-- FinalConsCommunicationNotInterested: Overall applicants moved to Not Interested from Initial Interview Communication -->
+      <span class="FinalConsCommunicationNotInterested absolute">
+          <a href="#allocateProfileModal" data-toggle="modal" data-status="final_communication_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Final Consultation Communication">Haris Ola</a>
+      </span><!-- FinalConsCommunicationNotInterested -->
   </div><!-- startTillCSL2 -->
 </div><!-- col-md-12 -->
 </div><!-- row -->

@@ -239,13 +239,16 @@ foreach( $Definition_id as $d)
 	$Tution_Fee_ = $output['Tution_Fee_'.$d];	
 	$Resource_fee_ = $output['Resource_fee_'.$d];
 	$Musakhar_ = $output['Musakhar_'.$d];
+	/*added zk*/
+	$Difference_ = $output['Difference_'.$d];
+	/*added zk*/
 	$Lab_avc_ = $output['Lab_avc_'.$d];
 	$Yearly_fee_ = $output['Yearly_fee_'.$d];
 
 
 
-
-  $query = "UPDATE `atif_fee_student`.`fee_definition` SET `tuition_fee`='".$Tution_Fee_."', `resource_fee`='".$Resource_fee_."', `musakhar`='".$Musakhar_."', `lab_avc`='".$Lab_avc_."', `yearly`='".$Yearly_fee_."', `modified`='".$NowTime."', `modified_by`='".$userID."' WHERE  `id`=".$d.";";
+	/*added zk*/
+  $query = "UPDATE `atif_fee_student`.`fee_definition` SET `tuition_fee`='".$Tution_Fee_."', `resource_fee`='".$Resource_fee_."', `musakhar`='".$Musakhar_."', `difference`='".$Difference_."', `lab_avc`='".$Lab_avc_."', `yearly`='".$Yearly_fee_."', `modified`='".$NowTime."', `modified_by`='".$userID."' WHERE  `id`=".$d.";";
 
 
 
@@ -326,9 +329,9 @@ where s.name='".$SC_Display_Name."'";
 	
 	for( $grade_id = 1; $grade_id <=5; $grade_id++ )
 	{
-
+		/*added zk*/
 		// Fee Definition for North Campus
-		$query_nc = "INSERT INTO `atif_fee_student`.`fee_definition` (`academic_session_id`,  `grade_id`, `tuition_fee`, `resource_fee`, `musakhar`, `lab_avc`, `yearly`, `created`, `register_by`, `record_deleted`) VALUES ('".$Session_id_nc."', '".$grade_id."', '0', '0', '0', '0', '0', '".$Created_Date."', '".$userID."', '0' );";
+		$query_nc = "INSERT INTO `atif_fee_student`.`fee_definition` (`academic_session_id`,  `grade_id`, `tuition_fee`, `resource_fee`, `musakhar`, `difference`, `lab_avc`, `yearly`, `created`, `register_by`, `record_deleted`) VALUES ('".$Session_id_nc."', '".$grade_id."', '0', '0', '0', '0', '0', '0', '".$Created_Date."', '".$userID."', '0' );";
 		$fee_bill_model->Fun_insert($query_nc);	
 	}
 
@@ -341,8 +344,8 @@ for( $grade_id = 6; $grade_id <=17; $grade_id++ )
 		{
 			$Session_id_sc = $Session_id_nc;
 		}
-
-		$query_nc = "INSERT INTO `atif_fee_student`.`fee_definition` (`academic_session_id`,  `grade_id`, `tuition_fee`, `resource_fee`, `musakhar`, `lab_avc`, `yearly`, `created`, `register_by`, `record_deleted`) VALUES ('".$Session_id_sc."', '".$grade_id."', '0', '0', '0', '0', '0', '".$Created_Date."', '".$userID."', '0' );";
+		/*added zk*/
+		$query_nc = "INSERT INTO `atif_fee_student`.`fee_definition` (`academic_session_id`,  `grade_id`, `tuition_fee`, `resource_fee`, `musakhar`, `difference`, `lab_avc`, `yearly`, `created`, `register_by`, `record_deleted`) VALUES ('".$Session_id_sc."', '".$grade_id."', '0', '0', '0', '0', '0', '0', '".$Created_Date."', '".$userID."', '0' );";
 
 		$fee_bill_model->Fun_insert($query_nc);	
 	}

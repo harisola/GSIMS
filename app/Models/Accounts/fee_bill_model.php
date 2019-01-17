@@ -20,7 +20,7 @@ class fee_bill_model extends Model
       return $weeks;
     }
 
-
+// Addded ZK 
     public function Get_Fee_Definition($Session_id)
     {
     	// $query = "select * from atif_fee_student.fee_definition as d where d.academic_session_id in (".$Session_id.")";
@@ -32,6 +32,7 @@ d.grade_id as Grade_id,
 d.tuition_fee as Tuition_fee,
 d.resource_fee as Resource_fee,
 d.musakhar as Musakhar,
+d.difference as Difference,
 d.lab_avc as Lab_avc,
 ( d.tuition_fee + d.resource_fee + d.musakhar + d.lab_avc ) as Total, 
 d.yearly as Yearly_fee, 

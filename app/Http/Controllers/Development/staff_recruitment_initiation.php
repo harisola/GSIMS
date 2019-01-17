@@ -519,6 +519,7 @@ public function addcustomer(Request $request)
         $career_grade_id = $request->input('allocation_grade');
 
         if(empty($career_grade_id )){
+          
           $career_grade_id  = 1;
         }
         $comments_applicant = $request->input('applicant_comment');
@@ -946,19 +947,11 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
            );
           $RecruimentData = $staffRecruiment->updateFormdata('atif_career.career_form_data', $where, $data);
         }
-    
-    
-
-        
   }
-  
-  
-  
-  
+    
   public function loadLogs( Request $request )
 {
   $staffRecruiment = new Staff_recruitment_model();
-  
   
   
   $userID = Sentinel::getUser()->id;
