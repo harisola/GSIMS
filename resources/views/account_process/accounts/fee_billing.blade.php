@@ -152,7 +152,7 @@
                         	</div>
                         	<div class="col-md-3">
                         		<label>&nbsp;</label><br />
-                        		<input type="button" id=""  class="btn btn-group green Generate_Fee_Bill_1" value="Generate Fee Bill" style="width: 100%;">
+                        		<input type="button" id="" data-re_generate="1" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
                         	</div>
                         </div><!-- row -->
                     <div class="portlet-body padding20" >
@@ -406,6 +406,12 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
    var installment_number=$('#installment_number').val();
    var gs_id=$('#txt_gs_id').val();
    var pdf="";
+   var re_generate="";
+   if($(this).data('re_generate')==1){
+       re_generate=$(this).data('re_generate');
+   }else{
+       re_generate=0;
+   }
    var current_url=window.location.href.split('public/')
    var base_url=current_url[0]+'public/';
    var studentStatus =  $( "#student_status option:selected" ).val();
@@ -436,8 +442,7 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
    var Grade_names_list   =  Grade_name.join(", ");
    var Section_names_list =  Section_name.join(",");
    var Status_names_list  =  Status_name.join(", ");
-
-   var txt_gs_id = $("#txt_gs_id").val();
+   var txt_gs_id =          $("#txt_gs_id").val();
 
  // pdf=pdf.trim();
    App.startPageLoading(); 
@@ -449,7 +454,7 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
         }else{
               App.stopPageLoading(); 
              window.open(base_url+'accounts/get_student_generated_bills?Grade_id='+Grade_id_list+ 
-               '&Gname='+Grade_names_list+'&billing_cycle_number='+installment_number+'&Snames='+Section_names_list+'&st='+Status_names_list+'&txt_gs_id='+txt_gs_id+'&pdf='+pdf+'&status_code='+studentStatus
+               '&Gname='+Grade_names_list+'&billing_cycle_number='+installment_number+'&Snames='+Section_names_list+'&st='+Status_names_list+'&txt_gs_id='+txt_gs_id+'&pdf='+pdf+'&status_code='+studentStatus+'&&re_generate'+re_generate
                 )        }
  
   }else{
@@ -458,7 +463,9 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
           var  myData={'_token': '{{ csrf_token() }}', 
                  'gs_id':gs_id, 
                  'pdf':pdf,
-                 'billing_cycle_number':installment_number, 
+                 'billing_cycle_number':installment_number,
+                 're_generate':re_generate,
+
                 }    
     }else{
           var  myData={
@@ -469,7 +476,8 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
                  'Snames':Section_names_list, 
                  'st':Status_names_list,
                  'status_code':studentStatus,
-                  'pdf':pdf
+                 'pdf':pdf,
+                 're_generate':re_generate,
                 }
     }
 

@@ -357,7 +357,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                      // $tax_allow=$this->StudentApplicableForTaxes($list,$gross_additional_charges);
                     //purani jaga tax calcualte karna ki harmi pan ki waja sa necha kari ha
  
-              $total_adjustments=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
+                $total_adjustments=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                 
                @$fee_details=$fee_bill->getLastBillByStudentId($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                @$received_amount=$fee_bill_received->getLastReceivedAmount(@$fee_details['id']);
@@ -445,7 +445,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $fee_bill->gb_id=$bill_number_remove_dash;
                 $fee_bill->academic_session_id= $list['a_session_id'];
                 $fee_bill->bill_cycle_no=$list['bill_no'];
-                $fee_bill->bill_title=$list['title'];
+                $fee_bill->bill_title=$list['title'];;
                 $fee_bill->bill_issue_date=$list['issue_date'];
                 $fee_bill->bill_due_date=$list['due_date'];
                 $fee_bill->bill_bank_valid_date=$list['bank_validity_date'];
@@ -475,7 +475,6 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 
                 if($installment_dicount_percentage==100){
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
-                    $resource_fee=(480*1.2);
                     $total_current_bill=($total_current_billing2+$resource_fee);
 
                 }else{
@@ -906,7 +905,6 @@ public function fetchFeeBill($gs_id){
 
                  $parameters=$fee_bill_type_parameter->getBillParameters($fee_bill_type_id);
                   $bill_title=$parameters['title'];
-
                   if($feedetails['std_status_code']=="S-CPT"){
                          $bill_notes=$parameters['notes_cpt'];
                   }else{
@@ -914,8 +912,7 @@ public function fetchFeeBill($gs_id){
                   }
                   //for more than first billing
                   if($grade_id==15 ||$grade_id==16){
-                        $bill_title='R E G U L A R   F E E   B I L L';
-                        $bill_notes="This fee bill incorporates Installment 03 of 05 for the Academic Session 2018-19. This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.";
+                        $bill_notes="This fee bill incorporates Installment 02 of 05 for the Academic Session 2018-19. This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.";
                   }
                  if($grade_id==17){
                     $resource_fee_show=true;
@@ -1007,7 +1004,7 @@ public function fetchFeeBill($gs_id){
             }
 
             if($difference>0){
-                $this->createTable($pdf,100,'Reduction as per SCP Orders',11.2,'B',5);
+                $this->createTable($pdf,100,'Difference',3.2,'B',5);
                 $this->createTable($pdf,100,'('.number_format($difference).')',34.2,'',5);
                 $this->createTable($pdf,100,'('.number_format($annual_difference).')',49.5,'',5);
                 $this->createTable($pdf,100,'('.number_format($installment_difference).')',66,'B',5);
@@ -1030,7 +1027,7 @@ public function fetchFeeBill($gs_id){
                 //gross tution fee calculation
 
                 $total_monthly=(((@$tution_fee+@$resource_fee)-@$difference)-@$south_campus_discount);
-                $total_annual=((@$annual_tuition_fee+@$annual_resource_fee)-@$annual_difference)-$annual_sounth_discount;
+                $total_annual=(@$annual_tuition_fee+@$annual_resource_fee)-$annual_sounth_discount;
                 $total_this_intallment=((@$installment_tution_fee+@$installment_resource_fee)-$installment_difference)-$installment_sounth_discount;
 
                 $this->createTable($pdf,106.2,number_format($total_monthly),34.2,'',5);//sum total monthly amoun
@@ -1119,8 +1116,7 @@ public function fetchFeeBill($gs_id){
                     $yearly_charges=0;
                 }
                 // $installment_dicount_percentage=100;
-                if($grade_id!=15 && $grade_id!=16){
-
+                if($grade_id!=15 ||$grade_id!=16){
                     if($installment_dicount_percentage==100){
                             //for special case only
                             $resource_fee=480;
@@ -1352,7 +1348,7 @@ public function fetchFeeBill($gs_id){
      }
 
      private function setBilldescription($pdf,$margin_left,$margin_top,$html,$fontsize){
-            $pdf->SetFont('Arial','','4');
+            $pdf->SetFont('Arial','','5.5');
             $pdf->SetTextColor(0,0,0);
             $pdf->SetXY(13,67);
             $pdf->MultiCell(75,3,  $html, 0.3);
@@ -1459,7 +1455,6 @@ public function fetchFeeBill($gs_id){
                 $total_payable=$fee_details['total_payable'];//get last bill total payable amount
                 $total_current_bill=$fee_details['total_current_bill'];//get last bill total payable amount
                 $previous_bill_adjsutment=$fee_details['adjustment'];//get last bill total payable amount
-                $previous_bill_taxes=$fee_details['oc_adv_tax'];//get last bill total payable amount
                 $received_amount=$received->getReceivedAmount($fee_details['id']);
                 if($billing_cycle_number==2){
                     if($received_amount>200000){
@@ -1476,24 +1471,14 @@ public function fetchFeeBill($gs_id){
         }
         if($last_remaining_amount<=0){
             if($total_payable<0){
-                if($previous_bill_taxes>0){
-                    $pendings=($previous_bill_adjsutment+$total_current_bill)+$previous_bill_taxes;
-                }else{
-                    $pendings=($previous_bill_adjsutment+$total_current_bill);
-                }
+              $pendings=$previous_bill_adjsutment+$total_current_bill;
             }else{
-                    $pendings=$last_remaining_amount;
-                    if($total_payable>0){//if last bill remaining adjustment and bill paid partially
-                        $pendings=$total_payable-$received_amount;
-                    }
+              $pendings=$last_remaining_amount;
             }
         }else{
            
            $pendings=$total_payable-$received_amount;
         }
-
-
-
         return $pendings;
     }
     public function calculate_adjustment_taxes($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){
