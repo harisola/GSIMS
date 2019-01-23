@@ -289,6 +289,10 @@ class fee_bill extends Model
         return $counter['bill_issue_date'];
     }
 
+    public function deleteBill($student_id,$academic_session_id,$billing_cycle_number){
+        $data=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id],['bill_cycle_no',$billing_cycle_number]])->delete();
+        return $data;
+    }
 
 
 

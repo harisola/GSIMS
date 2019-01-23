@@ -59,6 +59,7 @@ class AccountsController extends Controller
         $gf_id=            $request->input('gf_id');
         $std_status_id=      $request->input('status_code');
         $array_ids=explode(",",$grade_id);
+        $re_generate=$request->re_generate;
 
         $array_section_names=explode(",",$section_name);
         if($array_ids[0]==""){
@@ -87,8 +88,14 @@ class AccountsController extends Controller
             foreach ($list as $lists) {
                  $array_student_ids.=$lists->gs_id.',';
                  $current_acadmic_session=$lists->academic_session_id;
+                 $student_id=$lists->id;
+
+
 
                  if($lists->gs_id!=="" && $billing_cycle!==""){
+                    if($re_generate==1){
+                        $fee_bill->deleteBill($student_id,$current_acadmic_session,$billing_cycle);
+                    }
                     $this->insertFeeBill($lists->gs_id,$billing_cycle);
                  }
             }
@@ -1208,8 +1215,8 @@ public function fetchFeeBill($gs_id){
                 }
 
                 if($feedetails['total_payable']<0){
-                        $this->createTable($pdf,159,0,70,'B',6);
-                        $this->createTable($pdf,166,0,70,'',6);     
+                        $this->createTable($pdf,159,'N/A',70,'B',6);
+                        $this->createTable($pdf,166,'N/A',70,'',6);     
                 }else{
                         $this->createTable($pdf,159,number_format($feedetails['total_payable']),70,'B',6);
                         if($grade_id==15 && $billing_cycle==1){
