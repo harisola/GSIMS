@@ -481,11 +481,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 
                 if($installment_dicount_percentage==100){
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
-                    if($list['grade_id']!=15){
-                        $resource_fee=(480*1.2);
-                    }elseif($list['grade_id']!=16){
-                        $resource_fee=(480*1.2);
-                    }
+                    $resource_fee=(480*1.2);
                     $total_current_bill=($total_current_billing2+$resource_fee);
 
                 }else{
@@ -519,11 +515,6 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $fee_bill->security_deposit="";//blank for future work
                 $fee_bill->bill_payable=$gross_tution_fee;
                 if($installment_dicount_percentage==100){
-                    if($list['grade_id']!=15){
-                        $resource_fee=0;
-                    }elseif($list['grade_id']!=16){
-                        $resource_fee=0;
-                    }
                 $fee_bill->total_payable=(($total_adjustments+$gross_tution_fee+$additional_charges+$applicable_taxes+$roll_over_charges+$resource_fee)-$difference)-$net_discount_amount;
                  }else{
                      $fee_bill->total_payable=(($total_adjustments+$gross_tution_fee+$additional_charges+$applicable_taxes+$roll_over_charges)-$difference)-$net_discount_amount;
@@ -619,8 +610,6 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     break;
                 }
             }
-          
-
            return $taxes;
     }
 
@@ -1073,7 +1062,11 @@ public function fetchFeeBill($gs_id){
                   //for more than first billing
                   if($grade_id==15 ||$grade_id==16){
                         $bill_title='P R O V I S I O N A L  F E E  B I L L';
-$bill_notes="This Provisional Fee Bill incorporates the third instalment for the Academic Session 2018-19 in compliance with the recent SCP directives.This instalment reflects fee for 1.2 months, i.e., for part of December that had not yet been billed, along with the entire month of January. Please note that due to mid-session changes in fee levels, the indicative annualized fee is for illustrative purposes only. This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.";
+$bill_notes="Pursuant to the letter dated 24.01.2019, this Provisional Fee Bill incorporates the third instalment for the Academic
+Session 2018-19 in compliance with the recent SCP directives.This instalment reflects fee for 1.2 months, i.e., for
+part of December that had not yet been billed, along with the entire month of January. Please note that due to
+mid-session changes in fee levels, the indicative annualized fee is for illustrative purposes only. This is a computer
+generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.";
                   }
                  if($grade_id==17){
                     $resource_fee_show=true;
@@ -1202,15 +1195,14 @@ $bill_notes="This Provisional Fee Bill incorporates the third instalment for the
                 // $musakhar=1;
                 // $yearly_charges=1;
                 if(!empty($concession_code)){
-                    // $concession_text='Concession '.$concession_code;
-                    $concession_text='Concession ';
+                    $concession_text='Concession '.$concession_code;
                     $discount_total_monthly=$this->calculateDiscount($total_monthly,$installment_dicount_percentage);
                     $discount_total_annual=$this->calculateDiscount($total_annual,$installment_dicount_percentage);
                     @$discount_total_this_intallment=$this->calculateDiscount($total_this_intallment,$installment_dicount_percentage);
                     $concession_y=114;
 
-                    $this->createTable($pdf,$concession_y,$concession_text,4,'B',5);
-                    // $this->createTable($pdf,$concession_y,$installment_dicount_percentage.'%',26,'',5);//setting discount valuess
+                    $this->createTable($pdf,$concession_y,$concession_text,6,'B',5);
+                    $this->createTable($pdf,$concession_y,$installment_dicount_percentage.'%',26,'',5);//setting discount valuess
                     $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_monthly).')',34.2,'',5);//calculate monthly amount total discpount
                     $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_annual).')',49.5,'',5);
                     $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_this_intallment).')',66.5,'B',5);
@@ -1224,13 +1216,12 @@ $bill_notes="This Provisional Fee Bill incorporates the third instalment for the
                     $replace = ' ';
                     $scholarship_codes = preg_replace(strrev("/$find/"),strrev($replace),strrev($scholarship_codes),1);
                     $scholarship_codes=strrev($scholarship_codes); //output: this is my world, not my farm
-                    //$scholarship_text='Scholarship '.$scholarship_codes;
-                    $scholarship_text='Scholarship ';
+                    $scholarship_text='Scholarship '.$scholarship_codes;
                     $scholarship_y=110;
                     $scholarship_monthly=$feedetails['scholarship_amount']/$this->bill_number_of_months;
                     $scholarship_yearly=$scholarship_monthly*12;
-                    $this->createTable($pdf,$scholarship_y,$scholarship_text,4.0,'B',5);
-                    //$this->createTable($pdf,$scholarship_y,$feedetails['scholarship_percentage'].'%',26,'',5);//setting discount valuess - Code has been disabled
+                    $this->createTable($pdf,$scholarship_y,$scholarship_text,7.5,'B',5);
+                    $this->createTable($pdf,$scholarship_y,$feedetails['scholarship_percentage'].'%',26,'',5);//setting discount valuess
                     $this->createTable($pdf,$scholarship_y,'('.number_format(@$scholarship_monthly).')',34.2,'',5);//calculate monthly amount total discpount
                     $this->createTable($pdf,$scholarship_y,'('.number_format(@$scholarship_yearly).')',49.5,'',5);
                     $scholarship_amount='';
@@ -1472,10 +1463,10 @@ $bill_notes="This Provisional Fee Bill incorporates the third instalment for the
         $pdf->SetXY($margin_left + 7.2, $margin_top);
         $pdf->Cell(20, 5,$value, $bo, 0, 'C', 0);
 
-        $pdf->SetXY($margin_left + 101, $margin_top);
+        $pdf->SetXY($margin_left + 102.4, $margin_top);
         $pdf->Cell(20, 5,$value, $bo, 0, 'C', 0);
 
-        $pdf->SetXY($margin_left + 195, $margin_top);
+        $pdf->SetXY($margin_left + 195.3, $margin_top);
         $pdf->Cell(20, 5,$value, $bo, 0, 'C', 0);
 
      }
@@ -1513,16 +1504,16 @@ $bill_notes="This Provisional Fee Bill incorporates the third instalment for the
      }
 
      private function setBilldescription($pdf,$margin_left,$margin_top,$html,$fontsize){
-            $pdf->SetFont('Arial','','5');
+            $pdf->SetFont('Arial','','4');
             $pdf->SetTextColor(0,0,0);
             $pdf->SetXY(13,67);
-            $pdf->MultiCell(75,2.5,  $html, 0.3);
+            $pdf->MultiCell(75,3,  $html, 0.3);
 
             $pdf->SetXY(107,67);
-            $pdf->MultiCell(75,2.5,  $html, 0.3);
+            $pdf->MultiCell(75,3,  $html, 0.3);
 
             $pdf->SetXY(201,67);
-            $pdf->MultiCell(75,2.5,  $html, 0.3);
+            $pdf->MultiCell(75,3,  $html, 0.3);
      }
 
 

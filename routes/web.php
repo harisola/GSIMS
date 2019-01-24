@@ -287,6 +287,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/accounts/fee_bill', 'Accounts\AccountsController@insertFeeBill');
 
 	Route::get('/accounts/insertlist', 'Accounts\AccountsController@uploadStudentList');
+	Route::get('/accounts/concession', 'Accounts\AccountsController@uploadList');
+	Route::get('/accounts/scholarships', 'Accounts\AccountsController@uploadScholarshipList');
 	Route::get('/accounts/update_bill_numbers', 'Accounts\AccountsController@UpdateBillNumbers');
 
 	

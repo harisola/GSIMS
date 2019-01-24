@@ -254,7 +254,7 @@ class fee_bill extends Model
 
     public function getAdmissionFee($student_id,$academic_session_id=""){
         $details=fee_bill::where('student_id',$student_id)
-        ->select('admission_fee','gb_id')
+        ->select('admission_fee','gb_id','total_payable','security_deposit')
         ->where([['bill_title','Admission'],['bill_cycle_no',0]])
         ->whereIN('academic_session_id',[9])
         ->Orderby('id','desc')->first();
@@ -262,11 +262,13 @@ class fee_bill extends Model
         $bill_year=substr($gb_id,0,2);
         $c_year = date('Y');
         $c_nyear=substr($c_year,2,3);
-       if($bill_year==$c_nyear){
-            return $details['admission_fee'];
-        }else{
-            return 0;
-        }
+         return $details['total_payable']-$details['security_deposit'];
+
+       // if($bill_year==$c_nyear){
+       //      return $details['admission_fee'];
+       //  }else{
+       //      return 0;
+       //  }
     }
 
     public function getLastBillPaidNotPaid($student_id){
