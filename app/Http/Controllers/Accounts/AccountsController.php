@@ -247,10 +247,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         $academic_session_id=$list['a_session_id'];
         $std_status_code=$list['std_status_code'];
         $tuition_fee=($list['tuition_fee']*$this->bill_number_of_months);
-        $gross_tution_fee=($tuition_fee+$resource_fee)-$difference;
+        $gross_tution_fee=($tuition_fee+$resource_fee);
         // die;
         $south_campus_discount=$concession->southCampusDiscount($list['student_id'],$list['a_session_id'],$billing_cycle);
-        $gross_tution_fee=$gross_tution_fee-($south_campus_discount*$this->bill_number_of_months);
+        $gross_tution_fee=($gross_tution_fee-$difference)-($south_campus_discount*$this->bill_number_of_months);
         if($std_status_code=="S-CPT"){
              $arrears_suspended=$fee_bill->getSuspendedBarriers($list['student_id']);
              $scpt_unique_number=1;
@@ -286,17 +286,20 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
 
         $discount_total_monthly=$this->calculateDiscount(($gross_tution_fee),$installment_dicount_percentage);
         $net_discount_amount=$discount_total_monthly+$total_scholarship_amount;
+
         $codes=$this->getCodes($fee_concession,$discount_total_monthly);
         $yearly_charges=$billing_cycle_definition->getYearly($billing_cycle,$list['grade_id'],$list['a_session_id']);
         if(@$total_adjustments==""){
              $total_adjustments=0;
         }
         if($resource_fee>0){
+
              $gross_tution_fee=$gross_tution_fee;
         }else{
-             $gross_tution_fee=$tuition_fee;
+             $gross_tution_fee=$tuition_fee-$difference;
         }
-
+        // $gross_tution_fee;
+        // die;
         $musakhar_fee_show=$this->IncudeCharges($list['grade_id'],13,5);
         $resource_fee_show=$this->IncudeCharges($list['grade_id'],14,1);
         $lab_avc_fee_show=$this->IncudeCharges($list['grade_id'],16,15);
@@ -421,10 +424,12 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 // $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
                 $std_adjustments=$adjustment->getadjustments($list['student_id']);
                 $total_adjustments=($total_arriers+$std_adjustments);
-                $total_current_billing=((($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount)-$difference);
+
+                $total_current_billing=((($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount));
+                // die;
                 $total_current_billing_with_arrears=($gross_tution_fee+$additional_charges)-$net_discount_amount;//if student paid first bill and 2nd bill paid partially e.g payable 2 lac and received 1 lac so for tax calculation
 
-                $total_current_billing2=(($gross_tution_fee+$additional_charges)-$difference)-$net_discount_amount;   
+                $total_current_billing2=(($gross_tution_fee+$additional_charges))-$net_discount_amount;
                 if($amount_exceed==true){
                     $tax_allow=$this->StudentApplicableForTaxes($list,$total_current_billing,$billing_cycle);
 
@@ -478,7 +483,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $fee_bill->arrears_suspended=$arrears_suspended;
                 $fee_bill->gross_tuition_fee=$gross_tution_fee;
                 $fee_bill->additional_charges=$additional_charges;//but for future it will have some value
-                
+                $total_current_billing2;
                 if($installment_dicount_percentage==100){
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
                     if($list['grade_id']!=15){
@@ -491,6 +496,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 }else{
                      $total_current_bill=($total_current_billing2);
                 }
+                $total_current_bill;
                 $fee_bill->total_current_bill=$total_current_bill;
                 $fee_bill->difference=$difference;
                 $scholarship_percent_code_1="";
@@ -524,11 +530,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     }elseif($list['grade_id']!=16){
                         $resource_fee=0;
                     }
-                $fee_bill->total_payable=(($total_adjustments+$gross_tution_fee+$additional_charges+$applicable_taxes+$roll_over_charges+$resource_fee)-$difference)-$net_discount_amount;
+                $fee_bill->total_payable=(($total_current_bill+$applicable_taxes+$roll_over_charges));
                  }else{
-                     $fee_bill->total_payable=(($total_adjustments+$gross_tution_fee+$additional_charges+$applicable_taxes+$roll_over_charges)-$difference)-$net_discount_amount;
-                 }
-               
+                     $fee_bill->total_payable=(($total_adjustments+$gross_tution_fee+$additional_charges+$applicable_taxes+$roll_over_charges))-$net_discount_amount;
+                 }               
                 $fee_bill->is_void="";//not required
                 $fee_bill->ip4  ="";//not required
                 $fee_bill->filename="";//not required

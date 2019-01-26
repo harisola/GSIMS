@@ -262,13 +262,13 @@ class fee_bill extends Model
         $bill_year=substr($gb_id,0,2);
         $c_year = date('Y');
         $c_nyear=substr($c_year,2,3);
-         return $details['total_payable']-$details['security_deposit'];
+         // return $details['total_payable']-$details['security_deposit'];
 
-       // if($bill_year==$c_nyear){
-       //      return $details['admission_fee'];
-       //  }else{
-       //      return 0;
-       //  }
+       if($bill_year==$c_nyear){
+            return $details['admission_fee'];
+        }else{
+            return 0;
+        }
     }
 
     public function getLastBillPaidNotPaid($student_id){
