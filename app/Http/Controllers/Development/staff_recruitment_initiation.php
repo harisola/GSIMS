@@ -136,6 +136,7 @@ select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.st
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
 WHERE 1 ".$Where." and af.status_id != 10 and af.status_id != 12 
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
 and (d.p_date is null or d.p_date >= curdate() )";
 
 
@@ -214,6 +215,7 @@ select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.st
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
 WHERE 1 ".$searchQuery."  ".$Where." and af.status_id != 10 and af.status_id != 12 
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
 and (d.p_date is null or d.p_date >= curdate() )";
 
 
@@ -312,7 +314,8 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12  ".$Where."
+WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12 
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01' ".$Where."
 and (d.p_date is null or d.p_date >= curdate() )
 order by af.created desc  limit ".$row.",".$rowperpage;
 

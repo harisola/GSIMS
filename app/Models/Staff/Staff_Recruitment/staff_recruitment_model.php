@@ -2074,6 +2074,7 @@ order by lcf.created limit 1) as lcf on lcf.form_id = af.id
 
 
 WHERE 1  and af.status_id != 10 and af.status_id != 12  
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
  
 
 and af.id in (     select 

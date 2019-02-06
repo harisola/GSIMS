@@ -80,6 +80,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/masterLayout/staff/add_row', 'Development\Haris@AddRow');
 	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
+	Route::get('/VehicleReport', 'Attendance\Vehicle\VehicleReport@mainPage');
 	Route::get('/staff_layout_team', 'Development\Haris@development_UserTeam');
 	//Route::get('/student_layout', 'Development\StdMasterLayout@development');
 	Route::get('/student_layout', 'Student_Information\Master_Page\Grade@Students');
@@ -218,7 +219,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/masterLayout/staff/addComments','Attendance\Staff\staffStories@addStories');
 
 	// Manual 
-
 
 
 	//Super Profile

@@ -7627,6 +7627,8 @@ $('#staffView_StaffList_Search').val('');
                  $('.profile-usertitle-email').prop("href", 'mailto:'+data['info'][0]['email']+'@generations.edu.pk');
              $('.profile-usertitle-campus').html(data['info'][0]['campus']);
 
+             console.log("Current Leave"+data['current_leave'][0]['currentLeave']);
+
              $('.currentLeave').text(data['current_leave'][0]['currentLeave']);
              $('.profile-usertitle-mobilePhone').html(data['info'][0]['mobile_phone']);
              $('.profile-usertitle-bottomline').html(data['info'][0]['c_bottomline']+':<br>'+data['info'][0]['c_topline']+'</br>');
@@ -7675,19 +7677,23 @@ $('#staffView_StaffList_Search').val('');
              $('#staffView_ProcessorBar').html(html);
  
              /***** Roles *******/
+             if(data['roles'].length > 0){
              if(data['roles'][0]['pm_report_to']){
 
                  data['reporting1'][0] = setNotAcceptable(data['reporting1'][0]);
                  data['roles'][0] = setNotAcceptable(data['roles'][0]);
- 
-                 if(data['reporting1'][0]['abridged_name']){
-                     $('.profile-userrole-report-one').html('&#8594;'+data['reporting1'][0]['abridged_name']);
-                 }else{
-                     $('.profile-userrole-report-one').html('N/A');
+
+                  if(data['reporting1'][0] != undefined){
+                     if(data['reporting1'][0]['abridged_name']){
+                         $('.profile-userrole-report-one').html('&#8594;'+data['reporting1'][0]['abridged_name']);
+                     }else{
+                         $('.profile-userrole-report-one').html('N/A');
+                     }
                  }      
              }else{
                  $('.profile-userrole-report-one').html('&#8594;'+'N/A');
              }
+           }
              /***** Role 1 *******/
              
              if(data['reporting1']){
@@ -7700,11 +7706,13 @@ $('#staffView_StaffList_Search').val('');
                  /**
                     Description: IF abridge Name is Null 
                  **/
-                 if(data['reporting1'][0]['abridged_name']){
-                     $('.profile-userrole-role-one-report').html('&#8594;'+data['reporting1'][0]['abridged_name']);
-                 }else{
-                     $('.profile-userrole-role-one-report').html('N/A');
-                 } // end if else abridged Name
+                 if(data['reporting1'][0] != undefined){
+                   if(data['reporting1'][0]['abridged_name']){
+                       $('.profile-userrole-role-one-report').html('&#8594;'+data['reporting1'][0]['abridged_name']);
+                   }else{
+                       $('.profile-userrole-role-one-report').html('N/A');
+                   } // end if else abridged Name
+                }
                  
              } // End if of reporting 1
  
@@ -11412,7 +11420,8 @@ bootbox.dialog({
 
               $('.previous_el_balance').text(previous_leave);
               $('.current_el_balance').text(current_leave);
-               
+              
+              console.log('Current Leave'+current_leave); 
               $('.currentLeave').text(current_leave + ' / 10');
 
             }else{

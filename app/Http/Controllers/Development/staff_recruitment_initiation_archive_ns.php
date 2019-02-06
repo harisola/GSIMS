@@ -160,7 +160,8 @@ select max(lcf.id) as id
 from atif_career.log_career_form as lcf  group by lcf.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=5)";
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5)
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'";
 $count_result = $staffRecruiment->custom_query($query);
 
 if(!empty($count_result))
@@ -273,7 +274,8 @@ select max(lcf.id) as id
 from atif_career.log_career_form as lcf  group by lcf.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )";
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'";
 $scount_result = $staffRecruiment->custom_query($sQu);
 
 
@@ -411,7 +413,8 @@ select max(lcf.id) as id
 from atif_career.log_career_form as lcf  group by lcf.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )  and ( af.status_id = 10 or af.status_id = 12 ) ".$Where." 
+where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )  and ( af.status_id = 10 or af.status_id = 12 ) ".$Where."
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'  
 order by af.created desc  limit ".$row.",".$rowperpage;
 
 $empRecords = $staffRecruiment->custom_query($empQuery);

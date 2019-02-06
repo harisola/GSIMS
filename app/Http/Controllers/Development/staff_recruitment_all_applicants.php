@@ -135,7 +135,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$Where." ";
+WHERE 1  and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01' ".$Where." ";
 
 
 
@@ -212,7 +212,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery."  ".$Where." ";
+WHERE 1 ".$searchQuery." and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01' ".$Where." ";
 
 
 $scount_result = $staffRecruiment->custom_query($sQu);
@@ -310,7 +310,8 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery."  ".$Where."
+WHERE 1 ".$searchQuery." 
+and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01' ".$Where."
 order by af.created desc  limit ".$row.",".$rowperpage;
 
 $empRecords = $staffRecruiment->custom_query($empQuery);
