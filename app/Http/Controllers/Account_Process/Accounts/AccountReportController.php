@@ -31,10 +31,11 @@ class AccountReportController extends Controller
         $bill_cycle_no=1;
         $issuance_report=$fee_bill->getReportByAcademicSession($grade_id,$academic_session_id,$bill_cycle_no);
         $receiving_report=$fee_bill->getReceivingReport($grade_id,$academic_session_id,$bill_cycle_no);
+        // $receiving_report_grade_wise=$fee_bill->getFeeReceivingInformationGradeWise($bill_cycle_no,$grade_id);
     	return view('account_process.accounts.account_report',
             [
                 'report_data'=>  $report_data,
-                'issuance_reports'=>  $issuance_report,
+                'issuance_reports'=>  $issuance_report
             ]
             );
     	
@@ -50,6 +51,22 @@ class AccountReportController extends Controller
 		$data=$report_model->DetailsOfIssuance($acadmic_session_id,$installment_number,$gs_id,$gf_id);
 		return view('account_process.accounts.bill_issuance_table',['issuance_data'=>$data]);
 	}
+
+
+   public function getReceivingReport(request $request){
+        $report_model=new account_reports();
+        $fee_bill= new fee_bill;
+        $installment_number=$request->get('installment_number');
+        $grade_id=$request->get('grade_id');
+        $gf_id=$request->get('gf_id');
+        $receiving_report_grade_wise=$fee_bill->getFeeReceivingInformationGradeWise($installment_number,$grade_id);
+        return view('account_process.accounts.detail_receiving_report',
+            [
+                'receiving_report_grade_wise'=>  $receiving_report_grade_wise,
+            ]
+            );
+
+   }
 
     
 

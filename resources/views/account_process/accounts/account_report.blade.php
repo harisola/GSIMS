@@ -425,7 +425,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>Installment Number</label>
-                                            <select class="form-control" id="">
+                                            <select class="form-control" id="installment_number">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -435,12 +435,25 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>Class</label>
-                                            <select class="form-control" id="Clas">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
+                                            <select class="form-control" id="grade_id">
+                                                    <option data-grade_id="17"  value="17">PG</option>
+                                                    <option data-grade_id="1" value="1">PN</option>
+                                                    <option data-grade_id="2" value="2">N</option>
+                                                    <option data-grade_id="3" value="3">KG</option>
+                                                    <option data-grade_id="4" value="4">I</option>
+                                                    <option data-grade_id="5" value="5">II</option>
+                                                    <option data-grade_id="6" value="6">III</option>
+                                                    <option data-grade_id="7" value="7">IV</option>
+                                                    <option data-grade_id="8" value="8">V</option>
+                                                    <option data-grade_id="9" value="9">VI</option>
+                                                    <option data-grade_id="10" value="10">VII</option>
+                                                    <option data-grade_id="11" value="11">VIII</option>
+                                                    <option data-grade_id="12" value="12">IX</option>
+                                                    <option data-grade_id="13" value="13">X</option>
+                                                    <option data-grade_id="14" value="14">XI</option>
+                                                    <option data-grade_id="15" value="15">A1</option>
+                                                    <option data-grade_id="16" value="16">A2</option>
+                                                    <option data-grade_id="18"  value="18">All</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
@@ -455,105 +468,12 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>&nbsp;</label><br />
-                                            <input type="button" id="" data-pdf="0" class="btn btn-group green " value="Generate Report" style="width: 100%;">
+                                            <input type="button" id="" data-pdf="0" class="btn btn-group green generate_report_detail_receiving " value="Generate Report" style="width: 100%;">
                                         </div>
                                     </div><!-- row -->
                                     <div class="portlet-body padding20" >
-                                        <div class="row padding20 fee_billing_result" >
-                                            <table class="table table-striped table-bordered table-hover order-column dataTable no-footer" id="DetailsReceivingBillReport">
-                                                <thead>
-                                                    <tr>
-                                                        <th>S. No.</th>
-                                                        <th>GS ID</th>
-                                                        <th>GF ID</th>
-                                                        <th>Status</th>
-                                                        <th>Class</th>
-                                                        <th>Name</th>
-                                                        <th>Installment No.</th>
-                                                        <th>Bill No.</th>
-                                                        <th>Tuition Fee</th>
-                                                        <th>Resources Fee</th>
-                                                        <th>Musakhar Charges</th>
-                                                        <th>Yearly Charges</th>
-                                                        <th>Smart Card Charges</th>
-                                                        <th>Arrears without<br />Late Fee & Rollover Fee</th>
-                                                        <th>Late Fee</th>
-                                                        <th>Rollover Amount</th>
-                                                        <th>Total Fees without<br />Advance Tax</th>
-                                                        <th>Advance Tax</th>
-                                                        <th>Grand Total with<br />Advance Tax</th>
-                                                        <th>Admission Fee</th>
-                                                        <th>Security Deposit</th>
-                                                        <th>Computer Subscription</th>
-                                                        <th>Early/Preffered<br />Admission Offer</th>
-                                                        <th>Fee Receiving Date</th>
-                                                        <th>Mode of Payment<br />(Bank/Payorder/Foreign Remittance)</th>
-                                                        <th>Bank Branch</th>
-                                                        
-                                                        <!-- <th> Remitance </th> -->
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>2.4</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>2.4</td>
-                                                    </tr>
-                                                    <tr>
+                                        <div class="row padding20 detail_report_result" >
 
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>2.4</td>
-                                                        <td>1</td>
-                                                        <td>1</td>
-                                                        <td>2.4</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table><!-- sample_4 -->
                                         </div><!-- row -->
                                     </div><!-- portlet-body -->
                                 </div><!-- #tab_5_4 -->
@@ -585,7 +505,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>&nbsp;</label><br />
-                                            <input type="button" id="" data-pdf="0" class="btn btn-group green " value="Generate Report" style="width: 100%;">
+                                            <input type="button" id="" data-pdf="0" class="generate_report btn btn-group green " value="Generate Report" style="width: 100%;">
                                         </div>
                                     </div><!-- row -->
                                     <div class="portlet-body padding20" >
@@ -1115,12 +1035,12 @@ $('.issuance').click(function(){
     }
 
 $.ajax({
-	data:data,
-	method:'get',
-	url: url+'/account_reports/issuance_report',
-	success:function(result){
-		$('.fee_billing_result').eq(1).html(result);
-	}
+    data:data,
+    method:'get',
+    url: url+'/account_reports/issuance_report',
+    success:function(result){
+        $('.fee_billing_result').eq(1).html(result);
+    }
 })
 
 })

@@ -270,6 +270,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::get('/account_reports','Account_Process\Accounts\AccountReportController@index');
 
+	Route::get('/account_reports/detail_of_receiving','Account_Process\Accounts\AccountReportController@getReceivingReport');
+
 	Route::get('/account_reports/issuance_report','Account_Process\Accounts\AccountReportController@getReportInformation');
 
 	

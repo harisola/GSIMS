@@ -3,6 +3,7 @@
 namespace App\Models\Accounts;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class fee_bill extends Model
 {
@@ -171,6 +172,52 @@ class fee_bill extends Model
               return $details;
               
        
+    }
+
+    public function getFeeReceivingInformationGradeWise($installment_number,$grade_id){
+        $query = "SELECT cl.abridged_name,cl.id,cl.grade_name, cl.gs_id,cl.gfid,cl.std_status_code,fb.bill_cycle_no,fb.gb_id,
+        Sum(fbr.received_amount)  AS total_received,
+        SUM(fb.oc_adv_tax) as total_payable_taxes,
+        IF((Sum(fbr.received_amount)-SUM(fb.oc_adv_tax))>0,SUM(fb.oc_adv_tax),0) as total_received_taxes,
+        SUM(fb.roll_over_charges) as total_payable_rollover,
+        SUM(fb.adjustment) as total_arrear_adjustment,
+        SUM(fbr.received_late_fee) as total_received_late,
+        SUM(fd.tuition_fee *1.2)-SUM(fb.difference) as gross_tution_fee,
+        SUM(fd.resource_fee * 1.2) as total_payable_resource_fee,
+        SUM(fd.musakhar * 1.2) as musakhar_charges,
+        SUM(fb.oc_yearly) as total_payable_yearly_charges,
+        SUM(fb.oc_smartcard_charges) as total_smart_card_charges,
+        SUM(fb.total_payable)-SUM(fb.oc_adv_tax) as total_paybale_without_tax,
+        SUM(fb.total_payable) as total_paybale_with_tax ,
+        SUM(fbr.received_late_fee) as total_late_fee,
+        SUM(fb.admission_fee) as admission_fee,
+        SUM(fb.security_deposit) as security_deposit,
+        SUM(fd.lab_avc*1.2) as computer_charges,
+        fbr.received_date as received_date,
+         fbr.received_payment_mode as payment_mode,
+         fbr.received_branch as received_branch
+            FROM   atif.class_list cl 
+       LEFT JOIN atif_fee_student.fee_bill fb 
+              ON fb.student_id = cl.id 
+       LEFT JOIN atif_fee_student.fee_bill_received fbr 
+              ON fbr.fee_bill_id = fb.id 
+       LEFT JOIN atif_fee_student.fee_definition fd 
+              ON fd.grade_id=cl.grade_id
+              
+WHERE  fb.academic_session_id IN ( 11, 12 ) 
+       AND fb.bill_cycle_no IN (".$installment_number.") 
+       AND fd.academic_session_id IN (11,12)
+       AND cl.grade_id in (".$grade_id.")
+       
+GROUP  BY cl.id ";
+
+
+
+        $details = DB::connection('mysql_Career_fee_bill')->select($query);
+
+
+
+        return $details;
     }
 
     public function getReportByAcademicSession($grade_id,$academic_session_id,$bill_cycle_no){
@@ -380,6 +427,14 @@ class fee_bill extends Model
     public function getLastBillIssueDate($student_id){
         $counter=fee_bill::select('bill_issue_date')->where('student_id',$student_id)->Orderby('id','desc')->first();
         return $counter['bill_issue_date'];
+    }
+
+    public static function getAmountPaidOrNot($amount,$fee_type){
+            if($amount<0){
+                return 0;
+            }else{
+                return $fee_type;
+            } 
     }
 
 
