@@ -62,7 +62,7 @@
                                                         <td>{{$get_lastest_bill->bill_issue_date}}</td>
                                                         <td>{{$get_lastest_bill->bill_due_date}}</td>
                                                         <td>{{$get_lastest_bill->bill_bank_valid_date}}</td>
-                                                        <td>1.2</td>
+                                                        <td>1</td>
                                                         <td><?= number_format($get_lastest_bill->arrears_suspended) ?></td>
                                                         <td><?= number_format($get_lastest_bill->fee_a_discount)?></td>
                                                         <td>{{$get_lastest_bill->concession_code}}</td>
@@ -89,9 +89,9 @@
                                                         <td>{{$get_lastest_bill->oc_smartcard_charges}}</td>
                                                         <td><?= number_format($get_lastest_bill->waive_amount)?></td>
                                                         <td><?= number_format($get_lastest_bill->oc_adv_tax)?></td>
-                                                        <td><?= ($get_lastest_bill->resource_fee)*1.2; ?></td>
+                                                        <td><?= ($get_lastest_bill->resource_fee)*1; ?></td>
                                                         <td><?= ($get_lastest_bill->difference); ?></td>
-                                                        <td><?= ($get_lastest_bill->musakhar)*1.2; ?></td>
+                                                        <td><?= ($get_lastest_bill->musakhar)*1; ?></td>
                                                         <td>{{$get_lastest_bill->oc_yearly}}</td>
                                                         <td><?=number_format($get_lastest_bill->total_payable)?></td>
                                                         <td><?php App\Models\Accounts\remittance::remitanceStatus($get_lastest_bill->student_id) ?></td>

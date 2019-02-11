@@ -29,6 +29,24 @@ class fee_bill_received extends Model
         return ($fee+$july_fee);
     }
 
+        public function getLastJulyAmount($student_id="",$academic_session_id=""){
+
+        //i have to get student id by bill id
+                            $academic_session_id=$academic_session_id-1;
+
+        $july_fee=fee_bill_received::where(
+             [
+                ['fb.student_id',$student_id],
+                ['fb.bill_cycle_no',5],
+                ['received_date','>','2018-06-30'],
+             ]
+            )
+        ->join('fee_bill as fb','fb.id','fee_bill_received.fee_bill_id')
+        ->sum('received_amount');
+
+        return $july_fee;
+    }
+
     public function getLastReceivedAmount($bill_id){
         $received="";
         $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->Orderby('id','desc')->get();

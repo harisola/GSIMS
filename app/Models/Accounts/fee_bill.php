@@ -337,15 +337,22 @@ GROUP  BY cl.id ";
                 ->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')
                 ->Orderby('id','asc')->get();
         }else{
-            $details=fee_bill::where([['student_id',$student_id],['academic_session_id','<>',13]])->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')->Orderby('id','desc')->first();
+
+            $details=fee_bill::where([['student_id',$student_id],['academic_session_id','<>',13],['academic_session_id','>',10]])->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id','adjustment','roll_over_charges')->Orderby('id','desc')->first();
 
         }
-
-
         
         return $details;
     }
-    
+
+    public function getLastBillTaxesByStudentId($student_id,$academic_session_id){
+            $details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])
+            ->sum('oc_adv_tax');
+            return $details;
+
+
+    }
+
 
     public function getScptBillNoDiscount($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){
         // $details=fee_bill::where('student_id',$student_id)->select('id','total_payable','total_current_bill','oc_adv_tax','academic_session_id')->Orderby('id','desc')->first();
@@ -402,7 +409,7 @@ GROUP  BY cl.id ";
         ->Orderby('id','desc')->first();
         $gb_id=$details['gb_id'];
         $bill_year=substr($gb_id,0,2);
-        $c_year = date('Y');
+        $c_year = date('Y')-1;
         $c_nyear=substr($c_year,2,3);
          // return $details['total_payable']-$details['security_deposit'];
 
