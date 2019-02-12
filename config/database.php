@@ -187,6 +187,21 @@ return [
         ],
 
 
+        'my_VechilesDB' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_fee', '127.0.0.1'),
+            'database' => env('DB_DATABASE_Vehicle', 'forge'),
+            'username' => env('DB_USERNAME_Vehicle', 'forge'),
+            'password' => env('DB_PASSWORD_Vehicle', 'forge'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+            'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
+        ],
+
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

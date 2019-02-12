@@ -402,11 +402,12 @@ GROUP  BY cl.id ";
     }
 
     public function getAdmissionFee($student_id,$academic_session_id=""){
-        $details=fee_bill::where('student_id',$student_id)
+        $details=fee_bill::join('fee_bill_received as fbr','fbr.fee_bill_id','fee_bill.id')
+        ->where('student_id',$student_id)
         ->select('admission_fee','gb_id','total_payable','security_deposit')
-        ->where([['bill_title','Admission'],['bill_cycle_no',0]])
+        ->where([['bill_title','Admission'],['bill_cycle_no',0],['received_date','>','2018-06-30']])
         ->whereIN('academic_session_id',[9])
-        ->Orderby('id','desc')->first();
+        ->Orderby('fee_bill.id','desc')->first();
         $gb_id=$details['gb_id'];
         $bill_year=substr($gb_id,0,2);
         $c_year = date('Y')-1;

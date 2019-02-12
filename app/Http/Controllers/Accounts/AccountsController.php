@@ -370,10 +370,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
                     if($list['grade_id']!=15){
                         $min_resource_fee=(480*$this->bill_number_of_months);
-                        $total_adjustments=$total_adjustments+$min_resource_fee;
+                        //$total_adjustments=$total_adjustments+$min_resource_fee; commited on 2-11-2019
                     }elseif($list['grade_id']!=16){
                         $min_resource_fee=(480*$this->bill_number_of_months);
-                        $total_adjustments=$total_adjustments+$min_resource_fee;
+                        // $total_adjustments=$total_adjustments+$min_resource_fee;  commited on 2-11-2019
                     }
 
                 }
@@ -493,26 +493,30 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $fee_bill->adjustment=$total_adjustments;
                 $fee_bill->arrears_suspended=$arrears_suspended;
                 $fee_bill->gross_tuition_fee=$gross_tution_fee;
-                $fee_bill->additional_charges=$additional_charges;
-                $total_current_billing2;
-                if($installment_dicount_percentage==100){
+                                if($installment_dicount_percentage==100){
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
                     if($list['grade_id']!=15){
                         $resource_fee=(480*$this->bill_number_of_months);
+                        $additional_charges=$additional_charges+$resource_fee;
+
                     }elseif($list['grade_id']!=16){
                         $resource_fee=(480*$this->bill_number_of_months);
+                        $additional_charges=$additional_charges+$resource_fee;
                     }
                     
                     $total_current_bill=($total_current_billing2+$resource_fee);
 
-                    if($total_adjustments<0){
-                        $total_current_bill=0;
-                    }
+                    // if($total_adjustments<0){
+                    //     $total_current_bill=0;
+                    // }
 
 
                 }else{
                      $total_current_bill=($total_current_billing2);
                 }
+                $fee_bill->additional_charges=$additional_charges;
+                $total_current_billing2;
+
                 
                 $fee_bill->total_current_bill=$total_current_bill;
                 $fee_bill->difference=$difference;
@@ -712,7 +716,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         //if received amount greater than 0 (paid bill amount or  more than bill amoount)
                         $received_amount=$received_amount-($previous_bill_taxes+ @$fee_details->roll_over_charges);
                         $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
-                        $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-@$fee_details->roll_over_charges),$tax_percentage);
+                        // $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-@$fee_details->roll_over_charges),$tax_percentage);previoud code
+
+                        $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing),$tax_percentage);
+
                        // $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
                     }else if(($received_amount<@$fee_details['total_payable'] && $received_amount!=0) && $previous_bill_taxes!=0){
                         //if received amount paid but less than total payable
@@ -720,7 +727,6 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing_with_arrears,$tax_percentage);
                     }else if($received_amount==0){
                        $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
-                       $admission_fee;
                         if($received_amount>0){
                              $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
 
@@ -728,18 +734,19 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                             //only for this case we get july amount by using getLastJulyAmount else july fee will get automatically in sumTotalPayments
                             $july_amount=$fee_bill_received->getLastJulyAmount($list['student_id'],$list['academic_session_id']);
 
-                             $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$july_amount,$tax_percentage);
+                             $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$july_amount+$total_received_amount,$tax_percentage);
                         }
                        $applicable_taxes=$applicable_taxes;
                        //new code add for 4th installment before this code tax on taxes work propetly
                     }
                    
                }else{
-
-                     $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
+                
+                     $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+$total_current_billing,$tax_percentage);
                }
+               
 
-                $applicable_taxes;
+              
                return $applicable_taxes;
     }
 
@@ -1698,6 +1705,7 @@ inconsistencies / errors, please contact on email below.
            
            $pendings=$total_payable-$received_amount;
         }
+
 
         return $pendings;
     }

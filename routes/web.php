@@ -81,6 +81,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
 	Route::get('/VehicleReport', 'Attendance\Vehicle\VehicleReport@mainPage');
+	Route::get('/VehicleReports', 'Attendance\Vehicle\VehicleReport@Get_Filter');
 	Route::get('/staff_layout_team', 'Development\Haris@development_UserTeam');
 	//Route::get('/student_layout', 'Development\StdMasterLayout@development');
 	Route::get('/student_layout', 'Student_Information\Master_Page\Grade@Students');
