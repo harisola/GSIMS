@@ -2,7 +2,7 @@
                         		<thead>
                         			<tr>
                         				<th width="100" style="width: 100px !important;">GS-ID</th>
-                        				<th>Abridged Name</th>
+                        				                <th>Abridged Name</th>
                                                         <th>Status</th>
                                                         <th>Wing</th>
                                                         <th>Grade</th>
@@ -24,6 +24,7 @@
                                                         <th>Scholarship Code</th>
                                                         <th>Scholarship Percentage</th>
                                                         <th>arrears / (adjustment)</th>
+                                                        <th>Summer Adjustment</th>
                                                         <th>Roll Over Charges</th>
                                                         <th>gross tuition fee</th>
                                                         <th>additional charges</th>
@@ -82,6 +83,7 @@
                                                             </td>
                                                        
                                                         <td><?= number_format($get_lastest_bill->adjustment)?></td>
+                                                        <td>-<?= number_format($get_lastest_bill->summer_fee_adjustment)?></td>
                                                         <td>{{$get_lastest_bill->roll_over_charges}}</td>
                                                         <td><?= number_format($get_lastest_bill->gross_tuition_fee)?></td>
                                                         <td><?= number_format($get_lastest_bill->additional_charges)?></td>
@@ -89,9 +91,9 @@
                                                         <td>{{$get_lastest_bill->oc_smartcard_charges}}</td>
                                                         <td><?= number_format($get_lastest_bill->waive_amount)?></td>
                                                         <td><?= number_format($get_lastest_bill->oc_adv_tax)?></td>
-                                                        <td><?= ($get_lastest_bill->resource_fee)*1; ?></td>
+                                                        <td><?= ($get_lastest_bill->resource_fee)*2; ?></td>
                                                         <td><?= ($get_lastest_bill->difference); ?></td>
-                                                        <td><?= ($get_lastest_bill->musakhar)*1; ?></td>
+                                                        <td><?= ($get_lastest_bill->musakhar)*2; ?></td>
                                                         <td>{{$get_lastest_bill->oc_yearly}}</td>
                                                         <td><?=number_format($get_lastest_bill->total_payable)?></td>
                                                         <td><?php App\Models\Accounts\remittance::remitanceStatus($get_lastest_bill->student_id) ?></td>

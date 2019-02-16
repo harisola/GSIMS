@@ -3,7 +3,7 @@
 <!-- Weekly Timesheet CSS -->
 <style>
 .table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: #d4d4d4 !important;
+    background-color: #f1f1f1 !important;
 }
 </style>
 <!-- Weekly Timesheet CSS END  -->
@@ -63,6 +63,30 @@
   background: #e8bc40;
   margin: -10px 0 0 0;
 }
+.DTFC_LeftHeadWrapper,
+.DTFC_LeftBodyWrapper {
+    background: #fff;
+}
+.DTFC_LeftBodyLiner .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #ccc !important;
+}
+.portlet.light .dataTables_wrapper .dt-buttons {
+    margin-top: 0px;
+}
+a.dt-button, button.dt-button, div.dt-button {
+    background: #f1f1f1;
+    margin-right: 10px;
+    color: #000;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    padding: 6px 15px !important;
+}
+#sample_3 thead {
+    background: #d5dbe4;
+}
+.dataTables_filter {
+    margin-bottom: 10px;
+}
 </style>
 <!-- Start Content section -->
 <form method="post" action="" id="filteration">
@@ -120,21 +144,12 @@
                             
                              <input type="button" id="filter_report" data-pdf="0" class="btn btn-group green filter_report" value="Generate Report" style="width: 100%;">
                           </div>
-
-                          
-                          
-                          
-                          
-                          
                         </div><!-- row -->
                     <div class="portlet-body padding20 " >
                         <hr />
-                        <div class="row padding20 " >
-                         <table class="table table-bordered report_table"  id="sample_4">
+                        <div class="row padding20 " id="CLear_all" >
+                         
 
-                            
-
-                          </table>
                           <!-- sample_4 -->
 
                         </div><!-- row -->
@@ -151,53 +166,51 @@
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
+ 
 
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-
-
-
-
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 
 <script type="text/javascript">
+ $(document).ready(function() {
+
+ })
 
 
  $(document).on("click",".filter_report",function(){
+    // $('#sample_4').DataTable();
+    // $('#sample_4').DataTable().clear();
+    // $( "#CLear_all" ).load( "/master_layout/vehicle/filter_data_vehicle #sample_4" );
+    // $('#CLear_all').value().clear();
+
     $('#Generations_AjaxLoader').show();
-       
+
         var formdata =      'sectiontype='+$('#sectiontype').val()
                               +'&sectionmonth='+$('#sectionmonth').val()
                                +'&sectionyear='+$('#sectionyear').val()
 
 
-                                 console.log('form data=> '+formdata);
+                                console.log('form data=> '+formdata);
                             $.ajax({
                                 type:'get',
                                  url:'/gsims/public/VehicleReports',
                                 data:formdata,
                                 //dataType:'json',
                                 success:function(data){
+                                    // $("#CLear_all").html(data);
                                     console.log(data);
                                     
                                 $('#Generations_AjaxLoader').hide();
-
+                                 //var empty= '';
                                     if(data){
-                                        
-                                        $('.report_table').html(data);
-                                    }else{
-                                         $('#rows').html("Filtered Rows : "+ 0 +" Row");
+                                        //$('.report_table').html(data);
+                                        $('#CLear_all').html(data);
+                                        //data = empty;
+                                    }
+                                    // else if(data == empty){
+                                    //     console.log('loaded');
+                                    //     //$('.report_table').html(data);
+                                    // }
+                                    else{
+                                        $('#rows').html("Filtered Rows : "+ 0 +" Row");
                                         $('#report_table').html('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td>Data not found.</td><td></td><td></td><td></td><td></td></tr>data not found');
                                         $('#query').html(data.query);
                                         //$('#sub_query').html(data.sub_query);
@@ -213,10 +226,9 @@
  
 //create event on click
  
-               
-
-                                 
-                            
+              
+           
+                  
 
 loadScript("http://10.10.10.50/gsims/public/metronic/global/scripts/datatable.js", function(){
     loadScript("http://10.10.10.50/gsims/public/metronic/pages/scripts/table-datatables-responsive.min.js", function(){
@@ -243,7 +255,7 @@ loadScript("http://10.10.10.50/gsims/public/metronic/global/scripts/datatable.js
 });
 
 </script>
-        
+
 
 
 

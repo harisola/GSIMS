@@ -280,6 +280,12 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/account_reports','Account_Process\Accounts\AccountReportController@index');
 
 	Route::get('/account_reports/detail_of_receiving','Account_Process\Accounts\AccountReportController@getReceivingReport');
+	Route::get('/account_reports/receiving_full','Account_Process\Accounts\AccountReportController@getFullReceivingReport');
+
+	Route::get('/account_reports/detail_all_issuance','Account_Process\Accounts\AccountReportController@getIssuanceAllReport');
+	Route::get('/account_reports/detail_of_issuance','Account_Process\Accounts\AccountReportController@getIssuanceFilterWise');
+
+
 
 	Route::get('/account_reports/issuance_report','Account_Process\Accounts\AccountReportController@getReportInformation');
 
@@ -290,9 +296,11 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/accounts/fee_bill', 'Accounts\AccountsController@insertFeeBill');
 
 	Route::get('/accounts/insertlist', 'Accounts\AccountsController@uploadStudentList');
+	Route::get('/accounts/break_admission_fee', 'Accounts\AccountsController@updateComputerSubcription');
 	Route::get('/accounts/concession', 'Accounts\AccountsController@uploadList');
 	Route::get('/accounts/scholarships', 'Accounts\AccountsController@uploadScholarshipList');
 	Route::get('/accounts/update_bill_numbers', 'Accounts\AccountsController@UpdateBillNumbers');
+	Route::get('/summer_adjustments', 'Accounts\AccountsController@getSummerAdjustment');
 
 	
 

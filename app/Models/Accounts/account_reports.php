@@ -9,435 +9,49 @@ class account_reports extends Model
 {
 	protected $dbCon = 'mysql_Career_fee_bill';
 
-	 public function Get_Grade_Fee_Report($ASession_id_From, $ASession_id_To)
+	 public function Get_Grade_Fee_Report($ASession_id_From, $ASession_id_To,$installment_number)
     {
-    	
+    	$billing_number_month=$this->billNumberOfMonths($installment_number);
 
-    $query = "select 
-cl.grade_name as Grade_name,
-#sum((( fbr.received_amount - (d.resource_fee * fbm.bill_month) ) )) as Total_Tuition_Fee_PG,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
+    $query="SELECT 
+       `std_info`.`grade_name`          AS `Grade_name`, 
+      	SUM(fee_bill.gross_tuition_fee) AS Total_Tuition_Fee_PG,
+      	SUM(fee_def.resource_fee) AS Total_resourdes_fee,
+      	'0' AS SCEOPTDISC,
+      	SUM(fee_bill.concession_amount) AS Total_Concession_Amount,
+      	SUM(fee_bill.scholarship_amount) AS Total_scholarship_amount,
+      	SUM(fee_def.musakhar) AS Total_musakhar_charges,
+      	SUM(fee_bill.oc_yearly) AS Yearly_charges ,
+      	SUM(fee_bill.oc_smartcard_charges) AS Total_card_charges  ,
+      	SUM(fee_bill.roll_over_charges) AS ArrearswithoutLateFeeRolloverFee,
+      	SUM('0') AS Total_late_received,
+      	SUM(fee_bill.roll_over_charges) AS Total_rolover_charges,
+      	SUM(fee_bill.adjustment) AS Adjustments,
+      	SUM(fee_bill.bill_payable) AS Total_Fees,
+      	SUM(fee_bill.oc_adv_tax) AS AdvanceTax,
+      	SUM(fee_bill.total_payable) AS GrandTotalwithAdvanceTax
+ 
+	   FROM   `fee_bill` 
+       INNER JOIN `atif`.`class_list` AS `std_info` 
+               ON `fee_bill`.`student_id` = `std_info`.`id` 
+       LEFT JOIN `atif`.`students_all` AS `sa` 
+              ON `sa`.`student_id` = `std_info`.`id` 
+       INNER JOIN `atif`.`student_family_record` AS `std_data` 
+               ON `std_data`.`gf_id` = `sa`.`gf_id` 
+                  AND `std_data`.`nic` = `sa`.`tax_nic` 
+       INNER JOIN `atif_fee_student`.`fee_definition` AS `fee_def` 
+               ON `std_info`.`grade_id` = `fee_def`.`grade_id` 
+                  AND `std_info`.`academic_session_id` = 
+                      `fee_def`.`academic_session_id` 
+       LEFT JOIN `atif`.`staff_child` AS `sc` 
+              ON `sc`.`gf_id` = `std_info`.`gf_id` 
+       LEFT JOIN `atif`.`staff_registered` AS `sr` 
+              ON `sr`.`id` = `sc`.`staff_id` 
+		WHERE   
+        `fee_bill`.`bill_cycle_no` = $installment_number
+       AND `fee_bill`.`academic_session_id` IN ($ASession_id_From,$ASession_id_To) 
 
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-#left join atif_fee_Student.fee_bill_received as fbr on (fbr.fee_bill_id=fb.id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-#left join atif_fee_student.fee_bill_month as fbm on (fbm.academic_session_id=cl.academic_session_id)
-
-/*
-left join ( select card.student_id, card.req_date, card.amount from 
-atif.req_student_card as card 
-left join atif.class_list as cl
-on cl.id = card.student_id
-where card.req_date >= '2018-08-01' and card.`duplicate`=1 ) as crd
-on ( crd.student_id= fb.student_id and crd.req_date >= fb.bill_issue_date and crd.req_date <= fb.bill_bank_valid_date) */
-where cl.grade_dname='PG' and cl.academic_session_id=11 and fb.academic_session_id=11 and fb.bill_cycle_no=1  
-#and ( fb.student_id=2901 or fb.student_id=2931 )
-#Group by cl.id
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='PN' and cl.academic_session_id=11 and fb.academic_session_id=11 and fb.bill_cycle_no=1  
-
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='N' and cl.academic_session_id=11 and fb.academic_session_id=11 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='KG' and cl.academic_session_id=11 and fb.academic_session_id=11 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='I' and cl.academic_session_id=11 and fb.academic_session_id=11 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='II' and cl.academic_session_id=11 and fb.academic_session_id=11 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='III' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='IV' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='V' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='VI' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='VII' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='VIII' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='IX' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='X' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='XI' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='A1' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-
-
-
-union all
-select 
-cl.grade_name as Grade_name,
-FORMAT(sum((( (d.tuition_fee*2.4) ))),0) as Total_Tuition_Fee_PG,
-FORMAT(sum(((d.resource_fee * 2.4))),0) as Total_resourdes_fee,
-FORMAT(sum(ifnull(fb.fee_a_discount,0)),0) as SCEOPTDISC,
-FORMAT( ( sum(ifnull(fb.concession_amount,0))),0) as Total_Concession_Amount,
-FORMAT( ( sum(ifnull(fb.scholarship_amount,0))),0) as Total_scholarship_amount,
-FORMAT(( sum(ifnull(d.musakhar,0))),0) as Total_musakhar_charges,
-if(fb.bill_cycle_no=1,0, FORMAT(( sum(ifnull(d.yearly,0))),0))  as Yearly_charges,
-FORMAT( ( sum(ifnull(fb.oc_smartcard_charges,0))),0) as Total_card_charges,
-FORMAT( ( SUM(CASE WHEN fb.adjustment<0 THEN fb.adjustment ELSE 0 END)),0) as ArrearswithoutLateFeeRolloverFee,
-FORMAT(( sum(ifnull(fb.oc_late_fee,0))),0) as Total_late_received,
-FORMAT( ( sum(ifnull(fb.roll_over_charges,0))),0) as Total_rolover_charges,
-FORMAT((SUM(CASE WHEN fb.adjustment >= 0 THEN fb.adjustment ELSE 0 END)),0) as Adjustments,
-FORMAT((sum(fb.bill_payable)),0) as Total_Fees,
-FORMAT((sum(ifnull(fb.oc_adv_tax,0))),0) as AdvanceTax,
-FORMAT((sum(ifnull(fb.total_payable,0))),0) as GrandTotalwithAdvanceTax
-from atif.class_list as cl 
-left join atif_fee_student.fee_bill as fb on (fb.student_id=cl.id and fb.academic_session_id=fb.academic_session_id)
-left join atif_fee_student.fee_definition as d on ( d.grade_id= cl.grade_id and d.academic_session_id=cl.academic_session_id)
-where cl.grade_dname='A2' and cl.academic_session_id=12 and fb.academic_session_id=12 and fb.bill_cycle_no=1  
-"; 
+GROUP  BY `std_info`.`grade_id` ";
 
       $weeks = DB::connection($this->dbCon)
                 ->select($query);
@@ -499,6 +113,16 @@ where cl.grade_dname='A2' and cl.academic_session_id=12 and fb.academic_session_
         $result = DB::connection($this->dbCon)
         ->select($query);
         return $result;
+    }
+
+
+    public function billNumberOfMonths($installment_number){
+    			if($installment_number<3){
+                    $billing_months=2.4;
+                }elseif($installment_number==3){
+                    $billing_months=1.2;
+                }
+                return $billing_months;
     }
 
 

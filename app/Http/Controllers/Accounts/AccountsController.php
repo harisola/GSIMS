@@ -175,6 +175,44 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         
 
     }
+
+    public function updateComputerSubcription(){
+        ini_set('max_execution_time', 50000); //3 minutes
+        $class_list=  new class_list;
+        $query="SELECT fb.gb_id,fb.academic_session_id,fb.admission_fee,fb.security_deposit,(fb.security_deposit-15000) as new_computer,('15000') as new_security_deposit from atif_fee_student.fee_bill fb 
+        where fb.academic_session_id IN (9,10,11,12,13,14) 
+        and fb.security_deposit > 15000";
+
+        $details = DB::connection('mysql_Career_fee_bill')->select($query);
+
+        $details= collect($details)->map(function($x){ return (array) $x; })->toArray(); 
+        $i=0;
+        foreach ($details as  $detail){
+                $data=array(
+                'security_deposit' =>$detail['new_security_deposit'],
+                'computer_subcription_fee' =>$detail['new_computer'],
+                );            
+                $details = DB::connection('mysql_Career_fee_bill')
+                ->table('fee_bill')
+                ->where('gb_id',$detail['gb_id'])
+                ->update($data);
+        }
+    
+    }
+
+
+   public function getSummerAdjustment($gs_id){
+        ini_set('max_execution_time', 50000); //3 minutes
+        $class_list=  new class_list;
+        $query="SELECT * FROM summer_refund WHERE gs_id='$gs_id'"; 
+        $details = DB::connection('mysql_Career_fee_bill')->select($query);
+        $details= collect($details)->map(function($x){ return (array) $x; })->toArray(); 
+        $i=0;
+           return  @$details[0]['amount'];
+    }
+
+
+
     public function insertFeeBill($gs_id,$bill_cycle_no){
       
         $fee_bill = new fee_bill;
@@ -517,9 +555,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $fee_bill->additional_charges=$additional_charges;
                 $total_current_billing2;
 
-                
-                $fee_bill->total_current_bill=$total_current_bill;
+                $summer_adjustments=$this->getSummerAdjustment($list['gs_id']);
+                $fee_bill->total_current_bill=$total_current_bill-$summer_adjustments;
                 $fee_bill->difference=$difference;
+                $fee_bill->summer_fee_adjustment=$summer_adjustments;
                 $scholarship_percent_code_1="";
                 $scholarship_percent_code_2="";
                 
@@ -551,9 +590,9 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     }elseif($list['grade_id']!=16){
                         $resource_fee=0;
                     }
-                $fee_bill->total_payable=(($total_adjustments+$total_current_bill+$applicable_taxes+$roll_over_charges));
+                $fee_bill->total_payable=(($total_adjustments+$total_current_bill+$applicable_taxes+$roll_over_charges)-$summer_adjustments);
                  }else{
-                     $fee_bill->total_payable=(($total_adjustments+$gross_tution_fee+$additional_charges+$applicable_taxes+$roll_over_charges))-$net_discount_amount;
+                     $fee_bill->total_payable=(((($total_adjustments+$gross_tution_fee+$additional_charges+$applicable_taxes+$roll_over_charges))-$net_discount_amount)-$summer_adjustments);
                  }               
                 $fee_bill->is_void="";//not required
                 $fee_bill->ip4  ="";//not required
@@ -1212,7 +1251,7 @@ inconsistencies / errors, please contact on email below.
                 $this->createTable($pdf,97,'Resource Fee',4.7,'B',5);
                 $this->createTable($pdf,97,number_format($resource_fee),35.4,'',5);
                 $this->createTable($pdf,97,number_format($annual_resource_fee),50.5,'',5);
-                $this->createTable($pdf,97,number_format($installment_resource_fee),67.25,'B',5);
+                $this->createTable($pdf,97,number_format($installment_resource_fee),66.50,'B',5);
             }else{
                 $annual_resource_fee=0;
                 $installment_resource_fee=0;
@@ -1269,6 +1308,23 @@ inconsistencies / errors, please contact on email below.
                     $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_this_intallment).')',66,'B',5);
 
                 }
+
+                if($feedetails['summer_fee_adjustment']>0){
+                    // $concession_text='Concession '.$concession_code;
+                    $concession_text='Summer Fee Refund ';
+                    $discount_total_monthly=$this->calculateDiscount($total_monthly,$installment_dicount_percentage);
+                    $discount_total_annual=$this->calculateDiscount($total_annual,$installment_dicount_percentage);
+                    @$discount_total_this_intallment=$this->calculateDiscount($total_this_intallment,$installment_dicount_percentage);
+                    $concession_y=128;
+
+                    $this->createTable($pdf,$concession_y,$concession_text,8,'B',5);
+                    // $this->createTable($pdf,$concession_y,$installment_dicount_percentage.'%',26,'',5);//setting discount valuess
+                    // $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_monthly).')',34.2,'',5);//calculate monthly amount total discpount
+                    // $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_annual).')',49,'',5);
+                    $this->createTable($pdf,$concession_y,'('.number_format(@$feedetails['summer_fee_adjustment']).')',66,'B',5);
+
+                }
+
                 $feedetails['scholarship_codes'];
                 
                 if($feedetails['scholarship_amount']!=0){
@@ -1299,11 +1355,11 @@ inconsistencies / errors, please contact on email below.
                 if($lab_avc_fee_show==true){
                     $annual_lab_avc_fee=$lab_avc*12;
                     $lab_avc_fee_this_month=$lab_avc*$this->bill_number_of_months;
-
-                    $this->createTable($pdf,118.5,'Resource Charges',7,'B',5);
-                    $this->createTable($pdf,118.5,number_format(@$lab_avc),34.2,'',5);
-                    $this->createTable($pdf,118.5,number_format(@$annual_lab_avc_fee),49.5,'',5);
-                    $this->createTable($pdf,118.5,number_format(@$lab_avc_fee_this_month),67,'B',5);
+                    $y_pos=118.5;
+                    $this->createTable($pdf,$y_pos,'Resource Charges',7,'B',5);
+                    $this->createTable($pdf,$y_pos,number_format(@$lab_avc),34.2,'',5);
+                    $this->createTable($pdf,$y_pos,number_format(@$annual_lab_avc_fee),49.5,'',5);
+                    $this->createTable($pdf,$y_pos,number_format(@$lab_avc_fee_this_month),67,'B',5);
                 }else{
                       $annual_lab_avc_fee=0;
                       $lab_avc_fee_this_month=0;
@@ -1339,11 +1395,12 @@ inconsistencies / errors, please contact on email below.
                             //for special case only
                             $resource_fee=480;
                             $annual_resource_fee=$resource_fee*12;
+                            $y_pos=125.8;
                             $installment_resource_fee=$resource_fee*$this->bill_number_of_months;
-                            $this->createTable($pdf,128,'Minimum Resource Fee',9.5,'B',5);
-                            $this->createTable($pdf,128,number_format($resource_fee),35.5,'',5);
-                            $this->createTable($pdf,128,number_format($annual_resource_fee),50.5,'',5);
-                            $this->createTable($pdf,128,number_format($installment_resource_fee),67.6,'B',5);
+                            $this->createTable($pdf,$y_pos,'Minimum Resource Fee',9.0,'B',5);
+                            $this->createTable($pdf,$y_pos,number_format($resource_fee),35.5,'',5);
+                            $this->createTable($pdf,$y_pos,number_format($annual_resource_fee),50.5,'',5);
+                            $this->createTable($pdf,$y_pos,number_format($installment_resource_fee),67.6,'B',5);
                             $minimum_resource_fee=$resource_fee;
                             $annual_minimum_resource_fee=$annual_resource_fee;
                             $installment_minimum_resource_fee=$installment_resource_fee;
