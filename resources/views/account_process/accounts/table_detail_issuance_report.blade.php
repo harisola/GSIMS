@@ -30,6 +30,15 @@
         </thead>
         <?php $i=1; ?>
         @foreach($issuance_reports as $issuance_report)
+               <?php 
+                    if($issuance_report->bill_cycle_no<3){
+                            $bill_months=2.4;
+                    }elseif($issuance_report->bill_cycle_no==3){
+                            $bill_months=1;
+                    }else{
+                            $bill_months=2;
+                    }
+                ?>
             <tr>
                 <td  width="100">{{$i++}}</td>
                 <td>{{$issuance_report->student_gs_id}}</td>
@@ -39,14 +48,8 @@
                 <td>{{$issuance_report->student_name}}</td>
                 <td>{{$issuance_report->bill_title}}</td>
                 <td>{{$issuance_report->gb_id_mc_a}}</td>
-                <td><?= number_format($issuance_report->gross_tuition_fee)?></td>
-                <?php 
-                    if($issuance_report->bill_cycle_no==1 || $issuance_report->bill_cycle_no==2){
-                            $bill_months=2.4;
-                    }else{
-                            $bill_months=1;
-                    }
-                ?>
+                <td><?= number_format($issuance_report->tuition_fee *$bill_months)?></td>
+         
                 <td><?= ($issuance_report->resource_fee)*$bill_months; ?></td>
                 <td><?= ($issuance_report->musakhar)*$bill_months; ?></td>
 

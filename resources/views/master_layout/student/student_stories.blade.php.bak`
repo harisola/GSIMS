@@ -556,13 +556,10 @@ if( empty($Current_user_pic["photo150"]))
                                     <div class="theme-option">
                                         <span> User </span>
                                         <select id="Sort_By_User" class="layout-option form-control input-sm">
-                                           <option value="435">Tehreem Noman (SIS- Relationship Officer)</option>
-                                           <option value="2">Farah Shehzad (Relationship Officer (NC)) </option>
-                                           <option value="405">Afshan Jalil (Communications Liaison Officer)</option>
-                                           <!-- <option value="37">Zulfiqar</option> -->
-                                           <option value="231">Salman Munazzam (SIS Campus Liaison (SC))</option>
-                                           <option value="34">Ghazanfar Hameed (SIS Campus Liaison (NC))</option>
-                                           <!-- <option value="36">Ayaz</option> -->
+                                           <option value="2">Farah</option>
+                                           <option value="37">Zulfiqar</option>
+                                           <option value="231">Salman</option>
+                                           <option value="36">Ayaz</option>
                                         </select>
                                     </div>
                                   

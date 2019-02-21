@@ -78,7 +78,9 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/ateeb_rec_modal', 'Development\Haris@AteebRecModal'); 
 	Route::get('/update_staff', 'Development\Haris@Update_Staff');
 	Route::get('/masterLayout/staff/add_row', 'Development\Haris@AddRow');
-	//zk added end route
+	Route::get('/screening_gate', 'Attendance\Staff\ScreeningGate@mainPage');
+	Route::get('/new_admission ', 'Account_Process\Accounts\NewAdmission@index');
+	//zk added end route screening_gate
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
 	Route::get('/VehicleReport', 'Attendance\Vehicle\VehicleReport@mainPage');
 	Route::get('/VehicleReports', 'Attendance\Vehicle\VehicleReport@Get_Filter');

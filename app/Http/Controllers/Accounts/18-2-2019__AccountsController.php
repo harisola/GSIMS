@@ -557,10 +557,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 }else{
                      $total_current_bill=($total_current_billing2);
                 }
-                 $summer_adjustments=$this->getSummerAdjustment($list['gs_id']);
-                $fee_bill->additional_charges=$additional_charges-$summer_adjustments;
+                $fee_bill->additional_charges=$additional_charges;
                 $total_current_billing2;
 
+                $summer_adjustments=$this->getSummerAdjustment($list['gs_id']);
                 $fee_bill->total_current_bill=$total_current_bill-$summer_adjustments;
                 $fee_bill->difference=$difference;
                 $fee_bill->summer_fee_adjustment=$summer_adjustments;
@@ -776,7 +776,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
                         // $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-@$fee_details->roll_over_charges),$tax_percentage);previoud code
 
-                         @$applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-$fee_details->roll_over_charges),$tax_percentage);
+                         $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-$fee_details->roll_over_charges),$tax_percentage);
                        // $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
                     }else if(($received_amount<@$fee_details['total_payable'] && $received_amount!=0) && $previous_bill_taxes!=0){
 
@@ -1076,8 +1076,6 @@ public function fetchFeeBill($gs_id){
             $yearly="";
             $south_campus_discount="";
             $total_payable="";
-            $summer_adjustments="";
-
             foreach ($exp_gs_id as $gs_id){
                 $installment_dicount_percentage="";
                 $musakhar_fee_show=false;
@@ -1092,8 +1090,6 @@ public function fetchFeeBill($gs_id){
                 $feedetails=$class_list->newFeesInformation($gs_id);
                 $gs_id=$feedetails['student_gs_id'];
                 $branch_code=$this->getBranchCodeByCampus($feedetails['campus']);//South Campus 2 North Campus =1
-                $summer_adjustments="";
-
                 $year=$session->GetAcademicSession($branch_code)['dname'];
 
 
@@ -1197,19 +1193,15 @@ public function fetchFeeBill($gs_id){
                   }
                   //for more than first billing
                   if($grade_id==15 ||$grade_id==16){
-                        $bill_title='P R O V I S I O N A L   F E E   B I L L';
+                        $bill_title='P R O V I S I O N A L  F E E  B I L L';
 /*Removed on request of Imran SHb 
 $bill_notes="This Provisional Fee Bill incorporates the third instalment for the Academic Session 2018-19 in compliance with the recent SCP directives.This instalment reflects fee for 1.2 months, i.e., for part of December that had not yet been billed, along with the entire month of January. Please note that due to mid-session changes in fee levels, the indicative annualized fee is for illustrative purposes only. This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.";*/
-/*$bill_notes="This bill reflects fee for the month of February. Please note that we have already reduced fee
+$bill_notes="This bill reflects fee for the month of February. Please note that we have already reduced fee
 as per interim orders of Supreme Court of Pakistan. A review application is pending with hon.
 Supreme Court particularly regarding the summer fee refund and we will keep you appraised
 on this matter. This is a computer generated bill. If you have any queries - or notice any
 inconsistencies / errors, please contact on email below.
-";*/
-$bill_notes="This Provisional Fee Bill is the fourth instalment for the Academic Session 2018-19 and incorporates fee for the months of Feb'19 and Mar'19. In compliance with the SCP's interim orders, the bill reflects provisional adjustment of 50% of last year's summer fee.
-This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.
 ";
-
                   }
                  if($grade_id==17){
                     $resource_fee_show=true;
@@ -1226,7 +1218,7 @@ This is a computer generated bill. If you have any queries - or notice any incon
 
                   // $this->createTableHeading($pdf,6$this->bill_number_of_months,$bill_title.'(with Suspended Arriers)',35,'B',8);
             }else{
-                 $this->createTableHeading($pdf,61.8,$bill_title,35,'B',8);
+                 $this->createTableHeading($pdf,62.4,$bill_title,35,'B',8);
             }
             $this->setBilldescription($pdf,11,64,$bill_notes,$fontsize="");
             // $this->rotateText($pdf,185,"",10.5,'',5);//arrier notes
@@ -1348,13 +1340,13 @@ This is a computer generated bill. If you have any queries - or notice any incon
                     $discount_total_monthly=$this->calculateDiscount($total_monthly,$installment_dicount_percentage);
                     $discount_total_annual=$this->calculateDiscount($total_annual,$installment_dicount_percentage);
                     @$discount_total_this_intallment=$this->calculateDiscount($total_this_intallment,$installment_dicount_percentage);
-                    $concession_y=112.3;
+                    $concession_y=112;
 
-                    $this->createTable($pdf,$concession_y,$concession_text,3.9,'B',5);
+                    $this->createTable($pdf,$concession_y,$concession_text,4,'B',5);
                     // $this->createTable($pdf,$concession_y,$installment_dicount_percentage.'%',26,'',5);//setting discount valuess
-                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_monthly).')',34.5,'',5);//calculate monthly amount total discpount
-                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_annual).')',50,'',5);
-                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_this_intallment).')',66.2,'B',5);
+                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_monthly).')',34.2,'',5);//calculate monthly amount total discpount
+                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_annual).')',49,'',5);
+                    $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_this_intallment).')',66,'B',5);
 
                 }
 
@@ -1364,13 +1356,12 @@ This is a computer generated bill. If you have any queries - or notice any incon
                     $discount_total_monthly=$this->calculateDiscount($total_monthly,$installment_dicount_percentage);
                     $discount_total_annual=$this->calculateDiscount($total_annual,$installment_dicount_percentage);
                     @$discount_total_this_intallment=$this->calculateDiscount($total_this_intallment,$installment_dicount_percentage);
-                    $concession_y=128.5;
+                    $concession_y=114;
 
-                    $this->createTable($pdf,$concession_y,$concession_text,13,'B',5);
+                    $this->createTable($pdf,$concession_y,$concession_text,12.5,'B',5);
                     // $this->createTable($pdf,$concession_y,$installment_dicount_percentage.'%',26,'',5);//setting discount valuess
                     // $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_monthly).')',34.2,'',5);//calculate monthly amount total discpount
                     // $this->createTable($pdf,$concession_y,'('.number_format(@$discount_total_annual).')',49,'',5);
-                    $summer_adjustments=$feedetails['summer_fee_adjustment'];
                     $this->createTable($pdf,$concession_y,'('.number_format(@$feedetails['summer_fee_adjustment']).')',66,'B',5);
 
                 }
@@ -1394,7 +1385,7 @@ This is a computer generated bill. If you have any queries - or notice any incon
                     $this->createTable($pdf,$scholarship_y,'('.number_format(@$scholarship_yearly).')',49.5,'',5);
                     $scholarship_amount='';
                     $scholarship_amount=number_format($feedetails['scholarship_amount']);
-                    $this->createTable($pdf,$scholarship_y,'('.$scholarship_amount.')',66,'B',5);
+                    $this->createTable($pdf,$scholarship_y,'('.$scholarship_amount.')',66.5,'B',5);
 
                 }
 
@@ -1409,7 +1400,7 @@ This is a computer generated bill. If you have any queries - or notice any incon
                     $this->createTable($pdf,$y_pos,'Resource Charges',7,'B',5);
                     $this->createTable($pdf,$y_pos,number_format(@$lab_avc),34.2,'',5);
                     $this->createTable($pdf,$y_pos,number_format(@$annual_lab_avc_fee),49.5,'',5);
-                    $this->createTable($pdf,$y_pos,number_format(@$lab_avc_fee_this_month),66,'B',5);
+                    $this->createTable($pdf,$y_pos,number_format(@$lab_avc_fee_this_month),67,'B',5);
                 }else{
                       $annual_lab_avc_fee=0;
                       $lab_avc_fee_this_month=0;
@@ -1417,10 +1408,10 @@ This is a computer generated bill. If you have any queries - or notice any incon
                 if($musakhar!=0){
                     $musakhar_fee_annual=$musakhar*12;
                     $installment_musakhar_fee=$musakhar*$this->bill_number_of_months;
-                    $this->createTable($pdf,121,'Musakhar Charges',6.9,'B',5);
+                    $this->createTable($pdf,121,'Musakhar Charges',5.7,'B',4);
                     $this->createTable($pdf,121,number_format(@$musakhar),35.5,'',5);
                     $this->createTable($pdf,121,number_format(@$musakhar_fee_annual),50.2,'',5);
-                    $this->createTable($pdf,121,number_format(@$installment_musakhar_fee),67,'B',5);
+                    $this->createTable($pdf,121,number_format(@$installment_musakhar_fee),67.6,'B',5);
                 }else{
                     $musakhar_fee_annual=0;
                     $installment_musakhar_fee=0;    
@@ -1477,54 +1468,26 @@ This is a computer generated bill. If you have any queries - or notice any incon
                 //additional charges total
                 $total_charges=@$lab_avc+@$musakhar+@$minimum_resource_fee;
                 $total_charges_annual=@$musakhar_fee_annual+@$annual_lab_avc_fee+@$annual_minimum_resource_fee;
-                @$total_charges_paid=(@$installment_musakhar_fee+@$lab_avc_fee_this_month+@$yearly_charges+@$feedetails['oc_smartcard_charges']+@$installment_minimum_resource_fee)-@$summer_adjustments;
-               
-              
-               
+                $total_charges_paid=@$installment_musakhar_fee+@$lab_avc_fee_this_month+@$yearly_charges+@$feedetails['oc_smartcard_charges']+@$installment_minimum_resource_fee;
 
                 if($total_charges_paid==0){
 
                     $this->createTable($pdf,132.2,"-",34.5,'',5);//sum total monthly amoun
                     $this->createTable($pdf,132.2,"-",49.5,'',5);//sum annual amount
-                    $this->createTable($pdf,132.2,"-",66.1,'',5);//sum this installment
-                    //end gross tution fee calculatio
-                }elseif($total_charges_paid<0){
-
-                    if($total_charges==0){
-                        $this->createTable($pdf,132.2,'-',34.9,'',5);//sum total monthly amoun
-                    }else{
-                        $this->createTable($pdf,132.2,number_format($total_charges),34.9,'',5);//sum total monthly amoun
-
-                    }
-
-                    if($total_charges_annual==0){
-                        $this->createTable($pdf,132.2,'-',50,'',5);//sum annual amount
-                    }else{
-                        $this->createTable($pdf,132.2,number_format($total_charges_annual),50,'',5);//sum annual amount
-                    }
-
-                    if($total_charges_paid==0){
-                        $this->createTable($pdf,132.2,'-',66.1,'',5);//sum this installment
-                    }else{
-                        $this->createTable($pdf,132.2,'('.number_format(-($total_charges_paid)).')',66.1,'',5);//sum this installment
-                    }
+                    $this->createTable($pdf,132.2,"-",67,'',5);//sum this installment
                     //end gross tution fee calculatio
                 }else{
                     $this->createTable($pdf,132.2,number_format($total_charges),34.9,'',5);//sum total monthly amoun
                     $this->createTable($pdf,132.2,number_format($total_charges_annual),50,'',5);//sum annual amount
-                    $this->createTable($pdf,132.2,number_format($total_charges_paid),66.1,'',5);//sum this installment                }
-              }
+                    $this->createTable($pdf,132.2,number_format($total_charges_paid),66.9,'',5);//sum this installment
+                    //end gross tution fee calculatio
+
+                }
+              
 
             // $this->createTable($pdf,135,$feedetails['additional_charges'],67,'',5);//additional charges
                 $total_current_billing=($total_this_intallment+$total_charges_paid)-@$discount_total_this_intallment;
-                if($feedetails['total_current_bill']<0){
-                    $n_total_current_billing=number_format(-$feedetails['total_current_bill']);
-                    $n_total_current_billing='('.$n_total_current_billing.')';
-                    $this->createTable($pdf,139.2,$n_total_current_billing,70,'B',6);//total current billing
-                }else{
-                    $this->createTable($pdf,139.2,number_format($feedetails['total_current_bill']),70,'B',6);//total current billing
-
-                }
+                $this->createTable($pdf,139.2,number_format($feedetails['total_current_bill']),70,'B',6);//total current billing
                 $tax_apply_amount=$feedetails['total_current_bill']+$feedetails['adjustment'];
                 // if($tax_apply_amount>200000){
                 //     $oc_adv_tax=$this->calculateDiscount($tax_apply_amount=$total_current_billing+$feedetails['adjustment'],5);
@@ -1701,7 +1664,7 @@ This is a computer generated bill. If you have any queries - or notice any incon
      }
 
      private function setBilldescription($pdf,$margin_left,$margin_top,$html,$fontsize){
-            $pdf->SetFont('Arial','','6');
+            $pdf->SetFont('Arial','','5');
             $pdf->SetTextColor(0,0,0);
             $pdf->SetXY(13,67);
             $pdf->MultiCell(75,2.2,  $html, 0.3);

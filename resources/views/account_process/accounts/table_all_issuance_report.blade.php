@@ -1,72 +1,72 @@
         <table class="table table-bordered table-striped order-column" id="IssuanceBillReport">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 200px;" width="200">Grade</th>
-                                                        <th>Tuition Fee</th>
-                                                        <th>Resources Fee</th>
-                                                        <th>SC E. OPT DISC</th>
-                                                        <th>Concession</th>
-                                                        <th>Scholarship (A-Level)</th>
-                                                        <th>Musakhar Charges</th>
-                                                        <th>Yearly Charges</th>
-                                                        <th>Smart Card Charges</th>
-                                                        <th>Arrears without<br />Late Fee & Rollover Fee</th>
-                                                        <th>Late Fee</th>
-                                                        <th>Rollover Amount</th>
-                                                        <th>Adjustments</th>
-                                                        <th>Total Fees</th>
-                                                        <th>Advance Tax</th>
-                                                        <th>Grand Total with<br />Advance Tax</th>
-                                                        <!-- <th> Remitance </th> -->
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php if(!empty($report_data)) : ?>
-                                                        <?php foreach ($report_data as $value) : ?> 
-                                                        <tr>
-                                                        <td><?=$value->Grade_name;?></td>
-                                                        <td class="tution_fee"><?=$value->Total_Tuition_Fee_PG;?></td>
-                                                        <td class="Total_resourdes_fee"><?=$value->Total_resourdes_fee;?></td>
-                                                        <td class="scp_disc"><?=$value->SCEOPTDISC;?></td>
-                                                        <td class="Total_Concession_Amount"><?=$value->Total_Concession_Amount;?></td>
-                                                        <td class="Total_scholarship_amount"><?=$value->Total_scholarship_amount;?></td>
-                                                        <td class="Total_musakhar_charges"><?=$value->Total_musakhar_charges;?></td>
-                                                        <td class="Yearly_charges"><?=$value->Yearly_charges;?></td>
-                                                        <td class="Total_card_charges"><?=$value->Total_card_charges;?></td>
-                                                        <td class="Total_ArrearswithoutLateFeeRolloverFee"><?=$value->ArrearswithoutLateFeeRolloverFee;?></td>
-                                                        <td class="Total_late_received"><?=$value->Total_late_received;?></td>
-                                                        <td class="Total_rolover_charges"><?=$value->Total_rolover_charges;?></td>
-                                                        <td class="Adjustments"><?=$value->Adjustments;?></td>
-                                                        <td class="Total_Fees"><?=$value->Total_Fees;?></td>
-                                                        <td class="AdvanceTax"><?=$value->AdvanceTax;?></td>
-                                                        <td class="GrandTotalwithAdvanceTax"><?=$value->GrandTotalwithAdvanceTax;?></td>
-                                                        
-                                                        </tr>
-                                                        <?php endforeach; ?>  
-                                                    <?php endif; ?>    
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td style="width: 200px;" width="200"><strong>Total</strong></td>
-                                                        <td class="sum_tution_fee_total">-</td>
-                                                        <td class="sum_Total_resourdes_fee">-</td>
-                                                        <td class="sum_scp_disc">-</td>
-                                                        <td class="sum_Total_Concession_Amount">-</td>
-                                                        <td class="sum_Total_scholarship_amount">-</td>
-                                                        <td class="sum_Total_musakhar_charges">-</td>
-                                                        <td class="sum_Yearly_charges">-</td>
-                                                        <td class="sum_Total_card_charges">-</td>
-                                                        <td class="sum_ArrearswithoutLateFeeRolloverFee">-</td>
-                                                        <td class="sum_Total_late_received">-</td>
-                                                        <td class="sum_Total_rolover_charges">-</td>
-                                                        <td class="sum_Adjustments">-</td>
-                                                        <td class="sum_Total_Fees">-</td>
-                                                        <td class="sum_AdvanceTax">-</td>
-                                                        <td class="sum_GrandTotalwithAdvanceTax">-</td>
-                                                        <!-- <th> Remitance </th> -->
-                                                    </tr>
-                                                </tfoot>
-                                            </table><!-- sample_4 -->
+            <thead>
+                <tr>
+                    <th style="width: 200px;" width="200">Grade</th>
+                    <th>Tuition Fee</th>
+                    <th>Resources Fee</th>
+                    <th>SC E. OPT DISC</th>
+                    <th>Concession</th>
+                    <th>Scholarship (A-Level)</th>
+                    <th>Musakhar Charges</th>
+                    <th>Yearly Charges</th>
+                    <th>Smart Card Charges</th>
+                    <th>Arrears without<br />Late Fee & Rollover Fee</th>
+                    <th>Late Fee</th>
+                    <th>Rollover Amount</th>
+                    <th>Adjustments</th>
+                    <th>Total Fees</th>
+                    <th>Advance Tax</th>
+                    <th>Grand Total with<br />Advance Tax</th>
+                    <!-- <th> Remitance </th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(!empty($report_data)) : ?>
+                    <?php foreach ($report_data as $value) : ?> 
+                    <tr>
+                    <td><?=$value->Grade_name;?></td>
+                    <td class="tution_fee"><?= number_format($value->Total_Tuition_Fee_PG);?></td>
+                    <td class="Total_resourdes_fee"><?= number_format($value->Total_resourdes_fee);?></td>
+                    <td class="scp_disc"><?=$value->SCEOPTDISC;?></td>
+                    <td class="Total_Concession_Amount"><?= number_format($value->Total_Concession_Amount);?></td>
+                    <td class="Total_scholarship_amount"><?= number_format($value->Total_scholarship_amount);?></td>
+                    <td class="Total_musakhar_charges"><?= number_format($value->Total_musakhar_charges);?></td>
+                    <td class="Yearly_charges"><?= number_format($value->Yearly_charges);?></td>
+                    <td class="Total_card_charges"><?= number_format($value->Total_card_charges);?></td>
+                    <td class="Total_ArrearswithoutLateFeeRolloverFee"><?= number_format($value->ArrearswithoutLateFeeRolloverFee);?></td>
+                    <td class="Total_late_received"><?= number_format($value->Total_late_received);?></td>
+                    <td class="Total_rolover_charges"><?= number_format($value->Total_rolover_charges);?></td>
+                    <td class="Adjustments"><?= number_format($value->Adjustments);?></td>
+                    <td class="Total_Fees"><?= number_format($value->Total_Fees);?></td>
+                    <td class="AdvanceTax"><?= number_format($value->AdvanceTax);?></td>
+                    <td class="GrandTotalwithAdvanceTax"><?= number_format($value->GrandTotalwithAdvanceTax);?></td>
+                    
+                    </tr>
+                    <?php endforeach; ?>  
+                <?php endif; ?>    
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td style="width: 200px;" width="200"><strong>Total</strong></td>
+                    <td class="sum_tution_fee_total">-</td>
+                    <td class="sum_Total_resourdes_fee">-</td>
+                    <td class="sum_scp_disc">-</td>
+                    <td class="sum_Total_Concession_Amount">-</td>
+                    <td class="sum_Total_scholarship_amount">-</td>
+                    <td class="sum_Total_musakhar_charges">-</td>
+                    <td class="sum_Yearly_charges">-</td>
+                    <td class="sum_Total_card_charges">-</td>
+                    <td class="sum_ArrearswithoutLateFeeRolloverFee">-</td>
+                    <td class="sum_Total_late_received">-</td>
+                    <td class="sum_Total_rolover_charges">-</td>
+                    <td class="sum_Adjustments">-</td>
+                    <td class="sum_Total_Fees">-</td>
+                    <td class="sum_AdvanceTax">-</td>
+                    <td class="sum_GrandTotalwithAdvanceTax">-</td>
+                    <!-- <th> Remitance </th> -->
+                </tr>
+            </tfoot>
+        </table><!-- sample_4 -->
     <script type="text/javascript">
 
 function addCommas(nStr)

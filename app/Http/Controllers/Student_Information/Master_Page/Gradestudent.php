@@ -20,11 +20,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Sentinel;
 use Storage;
-use Mail;
+#use Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-use App\Models\Student\Student_Information\Student_Information;
+#use App\Models\Student\Student_Information\Student_Information;
 
 class Gradestudent extends Controller
 {
@@ -121,12 +121,17 @@ class Gradestudent extends Controller
 		
 	} 
 
+//Left Student Lists///
 
 public function Student_Stories(Request $request)
 {
 
+		/*$uer_id = Sentinel::getUser()->id;
+
+		echo $uer_id; exit;*/
 
 	
+	 
 	$query = "select
 	cl.id as Student_id, cl.gs_id, cl.abridged_name, cl.call_name, cl.grade_name, cl.section_name, cl.gr_no as Photo_id,
 	cl.section_id as Section_id, cl.section_dname as Section_name, 
@@ -140,10 +145,21 @@ public function Student_Stories(Request $request)
 	
 	$result = DB::connection('mysql')->select($query);
 	
-	$uer_id = Sentinel::getUser()->id;
+	 $uer_id = Sentinel::getUser()->id;
 	
-	$query_u = "select sr.abridged_name, sr.employee_id as ephoto_id, sr.gender as Gender  from atif.staff_registered as sr where sr.user_id=".$uer_id."";
+	$query_u = "select sr.abridged_name, sr.employee_id as ephoto_id, sr.gender as Gender  
+
+
+		from atif.staff_registered as sr 
+		left join atif_gs_sims.users as gu on gu.email=sr.gg_id
+
+		where gu.id=".$uer_id."";
 	$result_u = DB::connection('mysql')->select($query_u);
+
+
+
+
+
 	$Current_user_pic = array();
 	if( !empty($result_u) )
 	{
@@ -178,6 +194,11 @@ public function Student_Stories(Request $request)
 	    $stories[$i]->photo150 = $pic['photo150'];
 	    $i++;
     }
+
+
+
+ 
+
 
 	$Section_ids = " select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl group by cl.section_id  order by cl.section_id ";
 	$Section_ids = DB::connection('mysql')->select($Section_ids);
@@ -237,7 +258,7 @@ public function Get_Section(Request $request)
 
 public function Students_Stories( Request $request )
 {
-	$Student_id = $request->input('Student_id');
+	echo $Student_id = $request->input('Student_id'); exit;
 	
 	
 
@@ -302,7 +323,7 @@ public function Student_Stories_Limit(Request $request){
 	$stories_start = ($stories_limit - 30); 
 	
 	
-	
+	//zk
 	if( $Student_id == 0 )
 	{
 		$stories = $this->getStories($stories_start, $stories_start);	
@@ -611,7 +632,7 @@ public function getFilteredStories( $user, $lowerLimit, $upperLimit, $Where, $Da
 
 
 
-		$query = "select
+		$query211 = "select
 	thisData.*
 	from
 		( ";
@@ -800,7 +821,7 @@ else {
 	//$query .= " WHERE $Where "; 
 	
 	$query .= " order by thisDateTime desc ";
-	#print_r($query); exit;
+	print_r($query); exit;
 
 	$result = DB::connection('mysql')->select($query);
 	return $result;
@@ -816,25 +837,7 @@ public function getStories( $lowerLimit, $upperLimit)
 	$query = "select
 	thisData.*
 	from
-		(select 
-			cl.gs_id, cl.abridged_name, 'Generations School' as staff_name,
-			sms.message as comments, 
-			DATE_FORMAT(sms.created, '%a, %d %b %Y - %h:%i %p') as date_time,
-			sms.created as thisDateTime,
-			'SMS' as tag, '' as communication_tag, 0 as actions, 'M' as gender, 0 as user_id
-		
-			from atif_sms.sms_api_log AS sms
-			inner join atif.student_family_record as sfr
-				on REPLACE(sfr.mobile_phone,'-','') = sms.mobile_phone
-			inner join atif.class_list as cl
-				on cl.gf_id = sfr.gf_id
-		
-			where sms.message NOT LIKE '%Mr%' AND sms.message NOT LIKE '%Ms%'
-		
-		
-		
-			UNION
-		
+		( 
 		
 		
 			select 
@@ -942,8 +945,11 @@ public function Get_Student_Stories($Student_id, $lowerLimit, $upperLimit){
 			from (select
 				lc.*, sr.employee_id, sr.gender, sr.name as staff_name
 				from atif_student_log.log_comments as lc
-				left join atif.staff_registered as sr
-					on sr.user_id = lc.register_by) as lc
+				
+				left join atif_gs_sims.users as u  on u.id=lc.register_by
+				
+				left join atif.staff_registered as sr 
+				on sr.gg_id=u.email) as lc
 			inner join atif.class_list as cl
 				on cl.id = lc.student_id
 			where cl.id=$Student_id	
@@ -1017,7 +1023,7 @@ where cl.id=".$Student_id." )
 	limit $lowerLimit, $upperLimit";
 
 	
-	#echo $query; exit;
+	echo $query; exit;
 	
 	$result = DB::connection('mysql')->select($query);
 	return $result;
@@ -1049,6 +1055,7 @@ public function get_Staff_Pic($PhotoID, $Gender){
 
 
 
+
 public function get_Student_Pic($PhotoID){
 		if (!file_exists(STUDENT_PIC_500.$PhotoID.PIC500_TYPE)){
             $PhotoID = 'NoPic';
@@ -1058,6 +1065,17 @@ public function get_Student_Pic($PhotoID){
 
 	    return $user;
 	}
+
+
+	// public function get_Student_Pic($PhotoID){
+	// 	if (!file_exists(STUDENT_PIC_500.$PhotoID.PIC500_TYPE)){
+ //            $PhotoID = 'gs_logo';
+	//     }
+	//     $user['photo500'] = STUDENT_PIC_500.$PhotoID.PIC500_TYPE;
+	//     $user['photo150'] = STUDENT_PIC_150.$PhotoID.PIC150_TYPE;
+
+	//     return $user;
+	// }
 
 	
 	// Students Badge method for badge display:
@@ -1734,7 +1752,7 @@ public function get_Student_Pic($PhotoID){
             			</div>
                 	</li>';
         */
-		
+		//zk error
 		if( !empty($Stories) ):
 			foreach($Stories as $St):
 			
@@ -1829,7 +1847,6 @@ public function get_Student_Pic($PhotoID){
 					$mother_photo = $mother_photo2;
 				}
 					
-					
 				
 				
 			}
@@ -1901,7 +1918,7 @@ public function get_Student_Pic($PhotoID){
 	}else{
 		
 	}
-$html .= '</div><!-- Siblinginformation -->';
+	$html .= '</div><!-- Siblinginformation -->';
 	$html .= '</div>';
 	echo json_encode( array("fH"=> $html) );
 		
@@ -2550,6 +2567,7 @@ group by vt.date ";
 
 
 	public function add_this_student_story(Request $request){
+
 		$GSID = $request->input('gs_id', 0);
 		$Family_State = $request->input('Family_State');
 		$comments = $request->input('comments', '');
@@ -2574,6 +2592,24 @@ select id from atif.class_list as cl where cl.gfid= ( select cl.gfid from atif.c
 		$Table='log_comments';
 		$Tag_Categories='';
 		$Arr=array();
+
+
+
+
+$Get_user_email = "select sr.user_id as user_id from atif_gs_sims.users as u 
+left join atif.staff_registered as sr on sr.gg_id=u.email
+where u.id=".Sentinel::getUser()->id; 
+
+
+
+$Get_useremail = DB::connection('mysql')->select($Get_user_email);
+foreach( $Get_useremail as $s  ):
+$Getuseremail = $s->user_id;
+break;
+endforeach;
+
+
+
 		
 		foreach( $StList as $s  ):
 			
@@ -2584,9 +2620,9 @@ select id from atif.class_list as cl where cl.gfid= ( select cl.gfid from atif.c
 					'tag' => $comments_cat,
 					'communication_tag' => $communication_cat,
 					'created' => Carbon::now()->timestamp,
-					'register_by' => Sentinel::getUser()->id,
+					'register_by' => $Getuseremail,
 					'modified' => Carbon::now()->timestamp,
-					'modified_by' => Sentinel::getUser()->id
+					'modified_by' => $Getuseremail
 				]
 			);
 			

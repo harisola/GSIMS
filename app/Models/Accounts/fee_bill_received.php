@@ -58,6 +58,12 @@ class fee_bill_received extends Model
         return  $received;
     }
 
+    public function getOnlylastReceived($bill_id){
+                $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->first();
+                return @$fee['received_amount'];
+
+    }
+
 
     public function getPaymentMethod($bill_id){
 		$fee=fee_bill_received::where('fee_bill_id',$bill_id)->select('received_payment_mode')->first();

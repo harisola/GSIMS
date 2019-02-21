@@ -103,9 +103,6 @@ ul.chats {
     cursor: pointer;
     display: none;
 }
-
-
-
 </style>
 <link href="{{ URL::to('/css/studentLayout.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::to('/metronic/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
@@ -476,6 +473,13 @@ if( empty($Current_user_pic["photo150"]))
                 
                 
 
+
+
+
+
+
+
+
         			<!-- Add Story Modal -->  
 			        <div class="modal fade" id="Add_call_story" tabindex="-1" role="basic" aria-hidden="true">
 					
@@ -490,20 +494,21 @@ if( empty($Current_user_pic["photo150"]))
 			                    </div><!-- modal-body -->
 								
 	
-                                        <!-- <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-off bootstrap-switch-mini bootstrap-switch-id-switchChange2 bootstrap-switch-animate" style="width: 54px;">
+                                                    
+                                                        
+														<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-off bootstrap-switch-mini bootstrap-switch-id-switchChange2 bootstrap-switch-animate" style="width: 54px;">
 														<div class="bootstrap-switch-container"> 
 														
 														
-														
-														<input type="checkbox" class="make-switch" id="switchChange2" name="switchChange2" data-size="mini" data-on-text="Yes" data-off-text="No">
+														<input type="checkbox" class="make-switch[]" id="switchChange2" name="switchChange2" data-size="mini" data-on-text="Yes" data-off-text="No">
 														</div></div>
-														Family -->
+														Family
                                                     
+													
 													
 			                    <div class="modal-footer">
 									
-			                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel
-                                    </button>
+			                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
 			                        <button type="button" class="btn green" id="add_badge">Add Story</button>
 			                    </div><!-- modal-footer -->
 			                </div>
@@ -512,6 +517,13 @@ if( empty($Current_user_pic["photo150"]))
 			            <!-- /.modal-dialog -->
 			        </div>
 			        <!-- /.modal -->
+
+
+
+
+
+
+
 
 
       
@@ -525,7 +537,7 @@ if( empty($Current_user_pic["photo150"]))
 
 <div class="col-md-8 fixed-height" id="StudentView_StuInfo" style="display:;">
         <div class="row">
-            <div class="col-md-12 paddingRight0" id="hide_all">
+            <div class="col-md-12 paddingRight0">
                 <div class="portlet light bordered padding0 marginBottom0 StudentRightView">
                 	<div class="portlet-title">
                 		<h3 class="allSchoolClass">Student Stories <name id="Student_Nalo">  </name> <a class="pull-right" id="Back_To_Main" style="margin-top: 5px; color:#fff;display:none; font-size: 16px; "> Back to all stories </a> </h3>
@@ -556,13 +568,10 @@ if( empty($Current_user_pic["photo150"]))
                                     <div class="theme-option">
                                         <span> User </span>
                                         <select id="Sort_By_User" class="layout-option form-control input-sm">
-                                           <option value="435">Tehreem Noman (SIS- Relationship Officer)</option>
-                                           <option value="2">Farah Shehzad (Relationship Officer (NC)) </option>
-                                           <option value="405">Afshan Jalil (Communications Liaison Officer)</option>
-                                           <!-- <option value="37">Zulfiqar</option> -->
-                                           <option value="231">Salman Munazzam (SIS Campus Liaison (SC))</option>
-                                           <option value="34">Ghazanfar Hameed (SIS Campus Liaison (NC))</option>
-                                           <!-- <option value="36">Ayaz</option> -->
+                                           <option value="2">Farah</option>
+                                           <option value="37">Zulfiqar</option>
+                                           <option value="231">Salman</option>
+                                           <option value="36">Ayaz</option>
                                         </select>
                                     </div>
                                   
@@ -652,7 +661,69 @@ if( empty($Current_user_pic["photo150"]))
                             <ul class="chats" id="Stories_Chats">
 
 
-                              
+                                @foreach ($stories as $student)
+
+
+                                @if ($login_user != $student->user_id)
+                            	<li class="in">
+			                		<img class="avatar" alt="" src="{{ $student->photo150 }}">
+			            			<div class="message"><span class="arrow"> </span>
+			            				<div class="CommentInfo">
+			            					<a href="javascript:;" class="name"> <strong>{{ $student->staff_name }}</strong> </a>
+				            				<span class="studentInfoCom"><span class="grayish">Student Name:</span> {{ $student->abridged_name }} </span>
+                                            <span class="studentInfoCom"><span class="grayish">GS-ID:</span> {{ $student->gs_id }} </span>
+                                            <span class="body"><span class="grayish">Comment:</span> {{ $student->comments }} <br> </span>
+                                            <?php $tags =  explode(',', $student->tag); $c_tags =  explode(',', $student->communication_tag); ?>
+                                                @foreach ($tags as $tag)
+                                                <span class="commentCat TPA Confirmed "> {{ $tag }} </span>
+                                                @endforeach
+                                                @foreach ($c_tags as $tag)
+                                                <?php if($tag != '') { ?>
+                                                    <span class="commentCat communicationCat TPA Confirmed "> {{ $tag }} </span>
+                                                <?php } ?>
+                                                @endforeach
+				            				<br>                                            
+				            				<span class="commentDate"> {{ $student->date_time }} </span>
+			            				</div>
+			            			</div>
+			                	</li>
+
+
+                                @else
+                                <li class="out" data-filters="User Generated" data-category="Accounts">
+                                    <img class="avatar" alt="" src="{{ $student->photo150 }}">
+                                    <div class="message"><span class="arrow"> </span>
+                                        <div class="CommentInfo">
+                                            <a href="javascript:;" class="name"> <strong>{{ $student->staff_name }}</strong> </a>
+                                            <span class="studentInfoCom"><span class="grayish">Student Name:</span> {{ $student->abridged_name }} </span>
+                                            <span class="studentInfoCom"><span class="grayish">GS-ID:</span> {{ $student->gs_id }} </span>
+                                            <span class="body"> {{ $student->comments }} <br> </span>
+                                            <?php $tags =  explode(',', $student->tag); $c_tags =  explode(',', $student->communication_tag); ?>
+                                                @foreach ($tags as $tag)
+                                                <span class="commentCat TPA Confirmed "> {{ $tag }} </span>
+                                                @endforeach
+                                                @foreach ($c_tags as $tag)
+                                                <?php if($tag != '') { ?>
+                                                    <span class="commentCat communicationCat TPA Confirmed "> {{ $tag }} </span>
+                                                <?php } ?>
+                                                @endforeach
+                                            <br> 
+                                            <span class="commentDate"> {{ $student->date_time }} </span>
+                                        </div>
+                                    </div>
+                                </li>
+                                @endif
+			                	
+                                @endforeach
+								
+								
+								
+
+
+                                <?php /*
+		                		<li class="in" data-filters="System" data-category="TPA Confirmed "><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/899.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Erum Naz</strong> </a><span class="body"> Attendance Confirmed By CT Mon Nov 6, 2017 <br> Date Mon Nov 6, 2017 </span><span class="commentCat TPA Confirmed "> TPA Confirmed </span><br> <span class="commentDate"> Mon Nov 06, 2017 at 08:42 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Mon Nov 6, 2017</u> <br> at <u>08:00 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Mon Nov 06, 2017 at 08:00 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Fri Nov 3, 2017</u> <br> at <u>07:50 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Fri Nov 03, 2017 at 07:50 AM</span></div></li><li class="in" data-filters="System" data-category="TPA Confirmed "><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/899.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Erum Naz</strong> </a><span class="body"> Attendance Confirmed By CT Thu Nov 2, 2017 <br> Date Thu Nov 2, 2017 </span><span class="commentCat TPA Confirmed "> TPA Confirmed </span><br> <span class="commentDate"> Thu Nov 02, 2017 at 08:40 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Thu Nov 2, 2017</u> <br> at <u>07:58 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Thu Nov 02, 2017 at 07:58 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Wed Nov 1, 2017</u> <br> at <u>07:53 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Wed Nov 01, 2017 at 07:53 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Tue Oct 31, 2017</u> <br> at <u>07:54 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Tue Oct 31, 2017 at 07:54 AM</span></div></li><li class="in" data-filters="System" data-category="SMS"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Text Message</strong> </a><span class="body"> [GS Invitation] Come explore higher education prospects under one roof at Education Fair 2017 on Wed, Nov 1 @ Generation's South Campus 9:30 am - 12:00 noon. </span><span class="commentCat SMS"> SMS</span><br> <span class="commentDate"> Mon Oct 30, 2017 at 03:31 PM</span></div></li><li class="in" data-filters="System" data-category="TPA Confirmed "><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/899.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Erum Naz</strong> </a><span class="body"> Attendance Confirmed By CT Mon Oct 30, 2017 <br> Date Mon Oct 30, 2017 </span><span class="commentCat TPA Confirmed "> TPA Confirmed </span><br> <span class="commentDate"> Mon Oct 30, 2017 at 10:31 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Mon Oct 30, 2017</u> <br> at <u>07:58 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Mon Oct 30, 2017 at 07:58 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Thu Oct 26, 2017</u> <br> at <u>08:06 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Thu Oct 26, 2017 at 08:06 AM</span></div></li><li class="in" data-filters="System" data-category="SMS"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Text Message</strong> </a><span class="body"> [GS Invitation] You are invited to GET '17 - Exhibition of Innovation - Thu Oct 26 at 10:00 am @ Generation's South Campus. Pls bring Family SmartCard. </span><span class="commentCat SMS"> SMS</span><br> <span class="commentDate"> Wed Oct 25, 2017 at 04:04 PM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Wed Oct 25, 2017</u> <br> at <u>07:53 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Wed Oct 25, 2017 at 07:53 AM</span></div></li><li class="in" data-filters="System" data-category="Attendance"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Attendance Tap IN</strong> </a><span class="body"> Tap IN on <u>Wed Oct 25, 2017</u> <br> at <u>07:53 AM</u> </span><span class="commentCat Attendance"> Attendance</span><br> <span class="commentDate"> Wed Oct 25, 2017 at 07:53 AM</span></div></li><li class="in" data-filters="System" data-category="TPA Confirmed "><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/899.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>Erum Naz</strong> </a><span class="body"> Attendance Confirmed By CT Thu Oct 12, 2017 <br> Date Thu Oct 12, 2017 </span><span class="commentCat TPA Confirmed "> TPA Confirmed </span><br> <span class="commentDate"> Thu Oct 12, 2017 at 08:46 AM</span></div></li>
+                                */ ?>
+
                                 </ul>
 								<input type="hidden" name="LoadMore_E" id="LoadMore_E" value="<?=$Stories_limit;?>" />
 								<input type="hidden" name="LoadMore_E_Student_id" id="LoadMore_E_Student_id" value="0" />
@@ -867,14 +938,10 @@ $(document).on("click", ".show_addstory_modal", function (e) {
 
 
 $(document).on("click", "#add_badge", function (e) {
-
-
     var GSID = $('#Add_call_story .modal-body #student_gsid').val();
     var StudentName = $('#Add_call_story .modal-body #student_name').val();
 	var comments = $('#Add_call_story .modal-body #comments').val();
-
     var date_time = $('#Add_call_story .modal-body #date_time').val();
-    
 	
     var comments_cat = '';
 	comments_cat = $('#Add_call_story .modal-body #Dropdown_Comment_Category').val();
@@ -893,13 +960,12 @@ $(document).on("click", "#add_badge", function (e) {
 	var photo150_staff = $('#photo150_staff').val(); // png
 	
 	
-    var Family_State = 0;
-    var State = $('#switchChange2').bootstrapSwitch('state');
-    if(State)
-    {
-    	Family_State=1;
-        console.log("working");
-    }
+var Family_State = 0;
+var State = $('#switchChange2').bootstrapSwitch('state');
+if(State)
+{
+	Family_State=1;
+}
 	
 
 var values = [];
@@ -1080,7 +1146,6 @@ $(window).scroll(function() {
 
 
 $(document).ready(function(){
-    $('#hide_all').hide();
     $('.LeftBrowseStudents').append('<div id="toTop" class="btn btn-info"><span class="glyphicon glyphicon-chevron-up"></span> Back to Top</div>');
     $(".LeftBrowseStudents").scroll(function () {
         if ($(this).scrollTop() != 0) {
@@ -1306,7 +1371,7 @@ var pagefunction = function() {
 
     
     $('.studentView_StudentName a').click(function(e) {
-        $('#hide_all').show();
+        
         e.preventDefault();
         
         var Active_tab = $('ul#credit').find('li.active').data('interest');

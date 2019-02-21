@@ -745,10 +745,10 @@ var TableDatatablesManaged = function () {
             //"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
             "pagingType": "bootstrap_extended",
             "order": [[ 0, "desc" ]],
-            "lengthMenu": [
-                [-1, 40, 60, -1],
-                [-1, 40, 60, "All"] // change per page values here
-            ],
+            //"lengthMenu": [
+             //   [-1, 40, 60, -1],
+             //   [-1, 40, 60, "All"] // change per page values here
+            //],
 			//"bLengthChange" : false, //thought this line could hide the LengthMenu
 			//"bInfo" : false,
 			

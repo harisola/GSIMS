@@ -27,7 +27,7 @@
             <?php $i=1; ?>
     @foreach($receiving_report_grade_wise as $receiving_report_grade_wises)
    <tr>
-        <td width="100" style="width: 50px;text-align: center;">Total</td>
+        <td width="100" style="width: 50px;text-align: center;">{{$receiving_report_grade_wises->grade_name}}</td>
         <td>{{$receiving_report_grade_wises->bill_cycle_no}}</td>
         <?php 
         $amount=$receiving_report_grade_wises->total_received-$receiving_report_grade_wises->total_received_taxes;

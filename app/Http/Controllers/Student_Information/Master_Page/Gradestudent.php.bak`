@@ -20,13 +20,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Sentinel;
 use Storage;
-#use Mail;
+use Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-#use App\Models\Student\Student_Information\Student_Information;
+use App\Models\Student\Student_Information\Student_Information;
 
-class Grade extends Controller
+class Gradestudent extends Controller
 {
 	public function Students(Request $request)
 	{
@@ -121,11 +121,17 @@ class Grade extends Controller
 		
 	} 
 
+//Left Student Lists///
 
 public function Student_Stories(Request $request)
 {
-	echo 3; exit;
-	
+
+		/*$uer_id = Sentinel::getUser()->id;
+
+		echo $uer_id; exit;*/
+
+		 
+
 	$query = "select
 	cl.id as Student_id, cl.gs_id, cl.abridged_name, cl.call_name, cl.grade_name, cl.section_name, cl.gr_no as Photo_id,
 	cl.section_id as Section_id, cl.section_dname as Section_name, 
@@ -135,19 +141,19 @@ public function Student_Stories(Request $request)
 	left join (select sfr.gf_id, sfr.name from atif.student_family_record as sfr where sfr.parent_type = 1 group by sfr.gf_id) as sfr
 		on sfr.gf_id = cl.gf_id
 	where cl.std_status_category = 'Student'
-	order by cl.generation_of desc, cl.section_id, cl.call_name, cl.abridged_name limit 1" ;
+	order by cl.generation_of desc, cl.section_id, cl.call_name, cl.abridged_name ";
 	
 	$result = DB::connection('mysql')->select($query);
 	
-	$uer_id = Sentinel::getUser()->id;
+	 $uer_id = Sentinel::getUser()->id;
 	
 	$query_u = "select sr.abridged_name, sr.employee_id as ephoto_id, sr.gender as Gender  
 
 
-from atif.staff_registered as sr 
-left join atif_gs_sims.users as gu on gu.email=sr.gg_id
+		from atif.staff_registered as sr 
+		left join atif_gs_sims.users as gu on gu.email=sr.gg_id
 
-where gu.id=".$uer_id."";
+		where gu.id=".$uer_id."";
 	$result_u = DB::connection('mysql')->select($query_u);
 	$Current_user_pic = array();
 	if( !empty($result_u) )
@@ -198,7 +204,7 @@ where gu.id=".$uer_id."";
 	
 
 	
-	return view('master_layout.student.student_stories')->with(['students'=>$result, 'stories'=>$stories, "Stories_limit"=>$Stories_limit, 'login_user'=>Sentinel::getUser()->id,"abridged_name_staff" => $abridged_name, "Current_user_pic"=>$Current_user_pic, "Section_ids" => $Section_ids_full, "Grade_PG" => $Grade_PG,"North" => $North, "Full_School"=>$Section_ids  ]);
+	return view('master_layout.student.student_stories')->with(['students'=>$result, 'stories'=>$stories, "Stories_limit"=>$Stories_limit, 'login_user'=>Sentinel::getUser()->id,"abridged_name_staff" => $abridged_name, "Current_user_pic"=>$Current_user_pic, "Section_ids" => $Section_ids_full, "Grade_PG" => $Grade_PG,"North" => $North, "Full_School"=>$Section_ids]);
 
 }
 
@@ -242,16 +248,12 @@ public function Get_Section(Request $request)
 
 public function Students_Stories( Request $request )
 {
-	$Student_id = $request->input('Student_id');
+	echo $Student_id = $request->input('Student_id'); exit;
 	
 	
 
 
     $stories = $this->Get_Student_Stories($Student_id,0, 5);
-
-     
- 	
-
     $i = 0;
     foreach ($stories as $u) {
 		$pic = $this->get_Staff_Pic($u->actions, $u->gender);
@@ -266,8 +268,7 @@ public function Students_Stories( Request $request )
 	
 	
 	return  response()->json([
-        'Stories' => view('master_layout.student.students_stories')->with(['stories'=>$stories,
-         'login_user'=>Sentinel::getUser()->id ])->render(),
+        'Stories' => view('master_layout.student.students_stories')->with(['stories'=>$stories, 'login_user'=>Sentinel::getUser()->id ])->render(),
 		"abridged_name"=>$abridged_name,
 		"Student_id"=>$Student_id,
     ]);
@@ -621,7 +622,7 @@ public function getFilteredStories( $user, $lowerLimit, $upperLimit, $Where, $Da
 
 
 
-		$query = "select
+		$query211 = "select
 	thisData.*
 	from
 		( ";
@@ -810,7 +811,7 @@ else {
 	//$query .= " WHERE $Where "; 
 	
 	$query .= " order by thisDateTime desc ";
-	#print_r($query); exit;
+	print_r($query); exit;
 
 	$result = DB::connection('mysql')->select($query);
 	return $result;
@@ -855,20 +856,11 @@ public function getStories( $lowerLimit, $upperLimit)
 			lc.comments as comments, DATE_FORMAT(from_unixtime(lc.created), '%a, %d %b %Y - %h:%i %p') as date_time, from_unixtime(lc.created) as thisDateTime,
 			lc.tag as tag, lc.communication_tag, lc.employee_id as actions, lc.gender, lc.register_by as user_id
 		
-			from (
-
-
-			select
+			from (select
 				lc.*, sr.employee_id, sr.gender, sr.name as staff_name
 				from atif_student_log.log_comments as lc
-				
-				left join atif_gs_sims.users as u  on u.id=lc.register_by
-				
-				left join atif.staff_registered as sr 
-				on sr.gg_id=u.email
-
-
-					) as lc
+				left join atif.staff_registered as sr
+					on sr.user_id = lc.register_by) as lc
 			inner join atif.class_list as cl
 				on cl.id = lc.student_id
 		) as thisData 
@@ -912,12 +904,8 @@ public function getStories2( $lowerLimit, $upperLimit){
 			from (select
 				lc.*, sr.employee_id, sr.gender, sr.name as staff_name
 				from atif_student_log.log_comments as lc
-				
-				left join atif_gs_sims.users as u  on u.id=lc.register_by
-				
-				left join atif.staff_registered as sr 
-				on sr.gg_id=u.email )
- as lc
+				left join atif.staff_registered as sr
+					on sr.user_id = lc.register_by) as lc
 			inner join atif.class_list as cl
 				on cl.id = lc.student_id
 		) as thisData 
@@ -928,17 +916,12 @@ public function getStories2( $lowerLimit, $upperLimit){
 	return $result;
 }
 
-//Show all Student Comments//
 
 public function Get_Student_Stories($Student_id, $lowerLimit, $upperLimit){
-
-
 	$query = "select
 	thisData.*
 	from
-		(
-
-		select 
+		(select 
 			cl.gs_id, cl.abridged_name, 'Generations School' as staff_name,
 			sms.message as comments, DATE_FORMAT(sms.created, '%a, %d %b %Y - %h:%i %p') as date_time, sms.created as thisDateTime,
 			'SMS' as tag, '' as communication_tag, 0 as actions, 'M' as gender, 0 as user_id
@@ -948,7 +931,7 @@ public function Get_Student_Stories($Student_id, $lowerLimit, $upperLimit){
 				on REPLACE(sfr.mobile_phone,'-','') = sms.mobile_phone
 			inner join atif.class_list as cl
 				on cl.gf_id = sfr.gf_id
-			where cl.id=".$Student_id." and sms.message NOT LIKE '%Mr%' AND sms.message NOT LIKE '%Ms%'
+			where cl.id=$Student_id and sms.message NOT LIKE '%Mr%' AND sms.message NOT LIKE '%Ms%'
 		
 		
 		
@@ -965,22 +948,19 @@ public function Get_Student_Stories($Student_id, $lowerLimit, $upperLimit){
 			lc.communication_tag, 
 			lc.employee_id as actions, 
 			lc.gender, 
-			lc.register_by2 as user_id
+			lc.register_by as user_id
 			
-			from ( select
-				lc.*, sr.employee_id, sr.gender, sr.name as staff_name, u.id as register_by2
+			from (select
+				lc.*, sr.employee_id, sr.gender, sr.name as staff_name
 				from atif_student_log.log_comments as lc
 				
-				 
+				left join atif_gs_sims.users as u  on u.id=lc.register_by
 				
 				left join atif.staff_registered as sr 
-				on sr.user_id=lc.register_by
-
-					LEFT join atif_gs_sims.users as u on u.email = sr.gg_id
-) as lc
+				on sr.gg_id=u.email) as lc
 			inner join atif.class_list as cl
 				on cl.id = lc.student_id
-			where cl.id=".$Student_id."	
+			where cl.id=$Student_id	
 			
 			
 			
@@ -990,12 +970,8 @@ select
 			cl.abridged_name as abridged_name, 
 			'Attendance Tap' as staff_name,
 			'Threshold Attendance' as comments, 
-
-
-		
-
+			#FROM_UNIXTIME( UNIX_TIMESTAMP ( DATE_FORMAT(concat( att.date, ' ', att.time),'%a, %d %b %Y - %h:%i %p' ) ) )as date_time,
 			DATE_FORMAT(concat( att.date, ' ', att.time),'%a, %d %b %Y - %h:%i %p' ) as date_time,
-
 			FROM_UNIXTIME( UNIX_TIMESTAMP ( STR_TO_DATE(concat( att.date, ' ', att.time),'%Y-%m-%d %H:%i:%s' ) ) )as thisDateTime,
 			'Attendance' tag, 
 			'Attendance' as communication_tag, 
@@ -1023,9 +999,7 @@ union all
 			cl.abridged_name as abridged_name, 
 			'Attendance Tap' as staff_name,
 			'Threshold Attendance' as comments, 
-
-			
-
+			#FROM_UNIXTIME( UNIX_TIMESTAMP ( DATE_FORMAT(concat( att.date, ' ', att.time),'%a, %d %b %Y - %h:%i %p' ) ) )as date_time,
 			DATE_FORMAT(concat( att.date, ' ', att.time),'%a, %d %b %Y - %h:%i %p' ) as date_time,
 			FROM_UNIXTIME( UNIX_TIMESTAMP ( STR_TO_DATE(concat( att.date, ' ', att.time),'%Y-%m-%d %H:%i:%s' ) ) )as thisDateTime,
 			'Attendance' tag, 
@@ -1054,16 +1028,13 @@ where cl.id=".$Student_id." )
 			
 		) as thisData 
 	order by thisDateTime desc
-	limit $lowerLimit, $upperLimit ";
+	limit $lowerLimit, $upperLimit";
 
 	
-	#echo $query; exit;
+	echo $query; exit;
 	
-	return DB::connection('mysql')->select( $query );
-
-	#var_dump($result); exit;
-
-	 
+	$result = DB::connection('mysql')->select($query);
+	return $result;
 }
 
 
@@ -1872,7 +1843,6 @@ public function get_Student_Pic($PhotoID){
 					$mother_photo = $mother_photo2;
 				}
 					
-					
 				
 				
 			}
@@ -1944,7 +1914,7 @@ public function get_Student_Pic($PhotoID){
 	}else{
 		
 	}
-$html .= '</div><!-- Siblinginformation -->';
+	$html .= '</div><!-- Siblinginformation -->';
 	$html .= '</div>';
 	echo json_encode( array("fH"=> $html) );
 		
@@ -2077,11 +2047,8 @@ $html .= '</div><!-- Siblinginformation -->';
 				sr.gender as Register_by_gender,
 				from_unixtime(lc.created) AS Dated, lc.register_by AS User_id, lc.modified AS Updated_on, lc.modified_by AS Updated_by 
 				FROM atif_student_log.log_comments AS lc 
-				left join atif_gs_sims.users as u on u.id=lc.register_by
 				inner join atif.staff_registered as sr 
-				on  on sr.gg_id=u.email "; 
-
-
+				on sr.user_id=lc.register_by "; 
 			$Query .= " WHERE lc.student_id=".$Student_id." ";
 				
 			$Query .= " UNION  
@@ -2116,9 +2083,8 @@ $html .= '</div><!-- Siblinginformation -->';
 				sr.gender as Register_by_gender,
 				from_unixtime(lc.created) AS Dated, lc.register_by AS User_id, lc.modified AS Updated_on, lc.modified_by AS Updated_by 
 				FROM atif_student_log.log_comments AS lc 
-				left join atif_gs_sims.users as u on u.id=lc.register_by
 				inner join atif.staff_registered as sr 
-				on  on sr.gg_id=u.email"; 
+				on sr.user_id=lc.register_by"; 
 				$Query .= " WHERE lc.student_id=".$Student_id." ";
 				
 				
@@ -2163,8 +2129,7 @@ $html .= '</div><!-- Siblinginformation -->';
 							FROM atif_student_log.log_student_house AS sh 
 							INNER JOIN atif.class_list AS cl ON cl.id=sh.student_id 
 							INNER JOIN atif._house AS house ON house.id=sh.old_house_id 
-							
-				inner join atif.staff_registered as sr 
+							inner join atif.staff_registered as sr 
 							on sr.id=sh.register_by 
 							WHERE sh.student_id=".$Student_id." ";
 							
@@ -2206,10 +2171,7 @@ $html .= '</div><!-- Siblinginformation -->';
 							'' AS Old_Section_id, 
 							if( att.register_by=0,'Attendance TapIN', 
 							
-							concat( 'Modified By ',( select att_sr.abridged_name from atif.staff_registered as att_sr 
-
-
-							where att_sr.user_id=att.register_by ) 
+							concat( 'Modified By ',( select att_sr.abridged_name from atif.staff_registered as att_sr where att_sr.user_id=att.register_by ) 
 							) ) as  Register_by_name, 
 							
 							
@@ -2436,8 +2398,6 @@ group by vt.date ";
 
 
 	public function add_student_story(Request $request){
-
-	
 		$html = '';
 
 		$GSID = $request->input('gs_id', 0);
@@ -2559,7 +2519,21 @@ group by vt.date ";
 		$html .= '<span class="multiselect-native-select">';
 		$html .= '</span>';
 		$html .= '</div>';
-		$html .= '<!--select data-attribute="profile" multiple="multiple" id="studentComCateo" class="ddlFilterTableRow layout-option form-control input-sm">
+	
+									
+						
+
+
+
+
+	
+
+
+
+
+
+
+                                        $html .= '<!--select data-attribute="profile" multiple="multiple" id="studentComCateo" class="ddlFilterTableRow layout-option form-control input-sm">
                                            <option value="Call">Call</option>
                                            <option value="SMS">SMS</option>
                                            <option value="WhatsApp">WhatsApp</option>
@@ -2586,13 +2560,9 @@ group by vt.date ";
 
 
 
-    //Add Stories Of Students// 
+
 
 	public function add_this_student_story(Request $request){
-
-		
-		/*print_r("Working Page");
-		die;*/
 
 		$GSID = $request->input('gs_id', 0);
 		$Family_State = $request->input('Family_State');

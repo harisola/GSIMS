@@ -178,8 +178,10 @@ class fee_bill extends Model
 
                 if($installment_number<3){
                     $billing_months=2.4;
-                }else{
+                }elseif($installment_number==3){
                     $billing_months=1.2;
+                }else{
+                    $billing_months=2;
                 }
         if($grade_id==""){
                 $query = "SELECT cl.abridged_name,cl.id,cl.grade_name, cl.gs_id,cl.gfid,cl.std_status_code,fb.bill_cycle_no,fb.gb_id,
@@ -531,8 +533,10 @@ class fee_bill extends Model
             ->sum('oc_adv_tax');
             return $details;
 
-
     }
+
+
+    // public function getThisAcadmicSessionsBillStatus()
 
 
     public function getScptBillNoDiscount($student_id,$billing_cycle_number="",$academic_session_id="",$status=""){
@@ -574,18 +578,34 @@ class fee_bill extends Model
     	return $details;
     }
     public function sumPreviousAmount($student_id,$academic_session_id){
-    		$total=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->sum('total_current_bill');
-    		return $total;
+            $total=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->sum('total_current_bill');
+            return $total;
     }
+
+    public function getPreviousData($student_id,$academic_session_id){
+            $total=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->sum('total_current_bill','oc_adv_tax');
+            return $total;
+    }
+
     public function getLastBillTaxes($student_id){
 		$details=fee_bill::where('student_id',$student_id)->select('admission_fee','oc_adv_tax','id','adjustment')->Orderby('id','desc')->first();
     	return $details;   
     }
 
+    // public function getAdmissionFeeDifference($student_id){
+    //     $details=fee_bill::join('fee_bill_received as fbr','fbr.fee_bill_id','fee_bill.id')
+    //     ->where('student_id',$student_id)
+    //     ->select('admission_fee','gb_id','total_payable','computer_subcription_fee','received_amount','fee_a_discount')
+    //     ->where([['bill_title','Admission'],['bill_cycle_no',0],['received_date','>','2018-06-30']])
+    //     ->whereIN('academic_session_id',[9])
+    //     ->Orderby('fee_bill.id','desc')->first();
+    //     return $total_fee=($details['received_amount']);
+    // }
+
     public function getAdmissionFee($student_id,$academic_session_id=""){
         $details=fee_bill::join('fee_bill_received as fbr','fbr.fee_bill_id','fee_bill.id')
         ->where('student_id',$student_id)
-        ->select('admission_fee','gb_id','total_payable','computer_subcription_fee')
+        ->select('admission_fee','gb_id','total_payable','computer_subcription_fee','fee_a_discount')
         ->where([['bill_title','Admission'],['bill_cycle_no',0],['received_date','>','2018-06-30']])
         ->whereIN('academic_session_id',[9])
         ->Orderby('fee_bill.id','desc')->first();
@@ -595,8 +615,17 @@ class fee_bill extends Model
         $c_nyear=substr($c_year,2,3);
          // return $details['total_payable']-$details['security_deposit'];
 
+       // echo $this->getAdmissionFeeDifference($student_id);
+       // die;
        if($bill_year==$c_nyear){
-            return $details['admission_fee']+$details['computer_subcription_fee'];
+                 $total_income=$details['admission_fee']+$details['computer_subcription_fee'];
+
+                if($details['fee_a_discount']>0){
+                     $discount_amount=($details['admission_fee']/100)*$details['fee_a_discount'];
+                     $total_income=$total_income-$discount_amount;
+                }
+              
+            return $total_income;
         }else{
             return 0;
         }

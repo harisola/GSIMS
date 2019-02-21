@@ -20,11 +20,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Sentinel;
 use Storage;
-use Mail;
+#use Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-use App\Models\Student\Student_Information\Student_Information;
+#use App\Models\Student\Student_Information\Student_Information;
 
 class Grade extends Controller
 {
@@ -124,7 +124,8 @@ class Grade extends Controller
 
 public function Student_Stories(Request $request)
 {
-	
+
+	echo 1; exit;
 	$query = "select
 	cl.id as Student_id, cl.gs_id, cl.abridged_name, cl.call_name, cl.grade_name, cl.section_name, cl.gr_no as Photo_id,
 	cl.section_id as Section_id, cl.section_dname as Section_name, 
@@ -134,7 +135,7 @@ public function Student_Stories(Request $request)
 	left join (select sfr.gf_id, sfr.name from atif.student_family_record as sfr where sfr.parent_type = 1 group by sfr.gf_id) as sfr
 		on sfr.gf_id = cl.gf_id
 	where cl.std_status_category = 'Student'
-	order by cl.generation_of desc, cl.section_id, cl.call_name, cl.abridged_name";
+	order by cl.generation_of desc, cl.section_id, cl.call_name, cl.abridged_name limit 1" ;
 	
 	$result = DB::connection('mysql')->select($query);
 	
@@ -177,14 +178,14 @@ public function Student_Stories(Request $request)
 	    $i++;
     }
 
-	$Section_ids = " select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl group by cl.section_id  order by cl.section_id ";
+	$Section_ids = " select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl group by cl.section_id  order by cl.section_id limit 1";
 	$Section_ids = DB::connection('mysql')->select($Section_ids);
 	
-	$Grade_PG = " select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl where cl.grade_id = 17 group by cl.section_id ";
+	$Grade_PG = " select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl where cl.grade_id = 17 group by cl.section_id limit 1";
 	$Grade_PG = DB::connection('mysql')->select($Grade_PG);
-	$North = "select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl where cl.grade_id > 4 and cl.grade_id < 17 group by cl.section_id ";
+	$North = "select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl where cl.grade_id > 4 and cl.grade_id < 17 group by cl.section_id limit 1";
 	$North = DB::connection('mysql')->select($North);
-	$Section_ids_full = "select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl where cl.grade_id > 4 and cl.grade_id < 17 group by cl.section_id ";
+	$Section_ids_full = "select cl.section_id as Section_id, cl.section_dname as Section_name from atif.class_list as cl where cl.grade_id > 4 and cl.grade_id < 17 group by cl.section_id limit 1";
 	$Section_ids_full = DB::connection('mysql')->select($Section_ids_full);
 	
 	
@@ -235,7 +236,7 @@ public function Get_Section(Request $request)
 
 public function Students_Stories( Request $request )
 {
-	$Student_id = $request->input('Student_id');
+	 $Student_id = $request->input('Student_id'); 
 	
 	
 
@@ -609,7 +610,7 @@ public function getFilteredStories( $user, $lowerLimit, $upperLimit, $Where, $Da
 
 
 
-		$query = "select
+		$query24444 = "select
 	thisData.*
 	from
 		( ";
@@ -798,7 +799,7 @@ else {
 	//$query .= " WHERE $Where "; 
 	
 	$query .= " order by thisDateTime desc ";
-	#print_r($query); exit;
+	
 
 	$result = DB::connection('mysql')->select($query);
 	return $result;
@@ -843,11 +844,14 @@ public function getStories( $lowerLimit, $upperLimit)
 			lc.comments as comments, DATE_FORMAT(from_unixtime(lc.created), '%a, %d %b %Y - %h:%i %p') as date_time, from_unixtime(lc.created) as thisDateTime,
 			lc.tag as tag, lc.communication_tag, lc.employee_id as actions, lc.gender, lc.register_by as user_id
 		
-			from (select
+			from ( select
 				lc.*, sr.employee_id, sr.gender, sr.name as staff_name
 				from atif_student_log.log_comments as lc
-				left join atif.staff_registered as sr
-					on sr.user_id = lc.register_by) as lc
+				
+				left join atif_gs_sims.users as u  on u.id=lc.register_by
+				
+				left join atif.staff_registered as sr 
+				on sr.gg_id=u.email   ) as lc
 			inner join atif.class_list as cl
 				on cl.id = lc.student_id
 		) as thisData 
@@ -905,7 +909,7 @@ public function getStories2( $lowerLimit, $upperLimit){
 
 
 public function Get_Student_Stories($Student_id, $lowerLimit, $upperLimit){
-	$query = "select
+	  $query = "select
 	thisData.*
 	from
 		(select 
@@ -1015,7 +1019,7 @@ where cl.id=".$Student_id." )
 	limit $lowerLimit, $upperLimit";
 
 	
-	#echo $query; exit;
+	
 	
 	$result = DB::connection('mysql')->select($query);
 	return $result;
@@ -2548,7 +2552,11 @@ group by vt.date ";
 
 
 	public function add_this_student_story(Request $request){
+
 		$GSID = $request->input('gs_id', 0);
+
+
+
 		$Family_State = $request->input('Family_State');
 		$comments = $request->input('comments', '');
 		
@@ -2557,6 +2565,8 @@ group by vt.date ";
 		
 		$comments_cat = implode(",", $request->input('comments_cat', ''));
 		$communication_cat = implode(",", $request->input('communication_cat', ''));
+
+
 		
 		if($GSID != 0){
 			
@@ -2569,6 +2579,23 @@ select id from atif.class_list as cl where cl.gfid= ( select cl.gfid from atif.c
 		}
 		
 		$StList = DB::connection('mysql')->select($SQL);
+
+
+echo $Get_user_email = "select sr.user_id as user_id from atif_gs_sims.users as u 
+left join atif.staff_registered as sr on sr.gg_id=u.email
+where u.id=".Sentinel::getUser()->id;  
+
+
+
+$Get_useremail = DB::connection('mysql')->select($Get_user_email);
+foreach( $Get_useremail as $s  ):
+$Getuseremail = $s->user_id;
+break;
+endforeach;
+
+
+
+
 		$Table='log_comments';
 		$Tag_Categories='';
 		$Arr=array();
@@ -2582,9 +2609,9 @@ select id from atif.class_list as cl where cl.gfid= ( select cl.gfid from atif.c
 					'tag' => $comments_cat,
 					'communication_tag' => $communication_cat,
 					'created' => Carbon::now()->timestamp,
-					'register_by' => Sentinel::getUser()->id,
+					'register_by' => $Getuseremail,
 					'modified' => Carbon::now()->timestamp,
-					'modified_by' => Sentinel::getUser()->id
+					'modified_by' => $Getuseremail
 				]
 			);
 			
