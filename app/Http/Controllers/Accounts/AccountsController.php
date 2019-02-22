@@ -208,7 +208,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         $details = DB::connection('mysql_Career_fee_bill')->select($query);
         $details= collect($details)->map(function($x){ return (array) $x; })->toArray(); 
         $i=0;
-           return  @$details[0]['amount'];
+           return  0;
     }
 
 
@@ -729,6 +729,12 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
 
                 // $received_taxes=$fee_bill_received_info->getReceivedTaxes($list['student_id']); //old code
                 $previous_bill_taxes =$fee_bill->getLastBillTaxesByStudentId($list['student_id'],$list['a_session_id']);
+                //get sum of pvs taxes
+                $last_bill_taxes =$fee_bill->getLastBillTaxesNewByStudentId($list['student_id'],$list['a_session_id']);
+                $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
+
+
+
                 // $fee_details
                 $status=$list['std_status_code'];
                 $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
@@ -759,12 +765,9 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 
               
                if($billing_cycle>2){
-                    if($received_amount>0 &&$previous_bill_taxes!=0){
-
+                    if($received_amount>0 &&$last_bill_taxes!=0){
                         //if received amount greater than 0 (paid bill amount or  more than bill amoount)
-                        @$received_amount=$received_amount-($previous_bill_taxes+$fee_details->roll_over_charges);
-                        $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
-                        $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
+                         $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
                        if($last_bill_received>=@$fee_details['total_payable']){
                              $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing,$tax_percentage);
                        }               
@@ -789,9 +792,8 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $total_received_amount;
                         if($received_amount>0){
                              $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
-
-
                         }else{
+
                             //only for this case we get july amount by using getLastJulyAmount else july fee will get automatically in sumTotalPayments
                             $july_amount=$fee_bill_received->getLastJulyAmount($list['student_id'],$list['academic_session_id']);
 
@@ -800,15 +802,28 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
 
                             }else{
                                 
-                                 $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage)-$previous_bill_taxes;
-                                  if($last_bill_received=="" && $previous_bill_taxes>0){
-                                     $applicable_taxes= $applicable_taxes+$previous_bill_taxes;
+                                 $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
+                                 if($last_bill_received=="" && $previous_bill_taxes>0){
+                                      $applicable_taxes= $applicable_taxes+$previous_bill_taxes;
                                  }
-                                 
+
+                                 if($last_bill_received=="" && $last_bill_taxes>10000){
+                                      $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
+                                 }
+
+                                 if($last_bill_received=="" && ($last_bill_taxes<10000 && $last_bill_taxes>0)){
+                                    //if last bill not received and partially tax charged last time
+
+                                    $applicable_taxes=$this->calculateDiscount($total_current_billing,$tax_percentage);
+                                       $applicable_taxes=$applicable_taxes;
+                                 }
+                                
 
                             }
+
                         }
-                       $applicable_taxes=$applicable_taxes;
+                  
+
                        //new code add for 4th installment before this code tax on taxes work propetly
                     }
                    
@@ -819,7 +834,9 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                
                  if($applicable_taxes<0){
                     $applicable_taxes=-($applicable_taxes);
-                 }               
+                 }   
+
+                                
 
 
                return $applicable_taxes;

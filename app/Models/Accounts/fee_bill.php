@@ -535,6 +535,13 @@ class fee_bill extends Model
 
     }
 
+    public function getLastBillTaxesNewByStudentId($student_id,$academic_session_id){
+            $details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])
+            ->select('oc_adv_tax')->Orderby('id','desc')->first();
+            return $details['oc_adv_tax'];
+
+    }
+
 
     // public function getThisAcadmicSessionsBillStatus()
 
