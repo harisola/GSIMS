@@ -1790,9 +1790,9 @@ function addZero(i) {
    
            if ($selectedLength > 0 && $this.val() != '0') {
                if ($selectedLength == 1) {
-                   $critriaAttribute += '[data-' + $this.data('attribute') + '*="' + $this.val() + '"]';
+                   $critriaAttribute += '[data-' + $this.data('attribute') + '="' + $this.val() + '"]';
                } else {
-                   var $startDataAttribute = '[data-' + $this.data('attribute') + '*="',
+                   var $startDataAttribute = '[data-' + $this.data('attribute') + '="',
                        $endDataAttribute = '"]',
                        $selectedValues = $this.val().toString();
 					   
