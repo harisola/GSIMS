@@ -199,7 +199,29 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         }
     
     }
+    public function reqComputerSubcription(){
+        ini_set('max_execution_time', 50000); //3 minutes
+        $class_list=  new class_list;
+        $query="SELECT fb.student_id,fb.security_deposit,(fb.security_deposit-15000) as new_computer,('15000') as new_security_deposit from atif.req_admission fb 
+        where 
+         fb.security_deposit=17000";
 
+        $details = DB::connection('default_Atif')->select($query);
+
+        $details= collect($details)->map(function($x){ return (array) $x; })->toArray(); 
+        $i=0;
+        foreach ($details as  $detail){
+                $data=array(
+                'security_deposit' =>$detail['new_security_deposit'],
+                'computer_subscription' =>$detail['new_computer'],
+                );            
+                $details = DB::connection('default_Atif')
+                ->table('req_admission')
+                ->where('student_id',$detail['student_id'])
+                ->update($data);
+        }
+    
+    }
 
    public function getSummerAdjustment($gs_id){
         ini_set('max_execution_time', 50000); //3 minutes

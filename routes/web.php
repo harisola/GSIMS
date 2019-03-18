@@ -79,8 +79,15 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/update_staff', 'Development\Haris@Update_Staff');
 	Route::get('/masterLayout/staff/add_row', 'Development\Haris@AddRow');
 	Route::get('/screening_gate', 'Attendance\Staff\ScreeningGate@mainPage');
-	Route::get('/new_admission ', 'Account_Process\Accounts\NewAdmission@index');
-	//zk added end route screening_gate
+	// Route::get('/tap_in_staff', 'Attendance\Staff\ScreeningGate@Tap_In_Staff');
+	Route::get('/staff_interim_card', 'Attendance\Staff\ScreeningGate@Staff_Interim_Card'); 
+	Route::get('/tap_in_interim', 'Attendance\Staff\ScreeningGate@Tap_In_Interim');
+	//Route::get('/live_search', 'LiveSearch@index'); tap_in_interim
+	//Route::get('/search_action', 'Attendance\Staff\ScreeningGate@Search_Action'); interim_table_list
+	Route::get('/interim_table_list', 'Attendance\Staff\ScreeningGate@Staff_interim_table_list');
+	Route::post('/fetch_autocomplete', 'Attendance\Staff\ScreeningGate@fetch_autocomplete');
+	Route::post('/tap_in_staff', 'Attendance\Staff\ScreeningGate@Tap_In_Staff');
+	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
 	Route::get('/VehicleReport', 'Attendance\Vehicle\VehicleReport@mainPage');
 	Route::get('/VehicleReports', 'Attendance\Vehicle\VehicleReport@Get_Filter');
@@ -213,8 +220,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/masterLayout/staff/get_updateLeave','Development\Haris@get_updateLeave');
 	Route::post('/masterLayout/staff/LeaveUpdate','Development\Haris@LeaveUpdate');	
 
-
-
 	// Attendance - in - absentia
 	Route::get('/StaffAdjustments', 'Attendance\Staff\StaffAdjustments@mainPage');
 
@@ -222,7 +227,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/masterLayout/staff/addComments','Attendance\Staff\staffStories@addStories');
 
 	// Manual 
-
 
 	//Super Profile
 
@@ -243,8 +247,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/updateAttendanceStaff', 'spStaffProcess\sp_staffProcess@updateAttendanceStaff');
 
 
-
-
 	Route::get('/staff_payroll_adjustment', 'spStaffProcess\sp_staffProcess@staff_payroll_adjustment');
 	Route::get('/student_stories', 'Student_Information\Master_Page\Gradestudent@Student_Stories');
 	
@@ -253,6 +255,9 @@ Route::group(['middleware' => 'authenticated'], function () {
 	
 	Route::post('/student/Get_Section', 'Student_Information\Master_Page\Grade@Get_Section');
 
+	Route::get('/Get_Section_custom', 'Student_Information\Master_Page\Grade@Get_Section_query');
+
+	//Route::get('/VehicleReports', 'Attendance\Vehicle\VehicleReport@Get_Filter');
 
 	// //******************** Accounts *****************************//
 
@@ -273,8 +278,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::post('/generate_bill_3','Account_Process\Accounts\FeeBilling@generate_bill_3');
 
-
-
 	Route::get('/waviers_arrears','Account_Process\Accounts\WaviersArrears@index');
 
 	Route::get('/concession','Account_Process\Accounts\ConcessionController@index');
@@ -287,25 +290,17 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/account_reports/detail_all_issuance','Account_Process\Accounts\AccountReportController@getIssuanceAllReport');
 	Route::get('/account_reports/detail_of_issuance','Account_Process\Accounts\AccountReportController@getIssuanceFilterWise');
 
-
-
 	Route::get('/account_reports/issuance_report','Account_Process\Accounts\AccountReportController@getReportInformation');
 
-	
-	
+		
 	Route::get('/accounts/remitance','Account_Process\Accounts\FeeBilling@remitance');
 
 	Route::get('/accounts/fee_bill', 'Accounts\AccountsController@insertFeeBill');
 
 	Route::get('/accounts/insertlist', 'Accounts\AccountsController@uploadStudentList');
-	Route::get('/accounts/break_admission_fee', 'Accounts\AccountsController@updateComputerSubcription');
 	Route::get('/accounts/concession', 'Accounts\AccountsController@uploadList');
 	Route::get('/accounts/scholarships', 'Accounts\AccountsController@uploadScholarshipList');
 	Route::get('/accounts/update_bill_numbers', 'Accounts\AccountsController@UpdateBillNumbers');
-	Route::get('/summer_adjustments', 'Accounts\AccountsController@getSummerAdjustment');
-
-	
-
 
 	Route::get('/accounts/get_student_generated_bills', 'Accounts\AccountsController@getStudentGeneratedBills');
 
@@ -320,10 +315,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/Create_Remittance','Account_Process\Accounts\FeeBilling@Create_Remittance');
 
 	Route::post('/remitance_right_side','Account_Process\Accounts\FeeBilling@remitance_right_side');
-
-	
-
-
 
 	Route::post('/concession_search','Account_Process\Accounts\ConcessionController@concession_search');
 
@@ -340,8 +331,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 
 	Route::post('/render_html_right_side','Account_Process\Accounts\FeeBillSetup@render_html_right_side');
-
-
 
 	Route::post('/render_html_right_side_IS','Account_Process\Accounts\FeeBillSetup@render_html_right_side_IS');
 
@@ -362,12 +351,10 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::post('/addUpdateArrear','Account_Process\Accounts\arrears@insertAndUpdateArrear');
 
-
-
 	Route::post('/getArrearAndAdjustmentData','Account_Process\Accounts\arrears@get_arrear_and_adjustment_data');
 
 	Route::get('/set_el_balance','Development\hr_settings@set_leave_balance');
-});	
+			});	
 /*********************************************************************************/
 
 
@@ -382,11 +369,10 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::get('/staff_recruitment_process1','Development\staff_recruitment_process@process_flow');
 	Route::post( '/get_form', 'Development\staff_recruitment_process@get_process');
-
-
-
 	
 	Route::post('/staff_recruitment_initiation_add','Development\staff_recruitment_initiation@addFormData');
+
+	
 	Route::post('/staff_recruitment_initiation_addcareerform','Development\staff_recruitment_initiation@addCareerForm');
 	Route::get('/hr_configurations','Development\hr_settings@configurations');
 	Route::post('/hr_save_configurations','Development\hr_settings@saveConfigurations');
@@ -395,17 +381,11 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/addFollowComments','Development\hr_followup@addFollowComments');
 	Route::post('/update_archieve','Development\staff_recruitment_initiation_archive_ns@update_archieve');
 	
-	
 	Route::post('/addcustomer','Development\staff_recruitment_initiation@addcustomer');
 
 	Route::post('/get_staff_recruitment','Development\staff_recruitment_initiation@get_recruitment_data');
 
-
-	
-
-	
 	Route::post('/update_presence','Development\staff_recruitment_initiation@mark_presence');
-
 
 	Route::post('/call_for_part_b_presence','Development\staff_recruitment_initiation@call_for_part_b_presence');
 	
@@ -416,24 +396,26 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/preperation_checks','Development\staff_recruitment_initiation@addPreperationChecks');
 	
 	
-Route::post('/modified_form_list','Development\staff_recruitment_initiation@modified_form_list');
+	Route::post('/modified_form_list','Development\staff_recruitment_initiation@modified_form_list');
 
 
-Route::post('/allposts','Development\staff_recruitment_initiation@allposts');
+	Route::post('/allposts','Development\staff_recruitment_initiation@allposts');
 
+	Route::get('/get_dept', 'Development\staff_recruitment_initiation@all_dept');
 
+		Route::get('/get_dept2', 'Development\staff_recruitment_initiation@all_dept2');
+	
 	
 
-
-Route::post('/Search_followup_list','Development\hr_followup@Search_followup_list');
-Route::post('/Followup_list','Development\hr_followup@Followup_list');
+	Route::post('/Search_followup_list','Development\hr_followup@Search_followup_list');
+	Route::post('/Followup_list','Development\hr_followup@Followup_list');
 
 
 /* *******************************************************************************
  * Master Page(Student)
  * ******************************************************************************* 
 */
-Route::group(['middleware' => 'authenticated'],function(){
+	Route::group(['middleware' => 'authenticated'],function(){
 	Route::get("/student-information",  'Student_Information\Master_Page\Grade@Students');
 	Route::post("/student/detail", 'Student_Information\Master_Page\Grade@Students_Detail');
 	Route::get("/student/add_story", 'Student_Information\Master_Page\Grade@add_student_story');
@@ -452,18 +434,14 @@ Route::group(['middleware' => 'authenticated'],function(){
 	Route::get("/calendar", "Calendar\Master_Calendar\Calendar@MCalendar");
 
 
+	Route::get('/staff_recruitment_initiation_archive','Development\staff_recruitment_initiation_archive_ns@index');
 
-
-Route::get('/staff_recruitment_initiation_archive','Development\staff_recruitment_initiation_archive_ns@index');
-
-Route::post('/archiveLogs','Development\staff_recruitment_initiation_archive_ns@archiveLogs');
+	Route::post('/archiveLogs','Development\staff_recruitment_initiation_archive_ns@archiveLogs');
 
 
 	Route::post('/modified_form_archive','Development\staff_recruitment_initiation_archive_ns@modified_form_archive');
 
-Route::post('/allarchive','Development\staff_recruitment_initiation_archive_ns@allarchive');
+	Route::post('/allarchive','Development\staff_recruitment_initiation_archive_ns@allarchive');
 		
-
-
 });
 /* End Master Page(Student) *******************************************************/

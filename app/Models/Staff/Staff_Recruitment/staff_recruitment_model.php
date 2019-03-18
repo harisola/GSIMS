@@ -27,7 +27,7 @@ class Staff_recruitment_model extends Model
 			c.nic, c.gender, c.position_applied, c.comments,
 			c.status_id, c.stage_id,
 			cs.name as status_name, cs.name_code as status_code,
-			ct.name as stage_name, ct.name_code as stage_code, from_unixtime(c.created) as created, c.form_source,
+			ct.name as stage_name, ct.name_code as stage_code, from_unixtime(c.created) as created, c.form_source,part_b.career_id as carr_id,
 			part_b.date as part_b_date, part_b.time as part_b_time,
 			if(part_b.campus=2, 'South',if(part_b.campus=1, 'North', '')) as Campus,
 			if(c.status_id != 11 and part_b.time is not null, 'Part-B completed', '') as part_b_complete,
@@ -90,6 +90,8 @@ class Staff_recruitment_model extends Model
 		$career = collect($career)->map(function($x){ return (array) $x; })->toArray(); 
 		return $career;
 	}
+
+
 
 
 	 /**********************************************************************
@@ -526,17 +528,21 @@ GROUP BY group_name';
     * 
     * @output: 	All career forms as object
     ***********************************************************************/
+   
+
     public function get_applicant_recruitment_data($form_id){
 		
 	    $query = "SELECT cf.id as Form_id, cf.name,cf.status_id AS current_status_id,cf.stage_id AS current_stage_id, cf.form_source,
 cfd.status_id AS old_status_id,cfd.stage_id AS old_stage_id,cfd.comments_next_step,
-cfd.comments_applicant,
+cfd.comments_applicant,cfd.career_id,cfd.depart_id,cfd.level_id,
 cfd.comments_next_decision,cfd.comments_next_step_aloc,
 cfd.date,cfd.time,cfd.tag,cfd.campus,cfd.career_grade_id,cfd.checks,
-cfd.applicant_allocate,if(lcf.form_id is null,0,1) as intial_interview_presence,if(lcf_formal.form_id is null,0,1) as formal_interview_presence,if(lcf_observation.form_id is null,0,1) as observation_interview_presence,if(lcf_final_consultant.form_id is null,0,1) as final_consultant_interview_presence,
+cfd.applicant_allocate,if(lcf.form_id is null,0,1) as intial_interview_presence,if(lcf_formal.form_id is null,0,1) as formal_interview_presence,if(lcf_observation.form_id is null,0,1) as observation_interview_presence,if(lcf_final_consultant.form_id is null,0,1) as final_consultant_interview_presence,cd.departments,cl.levels,
 if(call_for_part_b_display.form_id is null,0,1) as call_for_part_b_display,if(form_screening_display.form_id is null,0,1) as form_screening_display
 FROM atif_career.career_form cf
 LEFT JOIN atif_career.career_form_data cfd ON cfd.form_id = cf.id
+LEFT JOIN atif_career.career_dept cd ON cd.id = cfd.depart_id
+LEFT JOIN atif_career.career_level cl ON cl.id = cfd.level_id
 LEFT JOIN atif_career.log_career_form lcf ON (lcf.status_id = 2 AND lcf.form_id = cf.id AND (lcf.stage_id = 4 OR lcf.stage_id = 8))
 LEFT JOIN atif_career.log_career_form lcf_formal ON (lcf_formal.status_id = 3 AND lcf_formal.form_id = cf.id AND (lcf_formal.stage_id = 4 OR lcf_formal.stage_id = 8))
 LEFT JOIN atif_career.log_career_form lcf_observation ON (lcf_observation.status_id = 4 AND lcf_observation.form_id = cf.id AND (lcf_observation.stage_id = 4 OR lcf_observation.stage_id = 8))

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Core\SelectionList;
 use App\Models\Staff\Staff_Recruitment\Staff_recruitment_model;
+use App\Models\Staff\Staff_Recruitment\staff_recruitment_area_department_levels;
 
 
 class staff_recruitment_all_applicants extends Controller
@@ -18,17 +19,37 @@ class staff_recruitment_all_applicants extends Controller
 
   public function index()
   {
+
+
+
+
     $userId = Sentinel::getUser()->id;
+
+     
     $staffRecruiment = new Staff_recruitment_model();
+     $get_dept_level = new staff_recruitment_area_department_levels();
+
     $RecruimentData = $staffRecruiment->get_recruitment_data();
+
     $tag = $staffRecruiment->get_tag();
+
     $grade = $staffRecruiment->get_grade();
+
     $status = $staffRecruiment->get_status();
+
     $campus = $staffRecruiment->get_branch();
+
     $career_allocation = $staffRecruiment->get_allocation();
+
     $get_getTags = $staffRecruiment->get_getTags();
+
+      $career_area = $get_dept_level->get_area();
+
+
+
     return view('master_layout.staff.staff_recruitment.staff_recruitment_initiation_view_all_applicants')
-        ->with(array('staffRecruiment' => $RecruimentData,'tag'=> $tag,'grade'=>$grade,'status'=> $status,'campus' => $campus,'career_allocation'=>$career_allocation,"get_getTags"=>$get_getTags));
+        ->with(array('staffRecruiment' => $RecruimentData,'tag'=> $tag,'grade'=>$grade,'status'=> $status,'campus' => $campus,'career_allocation'=>$career_allocation,"get_getTags"=>$get_getTags,"career_area"=>$career_area));
+
   }
 
 

@@ -24,13 +24,25 @@
                <table class="table table-bordered" style="margin-bottom: 0;">
                   <tr>
                      <td rowspan="2" width="25%"><h3 class="text-center">Form<br />Screening</h3>
-                        <!-- div class="text-center">
-                           <img src="img/AllocationIcon.png" />&nbsp;&nbsp;
-                           <img src="img/CommunicationIcon.png" />&nbsp;&nbsp;
-                           <img src="img/ReminderIcon.png" />&nbsp;&nbsp;
-                           <img src="img/PresenceIcon.png" />&nbsp;&nbsp;
-                           <img src="img/FollowUpIcon.png" />&nbsp;&nbsp;
-                        </div -->
+                        <div class="text-center">
+                           <div class="col-md-12 KashifSolangi">
+                           
+                             <select placeholder="Area" class="form-control " id="career_id_1">
+                                <?php foreach($career_area as $career_area1){ ?>
+                                     <option value="<?php echo $career_area1['id']; ?>"><?php echo $career_area1['area']; ?></option>
+                                <?php } ?>
+                             </select>
+                             <br />
+                                <div id="ajax_depart">
+                                </div>
+                                <div id="depart_1">
+                                </div>
+                                  <br />
+                                <div id="level_1">                                
+                                </div>
+                              <br />
+                           </div>
+                        </div>
                      </td>
                      <td width="25%">
                         <div class="row">
@@ -101,8 +113,10 @@
                      <td>
                         <div class="row">
                            <h5 class="text-center">Next Step Allocation</h5>
+
+
                            <div class="col-md-6 KashifSolangi" style="padding-right:5px;">
-                              <input type="date" class="form-control" id="applicant_next_step_allocation_date_1" >
+                              <input type="date" class="form-control" min="{{ date('Y-m-d') }}" id="applicant_next_step_allocation_date_1"  >
                            </div><!-- col-md-6 -->
                            <div class="col-md-6  KashifSolangi" style="padding-left:5px;">
                               <input type="time" class="form-control" id="applicant_next_step_allocation_time_1">
@@ -136,3 +150,68 @@
                   </tr>
                </table>
             </div><!-- FormScreening -->
+
+
+ <script type='text/javascript'>
+/*var toggleElements = function () {
+  var value = $( "#career_id_1 option:selected" ).text();
+
+  // var value = $('#career_id_1').find(":selected").text();
+ // alert(value);
+ var formdata =  'career_id_1='+$('#career_id_1').val();
+     console.log('form data=> '+formdata);
+    $.ajax({
+        type:'get',
+         url:'/gsims/public/get_dept',
+          data:formdata,
+        success:function(data){
+            console.log(data);
+            if(data){
+               $('#depart').html(data);
+            }
+            else{
+                $('#query').html(data.query);
+            }   
+        },
+        error:function(data){
+            console.log(data.responseText); 
+        }
+    });
+};
+
+$('#career_id_1').on('change', toggleElements);
+
+$(document).ready(toggleElements);*/
+
+
+  // $('#career_id_1').on('change', function(){
+  //   $('#depart_1').hide();
+  //   $('#level_1').hide();
+
+    
+  //   var formdata =  'career_id_1='+$('#career_id_1').val()
+  //    console.log('form data=> '+formdata);
+  //   $.ajax({
+  //       type:'get',
+  //        url:'/gsims/public/get_dept',
+  //         data:formdata,
+  //       success:function(data){
+
+  //           console.log(data);
+  //           if(data){
+  //             // $('#depart').show();
+  //             // $('#level').show();
+  //              $('#ajax_depart').html(data);
+  //           }
+  //           else{
+  //               $('#query').html(data.query);
+  //           }   
+  //       },
+  //       error:function(data){
+  //           console.log(data.responseText); 
+  //       }
+  //   });
+  //   });
+
+  
+  </script>

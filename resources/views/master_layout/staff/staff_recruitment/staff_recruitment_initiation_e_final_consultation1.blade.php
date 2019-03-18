@@ -27,6 +27,21 @@
                <table class="table table-bordered" style="margin-bottom: 0;">
                   <tr>
                      <td rowspan="2" width="25%"><h3 class="text-center">Final <br />Consultation</h3>
+
+                       <select placeholder="Area" class="form-control" id="career_id_5">
+                                <?php foreach($career_area as $career_area4){ ?>
+                                     <option value="<?php echo $career_area4['id']; ?>"><?php echo $career_area4['area']; ?></option>
+                                <?php } ?>
+                             </select>
+                             <br />
+                                <div id="ajax_depart_5">
+                                </div>
+                                <div id="depart_5">
+                                </div>
+                                <br/>
+                                <div id="level_5">                                
+                                </div>
+                              <br />
                         <div class="text-center">
                           <img id="status5_1" src="img/AllocationIcon.png" />&nbsp;&nbsp;
                            <img id="status5_2" src="img/CommunicationIcon.png" />&nbsp;&nbsp;
@@ -102,7 +117,7 @@
                         <div class="row">
                            <h5 class="text-center">Next Step Allocation</h5>
                            <div class="col-md-6 KashifSolangi" style="padding-right:5px;">
-                              <input type="date" class="form-control" id="applicant_next_step_allocation_date_5">
+                              <input type="date" class="form-control" min="{{ date('Y-m-d') }}" id="applicant_next_step_allocation_date_5">
                            </div><!-- col-md-6 -->
                            <div class="col-md-6 KashifSolangi" style="padding-left:5px;">
                               <input type="time" class="form-control" id="applicant_next_step_allocation_time_5">

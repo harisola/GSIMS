@@ -133,6 +133,20 @@ class AccountReportController extends Controller
 
    }
 
+    public function newAdmssionView(){
+        return view('account_process.accounts.new_admission_view');
+    }
+
+
+    public function newAdmissionFeeBillReport(request $request){
+                $fee_bill= new fee_bill;
+                $from_date=$request->from_date;
+                $to_date=$request->to_date;
+                $grade_name=$request->grade_name;
+                $admission_report=$fee_bill->getAdmissionFeeReport($from_date,$to_date,$grade_name);
+                return view('account_process.accounts.admission_bill_report_table',['admission_report'=>$admission_report]);
+    }
+
 
    
 

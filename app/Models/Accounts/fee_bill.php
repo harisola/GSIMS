@@ -663,6 +663,63 @@ class fee_bill extends Model
             } 
     }
 
+    public function getAdmissionFeeReport($from_date,$to_date,$grade_id){
+            $query = "SELECT 
+
+            if( 
+            cl.gs_id is not null,
+            (select att.date from atif_attendance.student_attendance as att where att.gs_id=cl.gs_id and att.date >= '2018-12-01' limit 1) , '' ) as First_Attendance_Tapin,
+
+
+            fb.admission_fee,fb.id,af.form_no,srr.gs_id,if(srr.gf_id!=0,concat(substr(srr.gf_id, 1, 2) , '-', substr(srr.gf_id, 3, 3) ),'')as gfid,sr.gt_id, 
+            af.official_name, 
+            fb.waive_amount,fb.concession_amount,fb.re_enforcement,fb.computer_subcription_fee,
+            fb.security_deposit,fb.total_payable,fbr.received_amount,
+            fbr.received_date,af.grade_name as applied_grade,from_unixtime(cl.created,'%Y-%m-%d') as eao_date,cl.grade_name FROM atif_fee_student.fee_bill fb
+
+
+
+
+
+            inner JOIN  atif_gs_admission.admission_form as af
+            ON af.form_no = if( LENGTH(af.form_no)=7,
+            concat( mid(fb.gb_id, 1, 2),'/' , mid(fb.gb_id, 5, 4) ) ,
+            concat( mid(fb.gb_id, 1, 2),'/' , mid(fb.gb_id, 6, 4) ) )
+            AND fb.bill_title='Admission'
+            AND fb.academic_session_id >= 13
+            AND fb.record_deleted = 0
+            and  mid(fb.gb_id, 1, 2) = '19'
+            and ( mid(fb.gb_id, 3, 2) = '81' or mid(fb.gb_id, 3, 2) = '82' or mid(fb.gb_id, 3, 2) = '85' or mid(fb.gb_id, 3, 2) = '86' )
+            left JOIN atif_fee_student.fee_bill_received as fbr ON fbr.fee_bill_id = fb.id
+
+
+
+
+            LEFT JOIN atif.class_list cl on cl.id=fb.student_id
+            left join atif.students_all as sa on (sa.student_id = fb.student_id 
+                 and fb.academic_session_id>=11) 
+
+            LEFT JOIN atif.student_family_record AS std_data ON (cl.gf_id = std_data.gf_id and std_data.nic = sa.tax_nic)
+            LEFT JOIN atif.staff_child sc ON sc.gf_id = sa.gf_id
+            LEFT JOIN atif.staff_registered sr ON (sr.id = sc.staff_id)
+            left join atif.student_registered as srr on srr.id=fb.student_id
+
+            where";
+            if($grade_id==""){
+                $query.="(fbr.received_date >= '$from_date' AND fbr.received_date <= '$to_date')
+                and fb.bill_cycle_no=0
+                and SUBSTR(fb.gb_id,7,1) <> '/'";
+            }else{
+                $query.="(fbr.received_date >= '$from_date' AND fbr.received_date <= '$to_date')
+                and fb.bill_cycle_no=0
+                and af.grade_name='$grade_id'
+                and SUBSTR(fb.gb_id,7,1) <> '/'";
+            } 
+            
+        return $details = DB::connection('mysql_Career_fee_bill')->select($query);
+    }
+
+
 
 
 

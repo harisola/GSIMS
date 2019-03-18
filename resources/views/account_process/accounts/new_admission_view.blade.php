@@ -75,89 +75,44 @@
                     <div class="row customRow">
                         	<div class="col-md-3">
                         		<label>Date from</label>
-                        		<input type="date" placeholder="From" name="" required="required" class="form-control">
+                        		<input type="date" placeholder="From" name="" id="from_date" required="required" class="form-control">
                         	</div>
                         	<div class="col-md-3" id="sectionFilter_container">
                         		<label>Date to</label>
-                        		<input type="date" placeholder="To" name="" required="required" class="form-control">
+                        		<input type="date" placeholder="To" name="" id="to_date" required="required" class="form-control">
                         	</div>
                         	<div class="col-md-3">
                         		<label>Grade</label>
-                        		<select class="form-control" id="installment_number">
-                                        <option value="All" selected="">All</option>
+                        		<select class="form-control" id="grade_name">
+                                        <option value="" selected="">All</option>
                                         <option value="PG">PG</option>
-                                        <option value="PG">PN</option>
-                                        <option value="PG">N</option>
-                                        <option value="PG">KG</option>
-                                        <option value="PG">I</option>
-                                        <option value="PG">II</option>
-                                        <option value="PG">III</option>
-                                        <option value="PG">IV</option>
-                                        <option value="PG">V</option>
-                                        <option value="PG">VI</option>
-                                        <option value="PG">VII</option>
-                                        <option value="PG">VIII</option>
-                                        <option value="PG">IX</option>
-                                        <option value="PG">X</option>
-                                        <option value="PG">XI</option>
-                                        <option value="PG">A1</option>
-                                        <option value="PG">A2</option>
+                                        <option value="PN">PN</option>
+                                        <option value="N">N</option>
+                                        <option value="KG">KG</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                        <option value="V">V</option>
+                                        <option value="VI">VI</option>
+                                        <option value="VII">VII</option>
+                                        <option value="VIII">VIII</option>
+                                        <option value="IX">IX</option>
+                                        <option value="X">X</option>
+                                        <option value="XI">XI</option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
                                 </select>
                         	</div>
                         	<div class="col-md-3">
                             <label>&nbsp;</label><br />
-                            <input type="button" id="" data-pdf="0" class="btn btn-group green" value="Get New Admissions" style="width: 100%;">
+                            <input type="button" id="" data-pdf="0" class="btn btn-group green get_report" value="Get New Admissions" style="width: 100%;">
                           </div>
                         </div><!-- row -->
                     <div class="portlet-body padding20" >
                         <hr />
-                        <div class="row padding20 fee_billing_result" >
-                        	<table class="table table-bordered" id="sample_3">
-                        		<thead>
-                        			<tr>
-                        				<th>S No.</th>
-        				                <th>Form No</th>
-                                        <th>GS ID</th>
-                                        <th>GF-ID</th>
-                                        <th>GT-ID</th>
-                                        <th>Applicant Name</th>
-                                        <th>Admission Fees</th>
-                                        <th>Concession</th>
-                                        <th>Re-enforcement</th>
-                                        <th>Computer Subscription</th>
-                                        <th>Security Deposit</th>
-                                        <th>Total Payable</th>
-                                        <th>Recieved Amount</th>
-                                        <th>Date</th>
-                                        <th>Grade of Admission</th>
-                                        <th>Early Joining Date</th>
-                                        <th>Early Joining Grade</th>
-                                        <th>First Tap in on</th>
-                        			</tr>
-                        		</thead>
-                        		<tbody>                                                       
-                        			<tr>
-                        				<td>1</td>
-                        				<td>19/1111</td>
-                        				<td>19-001</td>
-                        				<td>19-002</td>
-                        				<td>-</td>
-                        				<td>Saleem Ahmed</td>
-                        				<td>40,000</td>
-                        				<td>C(TC) @ 50%</td>
-                        				<td>10,000</td>
-                        				<td>-</td>
-                        				<td>15,000</td>
-                        				<td>65,000</td>
-                        				<td>65,000</td>
-                        				<td>2nd Feb 2019</td>
-                        				<td>PN</td>
-                        				<td>20th Feb 2019</td>
-                        				<td>PG</td>
-                        				<td>23rd Feb 2019</td>
-                        			</tr>
-                        		</tbody>
-                        	</table><!-- sample_4 -->
+                        <div class="row padding20 result" >
+
 
 
                         </div><!-- row -->
@@ -196,6 +151,29 @@
             });
         });
     });
+url=window.location.pathname;
+
+    $('.get_report').click(function(){
+    var data=
+    {
+    'from_date':$('#from_date').val(),
+    'to_date':$('#to_date').val(),
+    'grade_name':$('#grade_name').val(),
+    }
+     App.startPageLoading();
+
+$.ajax({
+    data:data,
+    method:'get',
+    url: url+'/account_reports/admission_report',
+    success:function(result){
+        $('.result').html(result);
+             App.stopPageLoading();
+
+    }
+})
+
+})
 </script>
 
         <!-- END PAGE LEVEL PLUGINS -->

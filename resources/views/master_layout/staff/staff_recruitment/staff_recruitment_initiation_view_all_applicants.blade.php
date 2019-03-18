@@ -43,12 +43,12 @@
               </ul>
           </div>
           <style>
-li.statement {
-    background: #fff8f8;
-    border: 1px solid #e0e0e0;
-    text-align: center;
-    margin-top: 16px;
-}
+        li.statement {
+            background: #fff8f8;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            margin-top: 16px;
+        }
         </style>
           <div class="portlet-body">
               <div class="tab-content">

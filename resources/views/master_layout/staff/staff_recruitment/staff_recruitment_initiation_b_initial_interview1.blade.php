@@ -29,7 +29,24 @@
                       <tr>
                          <td rowspan="2" width="25%"><h3 class="text-center">Initial <br />Interview</h3>
                             <div class="text-center">
-                                 <img id="status2_1" src="img/AllocationIcon.png" />&nbsp;&nbsp;
+                               <div class="col-md-12 KashifSolangi">
+                               <select placeholder="Area" class="form-control" id="career_id_2">
+                                <?php foreach($career_area as $career_area){ ?>
+                                     <!--<option value="<?php //echo $career_area['id']; ?>"><?php //echo $career_area['area']; ?></option>--> 
+                                     <option value="<?php echo $career_area['id']; ?>"><?php echo $career_area['area']; ?></option>
+                                <?php } ?>
+                             </select>
+                              <br />
+                                <div id="ajax_depart_2">
+                                </div>
+                                <div id="depart_2">
+                                </div>
+                                <br />
+                                <div id="level_2">                                
+                                </div>
+                              <br />
+                             </div>
+                               <img id="status2_1" src="img/AllocationIcon.png" />&nbsp;&nbsp;
                                <img id="status2_2" src="img/CommunicationIcon.png" />&nbsp;&nbsp;
                                <img id="status2_3" src="img/ReminderIcon.png" />&nbsp;&nbsp;
                                <img id="status2_4" src="img/PresenceIcon.png" />&nbsp;&nbsp;
@@ -103,7 +120,7 @@
                             <div class="row">
                                <h5 class="text-center">Next Step Allocation</h5>
                                <div class="col-md-6 KashifSolangi" style="padding-right:5px;">
-                                  <input type="date" class="form-control" id="applicant_next_step_allocation_date_2">
+                                  <input type="date" class="form-control" min="{{ date('Y-m-d') }}" id="applicant_next_step_allocation_date_2">
                                </div><!-- col-md-6 -->
                                <div class="col-md-6  KashifSolangi" style="padding-left:5px;">
                                   <input type="time" class="form-control" id="applicant_next_step_allocation_time_2">
@@ -138,3 +155,62 @@
                    </table>
                 </div><!-- FormScreening -->
             
+            <script type='text/javascript'>
+/*var toggleElements = function () {
+  var value = $( "#career_id_1 option:selected" ).text();
+
+  // var value = $('#career_id_1').find(":selected").text();
+ // alert(value);
+ var formdata =  'career_id_1='+$('#career_id_1').val();
+     console.log('form data=> '+formdata);
+    $.ajax({
+        type:'get',
+         url:'/gsims/public/get_dept',
+          data:formdata,
+        success:function(data){
+            console.log(data);
+            if(data){
+               $('#depart').html(data);
+            }
+            else{
+                $('#query').html(data.query);
+            }   
+        },
+        error:function(data){
+            console.log(data.responseText); 
+        }
+    });
+};
+
+$('#career_id_1').on('change', toggleElements);
+
+$(document).ready(toggleElements);*/
+
+
+  // $('#career_id_2').on('change', function(){
+  //   $('depart_2').hide();
+  //   $('level_2').hide();
+    
+  //   var formdata =  'career_id_2='+$('#career_id_2').val()
+  //    console.log('form data=> '+formdata);
+  //   $.ajax({
+  //       type:'get',
+  //        url:'/gsims/public/get_dept2',
+  //         data:formdata,
+  //       success:function(data){
+  //           console.log(data);
+  //           if(data){
+  //              $('#ajax_depart_2').html(data);
+  //           }
+  //           else{
+  //               $('#query').html(data.query);
+  //           }   
+  //       },
+  //       error:function(data){
+  //           console.log(data.responseText); 
+  //       }
+  //   });
+  //   });
+
+  
+  </script>

@@ -96,9 +96,7 @@ tr.walkin {
              <td><?=$sr["mobile_phone"];?></td>
              <td><?=$sr["land_line"];?></td> 
              <td><?=$sr["nic"];?></td>
-             <td><?=$sr["status_name"]?></td>
-
-                         
+             <td><?=$sr["status_name"]?></td>                     
              <td>
 
               <?php echo date("d-M-Y", strtotime( $sr["created"])); ?> - <?php echo date("h:i A", strtotime($sr["created"])); ?> <br />
@@ -113,7 +111,7 @@ tr.walkin {
                          <?=$sr["comments_next_decision"];?>
                          <?=$sr["comments_next_step_aloc"];?>
                            
- 
+
 
                          </td>
 
@@ -135,19 +133,36 @@ App.init();
 
   $('#Ajax_Table_info').dataTable({
         dom: 'Bfrtip',
+        
         buttons: [
             'copyHtml5',
             'excelHtml5',
             'csvHtml5',
             'pdfHtml5'
-        ]
+        ],
+        order:[0,'desc']
+
+
     });
+  
   setTimeout(function(){
    App.stopPageLoading();
   
     }, 5000);
 
+
 };
+
+
+
+
+
+
+/*$(document).ready(function() {
+    $('#Ajax_Table_info').DataTable( {
+        "order": [[ 0, "desc" ]]
+    } );
+} );*/
 
  
 loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){

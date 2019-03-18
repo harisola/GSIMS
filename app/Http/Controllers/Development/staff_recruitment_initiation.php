@@ -11,25 +11,114 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Core\SelectionList;
 use App\Models\Staff\Staff_Recruitment\Staff_recruitment_model;
-
+use App\Models\Staff\Staff_Recruitment\staff_recruitment_area_department_levels;
 
 class staff_recruitment_initiation extends Controller
 {
 
-  public function index()
+  public function index(Request $request)
   {
     $userId = Sentinel::getUser()->id;
+   
     $staffRecruiment = new Staff_recruitment_model();
+
+    $get_dept_level = new staff_recruitment_area_department_levels();
+
     $RecruimentData = $staffRecruiment->get_recruitment_data();
+    
     $tag = $staffRecruiment->get_tag();
     $grade = $staffRecruiment->get_grade();
     $status = $staffRecruiment->get_status();
     $campus = $staffRecruiment->get_branch();
     $career_allocation = $staffRecruiment->get_allocation();
+    $career_area = $get_dept_level->get_area();
+   
+
     $get_getTags = $staffRecruiment->get_getTags();
     return view('master_layout.staff.staff_recruitment.staff_recruitment_initiation_view')
-        ->with(array('staffRecruiment' => $RecruimentData,'tag'=> $tag,'grade'=>$grade,'status'=> $status,'campus' => $campus,'career_allocation'=>$career_allocation,"get_getTags"=>$get_getTags));
+        ->with(array('staffRecruiment' => $RecruimentData,'tag'=> $tag,'grade'=>$grade,'status'=> $status,'campus' => $campus,'career_allocation'=>$career_allocation,"get_getTags"=>$get_getTags,'career_area'=>$career_area));
   }
+
+  /*public function all_dept_default($id){
+
+    //$default = '';
+    $filterdata = new staff_recruitment_area_department_levels();
+
+    //$get_depart=$filterdata->get_all_dept($id);
+    $default['departments'] = $filterdata->get_all_dept($id);
+
+   //$get_level=$filterdata->all_level($id);
+    $default['levels'] = $filterdata->all_level($id);
+
+    return $default;
+  }*/
+
+
+  public function all_dept(Request $request){
+
+    $id = $request['career_id_1'];
+    $filterdata = new staff_recruitment_area_department_levels();
+     //prinit_r($filterdata);
+     //die;
+    $get_depart=$filterdata->get_all_dept($id);
+
+   $get_level=$filterdata->all_level($id);
+
+   //zk
+
+   //return view('master_layout/staff/staff_recruitment/select_depart_ajax');
+    return view('master_layout/staff/staff_recruitment/select_depart_ajax', (['get_depart'=>$get_depart,'get_level'=>$get_level]));
+
+    // $returnHTML = view('master_layout/staff/staff_recruitment/select_depart_ajax')->with( array('get_depart' => $get_depart,'get_level'=> $get_level ) )->render();
+    // return response()->json(array($returnHTML);
+
+   // return(['get_depart'=>$get_depart,
+   //  'get_level'=>$get_level]);
+  }
+
+
+
+
+  public function all_dept2(Request $request){
+
+    $id = $request['career_id_2'];
+    $filterdata = new staff_recruitment_area_department_levels();
+     //prinit_r($filterdata);
+     //die;
+    $get_depart=$filterdata->get_all_dept($id);
+
+   $get_level=$filterdata->all_level($id);
+
+   //zk
+
+   //return view('master_layout/staff/staff_recruitment/select_depart_ajax');
+    return view('master_layout/staff/staff_recruitment/select_depart_ajax1', (['get_depart'=>$get_depart,'get_level'=>$get_level]));
+
+    // $returnHTML = view('master_layout/staff/staff_recruitment/select_depart_ajax')->with( array('get_depart' => $get_depart,'get_level'=> $get_level ) )->render();
+    // return response()->json(array($returnHTML);
+
+   // return(['get_depart'=>$get_depart,
+   //  'get_level'=>$get_level]);
+  }
+
+
+
+
+ /* public function all_get_level(Request $request){
+
+
+    $id = $request['level'];
+    //echo $id;
+
+     /// 
+     $filterdata1 = new staff_recruitment_area_department_levels();
+     //prinit_r($filterdata);
+     //die;
+      $get_level=$filterdata1->all_level($id);
+     // print_r($get_level);
+    
+   return view('master_layout/staff/staff_recruitment/select_level_ajax', ['get_level'=>$get_level]);
+  }*/
 
 
 
@@ -373,7 +462,6 @@ foreach ($empRecords as $row) {
 
 
 
-
               $gc_id = '<a data-id="'.$row['career_id'].'" class="gc_id_form_id">'.$row['gc_id'].'</a>';
               $Landline=$row["land_line"];
 
@@ -501,11 +589,22 @@ public function addcustomer(Request $request)
     * Date:     Mar 22, 2018 (Thr)
     ***********************************************************************/
     public function addFormData(Request $request){
+
+      
+     /*   $depart_id = $request->input('depart_id');
+
+       echo $career_id;
+
+       die;*/
+        
     
         $staffRecruiment = new Staff_recruitment_model();
         
         $userID = Sentinel::getUser()->id;
         $form_id = $request->input('form_id');
+        $career_id = $request->input('career_id');
+        $depart_id = $request->input('depart_id');
+        $level_id = $request->input('level_id');
 
         $stage_id = $request->input('stage_id');
         if(!empty($request->input('taging'))){
@@ -599,7 +698,8 @@ $new_Data = array(
 'created' => $timeNow,
 'register_by' => $userID,
 'modified' => $timeNow,
-'modified_by' => $userID,                    
+'modified_by' => $userID,   
+        
 'record_deleted' => 0
 );
 
@@ -623,9 +723,13 @@ $new_Data2 = array(
 'created' => $timeNow,
 'register_by' => $userID,
 'modified' => $timeNow,
-'modified_by' => $userID,                    
+'modified_by' => $userID,  
+
+               
 'record_deleted' => 0
 );
+
+
 if( ((int)$status_id == 11 && (int)$stage_id == 4 ) )
 {
 }else 
@@ -636,10 +740,6 @@ $staffRecruiment->insertFormData('career_form_data_updation',$new_Data2);
 
 
 
-
-
-
-        
         $data = array(
           'form_id' => $form_id,
           'stage_id' => $stage_id,
@@ -657,9 +757,15 @@ $staffRecruiment->insertFormData('career_form_data_updation',$new_Data2);
           'created' => $timeNow,
           'register_by' => $userID,
           'modified' => $timeNow,
-          'modified_by' => $userID,                    
+          'modified_by' => $userID, 
+          'depart_id' => $depart_id, 
+          'level_id' => $level_id,
+          'career_id' => $career_id, 
           'record_deleted' => 0
         );
+
+
+        
         
         $career_form = array(
                   'status_id' => $status_next, 
@@ -703,7 +809,13 @@ $staffRecruiment->insertFormData('career_form_data_updation',$new_Data2);
             'created' => time(),
             'register_by' => Sentinel::getUser()->id,
             'modified' => time(),
-            'modified_by' => Sentinel::getUser()->id
+            'modified_by' => Sentinel::getUser()->id,
+            'career_id' => $career_id,
+            'depart_id' => $depart_id, 
+            'level_id' => $level_id       
+           
+            
+            
         );
 
         if( count( $flag_next_status ) == 0 ){
@@ -712,7 +824,7 @@ $staffRecruiment->insertFormData('career_form_data_updation',$new_Data2);
           //var_dump($id_delete);
           if(!empty($id_delete)){
            //var_dump($id_delete[0]->id);
-$delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data', $id_delete[0]->id);
+        $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data', $id_delete[0]->id);
 
             
           }
@@ -778,12 +890,19 @@ $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data'
     }
 
     // **************************** GET DATA FOR MAPPING **************//
+    // zk
+
 
     public function get_recruitment_data(Request $request){
-      $form_id = $request->input('form_id');
 
+      $form_id = $request->input('form_id');
       $staffRecruiment = new Staff_recruitment_model();
+
       $data['data'] = $staffRecruiment->get_applicant_recruitment_data($form_id);
+      // print_r($data['data'][0]['level_id'] );
+      // print_r($data['data'][0]['depart_id'] );
+      // die;
+   
       $current_status = $data['data'][0];
       $current_status  = $current_status['current_status_id'];
       $data['showMarkAsPresence'] = $staffRecruiment->get_mark_as_presence($form_id, $current_status);
@@ -1074,7 +1193,6 @@ $To_Date_m =  $request->input('from_date_m');
   }
     
   
-  
     
     
   if( !empty( $request->input('CForPartB') ))
@@ -1234,9 +1352,7 @@ $Where = $this->MakeWhere($request);
   $returnHTML = view('master_layout.staff.staff_recruitment.staff_recruitment_initiation_view_reload2')->with('staffRecruiment', $RecruimentData)->render();
   return response()->json(array('success' => true, 'html'=>$returnHTML));*/
   
-  
-
-
+ 
   $draw = $request->input('draw');
   $row = $request->input('start');
   $rowperpage = $request->input('length'); // Rows display per page

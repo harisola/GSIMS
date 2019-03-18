@@ -313,8 +313,10 @@
     <!-- /.modal-dialog -->
   </div><!-- modal -->
 
-   <div class="col-md-12" style="overflow-y: hidden;position:relative;">
-       <img src="img/RecruitmentProcessflow.jpg" width="3500" />
+   <div class="col-md-12" style="overflow-y: hidden;position:relative; "> 
+       <img src="img/RecruitmentProcessflow.jpg" width="3500" style="
+    zoom: 72%;
+"/>
 
         
                <div class="startTillCSL3">
@@ -630,13 +632,10 @@
       <span class="FinalConsCommunicationNotInterested absolute">
           <a href="#allocateProfileModal" data-toggle="modal" data-status="final_communication_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Final Consultation Communication">Haris Ola</a>
       </span><!-- FinalConsCommunicationNotInterested -->
-  </div><!-- startTillCSL2 -->
+  </div><!-- startzTillCSL2 -->
 </div><!-- col-md-12 -->
 </div><!-- row -->
-
-
 <script>
-
 
 $(document).on("click",".counter",function(){
 
@@ -717,10 +716,12 @@ $.ajax({
 <style>
 #empTable_wrapper .row div {
     width: 100% !important;
+
 }
 .modal-dialog {
     width: 80% !important;
     margin: 30px auto;
+
 }
 .startTillCSL3 a,
 .CSL3TillDDM3 a,
@@ -732,7 +733,14 @@ $.ajax({
     position: absolute;
     top: 0;
     left: 0;
+    zoom: 72%;
+
+     
+    
+
 }
+
+
 
 .CSL3TillDDM3 {
     width: 990px;
@@ -740,6 +748,9 @@ $.ajax({
     position: absolute;
     top: 0;
     left:1220px;
+    zoom: 72%;
+      
+     
 }
 .DDM3TillEnd {
     width: 1300px;
@@ -747,6 +758,9 @@ $.ajax({
     position: absolute;
     top: 0;
     left:2210px;
+    zoom: 72%;
+
+  
 }
 /* CSS for individual links start here */
 a.gray {

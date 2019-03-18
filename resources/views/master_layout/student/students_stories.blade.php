@@ -17,11 +17,11 @@
 					@foreach ($tags as $tag)
 					<span class="commentCat TPA Confirmed "> {{ $tag }} </span>
 					@endforeach
-					@foreach ($c_tags as $tag)
-					<?php if($tag != '') { ?>
-						<span class="commentCat communicationCat TPA Confirmed "> {{ $tag }} </span>
-					<?php } ?>
-					@endforeach
+					<!-- @foreach ($c_tags as $tag) -->
+					<?php /*if($tag != '') {*/ ?>
+						<!-- <span class="commentCat communicationCat TPA Confirmed "> {{ $tag }} </span> -->
+					<?php /*}*/ ?>
+					<!-- @endforeach -->
 				<br>                                            
 				<span class="commentDate"> {{ $student->date_time }} </span>
 			</div>

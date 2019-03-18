@@ -186,6 +186,35 @@ return [
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
 
+        'mysql_AttendanceStaff' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_AttendanceStaff', '127.0.0.1'),
+            'database' => env('DB_DATABASE_AttendanceStaff', 'forge'),
+            'username' => env('DB_USERNAME_AttendanceStaff', 'forge'),
+            'password' => env('DB_PASSWORD_AttendanceStaff', 'forge'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+            'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
+        ],
+
+
+        'mysql_Attendance' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_Attendance', '127.0.0.1'),
+            'database' => env('DB_DATABASE_Attendance', 'forge'),
+            'username' => env('DB_USERNAME_Attendance', 'forge'),
+            'password' => env('DB_PASSWORD_Attendance', 'forge'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+            'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
+        ],
+
 
         'my_VechilesDB' => [
             'driver' => 'mysql',

@@ -146,18 +146,18 @@ public function Followup_list(Request $request)
 //$pathname = $request->input();
 	$draw = $request->input('draw');
 	$row = $request->input('start');
-$rowperpage = $request->input('length'); // Rows display per page
-$order = $request->input("order");
-$columnIndex = $order[0]['column']; // Column index
-$columns = $request->input("columns");
-$columnName = $columns[$columnIndex]['data']; // Column name
-$order = $request->input("order");
-$columnSortOrder = $order[0]['dir']; // asc or desc
+	$rowperpage = $request->input('length'); // Rows display per page
+	$order = $request->input("order");
+	$columnIndex = $order[0]['column']; // Column index
+	$columns = $request->input("columns");
+	$columnName = $columns[$columnIndex]['data']; // Column name
+	$order = $request->input("order");
+	$columnSortOrder = $order[0]['dir']; // asc or desc
 
-$search = $request->input("search");
-$searchValue = $search['value']; // Search value
+	$search = $request->input("search");
+	$searchValue = $search['value']; // Search value
 
-$searchValue = preg_replace("/[^a-zA-Z0-9-\/ ]+/", "", html_entity_decode($searchValue, ENT_QUOTES));
+	$searchValue = preg_replace("/[^a-zA-Z0-9-\/ ]+/", "", html_entity_decode($searchValue, ENT_QUOTES));
 
 
 
@@ -322,7 +322,6 @@ when af.status_id=11 and af.stage_id=10 then 'CommunicatedForPartB'
 when af.status_id != 11 and d.p_time is not null then 'CompletedPartB'
 else ''
 end ) as PartB,
-
 
 
 from_unixtime(af.created,'%b %e, %Y %h:%i:%S %p') as Created_date,
@@ -511,7 +510,6 @@ $response = array(
 );
 echo json_encode($response);
 }
-
 
 
 
@@ -805,7 +803,6 @@ foreach ($empRecords as $row) {
 
 
 
-
 $action = '';
   if($row["form_source2"] == 1) { 
   $action .= '<div class="btn-group pull-right part_b_append_ul_'.$row['career_id'].'">';
@@ -835,7 +832,6 @@ $action .= '<button class="btn green btn-xs btn-outline dropdown-toggle" data-to
 <a href="http://10.10.10.63/gs/index.php/hcm/career_form_ajax/get_career_form_pdf_gcid?gc_id='.$row["gc_id"].'"><i class="fa fa-print"  ></i> Print </a></li>';
 $action .= '<li><a href="http://10.10.10.63/gs/index.php/hcm/career_form_ajax/get_career_form_pdf_gcid?gc_id='.$row["gc_id"].'"><i class="fa fa-file-pdf-o"></i> Save as PDF </a></li><li><a href="javascript:;"><i class="fa fa-file-excel-o"></i> Export to Excel </a></li></ul></div>';
 }
-
 
 
 

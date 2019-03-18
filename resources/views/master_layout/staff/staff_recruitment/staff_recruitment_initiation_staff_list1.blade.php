@@ -236,7 +236,7 @@
                <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="StaffList">
                  <thead>
                      <tr>
-                         <th class="all">Form #</th>
+                         <th class="all"> #</th>
                          <th class="all">Name</th>
                          <th class="all">Position</th>
                          <th class="none">Mobile: </th>

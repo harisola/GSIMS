@@ -5,7 +5,7 @@
 
 
 var insertForm = function(status_id,stage_id,next_stage){
-
+debugger;
 var status_id = status_id;
 var stage_id = stage_id;
 var next_stage = next_stage

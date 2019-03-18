@@ -678,18 +678,19 @@ if( empty($Current_user_pic["photo150"]))
 
 
 #loadMore {
-    padding: 10px;
-    text-align: center;
-    background-color: #33739E;
-    color: #fff;
-    border-width: 0 1px 1px 0;
-    border-style: solid;
-    border-color: #fff;
+   /* padding: 10px;
+    text-align: center;*/
+   /* background-color: #33739E;*/
+    color: #404040;
+   /* border-width: 0 1px 1px 0;
+    border-style: solid;*/
+   /* border-color: #fff;
     box-shadow: 0 1px 1px #ccc;
     transition: all 600ms ease-in-out;
     -webkit-transition: all 600ms ease-in-out;
     -moz-transition: all 600ms ease-in-out;
-    -o-transition: all 600ms ease-in-out;
+    -o-transition: all 600ms ease-in-out;*/
+    
 }
 #loadMore:hover {
     background-color: #fff;
@@ -2419,15 +2420,31 @@ $('#staffView_StaffList_Search_B').bind('keyup', function() {
 //Assign table rows to tableRecords
    var tableRecords = $('#staffView_Table_StaffList').find('.Row');
  $("#staffView_StaffList_Search").keyup(function(){
-        
-        var searchText = $("#staffView_StaffList_Search").val();
 
+    //alert('ok');
+if(this.value.length >= 3) {
+         
+          App.startPageLoading();
+
+         var searchText = $("#staffView_StaffList_Search").val();
+
+      
+         setTimeout(function(){ App.stopPageLoading(); }, 1000);
+
+           
+        
+        //alert('ok');
+       
+        
         //First letter of each word should be capital
+       // var searchText = $("#staffView_StaffList_Search").val();
         var arr = searchText.split(' ');
         var result = "";
+
+
         for (var x=0; x<arr.length; x++)
             result+=arr[x].substring(0,1).toUpperCase()+arr[x].substring(1)+' ';
-        searchText = result.substring(0, result.length-1);
+            searchText = result.substring(0, result.length-1);
 
         $(tableRecords).each(function(){
             var lineStr = $(this).text();
@@ -2450,9 +2467,52 @@ $('#staffView_StaffList_Search_B').bind('keyup', function() {
                 $(this).show();
             }
         });
+         
         var totalRow =  $('#staffView_Table_StaffList tr:visible').length - 1;
         $('#staffView_StaffList_Total').text('STAFF LIST - ' + totalRow); 
+       }
+        if(this.value == '') {
 
+             var searchText = $("#staffView_StaffList_Search").val();
+
+         var arr = searchText.split(' ');
+        var result = "";
+
+
+        for (var x=0; x<arr.length; x++)
+            result+=arr[x].substring(0,1).toUpperCase()+arr[x].substring(1)+' ';
+            searchText = result.substring(0, result.length-1);
+
+        $(tableRecords).each(function(){
+            var lineStr = $(this).text();
+            if( lineStr.indexOf(searchText) === -1 ){
+                $(this).hide();
+            } else {
+
+                // //Get Html of profile_StaffName
+                // var src_str = $(this).find('.profile_StaffName').html();
+                // //Remove mark if html already contains
+                // src_str = src_str.replace("<mark>", "" );
+                // src_str = src_str.replace("</mark>", "" );
+                // //Add mark on search words 
+                // if(searchText !== ""){
+                //     src_str = src_str.replace(searchText, "<mark>" + searchText + "</mark>");
+
+                // }
+                // //Update new html with mark on it
+                // $(this).find('.profile_StaffName').html(src_str)               
+                $(this).show();
+            }
+        });
+         
+        var totalRow =  $('#staffView_Table_StaffList tr:visible').length - 1;
+        $('#staffView_StaffList_Total').text('STAFF LIST - ' + totalRow); 
+        //alert('ok');
+
+
+    }
+
+    
     })
 	
 	

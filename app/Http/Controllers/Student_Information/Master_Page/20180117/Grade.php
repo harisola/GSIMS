@@ -354,11 +354,11 @@ public function Student_Stories_Limit(Request $request){
 									foreach($tags as $tag){
 										$html .= '<span class="commentCat TPA Confirmed ">'.$tag.'</span> ';
 									}
-									foreach ($c_tags as $tag){
+									/*foreach ($c_tags as $tag){
 										if($tag != ''){
 											$html .= '<span class="commentCat communicationCat TPA Confirmed "> '.$tag.' </span>';
 										}
-									}
+									}*/
 									$html .= '<span class="commentDate">'.$u->date_time.'</span>
 								</div>
 							</div>
@@ -941,7 +941,7 @@ public function Get_Student_Stories($Student_id, $lowerLimit, $upperLimit){
 		select 
 			cl.gs_id, cl.abridged_name, 'Generations School' as staff_name,
 			sms.message as comments, DATE_FORMAT(sms.created, '%a, %d %b %Y - %h:%i %p') as date_time, sms.created as thisDateTime,
-			'SMS' as tag, '' as communication_tag, 0 as actions, 'M' as gender, 0 as user_id
+			'SMS' as tag, '' as communication_tag, 0 as actions, 0 as gender, 0 as user_id
 		
 			from atif_sms.sms_api_log AS sms
 			inner join atif.student_family_record as sfr

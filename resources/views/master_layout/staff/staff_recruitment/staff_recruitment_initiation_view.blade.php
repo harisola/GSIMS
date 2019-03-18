@@ -496,7 +496,7 @@ $(document).on('click','#print_submit',function(){
   if(mobile === ""){ if(errors !== "") { errors += "<br>"; } errors += "<strong>Mobile Phone</strong> is required." }
   if(gender === ""){ if(errors !== "") { errors += "<br>"; } errors += "<strong>Gender</strong> is required." }
   if(tag === "" || tag === null){ if(errors !== "") { errors += "<br>"; } errors += "<strong>Tag</strong> is required." }
-
+  var formdata =  'career_id_1='+$('#career_id_1').val()
   if(errors === ""){
     $('#error_div').hide();
     $.ajax({
@@ -509,7 +509,8 @@ $(document).on('click','#print_submit',function(){
           land_line:landline,
           gender:gender,
           tag:tag,
-          comments:comments
+          comments:comments,
+          formdata:formdata
         },
       url:"{{url('/staff_recruitment_initiation_addcareerform')}}",
       success:function(e){
@@ -526,6 +527,7 @@ $(document).on('click','#print_submit',function(){
           $('#career_tag').val('');
           $('#career_comments').val('');
 			    $('#career_name').focus();
+           $('#depart').html(data);
 
 
           /***** Calling PDF *****/

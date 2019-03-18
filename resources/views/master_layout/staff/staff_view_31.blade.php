@@ -258,7 +258,7 @@ display: none;
   z-index: 9;
 }
 .edit-button {
-	position: absolute;
+  position: absolute;
     right: 14px;
     top: 0;
     background: #e2e2e273;
@@ -266,17 +266,17 @@ display: none;
     padding: 2px 10px;
 }
 .edit-button:hover {
-	color: #888;
-	background: #e2e2e2;
-	text-decoration: none;
-	border-bottom: 1px solid #888;
-	border-left: 1px solid #888;
+  color: #888;
+  background: #e2e2e2;
+  text-decoration: none;
+  border-bottom: 1px solid #888;
+  border-left: 1px solid #888;
 }
 #EditDetails .modal-dialog {
     width: 90%;
 }
 .marginBottom20 {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 </style>
 <link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css" />
@@ -1170,24 +1170,24 @@ display: none;
              <!-- SIDEBAR USERPIC -->
              <a href="#EditDetails" data-toggle="modal" class="edit-button">Edit details</a>
              <div class="modal fade" id="EditDetails" tabindex="-1" role="basic" aria-hidden="true">
-	             <div class="modal-dialog">
-	                <div class="modal-content">
-	                   <div class="modal-header">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h3 class="modal-title" id="modal-title-staff">Edit Information for <strong>Aamir Hussain</strong></h3>
                      </div>
                       <div class="modal_body_fetch"></div>
-	                   <hr />
-	                   <div class="modal-footer text-center" style="text-align:center;">
+                     <hr />
+                     <div class="modal-footer text-center" style="text-align:center;">
                         <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
                         <button type="button" class="btn dark btn-outline active add_staff_info" data-dismiss="">Update</button>
                         <!--button type="button" class="btn green">Add Badge</button -->
                      </div>
-	                </div>
-	                <!-- /.modal-content -->
-	             </div>
-	             <!-- /.modal-dialog -->
-	        </div>
+                  </div>
+                  <!-- /.modal-content -->
+               </div>
+               <!-- /.modal-dialog -->
+          </div>
              <div class="profile-userpic">
                 <img src="" class="img-responsive" alt=""> 
              </div>
@@ -5538,7 +5538,7 @@ display: none;
 </style>                     
                    <div class="tab-pane fade" id="tab_1_6">
                       <div id="content_role_position_distance"> 
-					
+          
                          <div class="portlet-body padding0">
                             <table width="100%" class="rolesTable">
                                <tr class="pBottom10">
@@ -8341,14 +8341,14 @@ $.ajax({
    cache:true,
    url:"{{url('/masterLayout/staff/Edit_Get_Absentia')}}",
    data:{
-	  "staff_id":Staff_id,
-	  "Absentia_id":Absentia_id,
-	  "_token": "{{ csrf_token() }}"
+    "staff_id":Staff_id,
+    "Absentia_id":Absentia_id,
+    "_token": "{{ csrf_token() }}"
    },
    success:function(result){
-	var data = jQuery.parseJSON(result);
-	$('#Absenia_Contents').html(data["h"]);
-	$('#AddAIAE').modal('toggle');
+  var data = jQuery.parseJSON(result);
+  $('#Absenia_Contents').html(data["h"]);
+  $('#AddAIAE').modal('toggle');
    }
 });
 }
@@ -8379,50 +8379,50 @@ $.ajax({
           title: "Please Confirm.",
           buttons: {
             confirm: {
-				label: "Yes! Change Absentia",
-				callback: function() { 
-					if( Attendance_in_id !== '' && Attendance_out_id !== '' && Attendance_des_id !== '' && end_time !== ''){
-						$.ajax({
-						   type:"POST",
-						   cache:true,
-						   url:"{{url('/masterLayout/staff/editAbsentia')}}",
-						   data:{
-							   "staff_id":staffID,
-							   "date" : date,
-							   "title" : titles,
-							   "start_time" : start_time,
-							   "end_time" : end_time,
-							   "description" : description,
-							   "Attendance_in_id" : Attendance_in_id,
-							   "Attendance_out_id" : Attendance_out_id,
-							   "Attendance_des_id" : Attendance_des_id,
-							   "Edit_Absentia_id_hidden" : Edit_Absentia_id_hidden,
-								"_token": "{{ csrf_token() }}"
-						   },
-						   success:function(result){
-								$('#absentia_table > tbody tr').each(function(index) { 
-									var $this = $(this);
-									var filter = $this.attr('id');
-									var id = "absentia_table_row_"+Edit_Absentia_id_hidden;
-									if(filter == id){
-									  var leaveHTML = '';
-									  leaveHTML = '<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ titles +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>';
-									  $(this).replaceWith(leaveHTML);
-									}
-								});
-								$('#AddAIAE').modal('toggle');   
-								$("#absentia_date_edit").val('');
-								$("#absentia_title_edit").val('');
-								$("#absentia_startTime_edit").val('');
-								$("#absentia_endTime_edit").val('');
-								$("#absentia_description_edit").val('');
-						   }
-					   });
-					}
+        label: "Yes! Change Absentia",
+        callback: function() { 
+          if( Attendance_in_id !== '' && Attendance_out_id !== '' && Attendance_des_id !== '' && end_time !== ''){
+            $.ajax({
+               type:"POST",
+               cache:true,
+               url:"{{url('/masterLayout/staff/editAbsentia')}}",
+               data:{
+                 "staff_id":staffID,
+                 "date" : date,
+                 "title" : titles,
+                 "start_time" : start_time,
+                 "end_time" : end_time,
+                 "description" : description,
+                 "Attendance_in_id" : Attendance_in_id,
+                 "Attendance_out_id" : Attendance_out_id,
+                 "Attendance_des_id" : Attendance_des_id,
+                 "Edit_Absentia_id_hidden" : Edit_Absentia_id_hidden,
+                "_token": "{{ csrf_token() }}"
+               },
+               success:function(result){
+                $('#absentia_table > tbody tr').each(function(index) { 
+                  var $this = $(this);
+                  var filter = $this.attr('id');
+                  var id = "absentia_table_row_"+Edit_Absentia_id_hidden;
+                  if(filter == id){
+                    var leaveHTML = '';
+                    leaveHTML = '<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ titles +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>';
+                    $(this).replaceWith(leaveHTML);
+                  }
+                });
+                $('#AddAIAE').modal('toggle');   
+                $("#absentia_date_edit").val('');
+                $("#absentia_title_edit").val('');
+                $("#absentia_startTime_edit").val('');
+                $("#absentia_endTime_edit").val('');
+                $("#absentia_description_edit").val('');
+               }
+             });
+          }
  
-				}// Call Back
-            	},//end Confirm
-			cancel: { label: "Cancel", callback: function() { } },
+        }// Call Back
+              },//end Confirm
+      cancel: { label: "Cancel", callback: function() { } },
             
           }
       });
@@ -8469,27 +8469,27 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
             confirm: {
               label: "Yes! Remove Absentia",
               callback: function() { 
-				
-			   if( Absentia_id > 0){
-				  $.ajax({
-						type:"POST",
-						cache:true,
-						url:"{{url('/masterLayout/staff/deleteAbsentia')}}",
-						data:{ "Absentia_id":Absentia_id, "Staff_id":Staff_id, "_token": "{{ csrf_token() }}" },
-						success:function(result){ $("#absentia_table_row_"+Absentia_id).remove(); }
-					});
-				}
-			}
+        
+         if( Absentia_id > 0){
+          $.ajax({
+            type:"POST",
+            cache:true,
+            url:"{{url('/masterLayout/staff/deleteAbsentia')}}",
+            data:{ "Absentia_id":Absentia_id, "Staff_id":Staff_id, "_token": "{{ csrf_token() }}" },
+            success:function(result){ $("#absentia_table_row_"+Absentia_id).remove(); }
+          });
+        }
+      }
             },
-		  cancel: {
+      cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
+  
+  
 }
 
 
@@ -8582,7 +8582,7 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
             confirm: {
               label: "Yes! Edit Leaves",
               callback: function() { 
-			
+      
   
    if(leave_type != '' && leave_title != '' && leave_from != '' && leave_to != ''){
 
@@ -8605,38 +8605,38 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
           },
           success:function(result){
 
-			$('#leave_table > tbody tr').each(function(index) {
-				var $this = $(this);
-				var filter = $this.attr('data-id');
-			 var id = Leave_Application_id;
-				if(filter == id){
-				   var leaveHTML = '';
+      $('#leave_table > tbody tr').each(function(index) {
+        var $this = $(this);
+        var filter = $this.attr('data-id');
+       var id = Leave_Application_id;
+        if(filter == id){
+           var leaveHTML = '';
 
-				   leaveHTML = leaveHTML + '<tr  class="approvedBorder" data-id='+id+'><td>'+leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+' </td></tr>';
-				   if(leave_approve_status_edit==1){
-					  leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+paid_compensation_percentage+'<span>% paid</span></td></tr>';
-					 }
+           leaveHTML = leaveHTML + '<tr  class="approvedBorder" data-id='+id+'><td>'+leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+' </td></tr>';
+           if(leave_approve_status_edit==1){
+            leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+paid_compensation_percentage+'<span>% paid</span></td></tr>';
+           }
 
-				leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp;'+formatDate(leave_from)+'</td></tr>';
+        leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp;'+formatDate(leave_from)+'</td></tr>';
 
-				   if(leave_approve_status_edit==1){
-					  leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved From"></i> &nbsp; '+formatDate(approve_from)+' </td></tr>';
-					 }
+           if(leave_approve_status_edit==1){
+            leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved From"></i> &nbsp; '+formatDate(approve_from)+' </td></tr>';
+           }
 
-				   leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr>';
+           leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr>';
 
-				   if(leave_approve_status_edit==1){
-					  leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+formatDate(approve_to)+' </td> </tr>';
-					 }
+           if(leave_approve_status_edit==1){
+            leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+formatDate(approve_to)+' </td> </tr>';
+           }
 
-				   //leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a></td></tr>';
-				
-				leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a> | <a onClick="delectLeave('+id+')"><i class="fa fa-close"></i></a></td></tr>';
-				$(this).replaceWith(leaveHTML);
-				}
+           //leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a></td></tr>';
+        
+        leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a> | <a onClick="delectLeave('+id+')"><i class="fa fa-close"></i></a></td></tr>';
+        $(this).replaceWith(leaveHTML);
+        }
 
-			});
-			$('#LeaveAppForEdit').modal('toggle');
+      });
+      $('#LeaveAppForEdit').modal('toggle');
              
           }
 
@@ -8646,18 +8646,18 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
 
  
  }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
-	
-	
+  
+  
+  
+  
 
  }
  
@@ -8674,31 +8674,31 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
             confirm: {
               label: "Yes! Remove Leave",
               callback: function() { 
-			
-			
-			  if( Action_id > 0){
-				  
-				 $.ajax({
-					type:"POST",
-					cache:true,
-					url:"{{url('/masterLayout/staff/deleteLeaveApp')}}",
-					data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
-					success:function(result){ 
-					
-					
-					 $('#leave_table > tbody tr').each(function(index) {
-						var $this = $(this);
-						var filter = $this.attr('data-id');
-						var id = Action_id;
-						if(filter == id){ $this.remove(); }
-					});
-					
-					}
-				 });
-			  }
+      
+      
+        if( Action_id > 0){
+          
+         $.ajax({
+          type:"POST",
+          cache:true,
+          url:"{{url('/masterLayout/staff/deleteLeaveApp')}}",
+          data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
+          success:function(result){ 
+          
+          
+           $('#leave_table > tbody tr').each(function(index) {
+            var $this = $(this);
+            var filter = $this.attr('data-id');
+            var id = Action_id;
+            if(filter == id){ $this.remove(); }
+          });
+          
+          }
+         });
+        }
        }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -8751,8 +8751,8 @@ $.ajax({
             confirm: {
               label: "Yes! Edit Penalty",
               callback: function() { 
-			
-			
+      
+      
     if(penalty_id_edit != '' && penalty_title != '' && penalty_from != '' && penalty_to != '' && penalty_day != ''){
        $.ajax({
           type:"POST",
@@ -8800,16 +8800,16 @@ $.ajax({
  
  
  }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
+  
+  
  }
  
 var delectLeavePenalties = function(Action_id){
@@ -8824,7 +8824,7 @@ bootbox.dialog({
             confirm: {
               label: "Yes! Remove Absentia",
               callback: function() { 
-			
+      
 if( Action_id > 0){
  $.ajax({
     type:"POST",
@@ -8847,8 +8847,8 @@ if( Action_id > 0){
 
 
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -8895,7 +8895,7 @@ var editAdjustment = function(){
             confirm: {
               label: "Yes! Edit Adjustment",
               callback: function() { 
-			
+      
     if(adjustment_title != '' && adjustment_no != ''){
        $.ajax({
           type:"POST",
@@ -8939,17 +8939,17 @@ var editAdjustment = function(){
 
   
   }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
-	
+  
+  
+  
   }
  
 var deleteAdjustment = function(Action_id)
@@ -8965,8 +8965,8 @@ var deleteAdjustment = function(Action_id)
             confirm: {
               label: "Yes! Remove Adjustment",
               callback: function() { 
-			
-			
+      
+      
  if( Action_id > 0){
     $.ajax({
        type:"POST",
@@ -8974,24 +8974,24 @@ var deleteAdjustment = function(Action_id)
        url:"{{url('/masterLayout/staff/deleteAdjustment')}}",
        data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
        success:function(result){ 
-	 
-	 
-	 
-	    $('#adjustment_table > tbody tr').each(function(index) {
-		  var $this = $(this);
-		  var filter = $this.attr('data-id');
-		  var id = Action_id;
-		  if(filter == id){ $this.remove(); }
-	   });
-	 }
+   
+   
+   
+      $('#adjustment_table > tbody tr').each(function(index) {
+      var $this = $(this);
+      var filter = $this.attr('data-id');
+      var id = Action_id;
+      if(filter == id){ $this.remove(); }
+     });
+   }
     });
  }
  
  
  
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -9046,9 +9046,9 @@ bootbox.dialog({
             confirm: {
               label: "Yes! Edit Missed Tap",
               callback: function() { 
-			
-			
-			
+      
+      
+      
 if(date != '' && missTap != '' && Tap_id != ''){
  $.ajax({
     type:"POST",
@@ -9107,17 +9107,17 @@ if(date != '' && missTap != '' && Tap_id != ''){
 
 
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
-	
+  
+  
+  
     
 }
 
@@ -9135,9 +9135,9 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
             confirm: {
               label: "Yes! Remove Missed Tap",
               callback: function() { 
-			
-			
-			
+      
+      
+      
  if( Action_id > 0){
     $.ajax({
        type:"POST",
@@ -9150,14 +9150,14 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
           "_token": "{{ csrf_token() }}" 
           },
        success:function(result){
-		 
-		 
-		 $('#manual_table > tbody tr').each(function(index) {
-		  var $this = $(this);
-		  var filter = $this.attr('data-id');
-		  var id = Action_id;
-		  if(filter == id){ $this.remove(); }
-		});
+     
+     
+     $('#manual_table > tbody tr').each(function(index) {
+      var $this = $(this);
+      var filter = $this.attr('data-id');
+      var id = Action_id;
+      if(filter == id){ $this.remove(); }
+    });
 
 
 
@@ -9166,8 +9166,8 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
  }
  
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -9175,16 +9175,16 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
           }
       });
 
-	
+  
 }
 
 
 $(".rolesRelation").click(
 function(){
-	var Staff_id = $("a[href='#tab_1_1']").attr('data-staff');
-	
-	Staff_Role_Distance(Staff_id)
-	
+  var Staff_id = $("a[href='#tab_1_1']").attr('data-staff');
+  
+  Staff_Role_Distance(Staff_id)
+  
 }
 );
 
@@ -9194,18 +9194,18 @@ $.ajax({
       type:"POST",
       url:"{{url('/masterLayout/staff/role_distance')}}",
       data:{
-		"Staff_id":Staff_id,
+    "Staff_id":Staff_id,
           "_token": "{{ csrf_token() }}"
       },
-	success:function(res){
-	var d =  jQuery.parseJSON(res);
-	$("#content_role_position_distance").html('');
-	$("#content_role_position_distance").html( d.ht );
-	}
+  success:function(res){
+  var d =  jQuery.parseJSON(res);
+  $("#content_role_position_distance").html('');
+  $("#content_role_position_distance").html( d.ht );
+  }
 });
-	   
-	   
-	   
+     
+     
+     
 }
 
 
@@ -10456,6 +10456,7 @@ bootbox.dialog({
            // Weekly Time Sheet
                 var weekly_time_sheet_in = timeToMinute(data[0].day_time_in);
                 var weekly_time_sheet_out = timeToMinute(data[0].day_time_out);
+                                  window.FinalTimeOut=data[0].tap_max;
 
                 var range = [];
                 if(weekly_time_sheet_in && weekly_time_sheet_out){
@@ -11514,6 +11515,9 @@ bootbox.dialog({
 
     var actualTapInTapOut = function(time,connect1,classes,uihandle,tooltip,range){
          console.log('time_actual_tap'+time);
+         setTimeout(function(){
+           $('.Out').text(window.FinalTimeOut);
+         },100)
          console.log('connect1_actual_tap'+connect1)
          console.log('classes_actual_tap'+classes) 
          console.log('uihandle_actual_tap'+uihandle) 
@@ -11692,10 +11696,14 @@ bootbox.dialog({
 
     function PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range){
 
-           if(typeof payrollSlider != undefined){
-                payrollSlider.noUiSlider.destroy();
+           if(payrollSlider != undefined){
+            if(payrollSlider.noUiSlider!=undefined){
+                              payrollSlider.noUiSlider.destroy();
+
+            }
            }
-          
+                        //  payrollSlider.noUiSlider.destroy();
+
           var PayrollSliderCreate1 = document.getElementById('PayrollAttendance');
           noUiSlider.create(PayrollSliderCreate1, {
           start: payRollAttendanceArray,
@@ -12217,12 +12225,12 @@ loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
                                                           loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/nouislider.min.js", function(){
                                                              loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/moment.min.js", function(){
                                                                  loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/index.js", function(){
-																   loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){
-																		loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
-																				loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
-																					loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
-																				});
-																			});
+                                   loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){
+                                    loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
+                                        loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
+                                          loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
+                                        });
+                                      });
                                                                       });
                                                                           });
                                                           });
