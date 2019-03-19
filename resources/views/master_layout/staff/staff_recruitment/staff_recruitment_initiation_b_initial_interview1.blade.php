@@ -31,7 +31,7 @@
                             <div class="text-center">
                                <div class="col-md-12 KashifSolangi">
                                <select  placeholder="Area" class="form-control" id="career_id_2">
-                                 <option value="" disabled > Select Area</option>
+                                 <option value="" disabled > Select Career</option>
                                 <?php foreach($career_area as $career_area){ ?>
                                      <!--<option value="<?php //echo $career_area['id']; ?>"><?php //echo $career_area['area']; ?></option>--> 
                                      <option value="<?php echo $career_area['id']; ?>"><?php echo $career_area['area']; ?></option>

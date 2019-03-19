@@ -442,13 +442,18 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/staff_recruitment_report','Development\staff_recruitment_reports@Get_recruitment_filter');
 
 	Route::get('/staff_recruitment_all_reports_data','Development\staff_recruitment_reports@staff_recruitment_all_reports_data');
+	Route::get('/new_admission ', 'Account_Process\Accounts\NewAdmission@index');
+	Route::get('account_reports/admission_report', 'Account_Process\Accounts\AccountReportController@newAdmissionFeeBillReport');
+
+	
+	/* Mis fee bill url */
+	Route::get('/mis ', 'Account_Process\Accounts\MisRegularFeeBill@index');
+
+	Route::POST('/table_ajax_fee_bill', 'Account_Process\Accounts\MisRegularFeeBill@table_ajax_feebill');
 
 
-	Route::get('/mis','Account_Process\Accounts\MisRegularFeeBill@index');
-	Route::post('/table_ajax_fee_bill','Account_Process\Accounts\MisRegularFeeBill@table_ajax_feebill');
-
-    Route::get('/new_admission','Account_Process\Accounts\AccountReportController@newAdmssionView');
-    Route::get('/account_reports/admission_report','Account_Process\Accounts\AccountReportController@newAdmissionFeeBillReport');
+	
+		
 
 		
 });

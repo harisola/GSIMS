@@ -203,7 +203,7 @@ a.dt-button, button.dt-button, div.dt-button {
 
                                               <div class="col-md-3" id="sectionFilter_container">
                                                 <label>Subject</label>
-                                                <select id="subject" class="form-control subject">
+                                                <select id="subject" class="form-control subject" multiple="multiple">
 
                                                  <option value="" >Select Subject</option>>
 
@@ -317,6 +317,29 @@ a.dt-button, button.dt-button, div.dt-button {
 
 
 
+             $(document).ready(function() {
+
+
+
+         $('#subject').multiselect({
+         enableFiltering: true,
+         filterBehavior: 'value',
+         numberDisplayed: 1
+             });
+
+             })
+
+            $(document).on("change", "#subject", function(){
+             var depart_name = [];
+            $.each($("#subject option:selected"), function(){            
+               subject_name.push($(this).val());
+
+
+               });
+            });
+
+
+
 
 
  $(document).on("click",".filter_report",function(){
@@ -362,7 +385,7 @@ a.dt-button, button.dt-button, div.dt-button {
  $(document).on("click",".filter_report_recuriment",function(){
     $('#Generations_AjaxLoader').show();
 
-        var formdata =      'departs='+$('#departs').val()
+        var formdata =      'departs='+$('#departs').val()+'&date_2='+$('#date_2').val()
                               
                             
                            console.log('form data=> '+formdata);
