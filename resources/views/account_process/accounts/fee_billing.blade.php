@@ -55,9 +55,9 @@
 }
 .tooltip {z-index: 99999}
 .customRow {
-	padding: 20px;
-	background: #e8bc40;
-	margin: -10px 0 0 0;
+  padding: 20px;
+  background: #e8bc40;
+  margin: -10px 0 0 0;
 }
 </style>
 <!-- Start Content section -->
@@ -73,9 +73,9 @@
                         </div>
                     </div><!-- portlet-title -->
                     <div class="row customRow">
-                        	<div class="col-md-3">
-                        		<label>Select Grade</label>
-                        		<select id="gradeFilter" multiple="multiple">
+                          <div class="col-md-3">
+                            <label>Select Grade</label>
+                            <select id="gradeFilter" multiple="multiple">
 
                                         <option data-grade_id="17"  value="PG">PG</option>
                                         <option data-grade_id="1" value="PN">PN</option>
@@ -91,15 +91,15 @@
                                         <option data-grade_id="11" value="VIII">VIII</option>
                                         <option data-grade_id="12" value="IX">IX</option>
                                         <option data-grade_id="13" value="X">X</option>
-                                    	<option data-grade_id="14" value="XI">XI</option>
-                                    	<option data-grade_id="15" value="A1">A1</option>
-                                    	<option data-grade_id="16" value="A2">A2</option>
+                                      <option data-grade_id="14" value="XI">XI</option>
+                                      <option data-grade_id="15" value="A1">A1</option>
+                                      <option data-grade_id="16" value="A2">A2</option>
                                       <option data-grade_id="18"  value="18">All</option>
                                 </select>
-                        	</div>
-                        	<div class="col-md-3" id="sectionFilter_container">
-                        		<label>Select Section</label>
-                        		<select id="sectionFilter" multiple="multiple">
+                          </div>
+                          <div class="col-md-3" id="sectionFilter_container">
+                            <label>Select Section</label>
+                            <select id="sectionFilter" multiple="multiple">
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -110,10 +110,10 @@
                                         <option value="H">H</option>
                                         <option value="I">I</option>
                                 </select>
-                        	</div>
-                        	<div class="col-md-3">
-                        		<label>Installment Number</label>
-                        		<select class="form-control" id="installment_number">
+                          </div>
+                          <div class="col-md-3">
+                            <label>Installment Number</label>
+                            <select class="form-control" id="installment_number">
 <!--                                         <option value="1">1</option>
  -->                                        
  <!-- <option value="2">2</option> -->
@@ -121,8 +121,8 @@
                                         <!-- <option value="4">4</option> -->
                                         <option value="5">5</option>
                                 </select>
-                        	</div>
-                        	<div class="col-md-2">
+                          </div>
+                          <div class="col-md-2">
                             <label>&nbsp;</label><br />
                             <input type="button" id="Generate_Fee_Bill_1" data-pdf="0" class="btn btn-group green" value="Generate Fee Bill" style="width: 100%;">
                           </div>
@@ -131,13 +131,13 @@
                             <input type="button" id="export_pdf" data-pdf="1" class="btn btn-group green" value="PDF" style="width: 100%;">
                           </div>
 
-                        	<div class="col-md-12 text-center">
-                        		<h2>OR</h2>
-                        	</div><!-- col-md-12 -->
-                        	<div class="col-md-3">
-                        		<label>GS-ID</label>
-                        		<input type="text" class="form-control" value="" id="txt_gs_id">
-                        	</div>
+                          <div class="col-md-12 text-center">
+                            <h2>OR</h2>
+                          </div><!-- col-md-12 -->
+                          <div class="col-md-3">
+                            <label>GS-ID</label>
+                            <input type="text" class="form-control" value="" id="txt_gs_id">
+                          </div>
                           <div class="col-md-3" id="">
                             <label>Select Student Status</label>
                             <select id="student_status"  class="form-control">
@@ -146,19 +146,19 @@
                                 <option value="2">S-CPT</option>
                             </select>
                           </div>
-                        	<div class="col-md-3">
-                        		<label>GT-ID</label>
-                        		<input type="text" class="form-control" id="txt_gt_id">
-                        	</div>
-                        	<div class="col-md-3">
-                        		<label>&nbsp;</label><br />
-                        		<input type="button" id="" data-re_generate="1" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
-                        	</div>
+                          <div class="col-md-3">
+                            <label>GT-ID</label>
+                            <input type="text" class="form-control" id="txt_gt_id">
+                          </div>
+                          <div class="col-md-3">
+                            <label>&nbsp;</label><br />
+                            <input type="button" id="" data-re_generate="1" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
+                          </div>
                         </div><!-- row -->
                     <div class="portlet-body padding20" >
                         <hr />
                         <div class="row padding20 fee_billing_result" >
-                        	
+                          
                         </div><!-- row -->
                     </div><!-- portlet-body -->
                 </div><!-- portlet -->
@@ -368,8 +368,8 @@ $("#statusFilter_container").html('');
        cache: false,
        success: function(response)
        {
-       	
-       	$("#statusFilter_container").html(response.html);
+        
+        $("#statusFilter_container").html(response.html);
        
         setTimeout(function(){ App.stopPageLoading(); 
         $("#statusFilter").multiselect('destroy');
@@ -506,7 +506,13 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
 
 };
 
-
+$(document).keypress(function (e) {
+ var key = e.which;
+ if(key == 13)  // the enter key code
+  {
+    $('.Generate_Fee_Bill_1').click();
+  }
+});
 
 loadScript("http://10.10.10.50/gsims/public/metronic/global/scripts/datatable.js", function(){
     loadScript("http://10.10.10.50/gsims/public/metronic/pages/scripts/table-datatables-responsive.min.js", function(){

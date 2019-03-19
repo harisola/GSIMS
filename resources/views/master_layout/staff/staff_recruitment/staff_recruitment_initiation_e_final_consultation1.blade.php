@@ -29,8 +29,9 @@
                      <td rowspan="2" width="25%"><h3 class="text-center">Final <br />Consultation</h3>
 
                        <select placeholder="Area" class="form-control" id="career_id_5">
-                                <?php foreach($career_area as $career_area4){ ?>
-                                     <option value="<?php echo $career_area4['id']; ?>"><?php echo $career_area4['area']; ?></option>
+                       <option value="" disabled > Select Area</option>
+                                <?php foreach($career_area as $career_area5){ ?>
+                                     <option value="<?php echo $career_area5['id']; ?>"><?php echo $career_area5['area']; ?></option>
                                 <?php } ?>
                              </select>
                              <br />

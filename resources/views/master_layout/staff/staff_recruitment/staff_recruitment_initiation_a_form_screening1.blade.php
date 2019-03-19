@@ -26,8 +26,8 @@
                      <td rowspan="2" width="25%"><h3 class="text-center">Form<br />Screening</h3>
                         <div class="text-center">
                            <div class="col-md-12 KashifSolangi">
-                           
-                             <select placeholder="Area" class="form-control " id="career_id_1">
+                             <select placeholder="Area" class="form-control" id="career_id_1">
+                              <option value="" disabled > Select Area</option>
                                 <?php foreach($career_area as $career_area1){ ?>
                                      <option value="<?php echo $career_area1['id']; ?>"><?php echo $career_area1['area']; ?></option>
                                 <?php } ?>
@@ -143,7 +143,7 @@
                               <textarea class="form-control" id="applicant_next_step_comment_1"></textarea>
                            </div><!-- col-md-6 -->
                            <div class="col-md-12 text-center marginTop20">
-                              <input  id="button_1" type="button" class="btn btn-group green" value="Submit" onClick="insertForm(1,1,8)">
+                              <input  id="button_1" type="button" class="btn btn-group green screening_inter" value="Submit" onClick="insertForm(1,1,8)">
                            </div><!-- col-md-12 -->
                         </div><!-- row -->
                      </td>

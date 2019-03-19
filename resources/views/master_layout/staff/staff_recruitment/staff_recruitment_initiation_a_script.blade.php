@@ -134,8 +134,9 @@ txt_allocation_d.closest(".KashifSolangi").removeClass( "has-error" );
 
 
 
+//arif
 
-if( applicant_next_status == 10 || applicant_next_status == 12 || applicant_next_status == 14 )
+if( applicant_next_status == 10 || applicant_next_status == 12 || applicant_next_status == 14 || applicant_next_status == 15)
 {
 
 cfpb_txt_date.closest(".KashifSolangi").removeClass( "has-error" );
@@ -343,6 +344,87 @@ setTimeout(function(){
         }
     });
     });
+
+
+     $('#career_id_3').on('change', function(){
+    $('#depart_3').hide();
+    $('#level_3').hide();
+    
+    var formdata =  'career_id_3='+$('#career_id_3').val()
+     console.log('form data=> '+formdata);
+    $.ajax({
+        type:'get',
+         url:'/gsims/public/get_dept3',
+          data:formdata,
+        success:function(data){
+            console.log(data);
+            if(data){
+               $('#ajax_depart_3').html(data);
+            }
+            else{
+                $('#query').html(data.query);
+            }   
+        },
+        error:function(data){
+            console.log(data.responseText); 
+        }
+    });
+    });
+
+
+         $('#career_id_4').on('change', function(){
+        $('#depart_4').hide();
+        $('#level_4').hide();
+    
+    var formdata =  'career_id_4='+$('#career_id_4').val()
+     console.log('form data=> '+formdata);
+    $.ajax({
+        type:'get',
+         url:'/gsims/public/get_dept4',
+          data:formdata,
+        success:function(data){
+            console.log(data);
+            if(data){
+               $('#ajax_depart_4').html(data);
+            }
+            else{
+                $('#query').html(data.query);
+            }   
+        },
+        error:function(data){
+            console.log(data.responseText); 
+        }
+    });
+    });     
+
+
+
+
+         $('#career_id_5').on('change', function(){
+        $('#depart_5').hide();
+        $('#level_5').hide();
+    
+    var formdata =  'career_id_5='+$('#career_id_5').val()
+     console.log('form data=> '+formdata);
+    $.ajax({
+        type:'get',
+         url:'/gsims/public/get_dept5',
+          data:formdata,
+        success:function(data){
+            console.log(data);
+            if(data){
+               $('#ajax_depart_5').html(data);
+            }
+            else{
+                $('#query').html(data.query);
+            }   
+        },
+        error:function(data){
+            console.log(data.responseText); 
+        }
+    });
+    });     
+
 // zk end
 var getStaffRecruitment = function getStaffRecruitment(form_id){
 $('#form_id').val(form_id);
@@ -386,6 +468,7 @@ for(var i = 0;i < data.length;i++){
 
     if(data[i].old_status_id != null){
         // debugger;
+        // debugger;
         // console.log(data[i].old_status_id);
         // vaL ISSUE
         var current_status = data[i].current_status_id;
@@ -393,11 +476,22 @@ for(var i = 0;i < data.length;i++){
         $('#allocation_grade_'+data[i].old_status_id).val(data[i].career_grade_id);
         $('#applicant_comment_'+data[i].old_status_id).val(data[i].comments_applicant);
         $('#career_id_'+data[i].old_status_id).val(data[i].career_id);
+
+      /*  if(data[i].career_id == 1 || data[i].career_id == 2 || data[i].career_id == 3 || data[i].career_id == 4){
+            console.log(data[i].career_id+'zk');
+            $('#career_id_'+data[i].old_status_id).prop("disabled", true);
+            // $('#career_id_'+data[i].old_status_id).html('<select disabled></select>');
+        }else{
+           $('#career_id_'+data[i].old_status_id).prop("disabled", false); 
+        }*/
+
+        //$( '#career_id_'+data[i].old_status_id).prop( "disabled", true );
         if(data[i].depart_id > 0){
-            $('#depart_'+data[i].old_status_id).html('<select placeholder="Area" class="form-control" id="depart_id_'+data[i].old_status_id+'"><option value='+data[i].depart_id+'>'+data[i].departments+'</option></select>');
+            
+            $('#depart_'+data[i].old_status_id).html('<select  placeholder="Area" class="form-control" id="depart_id_'+data[i].old_status_id+'"><option value='+data[i].depart_id+'>'+data[i].departments+'</option></select>');
         }
         if(data[i].level_id > 0){
-            $('#level_'+data[i].old_status_id).html('<select placeholder="Area" class="form-control" id="level_id_'+data[i].old_status_id+'"><option value='+data[i].level_id+'>'+data[i].levels+'</option></select>');
+            $('#level_'+data[i].old_status_id).html('<select  placeholder="Area" class="form-control" id="level_id_'+data[i].old_status_id+'"><option value='+data[i].level_id+'>'+data[i].levels+'</option></select>');
         }
 
         // $('#depart_jquery').html('<select placeholder="Area" class="form-control" id="depart_id_'+data[i].old_status_id+'"><option value='+data[i].depart_id+'>'+data[i].departments+'</option></select>');
@@ -649,24 +743,40 @@ buttonIntegration("button_1",0);
         $('#previous_process_2').hide();
         $('#main_div_2').removeClass( "hide" );
         $('#presence_2').hide();
+        console.log("intial_interview_presence t");
+        $('#career_id_1').prop("disabled", true);
+        $('#depart_id_1').prop("disabled", true);
+        $('#level_id_1').prop("disabled", true);
         
     }else{
         $('#previous_process_2').show();
         $('#main_div_2').addClass( "hide" );
         $('#presence_2').show();
-        
+        //zzkk
+        console.log("intial_interview_presence f");
+        $('#career_id_1').prop("disabled", false);
+        $('#depart_id_1').prop("disabled", false);
+        $('#level_id_1').prop("disabled", false);      
     }
 
     if(data[i].formal_interview_presence == 1){
         $('#previous_process_3').hide();
         $('#main_div_3').removeClass( "hide" );
         $('#presence_3').hide();
+        console.log("formal_interview_presence t");
+        $('#career_id_2').prop("disabled", true);
+        $('#depart_id_2').prop("disabled", true);
+        $('#level_id_2').prop("disabled", true);
         
         
     }else{
         $('#previous_process_3').show();
         $('#main_div_3').addClass( "hide" );
         $('#presence_3').show();
+        console.log("formal_interview_presence f");
+        $('#career_id_2').prop("disabled", false);
+        $('#depart_id_2').prop("disabled", false);
+        $('#level_id_2').prop("disabled", false); 
 
         
     }
@@ -675,20 +785,36 @@ buttonIntegration("button_1",0);
         $('#previous_process_4').hide();
         $('#main_div_4').removeClass( "hide" );
         $('#presence_4').hide();
+        console.log("observation_interview_presenc t");
+        $('#career_id_3').prop("disabled", true);
+        $('#depart_id_3').prop("disabled", true);
+        $('#level_id_3').prop("disabled", true);
     }else{
         $('#previous_process_4').show();
         $('#main_div_4').addClass( "hide" );
         $('#presence_4').show();
+        console.log("observation_interview_presence f");
+        $('#career_id_3').prop("disabled", false);
+        $('#depart_id_3').prop("disabled", false);
+        $('#level_id_3').prop("disabled", false); 
     }
 
     if(data[i].final_consultant_interview_presence == 1){
         $('#previous_process_5').hide();
         $('#main_div_5').removeClass( "hide" );
         $('#presence_5').hide();
+        console.log("final_consultant_interview_presence t");
+        $('#career_id_4').prop("disabled", true);
+        $('#depart_id_4').prop("disabled", true);
+        $('#level_id_4').prop("disabled", true);
     }else{
         $('#previous_process_5').show();
         $('#main_div_5').addClass( "hide" );
         $('#presence_5').show();
+        console.log("final_consultant_interview_presence f");
+        $('#career_id_4').prop("disabled", false);
+        $('#depart_id_4').prop("disabled", false);
+        $('#level_id_4').prop("disabled", false); 
     }
 
 }
@@ -893,8 +1019,36 @@ $('#'+id).show();
 }
 }
 
+// if($(".fomal_inter").is(":visible")){
+//     console.log("IN 2");
+// $('#career_id_2').prop("disabled", false);
+// $('#depart_id_2').prop("disabled", false);
+// $('#level_id_2').prop("disabled", false);
+// } else{
+//     console.log("OUT 2");
+// $('#career_id_2').prop("disabled", true);
+// $('#depart_id_2').prop("disabled", true);
+// $('#level_id_2').prop("disabled", true);
+
+// }
+
+// if($(".intial_inter").is(":visible")){
+//     console.log("IN 1");
+// $('#career_id_1').prop("disabled", false);
+// $('#depart_id_1').prop("disabled", false);
+// $('#level_id_1').prop("disabled", false);
+// } else{
+//     console.log("OUT 1");
+// $('#career_id_1').prop("disabled", true);
+// $('#depart_id_1').prop("disabled", true);
+// $('#level_id_1').prop("disabled", true);
+
+// }
+// screening_inter
+
 
 $('.mark_present').click(function(){
+//zzkk 
 var status_id =$(this).data("id");
 var form_id = $('#form_id').val();
 $.ajax({

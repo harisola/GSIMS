@@ -29,6 +29,7 @@
                      <td rowspan="2" width="25%"><h3 class="text-center"> <br/>Observation</h3>
 
                        <select placeholder="Area" class="form-control" id="career_id_4">
+                         <option value="" disabled > Select Area</option>
                                 <?php foreach($career_area as $career_area3){ ?>
                                      <option value="<?php echo $career_area3['id']; ?>"><?php echo $career_area3['area']; ?></option>
                                 <?php } ?>

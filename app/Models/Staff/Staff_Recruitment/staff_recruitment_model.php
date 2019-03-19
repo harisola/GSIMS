@@ -76,7 +76,7 @@ class Staff_recruitment_model extends Model
 				order by lcf.created, lcf.form_id) as lcf
 				on lcf.form_id = c.id*/
 				
-	where ( c.status_id != 10 and c.status_id != 12 )
+	where ( c.status_id != 10 and c.status_id != 12 and c.status_id != 15)
 			order by c.created desc";
 
 	    $career = DB::connection($this->dbCon)->select($query);
@@ -159,7 +159,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id  )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+where (cf.status_id=12 or cf.status_id=10 or cf.status_id=15) and dd.status_id=11 and cf.form_source=1
 
 union 
 
@@ -173,7 +173,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+where (cf.status_id=12 or cf.status_id=10 or cf.status_id=15) and dd.status_id=1
 
 union
 select 
@@ -187,7 +187,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+where (f.status_id=12 or f.status_id=10 or f.status_id=15 ) and d.status_id=2
  
  union
  select 
@@ -200,7 +200,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+where (f.status_id=12 or f.status_id=10 or f.status_id=15 ) and d.status_id=3
 
 
 
@@ -230,7 +230,7 @@ select max(lcf.id) as id
 from atif_career.log_career_form as lcf  group by lcf.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )
+where (f.status_id=12 or f.status_id=10 or f.status_id=15) and d.status_id=5 )
 			order by c.created desc";
 
 	    $career = DB::connection($this->dbCon)->select($query);

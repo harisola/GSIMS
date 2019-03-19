@@ -213,7 +213,7 @@ class ScreeningGate extends Controller
         foreach($data as $row)
         {
           //$output .= '<li><a href="#">'.$row->name.'</a></li>';
-          $output .= '<li class="staff_list_class">'.$row->name.'</li> <input type="hidden" class="stafflist_id"  value="'.$row->id.'" />';
+          $output .= '<li class="staff_list_class">'.$row->name.' - <small style="color:#888;">'.$row->gt_id.'</small></li> <input type="hidden" class="stafflist_id"  value="'.$row->id.'" />';
         
            //return $row->id;
         }

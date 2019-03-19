@@ -18,7 +18,7 @@
                 
                 <div style="display: none;" id="presence_2" class="relative processPresence InitialInterviewArea">
                   <div class="overlayTOP">
-                      <span class="centerPosition "><strong>Intial Interview</strong> <br /><input type="button" class="btn btn-group green mark_present" value="Mark as Present" name="" data-id="2" ></span>
+                      <span class="centerPosition "><strong>Intial Interview</strong> <br /><input type="button" class="btn btn-group green mark_present intial_inter" value="Mark as Present" name="" data-id="2" ></span>
                    </div>
                 </div>
                 <div id="main_div_2" class="relative hide InitialInterviewArea">
@@ -30,7 +30,8 @@
                          <td rowspan="2" width="25%"><h3 class="text-center">Initial <br />Interview</h3>
                             <div class="text-center">
                                <div class="col-md-12 KashifSolangi">
-                               <select placeholder="Area" class="form-control" id="career_id_2">
+                               <select  placeholder="Area" class="form-control" id="career_id_2">
+                                 <option value="" disabled > Select Area</option>
                                 <?php foreach($career_area as $career_area){ ?>
                                      <!--<option value="<?php //echo $career_area['id']; ?>"><?php //echo $career_area['area']; ?></option>--> 
                                      <option value="<?php echo $career_area['id']; ?>"><?php echo $career_area['area']; ?></option>

@@ -89,7 +89,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id  )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+where (cf.status_id=12 or cf.status_id=10 or cf.status_id = 15) and dd.status_id=11 and cf.form_source=1
 
 union 
 
@@ -103,7 +103,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+where (cf.status_id=12 or cf.status_id=10 or cf.status_id = 15) and dd.status_id=1
 
 union
 select 
@@ -117,7 +117,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+where (f.status_id=12 or f.status_id=10 or f.status_id = 15 ) and d.status_id=2
  
  union
  select 
@@ -130,7 +130,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+where (f.status_id=12 or f.status_id=10 or f.status_id = 15 ) and d.status_id=3
 
 
 
@@ -160,7 +160,7 @@ select max(lcf.id) as id
 from atif_career.log_career_form as lcf  group by lcf.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=5)
+where (f.status_id=12 or f.status_id=10 or f.status_id = 15) and d.status_id=5)
 and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'";
 $count_result = $staffRecruiment->custom_query($query);
 
@@ -203,7 +203,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id  )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+where (cf.status_id=12 or cf.status_id=10  or cf.status_id = 15) and dd.status_id=11 and cf.form_source=1
 
 union 
 
@@ -217,7 +217,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+where (cf.status_id=12 or cf.status_id=10 or cf.status_id = 15 ) and dd.status_id=1
 
 union
 select 
@@ -231,7 +231,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+where (f.status_id=12 or f.status_id=10 or f.status_id = 15 ) and d.status_id=2
  
  union
  select 
@@ -244,7 +244,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+where (f.status_id=12 or f.status_id=10  or f.status_id = 15) and d.status_id=3
 
 
 
@@ -274,7 +274,7 @@ select max(lcf.id) as id
 from atif_career.log_career_form as lcf  group by lcf.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )
+where (f.status_id=12 or f.status_id=10  or f.status_id = 15) and d.status_id=5 )
 and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'";
 $scount_result = $staffRecruiment->custom_query($sQu);
 
@@ -342,7 +342,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id  )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=11 and cf.form_source=1
+where (cf.status_id=12 or cf.status_id=10  or cf.status_id = 15) and dd.status_id=11 and cf.form_source=1
 
 union 
 
@@ -356,7 +356,7 @@ select max(cff.id) as id
 from atif_career.log_career_form as cff  group by cff.form_id )
  ) as dd
 on dd.form_id = cf.id
-where (cf.status_id=12 or cf.status_id=10 ) and dd.status_id=1
+where (cf.status_id=12 or cf.status_id=10  or cf.status_id = 15) and dd.status_id=1
 
 union
 select 
@@ -370,7 +370,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=2
+where (f.status_id=12 or f.status_id=10  or f.status_id = 15) and d.status_id=2
  
  union
  select 
@@ -383,7 +383,7 @@ select max(l.id) as id
 from atif_career.log_career_form as l  group by l.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=3
+where (f.status_id=12 or f.status_id=10  or f.status_id = 15) and d.status_id=3
 
 
 
@@ -413,7 +413,7 @@ select max(lcf.id) as id
 from atif_career.log_career_form as lcf  group by lcf.form_id )
 ) as d
 on d.form_id = f.id
-where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 )  and ( af.status_id = 10 or af.status_id = 12 ) ".$Where."
+where (f.status_id=12 or f.status_id=10  or f.status_id = 15 ) and d.status_id=5 )  and ( af.status_id = 10 or af.status_id = 12  or af.status_id = 15 ) ".$Where."
 and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'  
 order by af.created desc  limit ".$row.",".$rowperpage;
 
@@ -847,7 +847,7 @@ left join (select lcf.form_id, (lcf.created) as created, (lcf.modified) as modif
         order by lcf.created limit 1) as lcf
         on lcf.form_id = af.id
 
-WHERE 1 ".$searchQuery."  and  ( af.status_id = 10 or af.status_id = 12 ) ".$Where." order by af.created desc  limit ".$row.",".$rowperpage;
+WHERE 1 ".$searchQuery."  and  ( af.status_id = 10 or af.status_id = 12 or af.status_id = 15 ) ".$Where." order by af.created desc  limit ".$row.",".$rowperpage;
 
 
 ## Total number of records without filtering
@@ -867,7 +867,7 @@ left join atif_career.career_status as cs
         order by lcf.created limit 1) as lcf
         on lcf.form_id = af.id
 
-WHERE 1 and ( af.status_id = 10 or af.status_id = 12 ) ".$Where." ";
+WHERE 1 and ( af.status_id = 10 or af.status_id = 12 or af.status_id = 15 ) ".$Where." ";
 $count_result = $staffRecruiment->custom_query($query);
 $totalRecords = $count_result[0]['allcount'];
 
@@ -887,7 +887,7 @@ left join atif_career.career_status as cs
         order by lcf.created limit 1) as lcf
         on lcf.form_id = af.id
 
-WHERE 1 ".$searchQuery ." and  ( af.status_id = 10 or af.status_id = 12 )".$Where."  ";
+WHERE 1 ".$searchQuery ." and  ( af.status_id = 10 or af.status_id = 12  or af.status_id = 15)".$Where."  ";
 
 $scount_result = $staffRecruiment->custom_query($sQu);
 $totalRecordwithFilter = $scount_result[0]['allcount'];

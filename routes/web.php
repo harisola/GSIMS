@@ -78,15 +78,6 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/ateeb_rec_modal', 'Development\Haris@AteebRecModal'); 
 	Route::get('/update_staff', 'Development\Haris@Update_Staff');
 	Route::get('/masterLayout/staff/add_row', 'Development\Haris@AddRow');
-	Route::get('/screening_gate', 'Attendance\Staff\ScreeningGate@mainPage');
-	// Route::get('/tap_in_staff', 'Attendance\Staff\ScreeningGate@Tap_In_Staff');
-	Route::get('/staff_interim_card', 'Attendance\Staff\ScreeningGate@Staff_Interim_Card'); 
-	Route::get('/tap_in_interim', 'Attendance\Staff\ScreeningGate@Tap_In_Interim');
-	//Route::get('/live_search', 'LiveSearch@index'); tap_in_interim
-	//Route::get('/search_action', 'Attendance\Staff\ScreeningGate@Search_Action'); interim_table_list
-	Route::get('/interim_table_list', 'Attendance\Staff\ScreeningGate@Staff_interim_table_list');
-	Route::post('/fetch_autocomplete', 'Attendance\Staff\ScreeningGate@fetch_autocomplete');
-	Route::post('/tap_in_staff', 'Attendance\Staff\ScreeningGate@Tap_In_Staff');
 	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
 	Route::get('/VehicleReport', 'Attendance\Vehicle\VehicleReport@mainPage');
@@ -403,8 +394,10 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::get('/get_dept', 'Development\staff_recruitment_initiation@all_dept');
 
-		Route::get('/get_dept2', 'Development\staff_recruitment_initiation@all_dept2');
-	
+	Route::get('/get_dept2', 'Development\staff_recruitment_initiation@all_dept2');
+	Route::get('/get_dept3', 'Development\staff_recruitment_initiation@all_dept3');
+	Route::get('/get_dept4', 'Development\staff_recruitment_initiation@all_dept4');
+	Route::get('/get_dept5', 'Development\staff_recruitment_initiation@all_dept5');
 	
 
 	Route::post('/Search_followup_list','Development\hr_followup@Search_followup_list');
@@ -442,6 +435,15 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/modified_form_archive','Development\staff_recruitment_initiation_archive_ns@modified_form_archive');
 
 	Route::post('/allarchive','Development\staff_recruitment_initiation_archive_ns@allarchive');
+
+	//Staff Recruiment Arif Khan
+
+	Route::get('/staff_recruitment_reports','Development\staff_recruitment_reports@index');
+	Route::get('/staff_recruitment_report','Development\staff_recruitment_reports@Get_recruitment_filter');
+
+	Route::get('/staff_recruitment_all_reports_data','Development\staff_recruitment_reports@staff_recruitment_all_reports_data');
+		Route::get('/new_admission ', 'Account_Process\Accounts\NewAdmission@index');
+
 		
 });
 /* End Master Page(Student) *******************************************************/

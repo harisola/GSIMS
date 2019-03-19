@@ -24,7 +24,7 @@ class staff_recruitment_initiation extends Controller
 
     $get_dept_level = new staff_recruitment_area_department_levels();
 
-    $RecruimentData = $staffRecruiment->get_recruitment_data();
+    $RecruimentData = 0;
     
     $tag = $staffRecruiment->get_tag();
     $grade = $staffRecruiment->get_grade();
@@ -93,6 +93,76 @@ class staff_recruitment_initiation extends Controller
 
    //return view('master_layout/staff/staff_recruitment/select_depart_ajax');
     return view('master_layout/staff/staff_recruitment/select_depart_ajax1', (['get_depart'=>$get_depart,'get_level'=>$get_level]));
+
+    // $returnHTML = view('master_layout/staff/staff_recruitment/select_depart_ajax')->with( array('get_depart' => $get_depart,'get_level'=> $get_level ) )->render();
+    // return response()->json(array($returnHTML);
+
+   // return(['get_depart'=>$get_depart,
+   //  'get_level'=>$get_level]);
+  }
+
+
+
+
+  public function all_dept3(Request $request){
+
+    $id = $request['career_id_3'];
+    $filterdata = new staff_recruitment_area_department_levels();
+     //prinit_r($filterdata);
+     //die;
+    $get_depart=$filterdata->get_all_dept($id);
+
+   $get_level=$filterdata->all_level($id);
+
+   //zk
+
+   //return view('master_layout/staff/staff_recruitment/select_depart_ajax');
+    return view('master_layout/staff/staff_recruitment/select_depart_ajax2', (['get_depart'=>$get_depart,'get_level'=>$get_level]));
+
+    // $returnHTML = view('master_layout/staff/staff_recruitment/select_depart_ajax')->with( array('get_depart' => $get_depart,'get_level'=> $get_level ) )->render();
+    // return response()->json(array($returnHTML);
+
+   // return(['get_depart'=>$get_depart,
+   //  'get_level'=>$get_level]);
+  }
+
+ public function all_dept4(Request $request){
+
+    $id = $request['career_id_4'];
+    $filterdata = new staff_recruitment_area_department_levels();
+     //prinit_r($filterdata);
+     //die;
+    $get_depart=$filterdata->get_all_dept($id);
+
+   $get_level=$filterdata->all_level($id);
+
+   //zk
+
+   //return view('master_layout/staff/staff_recruitment/select_depart_ajax');
+    return view('master_layout/staff/staff_recruitment/select_depart_ajax3', (['get_depart'=>$get_depart,'get_level'=>$get_level]));
+
+    // $returnHTML = view('master_layout/staff/staff_recruitment/select_depart_ajax')->with( array('get_depart' => $get_depart,'get_level'=> $get_level ) )->render();
+    // return response()->json(array($returnHTML);
+
+   // return(['get_depart'=>$get_depart,
+   //  'get_level'=>$get_level]);
+  }
+
+
+  public function all_dept5(Request $request){
+
+    $id = $request['career_id_5'];
+    $filterdata = new staff_recruitment_area_department_levels();
+     //prinit_r($filterdata);
+     //die;
+    $get_depart=$filterdata->get_all_dept($id);
+
+   $get_level=$filterdata->all_level($id);
+
+   //zk
+
+   //return view('master_layout/staff/staff_recruitment/select_depart_ajax');
+    return view('master_layout/staff/staff_recruitment/select_depart_ajax4', (['get_depart'=>$get_depart,'get_level'=>$get_level]));
 
     // $returnHTML = view('master_layout/staff/staff_recruitment/select_depart_ajax')->with( array('get_depart' => $get_depart,'get_level'=> $get_level ) )->render();
     // return response()->json(array($returnHTML);
@@ -224,7 +294,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$Where." and af.status_id != 10 and af.status_id != 12 
+WHERE 1 ".$Where." and af.status_id != 10 and af.status_id != 12 and af.status_id != 15 
 and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
 and (d.p_date is null or d.p_date >= curdate() )";
 
@@ -303,7 +373,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery."  ".$Where." and af.status_id != 10 and af.status_id != 12 
+WHERE 1 ".$searchQuery."  ".$Where." and af.status_id != 10 and af.status_id != 12 and af.status_id != 15 
 and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
 and (d.p_date is null or d.p_date >= curdate() )";
 
@@ -403,7 +473,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12 
+WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12 and af.status_id != 15 
 and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01' ".$Where."
 and (d.p_date is null or d.p_date >= curdate() )
 order by af.created desc  limit ".$row.",".$rowperpage;
@@ -1460,7 +1530,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12  ".$Where."
+WHERE 1 ".$searchQuery." and af.status_id != 10 and af.status_id != 12 and af.status_id != 15  ".$Where."
 and (d.p_date is null or d.p_date >= curdate() )
 order by af.created desc  limit ".$row.",".$rowperpage;
 
@@ -1534,7 +1604,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$Where." and af.status_id != 10 and af.status_id != 12 
+WHERE 1 ".$Where." and af.status_id != 10 and af.status_id != 12 and af.status_id != 15
 and (d.p_date is null or d.p_date >= curdate() )";
 
 
@@ -1601,7 +1671,7 @@ left join (
 select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
 from atif_career.log_career_form as lcf 
 order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE 1 ".$searchQuery."  ".$Where." and af.status_id != 10 and af.status_id != 12 
+WHERE 1 ".$searchQuery."  ".$Where." and af.status_id != 10 and af.status_id != 12 and af.status_id != 15
 and (d.p_date is null or d.p_date >= curdate() )";
 
 

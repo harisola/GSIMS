@@ -91,7 +91,7 @@
                                                         <td>{{$get_lastest_bill->oc_smartcard_charges}}</td>
                                                         <td><?= number_format($get_lastest_bill->waive_amount)?></td>
                                                         <td><?= number_format($get_lastest_bill->oc_adv_tax)?></td>
-                                                        <td><?= ($get_lastest_bill->resource_fee)*2; ?></td>
+                                                        <td><?= ($get_lastest_bill->resource_fee)*1; ?></td>
                                                         <td><?= ($get_lastest_bill->difference); ?></td>
                                                         <td><?= ($get_lastest_bill->musakhar)*2; ?></td>
                                                         <td>{{$get_lastest_bill->oc_yearly}}</td>

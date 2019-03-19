@@ -765,17 +765,23 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                if($billing_cycle>2){
                     if($received_amount>0 &&$previous_bill_taxes!=0){
 
-                        //if received amount greater than 0 (paid bill amount or  more than bill amoount)
-                        @$received_amount=$received_amount-($previous_bill_taxes+$fee_details->roll_over_charges);
-                        $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
-                        $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
-                       if($last_bill_received>=@$fee_details['total_payable']){
-                             // $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing,$tax_percentage);
-
-                              if($billing_cycle>4){
+                       if($received_amount>$previous_bill_taxes){
                                  $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
-                             }
-                       }               
+                                //if received amount greater than taxes then first system will deduct taxes by his received amount and taxes is only for current billing.
+                            }else{
+
+                                //if received amount greater than 0 (paid bill amount or  more than bill amoount)
+                                    @$received_amount=$received_amount-($previous_bill_taxes+$fee_details->roll_over_charges);
+                                    $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
+                                    $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
+                                   if($last_bill_received>=@$fee_details['total_payable']){
+                                         // $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing,$tax_percentage);
+                                          if($billing_cycle>4){
+                                             $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
+                                         }
+                                   }               
+                                
+                            }          
                     }else if($received_amount>0 && $previous_bill_taxes==0){
 
 

@@ -18,7 +18,7 @@
             </div>              
             <div style="display: none;" id="presence_3" class="relative processPresence FormalInterviewArea">
               <div class="overlayTOP">
-                  <span class="centerPosition"><strong>Formal Interview</strong> <br /><input type="button" class="btn btn-group green mark_present" value="Mark as Present" name="" data-id="3" ></span>
+                  <span class="centerPosition"><strong>Formal Interview</strong> <br /><input type="button" class="btn btn-group green mark_present fomal_inter" value="Mark as Present" name="" data-id="3" ></span>
                </div>
             </div>
             <div id="main_div_3" class="relative hide FormalInterviewArea">
@@ -30,6 +30,7 @@
                      <td rowspan="2" width="25%"><h3 class="text-center">Formal <br />Interview</h3>
 
                       <select placeholder="Area" class="form-control" id="career_id_3">
+                        <option value="" disabled > Select Area</option>
                                 <?php foreach($career_area as $career_area2){ ?>
                                      <option value="<?php echo $career_area2['id']; ?>"><?php echo $career_area2['area']; ?></option>
                                          <?php } ?>
@@ -153,4 +154,22 @@
                   </tr>
                </table>
             </div><!-- FormScreening -->
-         
+<script type="text/javascript">
+
+// setTimeout(function(){
+
+// if($(".fomal_inter").is(":visible")){
+// $('#career_id_2').prop("disabled", false);
+// $('#depart_id_2').prop("disabled", false);
+// $('#level_id_2').prop("disabled", false);
+// } else{
+// $('#career_id_2').prop("disabled", true);
+// $('#depart_id_2').prop("disabled", true);
+// $('#level_id_2').prop("disabled", true);
+
+// }
+
+
+
+// }, 5000);
+</script>

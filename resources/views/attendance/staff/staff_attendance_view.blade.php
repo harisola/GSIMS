@@ -62,6 +62,49 @@
 .failAssign .false {
 	font-size: 140px;color: red;margin: 90px 0 0 0;
 }
+#stafflist_ajax {
+    width: 95%;
+    position: absolute;
+}
+#stafflist_ajax .dropdown-menu {
+    display: block;
+    position: relative;
+    margin: 30px 0 0 0;
+    padding: 5px 5px;
+    width: 100%;
+	border: 1px solid #888;
+    border-top: 0 none;
+    box-shadow: none;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: none;
+}
+#stafflist_ajax li.staff_list_class {
+    font-family: 'Conv_calibri';
+    font-size: 14px;
+    font-weight: normal !important;
+    padding: 5px 0;
+    cursor: pointer;
+}
+#StaffList_ZiaKashif_filter {
+	float: right;
+}
+input#interim_dec{
+    margin-top: 20px;
+    background: #ffedaa;
+    color: #000 !important;
+}
+input#interim_dec::placeholder {
+    color: #585858 !important;
+}
+li.staff_list_class:hover {
+    color: #3379b7;
+}
+h4#error {
+    color: black;
+    position: absolute;
+    top: 75px;
+}
 </style>
 <div class="row" id="maindiv">
     <div class="col-md-3">
@@ -128,46 +171,40 @@
                             <li>
                                 <a href="#vendorCard" data-toggle="tab"> Vendor </a>
                             </li>
-                        </ul>
+                        </ul><!-- nav -->
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="staffInterim">
-                            <div class="issueInterim">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon" id="sizing-addon1">Staff</span>
-                                    
-	                                    <input type="text" name="search_staff_name" id="search_staff_name" class="form-control" placeholder="Name, GT-ID or Name Code" aria-describedby="sizing-addon1">
-	                                    <input type="hidden" name="_token_rfid" id="_token" value="<?php echo csrf_token(); ?>" / >
-	                                    <div id="stafflist_ajax">
-	                                    </div>
-                                 </div>
-                                <div class="col-md-12 text-right" style="padding: 0;margin: 0;">
-                                    <input id="InterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Interim" name="" data-placement="bottom" data-original-title="Assign Interim Card"data-toggle="modal" href="">
-                                </div><!-- col-md-12 -->
-                            </div><!-- issueInterim -->
-                                    <!-- Begin Modal -->
-                                        <div class="modal fade 100pxwidth" id="InterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                        <h3 class="modal-title">Assign Interim - <small>Tap Interim Card</small></h3>
-                                                    </div>
-                                                    <div class="modal-body interim_card_div" style="float:left;width:100%;">
-                                                        <!-- tab_basic_edit Start -->
-                                                        @include('attendance.staff.staff_attendance_modal')
-                                                        <!-- tab_basic_edit End -->
-                                                    </div><!-- modal-body -->
-                                                </div><!-- modal-content -->
-                                            </div><!-- modal-dialog -->
-                                        </div><!-- modal -->
-                                    <!-- End Modal -->
+	                            <div class="issueInterim">
+	                                <div class="input-group input-group-sm">
+	                                    <span class="input-group-addon" id="sizing-addon1">Staff</span>
+		                                    <input type="text" name="search_staff_name" id="search_staff_name" class="form-control" placeholder="Name, GT-ID or Name Code" aria-describedby="sizing-addon1">
+		                                    <input type="hidden" name="_token_rfid" id="_token" value="<?php echo csrf_token(); ?>" / >
+		                                    <div id="stafflist_ajax">
+		                                    </div>
+	                                 </div>
+	                                <div class="col-md-12 text-right" style="padding: 0;margin: 0;">
+	                                    <input id="InterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Interim" name="" data-placement="bottom" data-original-title="Assign Interim Card"data-toggle="modal" href="">
+	                                </div><!-- col-md-12 -->
+	                            </div><!-- issueInterim -->
+                                <!-- Begin Modal -->
+                                <div class="modal fade 100pxwidth" id="InterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Assign Interim - <small>Tap Interim Card</small></h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                @include('attendance.staff.staff_attendance_modal')
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <!-- End Modal -->
                                 <hr />
-
-                               
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
-
-
-                                    
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="studentInterim">
@@ -186,7 +223,7 @@
                                     wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats
                                     keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan. </p>
                             </div>
-                        </div>
+                        </div><!-- tab-content -->
                     </div><!-- allocationArea -->
                 </div><!-- -->
             </div><!-- .portlet -->
@@ -257,7 +294,7 @@ $(document).ready(function(){
 
         $("#InterimCardTapBtn").click(function(){
             // $('#search_staff_name').on('input', function() {
-                if($('#search_staff_name').val() != '' && $('#search_staff_name').val().length > 1)
+                if($('#search_staff_name').val() != '' && $('#search_staff_name').val().length > 5)
                 { //console.log("if");
                     $('#interim_dec').val('');
                     $('.defaultAssign').css({'background-color':'white'});
@@ -267,7 +304,7 @@ $(document).ready(function(){
                 }else{
                     //console.log("else");
                     $("#search_staff_name").attr("placeholder", "Please select Staff Name first");
-                    $("#search_staff_name").css({"background-color": "#26a1ab","color": "white"});
+                    $("#search_staff_name").css({"background-color": "#f5ef3e","color": "black"});
                     // $(this).attr("placeholder", "Type your answer here");
                 }
             // });
@@ -508,9 +545,9 @@ $(document).ready(function(){
                   error: function (result) {
                         console.log(result["InterimIn"]);
                         $('#interim_dec').val('');
-                        $('.defaultAssign').css({'background-color':'red'});
-                        $('#error').text("Record Not Founded");
-                        $('#error').css({'color':'white'});
+                        $('.defaultAssign').css({'background-color':'#e8b80a'});
+                        $('#error').text("Record Not Found");
+                        $('#error').css({'color':'black'});
                         $('.successAssign').hide();
                         $('.failAssign').hide();
                         setTimeout(function(){
