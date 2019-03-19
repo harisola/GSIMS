@@ -118,7 +118,7 @@
  -->                                        
  <!-- <option value="2">2</option> -->
                                         <!-- <option value="3">3</option> -->
-                                        <option value="4">4</option>
+                                        <!-- <option value="4">4</option> -->
                                         <option value="5">5</option>
                                 </select>
                         	</div>
@@ -152,7 +152,7 @@
                         	</div>
                         	<div class="col-md-3">
                         		<label>&nbsp;</label><br />
-                        		<input type="button" id="" data-re_generate="0" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
+                        		<input type="button" id="" data-re_generate="1" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
                         	</div>
                         </div><!-- row -->
                     <div class="portlet-body padding20" >
@@ -506,7 +506,13 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
 
 };
 
-
+$(document).keypress(function (e) {
+ var key = e.which;
+ if(key == 13)  // the enter key code
+  {
+    $('.Generate_Fee_Bill_1').click();
+  }
+});
 
 loadScript("http://10.10.10.50/gsims/public/metronic/global/scripts/datatable.js", function(){
     loadScript("http://10.10.10.50/gsims/public/metronic/pages/scripts/table-datatables-responsive.min.js", function(){

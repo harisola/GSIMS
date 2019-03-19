@@ -70,8 +70,8 @@ return [
             'engine' => null,
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
-		
-		'mysql_att_lo' => [
+        
+        'mysql_att_lo' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => 'atif_attendance',
@@ -84,8 +84,8 @@ return [
             'engine' => null,
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
-		
-		'mysql_gs_events' => [
+        
+        'mysql_gs_events' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => 'atif_gs_events',
@@ -98,8 +98,8 @@ return [
             'engine' => null,
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
-		
-		'Badge_DB' => [
+        
+        'Badge_DB' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => 'gs_badges',
@@ -112,13 +112,13 @@ return [
             'engine' => null,
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
-		
-		'default_Atif' => [
+        
+        'default_Atif' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => 'atif',
             'username' => 'root',
-            'password' => 'abc',
+            'password' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -126,14 +126,14 @@ return [
             'engine' => null,
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
-	
-		
-		'mysql_StudentLog' => [
+    
+        
+        'mysql_StudentLog' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => 'atif_student_log',
             'username' => 'root',
-            'password' => 'abc',
+            'password' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -178,21 +178,6 @@ return [
             'database' => env('DB_DATABASE_fee', 'forge'),
             'username' => env('DB_USERNAME_fee', 'forge'),
             'password' => env('DB_PASSWORD_fee', 'forge'),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => false,
-            'engine' => null,
-            'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
-        ],
-
-
-        'my_VechilesDB' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST_fee', '127.0.0.1'),
-            'database' => env('DB_DATABASE_Vehicle', 'forge'),
-            'username' => env('DB_USERNAME_Vehicle', 'forge'),
-            'password' => env('DB_PASSWORD_Vehicle', 'forge'),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
