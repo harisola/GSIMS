@@ -199,29 +199,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         }
     
     }
-    public function reqComputerSubcription(){
-        ini_set('max_execution_time', 50000); //3 minutes
-        $class_list=  new class_list;
-        $query="SELECT fb.student_id,fb.security_deposit,(fb.security_deposit-15000) as new_computer,('15000') as new_security_deposit from atif.req_admission fb 
-        where 
-         fb.security_deposit=17000";
 
-        $details = DB::connection('default_Atif')->select($query);
-
-        $details= collect($details)->map(function($x){ return (array) $x; })->toArray(); 
-        $i=0;
-        foreach ($details as  $detail){
-                $data=array(
-                'security_deposit' =>$detail['new_security_deposit'],
-                'computer_subscription' =>$detail['new_computer'],
-                );            
-                $details = DB::connection('default_Atif')
-                ->table('req_admission')
-                ->where('student_id',$detail['student_id'])
-                ->update($data);
-        }
-    
-    }
 
    public function getSummerAdjustment($gs_id){
         ini_set('max_execution_time', 50000); //3 minutes
@@ -230,7 +208,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         $details = DB::connection('mysql_Career_fee_bill')->select($query);
         $details= collect($details)->map(function($x){ return (array) $x; })->toArray(); 
         $i=0;
-           return  @$details[0]['amount'];
+           return  0;
     }
 
 
@@ -503,7 +481,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 // die;
                 $total_current_billing_with_arrears=($gross_tution_fee+$additional_charges)-$net_discount_amount;//if student paid first bill and 2nd bill paid partially e.g payable 2 lac and received 1 lac so for tax calculation
 
-                $total_current_billing2=(($gross_tution_fee+$additional_charges))-$net_discount_amount;
+                 $total_current_billing2=(($gross_tution_fee+$additional_charges))-$net_discount_amount;
                 if($amount_exceed==true){
                     $tax_allow=$this->StudentApplicableForTaxes($list,$total_current_billing,$billing_cycle);
 
@@ -524,7 +502,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $applicable_taxes=$adjustment_taxes+$total;
                     }else{
                         $total_current_billing;
-                         $applicable_taxes=$this->calculateTaxes($list,$total_current_billing,$bill_cycle_no,$total_current_billing_with_arrears,$total_arriers);
+                         $applicable_taxes=$this->calculateTaxes($list,$total_current_billing,$bill_cycle_no,$total_current_billing_with_arrears,$total_arriers,$total_current_billing2);
                     }
                 }
                 $fee_bill->fee_bill_type_id=$fee_bill_type_id;//by default 1 for regular bill
@@ -725,7 +703,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
            return $taxes;
     }
 
-    public function calculateTaxes($list,$total_current_billing,$billing_cycle="",$total_current_billing_with_arrears="",$arrears){
+    public function calculateTaxes($list,$total_current_billing,$billing_cycle="",$total_current_billing_with_arrears="",$arrears,$total_current_billing2=""){
                 $fee_bill = new fee_bill;
                 $class_list = new class_list;
                 $session = new academic_session;
@@ -735,6 +713,8 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $fee_bill_received=new fee_bill_received;
                 $fee_bill_received_info=new fee_bill_received_info;
                 $adjustment=new adjustment;
+                $fee_definition = new fee_definition;
+
                 if($arrears==true){
                     $total_current_billing=$total_current_billing;
                     $total_current_billing_with_arrears=$total_current_billing_with_arrears;
@@ -750,7 +730,9 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                  $last_bill_received=$fee_bill_received->getOnlylastReceived($last_bill_id);
 
                 // $received_taxes=$fee_bill_received_info->getReceivedTaxes($list['student_id']); //old code
-                $previous_bill_taxes =$fee_bill->getLastBillTaxesByStudentId($list['student_id'],$list['a_session_id']);
+                // $previous_bill_taxes =$fee_bill->getLastBillTaxesByStudentId($list['student_id'],$list['a_session_id']);
+                $previous_bill_taxes =$fee_bill->getOnlyLastTaxes($list['student_id'],$list['a_session_id']);
+
                 // $fee_details
                 $status=$list['std_status_code'];
                 $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
@@ -788,7 +770,11 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $applicable_taxes=$this->calculateDiscount($admission_fee+$received_amount+$total_current_billing,$tax_percentage);
                         $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
                        if($last_bill_received>=@$fee_details['total_payable']){
-                             $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing,$tax_percentage);
+                             // $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing,$tax_percentage);
+
+                              if($billing_cycle>4){
+                                 $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
+                             }
                        }               
                     }else if($received_amount>0 && $previous_bill_taxes==0){
 
@@ -813,7 +799,8 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                              $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
 
 
-                        }else{
+                        }else{  
+
                             //only for this case we get july amount by using getLastJulyAmount else july fee will get automatically in sumTotalPayments
                             $july_amount=$fee_bill_received->getLastJulyAmount($list['student_id'],$list['academic_session_id']);
 
@@ -821,11 +808,14 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                                  $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage);
 
                             }else{
-                                
-                                 $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage)-$previous_bill_taxes;
+                                  $applicable_taxes=$this->calculateDiscount($admission_fee+$total_current_billing+$total_received_amount,$tax_percentage)-$previous_bill_taxes;
                                   if($last_bill_received=="" && $previous_bill_taxes>0){
-                                     $applicable_taxes= $applicable_taxes+$previous_bill_taxes;
+                                      $previous_bill_taxes =$fee_bill->getOnlyLastTaxes($list['student_id'],$list['a_session_id']);
+                                      $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
+                                      $applicable_taxes= $applicable_taxes+$previous_bill_taxes;
                                  }
+
+                                 // die;
                                  
 
                             }
@@ -842,8 +832,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                  if($applicable_taxes<0){
                     $applicable_taxes=-($applicable_taxes);
                  }               
-
-
+                 
                return $applicable_taxes;
     }
 

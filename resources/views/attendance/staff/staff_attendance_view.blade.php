@@ -134,10 +134,11 @@
                             <div class="issueInterim">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon" id="sizing-addon1">Staff</span>
-                                    <input type="text" name="search_staff_name" id="search_staff_name" class="form-control" placeholder="Name, GT-ID or Name Code" aria-describedby="sizing-addon1">
-                                    <input type="hidden" name="_token_rfid" id="_token" value="<?php echo csrf_token(); ?>" / >
-                                    <div id="stafflist_ajax">
-                                    </div>
+                                    
+	                                    <input type="text" name="search_staff_name" id="search_staff_name" class="form-control" placeholder="Name, GT-ID or Name Code" aria-describedby="sizing-addon1">
+	                                    <input type="hidden" name="_token_rfid" id="_token" value="<?php echo csrf_token(); ?>" / >
+	                                    <div id="stafflist_ajax">
+	                                    </div>
                                  </div>
                                 <div class="col-md-12 text-right" style="padding: 0;margin: 0;">
                                     <input id="InterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Interim" name="" data-placement="bottom" data-original-title="Assign Interim Card"data-toggle="modal" href="">
