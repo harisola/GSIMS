@@ -14,12 +14,12 @@ class fee_bill extends Model
 
 
     public function getFeeInformation($gs_id){
-    	$details=fee_bill::
+        $details=fee_bill::
             leftjoin('atif.class_list as std_info','fee_bill.student_id','=','std_info.id')
           ->leftjoin('atif.student_family_record as std_data','std_info.gf_id','=','std_data.gf_id')
           ->select(['fee_bill.*','std_info.abridged_name as student_name','std_info.gender','std_info.gs_id as student_gs_id','std_info.grade_name as grade_name','std_info.campus as campus','std_info.section_name as section_name','std_data.name as parent_name','std_data.parent_type','std_data.gf_id as family_id','std_info.grade_id as std_grade_id'])
-    	  ->where('gs_ids',$gs_id)->OrderBy('std_info.id','desc')->first();
-    	  return $details;
+          ->where('gs_ids',$gs_id)->OrderBy('std_info.id','desc')->first();
+          return $details;
     }
 
     public function feeInformationFilter($academic_session_id,$billing_cycle_number="",$grade_id,$section_name="",$gs_id="",$gf_id="",$gt_id="",$std_status_id=""){
@@ -499,11 +499,11 @@ class fee_bill extends Model
     }
 
     public function getRemitancesPaidFees(){
-    	$details=fee_bill::
-    	   join('students_expected_remitances','students_expected_remitances.student_id','=','students_expected_remitances.student_id')
-    	 ->join('atif.class_list as class_info','fee_bill.student_id','=','class_info.id')
-    	 ->join('atif_fee_student.remittance as r on r.student_id=cl.id and r.academic_id=cl.academic_session_id')
-    	 ->get();
+        $details=fee_bill::
+           join('students_expected_remitances','students_expected_remitances.student_id','=','students_expected_remitances.student_id')
+         ->join('atif.class_list as class_info','fee_bill.student_id','=','class_info.id')
+         ->join('atif_fee_student.remittance as r on r.student_id=cl.id and r.academic_id=cl.academic_session_id')
+         ->get();
     }
 
     public function checkBillExistance($gb_id){
@@ -535,12 +535,13 @@ class fee_bill extends Model
 
     }
 
-    public function getLastBillTaxesNewByStudentId($student_id,$academic_session_id){
+    public function getOnlyLastTaxes($student_id,$academic_session_id){
             $details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])
             ->select('oc_adv_tax')->Orderby('id','desc')->first();
             return $details['oc_adv_tax'];
 
     }
+
 
 
     // public function getThisAcadmicSessionsBillStatus()
@@ -559,10 +560,10 @@ class fee_bill extends Model
     }
 
 
-	public function getLastCurrentBilling($student_id){
-	    	$details=fee_bill::where('student_id',$student_id)->select('id','total_current_bill')->Orderby('id','desc')->first();
-	    	return $details['total_current_bill'];
-	 }
+    public function getLastCurrentBilling($student_id){
+            $details=fee_bill::where('student_id',$student_id)->select('id','total_current_bill')->Orderby('id','desc')->first();
+            return $details['total_current_bill'];
+     }
 
      public function getScptFirstBill($student_id,$billing_cycle_number,$academic_session_id){
             $billing_cycle_number=$billing_cycle_number-1;
@@ -581,8 +582,8 @@ class fee_bill extends Model
     }
 
      public function getLastBillNumber($student_id,$academic_session_id){
-    	$details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->select('gb_id')->Orderby('id','desc')->first();
-    	return $details;
+        $details=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->select('gb_id')->Orderby('id','desc')->first();
+        return $details;
     }
     public function sumPreviousAmount($student_id,$academic_session_id){
             $total=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->sum('total_current_bill');
@@ -595,8 +596,8 @@ class fee_bill extends Model
     }
 
     public function getLastBillTaxes($student_id){
-		$details=fee_bill::where('student_id',$student_id)->select('admission_fee','oc_adv_tax','id','adjustment')->Orderby('id','desc')->first();
-    	return $details;   
+        $details=fee_bill::where('student_id',$student_id)->select('admission_fee','oc_adv_tax','id','adjustment')->Orderby('id','desc')->first();
+        return $details;   
     }
 
     // public function getAdmissionFeeDifference($student_id){
@@ -639,15 +640,15 @@ class fee_bill extends Model
     }
 
     public function getLastBillPaidNotPaid($student_id){
-    	$details=fee_bill::where('student_id',$student_id)->select('bill_status')->Orderby('id','desc')->first();
-    	return $details['bill_status'];   
+        $details=fee_bill::where('student_id',$student_id)->select('bill_status')->Orderby('id','desc')->first();
+        return $details['bill_status'];   
     }
     public function updateBill($bill_id,$total_discount_amount){
-    	$discount=fee_bill::where('gb_id',$gb_id)->update($data);
+        $discount=fee_bill::where('gb_id',$gb_id)->update($data);
     }
-	public function countBills($student_id,$academic_session_id){
-    	$counter=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->count();
-    	return $counter;
+    public function countBills($student_id,$academic_session_id){
+        $counter=fee_bill::where([['student_id',$student_id],['academic_session_id',$academic_session_id]])->count();
+        return $counter;
     }
     public function getSuspendedBarriers($student_id){
         $counter=fee_bill::where('student_id',$student_id)->Orderby('id','desc')->first();
@@ -668,6 +669,62 @@ class fee_bill extends Model
             }else{
                 return $fee_type;
             } 
+    }
+
+        public function getAdmissionFeeReport($from_date,$to_date,$grade_id){
+            $query = "SELECT 
+
+            if( 
+            cl.gs_id is not null,
+            (select att.date from atif_attendance.student_attendance as att where att.gs_id=cl.gs_id and att.date >= '2018-12-01' limit 1) , '' ) as First_Attendance_Tapin,
+
+
+            fb.admission_fee,fb.id,af.form_no,srr.gs_id,if(srr.gf_id!=0,concat(substr(srr.gf_id, 1, 2) , '-', substr(srr.gf_id, 3, 3) ),'')as gfid,sr.gt_id, 
+            af.official_name, 
+            fb.waive_amount,fb.concession_amount,fb.re_enforcement,fb.computer_subcription_fee,
+            fb.security_deposit,fb.total_payable,fbr.received_amount,
+            fbr.received_date,af.grade_name as applied_grade,from_unixtime(cl.created,'%Y-%m-%d') as eao_date,cl.grade_name FROM atif_fee_student.fee_bill fb
+
+
+
+
+
+            inner JOIN  atif_gs_admission.admission_form as af
+            ON af.form_no = if( LENGTH(af.form_no)=7,
+            concat( mid(fb.gb_id, 1, 2),'/' , mid(fb.gb_id, 5, 4) ) ,
+            concat( mid(fb.gb_id, 1, 2),'/' , mid(fb.gb_id, 6, 4) ) )
+            AND fb.bill_title='Admission'
+            AND fb.academic_session_id >= 13
+            AND fb.record_deleted = 0
+            and  mid(fb.gb_id, 1, 2) = '19'
+            and ( mid(fb.gb_id, 3, 2) = '81' or mid(fb.gb_id, 3, 2) = '82' or mid(fb.gb_id, 3, 2) = '85' or mid(fb.gb_id, 3, 2) = '86' )
+            left JOIN atif_fee_student.fee_bill_received as fbr ON fbr.fee_bill_id = fb.id
+
+
+
+
+            LEFT JOIN atif.class_list cl on cl.id=fb.student_id
+            left join atif.students_all as sa on (sa.student_id = fb.student_id 
+                 and fb.academic_session_id>=11) 
+
+            LEFT JOIN atif.student_family_record AS std_data ON (cl.gf_id = std_data.gf_id and std_data.nic = sa.tax_nic)
+            LEFT JOIN atif.staff_child sc ON sc.gf_id = sa.gf_id
+            LEFT JOIN atif.staff_registered sr ON (sr.id = sc.staff_id)
+            left join atif.student_registered as srr on srr.id=fb.student_id
+
+            where";
+            if($grade_id==""){
+                $query.="(fbr.received_date >= '$from_date' AND fbr.received_date <= '$to_date')
+                and fb.bill_cycle_no=0
+                and SUBSTR(fb.gb_id,7,1) <> '/'";
+            }else{
+                $query.="(fbr.received_date >= '$from_date' AND fbr.received_date <= '$to_date')
+                and fb.bill_cycle_no=0
+                and af.grade_name='$grade_id'
+                and SUBSTR(fb.gb_id,7,1) <> '/'";
+            } 
+            
+        return $details = DB::connection('mysql_Career_fee_bill')->select($query);
     }
 
 

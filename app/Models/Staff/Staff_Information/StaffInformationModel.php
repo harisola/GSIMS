@@ -207,13 +207,13 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     ***********************************************************************/
 	public function getStaffInformation($staffID){
 
-		$query = "select
+		$query = "select 
 	    sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.father_name as fathername,sr.spouse_name as spousename, sr.abridged_name,sr.leave_balance, sr.nic, sr.gender, tl.title as staff_title,
-	    DATE_FORMAT(sr.dob, '%d-%b-%Y') as dob, sr.doj, SUBSTRING(sr.gg_id, 1, LOCATE('@',sr.gg_id)-1) as email, IF(sr.branch_id=1, 'North', 'South') as campus,
+	    DATE_FORMAT(sr.dob, '%Y-%m-%d') as dob, sr.doj, sr.gg_id as email, IF(sr.branch_id=1, 'North', 'South') as campus,
 	    sr.mobile_phone, sr.land_line, sr.staff_category, sr.c_topline, sr.c_bottomline, st.code as status_code, st.name as staff_status_name,
 	    if(sup.religion=1 or sup.religion is null, 'Muslim', 'Non-Muslim') as religion, sup.emailpersonal, sup.nationality,
 	    if(sup.employment_status=1, 'Married', if(sup.employment_status=2, 'Single', if(sup.employment_status=3, 'Divorced', if(sup.employment_status=4, 'Widow', '')))) as marital_status,
-	    cnt.apartment_no, cnt.building_name, cnt.plot_no, cnt.street_name, sub_region.name as sub_region, region.name as region,sr.dob as date_of_birth
+	    cnt.apartment_no, cnt.building_name, cnt.plot_no, cnt.street_name, sub_region.name as sub_region,sub_region.id as sub_region_id, region.name as region,region.id as region_id,sr.dob as date_of_birth
 	    from atif.staff_registered as sr
 	    left join atif._title_person as tl
 	    	on tl.id = sr.title_person_id
@@ -230,7 +230,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 	    where (sr.id = $staffID)
 	    AND (sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0)
 	    limit 1";
-      //print_r($query);
+
 		$staff = DB::connection($this->dbCon)->select($query);
 
 		$i = 0;
@@ -243,7 +243,6 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 
 		return $staff;
 	}
-
 
 
 
@@ -401,7 +400,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
         left join atif_role_org.role_category as rc
             on rc.id = ro.staff_role_category_id
 
-        where sr.gt_id = '".$GTID."'
+        where sr.gt_id = '".$GTID."' and ro.record_deleted=0
 
         order by ro.fundamentalRole desc;";
 
@@ -507,7 +506,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			on rc.id = ro.staff_role_category_id
 			
 
-		where ro.id = ".$RoleID;
+		where ro.id = ".$RoleID." and ro.record_deleted=0";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -578,7 +577,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 		where sr.gt_id = '".$GTID."') as sbjRole
 		on sbjRole.sbjRoleID = ro.id
 
-		where ro.id = ".$RoleID;
+		where ro.id = ".$RoleID." and ro.record_deleted=0";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -690,7 +689,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				and ssgg.academic_session_id <= 10
 
 
-			where sr.gt_id = '".$GTID."') as data
+			where sr.gt_id = '".$GTID."' and ro.record_deleted=0) as data
 
 			order by abridged_name desc
 			limit 1";
@@ -715,7 +714,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     public function get_StaffReporteeInfo($RoleID, $ReportingType=null, $NameCode=null)
     {
     	/***** ***** ***** Class Teachers for Year Tutor ***** ***** *****/
-        $query = "select grade_id from atif_role_org.role_position where id = " . $RoleID . 
+        $query = "select grade_id from atif_role_org.role_position where record_deleted=0 and id = " . $RoleID . 
         	" and (role_title_tl like 'YT%'
         	or role_title_tl like '%Mentor%')";
         $queryResult = DB::connection($this->dbCon)->select($query);
@@ -796,7 +795,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
         $query = "select sr.gt_id from atif_role_org.role_position as p
 		left join atif.staff_registered as sr
 			on sr.id = p.staff_id
-		where p.id = $RoleID and p.role_title_tl like 'LT%'";
+		where p.record_deleted=0 and p.id = $RoleID and p.role_title_tl like 'LT%'";
         $queryResult = DB::connection($this->dbCon)->select($query);
         $queryST = '';
         if(!empty($queryResult)){
@@ -863,9 +862,12 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				on sr.id = ro.staff_id
 			left join atif_role_org.role_category as rc
 				on rc.id = ro.staff_role_category_id
+
+				
 				
 
-			where ro.pm_report_to = $RoleID
+			where ro.pm_report_to = $RoleID and ro.record_deleted=0
+
 
 			$queryYT
 
@@ -889,7 +891,8 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				on rc.id = ro.staff_role_category_id
 				
 
-			where ro.pm_report_to = $RoleID
+			where ro.pm_report_to = $RoleID and ro.record_deleted=0
+
 
 			$queryYT
 
@@ -938,7 +941,8 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			on rc.id = ro.staff_role_category_id
 			
 
-		where ro.sc_report_to = $RoleID
+		where ro.sc_report_to = $RoleID and ro.record_deleted=0
+
 
 		order by rc.position";
 
@@ -989,7 +993,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			on st_gs.grade_name = gg.name
 			and st_gs.section_name = ss.name
 
-		where sr.gt_id = '".$GTID."'";
+		where sr.gt_id = '".$GTID."' and ro.record_deleted=0";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -1068,7 +1072,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 				on st_gs.grade_name = gg.name
 				and st_gs.section_name = ss.name
 
-			where sr.gt_id = '".$GTID."'";
+			where sr.gt_id = '".$GTID."' and ro.record_deleted=0";
 			$staff = DB::connection($this->dbCon)->select($query);
 		}
 
@@ -1149,7 +1153,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			and ssgg.academic_session_id <= 10
 
 
-		where sr.gt_id = '".$GTID."') as data
+		where sr.gt_id = '".$GTID."' and ro.record_deleted=0) as data
 		where students is not null
 
 		order by gp_id asc";
@@ -1204,7 +1208,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 						on st_gs.grade_name = gg.name
 						and st_gs.section_name = ss.name
 			
-					where sr.gt_id = '".$GTID."') as data
+					where sr.gt_id = '".$GTID."' and ro.record_deleted=0) as data
 					
 			UNION
 			
@@ -1265,7 +1269,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 						and ssgg.academic_session_id <= 10
 			
 			
-					where sr.gt_id = '".$GTID."'
+					where sr.gt_id = '".$GTID."' and ro.record_deleted=0
 					group by gg.name, ss.name) as data
 					where students is not null
 			) as data
@@ -1442,15 +1446,17 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     * @output:  Staff TIF-B, Other Detail: PF/Bank/Takaful/NTN
     * Date:     Jul 29, 2017 (Thu)
     ***********************************************************************/
+    //add reasons column in that query for takaful table zk
     public function getStaffOtherInfo($StaffID)
     {
         $query="select
-		IFNULL(b.bank_name, '-') as bank_name, IFNULL(b.branch, '-') as bank_branch, 
+		IFNULL(b.bank_name, '-') as bank_name, IFNULL(b.branch, '-') as bank_branch,
 		IFNULL(b.branch_code, '-') as branch_code, IFNULL(b.account_number, '-') as account_number,
 		IF(s.providentFund=1, 'Yes', 'No') as pf, IFNULL(s.nationalTaxNumber, '-') as ntn,
 		IFNULL(sr.eobi_no, '-') as eobi, IFNULL(sr.sessi_no, '-') as sessi,
-		IF(t.self=1, 'Yes', 'No') as takaful_self, IF(t.children=1, 'Yes', 'No') as takaful_children, 
-		IF(t.spouse=1, 'Yes', 'No') as takaful_spouse, IFNULL(t.certificate_no, '-') as takaful_crt
+		IF(t.self=1, 'Yes', 'No') as takaful_self, IF(t.children=1, 'Yes', 'No') as takaful_children,
+		IF(t.spouse=1, 'Yes', 'No') as takaful_spouse, IFNULL(t.certificate_no, '-') as takaful_crt,
+    	t.reasons as takaful_reasons
 		from atif.staff_registered as sr
 		left join atif.staff_registered_bank_account as b
 			on b.staff_id = sr.id
@@ -1732,7 +1738,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     public function get_StaffReporteeInfo_UTeam($RoleID, $ReportingType=null, $NameCode=null)
     {
 		
-		$query="select
+		/*$query="select
 	    sr.role_id_solangi as Role_id_So, sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.abridged_name, sr.nic, sr.gender, tl.title as staff_title,
 	    sr.dob, sr.doj, SUBSTRING(sr.gg_id, 1, LOCATE('@',sr.gg_id)-1) as email, IF(sr.branch_id=1, 'North', 'South') as campus,
 	    sr.mobile_phone, sr.staff_category, sr.c_topline, sr.c_bottomline, st.code as status_code, st.name as status_name, MID(st.code, 3, 1) as status_name_code, ttp.name as tt_profile_name, CONCAT(st.code, ': ', st.name) as status_description, sr.report_ok,
@@ -1828,7 +1834,7 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 			left join atif_role_org.role_category as rc
 				on rc.id = ro.staff_role_category_id
 				
-			where ro.pm_report_to = $RoleID) as sr
+			where ro.pm_report_to = $RoleID  ) as sr
 	    left join atif._title_person as tl
 	    	on tl.id = sr.title_person_id
 	    left join atif._staffstatus as st
@@ -1848,7 +1854,116 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 		left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and wts.date = curdate() ) 	
 	    where sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0
 	    group by sr.id
-	    order by sr.abridged_name";
+	    order by sr.abridged_name";*/
+
+	    $query = "SELECT
+ ro.id as Role_id_So,
+  sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.abridged_name, sr.nic, sr.gender, tl.title as staff_title,
+	    sr.dob, sr.doj, SUBSTRING(sr.gg_id, 1, LOCATE('@',sr.gg_id)-1) as email, IF(sr.branch_id=1, 'North', 'South') as campus,
+	    sr.mobile_phone, sr.staff_category, sr.c_topline, sr.c_bottomline, st.code as status_code, st.name as status_name, MID(st.code, 3, 1) as status_name_code, ttp.name as tt_profile_name, CONCAT(st.code, ': ', st.name) as status_description, 
+		 
+		 IF(ro.is_transparent =2, 'TRP', 'OPQ') as report_ok,
+		 
+
+	    
+
+	    
+
+	   if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'Waiting',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'Absent',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'On Time',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'Late',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'In Buffer', 'No profile assigned'  ))))) as atd_title,
+
+
+	    if(atd.time is null, 'awaited', concat('at ', TIME_FORMAT(atd.time, '%h:%i %p'))) as atd_content,
+
+	    
+
+
+
+	     if(WEEKDAY(date(curdate())) = 5  and tt.sat_working=1,
+	    if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'WaitingIcon.png',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'AbsentIcon.png',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'OnTimeicon.png',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'LateIcon.png',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBufferIcon.png', 'WaitingIcon.png'  )))))
+		  
+	    ,
+
+	    if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'WaitingIcon.png',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'AbsentIcon.png',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'OnTimeicon.png',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'LateIcon.png',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBufferIcon.png', 'WaitingIcon.png'  )))))) as atd_icon,
+		  
+
+if(WEEKDAY(date(curdate())) = 5  and tt.sat_working=1,
+
+if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'Waiting',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'Absent',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'On_Time',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'Late',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBuffer', ''  ))))),
+
+
+if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') )), 'Waiting',
+	    
+	    if( ( atd.time is null ) and ( curtime() >  ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ) , 'Absent',
+	    
+	   if( (atd.time is not null) and ( atd.time <= Time( TIME_FORMAT( wts.time_in + interval 59 second, '%H:%i:%s')) ), 'On_Time',
+	   
+	   if( (atd.time is not null) and ( atd.time > ADDTIME( wts.time_in, TIME_FORMAT(SEC_TO_TIME(( (tt.daily_relax_in+1)*60)),'%H:%i:%s')) ), 'Late',
+	    
+	    if( (atd.time is not null) and ( atd.time between 
+		 Time( TIME_FORMAT( wts.time_in + INTERVAL 1 MINUTE , '%H:%i:%s')) 
+		  and  Time( TIME_FORMAT( wts.time_in + INTERVAL (tt.daily_relax_in+1) MINUTE , '%H:%i:%s')) ) , 'InBuffer', ''  )))))) as Time_Checked
+
+
+
+FROM atif_role_org.role_position AS ro
+LEFT JOIN atif.staff_registered AS sr ON sr.id = ro.staff_id
+LEFT JOIN atif_role_org.role_category AS rc ON rc.id = ro.staff_role_category_id
+LEFT JOIN atif._title_person AS tl ON tl.id = sr.title_person_id
+LEFT JOIN atif._staffstatus AS st ON st.id = sr.staff_status
+LEFT JOIN 
+		 	(
+SELECT atd.staff_id, MIN(atd.time) AS TIME
+FROM atif_attendance_staff.staff_attendance_in AS atd
+WHERE atd.date = CURDATE() AND (atd.location_id = 3 OR atd.location_id = 4 OR atd.location_id=18)
+GROUP BY atd.staff_id
+			) AS atd ON atd.staff_id = sr.id
+LEFT JOIN atif_gs_events.tt_profile_time_staff AS tt ON tt.staff_id = sr.id
+LEFT JOIN atif_gs_events.tt_profile AS ttp ON ttp.id = tt.profile_id
+LEFT JOIN atif_gs_events.weekly_time_sheet AS wts ON (wts.staff_id = sr.id AND wts.date = CURDATE())
+WHERE (ro.pm_report_to=".$RoleID.")  
+#and sr.is_active = 1 and sr.is_posted = 1 
+and ro.record_deleted=0
+";
 
 
         $staff = DB::connection($this->dbCon)->select($query);
@@ -1954,12 +2069,12 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 
 			from atif_role_org.role_position as ro
 			left join atif.staff_registered as sr
-				on sr.id = ro.staff_id
+				on sr.id = ro.staff_id 
 			left join atif_role_org.role_category as rc
 				on rc.id = ro.staff_role_category_id
 				
 
-			where ro.sc_report_to = $RoleID) as sr
+			where ro.sc_report_to = $RoleID  ) as sr
 	    left join atif._title_person as tl
 	    	on tl.id = sr.title_person_id
 	    left join atif._staffstatus as st
@@ -1979,7 +2094,7 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 
 		left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and wts.date = curdate() ) 
 		 	
-	    where sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0
+	    where sr.is_active = 1 and sr.is_posted = 1 and sr.record_deleted = 0 
 	    group by sr.id
 	    order by sr.abridged_name";
 
@@ -2098,25 +2213,30 @@ and amd.id=".$Absentia_id."";
 
      public function getStaffComments($staff_id){
     	
-	 $query = "SELECT * from ( SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') as time_12hr, time , 'Threshold Tap In' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." )  as name , '2' as tempSort from 
-		atif_attendance_staff.staff_attendance_in where staff_id = ".$staff_id ." and location_id in (1,2) 
-		#GROUP BY date
-		UNION 
-		SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, 'Threshold Tap Out' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '5' as tempSort from atif_attendance_staff.`staff_attendance_out` where staff_id = ".$staff_id ." and location_id in (1,2)
-		#GROUP BY date
-		UNION 
-		SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, 'Po Tap In' as poTapIn, ' ' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '3' as tempSort from atif_attendance_staff.`staff_attendance_in` where staff_id = ".$staff_id ." and location_id in (3,4)
-		#GROUP BY date
-		UNION 
-		SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, 'Po Tap out' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '4' as tempSort from atif_attendance_staff.`staff_attendance_out` where staff_id = ".$staff_id ." and location_id in (3,4)
-		#GROUP BY date
-		UNION
-		SELECT   (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE user_id = created_by) ) as title,   'user' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut,comments as comments,(SELECT  GROUP_CONCAT(name) as category_name FROM atif_gs_events.comment_category where  FIND_IN_SET( id ,( SELECT `category_id` FROM atif_gs_events.`staff_comments` where id = comments_table.id ))) as comments_categories, ' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE user_id = created_by ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE user_id = created_by ) as name, '7' as tempSort  FROM atif_gs_events.`staff_comments` as comments_table where staff_id = ".$staff_id ."
-		UNION
-		SELECT  (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title, 'system' as flag, `date`, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut,' '  as comments, ' ' as comments_categories,  'vehicle Tap IN' as vehicleTap, ( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id , ( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '1' as tempSort FROM atif_attendance_vehicle .`vehicle_attendance_in`  where `vehicle_id` in (SELECT id FROM `atif`.`vehicle_registered` WHERE  `register_type` = 1 and `gv_id` in (SELECT `gv_id` FROM atif.`staff_vehicle` where `employee_id` = (SELECT `employee_id` FROM  atif.`staff_registered` WHERE id =".$staff_id .") ) ) GROUP BY date 
-		UNION
-		SELECT  (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title, 'system' as flag, `date`, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format,TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut,' '  as comments, ' ' as comments_categories, 'vehicle Tap Out' as vehicleTap, ( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id , ( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '6' as tempSort FROM atif_attendance_vehicle .`vehicle_attendance_out`  where `vehicle_id` in (SELECT id FROM `atif`.`vehicle_registered` WHERE  `register_type` = 1 and `gv_id` in (SELECT `gv_id` FROM atif.`staff_vehicle` where `employee_id` = (SELECT `employee_id` FROM  atif.`staff_registered` WHERE id =".$staff_id .")  ) ) #GROUP BY date  
-		ORDER by date desc, time DESC, tempSort DESC) as dd limit 200 ";
+
+			$query="select sr.id,sr.name,tp.title,result.date,result.time,DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format,sl.description,sl.name as location_name,TIME_FORMAT(time, '%r') time_12hr,result.type,
+			CONCAT(tp.title,' ',sr.name,' ',DATE_FORMAT(date,  '%a, %b %d %Y'),' ',sl.description,' ','tap_type',' ',TIME_FORMAT(time, '%r')) as description
+
+			from(
+			SELECT *,'tap-in' as type FROM atif_attendance_staff.staff_attendance_in si
+			where si.staff_id=613 
+			UNION ALL
+			SELECT *,'tap-out' as type FROM atif_attendance_staff.staff_attendance_out so
+			where so.staff_id=613 
+			) result
+
+			inner join atif_attendance.attendance_location sl
+			on sl.id=result.location_id
+
+			inner join atif.staff_registered sr
+			on sr.id=result.staff_id
+
+			left join atif._title_person tp
+			on tp.id=sr.title_person_id
+
+
+
+			ORDER by date desc, time DESC";
 	
 
 	     $comments = DB::connection($this->dbCon)->select($query);
@@ -2307,7 +2427,7 @@ public function getSinglePenalty($ID){
 	}
 
 	public function getDailyReportData($staff_id,$from_date,$to_date){
-		echo $query = "CALL atif_gs_events.`sp_get_attendance_info`(".$staff_id.",'".$from_date."','".$to_date."')";
+		$query = "CALL atif_gs_events.`sp_get_attendance_info`(".$staff_id.",'".$from_date."','".$to_date."')";
 		$result = DB::connection($this->dbCon)->select($query);
 		return $result;
 	}

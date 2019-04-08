@@ -258,7 +258,7 @@ display: none;
   z-index: 9;
 }
 .edit-button {
-	position: absolute;
+  position: absolute;
     right: 14px;
     top: 0;
     background: #e2e2e273;
@@ -266,17 +266,17 @@ display: none;
     padding: 2px 10px;
 }
 .edit-button:hover {
-	color: #888;
-	background: #e2e2e2;
-	text-decoration: none;
-	border-bottom: 1px solid #888;
-	border-left: 1px solid #888;
+  color: #888;
+  background: #e2e2e2;
+  text-decoration: none;
+  border-bottom: 1px solid #888;
+  border-left: 1px solid #888;
 }
 #EditDetails .modal-dialog {
     width: 90%;
 }
 .marginBottom20 {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 </style>
 <link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css" />
@@ -425,65 +425,7 @@ display: none;
                                      </div><!-- -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Title:</label>
-                                                    <div class="">
-                                                       <input type="text" class="form-control" name="" id="multiple_absentia_title" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Date:</label>
-                                                    <div class="">
-                                                       <input type="date" class="form-control" name="" id="multiple_absentia_date" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Start Time:</label>
-                                                    <div class="">
-                                                       <input type="time" class="form-control" name="" id="multiple_absentia_startTime" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">End Time:</label>
-                                                    <div class="">
-                                                       <input type="time" class="form-control" name="" id="multiple_absentia_endTime" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-12 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Description:</label>
-                                                    <div class="">
-                                                       <textarea id="multiple_absentia_description" cols="85" rows="5"></textarea>
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
+                                          @include('master_layout.staff.staff_recruitment.forms.absentia_form_body')
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -522,83 +464,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Leave Title:</label>
-                                                    <div class="">
-                                                       <input type="text" class="form-control" name="leave_title" id="multiple_leave_title" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Leave Type:</label>
-                                                    <div class="">
-                                                       <select class="form-control multiple_leave_type">
-                                                       @foreach($leaveType as $type)
-                                                                      <option value="{{$type->id}}">{{$type->leave_type_name}}</option>
-                                                                   @endforeach
-                                                       </select>
-                                                       <!-- select -->
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">From:</label>
-                                                    <div class="">
-                                                       <input type="date" class="form-control" name="" id="multiple_leave_from" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">To:</label>
-                                                    <div class="">
-                                                       <input type="date" class="form-control" name="" id="multiple_leave_to" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-12 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Additional Comments <small>(if any)</small>:</label>
-                                                    <div class="">
-                                                       <textarea id="multiple_leave_comment" cols="85" rows="5"></textarea>
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-12 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Request for a paid Compensation</label>
-                                                    <div class="">
-                                                       <input id="multiple_limit" type="checkbox" class="make-switch" data-on-text="Yes" data-off-text="No">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
+                                           @include('master_layout.staff.staff_recruitment.forms.leave_application_form_body')
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -636,68 +502,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Penalty Title:</label>
-                                                    <div class="">
-                                                       <input type="text" class="form-control" name="" id="multiple_penalty_title" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Penalty for <small>(no of days)</small>:</label>
-                                                    <div class="input-group">
-                                                       <input id="multiple_penalty_day" type="number" class="form-control" placeholder="">
-                                                       <span class="input-group-addon">
-                                                       <i class="fa fa-hashtag"></i>
-                                                       </span>
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Penalty from:</label>
-                                                    <div class="">
-                                                       <input type="date" class="form-control" name="" id="multiple_penalty_from" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Penalty to:</label>
-                                                    <div class="">
-                                                       <input id="multiple_penalty_to" type="date" class="form-control" placeholder="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-12 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Information regarding Penalty:</label>
-                                                    <div class="">
-                                                       <textarea id="multiple_penalty_description" cols="85" rows="5"></textarea>
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
+                                           @include('master_layout.staff.staff_recruitment.forms.unauthorize_leave_pnelty_form_body')
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -735,47 +540,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           <div class="row">
-                                              <div class="col-md-12 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Attendance Date:</label>
-                                                    <div class="">
-                                                       <input type="date" class="form-control" name="" id="multiple_manual_attendance" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Miss Tap:</label>
-                                                    <div class="">
-                                                       <input type="time" class="form-control" name="" id="multiple_manual_tap" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-
-
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-12 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Information regarding manual attendance:</label>
-                                                    <div class="">
-                                                       <textarea id="multiple_manual_description" cols="85" rows="5"></textarea>
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
+                                           @include('master_layout.staff.staff_recruitment.forms.miss_tap_form_body')
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -813,45 +578,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           <div class="row">
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Title:</label>
-                                                    <div class="">
-                                                       <input type="text" class="form-control" name="" id="multiple_adjustment_title" data-id="">
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                              <div class="col-md-6 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Adjustment for <small>(no of days)</small>:</label>
-                                                    <div class="input-group">
-                                                       <input id="multiple_adjustment_no" type="number" class="form-control" placeholder="">
-                                                       <span class="input-group-addon">
-                                                       <i class="fa fa-hashtag"></i>
-                                                       </span>
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
-                                           <div class="row">
-                                              <div class="col-md-12 paddingBottom10">
-                                                 <div class="form-group">
-                                                    <label class="">Information regarding Adjustments:</label>
-                                                    <div class="">
-                                                       <textarea id="multiple_adjustment_description" cols="85" rows="5"></textarea>
-                                                    </div>
-                                                 </div>
-                                                 <!-- form-group -->
-                                              </div>
-                                              <!-- col-md-6 -->
-                                           </div>
-                                           <!-- row -->
+                                           @include('master_layout.staff.staff_recruitment.forms.exceptional_adjustment_form_body')
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -1170,24 +897,24 @@ display: none;
              <!-- SIDEBAR USERPIC -->
              <a href="#EditDetails" data-toggle="modal" class="edit-button">Edit details</a>
              <div class="modal fade" id="EditDetails" tabindex="-1" role="basic" aria-hidden="true">
-	             <div class="modal-dialog">
-	                <div class="modal-content">
-	                   <div class="modal-header">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h3 class="modal-title" id="modal-title-staff">Edit Information for <strong>Aamir Hussain</strong></h3>
                      </div>
                       <div class="modal_body_fetch"></div>
-	                   <hr />
-	                   <div class="modal-footer text-center" style="text-align:center;">
+                     <hr />
+                     <div class="modal-footer text-center" style="text-align:center;">
                         <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
                         <button type="button" class="btn dark btn-outline active add_staff_info" data-dismiss="">Update</button>
                         <!--button type="button" class="btn green">Add Badge</button -->
                      </div>
-	                </div>
-	                <!-- /.modal-content -->
-	             </div>
-	             <!-- /.modal-dialog -->
-	        </div>
+                  </div>
+                  <!-- /.modal-content -->
+               </div>
+               <!-- /.modal-dialog -->
+          </div>
              <div class="profile-userpic">
                 <img src="" class="img-responsive" alt=""> 
              </div>
@@ -4044,6 +3771,16 @@ display: none;
                                                     <div class="form-body">
                                                        <div class="row">
                                                           <div class="col-md-6 paddingBottom10">
+                                                              <div class="form-group">
+                                                                  <label class="">Form #:</label>
+                                                                  <div class="">
+                                                                     <input type="text" class="form-control form_number_absentia_a" disabled="" name="" id="form_number_absentia_a" value="<?= 
+                                                                      App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(1); ?>" data-id="">
+                                                                  </div>
+                                                                  <div class="">
+                                                                     <input type="text" class="form-control form_number_absentia_b" name="" id="form_number_absentia_b" data-id="">
+                                                                  </div>
+                                                               </div>
                                                              <div class="form-group">
                                                                 <label class="">Title:</label>
                                                                 <div class="">
@@ -4488,11 +4225,15 @@ display: none;
                                                        <div class="row">
                                                           <div class="col-md-6 paddingBottom10">
                                                              <div class="form-group">
-                                                                <label class="">Form No:</label>
-                                                                <div class="">
-                                                                   <input type="text" class="form-control" name="" id="leave_form_no" >
-                                                                </div>
-                                                             </div>
+                                                                  <label class="">Form #:</label>
+                                                                  <div class="">
+                                                                     <input type="text" class="form-control form_number_leave_application_a" disabled="" name="" id="form_number_leave_application_a" value="<?= 
+                                                                      App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(2); ?>" data-id="">
+                                                                  </div>
+                                                                  <div class="">
+                                                                     <input type="text" class="form-control form_number_leave_application_b" name="" id="form_number_leave_application_b" data-id="">
+                                                                  </div>
+                                                               </div>
                                                              <!-- form-group -->
                                                           </div>
                                                           <!-- col-md-6 -->
@@ -4500,6 +4241,7 @@ display: none;
                                                         <!-- row -->
                                                        <div class="row">
                                                           <div class="col-md-6 paddingBottom10">
+
                                                              <div class="form-group">
                                                                 <label class="">Leave Title:</label>
                                                                 <div class="">
@@ -4742,6 +4484,16 @@ display: none;
                                                     <div class="form-body">
                                                        <div class="row">
                                                           <div class="col-md-6 paddingBottom10">
+                                                              <div class="form-group">
+                                                                  <label class="">Form #:</label>
+                                                                  <div class="">
+                                                                     <input type="text" class="form_number_penalty_a form-control" disabled="" name="" id="form_number_penalty_a" value="<?= 
+                                                                      App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(3); ?>" data-id="">
+                                                                  </div>
+                                                                  <div class="">
+                                                                     <input type="text" class="form-control form_number_penalty_b" name="" id="form_number_penalty_b" data-id="">
+                                                                  </div>
+                                                               </div>
                                                              <div class="form-group">
                                                                 <label class="">Penalty Title:</label>
                                                                 <div class="">
@@ -4928,6 +4680,16 @@ display: none;
                                                  <!-- headRightDetailsInner -->
                                                  <div class="portlet-body fixedHeightmodalPortlet">
                                                     <div class="form-body">
+                                                      <div class="form-group">
+                                                        <label class="">Form #:</label>
+                                                        <div class="">
+                                                        <input type="text" class="form-control form_number_exceptional_adjustment_a" disabled="" name="" id="form_number_exceptional_adjustment_a" value="<?= 
+                                                        App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(5); ?>" data-id="">
+                                                        </div>
+                                                        <div class="">
+                                                        <input type="text" class="form-control form_number_exceptional_adjustment_b" name="" id="form_number_exceptional_adjustment_b" data-id="">
+                                                        </div>
+                                                    </div> 
                                                        <div class="row">
                                                           <div class="col-md-6 paddingBottom10">
                                                              <div class="form-group">
@@ -5153,6 +4915,15 @@ display: none;
                                                  <!-- headRightDetailsInner -->
                                                  <div class="portlet-body fixedHeightmodalPortlet">
                                                     <div class="form-body">
+                                                       <div class="form-group">
+                                                          <label class="">Form #:</label>
+                                                          <div class="">
+                                                             <input type="text" class="form-control form_number_miss_tap_a" disabled="" name="" id="form_number_miss_tap_a" value="<?= 
+                                                              App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(4); ?>" data-id="">
+                                                          </div>
+                                                          <div class="">
+                                                             <input type="text" class="form-control form_number_miss_tap_b" name="" id="form_number_miss_tap_b" data-id="">
+                                                          </div>
                                                        <div class="row">
                                                           <div class="col-md-12 paddingBottom10">
                                                              <div class="form-group">
@@ -5262,6 +5033,7 @@ display: none;
                          </div>
                          <!-- tab-content -->
                       </div>
+                      </div>//unexpected div close
                       <!-- tabbable-line -->
                    </div>
                    <!-- tab_1_3 -->
@@ -5538,7 +5310,7 @@ display: none;
 </style>                     
                    <div class="tab-pane fade" id="tab_1_6">
                       <div id="content_role_position_distance"> 
-					
+          
                          <div class="portlet-body padding0">
                             <table width="100%" class="rolesTable">
                                <tr class="pBottom10">
@@ -6721,12 +6493,15 @@ $('#staffView_StaffList_Search').val('');
 
              var staffID = staff_ids[i];
 
-             var leave_title = $('#multiple_leave_title').val();
-             var leave_type = $('.multiple_leave_type option:selected').val();
-             var leave_from = $('#multiple_leave_from').val();
-             var leave_to = $('#multiple_leave_to').val();
-             var leave_comment = $('#multiple_leave_comment').val();
+              var leave_title = $('#multiple_leave_title').val();
+              var leave_type = $('.multiple_leave_type option:selected').val();
+              var leave_from = $('#multiple_leave_from').val();
+              var leave_to = $('#multiple_leave_to').val();
+              var leave_comment = $('#multiple_leave_comment').val();
+              var form_number_a=$('#form_number_leave_application_a').val();
+              var form_number_b=$('#form_number_leave_application_b').val();
 
+              var form_number=form_number_a+form_number_b;
              var paid_compensation_display;
              if (paid_compensation == 1) {
                  paid_compensation_display = 'Yes';
@@ -6749,6 +6524,7 @@ $('#staffView_StaffList_Search').val('');
                          "leave_to": leave_to,
                          "leave_comment": leave_comment,
                          "paid_compensation": paid_compensation,
+                         "form_number": form_number,
                          "_token": "{{ csrf_token() }}"
                      },
                      success: function(result) {
@@ -6778,6 +6554,10 @@ $('#staffView_StaffList_Search').val('');
              var start_time = $("#multiple_absentia_startTime").val();
              var end_time = $("#multiple_absentia_endTime").val();
              var description = $("#multiple_absentia_description").val();
+             var form_number_a=$('#form_number_absentia_a').val();
+             var form_number_b=$('#form_number_absentia_b').val();
+             var form_number=form_number_a+form_number_b;
+
              var staffID = staff_ids[i];
              if (date !== '' && title !== '' && start_time !== '' && end_time !== '') {
 
@@ -6792,6 +6572,7 @@ $('#staffView_StaffList_Search').val('');
                          "start_time": start_time,
                          "end_time": end_time,
                          "description": description,
+                         "form_number": form_number,
                          "_token": "{{ csrf_token() }}"
                      },
                      success: function(result) {
@@ -6839,6 +6620,11 @@ $('#staffView_StaffList_Search').val('');
            var penalty_from = $('#multiple_penalty_from').val();
            var penalty_to = $('#multiple_penalty_to').val();
            var penalty_description = $('#multiple_penalty_description').val();
+            var form_number_a=$('#form_number_penalty_a').val();
+            var form_number_b=$('#form_number_penalty_b').val();
+
+            var form_number=form_number_a+form_number_b;
+
            var staff_id = staff_ids[i];
            // console.log(penalty_to);
 
@@ -6854,6 +6640,7 @@ $('#staffView_StaffList_Search').val('');
                        "penalty_to": penalty_to,
                        "penalty_description": penalty_description,
                        "staff_id": staff_id,
+                       "form_number": form_number,
                        "_token": "{{ csrf_token() }}"
                    },
                    success: function(e) {
@@ -6898,9 +6685,13 @@ $('#staffView_StaffList_Search').val('');
       var staff_ids = $('.selectAdjustments').val();
 
       for (var i = 0; i < staff_ids.length; i++) {
-           var adjustment_title = $('#multiple_adjustment_title').val();
-           var adjustment_no = $('#multiple_adjustment_no').val();
-           var adjustment_description = $('#multiple_adjustment_description').val();
+          var adjustment_title = $('#multiple_adjustment_title').val();
+          var adjustment_no = $('#multiple_adjustment_no').val();
+          var adjustment_description = $('#multiple_adjustment_description').val();
+          var form_number_a=$('#form_number_exceptional_adjustment_a').val();
+          var form_number_b=$('#form_number_exceptional_adjustment_b').val();
+
+          var form_number=form_number_a+form_number_b;
            var staff_id = staff_ids[i];
            if (adjustment_title != '' && adjustment_no != '') {
                $.ajax({
@@ -6911,6 +6702,7 @@ $('#staffView_StaffList_Search').val('');
                        "adjustment_no": adjustment_no,
                        "adjustment_description": adjustment_description,
                        "staff_id": staff_id,
+                       "form_number": form_number,
                        "_token": "{{csrf_token()}}"
                    },
                    url: "{{url('/masterLayout/addAdjustment')}}",
@@ -6953,8 +6745,11 @@ $('#staffView_StaffList_Search').val('');
        var staff_ids = $('.selectManual').val();
 
        for (var i = 0; i < staff_ids.length; i++) {
-           var date = $("#multiple_manual_attendance").val();
-           var missTap = $("#multiple_manual_tap").val();
+          var date = $("#multiple_manual_attendance").val();
+          var missTap = $("#multiple_manual_tap").val();
+          var form_number_a=$('#form_number_miss_tap_a').val();
+          var form_number_b=$('#form_number_miss_tap_b').val();
+          var form_number=form_number_a+form_number_b;
 
            var description = $("#multiple_manual_description").val();
            var staffID = staff_ids[i];
@@ -6969,6 +6764,7 @@ $('#staffView_StaffList_Search').val('');
                        "date": date,
                        "missTap": missTap,
                        "description": description,
+                       "form_number": form_number,
                        "_token": "{{ csrf_token() }}"
                    },
                    success: function(result) {
@@ -7599,7 +7395,7 @@ $('#staffView_StaffList_Search').val('');
    
     $("#content_role_position_distance").html('');
     Staff_Role_Distance(staffID);
-   
+    debugger;
      $('.profile-userpic img').attr("src", "<?php echo url('/assets/img/loading.png'); ?>");
      $.ajax({
          type:"POST",
@@ -7807,28 +7603,16 @@ $('#staffView_StaffList_Search').val('');
              // Comments Response
              if(data['comments']){
                  var commentsHTML = '';
- 
+  
                  for(var i=0; i< data['comments'].length; i++){
-                     
-                     if(data['comments'][i].flag == 'system' && data['comments'][i].thresholdTapIN == 'Threshold Tap In' ){
- 
-                         commentsHTML = commentsHTML + '<li class="in commentsLI" data-val='+data['comments'][i].date+'><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> Threshold  </a><span class="datetime"> at <strong>'+ data['comments'][i].time_12hr+ '</strong> on <strong>'+ data['comments'][i].date_format +'</strong> </span><span class="body"> '+data['comments'][i].title +'. ' + data['comments'][i].name +' '+ data['comments'][i].date_format +' Threshold tap-in '+ data['comments'][i].time_12hr +'</span><input type="hidden" class="dateSearch" value='+data['comments'][i].date+' /></div></li>';
-                     } else if(data['comments'][i].flag == 'system' && data['comments'][i].thresholdTapOut == 'Threshold Tap Out' ){
-                         commentsHTML = commentsHTML + '<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> Threshold  </a><span class="datetime"> at <strong>'+ data['comments'][i].time_12hr+ '</strong> on <strong>'+data['comments'][i].date_format + '</strong> </span><span class="body"> '+data['comments'][i].title +'. ' + data['comments'][i].name +' '+ data['comments'][i].date_format +' Threshold tap-out '+ data['comments'][i].time_12hr +'</span><input type="hidden" class="dateSearch" value='+data['comments'][i].date+' /></div></li>';
-                     } else if(data['comments'][i].flag == 'system' && data['comments'][i].poTapIn == 'Po Tap In' ){
-                         commentsHTML = commentsHTML + '<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> Principal Office  </a><span class="datetime"> at <strong>'+ data['comments'][i].time_12hr+ '</strong> on <strong>'+data['comments'][i].date_format + '</strong> </span><span class="body"> '+data['comments'][i].title +'. ' + data['comments'][i].name +' '+ data['comments'][i].date_format +' Principal Office tap-in '+ data['comments'][i].time_12hr +'</span><input type="hidden" class="dateSearch" value='+data['comments'][i].date+' /></div></li>';
-                     } else if(data['comments'][i].flag == 'system' && data['comments'][i].poTapOut == 'Po Tap out' ){
-                         commentsHTML = commentsHTML + '<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> Principal Office  </a><span class="datetime"> at <strong>'+ data['comments'][i].time_12hr+ '</strong> on <strong>'+ data['comments'][i].date_format + '</strong> </span><span class="body"> '+data['comments'][i].title +'. ' + data['comments'][i].name +' '+ data['comments'][i].date_format+' Principal Office tap-out '+ data['comments'][i].time_12hr +'</span><input type="hidden" class="dateSearch" value='+data['comments'][i].date+' /></div></li>';
-                     } else if(data['comments'][i].flag == 'system' && data['comments'][i].vehicleTap == 'vehicle Tap IN' ){
-                         commentsHTML = commentsHTML + '<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> Vehicle  </a><span class="datetime"> at <strong>'+ data['comments'][i].time_12hr+ '</strong> on <strong>'+ data['comments'][i].date_format + '</strong> </span><span class="body"> '+data['comments'][i].title +'. ' + data['comments'][i].name +' '+ data['comments'][i].date_format +' Vehicle tap-in '+ data['comments'][i].time_12hr +'</span><input type="hidden" class="dateSearch" value='+data['comments'][i].date+' /></div></li>';
-                     } else if(data['comments'][i].flag == 'system' && data['comments'][i].vehicleTap == 'vehicle Tap Out' ){
-                         commentsHTML = commentsHTML + '<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> Vehicle  </a><span class="datetime"> at <strong>'+ data['comments'][i].time_12hr+ '</strong> on <strong>'+ data['comments'][i].date_format + '</strong> </span><span class="body"> '+data['comments'][i].title +'. ' + data['comments'][i].date_format +' Vehicle tap-out '+ data['comments'][i].time_12hr +'</span><input type="hidden" class="dateSearch" value='+data['comments'][i].date+' /></div></li>';
-                     } else if (data['comments'][i].flag == 'user' && data['comments'][i].comments != '') {
- 
-                         commentsHTML = commentsHTML + '<li class="out commentsLI"> <img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/'+ data['comments'][i].emp_id+'.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"> <strong>'+data['comments'][i].title +'. ' + data['comments'][i].name +'</strong> </a><span class="datetime"> at <strong>'+ data['comments'][i].time_12hr + '</strong> on <strong>'+ data['comments'][i].date_format +'</strong> </span><span class="body">' + data['comments'][i].comments + '</span><span class="commentCat"> '+data['comments'][i].comments_categories+' </span><input type="hidden" class="dateSearch" value='+data['comments'][i].date+' /></div></li>';
-                     }
-                     
-                                                       
+
+                      if(data['comments'][i].type=='tap-in' || data['comments'][i].type=='tap-out'){
+
+                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+data['comments'][i].location_name+'</a><span class="datetime"> at <strong>'+data['comments'][i].time_12hr+'</strong> on <strong>'+data['comments'][i].date_format+'</strong> </span><span class="body">'+data['comments'][i].description.replace('tap_type',data['comments'][i].type)+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"></div></li>';
+                      }else{
+                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+data['comments'][i].location_name+'</a><span class="body">'+data['comments'][i].description+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
+                      }
+                                                                           
                  }
  
                  $('#stories').html(commentsHTML);
@@ -8341,14 +8125,14 @@ $.ajax({
    cache:true,
    url:"{{url('/masterLayout/staff/Edit_Get_Absentia')}}",
    data:{
-	  "staff_id":Staff_id,
-	  "Absentia_id":Absentia_id,
-	  "_token": "{{ csrf_token() }}"
+    "staff_id":Staff_id,
+    "Absentia_id":Absentia_id,
+    "_token": "{{ csrf_token() }}"
    },
    success:function(result){
-	var data = jQuery.parseJSON(result);
-	$('#Absenia_Contents').html(data["h"]);
-	$('#AddAIAE').modal('toggle');
+  var data = jQuery.parseJSON(result);
+  $('#Absenia_Contents').html(data["h"]);
+  $('#AddAIAE').modal('toggle');
    }
 });
 }
@@ -8379,50 +8163,50 @@ $.ajax({
           title: "Please Confirm.",
           buttons: {
             confirm: {
-				label: "Yes! Change Absentia",
-				callback: function() { 
-					if( Attendance_in_id !== '' && Attendance_out_id !== '' && Attendance_des_id !== '' && end_time !== ''){
-						$.ajax({
-						   type:"POST",
-						   cache:true,
-						   url:"{{url('/masterLayout/staff/editAbsentia')}}",
-						   data:{
-							   "staff_id":staffID,
-							   "date" : date,
-							   "title" : titles,
-							   "start_time" : start_time,
-							   "end_time" : end_time,
-							   "description" : description,
-							   "Attendance_in_id" : Attendance_in_id,
-							   "Attendance_out_id" : Attendance_out_id,
-							   "Attendance_des_id" : Attendance_des_id,
-							   "Edit_Absentia_id_hidden" : Edit_Absentia_id_hidden,
-								"_token": "{{ csrf_token() }}"
-						   },
-						   success:function(result){
-								$('#absentia_table > tbody tr').each(function(index) { 
-									var $this = $(this);
-									var filter = $this.attr('id');
-									var id = "absentia_table_row_"+Edit_Absentia_id_hidden;
-									if(filter == id){
-									  var leaveHTML = '';
-									  leaveHTML = '<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ titles +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>';
-									  $(this).replaceWith(leaveHTML);
-									}
-								});
-								$('#AddAIAE').modal('toggle');   
-								$("#absentia_date_edit").val('');
-								$("#absentia_title_edit").val('');
-								$("#absentia_startTime_edit").val('');
-								$("#absentia_endTime_edit").val('');
-								$("#absentia_description_edit").val('');
-						   }
-					   });
-					}
+        label: "Yes! Change Absentia",
+        callback: function() { 
+          if( Attendance_in_id !== '' && Attendance_out_id !== '' && Attendance_des_id !== '' && end_time !== ''){
+            $.ajax({
+               type:"POST",
+               cache:true,
+               url:"{{url('/masterLayout/staff/editAbsentia')}}",
+               data:{
+                 "staff_id":staffID,
+                 "date" : date,
+                 "title" : titles,
+                 "start_time" : start_time,
+                 "end_time" : end_time,
+                 "description" : description,
+                 "Attendance_in_id" : Attendance_in_id,
+                 "Attendance_out_id" : Attendance_out_id,
+                 "Attendance_des_id" : Attendance_des_id,
+                 "Edit_Absentia_id_hidden" : Edit_Absentia_id_hidden,
+                "_token": "{{ csrf_token() }}"
+               },
+               success:function(result){
+                $('#absentia_table > tbody tr').each(function(index) { 
+                  var $this = $(this);
+                  var filter = $this.attr('id');
+                  var id = "absentia_table_row_"+Edit_Absentia_id_hidden;
+                  if(filter == id){
+                    var leaveHTML = '';
+                    leaveHTML = '<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ titles +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>';
+                    $(this).replaceWith(leaveHTML);
+                  }
+                });
+                $('#AddAIAE').modal('toggle');   
+                $("#absentia_date_edit").val('');
+                $("#absentia_title_edit").val('');
+                $("#absentia_startTime_edit").val('');
+                $("#absentia_endTime_edit").val('');
+                $("#absentia_description_edit").val('');
+               }
+             });
+          }
  
-				}// Call Back
-            	},//end Confirm
-			cancel: { label: "Cancel", callback: function() { } },
+        }// Call Back
+              },//end Confirm
+      cancel: { label: "Cancel", callback: function() { } },
             
           }
       });
@@ -8469,27 +8253,27 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
             confirm: {
               label: "Yes! Remove Absentia",
               callback: function() { 
-				
-			   if( Absentia_id > 0){
-				  $.ajax({
-						type:"POST",
-						cache:true,
-						url:"{{url('/masterLayout/staff/deleteAbsentia')}}",
-						data:{ "Absentia_id":Absentia_id, "Staff_id":Staff_id, "_token": "{{ csrf_token() }}" },
-						success:function(result){ $("#absentia_table_row_"+Absentia_id).remove(); }
-					});
-				}
-			}
+        
+         if( Absentia_id > 0){
+          $.ajax({
+            type:"POST",
+            cache:true,
+            url:"{{url('/masterLayout/staff/deleteAbsentia')}}",
+            data:{ "Absentia_id":Absentia_id, "Staff_id":Staff_id, "_token": "{{ csrf_token() }}" },
+            success:function(result){ $("#absentia_table_row_"+Absentia_id).remove(); }
+          });
+        }
+      }
             },
-		  cancel: {
+      cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
+  
+  
 }
 
 
@@ -8582,7 +8366,7 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
             confirm: {
               label: "Yes! Edit Leaves",
               callback: function() { 
-			
+      
   
    if(leave_type != '' && leave_title != '' && leave_from != '' && leave_to != ''){
 
@@ -8605,38 +8389,38 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
           },
           success:function(result){
 
-			$('#leave_table > tbody tr').each(function(index) {
-				var $this = $(this);
-				var filter = $this.attr('data-id');
-			 var id = Leave_Application_id;
-				if(filter == id){
-				   var leaveHTML = '';
+      $('#leave_table > tbody tr').each(function(index) {
+        var $this = $(this);
+        var filter = $this.attr('data-id');
+       var id = Leave_Application_id;
+        if(filter == id){
+           var leaveHTML = '';
 
-				   leaveHTML = leaveHTML + '<tr  class="approvedBorder" data-id='+id+'><td>'+leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+' </td></tr>';
-				   if(leave_approve_status_edit==1){
-					  leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+paid_compensation_percentage+'<span>% paid</span></td></tr>';
-					 }
+           leaveHTML = leaveHTML + '<tr  class="approvedBorder" data-id='+id+'><td>'+leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+' </td></tr>';
+           if(leave_approve_status_edit==1){
+            leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+paid_compensation_percentage+'<span>% paid</span></td></tr>';
+           }
 
-				leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp;'+formatDate(leave_from)+'</td></tr>';
+        leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp;'+formatDate(leave_from)+'</td></tr>';
 
-				   if(leave_approve_status_edit==1){
-					  leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved From"></i> &nbsp; '+formatDate(approve_from)+' </td></tr>';
-					 }
+           if(leave_approve_status_edit==1){
+            leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved From"></i> &nbsp; '+formatDate(approve_from)+' </td></tr>';
+           }
 
-				   leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr>';
+           leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr>';
 
-				   if(leave_approve_status_edit==1){
-					  leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+formatDate(approve_to)+' </td> </tr>';
-					 }
+           if(leave_approve_status_edit==1){
+            leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+formatDate(approve_to)+' </td> </tr>';
+           }
 
-				   //leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a></td></tr>';
-				
-				leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a> | <a onClick="delectLeave('+id+')"><i class="fa fa-close"></i></a></td></tr>';
-				$(this).replaceWith(leaveHTML);
-				}
+           //leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a></td></tr>';
+        
+        leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a> | <a onClick="delectLeave('+id+')"><i class="fa fa-close"></i></a></td></tr>';
+        $(this).replaceWith(leaveHTML);
+        }
 
-			});
-			$('#LeaveAppForEdit').modal('toggle');
+      });
+      $('#LeaveAppForEdit').modal('toggle');
              
           }
 
@@ -8646,18 +8430,18 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
 
  
  }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
-	
-	
+  
+  
+  
+  
 
  }
  
@@ -8674,31 +8458,31 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
             confirm: {
               label: "Yes! Remove Leave",
               callback: function() { 
-			
-			
-			  if( Action_id > 0){
-				  
-				 $.ajax({
-					type:"POST",
-					cache:true,
-					url:"{{url('/masterLayout/staff/deleteLeaveApp')}}",
-					data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
-					success:function(result){ 
-					
-					
-					 $('#leave_table > tbody tr').each(function(index) {
-						var $this = $(this);
-						var filter = $this.attr('data-id');
-						var id = Action_id;
-						if(filter == id){ $this.remove(); }
-					});
-					
-					}
-				 });
-			  }
+      
+      
+        if( Action_id > 0){
+          
+         $.ajax({
+          type:"POST",
+          cache:true,
+          url:"{{url('/masterLayout/staff/deleteLeaveApp')}}",
+          data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
+          success:function(result){ 
+          
+          
+           $('#leave_table > tbody tr').each(function(index) {
+            var $this = $(this);
+            var filter = $this.attr('data-id');
+            var id = Action_id;
+            if(filter == id){ $this.remove(); }
+          });
+          
+          }
+         });
+        }
        }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -8751,8 +8535,8 @@ $.ajax({
             confirm: {
               label: "Yes! Edit Penalty",
               callback: function() { 
-			
-			
+      
+      
     if(penalty_id_edit != '' && penalty_title != '' && penalty_from != '' && penalty_to != '' && penalty_day != ''){
        $.ajax({
           type:"POST",
@@ -8800,16 +8584,16 @@ $.ajax({
  
  
  }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
+  
+  
  }
  
 var delectLeavePenalties = function(Action_id){
@@ -8824,7 +8608,7 @@ bootbox.dialog({
             confirm: {
               label: "Yes! Remove Absentia",
               callback: function() { 
-			
+      
 if( Action_id > 0){
  $.ajax({
     type:"POST",
@@ -8847,8 +8631,8 @@ if( Action_id > 0){
 
 
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -8895,7 +8679,7 @@ var editAdjustment = function(){
             confirm: {
               label: "Yes! Edit Adjustment",
               callback: function() { 
-			
+      
     if(adjustment_title != '' && adjustment_no != ''){
        $.ajax({
           type:"POST",
@@ -8939,17 +8723,17 @@ var editAdjustment = function(){
 
   
   }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
-	
+  
+  
+  
   }
  
 var deleteAdjustment = function(Action_id)
@@ -8965,8 +8749,8 @@ var deleteAdjustment = function(Action_id)
             confirm: {
               label: "Yes! Remove Adjustment",
               callback: function() { 
-			
-			
+      
+      
  if( Action_id > 0){
     $.ajax({
        type:"POST",
@@ -8974,24 +8758,24 @@ var deleteAdjustment = function(Action_id)
        url:"{{url('/masterLayout/staff/deleteAdjustment')}}",
        data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
        success:function(result){ 
-	 
-	 
-	 
-	    $('#adjustment_table > tbody tr').each(function(index) {
-		  var $this = $(this);
-		  var filter = $this.attr('data-id');
-		  var id = Action_id;
-		  if(filter == id){ $this.remove(); }
-	   });
-	 }
+   
+   
+   
+      $('#adjustment_table > tbody tr').each(function(index) {
+      var $this = $(this);
+      var filter = $this.attr('data-id');
+      var id = Action_id;
+      if(filter == id){ $this.remove(); }
+     });
+   }
     });
  }
  
  
  
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -9046,9 +8830,9 @@ bootbox.dialog({
             confirm: {
               label: "Yes! Edit Missed Tap",
               callback: function() { 
-			
-			
-			
+      
+      
+      
 if(date != '' && missTap != '' && Tap_id != ''){
  $.ajax({
     type:"POST",
@@ -9107,17 +8891,17 @@ if(date != '' && missTap != '' && Tap_id != ''){
 
 
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
             
           }
       });
-	
-	
-	
+  
+  
+  
     
 }
 
@@ -9135,9 +8919,9 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
             confirm: {
               label: "Yes! Remove Missed Tap",
               callback: function() { 
-			
-			
-			
+      
+      
+      
  if( Action_id > 0){
     $.ajax({
        type:"POST",
@@ -9150,14 +8934,14 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
           "_token": "{{ csrf_token() }}" 
           },
        success:function(result){
-		 
-		 
-		 $('#manual_table > tbody tr').each(function(index) {
-		  var $this = $(this);
-		  var filter = $this.attr('data-id');
-		  var id = Action_id;
-		  if(filter == id){ $this.remove(); }
-		});
+     
+     
+     $('#manual_table > tbody tr').each(function(index) {
+      var $this = $(this);
+      var filter = $this.attr('data-id');
+      var id = Action_id;
+      if(filter == id){ $this.remove(); }
+    });
 
 
 
@@ -9166,8 +8950,8 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
  }
  
 }
-            	},
-	cancel: {
+              },
+  cancel: {
               label: "Cancel",
               callback: function() { }
             },
@@ -9175,16 +8959,16 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
           }
       });
 
-	
+  
 }
 
 
 $(".rolesRelation").click(
 function(){
-	var Staff_id = $("a[href='#tab_1_1']").attr('data-staff');
-	
-	Staff_Role_Distance(Staff_id)
-	
+  var Staff_id = $("a[href='#tab_1_1']").attr('data-staff');
+  
+  Staff_Role_Distance(Staff_id)
+  
 }
 );
 
@@ -9194,18 +8978,18 @@ $.ajax({
       type:"POST",
       url:"{{url('/masterLayout/staff/role_distance')}}",
       data:{
-		"Staff_id":Staff_id,
+    "Staff_id":Staff_id,
           "_token": "{{ csrf_token() }}"
       },
-	success:function(res){
-	var d =  jQuery.parseJSON(res);
-	$("#content_role_position_distance").html('');
-	$("#content_role_position_distance").html( d.ht );
-	}
+  success:function(res){
+  var d =  jQuery.parseJSON(res);
+  $("#content_role_position_distance").html('');
+  $("#content_role_position_distance").html( d.ht );
+  }
 });
-	   
-	   
-	   
+     
+     
+     
 }
 
 
@@ -9221,6 +9005,9 @@ $.ajax({
        var end_time = $("#absentia_endTime").val();
        var description = $("#absentia_description").val();
        var staffID = $('#tab_1_3').data('staffID');
+      var form_number_a=$('.form_number_absentia_a').val();
+      var form_number_b=$('.form_number_absentia_b').val();
+      var form_number=form_number_a+form_number_b;
        if( date !== '' && title !== '' && start_time !== '' && end_time !== ''){
    
            $.ajax({
@@ -9228,6 +9015,7 @@ $.ajax({
                cache:true,
                url:"{{url('/masterLayout/staff/addAbsentia')}}",
                data:{
+                   "form_number":form_number,
                    "staff_id":staffID,
                    "date" : date,
                    "title" : title,
@@ -9277,6 +9065,10 @@ bootbox.dialog({
        var date = $("#manual_attendance").val();
        var missTap = $("#manual_missTap").val();
 
+    var form_number_a=$('.form_number_miss_tap_a').val();
+    var form_number_b=$('.form_number_miss_tap_b').val();
+    var form_number=form_number_a+form_number_b;
+
        var description = $("#manual_description").val();
        var staffID = $('#tab_1_3').data('staffID');
 
@@ -9289,6 +9081,7 @@ bootbox.dialog({
                 url:"{{url('/masterLayout/staff/addManual')}}",
                 data:{
                    "staff_id":staffID,
+                   "form_number":form_number,
                    "date" : date,
                    "missTap" : missTap,
                    "description" : description,
@@ -9428,6 +9221,11 @@ bootbox.dialog({
           time_from = null;
         }
 
+        var form_number_a=$('.form_number_leave_application_a').val();
+        var form_number_b=$('.form_number_leave_application_b').val();
+
+        var form_number=form_number_a+form_number_b;
+
 
 
         if(leave_form_no != '' && leave_type != '' && leave_title != '' && leave_from != '' && leave_to != '' && hourlyConfirm == true && time_to != null && time_from != null){
@@ -9436,6 +9234,7 @@ bootbox.dialog({
               cache:true,
               url:"{{url('/masterLayout/staff/addLeave')}}",
               data:{
+                 "form_number":form_number,
                  "staff_id":staffID,
                  "leave_form_no":leave_form_no,
                  "leave_title":leave_title,
@@ -9740,6 +9539,10 @@ bootbox.dialog({
         var penalty_to = $('#penalty_to').val();
         var penalty_description = $('#penalty_description').val();
         var staff_id = $('#tab_1_3').data('staffID');
+        var form_number_a=$('.form_number_penalty_a').val();
+        var form_number_b=$('.form_number_penalty_b').val();
+
+        var form_number=form_number_a+form_number_b;
         // console.log(penalty_to);
 
         if(staff_id != '' && penalty_title != '' && penalty_from != '' && penalty_to != '' && penalty_day != ''){
@@ -9748,6 +9551,7 @@ bootbox.dialog({
               cache:true,
               url:"{{url('/masterLayout/addPenalty')}}",
               data:{
+                 "form_number":form_number,
                  "penalty_title":penalty_title,
                  "penalty_day":penalty_day,
                  "penalty_from":penalty_from,
@@ -9795,11 +9599,15 @@ bootbox.dialog({
         var adjustment_no = $('#adjustment_no').val();
         var adjustment_description = $('#adjustment_description').val();
         var staff_id = $('#tab_1_3').data('staffID');
+        var form_number_a=$('.form_number_exceptional_adjustment_a').val();
+        var form_number_b=$('.form_number_exceptional_adjustment_b').val();
+        var form_number=form_number_a+form_number_b;
         if(adjustment_title != '' && adjustment_no != ''){
            $.ajax({
               type:"POST",
               cache:true,
               data:{
+                 "form_number":form_number,
                  "adjustment_title":adjustment_title,
                  "adjustment_no":adjustment_no,
                  "adjustment_description":adjustment_description,
@@ -10456,6 +10264,7 @@ bootbox.dialog({
            // Weekly Time Sheet
                 var weekly_time_sheet_in = timeToMinute(data[0].day_time_in);
                 var weekly_time_sheet_out = timeToMinute(data[0].day_time_out);
+                                  window.FinalTimeOut=data[0].tap_max;
 
                 var range = [];
                 if(weekly_time_sheet_in && weekly_time_sheet_out){
@@ -11463,20 +11272,20 @@ bootbox.dialog({
 //var staffID = $(this).attr('data-staffID');
 //********Ateeb Modal Show Function On Click Start ********//
   $(document).on('click','.profile_StaffName',function(){
-      var staffID = $(this).attr('data-staffID');
-      //console.log(staffID);
-    $.ajax({
-        type:'GET',
-        data: {
-                "staff_id":staffID,
-                "_token": "{{ csrf_token() }}"
-        },
-        url:'/gsims/public/ateeb_rec_modal',
-        success:function(res){
+    //   var staffID = $(this).attr('data-staffID');
+    //   //console.log(staffID);
+    // $.ajax({
+    //     type:'GET',
+    //     data: {
+    //             "staff_id":staffID,
+    //             "_token": "{{ csrf_token() }}"
+    //     },
+    //     url:'/gsims/public/ateeb_rec_modal',
+    //     success:function(res){
 
-          $('.modal_body_fetch').html(res);
-        }
-        })
+    //       $('.modal_body_fetch').html(res);
+    //     }
+    //     })
   })
 
 
@@ -11514,6 +11323,9 @@ bootbox.dialog({
 
     var actualTapInTapOut = function(time,connect1,classes,uihandle,tooltip,range){
          console.log('time_actual_tap'+time);
+         setTimeout(function(){
+           $('.Out').text(window.FinalTimeOut);
+         },100)
          console.log('connect1_actual_tap'+connect1)
          console.log('classes_actual_tap'+classes) 
          console.log('uihandle_actual_tap'+uihandle) 
@@ -11692,10 +11504,14 @@ bootbox.dialog({
 
     function PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range){
 
-           if(typeof payrollSlider != undefined){
-                payrollSlider.noUiSlider.destroy();
+           if(payrollSlider != undefined){
+            if(payrollSlider.noUiSlider!=undefined){
+                              payrollSlider.noUiSlider.destroy();
+
+            }
            }
-          
+                        //  payrollSlider.noUiSlider.destroy();
+
           var PayrollSliderCreate1 = document.getElementById('PayrollAttendance');
           noUiSlider.create(PayrollSliderCreate1, {
           start: payRollAttendanceArray,
@@ -12217,12 +12033,12 @@ loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
                                                           loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/nouislider.min.js", function(){
                                                              loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/moment.min.js", function(){
                                                                  loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/index.js", function(){
-																   loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){
-																		loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
-																				loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
-																					loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
-																				});
-																			});
+                                   loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){
+                                    loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
+                                        loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
+                                          loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
+                                        });
+                                      });
                                                                       });
                                                                           });
                                                           });
