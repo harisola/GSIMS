@@ -44,6 +44,7 @@ var txt_allocation_staff = $('#allocation_staff_'+status_id);
 var txt_allocation_grade = $('#allocation_grade_'+status_id);
 
 var txt_allocation_d = $('#applicant_status_'+status_id);
+var txt_career_id = $('#career_id_'+status_id);
 
 var oerror=0; 
 if (!$.trim( applicant_next_step_allocation_date )) {
@@ -70,7 +71,6 @@ else
 {
 cfpb_txt_campus.closest(".KashifSolangi").removeClass( "has-error" );   
 }
-
 
 
 
@@ -129,6 +129,17 @@ else
 txt_allocation_d.closest(".KashifSolangi").removeClass( "has-error" );
 }
 
+///arif khan//
+
+if ( (career_id === null  ) && (!$.trim( career_id )) ) 
+{
+txt_career_id.closest(".KashifSolangi").addClass( "has-error" );
+oerror=1;
+}
+else 
+{
+txt_career_id.closest(".KashifSolangi").removeClass( "has-error" );
+}
 
 
 
@@ -146,6 +157,8 @@ txt_taging.closest(".KashifSolangi").removeClass( "has-error" );
 txt_allocation_staff.closest(".KashifSolangi").removeClass( "has-error" );
 txt_allocation_grade.closest(".KashifSolangi").removeClass( "has-error" );   
 txt_allocation_d.closest(".KashifSolangi").removeClass( "has-error" );
+txt_career_id.closest(".KashifSolangi").removeClass( "has-error" );
+
 oerror=0;
 }   
 

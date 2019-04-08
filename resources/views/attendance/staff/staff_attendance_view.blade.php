@@ -8,7 +8,25 @@
     margin: 0 auto;
     border: 1px solid #000;
     text-align: center;
+}
+.imageCenterDefaultParent {
+    background: #f3f3f3;
+    width: 160px;
+    border-radius: 50% !important;
+    padding: 0px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    text-align: center;
 }	
+.imageCenterDefaultChild {
+    background: #f3f3f3;
+    width: 100px;
+    border-radius: 50% !important;
+    padding: 0px;
+    margin: 0 auto;
+    border: 1px solid #000;
+    text-align: center;
+}   
 .INImage {
 	text-align: center;
 }
@@ -100,10 +118,62 @@ input#interim_dec::placeholder {
 li.staff_list_class:hover {
     color: #3379b7;
 }
+li.student_list_class:hover {
+    color: #3379b7;
+}
+#studentlist_ajax li.student_list_class {
+    font-family: 'Conv_calibri';
+    font-size: 14px;
+    font-weight: normal !important;
+    padding: 5px 0;
+    cursor: pointer;
+}
 h4#error {
     color: black;
     position: absolute;
     top: 75px;
+}
+ul.childList {
+    list-style: none;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+}
+ul.childList li.eachChild {
+    display: inline;
+}
+.eachChild {
+    padding: 0 10px;
+}
+.ChildName {
+    font-size: 14px;
+}
+.childInfo {
+    width: 20%;
+    display: inline-block;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.marginHead {
+    margin-top: 0;
+    padding-bottom: 10px;
+}
+.tapCardField{
+    background: #ffedaa;
+    color: #000 !important;
+}
+.form-actions {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+#AdmissionDayPass,
+#ApplicantDayPass,
+#VendorDayPass,
+#WorkerDayPass,
+#GuestDayPass {
+	display: none;
 }
 </style>
 <div class="row" id="maindiv">
@@ -159,18 +229,17 @@ h4#error {
                     </div><!-- tapArea -->
                     <div class="allocationArea" style="display: none;">
                         <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#staffInterim" data-toggle="tab"> Staff </a>
-                            </li>
-                            <li>
-                                <a href="#studentInterim" data-toggle="tab"> Student </a>
-                            </li>
-                            <li>
-                                <a href="#parentCard" data-toggle="tab"> Parent </a>
-                            </li>
-                            <li>
-                                <a href="#vendorCard" data-toggle="tab"> Vendor </a>
-                            </li>
+                            <li class="active"><a href="#staffInterim" data-toggle="tab"> Staff </a></li>
+                            <li><a href="#parentInterim" data-toggle="tab"> Parent </a></li>
+                            <li><a href="#visitorInterim" data-toggle="tab"> Visitor </a></li>
+                            <?php /*
+                            <li><a href="#admissionInterim" data-toggle="tab"> Admission </a></li>
+                            <li><a href="#applicantInterim" data-toggle="tab"> Applicant </a></li>
+                            <li><a href="#vendorInterim" data-toggle="tab"> Vendor </a></li>
+                            <li><a href="#workerInterim" data-toggle="tab"> Worker </a></li>
+                            <li><a href="#guestInterim" data-toggle="tab"> Guest </a></li>
+                            */ ?>
+                            <li><a href="#alumniInterim" data-toggle="tab"> Alumni </a></li>
                         </ul><!-- nav -->
                         <div class="tab-content">
                             <div class="tab-pane fade active in" id="staffInterim">
@@ -207,21 +276,954 @@ h4#error {
                                 <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="studentInterim">
-                                <p> Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-                                    craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-                                    helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art
-                                    party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park. </p>
+                            <div class="tab-pane fade" id="parentInterim">
+                                <div class="issueInterim">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon" id="sizing-addon1">Family</span>
+                                            <input type="text" name="search_student_name" id="search_student_name" class="form-control" placeholder="Student Name, GS-ID or GF-ID" aria-describedby="sizing-addon1">
+                                            <input type="hidden" name="_token_rfid" id="_token" value="" / >
+                                            <div id="studentlist_ajax">
+                                            </div>
+                                     </div>
+                                    <div class="col-md-12 text-right" style="padding: 0;margin: 0;">
+                                        <input id="ParentInterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Daypass" name="" data-placement="bottom" data-original-title="Assign Interim Card"data-toggle="modal" href="">
+                                    </div><!-- col-md-12 -->
+                                </div><!-- issueInterim -->
+                                <!-- Begin Modal -->
+                                <div class="modal fade 100pxwidth" id="ParentInterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Assign Daypass for GF-ID <strong>12-052</strong></h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6 text-center">
+                                                        <img src= "http://10.10.10.63/gs/assets/photos/sis/150x150/father/166309.png" class="imageCenterDefaultParent" />
+                                                        <h5>Hunaiz Mehmood</h5>
+                                                    </div><!-- col-md-6 -->
+                                                    <div class="col-md-6 text-center">
+                                                        <img src="http://10.10.10.63/gs/assets/photos/sis/150x150/mother/166309.png" class="imageCenterDefaultParent">
+                                                        <h5>Mehreen Hunaiz</h5>
+                                                    </div><!-- col-md-6 -->
+                                                </div><!-- col-md-12 -->
+                                                <hr />
+                                                <div class="col-md-12 text-center">
+                                                    <ul class="childList">
+                                                        <li class="eachChild">
+                                                            <span class="childInfo">
+                                                                <img src="http://10.10.10.63/gs/assets/photos/sis/150x150/student/166309.png" class="imageCenterDefaultChild">
+                                                                <span class="ChildName">Saleem Qureshi</span><br />
+                                                                <span class="childGS">16-070</span> | <span class="stuStatus">S-CFS</span>
+                                                            </span><!-- childInfo -->
+                                                        </li><!-- eachChild -->
+                                                        <li class="eachChild">
+                                                            <span class="childInfo">
+                                                                <img src="http://10.10.10.63/gs/assets/photos/sis/150x150/student/165950.png" class="imageCenterDefaultChild">
+                                                                <span class="ChildName">Saleem Qureshi</span><br />
+                                                                <span class="childGS">16-070</span> | <span class="stuStatus">S-CFS</span>
+                                                            </span><!-- childInfo -->
+                                                        </li><!-- eachChild -->
+                                                        <li class="eachChild">
+                                                            <span class="childInfo">
+                                                                <img src="http://10.10.10.63/gs/assets/photos/sis/150x150/student/11049.png" class="imageCenterDefaultChild">
+                                                                <span class="ChildName">Saleem Qureshi</span><br />
+                                                                <span class="childGS">16-070</span> | <span class="stuStatus">S-CFS</span>
+                                                            </span><!-- childInfo -->
+                                                        </li><!-- eachChild -->
+                                                        <li class="eachChild">
+                                                            <span class="childInfo">
+                                                                <img src="http://10.10.10.63/gs/assets/photos/sis/150x150/student/166309.png" class="imageCenterDefaultChild">
+                                                                <span class="ChildName">Saleem Qureshi</span><br />
+                                                                <span class="childGS">16-070</span> | <span class="stuStatus">S-CFS</span>
+                                                            </span><!-- childInfo -->
+                                                        </li><!-- eachChild -->
+                                                        <li class="eachChild">
+                                                            <span class="childInfo">
+                                                                <img src="http://10.10.10.63/gs/assets/photos/sis/150x150/student/165950.png" class="imageCenterDefaultChild">
+                                                                <span class="ChildName">Saleem Qureshi</span><br />
+                                                                <span class="childGS">16-070</span> | <span class="stuStatus">S-CFS</span>
+                                                            </span><!-- childInfo -->
+                                                        </li><!-- eachChild -->
+                                                    </ul><!-- ul -->
+                                                </div><!-- col-md-12 -->
+                                                <hr />
+                                                <div class="col-md-12">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <h3 class="form-section marginHead">Visiting Form</h3>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Location</label>
+                                                                        <select class="form-control" required="">
+                                                                            <option value="" disabled="disabled" selected="">Select Location</option>
+                                                                            <option value="">Screening Gate</option>
+                                                                            <option value="">Basement</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visitor</label>
+                                                                        <select class="form-control" required="">
+                                                                            <option value="" disabled="disabled" selected="">Select Visitor</option>
+                                                                            <option value="">Father</option>
+                                                                            <option value="">Mother</option>
+                                                                            <option value="">Both</option>
+                                                                            <option value="">Other/Guardian</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Purpose</label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Purpose">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Person Name</label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Person Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Department</label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Purpose">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No</label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 -->
+                                                
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
+                                </table>
                             </div>
-                            <div class="tab-pane fade" id="parentCard">
-                                <p> Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone
-                                    skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel
-                                    fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr. </p>
+                            <div class="tab-pane fade" id="visitorInterim">
+                                <div class="col-md-12 text-right" style="padding: 0;margin: 30px 0 0 0;">
+                                    <input id="VisitorInterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Daypass" name="" data-placement="bottom" data-original-title="Day Pass for Admission"data-toggle="modal" href="">
+                                </div><!-- col-md-12 -->
+                                <div class="modal fade 100pxwidth" id="VisitorInterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Assign Daypass for Visitors</h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                <div class="col-md-12">
+                                                	<div class="form-group">
+                                                        <label class="control-label">Visitor type <span class="required">*</span></label>
+                                                        <select class="form-control visitorTypeClass" required="" id="visitorType">
+                                                            <option value="" disabled="disabled" selected="">Select Visitor type</option>
+                                                            <option value="AdmissionVisit">Admission</option>
+                                                            <option value="ApplicantVisit">Applicant</option>
+                                                            <option value="VendorVisit">Vendor</option>
+                                                            <option value="WorkerVisit">Worker</option>
+                                                            <option value="GuestVisit">Guest</option>
+                                                        </select>
+                                                    </div><!-- form-group -->
+                                                </div><!-- -->
+                                                <hr />
+                                                <div class="col-md-12" id="AdmissionDayPass">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Purpose <span class="required">*</span></label>
+                                                                        <select class="form-control" required="">
+                                                                            <option value="" disabled="disabled" selected="">Visiting Purpose</option>
+                                                                            <option value="">Form Issuance</option>
+                                                                            <option value="">Form Submission</option>
+                                                                            <option value="">Assessment</option>
+                                                                            <option value="">Discussion</option>
+                                                                            <option value="">Offer Letter or Fee Bill</option>
+                                                                            <option value="">Further Discussion</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Applicant Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant/Student Name">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Admission for Grade <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 AdmissionDayPass -->
+                                                <div class="col-md-12" id="ApplicantDayPass">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Purpose <span class="required">*</span></label>
+                                                                        <select class="form-control" required="">
+                                                                            <option value="" disabled="disabled" selected="">Visiting Purpose</option>
+                                                                            <option value="">Apply</option>
+                                                                            <option value="">Interview</option>
+                                                                            <option value="">Observation</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 ApplicantDayPass -->
+                                                <div class="col-md-12" id="VendorDayPass">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Vendor NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Vendor Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Vendor Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Purpose <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Purpose">
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Person Visiting to <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Person visiting to">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Department <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Department">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 VendorDayPass -->
+                                                <div class="col-md-12" id="WorkerDayPass">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Worker NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Worker Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Worker Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Purpose <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Purpose">
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Person Visiting to <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Person visiting to">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Department <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Department">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 WorkerDayPass -->
+                                                <div class="col-md-12" id="GuestDayPass">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Purpose <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest Purpose">
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Person Visiting to <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Person visiting to">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Department <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Department">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 GuestDayPass -->
+                                                
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
+                                </table>
                             </div>
-                            <div class="tab-pane fade" id="vendorCard">
-                                <p> Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore
-                                    wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats
-                                    keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan. </p>
+                            
+
+
+                            <div class="tab-pane fade" id="admissionInterim">
+                                <div class="col-md-12 text-right" style="padding: 0;margin: 30px 0 0 0;">
+                                    <input id="AdmissionInterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Daypass" name="" data-placement="bottom" data-original-title="Day Pass for Admission"data-toggle="modal" href="">
+                                </div><!-- col-md-12 -->
+                                <div class="modal fade 100pxwidth" id="AdmissionInterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Assign Daypass for Admission</h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                <div class="col-md-12">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Purpose <span class="required">*</span></label>
+                                                                        <select class="form-control" required="">
+                                                                            <option value="" disabled="disabled" selected="">Visiting Purpose</option>
+                                                                            <option value="">Form Issuance</option>
+                                                                            <option value="">Form Submission</option>
+                                                                            <option value="">Assessment</option>
+                                                                            <option value="">Discussion</option>
+                                                                            <option value="">Offer Letter or Fee Bill</option>
+                                                                            <option value="">Further Discussion</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Applicant Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant/Student Name">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Admission for Grade <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visitor Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 -->
+                                                
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="applicantInterim">
+                            	<div class="col-md-12 text-right" style="padding: 0;margin: 30px 0 0 0;">
+                                    <input id="ApplicantInterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Daypass" name="" data-placement="bottom" data-original-title="Day Pass for Applicant"data-toggle="modal" href="">
+                                </div><!-- col-md-12 -->
+                                <div class="modal fade 100pxwidth" id="ApplicantInterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Assign Daypass for Applicant</h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                <div class="col-md-12">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Applicant Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Purpose <span class="required">*</span></label>
+                                                                        <select class="form-control" required="">
+                                                                            <option value="" disabled="disabled" selected="">Visiting Purpose</option>
+                                                                            <option value="">Apply</option>
+                                                                            <option value="">Interview</option>
+                                                                            <option value="">Observation</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 -->
+                                                
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
+                                </table>
+                            </div><!-- applicantInterim -->
+                            <div class="tab-pane fade" id="vendorInterim">
+                                <div class="col-md-12 text-right" style="padding: 0;margin: 30px 0 0 0;">
+                                    <input id="VendorInterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Daypass" name="" data-placement="bottom" data-original-title="Vendor Visiting"data-toggle="modal" href="">
+                                </div><!-- col-md-12 -->
+                                <div class="modal fade 100pxwidth" id="VendorInterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Vendor Visiting Form</h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                <div class="col-md-12">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Vendor NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Vendor Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Vendor Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Purpose <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Purpose">
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Person Visiting to <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Person visiting to">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Department <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Department">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 -->
+                                                
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="workerInterim">
+                                <div class="col-md-12 text-right" style="padding: 0;margin: 30px 0 0 0;">
+                                    <input id="WorkerInterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Daypass" name="" data-placement="bottom" data-original-title="Vendor Visiting"data-toggle="modal" href="">
+                                </div><!-- col-md-12 -->
+                                <div class="modal fade 100pxwidth" id="WorkerInterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Worker Visiting Form</h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                <div class="col-md-12">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Worker NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Worker Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Worker Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Purpose <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Purpose">
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Person Visiting to <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Person visiting to">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Department <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Department">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 -->
+                                                
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="guestInterim">
+                                <div class="col-md-12 text-right" style="padding: 0;margin: 30px 0 0 0;">
+                                    <input id="GuestInterimCardTapBtn" type="button" class="btn btn-group green assignInterim" value="Assign Daypass" name="" data-placement="bottom" data-original-title="Vendor Visiting"data-toggle="modal" href="">
+                                </div><!-- col-md-12 -->
+                                <div class="modal fade 100pxwidth" id="GuestInterimCardTapmodal" tabindex="-1" role="basic" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Guest Visiting Form</h3>
+                                            </div>
+                                            <div class="modal-body interim_card_div" style="float:left;width:100%;">
+                                                <!-- tab_basic_edit Start -->
+                                                <div class="col-md-12">
+                                                    <form action="#" class="horizontal-form">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">NIC <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest NIC">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Name <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest Name">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Mobile <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest Mobile">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Purpose <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Guest Purpose">
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- row -->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Person Visiting to <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Person visiting to">
+                                                                    </div>
+                                                                </div>
+                                                                <!--/span-->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Visiting Department <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control" placeholder="Visiting Department">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Card No <span class="required">*</span></label>
+                                                                        <input type="text" id="" class="form-control tapCardField" placeholder="Tap Card after selecting this field">
+                                                                    </div>
+                                                                </div><!--/span-->
+                                                            </div><!--/row-->
+                                                            
+                                                        </div>
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn default">Cancel</button>
+                                                            <button type="submit" class="btn blue">
+                                                                <i class="fa fa-check"></i> Submit</button>
+                                                        </div><!-- form-actions -->
+                                                    </form>
+                                                </div><!-- col-md-12 -->
+                                                
+                                                <!-- tab_basic_edit End -->
+                                            </div><!-- modal-body -->
+                                        </div><!-- modal-content -->
+                                    </div><!-- modal-dialog -->
+                                </div><!-- modal -->
+                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="StaffList_ZiaKashif">
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="alumniInterim">
+                                <p> Alumni</p>
                             </div>
                         </div><!-- tab-content -->
                     </div><!-- allocationArea -->
@@ -290,11 +1292,15 @@ $(document).ready(function(){
             $('.rf_default').show();
         
         });
+        $("#visitorType").click(function(){
+
+        });
+        
 
 
         $("#InterimCardTapBtn").click(function(){
             // $('#search_staff_name').on('input', function() {
-                if($('#search_staff_name').val() != '' && $('#search_staff_name').val().length > 5)
+                if($('#search_staff_name').val() != '' && $('#search_staff_name').val().length > 4)
                 { //console.log("if");
                     $('#interim_dec').val('');
                     $('.defaultAssign').css({'background-color':'white'});
@@ -311,6 +1317,91 @@ $(document).ready(function(){
             // $("#search_staff_name").show();
             //console.log("this.length()");
         });
+
+        /* By haris */
+        $("#ParentInterimCardTapBtn").click(function(){
+            // $('#search_staff_name').on('input', function() {
+                if($('#search_student_name').val() != '' && $('#search_student_name').val().length >0)
+                { //console.log("if");
+                    $('#interim_dec').val('');
+                    $('.defaultAssign').css({'background-color':'white'});
+                    $('#ParentInterimCardTapmodal').modal({
+                        show: 'false'
+                    }); 
+                }else{
+                    //console.log("else");
+                    $("#search_student_name").attr("placeholder", "Please select Student Name first");
+                    $("#search_student_name").css({"background-color": "#f5ef3e","color": "black"});
+                    // $(this).attr("placeholder", "Type your answer here");
+                }
+            // });
+            // $("#search_staff_name").show();
+            //console.log("this.length()");
+        });
+
+        $("#ApplicantInterimCardTapBtn").click(function(){
+            $('#ApplicantInterimCardTapmodal').modal({
+                show: 'false'
+            });
+        });
+            
+        $("#VisitorInterimCardTapBtn").click(function(){
+            $('#VisitorInterimCardTapmodal').modal({
+                show: 'false'
+            });
+        });
+        $(document).ready(function() {
+		  $('#visitorType').on('change', function() {
+		    if (this.value == 'AdmissionVisit') {
+		      $("#AdmissionDayPass").show();
+		    } else {
+		      $("#AdmissionDayPass").hide();
+		    }
+		    if (this.value == 'ApplicantVisit') {
+		      $("#ApplicantDayPass").show();
+		    } else {
+		      $("#ApplicantDayPass").hide();
+		    }
+		    if (this.value == 'VendorVisit') {
+		      $("#VendorDayPass").show();
+		    } else {
+		      $("#VendorDayPass").hide();
+		    }
+		    if (this.value == 'WorkerVisit') {
+		      $("#WorkerDayPass").show();
+		    } else {
+		      $("#WorkerDayPass").hide();
+		    }
+		    if (this.value == 'GuestVisit') {
+		      $("#GuestDayPass").show();
+		    } else {
+		      $("#GuestDayPass").hide();
+		    }
+		  });
+		});
+		 // $("#AdmissionInterimCardTapBtn").click(function(){
+        //     $('#AdmissionInterimCardTapmodal').modal({
+        //         show: 'false'
+        //     });
+        // });
+        // $("#VendorInterimCardTapBtn").click(function(){
+        //     $('#VendorInterimCardTapmodal').modal({
+        //         show: 'false'
+        //     });
+        // });
+        // $("#WorkerInterimCardTapBtn").click(function(){
+        //     $('#WorkerInterimCardTapmodal').modal({
+        //         show: 'false'
+        //     });
+        // });
+        // $("#GuestInterimCardTapBtn").click(function(){
+        //     $('#GuestInterimCardTapmodal').modal({
+        //         show: 'false'
+        //     });
+        // });
+
+
+        /* End by Haris */
         
 
         $(function() { 
@@ -342,7 +1433,11 @@ $(document).ready(function(){
             },
             complete:function(){
 
-                setTimeout(function(){$("#StaffList_ZiaKashif").DataTable();  }, 3000);
+                setTimeout(function(){
+                    $("#StaffList_ZiaKashif").DataTable({
+                        "pageLength": 5,
+                        "lengthChange": false
+                    });  }, 2000);
 
              
 
@@ -570,13 +1665,15 @@ $(document).ready(function(){
 
       
     });
-
     //on click function 
     $(document).click(function(event){
         if($(event.target).is('.daypassBTN')) {
             // console.log('day passs in')
         }else if($(event.target).is('#search_staff_name')){
             // console.log('search staff name')
+        /* haris */
+        }else if($(event.target).is('#search_student_name')){
+            // console.log('search student name')
         }else if($(event.target).is('#interim_dec')){
             $('#interim_dec').focus();
         }else if($(event.target).is('.requestAssign') || $(event.target).is('.defaultAssign')){
@@ -584,6 +1681,9 @@ $(document).ready(function(){
         }else if($(event.target).is('.input-inline')){
             $("#rfid_dec").focusout();
             $('.input-inline').focus();
+        }
+        else if($(event.target).is('.visitorTypeClass')){
+            $("#rfid_dec").focusout();
         }
         // else if($(event.target).is('#maindiv')){
         //     $("#stafflist_ajax").dispose();

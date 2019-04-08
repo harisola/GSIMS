@@ -53,8 +53,10 @@ class TTProfileController extends Controller
             $staff_ids = explode(',', $staff_ids);
 
 
+            $loop_counter = count($staff_ids);
 
-            for ($i=0; $i < count($staff_ids) ; $i++) { 
+            for ($i=0; $i < $loop_counter ; $i++) 
+            { 
 
                 $updateStaffStatus = $staffInfo->updateProfileTimeStaff($staff_ids[$i], $staff_profile);
                 if( $updateStaffStatus == 0 ){
@@ -63,7 +65,7 @@ class TTProfileController extends Controller
                 }
 
                 $from_date = date("Y-m-d");
-                $to_date = date("Y-m-d",strtotime('+360 days'));
+                $to_date   = date("Y-m-d",strtotime('+360 days'));
                 $update_weeklySheet =  $staffInfo->updateWeeklyTimeSheetByStaff($staff_ids[$i], $from_date,$to_date);
                 
 
@@ -1576,8 +1578,17 @@ class TTProfileController extends Controller
         $yesterdayDate = $staffInfo->getYesterdayDate($staff_id);
         if(is_null($yesterdayDate[0]->yesterdayDate)){
 
-            var_dump($yesterdayDate);
-            exit;
+            /* Commented on Request of Haris. Identified that only 1 profile was being allocated, on further verification, found this code that was breaking the loop */
+
+            // var_dump($yesterdayDate);
+            //  exit;
+
+            
+            /* */
+
+
+
+
             /************ If Yesterday Date Not Found *****************/
             $yesterday = strtotime(date('w') == 0 ? 'last saturday' : 'yesterday');
             $yesterday = date('Y-m-d', $yesterday);

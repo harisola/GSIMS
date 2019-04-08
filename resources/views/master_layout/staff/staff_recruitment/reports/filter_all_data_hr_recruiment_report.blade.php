@@ -1,51 +1,77 @@
- <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_4">
-                                                    <thead>
-                                                      <tr>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Department</th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Initial Interview</th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Formal Interview</th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Observation</th> 
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Final Consultation</th>   
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Offer</th> 
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;"> Offer Confirmation</th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Archive </th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Regret</th> 
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Not Interested</th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Formal Inteview Follow Up</th> <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Observation Follow Up</th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Final Consultation Follow Up</th>
-                                                         <th style="text-align: center;background-color: #2f353bbd;color: #fff;">Offer Confirmation Follow Up</th>
-                                                      </tr>
+ 
+ <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_2">
+                <thead>
+                  <tr>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Department</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Initial Interview</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Formal Interview</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Observation</th> 
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Final Consultation</th>   
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Formal Inteview Follow Up</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Observation Follow Up</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Final Consultation Follow Up</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Offer Confirmation Follow Up</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Offer</th> 
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;"> Offer Confirmation</th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Archive </th>
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Regret</th> 
+                     <th style="text-align: center;background-color: #2f353b;color: #fff;">Not Interested</th>
+                  </tr>
+                </thead>
 
+                 <tbody>
 
-                                                    </thead>
+                  <!-- Add Loop and Dynamic Work and Excel  Arif Khan -->
+                      <?php 
+                        if(!empty($data))
+                          {
+                             foreach ($data as  $all_filter_datas) { ?>
+                                <?php if(!empty($all_filter_datas->depart_id)){ ?>
+                             <tr>
+                                  <td><?php echo $all_filter_datas->departments; ?></td>
+                                  <td><?php echo $all_filter_datas->Initial_Interview; ?></td>
+                                  <td><?php echo $all_filter_datas->Formal_Interview; ?></td>
+                                  <td><?php echo $all_filter_datas->Observation; ?></td>
+                                  <td><?php echo $all_filter_datas->Final_Consultation; ?></td>
 
-                                                     <tbody>
-                                                      <?php foreach ($data as $key => $all_filter_datas) { ?>
-                                                       
-                                                    
+                                  <td><?php echo $all_filter_datas->Formal_Inteview_Follow_Up; ?></td>
+                                  <td><?php echo $all_filter_datas->Observation_Follow_Up; ?></td>
+                                  <td><?php echo $all_filter_datas->Final_Consultation_Follow_Up; ?></td>
+                                  <td><?php echo $all_filter_datas->Offer_Confirmation_Follow_Up; ?></td>
 
-                                                        <tr>
+                                  <td><?php echo $all_filter_datas->Offer; ?></td>
+                                  <td><?php echo $all_filter_datas->Offer_Confirmation; ?></td>
+                                  <td><?php echo $all_filter_datas->Archive; ?></td>
+                                  <td><?php echo $all_filter_datas->Regret; ?></td>
+                                  <td><?php echo $all_filter_datas->Not_Interested; ?></td>
+                           </tr>
 
-                                                          <td style="text-align: center;background-color: #71A7B0;"><?php echo $all_filter_datas->departments; ?></td>
+                        <?php
+                          }
+                        }
+                      }
+                       ?>
+                     
+                </tbody>
+ </table>
 
+  <script type="text/javascript">
+         $('#sample_2').DataTable({
+                      "destroy": true,
+                      //"scrollX": true,
+                      //"ordering": true,
+                      dom: 'Bfrtip',
+                      "pageLength": 20,
+                      
+                     "buttons": [
+                      
+                      {
+                          extend: 'excelHtml5',  
+                          title: 'Recruitment_Status_Report_',
+                          footer: true
+                      },
+                  ],
 
-                                                              <td>1</td>
-                                                              <td>2</td>
-                                                              <td>3</td>
-                                                              <td>4</td>
-                                                              <td>5</td>
-                                                              <td>6</td>
-                                                              <td>7</td>
-                                                              <td>8</td>
-                                                              <td>9</td>
-                                                              <td>10</td>
-                                                              <td>11</td>
-                                                              <td>12</td>
-                                                              <td>13</td>
+                });
 
-                                                        </tr>
-
-                                                          <?php } ?>
-                                                         
-                                                    </tbody>
-                                                    </table>
+        </script>

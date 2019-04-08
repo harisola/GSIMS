@@ -436,7 +436,7 @@ left join atif_career.career_form_data as part_b on part_b.form_id = c.id and pa
     	return $id;
     }
     public function updateFormdata($table_name,$where,$data){
-         $update_data =  DB::connection($this->dbCon)->table($table_name)->where($where)->update($data);
+        $update_data =  DB::connection($this->dbCon)->table($table_name)->where($where)->update($data);
         return $update_data;
     }
 

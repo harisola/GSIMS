@@ -661,7 +661,7 @@ public function addcustomer(Request $request)
     public function addFormData(Request $request){
 
       
-     /*   $depart_id = $request->input('depart_id');
+      /*   $depart_id = $request->input('depart_id');
 
        echo $career_id;
 
@@ -712,162 +712,152 @@ public function addcustomer(Request $request)
           $status_id=1;
           $stage_id=1;
         }
+      $applicant_status = $request->input('applicant_status');
+      $stage_id = (int)$request->input('stage_id');
+      $applicant_next_status = $request->input('applicant_next_status');
+      $next_stage = $request->input('next_stage');
 
+      $Get_Last_Record = "select u.id as id, u.date, u.time
+                          from atif_Career.career_form_data_updation as u
+                          where u.form_id=".$form_id."
+                          and u.status_id=".$status_id."
+                          and u.stage_id=".$stage_id." ";
 
+      $Lr = $staffRecruiment->custom_query($Get_Last_Record);
 
+      $previous_date=date("Y-m-d");
+      $previous_time=date('h:i:s');
 
-$applicant_status = $request->input('applicant_status');
-$stage_id = (int)$request->input('stage_id');
-$applicant_next_status = $request->input('applicant_next_status');
-$next_stage = $request->input('next_stage');
+        if( !empty($Lr) )
+        {
+          foreach ($Lr as $v) 
+          {
+          $Action_Status_id = $v["id"]; 
+          $previous_date = $v["date"];
+          $previous_time = $v["time"];
+          $data_KS = array('record_deleted' =>1 );
+          $where_KS = array( 'id' => $Action_Status_id );
+          $staffRecruiment->updateFormdata('atif_career.career_form_data_updation', $where_KS, $data_KS);
+          }
 
-$Get_Last_Record = "select u.id as id, u.date, u.time from atif_Career.career_form_data_updation as u where u.form_id=".$form_id." 
-and u.status_id=".$status_id." and u.stage_id=".$stage_id." ";
+        }
+        if( $applicant_next_status == 14 )
+        {
+          $date = $previous_date;
+          $time = $previous_time;
+        }
 
-$Lr = $staffRecruiment->custom_query($Get_Last_Record);
-
-$previous_date=date("Y-m-d");
-$previous_time=date('h:i:s');
-
-if( !empty($Lr) )
-{
-  foreach ($Lr as $v) 
-  {
-  $Action_Status_id = $v["id"]; 
-  $previous_date = $v["date"];
-  $previous_time = $v["time"];
-  $data_KS = array('record_deleted' =>1 );
-  $where_KS = array( 'id' => $Action_Status_id );
-  $staffRecruiment->updateFormdata('atif_career.career_form_data_updation', $where_KS, $data_KS);
-  }
-}
-
-if( $applicant_next_status == 14 )
-{
-  $date = $previous_date;
-  $time = $previous_time;
-}
-
-$new_Data = array(
-"comment_type"  => "allocation",
-'form_id' => $form_id,
-'status_id' => $applicant_status,
-'stage_id' => $stage_id,
-"applicant_next_status" =>  $applicant_next_status,
-"next_stage" => $next_stage,
-'tag' => $tag,
-'applicant_allocate' => $applicant_allocate,
-'career_grade_id' => $career_grade_id,
-'comments_applicant' => $comments_applicant,
-'comments_next_decision' => $comments_next_decision,
-'date' => $date,
-'time' => $time,
-'campus' => $campus,
-'comments_next_step_aloc' => $comments_next_step_aloc,
-'comments_next_step' => $comments_next_step,
-'created' => $timeNow,
-'register_by' => $userID,
-'modified' => $timeNow,
-'modified_by' => $userID,   
-        
-'record_deleted' => 0
-);
-
-$new_Data2 = array(
-"comment_type"  => "decision",
-'form_id' => $form_id,
-'status_id' => $applicant_status,
-'stage_id' => $stage_id,
-"applicant_next_status" =>  $applicant_next_status,
-"next_stage" => $next_stage,
-'tag' => $tag,
-'applicant_allocate' => $applicant_allocate,
-'career_grade_id' => $career_grade_id,
-'comments_applicant' => $comments_applicant,
-'comments_next_decision' => $comments_next_decision,
-'date' => $date,
-'time' => $time,
-'campus' => $campus,
-'comments_next_step_aloc' => $comments_next_step_aloc,
-'comments_next_step' => $comments_next_step,
-'created' => $timeNow,
-'register_by' => $userID,
-'modified' => $timeNow,
-'modified_by' => $userID,  
-
-               
-'record_deleted' => 0
-);
-
-
-if( ((int)$status_id == 11 && (int)$stage_id == 4 ) )
-{
-}else 
-{
-$staffRecruiment->insertFormData('career_form_data_updation',$new_Data);
-$staffRecruiment->insertFormData('career_form_data_updation',$new_Data2); 
-}
-
-
-
-        $data = array(
-          'form_id' => $form_id,
-          'stage_id' => $stage_id,
-          'tag' => $tag,
-          'applicant_allocate' => $applicant_allocate,
-          'career_grade_id' => $career_grade_id,
-          'comments_applicant' => $comments_applicant,
-          'status_id' => $status_id,
-          'comments_next_decision' => $comments_next_decision,
-          'date' => $date,
-          'time' => $time,
-          'campus' => $campus,
-          'comments_next_step_aloc' => $comments_next_step_aloc,
-          'comments_next_step' => $comments_next_step,
-          'created' => $timeNow,
-          'register_by' => $userID,
-          'modified' => $timeNow,
-          'modified_by' => $userID, 
-          'depart_id' => $depart_id, 
-          'level_id' => $level_id,
-          'career_id' => $career_id, 
-          'record_deleted' => 0
+        $new_Data = array(
+            "comment_type"  => "allocation",
+            'form_id' => $form_id,
+            'status_id' => $applicant_status,
+            'stage_id' => $stage_id,
+            "applicant_next_status" =>  $applicant_next_status,
+            "next_stage" => $next_stage,
+            'tag' => $tag,
+            'applicant_allocate' => $applicant_allocate,
+            'career_grade_id' => $career_grade_id,
+            'comments_applicant' => $comments_applicant,
+            'comments_next_decision' => $comments_next_decision,
+            'date' => $date,
+            'time' => $time,
+            'campus' => $campus,
+            'comments_next_step_aloc' => $comments_next_step_aloc,
+            'comments_next_step' => $comments_next_step,
+            'created' => $timeNow,
+            'register_by' => $userID,
+            'modified' => $timeNow,
+            'modified_by' => $userID,
+            'record_deleted' => 0
         );
 
+        $new_Data2 = array(
+            "comment_type"  => "decision",
+            'form_id' => $form_id,
+            'status_id' => $applicant_status,
+            'stage_id' => $stage_id,
+            "applicant_next_status" =>  $applicant_next_status,
+            "next_stage" => $next_stage,
+            'tag' => $tag,
+            'applicant_allocate' => $applicant_allocate,
+            'career_grade_id' => $career_grade_id,
+            'comments_applicant' => $comments_applicant,
+            'comments_next_decision' => $comments_next_decision,
+            'date' => $date,
+            'time' => $time,
+            'campus' => $campus,
+            'comments_next_step_aloc' => $comments_next_step_aloc,
+            'comments_next_step' => $comments_next_step,
+            'created' => $timeNow,
+            'register_by' => $userID,
+            'modified' => $timeNow,
+            'modified_by' => $userID,
+            'record_deleted' => 0
+        );
 
-        
-        
+        if( ((int)$status_id == 11 && (int)$stage_id == 4 ) )
+        {
+
+        }else 
+        {
+          $staffRecruiment->insertFormData('career_form_data_updation',$new_Data);
+          $staffRecruiment->insertFormData('career_form_data_updation',$new_Data2); 
+        }
+
+        $data = array(
+            'form_id' => $form_id,
+            'stage_id' => $stage_id,
+            'tag' => $tag,
+            'applicant_allocate' => $applicant_allocate,
+            'career_grade_id' => $career_grade_id,
+            'comments_applicant' => $comments_applicant,
+            'status_id' => $status_id,
+            'comments_next_decision' => $comments_next_decision,
+            'date' => $date,
+            'time' => $time,
+            'campus' => $campus,
+            'comments_next_step_aloc' => $comments_next_step_aloc,
+            'comments_next_step' => $comments_next_step,
+            'created' => $timeNow,
+            'register_by' => $userID,
+            'modified' => $timeNow,
+            'modified_by' => $userID, 
+            'depart_id' => $depart_id, 
+            'level_id' => $level_id,
+            'career_id' => $career_id, 
+            'record_deleted' => 0
+        );
+
         $career_form = array(
                   'status_id' => $status_next, 
                   'stage_id' => $stage_next,
                   'modified' => time(),
                   'modified_by' => $userID
-                );
+        );
         // var_dump($career_form);
         $where_career_form =  array('id' => $form_id );
-
         $careerForm = $staffRecruiment->updateFormdata('career_form', $where_career_form, $career_form);
-
-
         $flag = $staffRecruiment->get_form_status($form_id, $status_id);
 
 
-       
         if( count( $flag ) == 0 ){
-
           $RecruimentData = $staffRecruiment->insertFormData('career_form_data',$data);
-
-        } else {
+        }
+        else
+        {
+          //error here
           $where = array(
             'form_id' => $form_id,
             'status_id' => $status_id
-           );
-          $RecruimentData = $staffRecruiment->updateFormdata('atif_career.career_form_data', $where, $data);
+          );
+
+          $RecruimentData = $staffRecruiment->updateFormdata('career_form_data', $where, $data);
+            // print_r($RecruimentData);
+            // die;
+
         }
 
-
         $flag_next_status = $staffRecruiment->get_form_status($form_id, $status_next);
-
         $data_next_status = array(
             'form_id' => $form_id,
             'status_id' => $status_next,
@@ -883,45 +873,36 @@ $staffRecruiment->insertFormData('career_form_data_updation',$new_Data2);
             'career_id' => $career_id,
             'depart_id' => $depart_id, 
             'level_id' => $level_id       
-           
-            
-            
         );
 
         if( count( $flag_next_status ) == 0 ){
-
           $id_delete = $staffRecruiment->get_deleted_id($form_id);
           //var_dump($id_delete);
           if(!empty($id_delete)){
            //var_dump($id_delete[0]->id);
-        $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data', $id_delete[0]->id);
-
-            
+            $delete_career_data = $staffRecruiment->delete_id('atif_career.career_form_data', $id_delete[0]->id);
           }
           $RecruimentData = $staffRecruiment->insertFormData('career_form_data',$data_next_status);
-
           if(!empty($id_delete[0]->status_id)){
-           // var_dump($id_delete[0]->status_id);
+            // var_dump($id_delete[0]->status_id);
             $get_log =  $staffRecruiment->get_log_status($form_id,$id_delete[0]->status_id);
-           // var_dump($get_log);
-
+            // var_dump($get_log);
             foreach($get_log as $delete_log){
               $delete_log_data = $staffRecruiment->delete_id('atif_career.log_career_form', $delete_log->id); 
              // var_dump($delete_log_data);
             }
             //var_dump($delete_log_data);
           }
-
-        }else {
+        }
+        else
+        {
           $where = array(
             'form_id' => $form_id,
             'status_id' => $status_next,
             'modified' => time()
-           );
+          );
           $RecruimentData = $staffRecruiment->updateFormdata('atif_career.career_form_data', $where, $data);
         }
-      
-
         echo json_encode($careerForm);
      
     }

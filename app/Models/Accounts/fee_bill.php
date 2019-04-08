@@ -613,7 +613,7 @@ class fee_bill extends Model
     public function getAdmissionFee($student_id,$academic_session_id=""){
         $details=fee_bill::join('fee_bill_received as fbr','fbr.fee_bill_id','fee_bill.id')
         ->where('student_id',$student_id)
-        ->select('admission_fee','gb_id','total_payable','computer_subcription_fee','fee_a_discount')
+        ->select('admission_fee','security_deposit','gb_id','total_payable','computer_subcription_fee','fee_a_discount','received_amount')
         ->where([['bill_title','Admission'],['bill_cycle_no',0],['received_date','>','2018-06-30']])
         ->whereIN('academic_session_id',[9])
         ->Orderby('fee_bill.id','desc')->first();
@@ -626,7 +626,15 @@ class fee_bill extends Model
        // echo $this->getAdmissionFeeDifference($student_id);
        // die;
        if($bill_year==$c_nyear){
-                 $total_income=$details['admission_fee']+$details['computer_subcription_fee'];
+        
+                 $grand_total_fee=$details['admission_fee']+$details['computer_subcription_fee']+$details['security_deposit'];
+                 if($details['received_amount']>$grand_total_fee){
+                     $details['received_amount']=$details['received_amount']-$details['security_deposit'];
+                     $total_income=$details['received_amount'];
+                 }else{
+                         $total_income=$details['admission_fee']+$details['computer_subcription_fee'];
+                 }
+                
 
                 if($details['fee_a_discount']>0){
                      $discount_amount=($details['admission_fee']/100)*$details['fee_a_discount'];
@@ -671,7 +679,7 @@ class fee_bill extends Model
             } 
     }
 
-        public function getAdmissionFeeReport($from_date,$to_date,$grade_id){
+    public function getAdmissionFeeReport($from_date,$to_date,$grade_id){
             $query = "SELECT 
 
             if( 
@@ -679,10 +687,23 @@ class fee_bill extends Model
             (select att.date from atif_attendance.student_attendance as att where att.gs_id=cl.gs_id and att.date >= '2018-12-01' limit 1) , '' ) as First_Attendance_Tapin,
 
 
-            fb.admission_fee,fb.id,af.form_no,srr.gs_id,if(srr.gf_id!=0,concat(substr(srr.gf_id, 1, 2) , '-', substr(srr.gf_id, 3, 3) ),'')as gfid,sr.gt_id, 
+           format( fb.admission_fee, 0 ) as admission_fee ,
+            fb.id,af.form_no,srr.gs_id,if(srr.gf_id!=0,concat(substr(srr.gf_id, 1, 2) , '-', substr(srr.gf_id, 3, 3) ),'')as gfid,sr.gt_id, 
             af.official_name, 
-            fb.waive_amount,fb.concession_amount,fb.re_enforcement,fb.computer_subcription_fee,
-            fb.security_deposit,fb.total_payable,fbr.received_amount,
+            fb.waive_amount,
+            /*fb.concession_amount,*/
+            /*if( fb.fee_a_discount != '0' or af.referral_applied=1, 20000, 0 ) as concession_amount,*/
+            (   CASE
+                WHEN referral_applied = 1 THEN format(20000,0)
+                WHEN fb.fee_a_discount != '0' THEN  format( 40000  / 100 * (convert(fb.fee_a_discount, UNSIGNED INTEGER ) ), 0)
+                ELSE 0
+            END ) concession_amount,
+
+            format( fb.re_enforcement,0) as re_enforcement,
+            format( fb.computer_subcription_fee,0) as computer_subcription_fee,
+            format( fb.security_deposit,0) as security_deposit,
+            format( fb.total_payable,0) as total_payable,
+            format ( fbr.received_amount,0) as received_amount,
             fbr.received_date,af.grade_name as applied_grade,from_unixtime(cl.created,'%Y-%m-%d') as eao_date,cl.grade_name FROM atif_fee_student.fee_bill fb
 
 
@@ -727,6 +748,21 @@ class fee_bill extends Model
         return $details = DB::connection('mysql_Career_fee_bill')->select($query);
     }
 
+
+    public function getAllReceivedByStudentId($student_id){
+            $query = "SELECT sum(fbr.received_amount) as total_received FROM atif.class_list cl
+            left JOIN atif_fee_student.fee_bill fb
+            on fb.student_id=cl.id
+            left JOIN atif_fee_student.fee_bill_received fbr
+            on fbr.fee_bill_id=fb.id
+            where fb.academic_session_id IN (11,12)
+            and fb.bill_cycle_no in (1,2,3,4,5)
+            and fb.student_id=$student_id";
+            
+            
+         $details = DB::connection('mysql_Career_fee_bill')->select($query)[0];
+         return $details->total_received;
+    }
 
 
 

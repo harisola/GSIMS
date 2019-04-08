@@ -248,7 +248,9 @@ class ScreeningGate extends Controller
       
       if( $interim != '' )
       {
-          $get_interim_cardno = $tmpcard_staff_used_model->checkinterim($interim);
+          // Edit By ZK
+          // $get_interim_cardno = $tmpcard_staff_used_model->checkinterim($interim);
+          $get_interim_cardno = $tmpcard_staff_used_model->checkinterim($interim,3);
           if( !empty($get_interim_cardno))
           {
               $tmp_card_no = $get_interim_cardno[0]->card_no;

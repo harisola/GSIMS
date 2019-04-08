@@ -7,86 +7,85 @@ use Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-//use App\Models\Staff\Staff_Information\StaffInformationModel;
+use App\Models\Accounts\fee_bill_mis;
+
 
 class MisRegularFeeBill extends Controller
 {
-    public function index(){
-        return view('account_process.accounts.fee_bill_mis');
+    public function index()
+    {
+        $fbmis = new fee_bill_mis();
+
+
+        $MIS_Data = array();
+        $BillCycle_no=5;
+        $ASID_From=11;
+        $ASID_To=12;
+        
+        $ASID = $fbmis->get_Academic_Session_id();
+        if( !empty( $ASID ) )
+        {
+            $ASID_From=$ASID[0]->ASID;
+            $ASID_To=$ASID[1]->ASID;
+        }
+        
+
+       $MIS_Data =  $fbmis->Call_Mis_Sp( $BillCycle_no, $ASID_From, $ASID_To );
+       
+       
+
+        return view('account_process.accounts.fee_bill_mis')->with( array( "MIS_Data"=> $MIS_Data) );
     }
 
-    public function table_ajax_feebill(Request $request)
+
+    public function get_fee_bill_mis_ajax(Request $request)
     {
+        $fbmis = new fee_bill_mis();
+
+        $MIS_Data = array();
+        $BillCycle_no=5;
+        $ASID_From=11;
+        $ASID_To=12;
+
+        $BillDated='2019-03-15';
+
+        $MisType = $request->input('MisType');
+        
+        
+        
+
 
         
-                
-                
+        
+        $ASID = $fbmis->get_Academic_Session_id();
 
-               $iTotalRecords = 178;
+        if( !empty( $ASID ) )
+        {
+            $ASID_From=$ASID[0]->ASID;
+            $ASID_To=$ASID[1]->ASID;
+        }
 
-               $sEcho = intval($request->input('draw') ); 
-
-
-
-               $iDisplayLength = intval( $request->input('length'));
-
-                $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength; 
-                $iDisplayStart = intval( $request->input('start'));
-               
-                
-                $records = array();
-                $records["data"] = array(); 
-
-                $end = $iDisplayStart + $iDisplayLength;
-                $end = $end > $iTotalRecords ? $iTotalRecords : $end;
-
-                $status_list = array(
-                    array("success" => "Pending"),
-                    array("info" => "Closed"),
-                    array("danger" => "On Hold"),
-                    array("warning" => "Fraud")
-                );
-
-                    for($i = $iDisplayStart; $i < $end; $i++) {
-                        $status = $status_list[rand(0, 2)];
-                        $id = ($i + 1);
-                        $records["data"][] = array(
-                        '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input name="id[]" type="checkbox" class="checkboxes" value="'.$id.'"/><span></span></label>',
-                        $id,
-                        '12/09/2013',
-                        'Jhon Doe',
-                        'Jhon Doe',
-                        '450.60$',
-                        rand(1, 10),
-                        '<span class="label label-sm label-'.(key($status)).'">'.(current($status)).'</span>',
-                        '<a href="javascript:;" class="btn btn-sm btn-outline grey-salsa"><i class="fa fa-search"></i> View</a>',
-                    );
-                }
-
-                $customActionType = $request->input('customActionType');
-
-                if( isset( $customActionType ) )
-                {
-                    if ( $customActionType  == "group_action" ) 
-                    {
-                        $records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
-                        $records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
-                    }
-                    
-                }
-
-                
-
-                $records["draw"] = $sEcho;
-                $records["recordsTotal"] = $iTotalRecords;
-                $records["recordsFiltered"] = $iTotalRecords;
-                
-                echo json_encode($records);
+        if( $MisType == 1 )
+        {
+            $BillCycle_no = $request->input('Billcycleno');
+            $MIS_Data =  $fbmis->Call_Mis_Sp( $BillCycle_no, $ASID_From, $ASID_To );
+        }
+        else
+        {
+            // Get Admissoin MIS here...
+            $BillDated = date('Y-m-d', strtotime( $request->input('BillDated') ));
+            $MIS_Data =  $fbmis->Call_Mis_Sp_adm( $BillDated );
+        }
+        
 
 
-
-
+        
+        
+        $html =  view('account_process.accounts.fee_bill_mis_table')->with( array('MIS_Data' => $MIS_Data ) )->render();
+        return response()->json(array('success' => true, 'html'=>$html));
     }
+
+
 
 
 

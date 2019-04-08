@@ -273,8 +273,145 @@
 
  
 @endphp
-
+<style type="text/css">
+.customRow {
+    padding: 20px;
+    background: #e8bc40;
+    margin: -10px 0 0 0;
+} 
+.marginTop20 {
+  margin-top: 20px;
+}
+.padding0 {
+    padding: 0 !important;
+}
+.marginBottom0 {
+    margin-bottom: 0 !important;
+}
+.portlet.light.forced>.portlet-title {
+    padding: 10px 20px !important;
+    min-height: 48px;
+}
+.portlet {
+      overflow: hidden;
+}
+.btn-group,
+button.multiselect.dropdown-toggle.btn.btn-default {
+    width: 100%;
+}
+</style>
 <div class="row marginTop20">
+    <div class="col-md-12" id="" style="">
+        <div class="row">
+            <div class="col-md-12 paddingRight0">
+                <div class="portlet light forced bordered padding0 marginBottom0">
+                    <div class="portlet-title">
+                        <div class="caption add_profile_label">
+                            <i class="icon-users font-dark"></i>
+                            <span class="caption-subject font-dark sbold uppercase caption_subject_profile">Recruitment Processflow</span>
+                        </div>
+                    </div><!-- portlet-title -->
+                    <div class="row customRow">
+                      <div class="col-md-3">
+                          <label>Date From</label>
+                          <input type="date" class="form-control" value="" id="">
+                      </div>
+                      <div class="col-md-3">
+                          <label>Date To</label>
+                          <input type="date" class="form-control" value="" id="">
+                      </div>
+                      <div class="col-md-3">
+                          <label>Department</label>
+                          <select id="departmentFilter" multiple="multiple">
+                              <option data-grade_id="17"  value="PG">PG</option>
+                              <option data-grade_id="1" value="PN">PN</option>
+                              <option data-grade_id="2" value="N">N</option>
+                              <option data-grade_id="3" value="KG">KG</option>
+                              <option data-grade_id="4" value="I">I</option>
+                              <option data-grade_id="5" value="II">II</option>
+                              <option data-grade_id="6" value="III">III</option>
+                              <option data-grade_id="7" value="IV">IV</option>
+                              <option data-grade_id="8" value="V">V</option>
+                              <option data-grade_id="9" value="VI">VI</option>
+                              <option data-grade_id="10" value="VII">VII</option>
+                              <option data-grade_id="11" value="VIII">VIII</option>
+                              <option data-grade_id="12" value="IX">IX</option>
+                              <option data-grade_id="13" value="X">X</option>
+                              <option data-grade_id="14" value="XI">XI</option>
+                              <option data-grade_id="15" value="A1">A1</option>
+                              <option data-grade_id="16" value="A2">A2</option>
+                              <option data-grade_id="18"  value="18">All</option>
+                          </select>
+                      </div>
+                      <div class="col-md-3">
+                          <label>Subject</label>
+                          <select id="subjectFilter" multiple="multiple">
+                              <option value="PG">PG</option>
+                              <option value="PN">PN</option>
+                              <option value="N">N</option>
+                              <option value="KG">KG</option>
+                              <option value="I">I</option>
+                              <option value="II">II</option>
+                              <option value="III">III</option>
+                              <option value="IV">IV</option>
+                              <option value="V">V</option>
+                              <option value="VI">VI</option>
+                              <option value="VII">VII</option>
+                              <option value="VIII">VIII</option>
+                              <option value="IX">IX</option>
+                              <option value="X">X</option>
+                              <option value="XI">XI</option>
+                              <option value="A1">A1</option>
+                              <option value="A2">A2</option>
+                              <option value="18">All</option>
+                          </select>
+                      </div>
+                      
+
+
+                      <div class="col-md-3" style="margin-top: 30px;">
+                          <label>Designation</label>
+                          <select id="designationFilter" multiple="multiple">
+                              <option value="">PG</option>
+                              <option value="">PN</option>
+                              <option value="">N</option>
+                              <option value="">KG</option>
+                              <option value="">I</option>
+                              <option value="">II</option>
+                              <option value="">III</option>
+                              <option value="">IV</option>
+                              <option value="">V</option>
+                              <option value="">VI</option>
+                              <option value="">VII</option>
+                              <option value="">VIII</option>
+                              <option value="">IX</option>
+                              <option value="">X</option>
+                              <option value="">XI</option>
+                              <option value="">A1</option>
+                              <option value="">A2</option>
+                              <option value="">All</option>
+                          </select>
+                      </div>
+                      <div class="col-md-3" style="margin-top: 30px;">
+                          <label>Campus</label>
+                          <select id="campusFilter" multiple="multiple">
+                              <option data-grade_id=""  value="">South</option>
+                              <option data-grade_id="" value="">North</option>
+                          </select>
+                      </div>
+                      <div class="col-md-3" style="margin-top: 30px;">
+                          <label>Form Source</label>
+                          <select id="formSourceFilter" multiple="multiple">
+                              <option data-grade_id=""  value="">Online</option>
+                              <option data-grade_id="" value="">Walkin</option>
+                          </select>
+                      </div>
+                      <div class="col-md-3" style="margin-top: 30px;">
+                          <label>&nbsp;</label>
+                          <input type="button" id="" data-re_generate="0" class="btn btn-group green Generate_Fee_Bill_1" value="Filter Processflow" style="width: 100%;">
+                      </div>
+                    </div><!-- cutomRow -->
+                    <div class="row marginTop20">
   <div class="modal fade" id="allocateProfileModal" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -635,6 +772,13 @@
   </div><!-- startzTillCSL2 -->
 </div><!-- col-md-12 -->
 </div><!-- row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
 
 $(document).on("click",".counter",function(){
@@ -710,7 +854,32 @@ $.ajax({
 
   });
 
-
+$('#departmentFilter').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+ });
+$('#subjectFilter').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+ });
+$('#formSourceFilter').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+ });
+$('#designationFilter').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+ });
+$('#campusFilter').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+ });
+subjectFilter
 </script>
 
 <style>

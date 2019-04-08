@@ -400,10 +400,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         
               $gross_additional_charges=$gross_tution_fee+$additional_charges;
                      // $tax_allow=$this->StudentApplicableForTaxes($list,$gross_additional_charges);
-                    //purani jaga tax calcualte karna ki harmi pan ki waja sa necha kari ha
  
-              $total_adjustments=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
-             
+               $total_adjustments=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
+
+                           
                 if($installment_dicount_percentage==100 && $total_adjustments<=0){
                     // $total_current_bill=($gross_tution_fee+$additional_charges+$resource_fee)-@$discount_total_monthly;
                     
@@ -427,13 +427,21 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $amount_exceed=true;
                         $adjustment_taxes=$total_adjustment_taxes=$this->calculate_adjustment_taxes($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                         $total_adjustments=-($adjustment_taxes-$total_adjustments);
+
                     }
                 }
                 
                 $custom_arrear_adjustment=$arrear_adjustment_model->get_custom_pending_amount_id($list['student_id'],$billing_cycle);
-                $total_adjustments=$total_adjustments+$custom_arrear_adjustment;
-            
+                 $total_adjustments=$total_adjustments+$custom_arrear_adjustment;
                 if($total_adjustments<0){
+                    $previos_roll_over=$fee_bill->getLastBillRollOver($list['student_id'],$list['academic_session_id']);
+                //if last bill in negative with rollover and last bill recving 0 5ht installment
+                    // if($received_amount=="" && $previos_roll_over>0){
+                    //     $total_adjustments=$total_adjustments+$previos_roll_over;
+                    // }
+                    // echo $total_adjustments;
+                    // die;
+                //if last bill in negative with rollover and last bill recving 0 5ht installment
 
                     $adjustment->insertUpdateAdjustment($list['student_id'],str_replace("-","",$total_adjustments));
                     $arriers_adjustment->InsertUpdateArriers($list['student_id'],0);
@@ -449,16 +457,28 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     $previos_roll_over=$fee_bill->getLastBillRollOver($list['student_id'],$list['academic_session_id']);
                     //for temp use only next time we have to remove this line we have to remove rollover charges rollover charges only be added in rollover charges. it will never calculated in taxes
                     if($total_adjustments>1000){
-                        $total_adjustments=$total_adjustments-$previos_roll_over;
+
+                        if($bill_cycle_no>2 && $total_adjustments<2000 && $previos_roll_over==1000){
+                            $total_adjustments;
+                         }else{
+                             $total_adjustments=$total_adjustments-$previos_roll_over;
+                         }
+                        
+                         
                     }
+                    
 
                     $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
                     $adjustment->insertUpdateAdjustment($list['student_id'],0);
 
                 }else{
+
                     $adjustment->insertUpdateAdjustment($list['student_id'],0);
                     $arriers_adjustment->InsertUpdateArriers($list['student_id'],0);
                 }
+
+
+                    
                  $total_arriers=
                  $arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount'];//these all are arriers
                  $total_arriers_with_taxes=
@@ -547,11 +567,8 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $additional_charges=$additional_charges+$resource_fee;
                     }
                     
-                    $total_current_bill=($total_current_billing2+$resource_fee);
-
-                    // if($total_adjustments<0){
-                    //     $total_current_bill=0;
-                    // }
+                 $total_current_bill=($total_current_billing2+$resource_fee);
+                   
 
 
                 }else{
@@ -658,24 +675,30 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
             $gross_and_additional_charges=$gross_and_additional_charges-$summer_refund;
             $received_amount=$this->calculate_arrier_adjustments($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
 
-
             @$arriers_amount=$arriers_adjustment->getAllRemitanceadjustements($list['student_id'])['adjustment_amount']; 
             $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
             $adjustment_amount=$adjustment->getadjustments($list['student_id']);
             $balance=$arriers_amount+$adjustment_amount;
+
             $adjustment_amount2=str_replace('-','', $adjustment_amount);//simply adjustment amount without minus
+
             if($billing_cycle>1 && $adjustment_amount2>20000){
-                $taxable_amount=$adjustment_amount2+$gross_and_additional_charges;
+                $total_previous_bill_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['a_session_id']);
+                $taxable_amount=$adjustment_amount2+$gross_and_additional_charges+$total_previous_bill_amount;
+                
             }else{
                 $taxable_amount=$received_amount+$gross_and_additional_charges;
-            }
+            }                
+
             $total_previous_bill_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['a_session_id']);
             if($billing_cycle>1 && $adjustment_amount2>20000){
+                $taxable_amount=$adjustment_amount2+$gross_and_additional_charges+$total_previous_bill_amount;
 
-                $taxable_amount=$adjustment_amount2+$gross_and_additional_charges;
-
+                // $taxable_amount=$adjustment_amount2+$gross_and_additional_charges; commit in 5ht billing for case 17-457
+ 
 
             }else{
+
                  $taxable_amount=$total_previous_bill_amount+$gross_and_additional_charges;
 
                 if($admission_fee>0){
@@ -685,6 +708,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
             }
             $admin_set_tax_amount=$tax_amount->getTaxPercentage($list['a_session_id'])['tax_amount'];
             $taxable_amount;
+          
             if($taxable_amount>$admin_set_tax_amount){ 
                  $taxes=1;
             }
@@ -699,6 +723,8 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     break;
                 }
             }
+
+
             
            return $taxes;
     }
@@ -714,7 +740,8 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $fee_bill_received_info=new fee_bill_received_info;
                 $adjustment=new adjustment;
                 $fee_definition = new fee_definition;
-
+                $fee_detail=$fee_bill->getLastBillByStudentId($list['student_id']);
+                $received_amount=$fee_bill_received->getReceivedAmount($fee_detail['id']);
                 if($arrears==true){
                     $total_current_billing=$total_current_billing;
                     $total_current_billing_with_arrears=$total_current_billing_with_arrears;
@@ -738,6 +765,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
                 // echo $received_amount= $fee_bill_received->getReceivedAmount($fee_details['id']);
                 $received_amount=$fee_bill_received->getReceivedAmount($fee_details['id']);
+                $total_received_amount=$fee_bill->getAllReceivedByStudentId($list['student_id']);
 
                 if($status=='S-CPT'){
 
@@ -760,13 +788,28 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         
                   }
 
-                
+                 
               
                if($billing_cycle>2){
-                    if($received_amount>0 &&$previous_bill_taxes!=0){
+              
+                    if($total_received_amount>0 &&$previous_bill_taxes!=0){
 
-                       if($received_amount>$previous_bill_taxes){
-                                 $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
+                       if($total_received_amount>$previous_bill_taxes){
+                                  if($total_received_amount<200001){
+                                       //as per miss hina new requirement in 5th billing 
+                                          $current_bill_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
+                                              $total_payable=$fee_detail->total_payable;//get last bill total payable amount
+                                            if($received_amount>=$total_payable){
+                                                  $applicable_taxes=$current_bill_taxes;
+
+                                            }else{
+                                                  $applicable_taxes=$current_bill_taxes+$previous_bill_taxes;
+                                            }
+                                         // echo $previous_bill_adjsutment;
+
+                                  }else{
+                                      $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
+                                  }
                                 //if received amount greater than taxes then first system will deduct taxes by his received amount and taxes is only for current billing.
                             }else{
 
@@ -838,7 +881,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                  if($applicable_taxes<0){
                     $applicable_taxes=-($applicable_taxes);
                  }               
-                 
+            
                return $applicable_taxes;
     }
 
@@ -1426,7 +1469,7 @@ This is a computer generated bill. If you have any queries - or notice any incon
                     $this->createTable($pdf,$y_pos,'Resource Charges',7,'B',5);
                     $this->createTable($pdf,$y_pos,number_format(@$lab_avc),34.2,'',5);
                     $this->createTable($pdf,$y_pos,number_format(@$annual_lab_avc_fee),49.5,'',5);
-                    $this->createTable($pdf,$y_pos,number_format(@$lab_avc_fee_this_month),66,'B',5);
+                    $this->createTable($pdf,$y_pos,number_format(@$lab_avc_fee_this_month),66.5,'B',5);
                 }else{
                       $annual_lab_avc_fee=0;
                       $lab_avc_fee_this_month=0;
@@ -1437,7 +1480,7 @@ This is a computer generated bill. If you have any queries - or notice any incon
                     $this->createTable($pdf,121,'Musakhar Charges',6.9,'B',5);
                     $this->createTable($pdf,121,number_format(@$musakhar),35.5,'',5);
                     $this->createTable($pdf,121,number_format(@$musakhar_fee_annual),50.2,'',5);
-                    $this->createTable($pdf,121,number_format(@$installment_musakhar_fee),67,'B',5);
+                    $this->createTable($pdf,121,number_format(@$installment_musakhar_fee),67.5,'B',5);
                 }else{
                     $musakhar_fee_annual=0;
                     $installment_musakhar_fee=0;    
@@ -1445,15 +1488,16 @@ This is a computer generated bill. If you have any queries - or notice any incon
                 }
                 
                 if($feedetails['oc_smartcard_charges']!=0){
-                    $this->createTable($pdf,123,'Smart Card Charges',5.9,'B',4);
+                    $this->createTable($pdf,123,'Smart Card Charges',7.4,'B',5);
                     $this->createTable($pdf,123,number_format(@$feedetails['oc_smartcard_charges']),67,'B',5);
                 }
 
                 if($yearly_charges!=0){
-                    $this->createTable($pdf,124,'Yearly Charges',4.7,'B',4);
-                    $this->createTable($pdf,124,number_format(@$yearly_charges),67,'B',5);
+                    $this->createTable($pdf,125,'Yearly Charges',5.4,'B',5);
+                    $this->createTable($pdf,125,number_format(@$yearly_charges),66.5,'B',5);
                 }else{
                     $yearly_charges=0;
+
                 }
                 // $installment_dicount_percentage=100;
                 if($grade_id!=15 && $grade_id!=16){
@@ -1527,8 +1571,19 @@ This is a computer generated bill. If you have any queries - or notice any incon
                     }
                     //end gross tution fee calculatio
                 }else{
-                    $this->createTable($pdf,132.2,number_format($total_charges),34.9,'',5);//sum total monthly amoun
-                    $this->createTable($pdf,132.2,number_format($total_charges_annual),50,'',5);//sum annual amount
+
+                    if($total_charges==0){
+                        $this->createTable($pdf,132.2,'-',34.9,'',5);//sum total monthly amoun
+
+                    }else{
+                        $this->createTable($pdf,132.2,number_format($total_charges),34.9,'',5);//sum total monthly amoun
+
+                    }
+                    if($total_charges_annual==0){
+                        $this->createTable($pdf,132.2,'-',50,'',5);//sum annual amount
+                    }else{
+                        $this->createTable($pdf,132.2,number_format($total_charges_annual),50,'',5);//sum annual amount
+                    }
                     $this->createTable($pdf,132.2,number_format($total_charges_paid),66.1,'',5);//sum this installment                }
               }
 
@@ -1837,16 +1892,29 @@ This is a computer generated bill. If you have any queries - or notice any incon
 
 
       $last_remaining_amount=$total_payable+($previous_bill_adjsutment);
+
         if($total_payable==$received_amount){
             return $pendings=0;
         }
         if($last_remaining_amount<=0){
+
+
             if($total_payable<0){
+
                 if($previous_bill_taxes>0){
                     $pendings=($previous_bill_adjsutment+$total_current_bill)+$previous_bill_taxes;
                 }else{
                     $pendings=($previous_bill_adjsutment+$total_current_bill);
+                    if($total_payable<0 && $received_amount>0){
+                        //if last bill is negative and user deposit some amount
+                        $pendings= $total_payable-$received_amount; 
+                    }
                 }
+
+                if($received_amount==0){
+                    $pendings=$total_payable;
+                }
+
             }else{
                     $pendings=$last_remaining_amount;
                     if($total_payable>0){//if last bill remaining adjustment and bill paid partially
@@ -1857,7 +1925,7 @@ This is a computer generated bill. If you have any queries - or notice any incon
            
            $pendings=$total_payable-$received_amount;
         }
-
+      
 
         return $pendings;
     }

@@ -76,9 +76,17 @@ class tmpcard_staff_used extends Model
 
     }
 
-    public function checkinterim($interim_rfid)
+    //edit by zk
+    public function checkinterim($interim_rfid,$interim_rfid_cardtype)
     {
-       $SqlQuery = "select trc.id,trc.card_no,trc.card_type,trc.rfid_dec,trc.rfid_hex from atif._tmp_rfid_cards as trc WHERE trc.rfid_dec = ".$interim_rfid.""; 
+       // $SqlQuery = "select trc.id,trc.card_no,trc.card_type,trc.rfid_dec,trc.rfid_hex from atif._tmp_rfid_cards as trc WHERE trc.rfid_dec = ".$interim_rfid.""; 
+
+        $SqlQuery = "select trc.id,trc.card_no,trt.name,trc.card_type,trc.rfid_dec,trc.rfid_hex 
+                    from atif._tmp_rfid_cards as trc 
+                    left join atif._tmp_rfid_type as trt
+                    on trt.id = trc.card_type
+                    WHERE trc.rfid_dec = ".$interim_rfid." 
+                    and trc.card_type = ".$interim_rfid_cardtype."";
 
         $result = DB::connection($this->dbCon)->select($SqlQuery);
         return $result;

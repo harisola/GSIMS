@@ -14,7 +14,11 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Fee Billing</span>
+            <span>Accounts</span>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <span>New Admissions</span>
         </li>
     </ul>
     <div class="page-toolbar">

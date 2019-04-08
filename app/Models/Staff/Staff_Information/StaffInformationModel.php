@@ -2098,25 +2098,31 @@ and amd.id=".$Absentia_id."";
 
      public function getStaffComments($staff_id){
     	
-	 $query = "SELECT * from ( SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') as time_12hr, time , 'Threshold Tap In' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." )  as name , '2' as tempSort from 
-		atif_attendance_staff.staff_attendance_in where staff_id = ".$staff_id ." and location_id in (1,2) 
-		#GROUP BY date
-		UNION 
-		SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, 'Threshold Tap Out' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '5' as tempSort from atif_attendance_staff.`staff_attendance_out` where staff_id = ".$staff_id ." and location_id in (1,2)
-		#GROUP BY date
-		UNION 
-		SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, 'Po Tap In' as poTapIn, ' ' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '3' as tempSort from atif_attendance_staff.`staff_attendance_in` where staff_id = ".$staff_id ." and location_id in (3,4)
-		#GROUP BY date
-		UNION 
-		SELECT (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title,  'system' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, 'Po Tap out' as poTapOut, ' '  as comments, ' ' as comments_categories,' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '4' as tempSort from atif_attendance_staff.`staff_attendance_out` where staff_id = ".$staff_id ." and location_id in (3,4)
-		#GROUP BY date
-		UNION
-		SELECT   (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE user_id = created_by) ) as title,   'user' as flag, date, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut,comments as comments,(SELECT  GROUP_CONCAT(name) as category_name FROM atif_gs_events.comment_category where  FIND_IN_SET( id ,( SELECT `category_id` FROM atif_gs_events.`staff_comments` where id = comments_table.id ))) as comments_categories, ' ' as vehicleTap,( select employee_id FROM atif.`staff_registered` WHERE user_id = created_by ) as emp_id ,( select abridged_name FROM atif.`staff_registered` WHERE user_id = created_by ) as name, '7' as tempSort  FROM atif_gs_events.`staff_comments` as comments_table where staff_id = ".$staff_id ."
-		UNION
-		SELECT  (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title, 'system' as flag, `date`, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format, TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut,' '  as comments, ' ' as comments_categories,  'vehicle Tap IN' as vehicleTap, ( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id , ( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '1' as tempSort FROM atif_attendance_vehicle .`vehicle_attendance_in`  where `vehicle_id` in (SELECT id FROM `atif`.`vehicle_registered` WHERE  `register_type` = 1 and `gv_id` in (SELECT `gv_id` FROM atif.`staff_vehicle` where `employee_id` = (SELECT `employee_id` FROM  atif.`staff_registered` WHERE id =".$staff_id .") ) ) GROUP BY date 
-		UNION
-		SELECT  (SELECT title FROM `atif`.`_title_person` WHERE `id` = (select title_person_id FROM atif.`staff_registered` WHERE id = ".$staff_id .") ) as title, 'system' as flag, `date`, DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format,TIME_FORMAT(time, '%r') time_12hr, time, ' ' as thresholdTapIN, ' ' as thresholdTapOut, ' ' as poTapIn, ' ' as poTapOut,' '  as comments, ' ' as comments_categories, 'vehicle Tap Out' as vehicleTap, ( select employee_id FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as emp_id , ( select abridged_name FROM atif.`staff_registered` WHERE id = ".$staff_id ." ) as name, '6' as tempSort FROM atif_attendance_vehicle .`vehicle_attendance_out`  where `vehicle_id` in (SELECT id FROM `atif`.`vehicle_registered` WHERE  `register_type` = 1 and `gv_id` in (SELECT `gv_id` FROM atif.`staff_vehicle` where `employee_id` = (SELECT `employee_id` FROM  atif.`staff_registered` WHERE id =".$staff_id .")  ) ) #GROUP BY date  
-		ORDER by date desc, time DESC, tempSort DESC) as dd limit 200 ";
+			$query="select sr.id,sr.name,tp.title,result.date,result.time,DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format,sl.description,sl.name as location_name,TIME_FORMAT(time, '%r') time_12hr,result.type,
+			CONCAT(tp.title,' ',sr.name,' ',DATE_FORMAT(date,  '%a, %b %d %Y'),' ',sl.description,' on ',TIME_FORMAT(time, '%r')) as description
+
+
+
+			from(
+			SELECT *,'tap-in' as type FROM atif_attendance_staff.staff_attendance_in si
+			where si.staff_id=613 
+			UNION ALL
+			SELECT *,'tap-out' as type FROM atif_attendance_staff.staff_attendance_out so
+			where so.staff_id=613 
+			) result
+
+			inner join atif_attendance.attendance_location sl
+			on sl.id=result.location_id
+
+			inner join atif.staff_registered sr
+			on sr.id=result.staff_id
+
+			left join atif._title_person tp
+			on tp.id=sr.title_person_id
+
+
+
+			ORDER by date desc, time DESC";
 	
 
 	     $comments = DB::connection($this->dbCon)->select($query);

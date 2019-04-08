@@ -60,7 +60,7 @@
 .tooltip {z-index: 99999}
 .customRow {
   padding: 20px;
-  background: #71A6A3;
+  background: #fff;
   margin: -10px 0 0 0;
 }
 .DTFC_LeftHeadWrapper,
@@ -95,8 +95,12 @@ a.dt-button, button.dt-button, div.dt-button {
                    <li class="active">
                        <a href="#staffInterim"  data-toggle="tab">Recruitment 2019 | Status Report 1</a>
                    </li>
-                   <li>
+                   <!--<li>
                        <a href="#studentInterim" data-toggle="tab"> Recruitment 2019 | Status Report 2 </a>
+                   </li>-->
+
+                    <li>
+                       <a href="#studentInterimtoday" data-toggle="tab"> Recruitment 2019 | Status Report 2 </a>
                    </li>
                    
                </ul>
@@ -114,10 +118,10 @@ a.dt-button, button.dt-button, div.dt-button {
                                                 <i class="icon-car font-dark"></i>
                                                 <span class="caption-subject font-dark sbold uppercase caption_subject_profile"><u>HR Recruitment Report</u>
                                             </div>
-                                        </div><!-- portlet-title -->
-                                        <div class="row customRow">
+                                        </div> <!-- portlet-title -->
+                                       <div class="row customRow">
                                               
-                                              <div class="col-md-3" id="sectionFilter_container">
+                                              <!--<div class="col-md-3" id="sectionFilter_container">
                                                 <label>Start Date</label>
                                                 
                                                     <input type="date" class="form-control" id="date_1" >
@@ -128,16 +132,56 @@ a.dt-button, button.dt-button, div.dt-button {
                                                 
                                                 <input type="date" class="form-control" id="date_2" >
 
-                                              </div>
+                                              </div>-->
                                                   <div class="col-md-3">
                                                     <label>&nbsp;</label><br />
                                                     
-                                                     <input type="button" id="filter_report" data-pdf="0" class="btn btn-group green filter_report" value="Generate Report" style="width: 100%;">
+                                                     <input type="button" id="filter_report" data-pdf="0" class="btn btn-group green filter_report" value="Generate Report" style="margin-left: 7%;width: 100%;background-color: #71A7A9;color: #fff;">
                                                   </div>
                                                 </div><!-- row -->
                                             <div class="portlet-body padding20 " >
                                                 <hr />
                                                 <div class="row padding20 " id="CLear_all">
+                                             
+                                                </div><!-- row -->
+                                            </div><!-- portlet-body -->
+                                        </div><!-- portlet -->
+                                    </div><!-- col-md-12 v-->
+                                </div><!-- row -->
+                            </div><!-- col-md-8 -->
+                        </div><!-- row -->
+
+                        </form>
+                    </div>
+
+                    <!--Add New Filter By Arif Khan-->
+
+          <div class="tab-pane fade" id="studentInterimtoday">
+
+                <form method="post" action="" id="all_filter_data_today">
+                    <div class="row marginTop20">
+                        <div class="col-md-12 fixed-height" id="" style="">
+                            <div class="row">
+                                <div class="col-md-12 paddingRight0">
+                                    <div class="portlet light bordered padding0 marginBottom0" >
+                                        <div class="portlet-title">
+                                            <div class="caption add_profile_label">
+                                                <i class="icon-car font-dark"></i>
+                                                <span class="caption-subject font-dark sbold uppercase caption_subject_profile"><u>HR Recruitment Report</u>
+                                            </div>
+                                        </div><!-- portlet-title -->
+                                        <div class="row">
+                                              
+                                             
+                                                  <div class="col-md-3">
+                                                    <label>&nbsp;</label><br />
+                                                     <input type='hidden' name='today_date' id='today_date' value='<?php echo date("Y-m-d"); ?>'>
+                                                     <input type="button" id="all_filter_data_today" data-pdf="0" class="btn btn-group green all_filter_data_today" value="Generate Report" style="margin-left: 7%;width: 100%;background-color: #71A7A9;color: #fff;">
+                                                  </div>
+                                                </div><!-- row -->
+                                            <div class="portlet-body padding20 " >
+                                                <hr />
+                                                <div class="row padding20 " id="today_data">
                                              
                                                 </div><!-- row -->
                                             </div><!-- portlet-body -->
@@ -419,6 +463,46 @@ a.dt-button, button.dt-button, div.dt-button {
                             });
             
         });
+
+        //Add New Ajax For Filter By Arif Khan
+
+    $(document).on("click",".all_filter_data_today",function(){
+    $('#Generations_AjaxLoader').show();
+
+        var formdata =      'today_date='+$('#today_date').val()
+
+                            
+                            console.log('form data=> '+formdata);
+                            $.ajax({
+                                type:'get',
+                                 url:'/gsims/public/staff_recruitment_all_reports_data_today',
+                                data:formdata,
+                                //dataType:'json',
+                                success:function(data){
+                                    
+                                    console.log(data);
+                                    
+                                $('#Generations_AjaxLoader').hide();
+                                 //var empty= '';
+                                    if(data){
+                                        // $('.report_table').html('');
+                                        $('#today_data').html(data);
+                                        //data = empty;
+                                         }
+                                   
+                                    else{
+                                        $('#rows').html("Filtered Rows : "+ 0 +" Row");
+                                        $('#report_table').html('<tr><td></td><td></td><td></td><td></td><td></td><td></td><td>Data not found.</td><td></td><td></td><td></td><td></td></tr>data not found');
+                                        $('#query').html(data.query);
+                                        //$('#sub_query').html(data.sub_query);
+                                    }   
+                                },
+                                error:function(data){
+                                    console.log(data.responseText); 
+                                }
+                            });
+            
+               });
        
                  
 

@@ -32,7 +32,14 @@
                                                         <td>{{$admission_bill_report_tables->gt_id}}</td>
                                                         <td>{{$admission_bill_report_tables->official_name}}</td>
                                                         <td>{{$admission_bill_report_tables->admission_fee}}</td>
-                                                        <td>{{40000-$admission_bill_report_tables->admission_fee}}</td>
+                                                        <td> 
+                                                            {{ $admission_bill_report_tables->concession_amount }}
+
+                                                                
+                                                        </td>
+
+
+
                                                         <td>{{$admission_bill_report_tables->re_enforcement}}</td>
                                                         <td>{{$admission_bill_report_tables->computer_subcription_fee}}</td>
                                                         <td>{{$admission_bill_report_tables->security_deposit}}</td>

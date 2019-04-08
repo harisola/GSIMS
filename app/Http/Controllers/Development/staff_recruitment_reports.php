@@ -4,7 +4,6 @@
 *******************************************************************/
 
 namespace App\Http\Controllers\Development;
-
 use Sentinel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,16 +32,13 @@ class staff_recruitment_reports extends Controller
     
   }
 
-
+//Add New Controller for Start End Date  Data By Arif Khan
 
    public function Get_recruitment_filter(Request $request){
 
         ini_set('max_execution_time', 50000); 
         $date_1 = $request['date_1'];
         $date_2 = $request['date_2'];
-       
-
-        
 
          $filterdata = new Staff_recruitment_report_modal();
 
@@ -62,75 +58,222 @@ class staff_recruitment_reports extends Controller
 
 
                           ]);
-       
-        }
+      }
+
+      //Add New Controller for Multiple  Data By Arif Khan
+
+     public function staff_recruitment_all_reports_data(Request $request){
+
+              ini_set('max_execution_time', 50000); 
+              $departs = $request['departs'];
+              $subjects = $request['subjects'];
+              $date_depart1 = $request['date_depart1'];
+              $date_depart2 = $request['date_depart2'];
+              $designations = $request['designations'];
+              $campus = $request['campus'];
+              $Onlinew = $request['Onlinew'];
+
+              $filterdata = new Staff_recruitment_report_modal();
 
 
+                       if($date_depart1 !='null' && $date_depart1 !="" ){
 
-        public function staff_recruitment_all_reports_data(Request $request){
+                       $all_filter_data=$filterdata->filter_report_data_departs_dates1($date_depart1);
 
-            ini_set('max_execution_time', 50000); 
-            $depart = $request['departs'];
+                      }
 
-            $filterdata = new Staff_recruitment_report_modal();
-           
-             $depart = explode(" ", $depart);
+                     if($subjects !='null' && $subjects !=""){
 
-              /* for($i=0;$i<count($depart);$i++){
+                       $all_filter_data=$filterdata->filter_report_data_subjects($subjects);
 
-                 $depart[$i] = explode(" ",$depart[$i]);
-                }*/
+                      }
 
-                foreach ($depart as $key => $departs){
+                     if($departs !='null'&& $departs !=""){
 
-
-                 
-                 //$all_filter_data=$filterdata->filter_report_data_hr_recruitments($depart);
-                  // $all_filter_data=$filterdata->filter_report_data_hr_recruitments($departs);
-                    //print_r($departs);
-
-                     if($request->get('departs'))
-                    {
-                        $query = $request->get('departs');
-                       for( $i = 0; $i<$query; $i++ ){
-
-
-
-                          $data = DB::table('atif_career.career_dept')->where('id', 'like', '%'.$query[$i].'%')->get();
-                                                           /* ->orWhere('abridged_name', 'like', '%'.$query.'%')
-                                                            ->orWhere('name_code', 'like', '%'.$query.'%')*/
-
-
-                               print_r($data);
-
-                                     die;
-                                                           
-                              }                
-
-              
-                }
-
-               
-             
-              
-
-               /*echo "<pre>";
-                print_r($depart);
-                exit();*/
-                              
-
-            //$all_filter_data=$filterdata->filter_report_data_hr_recruitments($depart);
-
-            //print_r($all_filter_data);
-            //die;
-
-          
-             return view('master_layout/staff/staff_recruitment/reports/filter_all_data_hr_recruiment_report',['data'=>$data]);
-        
-
-       
-        }
-
-}
+                       $all_filter_data=$filterdata->filter_report_data_departs($departs);
  
+                       }
+                     if($departs !='null' && $departs !="" && $subjects !='null' && $subjects !=""){
+
+                       $all_filter_data=$filterdata->filter_report_data_departs_subjects($departs,$subjects);
+
+                      }
+
+                     if($subjects !='null' && $subjects !="" && $campus !='null' && $campus !=""){
+
+                       $all_filter_data=$filterdata->filter_report_data_subjects_campus_all($campus,$subjects);
+
+                      }
+
+                     if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !=""){
+
+                       $all_filter_data=$filterdata->filter_report_data_departs_dates($date_depart1,$date_depart2);
+
+                      }
+
+
+                     if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $departs !='null'){
+
+                       $all_filter_data=$filterdata->filter_report_data_departs_dates_depart($date_depart1,$date_depart2,$departs);
+
+                      }
+ 
+                      if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $departs !='null' && $departs !="" && $subjects !='null' && $subjects !="" ){
+
+                       $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_all($date_depart1,$date_depart2,$departs,$subjects);
+
+                       }
+                      if($designations !='null' && $designations !=""){
+
+                       $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_desig($designations);
+
+                      }
+
+                      if($campus !='null'  && $campus !="" ){
+
+                       $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_campus($campus);
+
+                      }
+
+                     if($Onlinew !='null'  && $Onlinew !=""){
+
+                       $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_status($Onlinew);
+
+                       }
+
+
+                     if($departs !='null' && $departs !="" && $subjects !='null' && $subjects !="" && $campus !='null' && $campus !="" ){
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_all_compus($departs,$subjects,$campus);
+                      }
+
+
+                      if($departs !='null' && $departs !="" && $subjects !='null' && $subjects !="" && $campus !='null' && $campus !="" && $designations !='null' && $designations !=""){
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_all_compus_desig($departs,$subjects,$campus,$designations);
+                      }
+
+                     if($departs !='null' && $departs !="" && $campus !='null' && $campus !="" && $designations !='null' && $designations !=""){
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_compus_desig($departs,$designations,$campus);
+                       }
+
+
+
+                       if($departs !='null' && $departs !=""  && $designations !='null' && $designations !="" && $campus !='null' && $campus !=""){
+
+                            $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_compus_desig($departs,$designations,$campus);
+                        }
+
+
+                       if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !=""  && $campus !="" && $campus !='null' && $Onlinew !="" && $Onlinew !='null'){
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates_campus_online($date_depart1,$date_depart2,$campus,$Onlinew);
+                          }
+
+
+                      if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" &&  $campus !='null' && $campus !="" &&  $Onlinew !='null' && $Onlinew !="" && $departs !='null' && $departs !="" && $subjects !='null' && $subjects !="" && $designations !='null' && $designations !="" ){
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates_campus_online_desig_subject_all($date_depart1,$date_depart2,$departs,$subjects,$designations,$campus,$Onlinew);
+                        }
+
+                      if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $subjects !='null' && $subjects !="" && $campus !='null'  && $campus !=""   ){
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates_campus_subject_all($date_depart1,$date_depart2,$subjects,$campus);
+                         }
+
+
+                         if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $subjects !='null' && $subjects !=""){
+
+                          $all_filter_data=$filterdata->filter_report_data_departs_dates_subject_all($date_depart1,$date_depart2,$subjects);
+                         }
+
+                          if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $campus !='null'  && $campus !=""   ){
+
+                          $all_filter_data=$filterdata->filter_report_data_departs_dates_campus_all($date_depart1,$date_depart2,$campus);
+                         }
+
+                         if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $designations !='null'  && $designations !=""   ){
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates_desig_all($date_depart1,$date_depart2,$designations);
+                         }
+
+
+                          if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $designations !='null'  && $designations !="" && $subjects !='null'  && $subjects !="" && $departs !='null'  && $departs !=""   ){
+
+                          $all_filter_data=$filterdata->filter_report_data_departs_dates_desig_subjects_all($date_depart1,$date_depart2,$departs,$subjects,$designations);
+                         }
+
+
+
+                           if($designations !='null'  && $designations !="" && $subjects !='null'  && $subjects !="" && $departs !='null'  && $departs !=""   ){
+
+                          $all_filter_data=$filterdata->filter_report_subjects_desig_subjects_all($designations,$subjects,$departs);
+                           }
+
+
+                         if($departs !='null' && $departs !="" && $campus !='null' && $campus !=""){
+
+                            $all_filter_data=$filterdata->filter_report_data_depart_compus($departs,$campus);
+                           } 
+
+                           if($subjects !='null' && $subjects !="" && $campus !='null' && $campus !=""){
+
+                            $all_filter_data=$filterdata->filter_report_data_subjects_compus($subjects,$campus);
+                           } 
+
+
+                          if($departs !='null' && $departs !="" && $Onlinew !='null' && $Onlinew !=""){
+
+                              $all_filter_data=$filterdata->filter_report_data_depart_online($departs,$Onlinew);
+                             }
+
+                           if($campus !='null'  && $campus !="" && $Onlinew !='null' && $Onlinew !=""){
+
+                            $all_filter_data=$filterdata->filter_report_data_campus_online($campus,$Onlinew);
+                           }
+
+                            if($departs !='null' && $departs !="" && $campus !='null'  && $campus !="" && $Onlinew !='null' && $Onlinew !=""){
+
+                            $all_filter_data=$filterdata->filter_report_data_campus_online_depart($departs,$campus,$Onlinew);
+                               }
+
+
+                           if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !=""&& $subjects !='null'  && $subjects !="" && $designations !='null'  && $designations !=""   ){
+
+                          $all_filter_data=$filterdata->filter_report_data_departs_dates_desig_subject($date_depart1,$date_depart2,$subjects,$designations);
+                         }
+
+                           //Select All Data //
+
+                           if($date_depart1 =="" && $date_depart2 =="" && $departs =='null' && $subjects =='null' && $designations =='null' && $campus =="" && $Onlinew ==""){
+
+                                 $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_null();
+                             }
+
+
+                 return view('master_layout/staff/staff_recruitment/reports/filter_all_data_hr_recruiment_report',['data'=>$all_filter_data]);
+
+      }
+
+    //Add New Controller for Current Date Data By Arif Khan
+      public function today_report(Request $request){
+
+        $date_2 = $request['today_date'];
+          $filterdata = new Staff_recruitment_report_modal();
+        ////echo $date_1;
+        /*$status_id_curr=$filterdata->get_statusid_today();
+        $current_status = $status_id_curr[0]->status_id_curr;*/
+        $all_filter_data=$filterdata->filter_report_data_today($date_2);
+
+        //print_r($all_filter_data);
+
+       // die;
+
+
+
+         return view('master_layout/staff/staff_recruitment/reports/filter_all_data_hr_recruiment_report_today',['data'=>$all_filter_data]);
+
+      }
+  
 }

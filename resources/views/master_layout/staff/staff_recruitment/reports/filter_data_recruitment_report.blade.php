@@ -2,7 +2,7 @@
 
                   
 
-                            <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_4">
+                            <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_12">
                             <thead>
                               <tr>
                                 <th style="text-align: center;">Online Form Screening</th>
@@ -37,26 +37,15 @@
                          
                         <script type="text/javascript">
 
-                                    $('#sample_4').DataTable({
+                                    $('#sample_12').DataTable({
                                             "destroy": true,
                                             "scrollX": true,
                                             "ordering": true,
                                             dom: 'Bfrtip',
                                             "pageLength": 20,
-                                            //fixedColumns:   {
-                                            //    leftColumns: 5,
-                                            //},
-                                           /* buttons: [
-                                                {
-                                                    extend: 'excelHtml5',
-                                                    title: 'VehicleReport'
-                                                }
-                                            ]*/
+                                            
                                            "buttons": [
-                                             {
-                                            //extend: 'colvis',
-                                            //text: 'Show/hide columns'
-                                            },
+                                            
                                             {
                                                 extend: 'excelHtml5',
                                         
