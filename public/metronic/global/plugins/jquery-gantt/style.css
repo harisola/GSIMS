@@ -262,3 +262,10 @@
 .fn-gantt .navigate .nav-end:hover {
 	background-position: -170px -20px;
 }
+.form_part_a{
+	    float: left;
+	    width: 100px;
+}
+.form_part_b{
+	    width: 100px;
+}

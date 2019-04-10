@@ -37,7 +37,8 @@ class Sp_staffProcess extends Controller{
 
 
 	public function staff_payroll_adjustment(Request $request){
-		 
+         ini_set('max_execution_time', 50000); //3 minutes
+
 		$staffInfo = new StaffInformationModel();
 		$staffAdjustment = new StaffAdjustmentModel();
 		$absentia = $staffAdjustment->getStaffAbsentia();		

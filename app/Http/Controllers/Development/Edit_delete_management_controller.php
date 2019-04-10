@@ -14,6 +14,10 @@ use App\Models\Core\SelectionList;
 use App\Models\Staff\Staff_Information\StaffInformationModel;
 use App\Models\Staff\Staff_Information\Edit_delete_management_model;
 use App\Models\Staff\Staff_Information\daily_attendance_report;
+use App\Models\Staff\Staff_Information\hr_forms_log;
+use App\Models\Staff\Staff_Information\hr_form_number_format;
+
+
 
 class Edit_delete_management_controller extends StaffReportController
 {
@@ -26,73 +30,88 @@ class Edit_delete_management_controller extends StaffReportController
         
 		$SData = $staffInfo->getStaffAbsentiaE($staff_id, $Absentia_id);
 		
-		$html = ' <div class="row">
-					<div class="col-md-6 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">Title:</label>
-						  <div class="">
-						  <input type="hidden" name="Attendance_in_id" id="Attendance_in_id" value="'.$SData[0]->IN_id.'" />
-						  <input type="hidden" name="Attendance_out_id" id="Attendance_out_id" value="'.$SData[0]->Out_id.'" />
-						  <input type="hidden" name="Attendance_des_id" id="Attendance_des_id" value="'.$SData[0]->Des_id.'" />
+		// $html = ' <div class="row">
+		// 			<div class="col-md-6 paddingBottom10">
+		// 				<!-- form-group -->
+		// 				   <div class="col-md-6 paddingBottom10">
+		// 				   <div class="form-group">
+		// 					  <label class="">Form Number:</label>
+		// 					  <div class="">
+							 
+							  
+		// 						 <input type="text" class="form-control" name="absentia_title_edit" id="absentia_title_edit" value="'.$SData[0]->form_number.'" />
+		// 					  </div>
+		// 				   </div>
+		// 				   <!-- form-group -->
+		// 			   <div class="form-group">
+		// 				  <label class="">Title:</label>
+		// 				  <div class="">
+		// 				  <input type="hidden" name="Attendance_in_id" id="Attendance_in_id" value="'.$SData[0]->IN_id.'" />
+		// 				  <input type="hidden" name="Attendance_out_id" id="Attendance_out_id" value="'.$SData[0]->Out_id.'" />
+		// 				  <input type="hidden" name="Attendance_des_id" id="Attendance_des_id" value="'.$SData[0]->Des_id.'" />
 						  
-							 <input type="text" class="form-control" name="absentia_title_edit" id="absentia_title_edit" value="'.$SData[0]->D_Title.'" />
-						  </div>
-					   </div>
-					   <!-- form-group -->
-					</div>
-					<!-- col-md-6 -->
-					<div class="col-md-6 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">Date:</label>
-						  <div class="">
-							 <input type="date" class="form-control" name="absentia_date_edit" id="absentia_date_edit" value="'.$SData[0]->In_Date.'" />
-						  </div>
-					   </div>
-					   <!-- form-group -->
-					</div>
-					<!-- col-md-6 -->
-				 </div>
-				 <!-- row -->
-				 <div class="row">
-					<div class="col-md-6 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">Start Time:</label>
-						  <div class="">
-							 <input type="time" class="form-control" name="absentia_startTime_edit" id="absentia_startTime_edit" value="'.$SData[0]->Out_Time.'" />
-						  </div>
-					   </div>
-					   <!-- form-group -->
-					</div>
-					<!-- col-md-6 -->
-					<div class="col-md-6 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">End Time:</label>
-						  <div class="">
-							 <input type="time" class="form-control" name="absentia_endTime_edit" id="absentia_endTime_edit" value="'.$SData[0]->In_Time.'" />
-						  </div>
-					   </div>
-					   <!-- form-group -->
-					</div>
-					<!-- col-md-6 -->
-				 </div>
-				 <!-- row -->
-				 <div class="row">
-					<div class="col-md-12 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">Description:</label>
-						  <div class="">
-							 <textarea id="absentia_description_edit" cols="85" rows="5">'.$SData[0]->D_Des.'</textarea>
-						  </div>
-					   </div>
-					   <!-- form-group -->
-					</div>
-					<!-- col-md-6 -->
-				 </div>
-				 <!-- row -->';
+		// 					 <input type="text" class="form-control" name="absentia_title_edit" id="absentia_title_edit" value="'.$SData[0]->D_Title.'" />
+		// 				  </div>
+		// 			   </div>
+					   
+
+		// 			</div>
+		// 			<!-- col-md-6 -->
+		// 			<div class="col-md-6 paddingBottom10">
+		// 			   <div class="form-group">
+		// 				  <label class="">Date:</label>
+		// 				  <div class="">
+		// 					 <input type="date" class="form-control" name="absentia_date_edit" id="absentia_date_edit" value="'.$SData[0]->In_Date.'" />
+		// 				  </div>
+		// 			   </div>
+		// 			   <!-- form-group -->
+		// 			</div>
+		// 			<!-- col-md-6 -->
+		// 		 </div>
+		// 		 <!-- row -->
+		// 		 <div class="row">
+		// 			<div class="col-md-6 paddingBottom10">
+		// 			   <div class="form-group">
+		// 				  <label class="">Start Time:</label>
+		// 				  <div class="">
+		// 					 <input type="time" class="form-control" name="absentia_startTime_edit" id="absentia_startTime_edit" value="'.$SData[0]->Out_Time.'" />
+		// 				  </div>
+		// 			   </div>
+		// 			   <!-- form-group -->
+		// 			</div>
+		// 			<!-- col-md-6 -->
+		// 			<div class="col-md-6 paddingBottom10">
+		// 			   <div class="form-group">
+		// 				  <label class="">End Time:</label>
+		// 				  <div class="">
+		// 					 <input type="time" class="form-control" name="absentia_endTime_edit" id="absentia_endTime_edit" value="'.$SData[0]->In_Time.'" />
+		// 				  </div>
+		// 			   </div>
+		// 			   <!-- form-group -->
+		// 			</div>
+		// 			<!-- col-md-6 -->
+		// 		 </div>
+		// 		 <!-- row -->
+		// 		 <div class="row">
+		// 			<div class="col-md-12 paddingBottom10">
+		// 			   <div class="form-group">
+		// 				  <label class="">Description:</label>
+		// 				  <div class="">
+		// 					 <textarea id="absentia_description_edit" cols="85" rows="5">'.$SData[0]->D_Des.'</textarea>
+		// 				  </div>
+		// 			   </div>
+		// 			   <!-- form-group -->
+		// 			</div>
+		// 			<!-- col-md-6 -->
+		// 		 </div>
+		// 		 <!-- row -->';
+
+         return view('attendance.staff.absentia_form_edit')->with(array('SData' => $SData));
+
 				 
-		$h = array('h'=>$html);
+		// $h = array('h'=>$html);
 		
-		echo json_encode( $h );
+		// echo json_encode( $h );
 	}
 	
 	
@@ -104,6 +123,7 @@ class Edit_delete_management_controller extends StaffReportController
 	public function deleteAbsentia(Request $request){
 		$userID = Sentinel::getUser()->id;
         $staffInfo = new StaffInformationModel();
+        $hr_forms_log=new hr_forms_log;
         $Absentia_id = $request->input('Absentia_id');
 		$Staff_id = $request->input('Staff_id');
 		
@@ -138,80 +158,37 @@ class Edit_delete_management_controller extends StaffReportController
         $staffInfo->update_data('atif_attendance_staff.staff_attendance_out',$where_out,$data_in);
 		
 		$staffInfo->setAttendanceInfo($Staff_id,$Dated,date("Y-m-d"));
+
+
+		$logs=$hr_forms_log->getInformation('atif_gs_events.absenta_manual_description',$Absentia_id);
 		
-		/*
+
+		  $hr_forms_log->staff_id=$logs['staff_id'];
+          $hr_forms_log->type='delete';
+          $hr_forms_log->effected_entry_table='atif_gs_events.absenta_manual_description';
+          $hr_forms_log->effected_table_id=$logs['title'];
+          $hr_forms_log->form_number=$logs['form_number'];
+          $hr_forms_log->title=$logs['title'];
+          $hr_forms_log->description=$logs['description'];
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$logs['time_details'];
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
 		
-		foreach( $Absentia_list as $a ){
-			$IN_id = $a->ID;
-			$data_in = array(
-			'modified' => time(),
-			'modified_by' => $userID,
-			"record_deleted"=>1
-			);
-			$where_in = array("id" => $IN_id);
-			$staffInfo->update_data('atif_attendance_staff.staff_attendance_in',$where_in,$data_in);
-		}
-				
-		$query2 = "select id as ID from  atif_attendance_staff.staff_attendance_out ai  where ai.staff_id=".$Staff_id."  and ai.date = '".$Dated."' and ai.created=".$Created."";
-		$Absentia_lists = $staffInfo->GetKashif($query2);
-		$Out_id = $Absentia_lists[0]->ID;
-		$where_in = array("id" => $Out_id);
-        $staffInfo->update_data('atif_attendance_staff.staff_attendance_out',$where_in,$data_in);
-		  
-		foreach( $Absentia_lists as $a ){
-			$IN_id = $a->ID;
-			$data_in = array(
-			'modified' => time(),
-			'modified_by' => $userID,
-			"record_deleted"=>1
-			);
-			$where_in = array("id" => $IN_id);
-          $staffInfo->update_data('atif_attendance_staff.staff_attendance_out',$where_in,$data_in);
-		}
-		
-		
-		$GetDate = " select  date as Dated from  atif_gs_events.absenta_manual_description where id =".$Absentia_id."";
-		$Absentia = $staffInfo->GetKashif($GetDate);
-		$Dated = $Absentia[0]->Dated;
-	
-		$query1 = "select id as ID from  atif_attendance_staff.staff_attendance_in ai where ai.staff_id=".$Staff_id."  and ai.date = '".$Dated."'";
-		$Absentia_list = $staffInfo->GetKashif($query1);
-		foreach( $Absentia_list as $a ){
-			$IN_id = $a->ID;
-			$data_in = array(
-			'modified' => time(),
-			'modified_by' => $userID,
-			"record_deleted"=>1
-			);
-			$where_in = array("staff_id" => $Staff_id, "date" => $Dated);
-			$staffInfo->update_data('atif_attendance_staff.staff_attendance_in',$where_in,$data_in);
-		}
-		
-		
-		$query2 = "select id as ID from  atif_attendance_staff.staff_attendance_out ai  where ai.staff_id=".$Staff_id."  and ai.date = '".$Dated."'";
-		$Absentia_list = $staffInfo->GetKashif($query2);
-		foreach( $Absentia_list as $a ){
-			$IN_id = $a->ID;
-			$data_in = array(
-			
-			'modified' => time(),
-			'modified_by' => $userID,
-			'record_deleted'=>1
-			
-			);
-			$where_in = array("id" => $IN_id);
-			$staffInfo->update_data('atif_attendance_staff.staff_attendance_out',$where_in,$data_in);
-		}
-		*/
 	}
 	public function editAbsentia(Request $request){
 
         $userID = Sentinel::getUser()->id;
         $staffInfo = new StaffInformationModel();
+        $hr_forms_log=new hr_forms_log;
+
         $staff_id = $request->input('staff_id');
         $date = $request->input('date');
         $tap_out = $request->input('start_time');
         $tap_in = $request->input('end_time');
+        $form_number = $request->input('form_number');
 		
 		$Attendance_in_id = $request->input('Attendance_in_id');
 		$Attendance_out_id = $request->input('Attendance_out_id');
@@ -246,14 +223,33 @@ class Edit_delete_management_controller extends StaffReportController
           $title_description = array(
             'date' => $date,
             'title' => $title,
+            'form_number' => $form_number,
             'description' => $description,
             'modified' => time(),
             'modified_by' => $userID
           );
 		$where_des = array("id" => $Attendance_des_id);
 		$staff_absentia_in =  $staffInfo->update_data('atif_gs_events.absenta_manual_description',$where_des,$title_description);
-		// Call SP For Trigger 
+		
+
+		  $hr_forms_log->staff_id=$staff_id;
+          $hr_forms_log->type='updated';
+          $hr_forms_log->effected_entry_table='atif_gs_events.absenta_manual_description';
+          $hr_forms_log->effected_table_id=$Attendance_des_id;
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->title=$title;
+          $hr_forms_log->description=$description;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$tap_in.'///'.$tap_out;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+
+          // Call SP For Trigger 
 		 $staffInfo->setAttendanceInfo($staff_id,$date,date("Y-m-d"));
+
+
 	}
 	
 	
@@ -265,6 +261,7 @@ class Edit_delete_management_controller extends StaffReportController
 		$where  = array( 'id' => $id );
 		$getLeave = $staffInfo->get('atif_gs_events.leave_application',$where);
 		$leaveType = $staffInfo->get('atif_gs_events.leave_type','');
+		$form_number=$getLeave[0]->form_no;
 
 
 		
@@ -289,19 +286,21 @@ class Edit_delete_management_controller extends StaffReportController
 			$displayTime = 'none';
 		}else{
 			$time_from = $getLeave[0]->time_from;
-			$time_to = $getLeave[0]->time_to;
+			$time_from = $getLeave[0]->time_from;
 			$checkedDisplay = 'checked';
 			$displayTime = '';
 		}
-		
+		@$format_code=hr_form_number_format::getFormNumberFormat(2);
+
+		@$form_number=explode($format_code, $form_number);
+
 		
 		$html_LT = '<div class="row">';
 		$html_LT .= '<div class="col-md-6 paddingBottom10">
                  <div class="form-group">
-                    <label class="">Form No:</label>
-                    <div class="">
-                       <input type="text" class="form-control" name="" id=""  disabled value="'.$getLeave[0]->form_no.'">
-                    </div>
+                    <label class="">Form No:</label><br>
+                    <input type="text" class="form-control form_part_a form_number_leave_application_a" name="form_number_leave_application_a" id="form_number_leave_application_a" value="'.@$format_code.'" disabled="" />
+					<input type="text" class="form-control form_part_b form_number_leave_application_b" name="form_number_leave_application_b" id="form_number_leave_application_b" value="'.@$form_number[1].'" />
                  </div>
               </div>
             </div>';
@@ -395,7 +394,7 @@ class Edit_delete_management_controller extends StaffReportController
                      <div class="form-group">
                         <label class="">To time:</label>
                         <div class="">
-                           <input type="time" class="form-control" name="time_to_update_val" id="time_to_update_val" value="'.$time_to.'">
+                           <input type="time" class="form-control" name="time_to_update_val" id="time_to_update_val" value="'.@$time_to.'">
                         </div>
                      </div>
                      <!-- form-group -->
@@ -461,9 +460,11 @@ class Edit_delete_management_controller extends StaffReportController
         $paid_compensation = $request->input('paid_compensation');
         $time_from = $request->input('time_from');
         $time_to = $request->input('time_to');
+        $form_number = $request->input('form_number');
 
 		$data = array(
           'leave_type' => $leave_type,
+          'form_no' => $form_number,
           'leave_title' => $leave_title,
           'leave_from' => $leave_from,
           'leave_to' => $leave_to,
@@ -475,8 +476,34 @@ class Edit_delete_management_controller extends StaffReportController
           'modified_by' => $userID,
         );
 
+        if($time_from==""){
+            $time_from='none';
+         }
+         if($time_to==""){
+            $time_to='none';
+         }
+
+
+          
+
         $where_des = array("id" => $Leave_Application_id);
 		$staffInfo->update_data('atif_gs_events.leave_application',$where_des,$data);
+		  $hr_forms_log=new hr_forms_log;
+		  $logs=$hr_forms_log->getInformation('atif_gs_events.leave_application',$Leave_Application_id);
+          $hr_forms_log->staff_id=$logs['staff_id'];
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->type='updated';
+          $hr_forms_log->effected_entry_table='atif_gs_events.leave_application';
+          $hr_forms_log->effected_table_id=$Leave_Application_id;
+          $hr_forms_log->title=$leave_title;
+          $hr_forms_log->description=$leave_comment;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$leave_from.'///'.$leave_to.'///'.$time_from.'///'.$time_to;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+
 		echo $Leave_Application_id;
 		
 		
@@ -486,6 +513,7 @@ class Edit_delete_management_controller extends StaffReportController
 	public function deleteLeaveApp(Request $request){
 		$userID = Sentinel::getUser()->id;
         $staffInfo = new StaffInformationModel();
+        $hr_forms_log=new hr_forms_log;
         $Action_id = $request->input('Action_id');
 		$data = array(
            'modified' => time(),
@@ -494,6 +522,24 @@ class Edit_delete_management_controller extends StaffReportController
         );
 		$where  = array("id" => $Action_id);
         $staffInfo->update_data('atif_gs_events.leave_application',$where,$data);
+
+        $logs=$hr_forms_log->getInformation('atif_gs_events.leave_application',$Action_id);
+		
+
+		  $hr_forms_log->staff_id=$logs['staff_id'];
+          $hr_forms_log->type='delete';
+          $hr_forms_log->effected_entry_table='atif_gs_events.leave_application';
+          $hr_forms_log->form_number=$logs['form_number'];
+          $hr_forms_log->effected_table_id=$Action_id;
+          $hr_forms_log->title=$logs['title'];
+          $hr_forms_log->description=$logs['description'];
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->leave_type=$logs['leave_type'];
+          $hr_forms_log->time_details=$logs['time_details'];
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
 		
 	}
 	
@@ -510,78 +556,17 @@ class Edit_delete_management_controller extends StaffReportController
 		if( !empty( $Penalties ) ){
 			$ID = $Penalties[0]->id;
 			$Staff_id = $Penalties[0]->staff_id;
+			$form_number = $Penalties[0]->form_number;
 			$Penalty_Title = $Penalties[0]->penalty_title;
 			$Penalty_Day = $Penalties[0]->penalty_day;
 			$Penalty_From = $Penalties[0]->penalty_from;
 			$Penalty_To = $Penalties[0]->penalty_to;
 			$Penalty_Description = $Penalties[0]->penalty_description;
 			
-			
-			
-			
-			$html .= ' <div class="row">
-						<div class="col-md-6 paddingBottom10">
-						   <div class="form-group">
-							  <label class="">Penalty Title:</label>
-							  <div class="">
-							  <input type="hidden" name="staff_id_edit" id="staff_id_edit" value="'.$Staff_id.'" />
-							  <input type="hidden" name="penalty_id_edit" id="penalty_id_edit" value="'.$Action_id.'" />
-								 <input type="text" class="form-control" name="" id="penalty_title_edit" value="'.$Penalty_Title.'" />
-							  </div>
-						   </div>
-						</div>
-						<div class="col-md-6 paddingBottom10">
-						   <div class="form-group">
-							  <label class="">Penalty for <small>(no of days)</small>:</label>
-							  <div class="input-group">
-								 <input type="number" class="form-control" id="penalty_day_edit" value="'.$Penalty_Day.'" />
-								 <span class="input-group-addon">
-								 <i class="fa fa-hashtag"></i>
-								 </span>
-							  </div>
-						   </div>
-						  
-						</div>
-					
-					 </div>
-					
-					 <div class="row">
-						<div class="col-md-6 paddingBottom10">
-						   <div class="form-group">
-							  <label class="">Penalty from:</label>
-							  <div class="">
-								 <input type="date" class="form-control"  id="penalty_from_edit" value="'.$Penalty_From.'" />
-							  </div>
-						   </div>
-						   
-						</div>
-						
-						<div class="col-md-6 paddingBottom10">
-						   <div class="form-group">
-							  <label class="">Penalty to:</label>
-							  <div class="">
-								 <input type="date" class="form-control" id="penalty_to_edit" value="'.$Penalty_To.'" />
-							  </div>
-						   </div>
-						
-						</div>
-						
-					 </div>
-					
-					 <div class="row">
-						<div class="col-md-12 paddingBottom10">
-						   <div class="form-group">
-							  <label class="">Information regarding Penalty:</label>
-							  <div class="">
-								 <textarea cols="85" rows="5" id="penalty_description_edit">'.$Penalty_Description.'</textarea>
-							  </div>
-						   </div>
-						</div>
-					 </div>';
 		}
 		
-		$h = array("h"=>$html);
-		echo json_encode($h);
+		return view ('attendance.staff.editpenalties',compact('ID','Staff_id','form_number','Penalty_Title','Action_id','Penalty_Day','Penalty_From','Penalty_To','Penalty_Description'));
+
 	}
 	
 	
@@ -593,6 +578,7 @@ class Edit_delete_management_controller extends StaffReportController
 		
 		$staff_id = $request->input('Staff_id');
 		$Penalty_Id  = $request->input('penalty_id_edit');
+		$form_number  = $request->input('form_number');
 		
 		$penalty_title = $request->input('penalty_title');
 		$penalty_day = $request->input('penalty_day');
@@ -602,6 +588,7 @@ class Edit_delete_management_controller extends StaffReportController
 		
 
 		$data = array(
+			'form_number' => $form_number,
 			'penalty_title' => $penalty_title,
 			'penalty_day' => $penalty_day,
 			'penalty_from' => $penalty_from,
@@ -633,6 +620,22 @@ class Edit_delete_management_controller extends StaffReportController
 
 
       }
+
+	      $hr_forms_log=new hr_forms_log;
+		  $logs=$hr_forms_log->getInformation('atif_gs_events.daily_penalty',$Penalty_Id);
+          $hr_forms_log->staff_id=$logs['staff_id'];
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->type='updated';
+          $hr_forms_log->effected_entry_table='atif_gs_events.daily_penalty';
+          $hr_forms_log->effected_table_id=$Penalty_Id;
+          $hr_forms_log->title=$penalty_title;
+          $hr_forms_log->description=$penalty_description;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$penalty_day.'///'.$penalty_from.'///'.$penalty_to;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
       
 	  $id = array( "id" => $Penalty_Id );
 	  
@@ -652,7 +655,27 @@ class Edit_delete_management_controller extends StaffReportController
 		   "record_deleted"=>1
         );
 		$where  = array("id" => $Action_id);
+
+		  
+
         $staffInfo->update_data('atif_gs_events.daily_penalty',$where,$data);
+
+          $hr_forms_log=new hr_forms_log;
+		  $logs=$hr_forms_log->getInformation('atif_gs_events.daily_penalty',$Action_id);
+
+          $hr_forms_log->staff_id=$logs['staff_id'];
+          $hr_forms_log->form_number=$logs['form_number'];
+          $hr_forms_log->type='deleted';
+          $hr_forms_log->effected_entry_table='atif_gs_events.daily_penalty';
+          $hr_forms_log->effected_table_id=$Action_id;
+          $hr_forms_log->title=$logs['title'];
+          $hr_forms_log->description=$logs['description'];
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$logs['time_details'];;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
 		
 	}
 	
@@ -660,62 +683,16 @@ class Edit_delete_management_controller extends StaffReportController
 		$staffInfo = new StaffInformationModel();
         $Action_id = $request->input('ID');
 		$Ad = $staffInfo->getSingleExceptionAdjustment($Action_id);
-		$html = '';
-		if( !empty($Ad) )
-		{
+		if( !empty($Ad) ){
 			$ID = $Ad[0]->id;
 			$Staff_id 			= $Ad[0]->staff_id;
+			$form_number 			= $Ad[0]->form_number;
 			$Adjustment_Title 	= $Ad[0]->adjustment_title;
 			$Adjustment_Day 	= $Ad[0]->adjustment_day;
 			$Adjustment_Description = $Ad[0]->adjustment_description;
-			
-$html .= '   <div class="row">
-			<div class="col-md-6 paddingBottom10">
-			   <div class="form-group">
-				  <label class="">Title:</label>
-				  <div class="">
-				  <input type="hidden" id="adjustment_id_edit" value="'.$ID.'" />
-				  <input type="hidden" id="adjustment_staff_edit" value="'.$Staff_id.'" />
-				  
-					 <input type="text" class="form-control" name="" id="adjustment_title_edit" value="'.$Adjustment_Title.'" />
-				  </div>
-			   </div>
-			   <!-- form-group -->
-			</div>
-			<!-- col-md-6 -->
-			<div class="col-md-6 paddingBottom10">
-			   <div class="form-group">
-				  <label class="">Adjustment for <small>(no of days)</small>:</label>
-				  <div class="input-group">
-					 <input type="number" class="form-control" id="adjustment_no_edit" value="'.$Adjustment_Day.'" />
-					 <span class="input-group-addon">
-					 <i class="fa fa-hashtag"></i>
-					 </span>
-				  </div>
-			   </div>
-			   <!-- form-group -->
-			</div>
-			<!-- col-md-6 -->
-		 </div>
-		 <!-- row -->
-		 <div class="row">
-			<div class="col-md-12 paddingBottom10">
-			   <div class="form-group">
-				  <label class="">Information regarding Adjustments:</label>
-				  <div class="">
-					 <textarea id="adjustment_description_edit" cols="85" rows="5">'.$Adjustment_Description.'</textarea>
-				  </div>
-			   </div>
-			   <!-- form-group -->
-			</div>
-			<!-- col-md-6 -->
-		 </div>';
-			
-			
+						
 		}
-		
-		$h = array("h"=>$html);
-		echo json_encode($h);
+		return view ('attendance.staff.edit_adjustment_form',compact('ID','Staff_id','form_number','Adjustment_Title','Adjustment_Day','Adjustment_Description'));
 	}
 	
 	
@@ -724,6 +701,7 @@ $html .= '   <div class="row">
 		$staffInfo = new StaffInformationModel();
 		$userID = Sentinel::getUser()->id;
 		$adjustment_title = $request->input('adjustment_title');
+		$form_number = $request->input('form_number');
 		$adjustment_no = $request->input('adjustment_no');
 		$adjustment_description = $request->input('adjustment_description');
 		$staff_id = $request->input('staff_id');
@@ -731,6 +709,7 @@ $html .= '   <div class="row">
 		$events = new daily_attendance_report;
 		
 		$data = array(
+			'form_number' => $form_number,
 			'adjustment_title' => $adjustment_title,
 			'adjustment_day' => $adjustment_no,
 			'adjustment_description'=> $adjustment_description,
@@ -749,11 +728,29 @@ $html .= '   <div class="row">
 			$leaveBalance = $leaveBalance + $adjustment_no;
 			$update = array( 'leave_balance' => $leaveBalance );
 			$updation = $staffInfo->update_data('atif.staff_registered',$where,$update);
+				$hr_forms_log=new hr_forms_log;
+
+				$logs=$hr_forms_log->getInformation('atif_gs_events.exception_adjustment',$adjustment_id);
+				$hr_forms_log->staff_id=$logs['staff_id'];
+				$hr_forms_log->form_number=$form_number;
+				$hr_forms_log->type='updated';
+				$hr_forms_log->effected_entry_table='atif_gs_events.exception_adjustment';
+				$hr_forms_log->effected_table_id=$adjustment_id;
+				$hr_forms_log->title=$adjustment_title;
+				$hr_forms_log->description=$adjustment_description;
+				$hr_forms_log->date=date('Y-m-d');
+				$hr_forms_log->time=date("H:i:s");
+				$hr_forms_log->time_details=$adjustment_no;
+				$hr_forms_log->created_by=$userID;
+				$hr_forms_log->updated_by=$userID;
+				$hr_forms_log->save();
 		}
 		$id = array("id"=>$adjustment_id);
 		 $exception_adjustment_array = array('exceptional_adjustments' =>$adjustment_no);
 		 
       	 // $events->updateExceptionalLeave($staff_id,$exception_adjustment_array);
+
+      	  
      
 		echo json_encode($id);
 	}
@@ -785,6 +782,22 @@ $html .= '   <div class="row">
 			$leaveBalance = ( $leaveBalance + $Adjustment_Day );
 			$update = array( 'leave_balance' => $leaveBalance );
 			$updation = $staffInfo->update_data('atif.staff_registered',$where,$update);
+
+			$hr_forms_log=new hr_forms_log;
+			$logs=$hr_forms_log->getInformation('atif_gs_events.exception_adjustment',$Action_id);
+			$hr_forms_log->staff_id=$logs['staff_id'];
+			$hr_forms_log->type='deleted';
+			$hr_forms_log->effected_entry_table='atif_gs_events.exception_adjustment';
+			$hr_forms_log->effected_table_id=$Action_id;
+			$hr_forms_log->form_number=$logs['form_number'];
+			$hr_forms_log->title=$logs['title'];
+			$hr_forms_log->description=$logs['description'];
+			$hr_forms_log->date=date('Y-m-d');
+			$hr_forms_log->time=date("H:i:s");
+			$hr_forms_log->time_details=$logs['time_details'];;
+			$hr_forms_log->created_by=$userID;
+			$hr_forms_log->updated_by=$userID;
+			$hr_forms_log->save();
 		}
 			$id = array("id"=>$Action_id);
 			echo json_encode($id);
@@ -810,61 +823,21 @@ $html .= '   <div class="row">
 		$html = '';
 		if( !empty($Ad) )
 		{
-			
 			$Tap_id = $Ad[0]->Tap_id;
 			$Dated 	= $Ad[0]->Dated;
+			$form_number 	= $Ad[0]->form_number;
 			$manual_time 	= $Ad[0]->manual_time;
 			$description = $Ad[0]->description;
-			
 			$Missed_id = $Ad[0]->Missed_id;
 			$Table_name = $Ad[0]->Table_name;
-			
-			
-	$html .= '    <div class="row">
-					<div class="col-md-12 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">Attendance Date:</label>
-						  <div class="">
-							<input type="hidden" id="manual_id_edit" value='.$Action_id.' />
-							<input type="hidden" id="tap_id_edit" value='.$Tap_id.' />
-							
-							<input type="hidden" id="Missed_id_edit" value='.$Missed_id.' />
-							<input type="hidden" id="Table_name_edit" value='.$Table_name.' />
-							
-							 <input type="date" class="form-control"  id="manual_attendance_edit" value="'.$Dated.'" />
-						  </div>
-					   </div>
-					   <!-- form-group -->
-					</div>
-					<!-- col-md-6 -->
-				 </div>
-				 <!-- row -->
-				 <div class="row">
-					<div class="col-md-6 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">Tap :</label>
-						  <div class="">
-							 <input type="time" class="form-control" name="" id="manual_missTap_edit" data-id="" value="'.$manual_time.'" />
-						  </div>
-					   </div>
-					</div>
-					</div>
-				 <div class="row">
-					<div class="col-md-12 paddingBottom10">
-					   <div class="form-group">
-						  <label class="">Information regarding missed tap event:</label>
-						  <div class="">
-							 <textarea id="manual_description_edit" cols="85" rows="5">'.$description.'</textarea>
-						  </div>
-					   </div>
-					</div>
-				 </div>';
-			
-			
 		}
-		
-		$h = array("h"=>$html);
-		echo json_encode($h);
+		return view ('attendance.staff.miss_tap_edit',compact('Staff_id','form_number','Tap_id',
+					'manual_time','Dated','form_number','description','Missed_id','Table_name','Action_id'));
+
+
+
+					
+
 		
 	}
 	
@@ -873,6 +846,7 @@ $html .= '   <div class="row">
 	{
 		$userID = Sentinel::getUser()->id;
         $staffInfo = new StaffInformationModel();
+        $hr_forms_log = new hr_forms_log();
         $Manual_id = $request->input('Manual_id');
 		$Tap_id = $request->input('Tap_id');
 		
@@ -881,6 +855,7 @@ $html .= '   <div class="row">
 		
         $date = $request->input('date');
         $missTap = $request->input('missTap');
+        $form_number = $request->input('form_number');
 		$description = $request->input('description');
 		$timeNow = time();
 		
@@ -901,6 +876,7 @@ $html .= '   <div class="row">
 		$title_description = array(
             'date' => $date,
             'description' => $description,
+            'form_number' => $form_number,
             'modified' => $timeNow,
             'modified_by' => $userID
           );
@@ -908,6 +884,24 @@ $html .= '   <div class="row">
 
         $where = array("id"=>$Manual_id);
 		$staffInfo->update_data('atif_gs_events.absenta_manual_description',$where,$title_description);
+
+
+		  $logs=$hr_forms_log->getInformation('atif_gs_events.absenta_manual_description',$Manual_id);
+		  $hr_forms_log->staff_id=$logs['staff_id'];
+          $hr_forms_log->type='updated';
+          $hr_forms_log->effected_entry_table='atif_gs_events.absenta_manual_description';
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->effected_table_id=$Manual_id;
+          $hr_forms_log->title=$logs['title'];
+          $hr_forms_log->description=$description;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$missTap.'///'.$date;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+
+
 		
 		$GetDate = " select n.staff_id as Staff_id from atif_gs_events.absenta_manual_description as n where n.id =".$Manual_id."";
 		$Absentia = $staffInfo->GetKashif($GetDate);
@@ -924,6 +918,8 @@ $html .= '   <div class="row">
 	{
 		$userID = Sentinel::getUser()->id;
         $staffInfo = new StaffInformationModel();
+        $hr_forms_log = new hr_forms_log();
+
         $Action_id = $request->input('Action_id');
 		
 		$Missed_id = $request->input('Missed_id');
@@ -931,6 +927,21 @@ $html .= '   <div class="row">
 		
 		$timeNow = time();
 		$Ad = $staffInfo->getSingleStaffManualTime($Action_id);
+
+		   $logs=$hr_forms_log->getInformation('atif_gs_events.absenta_manual_description',$Action_id);
+		  $hr_forms_log->staff_id=$logs['staff_id'];
+		  $hr_forms_log->form_number=$logs['form_number'];
+          $hr_forms_log->type='deleted';
+          $hr_forms_log->effected_entry_table='atif_gs_events.absenta_manual_description';
+          $hr_forms_log->effected_table_id=$Action_id;
+          $hr_forms_log->title=$logs['title'];
+          $hr_forms_log->description=$logs['description'];
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$logs['time_details'];
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
 		
 		$html = '';
 		if( !empty($Ad) )
@@ -950,7 +961,7 @@ $html .= '   <div class="row">
 		}else{
 			$staffInfo->update_data('atif_attendance_staff.staff_attendance_out',$where2, $data);
 		}
-        
+
 		
 		$title_description = array(
 			'modified' => $timeNow,
@@ -964,11 +975,15 @@ $html .= '   <div class="row">
 		$Absentia = $staffInfo->GetKashif($GetDate);
 		$Staff_id = $Absentia[0]->Staff_id;
 		$Dated = $Absentia[0]->Dated;
+
+		  
 		
 		$staffInfo->setAttendanceInfo($Staff_id, $Dated, date("Y-m-d"));
 		
 		
 		}
+
+
 		
 		
 		

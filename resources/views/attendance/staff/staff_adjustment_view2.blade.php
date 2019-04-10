@@ -1479,56 +1479,7 @@ tr.group td {
     </div><!-- col-md-12 v-->
 </div><!-- .row -->
 <!-- Start Edit Absenia_id -->
-
-<div class="modal fade" id="AddAIAE" tabindex="-1" role="basic" aria-hidden="true">
-    <input type="hidden" name="Edit_Absentia_id_hidden" id="Edit_Absentia_id_hidden" value="0" />
-    <input type="hidden" name="Edit_Absentia_id_staff_id_hidden" id="Edit_Absentia_id_staff_id_hidden" value="0" />
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h3 class="modal-title">Edit Absentia</h3>
-            </div>
-            <div class="modal-body" style="float:left;width:100%;">
-                <div class="portlet box blue-hoki">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-user"></i><font id="selected_individuals">Attendance in Absentia form</font>
-                        </div>
-                    </div>
-                    <!-- portlet-title -->
-                    <div class="headRightDetailsInner">
-                        <table class="absentia_staff_view">
-                            <tbody>
-                                <tr id="">
-                                    <td class="" style="padding-right:10px;">
-                                        <img class="user-pic rounded absentia_staff_img tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="" width="42">
-                                    </td>
-                                    <td class="staffView_StaffName">
-                                        <a href="javascript:;" class="primary-link tooltips absentia_staff_name" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="289" data-staffgtid="12-045"></a> - <small class="absentia_name_code tooltips" data-container="body" data-placement="top" data-original-title="" ></small><br><small class="shortHeight"><span class="absentia_bottom_line tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"></span></small>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!-- col-md-4 -->
-                    </div>
-                    <div class="portlet-body fixedHeightmodalPortlet">
-                        <div class="form-body" id="Absenia_Contents"> </div>
-                        <!-- form-body -->
-                    </div>
-                    <!-- portlet-body fixedHeightmodalPortlet-->
-                </div>
-            </div>
-            <div class="modal-footer text-center" style="text-align:center;">
-                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
-                <button onclick="addAbsentiaE()" type="button" class="btn dark btn-outline active" data-dismiss="">Update</button>
-                <!--button type="button" class="btn green">Add Badge</button -->
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+  @include('attendance.staff.modals.absentia_edit_modal')
 <!-- End Edit Absenia_id-->
 
 <!-- Leave Application Edit Functionality Modal-->
@@ -1723,7 +1674,12 @@ tr.group td {
 <!-- End Manual Attendance modal -->
 
 <script type="text/javascript">
-
+    // setTimeout(function(){
+    //   $(".form_part_b").inputmask("mask", {
+    //     "mask": "9999-999"
+    //   });
+    // },500)
+   
     $(".saveMultipleLeave").click(function() {
 
         var inputID = $('#saveMultipleLeaveForm').validate({
@@ -2288,9 +2244,11 @@ var edit_manual = function (ID) {
     var description = $("#manual_description_edit").val();
     var Manual_id = $('#manual_id_edit').val();
     var Tap_id = $('#tap_id_edit').val();
-
     var Missed_id = $('#Missed_id_edit').val();
     var Table_name = $('#Table_name_edit').val();
+    var form_number_a=$('#form_number_miss_tap_a').val();
+    var form_number_b=$('#form_number_miss_tap_b').val();
+    var form_number=form_number_a+form_number_b;
 
 
     bootbox.dialog({
@@ -2315,6 +2273,7 @@ var edit_manual = function (ID) {
                                 "date": date,
                                 "missTap": missTap,
                                 "description": description,
+                                "form_number": form_number,
                                 "_token": "{{ csrf_token() }}"
                             },
                             success: function (result) {
@@ -2357,9 +2316,8 @@ var editAddManual = function(ID,Missed_id,Table_name){
        "_token": "{{ csrf_token() }}"
        },
        success:function(res){
-       var data = jQuery.parseJSON(res);
        $("#Manual_Form_Entry").html('');
-       $("#Manual_Form_Entry").html(data.h);
+       $("#Manual_Form_Entry").html(res);
        $("#manual_staff_view").html($('#manual_staff_view_'+Missed_id).html())
        $("#ManualAttendanceFormEdit").modal('toggle');
        }
@@ -2375,6 +2333,9 @@ var editPenalty = function () {
 
     var penalty_id_edit = $('#penalty_id_edit').val();
     var Staff_id = $('#staff_id_edit').val();
+    var form_number_a=$('#form_number_penalty_a').val();
+    var form_number_b=$('#form_number_penalty_b').val();
+    var form_number=form_number_a+form_number_b;
 
     // console.log(penalty_to);
 
@@ -2394,6 +2355,7 @@ var editPenalty = function () {
                             url: "{{url('/masterLayout/staff/OverRightPenalties')}}",
                             data: {
                                 "penalty_id_edit": penalty_id_edit,
+                                "form_number": form_number,
                                 "Staff_id": Staff_id,
                                 "penalty_title": penalty_title,
                                 "penalty_day": penalty_day,
@@ -2442,9 +2404,7 @@ var ReWriteLeavePenalties = function(ID){
        "_token": "{{ csrf_token() }}"
        },
        success:function(res){
-       var data = jQuery.parseJSON(res);
-       $("#Penalties_Contents").html('');
-       $("#Penalties_Contents").html(data.h);
+       $("#Penalties_Contents").html(res);
        $(".penalty_staff_view").html($('.penalty_staff_view_'+ID).html())
        $("#UnAuthLeavePenEdit").modal('toggle');
        }
@@ -2458,6 +2418,10 @@ var editAdjustment = function () {
 
     var adjustment_id = $('#adjustment_id_edit').val();
     var staff_id = $('#adjustment_staff_edit').val();
+    var form_number_a=$('#form_number_exceptional_adjustment_a').val();
+    var form_number_b=$('#form_number_exceptional_adjustment_b').val();
+
+    var form_number=form_number_a+form_number_b;
 
     bootbox.dialog({
         message: "Are you sure you want to edit this Adjustment?",
@@ -2472,6 +2436,7 @@ var editAdjustment = function () {
                             type: "POST",
                             cache: true,
                             data: {
+                                "form_number": form_number,
                                 "adjustment_title": adjustment_title,
                                 "adjustment_no": adjustment_no,
                                 "adjustment_description": adjustment_description,
@@ -2520,10 +2485,10 @@ var ReWriteAdjustment = function(ID){
        "_token": "{{ csrf_token() }}"
        },
        success:function(res){
-       var data = jQuery.parseJSON(res);
+       // var data = jQuery.parseJSON(res);
        $('.adjustment_staff_view').html($('.adjustment_staff_'+ID).html())
        $("#Adjustment_Contents").html('');
-       $("#Adjustment_Contents").html(data.h);
+       $("#Adjustment_Contents").html(res);
        $("#ExceptionalAdjustmentFormEdit").modal('toggle');
        }
     });
@@ -2553,6 +2518,11 @@ var edit_leave = function () {
     var leave_approve_status_edit = $('#leave_approve_status_edit').val();
     var approve_from = $('#leave_approve_date_from_edit').val();
     var approve_to = $('#leave_approve_date_to_edit').val();
+
+    var form_number_a=$('#form_number_leave_application_a').val();
+    var form_number_b=$('#form_number_leave_application_b').val();
+
+    var form_number=form_number_a+form_number_b;
 
 
     var paid_compensation_display;
@@ -2587,6 +2557,7 @@ var edit_leave = function () {
                                 "leave_to": leave_to,
                                 "leave_comment": leave_comment,
                                 "paid_compensation": paid_compensation,
+                                "form_number": form_number,
                                 "_token": "{{ csrf_token() }}"
                             },
                             success: function (result) {
@@ -2702,9 +2673,12 @@ var Edit_Absentia = function(Absentia_id, Staff_id ){
                 "_token": "{{ csrf_token() }}"
                },
                success:function(result){
-              var data = jQuery.parseJSON(result);
-              $('#Absenia_Contents').html(data["h"]);
+              // var data = jQuery.parseJSON(result);
+              $('#Absenia_Contents').html(result);
               $('#AddAIAE').modal('toggle');
+                    $(".form_part_b").inputmask("mask", {
+        "mask": "9999-999"
+      });
                }
             });
         }
@@ -2730,16 +2704,15 @@ var addAbsentiaE = function addAbsentiaE() {
     var Attendance_des_id = $("#Attendance_des_id").val();
     var Edit_Absentia_id_hidden = $("#Edit_Absentia_id_hidden").val();
     var Edit_Absentia_id_staff_id_hidden = $("#Edit_Absentia_id_staff_id_hidden").val();
-
-
-
     var date = $("#absentia_date_edit").val();
     var titles = $("#absentia_title_edit").val();
     var start_time = $("#absentia_startTime_edit").val();
     var end_time = $("#absentia_endTime_edit").val();
     var description = $("#absentia_description_edit").val();
     var staffID = Edit_Absentia_id_staff_id_hidden;
-
+    var form_number_a=$('#form_number_absentia_a').val();
+    var form_number_b=$('#form_number_absentia_b').val();
+    var form_number=form_number_a+form_number_b;
 
     bootbox.dialog({
         message: "Are you sure you want to change this Absentia?",
@@ -2755,6 +2728,7 @@ var addAbsentiaE = function addAbsentiaE() {
                             url: "{{url('/masterLayout/staff/editAbsentia')}}",
                             data: {
                                 "staff_id": staffID,
+                                "form_number": form_number,
                                 "date": date,
                                 "title": titles,
                                 "start_time": start_time,

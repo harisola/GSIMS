@@ -26,6 +26,8 @@ use App\Models\Staff\Staff_Information\staff_registered_bank_account;
 use App\Models\Staff\Staff_Information\staff_registered_qualification;
 use App\Models\Staff\Staff_Information\staff_registered_father_spouse;
 use App\Models\Staff\Staff_Information\staff_registered_alternativecontact;
+use App\Models\Staff\Staff_Information\hr_forms_log;
+use App\Models\Staff\Staff_Information\adjustment_approval;
 
 
 class Haris extends StaffReportController
@@ -139,6 +141,9 @@ class Haris extends StaffReportController
 
 
         $staff['comments'] = $staffInfo->getStaffComments($staffID);
+
+        // print_r($staffInfo->getStaffComments($staffID));
+        // die;
 
 
         $staff['leave_description']= $staffInfo->get_leave_desscription($staffID);
@@ -1216,13 +1221,15 @@ class Haris extends StaffReportController
 
         $userID = Sentinel::getUser()->id;
         $staffInfo = new StaffInformationModel();
+        $hr_forms_log=new hr_forms_log;
+        $adjustment_approval=new adjustment_approval;
         $staff_id = $request->input('staff_id');
         $date = $request->input('date');
         $tap_out = $request->input('start_time');
         $tap_in = $request->input('end_time');
+        $form_number = $request->input('form_number');
         $time = time();
-
-        $data_in = array(
+    $data_in = array(
           'staff_id' => $staff_id,
           'date' => $date,
           'time' => $tap_in,
@@ -1261,6 +1268,7 @@ class Haris extends StaffReportController
 
           $title_description = array(
             'staff_id' => $staff_id,
+            'form_number'=>$form_number,
             'date' => $date,
             'title' => $title,
             'location_id' => 17,
@@ -1274,15 +1282,39 @@ class Haris extends StaffReportController
           );
 
 
+          
+
+
         $insert_description =  $staffInfo->insertComments('atif_gs_events.absenta_manual_description',$title_description);
 
+        $hr_forms_log->staff_id=$staff_id;
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->type='insert';
+          $hr_forms_log->effected_entry_table='atif_gs_events.absenta_manual_description';
+          $hr_forms_log->effected_table_id=$insert_description;
+          $hr_forms_log->title=$title;
+          $hr_forms_log->description=$description;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date("H:i:s");
+          $hr_forms_log->time_details=$tap_in.'///'.$tap_out.'///'.$date;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+          $table_name='atif_gs_events.absenta_manual_description';
+          $this->adjustmentApproval($staff_id,$table_name,$insert_description,1,$userID,$userID);
 
         // Call SP For Trigger 
         if($staff_absentia_in > 0 && $staff_absentia_out > 0){
 
           $staffInfo->setAttendanceInfo($staff_id,$date,date("Y-m-d"));
 
+          
+
+
+
         }
+
+
 		
     		$Last_id = array("Last_id"=>$insert_description);
     		echo json_encode($Last_id);
@@ -1308,6 +1340,7 @@ class Haris extends StaffReportController
         $staff_id = $request->input('staff_id');
         $date = $request->input('date');
         $missTap = $request->input('missTap');
+        $form_number = $request->input('form_number');
         $timeNow = time();
         $data = array(
           'staff_id' => $staff_id,
@@ -1352,6 +1385,7 @@ class Haris extends StaffReportController
           $description = $request->input('description');
           $title_description = array(
             'staff_id' => $staff_id,
+            'form_number' => $form_number,
             'date' => $date,
             'description' => $description,
             'location_id' => 18,
@@ -1363,7 +1397,27 @@ class Haris extends StaffReportController
           );
 
 
+
+
         $insert_description =  $staffInfo->insertComments('atif_gs_events.absenta_manual_description',$title_description);
+
+          $hr_forms_log=new hr_forms_log;
+          $hr_forms_log->staff_id=$staff_id;
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->type='insert';
+          $hr_forms_log->effected_entry_table='atif_gs_events.absenta_manual_description';
+          $hr_forms_log->effected_table_id=$insert_description;
+          $hr_forms_log->title='Miss Tap';
+          $hr_forms_log->description=$description;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date('H:i:s');
+          $hr_forms_log->time_details=$missTap.'///'.$date;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+
+          $this->adjustmentApproval($staff_id,'atif_gs_events.absenta_manual_description',$insert_description,5,$userID,$userID);
+
         
         $userData = $staffInfo->get_Staff_Info($userID);
 
@@ -1385,6 +1439,10 @@ class Haris extends StaffReportController
             'Missed_id'=>$staff_manual_attendance,
             'Table_name'=>$tableFlag
           );
+
+          
+
+
         return  $data;
       }
 
@@ -1412,12 +1470,13 @@ class Haris extends StaffReportController
         $paid_compensation = $request->input('paid_compensation');
         $time_from = $request->input('time_from');
         $time_to = $request->input('time_to');
+        $form_number = $request->input('form_number');
 
 
 
 
         $data = array(
-          'form_no' => $form_no,
+          'form_no' => $form_number,
           'leave_type' => $leave_type,
           'staff_id' => $staff_id,
           'leave_title' => $leave_title,
@@ -1433,8 +1492,46 @@ class Haris extends StaffReportController
           'modified_by' => $userID,
           'record_deleted' => 0
         );
+         if($leave_type==1){
+            $l_leave_type='Haj';
+              
+         }elseif ($leave_type==2) {
+            $l_leave_type='Education';
+              
+         }elseif ($leave_type==3) {
+              $l_leave_type='Seminar';
+              
+         }elseif ($leave_type==4) {
+            $l_leave_type='Exhibition';
+         }elseif ($leave_type==5) {
+            $l_leave_type='Personal';
+         }
+         if($time_from==""){
+            $time_from='none';
+         }
+         if($time_to==""){
+            $time_to='none';
+         }
 
-        $leave =  $staffInfo->insertComments('atif_gs_events.leave_application',$data);
+          $leave =  $staffInfo->insertComments('atif_gs_events.leave_application',$data);
+          $hr_forms_log=new hr_forms_log;
+          $hr_forms_log->staff_id=$staff_id;
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->type='insert';
+          $hr_forms_log->effected_entry_table='atif_gs_events.leave_application';
+          $hr_forms_log->effected_table_id=$leave;
+          $hr_forms_log->title=$leave_title;
+          $hr_forms_log->leave_type=$l_leave_type;
+          $hr_forms_log->description=$leave_comment;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date('H:i:s');
+          $hr_forms_log->time_details=$leave_from.'///'.$leave_to.'///'.$time_from.'///'.$time_to;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+
+          $this->adjustmentApproval($staff_id,'atif_gs_events.leave_application',$leave,2,$userID,$userID);
+
         echo $leave;
     }
 
@@ -1454,9 +1551,11 @@ class Haris extends StaffReportController
       $penalty_to = $request->input('penalty_to');
       $penalty_description = $request->input('penalty_description');
       $staff_id = $request->input('staff_id');
+      $form_number = $request->input('form_number');
 
       $data = array(
 
+          'form_number' => $form_number,
           'penalty_title' => $penalty_title,
           'penalty_day' => $penalty_day,
           'penalty_from' => $penalty_from,
@@ -1483,6 +1582,7 @@ class Haris extends StaffReportController
         $staffDescription = $staffInfo->get('atif.staff_registered',$where);
         $leaveBalance = $staffDescription[0]->leave_balance;
         $leaveBalance = $leaveBalance - $penalty_day;
+        
         $update = array(
           'leave_balance' => $leaveBalance
         );
@@ -1491,6 +1591,23 @@ class Haris extends StaffReportController
 
 
       }
+
+          $hr_forms_log=new hr_forms_log;
+          $hr_forms_log->staff_id=$staff_id;
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->type='insert';
+          $hr_forms_log->effected_entry_table='atif_gs_events.daily_penalty';
+          $hr_forms_log->effected_table_id=$penalty;
+          $hr_forms_log->title=$penalty_title;
+          $hr_forms_log->description=$penalty_description;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date('H:i:s');
+          $hr_forms_log->time_details=$penalty_day.'///'.$penalty_from.'///'.$penalty_to;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+          $this->adjustmentApproval($staff_id,'atif_gs_events.daily_penalty',$penalty,3,$userID,$userID);
+
       
 		$id = array( "id" => $penalty );
 		echo json_encode($id);
@@ -1511,10 +1628,12 @@ class Haris extends StaffReportController
       $adjustment_no = $request->input('adjustment_no');
       $adjustment_description = $request->input('adjustment_description');
       $staff_id = $request->input('staff_id');
+      $form_number = $request->input('form_number');
       $events = new daily_attendance_report;
 	  $adjustment=0;
 
       $data = array(
+        'form_number' => $form_number,
         'staff_id' => $staff_id,
         'adjustment_title' => $adjustment_title,
         'adjustment_day' => $adjustment_no,
@@ -1545,6 +1664,23 @@ class Haris extends StaffReportController
         $updation = $staffInfo->update_data('atif.staff_registered',$where,$update);
 
       }
+
+          $hr_forms_log=new hr_forms_log;
+          $hr_forms_log->staff_id=$staff_id;
+          $hr_forms_log->form_number=$form_number;
+          $hr_forms_log->type='insert';
+          $hr_forms_log->effected_entry_table='atif_gs_events.exception_adjustment';
+          $hr_forms_log->effected_table_id=$adjustment;
+          $hr_forms_log->title=$adjustment_title;
+          $hr_forms_log->description=$adjustment_description;
+          $hr_forms_log->date=date('Y-m-d');
+          $hr_forms_log->time=date('H:i:s');
+          $hr_forms_log->time_details=$adjustment_no;
+          $hr_forms_log->created_by=$userID;
+          $hr_forms_log->updated_by=$userID;
+          $hr_forms_log->save();
+          $this->adjustmentApproval($staff_id,'atif_gs_events.exception_adjustment',$adjustment,4,$userID,$userID);
+
 	  
 	  $id = array("id"=>$adjustment);
       $exception_adjustment_array = array('exceptional_adjustments' =>$adjustment_no);
@@ -1725,7 +1861,8 @@ class Haris extends StaffReportController
 
         }
       }
-      
+
+          
 
       echo $update_id;
     }
@@ -3005,5 +3142,16 @@ class Haris extends StaffReportController
       $staffInfo = new StaffInformationModel();
       $allocated_leave =  $staffInfo->getLeaveDailyReport($staff_id,$date);
       echo json_encode($allocated_leave);
-   }  
+   } 
+
+   public function adjustmentApproval($staff_id,$table_name,$table_id,$approve_type_id,$created_by,$modified_by){
+      $adjustment_approval=new adjustment_approval;
+      $adjustment_approval->staff_id=$staff_id;
+      $adjustment_approval->table_name=$table_name;
+      $adjustment_approval->table_id=$table_id;
+      $adjustment_approval->approval_type_id=$approve_type_id;
+      $adjustment_approval->created_by=$created_by;
+      $adjustment_approval->modified_by=$modified_by;
+      $adjustment_approval->save();
+   } 
 }

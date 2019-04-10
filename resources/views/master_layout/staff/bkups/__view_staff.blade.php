@@ -356,10 +356,9 @@ display: none;
 
 <!-- BEGIN USE PROFILE -->
 <div class="row marginTop20">
-	<div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
-    <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
-    </div><!-- div -->
-    
+<div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
+                              <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
+</div>
  <div class="col-md-4 borderRightDashed">
     <!-- BEGIN EXAMPLE TABLE PORTLET-->
     <div class="portlet light bordered fixed-height-NoScroll marginBottom0">
@@ -432,11 +431,11 @@ display: none;
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleAbsentia">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div><!-- form-actions -->
+                                      </div>
                                      </div>
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
-                                  </div><!-- blue-hoki -->
+                                  </div>
                                 </div><!-- tab_5_1 -->
                                 <div class="tab-pane" id="tab_5_2">
                                   <div class="portlet box blue-hoki">
@@ -447,20 +446,21 @@ display: none;
                                      </div>
                                      <!-- portlet-title -->
                                      <div class="headRightDetailsInner2 form-group">
-                                        <div class="input-group select2-bootstrap-append">
-                                          <select id="multi-append" class="form-control select2 leaveSelect" multiple>
-                                              <option></option>
-                                              @foreach ($staff as $data)
-                                              <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
-                                              @endforeach
-                                          </select>
-                                          <span class="input-group-btn">
-                                              <button class="btn btn-default" type="button" data-select2-open="multi-append">
-                                                  <span class="glyphicon glyphicon-search"></span>
-                                              </button>
-                                          </span>
-                                      	</div>
-                                     </div><!-- -->
+                                    <div class="input-group select2-bootstrap-append">
+                                      <select id="multi-append" class="form-control select2 leaveSelect" multiple>
+                                          <option></option>
+                                          @foreach ($staff as $data)
+                                          <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
+                                          @endforeach
+                       
+                                      </select>
+                                      <span class="input-group-btn">
+                                          <button class="btn btn-default" type="button" data-select2-open="multi-append">
+                                              <span class="glyphicon glyphicon-search"></span>
+                                          </button>
+                                      </span>
+                                  </div>
+                                 </div><!-- -->
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
@@ -470,11 +470,11 @@ display: none;
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleLeave">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div>
-                                     </div><!-- fixedHeightmodalPortlet -->
+                                      </div>
+                                     </div>
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
-                                  </div><!-- portlet -->
+                                  </div>
                                 </div><!-- tab_5_2 -->
                                 <div class="tab-pane" id="tab_5_3">
                                   <div class="portlet box blue-hoki">
@@ -485,20 +485,20 @@ display: none;
                                      </div>
                                      <!-- portlet-title -->
                                      <div class="headRightDetailsInner2 form-group">
-                                        <div class="input-group select2-bootstrap-append">
-                                          <select id="multi-append" class="form-control select2 selectPenalty" multiple>
-                                              <option></option>
-                                               @foreach ($staff as $data)
-                                                    <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
-                                               @endforeach 
-                                          </select>
-                                          <span class="input-group-btn">
-                                              <button class="btn btn-default" type="button" data-select2-open="multi-append">
-                                                  <span class="glyphicon glyphicon-search"></span>
-                                              </button>
-                                          </span>
-                                      	</div>
-                                     </div><!-- headRightDetailsInner2 -->
+                                    <div class="input-group select2-bootstrap-append">
+                                      <select id="multi-append" class="form-control select2 selectPenalty" multiple>
+                                          <option></option>
+                                           @foreach ($staff as $data)
+                                                <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
+                                           @endforeach 
+                                      </select>
+                                      <span class="input-group-btn">
+                                          <button class="btn btn-default" type="button" data-select2-open="multi-append">
+                                              <span class="glyphicon glyphicon-search"></span>
+                                          </button>
+                                      </span>
+                                  </div>
+                                 </div>
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
@@ -508,7 +508,7 @@ display: none;
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultiplePenalty">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                        </div>
+                                      </div>
                                      </div>
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
@@ -3774,11 +3774,11 @@ display: none;
                                                               <div class="form-group">
                                                                   <label class="">Form #:</label>
                                                                   <div class="">
-                                                                     <input type="text" class="form-control form_number_absentia_a form_part_a" disabled="" name="" id="form_number_absentia_a" value="<?= 
+                                                                     <input type="text" class="form-control form_number_absentia_a" disabled="" name="" id="form_number_absentia_a" value="<?= 
                                                                       App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(1); ?>" data-id="">
                                                                   </div>
                                                                   <div class="">
-                                                                     <input type="text" class="form-control  form_number_absentia_b form_part_b " name="" id="form_number_absentia_b" data-id="">
+                                                                     <input type="text" class="form-control form_number_absentia_b" name="" id="form_number_absentia_b" data-id="">
                                                                   </div>
                                                                </div>
                                                              <div class="form-group">
@@ -4178,12 +4178,11 @@ display: none;
                                                              <div class="form-group">
                                                                   <label class="">Form #:</label>
                                                                   <div class="">
-                                                                     <input type="text" class="form_part_a
-                                                                      form-control form_number_leave_application_a " disabled="" name="" id="form_number_leave_application_a" value="<?= 
+                                                                     <input type="text" class="form-control form_number_leave_application_a" disabled="" name="" id="form_number_leave_application_a" value="<?= 
                                                                       App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(2); ?>" data-id="">
                                                                   </div>
                                                                   <div class="">
-                                                                     <input type="text" class="form_part_b form-control form_number_leave_application_b" name="" id="form_number_leave_application_b" data-id="">
+                                                                     <input type="text" class="form-control form_number_leave_application_b" name="" id="form_number_leave_application_b" data-id="">
                                                                   </div>
                                                                </div>
                                                              <!-- form-group -->
@@ -4439,11 +4438,11 @@ display: none;
                                                               <div class="form-group">
                                                                   <label class="">Form #:</label>
                                                                   <div class="">
-                                                                     <input type="text" class="form_number_penalty_a form_part_a form-control " disabled="" name="" id="form_number_penalty_a" value="<?= 
+                                                                     <input type="text" class="form_number_penalty_a form-control" disabled="" name="" id="form_number_penalty_a" value="<?= 
                                                                       App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(3); ?>" data-id="">
                                                                   </div>
                                                                   <div class="">
-                                                                     <input type="text" class="form-control form_number_penalty_b form_part_b" name="" id="form_number_penalty_b" data-id="">
+                                                                     <input type="text" class="form-control form_number_penalty_b" name="" id="form_number_penalty_b" data-id="">
                                                                   </div>
                                                                </div>
                                                              <div class="form-group">
@@ -4635,11 +4634,11 @@ display: none;
                                                       <div class="form-group">
                                                         <label class="">Form #:</label>
                                                         <div class="">
-                                                        <input type="text" class="form-control form_number_exceptional_adjustment_a form_part_a" disabled="" name="" id="form_number_exceptional_adjustment_a" value="<?= 
+                                                        <input type="text" class="form-control form_number_exceptional_adjustment_a" disabled="" name="" id="form_number_exceptional_adjustment_a" value="<?= 
                                                         App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(5); ?>" data-id="">
                                                         </div>
                                                         <div class="">
-                                                        <input type="text" class="form-control form_number_exceptional_adjustment_b form_part_b" name="" id="form_number_exceptional_adjustment_b" data-id="">
+                                                        <input type="text" class="form-control form_number_exceptional_adjustment_b" name="" id="form_number_exceptional_adjustment_b" data-id="">
                                                         </div>
                                                     </div> 
                                                        <div class="row">
@@ -4870,11 +4869,11 @@ display: none;
                                                        <div class="form-group">
                                                           <label class="">Form #:</label>
                                                           <div class="">
-                                                             <input type="text" class="form-control form_number_miss_tap_a form_part_a" disabled="" name="" id="form_number_miss_tap_a" value="<?= 
+                                                             <input type="text" class="form-control form_number_miss_tap_a" disabled="" name="" id="form_number_miss_tap_a" value="<?= 
                                                               App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(4); ?>" data-id="">
                                                           </div>
                                                           <div class="">
-                                                             <input type="text" class="form-control form_number_miss_tap_b form_part_b" name="" id="form_number_miss_tap_b" data-id="">
+                                                             <input type="text" class="form-control form_number_miss_tap_b" name="" id="form_number_miss_tap_b" data-id="">
                                                           </div>
                                                        <div class="row">
                                                           <div class="col-md-12 paddingBottom10">
@@ -5728,10 +5727,6 @@ display: none;
 
           $('#showHourly').fadeToggle();
       });
-
-        $(".form_part_b").inputmask("mask", {
-            "mask": "9999-999"
-          });
       
     });
 
@@ -7564,14 +7559,9 @@ $('#staffView_StaffList_Search').val('');
                  for(var i=0; i< data['comments'].length; i++){
 
                       if(data['comments'][i].type=='tap-in' || data['comments'][i].type=='tap-out'){
-                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+school_name+'</strong> </span></a><span class="body">'+data['comments'][i].description.replace('tap_type',data['comments'][i].type)+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
+                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+school_name+'</a><span class="datetime"> at <strong>'+data['comments'][i].time_12hr+'</strong> on <strong>'+data['comments'][i].date_format+'</strong> </span><span class="body">'+data['comments'][i].description.replace('tap_type',data['comments'][i].type)+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"></div></li>';
                       }else{
-                        var name_and_location="";
-                        name_and_location=data['comments'][i].location_name;
-                        var user_name=name_and_location.split("//")[0];
-                        var user_image=name_and_location.split("//")[1];
-
-                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/'+user_image+'.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+user_name+'</a><span class="body">'+data['comments'][i].description+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
+                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+data['comments'][i].location_name+'</a><span class="body">'+data['comments'][i].description+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
                       }
                                                                            
                  }

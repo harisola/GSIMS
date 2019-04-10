@@ -59,7 +59,7 @@ class fee_bill_received extends Model
     }
 
     public function getOnlylastReceived($bill_id){
-                $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->first();
+                $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->OrderBy('id','desc')->first();
                 return @$fee['received_amount'];
 
     }

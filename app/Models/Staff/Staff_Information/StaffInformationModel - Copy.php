@@ -2183,7 +2183,8 @@ and ao.record_deleted =0";
 		amd.id as Des_id,
 		amd.date as D_Date,
 		amd.title as D_Title,
-		amd.description as D_Des
+		amd.description as D_Des,
+		amd.form_number
 		
 from atif_gs_events.absenta_manual_description amd 
 left join ( select *  from  atif_attendance_staff.staff_attendance_in aii where aii.staff_id=".$staff_id." ) as ai
@@ -2213,32 +2214,188 @@ and amd.id=".$Absentia_id."";
     }
 
      public function getStaffComments($staff_id){
-    	
-	 $query="select sr.id,sr.name,tp.title,result.date,result.time,DATE_FORMAT(date,  '%a, %b %d %Y' ) as date_format,sl.description,sl.name as location_name,TIME_FORMAT(time, '%r') time_12hr,result.type,
-			CONCAT(tp.title,' ',sr.name,' ',DATE_FORMAT(date,  '%a, %b %d %Y'),' ',sl.description,' ','tap_type',' ',TIME_FORMAT(time, '%r')) as description
+ 
 
 
 
-			from(
-			SELECT *,'tap-in' as type FROM atif_attendance_staff.staff_attendance_in si
-			where si.staff_id=$staff_id 
-			UNION ALL
-			SELECT *,'tap-out' as type FROM atif_attendance_staff.staff_attendance_out so
-			where so.staff_id=$staff_id 
-			) result
+          $query="SELECT * 
+FROM   (SELECT sr.id, 
+               sr.name, 
+               tp.title, 
+               result.date, 
+               result.time, 
+               Date_format(date, '%a, %b %d %Y')                              AS 
+                      date_format, 
+               sl.description                                                 AS 
+                      d_description, 
+               sl.name                                                        AS 
+                      location_name, 
+               Time_format(time, '%h:%i %p') 
+               time_12hr 
+                      , 
+               result.type, 
+               Concat(tp.title, ' ', sr.name, ' ',' on ',
+               Date_format(date, '%a, %b %d %Y'), 
+               ' tap his/her card ', sl.description ,' at ', Time_format(time, '%h:%i %p')) AS 
+                      description 
+        FROM   (SELECT *, 
+                       'tap-in' AS TYPE 
+                FROM   atif_attendance_staff.staff_attendance_in si 
+                WHERE  si.staff_id = $staff_id 
+                UNION ALL 
+                SELECT *, 
+                       'tap-out' AS type 
+                FROM   atif_attendance_staff.staff_attendance_out so 
+                WHERE  so.staff_id = $staff_id) AS result 
+               inner join atif_attendance.attendance_location sl 
+                       ON sl.id = result.location_id 
+               inner join atif.staff_registered sr 
+                       ON sr.id = result.staff_id 
+               left join atif._title_person tp 
+                      ON tp.id = sr.title_person_id) AS old_data 
+UNION ALL 
+(SELECT hfs.staff_id                               AS id, 
+        sr.name                                    AS NAME, 
+        tp.title                                   AS title, 
+        hfs.date                                   AS date, 
+        hfs.time                                   AS time, 
+        Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
+        hfs.description                            AS d_description, 
+        Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id) AS location_name, 
+        Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
+        hfs.type                                   AS type, 
+        CASE 
+          WHEN 
+hfs.effected_entry_table = 'atif_gs_events.absenta_manual_description' 
+AND ( hfs.TYPE = 'insert' 
+       OR hfs.TYPE = 'updated' ) and hfs.title!='Miss Tap' THEN 
+          Concat('Absentia form', ' ', IF(hfs.type='insert',' submitted ',' edited '), ' for ', sr.abridged_name, 
+          ' with following details:
+       <br>
+       <strong>Form-No: </strong>',hfs.form_number,'
+       
+       <br><strong>Title</strong>: ' 
+        , hfs.title, '<br><strong>Date</strong>: ', 
+          Date_format(Split_string(hfs.time_details, '///', 3), '%a, %b %d %Y'), 
+          '<br><strong>Start Time: ' 
+        , Time_format(Split_string(hfs.time_details, '///', 2),'%h:%i %p'), '<br>End Time: ', 
+          Time_format(Split_string(hfs.time_details, '///', 1),'%h:%i %p'), '<br>', 
+          IF(hfs.description <> '', Concat('Description: ', hfs.description), '') 
+        ) 
+        
+WHEN 
+hfs.effected_entry_table = 'atif_gs_events.absenta_manual_description' 
+AND ( hfs.TYPE = 'delete' ) and hfs.title!='Miss Tap' THEN 
+          Concat('Absentia ', ' ', 'Form No: ',hfs.form_number, ' for ', sr.abridged_name, 
+          ' has been deleted')
+          
+  WHEN 
+hfs.effected_entry_table = 'atif_gs_events.leave_application' 
+AND ( hfs.TYPE = 'insert' 
+       OR hfs.TYPE = 'updated' )  THEN 
+          Concat('Leave Application form',IF(hfs.type='insert',' submitted ',' edited ') ,'for ', sr.abridged_name, 
+          ' with following details:
+       <br>
+       <strong>Form-No</strong>',': ',hfs.form_number,'
+       
+       <br><strong>Title</strong>: ' , hfs.title, 
+        
+          '<br><strong>From Date: ' , Date_format(Split_string(hfs.time_details, '///', 1),'%a, %b %d %Y'), 
+       '<br><strong>To Date: </strong>',Date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y'), 
+       '<br><strong>From Time: </strong>',IF(Split_string(hfs.time_details, '///', 4)<>'none',time_format(Split_string(hfs.time_details, '///', 3),'%h:%i %p'),'none'), 
+       '<br><strong>To Time: </strong>',IF(Split_string(hfs.time_details, '///', 4)<>'none',time_format(Split_string(hfs.time_details, '///', 4),'%h:%i %p'),'none'), 
+       '<br>', IF(hfs.description <> '', Concat('Description: ', hfs.description), 'none') 
+        ) 
+        
+WHEN 
+hfs.effected_entry_table = 'atif_gs_events.leave_application' 
+AND ( hfs.TYPE = 'delete' ) THEN 
+          Concat('Leave Application form ', ' ', 'Form No: ',hfs.form_number, ' for ', sr.abridged_name, 
+          ' has been deleted')
+          
+          
+WHEN 
+hfs.effected_entry_table = 'atif_gs_events.exception_adjustment' 
+AND ( hfs.TYPE = 'insert' 
+       OR hfs.TYPE = 'updated' )  THEN 
+          Concat('Adjustment form',IF(hfs.type='insert',' submitted ',' edited ') ,'for ', sr.abridged_name, 
+          ' with following details:
+       <br>
+       <strong>Form-No</strong>',': ',hfs.form_number,'
 
-			inner join atif_attendance.attendance_location sl
-			on sl.id=result.location_id
+      <br><strong>Title</strong>: ' , hfs.title, 
 
-			inner join atif.staff_registered sr
-			on sr.id=result.staff_id
+      '<br><strong>No of Days: ' , hfs.time_details, 
 
-			left join atif._title_person tp
-			on tp.id=sr.title_person_id
+       '<br>', IF(hfs.description <> '', Concat('Description: ', hfs.description), '') 
+        ) 
+WHEN 
+hfs.effected_entry_table = 'atif_gs_events.exception_adjustment' 
+AND ( hfs.TYPE = 'deleted' ) THEN 
+          Concat('Adjustment ', ' ', 'Form No: ',hfs.form_number, ' for ', sr.abridged_name, 
+          ' has been deleted')
+       
+  WHEN 
+hfs.effected_entry_table = 'atif_gs_events.absenta_manual_description' 
+AND ( hfs.TYPE = 'insert' 
+       OR hfs.TYPE = 'updated' ) AND hfs.title='Miss Tap' THEN 
+          Concat('Missed Tap form',IF(hfs.type='insert',' submitted ',' edited ') ,'for ', sr.abridged_name, 
+          ' with following details:
+       <br>
+       <strong>Form-No</strong>',': ',hfs.form_number,
+          '<br><strong>Date: ' , date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y'), 
+        '<br><strong>Time: ' , Time_format(Split_string(hfs.time_details, '///', 1),'%h:%i %p'), 
+       '<br>', IF(hfs.description <> '', Concat('Description: ', hfs.description), '') 
+        ) 
+WHEN 
+hfs.effected_entry_table = 'atif_gs_events.absenta_manual_description' 
+AND ( hfs.TYPE = 'deleted' ) AND hfs.title='Miss Tap' THEN 
+          Concat('Missed Tap ', ' ', 'Form No: ',hfs.form_number, ' for ', sr.abridged_name, 
+          ' has been deleted')
+       
+       
+  WHEN 
+hfs.effected_entry_table = 'atif_gs_events.daily_penalty' 
+AND ( hfs.TYPE = 'insert' 
+       OR hfs.TYPE = 'updated' )  THEN 
+          Concat('Leave Penalty ','for ', sr.abridged_name, 
+          ' with following details has been',IF(hfs.type='insert',' submitted ',' edited ') ,':
+       <br>
+       <strong>Form-No:</strong>',' ',hfs.form_number,'
+       
+       <br><strong>Penalty Title</strong>: ' , hfs.title, 
+       
+        '<br><strong>No of Days: ' , Split_string(hfs.time_details, '///', 1), 
+       '<br><strong>From Date: </strong>',date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y'), 
+       '<br><strong>To Date: </strong>',date_format(Split_string(hfs.time_details, '///', 3),'%a, %b %d %Y'), 
+       '<br>', IF(hfs.description <> '', Concat('Description: ', hfs.description), '') 
+        )  
+WHEN 
+hfs.effected_entry_table = 'atif_gs_events.daily_penalty' 
+AND ( hfs.TYPE = 'deleted' )  THEN 
+          Concat('Leave Penalty ', ' ', 'Form No: ',hfs.form_number, ' for ', sr.abridged_name, 
+          ' has been deleted')         
+        
+        
+        
+          
+          ELSE NULL 
+        END                                        AS description 
+ FROM   atif_gs_events.hr_forms_logs hfs 
+        inner join atif.staff_registered sr 
+                ON sr.id = hfs.staff_id 
+        inner join atif_gs_sims.users sdd 
+                ON sdd.id = hfs.updated_by 
+        inner join atif.staff_registered srr
+					 ON srr.gg_id=sdd.email
+        left join atif._title_person tp 
+               ON tp.id = sr.title_person_id 
+ WHERE  hfs.staff_id = $staff_id) 
+ORDER  BY date DESC, 
+          TIME DESC";
 
 
-
-			ORDER by date desc, time DESC";
+          // die;
 	
 
 	     $comments = DB::connection($this->dbCon)->select($query);
@@ -2306,12 +2463,13 @@ select Concat(DATE_FORMAT(from_unixtime(sao.created),'%a %b %d %Y'),', at ',DATE
 
 public function getSingleStaffManualTime($Manual_id){
 		
-	$Qeury = "select * from ( 
+	 $Qeury = "select * from ( 
 select sai.id as Tap_id, 
 				(sai.date) as Dated,
 				(sai.time) as manual_time, 
 				mdes.id as Manual_id, 
 				mdes.description,
+				mdes.form_number,
 				sai.id as Missed_id,
 				'In_Table' as Table_name	
 				
@@ -2325,7 +2483,9 @@ select sao.id as Tap_id,
 				(sao.date) as Dated,
 			(sao.time)  as manual_time,
 			 mdes.id as Manual_id, mdes.description,
-			 	sao.id as Missed_id, 'Out_Table' as Table_name
+			 	sao.id as Missed_id, 'Out_Table' as Table_name,
+			 	'form_number' as form_number
+			 	
 
 
 				from atif_attendance_staff.staff_attendance_out as sao left join atif_gs_events.absenta_manual_description mdes on sao.`created` = mdes.`created`  where sao.location_id = 18 and mdes.record_deleted = 0 
