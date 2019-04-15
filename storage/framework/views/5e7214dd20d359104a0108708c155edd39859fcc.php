@@ -279,19 +279,19 @@ display: none;
   margin-bottom: 20px;
 }
 </style>
-<link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/bootstrap-summernote/summernote.css')); ?>" rel="stylesheet" type="text/css" />
 <!-- -->
-<link href="{{ URL::to('/css/staffLayout.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/css/staffLayout.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.css')); ?>" rel="stylesheet" type="text/css" />
 <!-- -->
-<link href="{{ URL::to('/metronic/global/plugins/time-range/css/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/time-range/css/nouislider.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ URL::to('/metronic/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/time-range/css/flatpickr.min.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/time-range/css/nouislider.min.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/select2/css/select2.min.css')); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo e(URL::to('/metronic/global/plugins/select2/css/select2-bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
 <!-- END PAGE LEVEL STYLES -->
 <script>
  $("#change-color-switch").bootstrapSwitch();
@@ -413,9 +413,9 @@ display: none;
                                         <div class="input-group select2-bootstrap-append">
                                           <select id="multi-append" class="form-control select2 absentiaSelect" multiple>
                                               <option></option>
-                                              @foreach ($staff as $data)
-                                                <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
-                                              @endforeach                  
+                                              <?php $__currentLoopData = $staff; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($data->staff_id); ?>"> <?php echo e($data->abridged_name); ?><small> - <?php echo e($data->name_code); ?></small></option>
+                                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                  
                                           </select>
                                           <span class="input-group-btn">
                                               <button class="btn btn-default" type="button" data-select2-open="multi-append">
@@ -426,7 +426,7 @@ display: none;
                                      </div><!-- -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                          @include('master_layout.staff.staff_recruitment.forms.absentia_form_body')
+                                          <?php echo $__env->make('master_layout.staff.staff_recruitment.forms.absentia_form_body', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -450,9 +450,9 @@ display: none;
                                         <div class="input-group select2-bootstrap-append">
                                           <select id="multi-append" class="form-control select2 leaveSelect" multiple>
                                               <option></option>
-                                              @foreach ($staff as $data)
-                                              <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
-                                              @endforeach
+                                              <?php $__currentLoopData = $staff; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                              <option value="<?php echo e($data->staff_id); ?>"> <?php echo e($data->abridged_name); ?><small> - <?php echo e($data->name_code); ?></small></option>
+                                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                           </select>
                                           <span class="input-group-btn">
                                               <button class="btn btn-default" type="button" data-select2-open="multi-append">
@@ -464,7 +464,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           @include('master_layout.staff.staff_recruitment.forms.leave_application_form_body')
+                                           <?php echo $__env->make('master_layout.staff.staff_recruitment.forms.leave_application_form_body', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -488,9 +488,9 @@ display: none;
                                         <div class="input-group select2-bootstrap-append">
                                           <select id="multi-append" class="form-control select2 selectPenalty" multiple>
                                               <option></option>
-                                               @foreach ($staff as $data)
-                                                    <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
-                                               @endforeach 
+                                               <?php $__currentLoopData = $staff; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($data->staff_id); ?>"> <?php echo e($data->abridged_name); ?><small> - <?php echo e($data->name_code); ?></small></option>
+                                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
                                           </select>
                                           <span class="input-group-btn">
                                               <button class="btn btn-default" type="button" data-select2-open="multi-append">
@@ -502,7 +502,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           @include('master_layout.staff.staff_recruitment.forms.unauthorize_leave_pnelty_form_body')
+                                           <?php echo $__env->make('master_layout.staff.staff_recruitment.forms.unauthorize_leave_pnelty_form_body', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -526,9 +526,9 @@ display: none;
                                     <div class="input-group select2-bootstrap-append">
                                       <select id="multi-append" class="form-control select2 selectManual" multiple>
                                           <option></option>
-                                           @foreach ($staff as $data)
-                                                <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
-                                           @endforeach 
+                                           <?php $__currentLoopData = $staff; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($data->staff_id); ?>"> <?php echo e($data->abridged_name); ?><small> - <?php echo e($data->name_code); ?></small></option>
+                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
                                       </select>
                                       <span class="input-group-btn">
                                           <button class="btn btn-default" type="button" data-select2-open="multi-append">
@@ -540,7 +540,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           @include('master_layout.staff.staff_recruitment.forms.miss_tap_form_body')
+                                           <?php echo $__env->make('master_layout.staff.staff_recruitment.forms.miss_tap_form_body', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -564,9 +564,9 @@ display: none;
                                     <div class="input-group select2-bootstrap-append">
                                       <select id="multi-append" class="form-control select2 selectAdjustments" multiple>
                                           <option></option>
-                                           @foreach ($staff as $data)
-                                                <option value="{{ $data->staff_id }}"> {{ $data->abridged_name }}<small> - {{ $data->name_code }}</small></option>
-                                           @endforeach 
+                                           <?php $__currentLoopData = $staff; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($data->staff_id); ?>"> <?php echo e($data->abridged_name); ?><small> - <?php echo e($data->name_code); ?></small></option>
+                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
                                       </select>
                                       <span class="input-group-btn">
                                           <button class="btn btn-default" type="button" data-select2-open="multi-append">
@@ -578,7 +578,7 @@ display: none;
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
                                         <div class="form-body">
-                                           @include('master_layout.staff.staff_recruitment.forms.exceptional_adjustment_form_body')
+                                           <?php echo $__env->make('master_layout.staff.staff_recruitment.forms.exceptional_adjustment_form_body', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                         </div>
                                         <!-- form-body -->
                                         <div class="form-actions">
@@ -620,17 +620,17 @@ display: none;
                    <div class="theme-option">
                       <span> Profile </span>
                       <select data-attribute="profile" multiple="multiple" id="StaffView_Filter_Profile" class="ddlFilterTableRow layout-option form-control input-sm">
-                         @foreach ($filter['tt_profile'] as $d)
-                         <option value="{{ $d->name }}">{{ $d->name }}</option>
-                         @endforeach
+                         <?php $__currentLoopData = $filter['tt_profile']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                         <option value="<?php echo e($d->name); ?>"><?php echo e($d->name); ?></option>
+                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </select>
                    </div>
                    <div class="theme-option">
                       <span> Department </span>
                       <select data-attribute="department" multiple="multiple" id="StaffView_Filter_Department" class="ddlFilterTableRow layout-option form-control input-sm">
-                         @foreach ($filter['department'] as $d)
-                         <option value="{{ $d->c_bottomline }}">{{ $d->c_bottomline }}</option>
-                         @endforeach
+                         <?php $__currentLoopData = $filter['department']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                         <option value="<?php echo e($d->c_bottomline); ?>"><?php echo e($d->c_bottomline); ?></option>
+                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </select>
                    </div>
                    <div class="theme-option">
@@ -840,33 +840,33 @@ display: none;
                    </tr>
                    <!-- End Static Table Row -->
                    */ ?>
-                @foreach ($staff as $data)
-                <tr class="Row" data-attendance="{{ $data->atd_title }}"   data-campus="{{ $data->campus }}" data-profile="{{ $data->tt_profile_name }}" data-department="{{ $data->c_topline }}, {{ $data->c_bottomline }}" data-att_status="{{ $data->Time_Checked }}" data-status_name_code="{{ $data->status_name_code }}">
+                <?php $__currentLoopData = $staff; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr class="Row" data-attendance="<?php echo e($data->atd_title); ?>"   data-campus="<?php echo e($data->campus); ?>" data-profile="<?php echo e($data->tt_profile_name); ?>" data-department="<?php echo e($data->c_topline); ?>, <?php echo e($data->c_bottomline); ?>" data-att_status="<?php echo e($data->Time_Checked); ?>" data-status_name_code="<?php echo e($data->status_name_code); ?>">
                    <td class="">
-                      <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="{{ $data->gt_id }}" src="{{ $data->photo150 }}">
+                      <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($data->gt_id); ?>" src="<?php echo e($data->photo150); ?>">
                    </td>
                    <td class="staffView_StaffName">
-                      <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="{{ $data->name_code }}" data-staffID="{{ $data->staff_id }}" data-staffGTID="{{ $data->gt_id }}" data-src="{{url('metronic/pages/img') }}/{{ $data->atd_icon }}" data-content="Tap In {{ $data->atd_content }}" data-title="{{ $data->atd_title }}">{{ $data->abridged_name }}</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="{{ $data->email }}">{{ $data->name_code }}</small><br />
-                      <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="{{ $data->status_description }}">{{ $data->status_name_code }}</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">R</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="{{ $data->c_topline }}, {{ $data->c_bottomline }}">{{ $data->c_bottomline }}: {{ $data->c_topline }}</span></small>
+                      <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="<?php echo e($data->name_code); ?>" data-staffID="<?php echo e($data->staff_id); ?>" data-staffGTID="<?php echo e($data->gt_id); ?>" data-src="<?php echo e(url('metronic/pages/img')); ?>/<?php echo e($data->atd_icon); ?>" data-content="Tap In <?php echo e($data->atd_content); ?>" data-title="<?php echo e($data->atd_title); ?>"><?php echo e($data->abridged_name); ?></a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($data->email); ?>"><?php echo e($data->name_code); ?></small><br />
+                      <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($data->status_description); ?>"><?php echo e($data->status_name_code); ?></span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">R</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($data->c_topline); ?>, <?php echo e($data->c_bottomline); ?>"><?php echo e($data->c_bottomline); ?>: <?php echo e($data->c_topline); ?></span></small>
                    </td>
                    <td class="text-center" colspan="2">
                       <span style="width:30px; text-align:center; float:left;">
-                      <img style="margin-top: 6px;" src="{{ url('metronic/pages/img') }}/{{ $data->atd_icon }}" class="popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="Tap In {{ $data->atd_content }}" data-original-title="{{ $data->atd_title }}" width="25" />
+                      <img style="margin-top: 6px;" src="<?php echo e(url('metronic/pages/img')); ?>/<?php echo e($data->atd_icon); ?>" class="popovers" data-container="body" data-trigger="hover" data-placement="top" data-content="Tap In <?php echo e($data->atd_content); ?>" data-original-title="<?php echo e($data->atd_title); ?>" width="25" />
                       </span>
                       <span class="AttStatusNeww">
                       <span class="tenDayAttStatuss tooltips" data-container="body" data-placement="top" data-original-title="10 day status">10</span>
                       <span class="sixtyDayAttStatuss tooltips" data-container="body" data-placement="top" data-original-title="60 day status">60</span>
                       </span>
                    </td>
-                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> {{ $data->name_code }} </td>
-                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> {{ $data->gt_id }} </td>
-                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> {{ $data->tt_profile_name }} </td>
-                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> {{ $data->c_bottomline }} </td>
-                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> {{ $data->campus }} </td>
-                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> {{ $data->atd_title }} </td>
-                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> {{ $data->abridged_name }} </td>
+                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->name_code); ?> </td>
+                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->gt_id); ?> </td>
+                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->tt_profile_name); ?> </td>
+                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->c_bottomline); ?> </td>
+                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->campus); ?> </td>
+                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->atd_title); ?> </td>
+                   <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->abridged_name); ?> </td>
                 </tr>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
              </table>
           </div>
           <!-- table-scrollable-borderless -->
@@ -3689,7 +3689,7 @@ display: none;
                                         </div><!-- /.modal-content -->
                                      </div><!-- /.modal-dialog -->
                                   </div><!-- Start Edit Absenia_id -->
-                                    @include('attendance.staff.modals.absentia_edit_modal')
+                                    <?php echo $__env->make('attendance.staff.modals.absentia_edit_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                   <!-- End Edit Absenia_id-->
                                 </div><!-- portlet -->
                             </div><!-- tab_1_3_2 -->
@@ -3801,9 +3801,9 @@ display: none;
                                                                 <div class="">
                                                                    <select class="form-control" id="leave_type_update">
                                                                    <option selected disabled value="0">Select Leave Type</option>
-                                                                   @foreach($leaveType as $type)
-                                                                      <option value="{{$type->id}}">{{$type->leave_type_name}}</option>
-                                                                   @endforeach
+                                                                   <?php $__currentLoopData = $leaveType; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                      <option value="<?php echo e($type->id); ?>"><?php echo e($type->leave_type_name); ?></option>
+                                                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                    </select>
                                                                    <!-- select -->
                                                                 </div>
@@ -4034,9 +4034,9 @@ display: none;
                                                                     <div class="leave_type">
                                                                        <select class="form-control">
                                                                        <option selected disabled value="0">Select Leave Type</option>
-                                                                       @foreach($leaveType as $type)
-                                                                          <option value="{{$type->id}}">{{$type->leave_type_name}}</option>
-                                                                       @endforeach
+                                                                       <?php $__currentLoopData = $leaveType; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                          <option value="<?php echo e($type->id); ?>"><?php echo e($type->leave_type_name); ?></option>
+                                                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                        </select>
                                                                        <!-- select -->
                                                                     </div>
@@ -4855,12 +4855,13 @@ display: none;
                                         </button>
                                         <div class="dropdown-menuu pull-right" role="menu" style="display:none;">
                                            <h4 class="bbottom">Comment Category</h4>
-                                           @foreach($staffCategory as $category)
+                                           <?php $__currentLoopData = $staffCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                            <label class="mt-checkbox">
-                                           <input type="checkbox"  data-name="{{$category->name}}" value="{{$category->id}}" class="CheckBox_Category" /> {{$category->name}}
+                                           <input type="checkbox"  data-name="<?php echo e($category->name); ?>" value="<?php echo e($category->id); ?>" class="CheckBox_Category" /> <?php echo e($category->name); ?>
+
                                            <span></span>
                                            </label><br />
-                                           @endforeach
+                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
                                      </div>
                                      <!-- commnetType -->
@@ -5456,7 +5457,7 @@ display: none;
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
-@include('master_layout.footer')
+<?php echo $__env->make('master_layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <script type="text/javascript">
 
       $(document).ready(function () {
@@ -6086,7 +6087,7 @@ display: none;
                 $.ajax({
                      type: "GET",
                      cache: true,
-                     url: "{{url('/masterLayout/staff/add_row')}}",
+                     url: "<?php echo e(url('/masterLayout/staff/add_row')); ?>",
                      data: {
                           "next_div": next_div,
                           "view_name": view_name,
@@ -6213,7 +6214,7 @@ $('#staffView_StaffList_Search').val('');
                  $.ajax({
                      type: "POST",
                      cache: true,
-                     url: "{{url('/masterLayout/staff/addLeave')}}",
+                     url: "<?php echo e(url('/masterLayout/staff/addLeave')); ?>",
                      data: {
                          "staff_id": staffID,
                          "leave_title": leave_title,
@@ -6223,7 +6224,7 @@ $('#staffView_StaffList_Search').val('');
                          "leave_comment": leave_comment,
                          "paid_compensation": paid_compensation,
                          "form_number": form_number,
-                         "_token": "{{ csrf_token() }}"
+                         "_token": "<?php echo e(csrf_token()); ?>"
                      },
                      success: function(result) {
 
@@ -6263,7 +6264,7 @@ $('#staffView_StaffList_Search').val('');
                  $.ajax({
                      type: "POST",
                      cache: true,
-                     url: "{{url('/masterLayout/staff/addAbsentia')}}",
+                     url: "<?php echo e(url('/masterLayout/staff/addAbsentia')); ?>",
                      data: {
                          "staff_id": staffID,
                          "date": date,
@@ -6272,7 +6273,7 @@ $('#staffView_StaffList_Search').val('');
                          "end_time": end_time,
                          "description": description,
                          "form_number": form_number,
-                         "_token": "{{ csrf_token() }}"
+                         "_token": "<?php echo e(csrf_token()); ?>"
                      },
                      success: function(result) {
                     
@@ -6331,7 +6332,7 @@ $('#staffView_StaffList_Search').val('');
                $.ajax({
                    type: "POST",
                    cache: true,
-                   url: "{{url('/masterLayout/addPenalty')}}",
+                   url: "<?php echo e(url('/masterLayout/addPenalty')); ?>",
                    data: {
                        "penalty_title": penalty_title,
                        "penalty_day": penalty_day,
@@ -6340,7 +6341,7 @@ $('#staffView_StaffList_Search').val('');
                        "penalty_description": penalty_description,
                        "staff_id": staff_id,
                        "form_number": form_number,
-                       "_token": "{{ csrf_token() }}"
+                       "_token": "<?php echo e(csrf_token()); ?>"
                    },
                    success: function(e) {
                        var curdate = new Date();
@@ -6402,9 +6403,9 @@ $('#staffView_StaffList_Search').val('');
                        "adjustment_description": adjustment_description,
                        "staff_id": staff_id,
                        "form_number": form_number,
-                       "_token": "{{csrf_token()}}"
+                       "_token": "<?php echo e(csrf_token()); ?>"
                    },
-                   url: "{{url('/masterLayout/addAdjustment')}}",
+                   url: "<?php echo e(url('/masterLayout/addAdjustment')); ?>",
                    success: function(e) {
 
                        var date = new Date();
@@ -6457,14 +6458,14 @@ $('#staffView_StaffList_Search').val('');
                $.ajax({
                    type: "POST",
                    cache: true,
-                   url: "{{url('/masterLayout/staff/addManual')}}",
+                   url: "<?php echo e(url('/masterLayout/staff/addManual')); ?>",
                    data: {
                        "staff_id": staffID,
                        "date": date,
                        "missTap": missTap,
                        "description": description,
                        "form_number": form_number,
-                       "_token": "{{ csrf_token() }}"
+                       "_token": "<?php echo e(csrf_token()); ?>"
                    },
                    success: function(result) {
                        var time = new Date();
@@ -6681,10 +6682,10 @@ $('#staffView_StaffList_Search').val('');
  $.ajax({
      type:"POST",
      cache:true,
-     url:"{{url('/masterLayout/staff/getStaff_tifB')}}",
+     url:"<?php echo e(url('/masterLayout/staff/getStaff_tifB')); ?>",
      data:{
          staff_id:staffID,
-         "_token": "{{ csrf_token() }}",
+         "_token": "<?php echo e(csrf_token()); ?>",
      },
      success:function(result){
  
@@ -6697,7 +6698,7 @@ $('#staffView_StaffList_Search').val('');
              for (var i = 0; i < data['education'].length; i++) {
                  if(data['education'][i]['level'] === educationNumbers[j]) {
                      data['education'][i] = setNotAcceptable(data['education'][i]);
-                     html = html+'<div class="col-md-6"><div class="portlet light bordered lowPadding"><div class="portlet-body"><div class="col-md-3 padding0"><img src="{{ url("/metronic/pages/img/schoolIcon.jpg") }}" class="SchoolPlaceHolder" /></div><!-- col-md-3 --><div class="col-md-9 paddingRight0"><h5 class=" marginBottom0"><strong>'+data['education'][i]['institute']+'</strong></h5><h5 class="font-grey-cascade"><strong>'+data['education'][i]['qualification']+'</strong>, '+data['education'][i]['subjects']+'</h5><div class="col-md-6 padding0"><h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;'+data['education'][i]['result']+'</h5></div><div class="col-md-6"><h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;'+data['education'][i]['year_of_completion']+'</h5></div></div><!-- col-md-9 --></div><!-- portlet-body --></div><!-- portlet --></div><!-- col-md-6 -->';
+                     html = html+'<div class="col-md-6"><div class="portlet light bordered lowPadding"><div class="portlet-body"><div class="col-md-3 padding0"><img src="<?php echo e(url("/metronic/pages/img/schoolIcon.jpg")); ?>" class="SchoolPlaceHolder" /></div><!-- col-md-3 --><div class="col-md-9 paddingRight0"><h5 class=" marginBottom0"><strong>'+data['education'][i]['institute']+'</strong></h5><h5 class="font-grey-cascade"><strong>'+data['education'][i]['qualification']+'</strong>, '+data['education'][i]['subjects']+'</h5><div class="col-md-6 padding0"><h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-graduation"></span>&nbsp;&nbsp;&nbsp;'+data['education'][i]['result']+'</h5></div><div class="col-md-6"><h5 class="marginBottom0 font-grey-cascade marginTop0"><span aria-hidden="true" class="icon-calendar"></span>&nbsp;&nbsp;&nbsp;'+data['education'][i]['year_of_completion']+'</h5></div></div><!-- col-md-9 --></div><!-- portlet-body --></div><!-- portlet --></div><!-- col-md-6 -->';
                  }
              }
              html = html+'</div>';
@@ -6712,7 +6713,7 @@ $('#staffView_StaffList_Search').val('');
              for (var i = 0; i < data['employment'].length; i++) {
                  data['employment'][i] = setNotAcceptable(data['employment'][i]);
                  html = html+'<div class="row">';
-                 html = html+'<div class="col-md-12"><div class="portlet light lowPadding2 onlyBorderBottom marginBottom0"><div class="portlet-body"><div class="col-md-1 padding0"><img src="{{ url("/metronic/pages/img/BriefacaseIcon.jpg") }}" class="SchoolPlaceHolder" /></div><!-- col-md-3 --><div class="col-md-11 paddingRight0"><h5 class=" marginBottom0 font-grey-mint marginTop0"><strong>'+data['employment'][i]['organization']+'</strong> on the position of <strong>'+data['employment'][i]['designation']+'</strong></h5><h5 class="font-grey-salsa marginBottom4"><span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>'+data['employment'][i]['salary']+'</strong></span><span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>'+data['employment'][i]['from_year']+'</strong> to <strong>'+data['employment'][i]['to_year']+'</strong></span><span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>'+data['employment'][i]['classes_taught']+' </strong></span><span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>'+data['employment'][i]['subject_taught']+'</strong></span></h5><p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">'+data['employment'][i]['reason_for_leaving']+'</span> </p></div><!-- col-md-9 --></div><!-- portlet-body --></div><!-- portlet --></div><!-- col-md-6 -->';
+                 html = html+'<div class="col-md-12"><div class="portlet light lowPadding2 onlyBorderBottom marginBottom0"><div class="portlet-body"><div class="col-md-1 padding0"><img src="<?php echo e(url("/metronic/pages/img/BriefacaseIcon.jpg")); ?>" class="SchoolPlaceHolder" /></div><!-- col-md-3 --><div class="col-md-11 paddingRight0"><h5 class=" marginBottom0 font-grey-mint marginTop0"><strong>'+data['employment'][i]['organization']+'</strong> on the position of <strong>'+data['employment'][i]['designation']+'</strong></h5><h5 class="font-grey-salsa marginBottom4"><span class="positionDetail"><i class="fa fa-money tooltips" data-container="body" data-placement="top" data-original-title="Sallary"></i> <strong>'+data['employment'][i]['salary']+'</strong></span><span class="positionDetail"><i class="fa fa-calendar tooltips" data-container="body" data-placement="top" data-original-title="Tenure"></i> <strong>'+data['employment'][i]['from_year']+'</strong> to <strong>'+data['employment'][i]['to_year']+'</strong></span><span class="positionDetail"><img src="http://10.10.10.50/gsims/public/metronic/pages/img/blackboard.png" width="20" class="tooltips" data-container="body" data-placement="top" data-original-title="Classes Taught" /> <strong>'+data['employment'][i]['classes_taught']+' </strong></span><span class="positionDetail"><i class="icon-book-open tooltips" data-container="body" data-placement="top" data-original-title="Subjects Taught"></i> <strong>'+data['employment'][i]['subject_taught']+'</strong></span></h5><p class="font-grey-salsa marginBottom0">Reason for Leaving: <span class="font-grey-mint">'+data['employment'][i]['reason_for_leaving']+'</span> </p></div><!-- col-md-9 --></div><!-- portlet-body --></div><!-- portlet --></div><!-- col-md-6 -->';
                  html = html+'</div><!-- row -->';
              }
          }
@@ -6740,7 +6741,7 @@ $('#staffView_StaffList_Search').val('');
          if(data['sc'][0]['gs_id'] != null){
              for (var i = 0; i < data['sc'].length; i++) {
                  data['sc'][i] = setNotAcceptable(data['sc'][i]);
-                 html = html+'<div class="col-md-3"><div class="mt-card-item '+data['sc'][i]['html_class']+'"><div class="mt-card-avatar mt-overlay-4"><img src="{{ url("") }}/'+data['sc'][i]['photo500']+'" /><div class="mt-overlay"><h2>'+data['sc'][i]['class']+' <span class="font-yellow-lemon">('+data['sc'][i]['house_name']+')</span></h2><div class="mt-info font-white"><div class="mt-card-content"><p class="mt-card-desc font-white">GF-ID: <strong>'+data['sc'][i]['gfid']+'</strong> ('+(i+1)+'/'+data['sc'].length+')</p><div class="mt-card-social"></div></div></div></div><!-- mt-overlay --></div><!-- mt-card-avatar --><div class="mt-card-content"><h3 class="mt-card-name">'+data['sc'][i]['abridged_name']+'</h3><p class="mt-card-desc font-grey-mint">GS-ID: <strong>'+data['sc'][i]['gs_id']+'</strong> ('+data['sc'][i]['std_status_code']+')</p></div><!-- mt-card-content --></div><!-- mt-card-item --></div><!-- col-md-3 -->';
+                 html = html+'<div class="col-md-3"><div class="mt-card-item '+data['sc'][i]['html_class']+'"><div class="mt-card-avatar mt-overlay-4"><img src="<?php echo e(url("")); ?>/'+data['sc'][i]['photo500']+'" /><div class="mt-overlay"><h2>'+data['sc'][i]['class']+' <span class="font-yellow-lemon">('+data['sc'][i]['house_name']+')</span></h2><div class="mt-info font-white"><div class="mt-card-content"><p class="mt-card-desc font-white">GF-ID: <strong>'+data['sc'][i]['gfid']+'</strong> ('+(i+1)+'/'+data['sc'].length+')</p><div class="mt-card-social"></div></div></div></div><!-- mt-overlay --></div><!-- mt-card-avatar --><div class="mt-card-content"><h3 class="mt-card-name">'+data['sc'][i]['abridged_name']+'</h3><p class="mt-card-desc font-grey-mint">GS-ID: <strong>'+data['sc'][i]['gs_id']+'</strong> ('+data['sc'][i]['std_status_code']+')</p></div><!-- mt-card-content --></div><!-- mt-card-item --></div><!-- col-md-3 -->';
              }
          }
          $('#tab_staff_child').html(html);
@@ -6774,12 +6775,12 @@ $('#staffView_StaffList_Search').val('');
  var get_Staff_TIFA = function(GTID) {
  /***** Posting GT-ID and retrieving data ****/
  $.ajax({
-     url: "{{url('/masterLayout/staff/getStaff_tifA')}}",
+     url: "<?php echo e(url('/masterLayout/staff/getStaff_tifA')); ?>",
      type:"POST",
      cache:true,
      data: {
        GTID: GTID,
-       "_token": "{{ csrf_token() }}",
+       "_token": "<?php echo e(csrf_token()); ?>",
      },
      success: function (response) {
          $('#tab_1_2').html(response);
@@ -7098,10 +7099,10 @@ $('#staffView_StaffList_Search').val('');
      $.ajax({
          type:"POST",
          cache:true,
-         url:"{{url('/masterLayout/staff/getStaffInfo')}}",
+         url:"<?php echo e(url('/masterLayout/staff/getStaffInfo')); ?>",
          data:{
              staff_id:staffID,
-             "_token": "{{ csrf_token() }}",
+             "_token": "<?php echo e(csrf_token()); ?>",
          },
          success:function(result){
             var data = jQuery.parseJSON(result);
@@ -7302,7 +7303,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['comments']){
                  var commentsHTML = '';
                  var school_name="Generation's School";
-                 var login_user_id={{Sentinel::getUser()->id}};
+                 var login_user_id=<?php echo e(Sentinel::getUser()->id); ?>;
                  for(var i=0; i< data['comments'].length; i++){
 
                       if(data['comments'][i].type=='tap-in' || data['comments'][i].type=='tap-out'){
@@ -7832,11 +7833,11 @@ if( Staff_id > 0 ){
 $.ajax({
    type:"POST",
    cache:true,
-   url:"{{url('/masterLayout/staff/Edit_Get_Absentia')}}",
+   url:"<?php echo e(url('/masterLayout/staff/Edit_Get_Absentia')); ?>",
    data:{
     "staff_id":Staff_id,
     "Absentia_id":Absentia_id,
-    "_token": "{{ csrf_token() }}"
+    "_token": "<?php echo e(csrf_token()); ?>"
    },
    success:function(result){
   // var data = jQuery.parseJSON(result);
@@ -7884,7 +7885,7 @@ $.ajax({
                         $.ajax({
                             type: "POST",
                             cache: true,
-                            url: "{{url('/masterLayout/staff/editAbsentia')}}",
+                            url: "<?php echo e(url('/masterLayout/staff/editAbsentia')); ?>",
                             data: {
                                 "staff_id": staffID,
                                 "form_number": form_number,
@@ -7897,7 +7898,7 @@ $.ajax({
                                 "Attendance_out_id": Attendance_out_id,
                                 "Attendance_des_id": Attendance_des_id,
                                 "Edit_Absentia_id_hidden": Edit_Absentia_id_hidden,
-                                "_token": "{{ csrf_token() }}"
+                                "_token": "<?php echo e(csrf_token()); ?>"
                             },
                             success: function(result) {
 
@@ -7965,8 +7966,8 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
           $.ajax({
             type:"POST",
             cache:true,
-            url:"{{url('/masterLayout/staff/deleteAbsentia')}}",
-            data:{ "Absentia_id":Absentia_id, "Staff_id":Staff_id, "_token": "{{ csrf_token() }}" },
+            url:"<?php echo e(url('/masterLayout/staff/deleteAbsentia')); ?>",
+            data:{ "Absentia_id":Absentia_id, "Staff_id":Staff_id, "_token": "<?php echo e(csrf_token()); ?>" },
             success:function(result){ $("#absentia_table_row_"+Absentia_id).remove(); }
           });
         }
@@ -7988,10 +7989,10 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
    var update_id =  id;
    $.ajax({
        type:"POST",
-       url:"{{url('/masterLayout/staff/ReWriteLeave')}}",
+       url:"<?php echo e(url('/masterLayout/staff/ReWriteLeave')); ?>",
        data:{
           "id":id,
-          "_token": "{{ csrf_token() }}"
+          "_token": "<?php echo e(csrf_token()); ?>"
        },
        success:function(e){
 
@@ -8087,7 +8088,7 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
     $.ajax({
           type:"POST",
           cache:true,
-          url:"{{url('/masterLayout/staff/RWriteLeave')}}",
+          url:"<?php echo e(url('/masterLayout/staff/RWriteLeave')); ?>",
           data:{
               "staff_id":staffID,
               "form_number":form_number,
@@ -8100,7 +8101,7 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
               "paid_compensation":paid_compensation,
               "time_from":time_from,
               "time_to":time_to,
-              "_token": "{{ csrf_token() }}"
+              "_token": "<?php echo e(csrf_token()); ?>"
           },
           success:function(result){
 
@@ -8180,8 +8181,8 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
          $.ajax({
           type:"POST",
           cache:true,
-          url:"{{url('/masterLayout/staff/deleteLeaveApp')}}",
-          data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
+          url:"<?php echo e(url('/masterLayout/staff/deleteLeaveApp')); ?>",
+          data:{ "Action_id":Action_id, "_token": "<?php echo e(csrf_token()); ?>" },
           success:function(result){ 
           
           
@@ -8216,10 +8217,10 @@ var ReWriteLeavePenalties = function(ID){
 $.ajax({
  type:"POST",
  cache:true,
- url:"{{url('/masterLayout/staff/editPenalties')}}",
+ url:"<?php echo e(url('/masterLayout/staff/editPenalties')); ?>",
  data:{
  "ID":ID,
- "_token": "{{ csrf_token() }}"
+ "_token": "<?php echo e(csrf_token()); ?>"
  },
  success:function(res){
  // var data = jQuery.parseJSON(res);
@@ -8265,7 +8266,7 @@ $.ajax({
        $.ajax({
           type:"POST",
           cache:true,
-          url:"{{url('/masterLayout/staff/OverRightPenalties')}}",
+          url:"<?php echo e(url('/masterLayout/staff/OverRightPenalties')); ?>",
           data:{
               "form_number":form_number,
               "penalty_id_edit":penalty_id_edit,
@@ -8275,7 +8276,7 @@ $.ajax({
               "penalty_from":penalty_from,
               "penalty_to":penalty_to,
               "penalty_description":penalty_description,
-              "_token":"{{ csrf_token() }}"
+              "_token":"<?php echo e(csrf_token()); ?>"
           },
           success:function(e){
              var curdate = new Date();
@@ -8338,8 +8339,8 @@ if( Action_id > 0){
  $.ajax({
     type:"POST",
     cache:true,
-    url:"{{url('/masterLayout/staff/deletePenalties')}}",
-    data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
+    url:"<?php echo e(url('/masterLayout/staff/deletePenalties')); ?>",
+    data:{ "Action_id":Action_id, "_token": "<?php echo e(csrf_token()); ?>" },
     success:function(result){ 
   
   $('#penaltyTable > tbody tr').each(function(index) {
@@ -8373,10 +8374,10 @@ var ReWriteAdjustment = function(ID){
 $.ajax({
  type:"POST",
  cache:true,
- url:"{{url('/masterLayout/staff/editAdjustment')}}",
+ url:"<?php echo e(url('/masterLayout/staff/editAdjustment')); ?>",
  data:{
  "ID":ID,
- "_token": "{{ csrf_token() }}"
+ "_token": "<?php echo e(csrf_token()); ?>"
  },
  success:function(res){
 
@@ -8429,9 +8430,9 @@ var editAdjustment = function(){
              "adjustment_description":adjustment_description,
              "staff_id":staff_id,
           "adjustment_id":adjustment_id,
-             "_token":"{{csrf_token()}}"
+             "_token":"<?php echo e(csrf_token()); ?>"
           },
-          url:"{{url('/masterLayout/staff/OverRightAdjustment')}}",
+          url:"<?php echo e(url('/masterLayout/staff/OverRightAdjustment')); ?>",
           success:function(e){
           var data = JSON.parse(e);
           var Last_id = data.id;
@@ -8494,8 +8495,8 @@ var deleteAdjustment = function(Action_id)
     $.ajax({
        type:"POST",
        cache:true,
-       url:"{{url('/masterLayout/staff/deleteAdjustment')}}",
-       data:{ "Action_id":Action_id, "_token": "{{ csrf_token() }}" },
+       url:"<?php echo e(url('/masterLayout/staff/deleteAdjustment')); ?>",
+       data:{ "Action_id":Action_id, "_token": "<?php echo e(csrf_token()); ?>" },
        success:function(result){ 
    
    
@@ -8529,12 +8530,12 @@ var editAddManual = function(ID,Missed_id,Table_name){
 $.ajax({
  type:"POST",
  cache:true,
- url:"{{url('/masterLayout/staff/editAddManual')}}",
+ url:"<?php echo e(url('/masterLayout/staff/editAddManual')); ?>",
  data:{
  "ID":ID,
  "Missed_id":Missed_id,
  "Table_name":Table_name,
- "_token": "{{ csrf_token() }}"
+ "_token": "<?php echo e(csrf_token()); ?>"
  },
  success:function(res){
  // var data = jQuery.parseJSON(res);
@@ -8585,7 +8586,7 @@ if(date != '' && missTap != '' && Tap_id != ''){
  $.ajax({
     type:"POST",
     cache:true,
-    url:"{{url('/masterLayout/staff/OverRightAddManual')}}",
+    url:"<?php echo e(url('/masterLayout/staff/OverRightAddManual')); ?>",
     data:{
        "form_number":form_number,
        "Manual_id":Manual_id,
@@ -8595,7 +8596,7 @@ if(date != '' && missTap != '' && Tap_id != ''){
        "date" : date,
        "missTap" : missTap,
        "description" : description,
-       "_token": "{{ csrf_token() }}"
+       "_token": "<?php echo e(csrf_token()); ?>"
     },
     success:function(result){
       var time = new Date();
@@ -8675,12 +8676,12 @@ var deleteAddManual = function(Action_id, Missed_id, Table_name)
     $.ajax({
        type:"POST",
        cache:true,
-       url:"{{url('/masterLayout/staff/deleteAddManual')}}",
+       url:"<?php echo e(url('/masterLayout/staff/deleteAddManual')); ?>",
        data:{ 
           "Action_id":Action_id, 
           "Missed_id":Missed_id, 
           "Table_name":Table_name, 
-          "_token": "{{ csrf_token() }}" 
+          "_token": "<?php echo e(csrf_token()); ?>" 
           },
        success:function(result){
      
@@ -8725,10 +8726,10 @@ function Staff_Role_Distance(Staff_id)
 {
 $.ajax({
       type:"POST",
-      url:"{{url('/masterLayout/staff/role_distance')}}",
+      url:"<?php echo e(url('/masterLayout/staff/role_distance')); ?>",
       data:{
     "Staff_id":Staff_id,
-          "_token": "{{ csrf_token() }}"
+          "_token": "<?php echo e(csrf_token()); ?>"
       },
   success:function(res){
   var d =  jQuery.parseJSON(res);
@@ -8767,7 +8768,7 @@ $.ajax({
            $.ajax({
                type:"POST",
                cache:true,
-               url:"{{url('/masterLayout/staff/addAbsentia')}}",
+               url:"<?php echo e(url('/masterLayout/staff/addAbsentia')); ?>",
                data:{
                    "form_number":form_number,
                    "staff_id":staffID,
@@ -8776,7 +8777,7 @@ $.ajax({
                    "start_time" : start_time,
                    "end_time" : end_time,
                    "description" : description,
-                   "_token": "{{ csrf_token() }}"
+                   "_token": "<?php echo e(csrf_token()); ?>"
                },
                success:function(result){
    
@@ -8832,14 +8833,14 @@ bootbox.dialog({
             $.ajax({
                 type:"POST",
                 cache:true,
-                url:"{{url('/masterLayout/staff/addManual')}}",
+                url:"<?php echo e(url('/masterLayout/staff/addManual')); ?>",
                 data:{
                    "staff_id":staffID,
                    "form_number":form_number,
                    "date" : date,
                    "missTap" : missTap,
                    "description" : description,
-                   "_token": "{{ csrf_token() }}"
+                   "_token": "<?php echo e(csrf_token()); ?>"
                },
                success:function(result){
                   var time = new Date();
@@ -8892,11 +8893,11 @@ bootbox.dialog({
     $.ajax({
        "type":"POST",
        cache:true,
-       url:"{{ url('/masterLayout/staff/getManualAttendance') }}",
+       url:"<?php echo e(url('/masterLayout/staff/getManualAttendance')); ?>",
        data:{
           date:date,
           staff_id:staffID,
-          "_token":"{{csrf_token()}}"
+          "_token":"<?php echo e(csrf_token()); ?>"
        },
        
        success:function(e){
@@ -8988,7 +8989,7 @@ bootbox.dialog({
           $.ajax({
               type:"POST",
               cache:true,
-              url:"{{url('/masterLayout/staff/addLeave')}}",
+              url:"<?php echo e(url('/masterLayout/staff/addLeave')); ?>",
               data:{
                  "form_number":form_number,
                  "staff_id":staffID,
@@ -9001,7 +9002,7 @@ bootbox.dialog({
                  "paid_compensation":paid_compensation,
                  "time_from":time_from,
                  "time_to":time_to,
-                  "_token": "{{ csrf_token() }}"
+                  "_token": "<?php echo e(csrf_token()); ?>"
               },
               success:function(result){
               $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
@@ -9012,7 +9013,7 @@ bootbox.dialog({
           $.ajax({
           type:"POST",
           cache:true,
-          url:"{{url('/masterLayout/staff/addLeave')}}",
+          url:"<?php echo e(url('/masterLayout/staff/addLeave')); ?>",
           data:{
                "form_number":form_number,
                "staff_id":staffID,
@@ -9025,7 +9026,7 @@ bootbox.dialog({
                "paid_compensation":paid_compensation,
                "time_from":time_from,
                "time_to":time_to,
-                "_token": "{{ csrf_token() }}"
+                "_token": "<?php echo e(csrf_token()); ?>"
               },
           success:function(result){
           $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
@@ -9041,10 +9042,10 @@ bootbox.dialog({
    var update_id =  id;
    $.ajax({
        type:"POST",
-       url:"{{url('/masterLayout/staff/get_updateLeave')}}",
+       url:"<?php echo e(url('/masterLayout/staff/get_updateLeave')); ?>",
        data:{
           "id":id,
-          "_token": "{{ csrf_token() }}"
+          "_token": "<?php echo e(csrf_token()); ?>"
        },
        success:function(e){
 
@@ -9176,7 +9177,7 @@ bootbox.dialog({
     $.ajax({
        type:"POST",
        cache:true,
-       url:"{{url('/masterLayout/staff/LeaveUpdate')}}",
+       url:"<?php echo e(url('/masterLayout/staff/LeaveUpdate')); ?>",
        data:{
           "id":id,
           "leave_title":leave_title,
@@ -9192,7 +9193,7 @@ bootbox.dialog({
           "LeaveApproval":LeaveApproval,
           "leave_approve_time_from":time_approval_from_update,
           "leave_approve_time_to":time_approval_to_update,
-          "_token" : "{{ csrf_token() }}"
+          "_token" : "<?php echo e(csrf_token()); ?>"
 
        },
       
@@ -9308,7 +9309,7 @@ bootbox.dialog({
            $.ajax({
               type:"POST",
               cache:true,
-              url:"{{url('/masterLayout/addPenalty')}}",
+              url:"<?php echo e(url('/masterLayout/addPenalty')); ?>",
               data:{
                  "form_number":form_number,
                  "penalty_title":penalty_title,
@@ -9317,7 +9318,7 @@ bootbox.dialog({
                  "penalty_to":penalty_to,
                  "penalty_description":penalty_description,
                  "staff_id":staff_id,
-                 "_token":"{{ csrf_token() }}"
+                 "_token":"<?php echo e(csrf_token()); ?>"
               },
               success:function(res){
                  var curdate = new Date();
@@ -9374,9 +9375,9 @@ bootbox.dialog({
                  "adjustment_no":adjustment_no,
                  "adjustment_description":adjustment_description,
                  "staff_id":staff_id,
-                 "_token":"{{csrf_token()}}"
+                 "_token":"<?php echo e(csrf_token()); ?>"
               },
-              url:"{{url('/masterLayout/addAdjustment')}}",
+              url:"<?php echo e(url('/masterLayout/addAdjustment')); ?>",
               success:function(e){
 
                var data = JSON.parse(e);
@@ -9438,7 +9439,7 @@ bootbox.dialog({
  var flag = 0;
  var data;
  var url;
- url = "{{url('/masterLayout/staff/addComments')}}";
+ url = "<?php echo e(url('/masterLayout/staff/addComments')); ?>";
  var selectedCategory = [];
  var  selectedCategoryName = [];
  for(var i = 0; i<checkBox.length; i++){
@@ -9477,7 +9478,7 @@ bootbox.dialog({
                  'category_id':selectedCategory,
                  'staff_id':staff_id,
                  'time':time,
-                 "_token": "{{ csrf_token() }}"
+                 "_token": "<?php echo e(csrf_token()); ?>"
              },
              url:url,
              success:function(e){
@@ -9499,7 +9500,7 @@ bootbox.dialog({
                      var getTime = GetTime(date);
  
  
-                     html = '<li class="out commentsLI"><img class="avatar" alt="" src="{{ STAFF_PIC_150 . $user['info'][0]->photo_id . STAFF_PIC150_TYPE}}" /><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"><strong></strong> <strong>{{$user["info"][0]->abridged_name}}</strong> </a><span class="datetime"> at <strong>'+getTime+'</strong> on <strong>'+day_name+","+month+" "+curdate+" "+year+'</strong> </span><span class="body">'+commentText.value+' </span><span class="commentCat"></span><span class="commentCat">'+selectedCategoryName.join()+'</span><input type="hidden" class="dateSearch" value='+year+"-"+parseInt(date.getMonth()+1)+"-"+curdate+' /></div></li>';
+                     html = '<li class="out commentsLI"><img class="avatar" alt="" src="<?php echo e(STAFF_PIC_150 . $user['info'][0]->photo_id . STAFF_PIC150_TYPE); ?>" /><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name"><strong></strong> <strong><?php echo e($user["info"][0]->abridged_name); ?></strong> </a><span class="datetime"> at <strong>'+getTime+'</strong> on <strong>'+day_name+","+month+" "+curdate+" "+year+'</strong> </span><span class="body">'+commentText.value+' </span><span class="commentCat"></span><span class="commentCat">'+selectedCategoryName.join()+'</span><input type="hidden" class="dateSearch" value='+year+"-"+parseInt(date.getMonth()+1)+"-"+curdate+' /></div></li>';
                      $('.chats').prepend(html);
  
                      clearComments();
@@ -9635,9 +9636,9 @@ bootbox.dialog({
        type:"POST",
        cache:false,
        data:{
-           "_token": "{{ csrf_token() }}"
+           "_token": "<?php echo e(csrf_token()); ?>"
        },
-       url:"{{url('/masterLayout/staff/get_cut_date')}}",
+       url:"<?php echo e(url('/masterLayout/staff/get_cut_date')); ?>",
        success:function(e){
         var data = jQuery.parseJSON(e);
         if(data['get_cut_date']){
@@ -9704,35 +9705,35 @@ bootbox.dialog({
  
  
  
-loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
- loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/datatables.min.js", function(){
-    loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
-       loadScript("{{ URL::to('metronic') }}/pages/scripts/profile.js", function(){
-             loadScript("{{ URL::to('metronic') }}/pages/scripts/table-datatables-managed.js", function(){
-                 loadScript("{{ URL::to('metronic') }}/global/plugins/jquery.sparkline.min.js", function(){
-                     loadScript("{{ URL::to('metronic') }}/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
-                         loadScript("{{ URL::to('metronic') }}/global/plugins/moment.js", function(){
-                             loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js", function(){
-                                 loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.js", function(){
-                                    // loadScript("{{ URL::to('metronic') }}/pages/scripts/ui-datepaginator.min.js", function(){
-                                         loadScript("{{ URL::to('metronic') }}/layouts/layout/scripts/demo.min.js", function(){ 
-                                             loadScript("{{ URL::to('metronic') }}/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js", function(){
-                                                 loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-markdown/lib/markdown.js", function(){
-                                                     loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js", function(){
-                                                         loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-summernote/summernote.min.js", function(){
-                                                             loadScript("{{ URL::to('metronic') }}/pages/scripts/components-ion-sliders.js", function(){
-                                                  loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/vue.min.js", function(){
-                                              loadScript("{{ URL::to('metronic') }}/global/plugins/select2/js/select2.full.min.js", function(){
-                                              loadScript("{{ URL::to('metronic') }}/pages/scripts/components-select2.min.js", function(){
-                                                      loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/flatpickr.min.js", function(){
+loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", function(){
+ loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/datatables.min.js", function(){
+    loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
+       loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/profile.js", function(){
+             loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/table-datatables-managed.js", function(){
+                 loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jquery.sparkline.min.js", function(){
+                     loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
+                         loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/moment.js", function(){
+                             loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js", function(){
+                                 loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.js", function(){
+                                    // loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/ui-datepaginator.min.js", function(){
+                                         loadScript("<?php echo e(URL::to('metronic')); ?>/layouts/layout/scripts/demo.min.js", function(){ 
+                                             loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js", function(){
+                                                 loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-markdown/lib/markdown.js", function(){
+                                                     loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js", function(){
+                                                         loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-summernote/summernote.min.js", function(){
+                                                             loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/components-ion-sliders.js", function(){
+                                                  loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/vue.min.js", function(){
+                                              loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/select2/js/select2.full.min.js", function(){
+                                              loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/components-select2.min.js", function(){
+                                                      loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/flatpickr.min.js", function(){
 
-                                                          loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/nouislider.min.js", function(){
-                                                             loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/moment.min.js", function(){
-                                                                 loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/index.js", function(){
-                                   loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){
-                                    loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
-                                        loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
-                                          loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
+                                                          loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/nouislider.min.js", function(){
+                                                             loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/moment.min.js", function(){
+                                                                 loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/index.js", function(){
+                                   loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootbox/bootbox.min.js", function(){
+                                    loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jquery-validation/js/jquery.validate.js",function(){
+                                        loadScript("<?php echo e(URL::to('')); ?>/js/jquery.filtertable.min.js", function(){
+                                          loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/app.min.js", pagefunction);
                                         });
                                       });
                                                                       });
@@ -9762,8 +9763,8 @@ loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
 
 });
 </script>
-<script src="{{ URL::to('metronic') }}/global/scripts/global_functions.js" type="text/javascript"></script>
-<script src="{{ URL::to('metronic') }}/global/scripts/attendance_graph.js" type="text/javascript"></script>
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/attendance_graph.js" type="text/javascript"></script>
 
 <!--<script src="assets/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
  <script src="assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>
