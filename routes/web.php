@@ -88,6 +88,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/fetch_autocomplete', 'Attendance\Staff\ScreeningGate@fetch_autocomplete');
 	Route::post('/tap_in_staff', 'Attendance\Staff\ScreeningGate@Tap_In_Staff');
 	Route::get('/reports', 'Attendance\Reports\Reports@mainPage');
+	Route::post('/reporst_staff_attendance', 'Attendance\Reports\Reports@reporst_staff_attendance');
+	
 	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
 	//Start Arif Khan Add Routes for VEHICLE 

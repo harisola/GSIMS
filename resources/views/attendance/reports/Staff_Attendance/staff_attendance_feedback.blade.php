@@ -50,7 +50,7 @@
     @endphp
 
     @endforeach
-    @endif;
+    @endif
    
   </tbody>
 </table>
