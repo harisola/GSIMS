@@ -19,8 +19,12 @@
         <script type="text/javascript" src="<?php echo ASSETS_URL; ?>/global/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
         <script type="text/javascript" src="<?php echo ASSETS_URL; ?>/global/plugins/jquery.sparkline.js"></script>
         <link rel="stylesheet" href="<?php echo ASSETS_URL; ?>/global/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.3.7/packaged/jquery.noty.packaged.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+
+
+        <script src="<?php echo ASSETS_URL; ?>/global/plugins/bootstrap-switch/js/jquery.noty.packaged.min.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="<?php echo ASSETS_URL; ?>/global/plugins/bootstrap-multiselect/css/animate.min.css" type="text/css"/>
+
 
         <!-- END CORE PLUGINS -->
         
