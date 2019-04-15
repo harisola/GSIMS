@@ -12,6 +12,8 @@
 		  <div class="">
 				<input type="text" class="form-control form_part_a form_number_miss_tap_a" name="form_number_miss_tap_a" id="form_number_miss_tap_a" value="{{$format_code}}" disabled="" />
 				<input type="text" class="form-control form_part_b form_number_miss_tap_b" name="form_number_miss_tap_b" id="form_number_miss_tap_b" value="{{@$form_number[1]}}" />
+				<input type="hidden" class="form-control mis_pvs_form_no" name="pvs_form_no" id="mis_pvs_form_no" value="{{@$form_number[1]}}" />
+
 		  </div>
 	   </div>
 		<!-- form-group -->

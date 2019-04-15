@@ -3376,90 +3376,9 @@ display: none;
                       <!-- orgChartSection -->
                    </div>
                    <!-- tab_1_2 -->
-                   <?php /* ?>
-                   <div class="tab-pane fade" id="tab_1_3">
-                      <h4 class="text-center bold marginTop20"><i class="icon-user-following"></i>&nbsp;&nbsp; Admin/SIS/Tamkeen</h4>
-                      <div class="row list-separated profile-stat" style="padding-top:12px;">
-                         <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 07:00 AM </div>
-                            <div class="uppercase profile-stat-text"> Standard IN </div>
-                         </div>
-                         <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 04:00 PM </div>
-                            <div class="uppercase profile-stat-text"> Standard OUT </div>
-                         </div>
-                         <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 04:00 PM </div>
-                            <div class="uppercase profile-stat-text"> Friday OUT </div>
-                         </div>
-                         <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 4.5 </div>
-                            <div class="uppercase profile-stat-text"> Saturday Hours </div>
-                         </div>
-                         <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 2 </div>
-                            <div class="uppercase profile-stat-text"> Off Saturdays </div>
-                         </div>
-                         <div class="col-md-2 col-sm-2 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 4.5 </div>
-                            <div class="uppercase profile-stat-text"> Saturday Hours </div>
-                         </div>
-                      </div>
-                      <h4 class="text-center marginTop20 bold">For the Month of July</h4>
-                      <div class="row list-separated profile-stat" style="padding-top:12px;">
-                         <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 2 </div>
-                            <div class="uppercase profile-stat-text"> Late(s) </div>
-                         </div>
-                         <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 1 </div>
-                            <div class="uppercase profile-stat-text"> Casual Leaves </div>
-                         </div>
-                         <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 0 </div>
-                            <div class="uppercase profile-stat-text"> Short Leaves </div>
-                         </div>
-                         <div class="col-md-3 col-sm-3 col-xs-6">
-                            <div class="uppercase profile-stat-title"> 1 </div>
-                            <div class="uppercase profile-stat-text"> Half Day </div>
-                         </div>
-                      </div>
-                      <h4 class="text-center marginTop20 bold">Attendance Policy</h4>
-                      <div class="row list-separated profile-stat" style="padding-top:12px;">
-                         <div class="col-md-12">
-                            <div class="contentArea">
-                               <div class="text-center col-md-12">
-                                  <h4>Regularity & Punctuality</h4>
-                               </div>
-                               <div class="col-md-12">
-                                  <ul class="policyList">
-                                     <li>
-                                        <strong>Late</strong>: Late time period = <a nref="#" class="editable">15</a> minutes from time In. Accumulation of <a nref="#" class="editable">4</a> late(s) in a <a nref="#" class="editable">quarter</a> is equivalent to one day ABSENCE
-                                     </li>
-                                     <li>
-                                        <strong>Short Leave</strong> SL time period = <a href="#" class="editable">2</a> hours from time In or Out. Accumulation of <a nref="#" class="editable">3</a> SL is equivalent to <a nref="#" class="editable">1</a> day ABSENCE
-                                     </li>
-                                     <li>
-                                        <strong>Half Day</strong>: HD period = More the <a href="#" class="editable">2</a> hours from time In or Out. Half day deduction / half CL will be adjusted.
-                                     </li>
-                                     <li>In  case of late arrival or absence, staff member needs to inform HR office,  respective Section Head/ HOD prior to <a href="#" class="editable">7:30am</a>.</li>
-                                  </ul>
-                               </div>
-                            </div>
-                            <!-- contentArea -->
-                         </div>
-                         <!-- -->
-                      </div>
-                   </div>
-                   <!-- tab_1_3 -->
-                   <?php */ ?>
                    <div class="tab-pane fade" id="tab_1_3">
                       <div class="tabbable-line">
                          <ul class="nav nav-tabs" id="">
-                            <?php /* 
-                            <li class="active">
-                               <a href="#tab_1_3_1" data-toggle="tab"> Policy </a>
-                            </li> */?>
                             <li class="active">
                                <a href="#tab_1_3_3" data-toggle="tab"> Attendance Breakdown </a>
                             </li>
@@ -3478,246 +3397,164 @@ display: none;
                             </li>
                          </ul>
                          <div class="tab-content">
-                            <?php /* 
-                            <div class="tab-pane fade active in" id="tab_1_3_1">
-                               <h4 class="text-center bold marginTop20"><i class="icon-user-following"></i>&nbsp;&nbsp; Admin/SIS/Tamkeen</h4>
-                               <div class="row list-separated profile-stat" style="padding-top:12px;">
-                                  <div class="col-md-2 col-sm-2 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 07:00 AM </div>
-                                     <div class="uppercase profile-stat-text"> Standard IN </div>
-                                  </div>
-                                  <div class="col-md-2 col-sm-2 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 04:00 PM </div>
-                                     <div class="uppercase profile-stat-text"> Standard OUT </div>
-                                  </div>
-                                  <div class="col-md-2 col-sm-2 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 04:00 PM </div>
-                                     <div class="uppercase profile-stat-text"> Friday OUT </div>
-                                  </div>
-                                  <div class="col-md-2 col-sm-2 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 4.5 </div>
-                                     <div class="uppercase profile-stat-text"> Saturday Hours </div>
-                                  </div>
-                                  <div class="col-md-2 col-sm-2 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 2 </div>
-                                     <div class="uppercase profile-stat-text"> Off Saturdays </div>
-                                  </div>
-                                  <div class="col-md-2 col-sm-2 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 4.5 </div>
-                                     <div class="uppercase profile-stat-text"> Saturday Hours </div>
-                                  </div>
-                               </div>
-                               <h4 class="text-center marginTop20 bold">For the Month of July</h4>
-                               <div class="row list-separated profile-stat" style="padding-top:12px;">
-                                  <div class="col-md-3 col-sm-3 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 2 </div>
-                                     <div class="uppercase profile-stat-text"> Late(s) </div>
-                                  </div>
-                                  <div class="col-md-3 col-sm-3 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 1 </div>
-                                     <div class="uppercase profile-stat-text"> Casual Leaves </div>
-                                  </div>
-                                  <div class="col-md-3 col-sm-3 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 0 </div>
-                                     <div class="uppercase profile-stat-text"> Short Leaves </div>
-                                  </div>
-                                  <div class="col-md-3 col-sm-3 col-xs-6">
-                                     <div class="uppercase profile-stat-title"> 1 </div>
-                                     <div class="uppercase profile-stat-text"> Half Day </div>
-                                  </div>
-                               </div>
-                               <h4 class="text-center marginTop20 bold">Attendance Policy</h4>
-                               <div class="row list-separated profile-stat" style="padding-top:12px;">
-                                  <div class="col-md-12">
-                                     <div class="contentArea">
-                                        <div class="text-center col-md-12">
-                                           <h4>Regularity & Punctuality</h4>
-                                        </div>
-                                        <div class="col-md-12">
-                                           <ul class="policyList">
-                                              <li>
-                                                 <strong>Late</strong>: Late time period = <a nref="#" class="editable">15</a> minutes from time In. Accumulation of <a nref="#" class="editable">4</a> late(s) in a <a nref="#" class="editable">quarter</a> is equivalent to one day ABSENCE
-                                              </li>
-                                              <li>
-                                                 <strong>Short Leave</strong> SL time period = <a href="#" class="editable">2</a> hours from time In or Out. Accumulation of <a nref="#" class="editable">3</a> SL is equivalent to <a nref="#" class="editable">1</a> day ABSENCE
-                                              </li>
-                                              <li>
-                                                 <strong>Half Day</strong>: HD period = More the <a href="#" class="editable">2</a> hours from time In or Out. Half day deduction / half CL will be adjusted.
-                                              </li>
-                                              <li>In  case of late arrival or absence, staff member needs to inform HR office,  respective Section Head/ HOD prior to <a href="#" class="editable">7:30am</a>.</li>
-                                           </ul>
-                                        </div>
-                                     </div>
-                                     <!-- contentArea -->
-                                  </div>
-                                  <!-- -->
-                               </div>
-                            </div>
-                            <!-- tab_1_3_1 -->
-                            */ ?>
                             <div class="tab-pane fade active in" id="tab_1_3_3">
                               <div class="portlet-body">
-                                  
-                                    <div class="row">
-                                    
-                                    <div id="datepaginator"> </div>
-                                    
-                                        <div class="col-md-12" style="margin-top:20px;">
-                                        
-                                           <!-- BEGIN PORTLET-->
-                                           <div class="portlet light form-fit bordered">
-                                              <div class="portlet-title">
-                                                 <div class="caption">
-                                                    <i class="icon-settings font-dark"></i>
-                                                    <span class="caption-subject font-dark sbold uppercase date_label">Attendance for <?php echo date('D F,d Y') ?></span>
-                                                 </div>
-                                              </div><!-- portlet-title -->
-                                              <div class="portlet-body form">
-                                                 <div class="opardiv"></div>
-                                                 <form role="form" class="form-horizontal form-bordered">
-                                                    <div class="form-body">
-                                                       <div class="form-group">
-                                                          <div class="col-md-3">
-                                                             Expected Time
-                                                          </div>
-                                                          <div class="col-md-9" style="height: 84px;">
-                                                             <!-- <input id="range_3" type="text" value="" /> -->
-                                                             <div id="weeklySlider"></div>
-                                                          </div>
-                                                       </div>
+                              	<div class="row">
+                                	<div id="datepaginator"> </div>
+                                    <div class="col-md-12" style="margin-top:20px;">
+                                       <!-- BEGIN PORTLET-->
+                                       <div class="portlet light form-fit bordered">
+                                          <div class="portlet-title">
+                                             <div class="caption">
+                                                <i class="icon-settings font-dark"></i>
+                                                <span class="caption-subject font-dark sbold uppercase date_label">Attendance for <?php echo date('D F,d Y') ?></span>
+                                             </div>
+                                          </div><!-- portlet-title -->
+                                          <div class="portlet-body form">
+                                             <div class="opardiv"></div>
+                                             <form role="form" class="form-horizontal form-bordered">
+                                                <div class="form-body">
+                                                   <div class="form-group">
+                                                      <div class="col-md-3">
+                                                         Expected Time
+                                                      </div>
+                                                      <div class="col-md-9" style="height: 84px;">
+                                                         <!-- <input id="range_3" type="text" value="" /> -->
+                                                         <div id="weeklySlider"></div>
+                                                      </div>
+                                                   </div>
+                                                   <!-- form-group -->
+                                                   <div class="form-group">
+                                                      <div class="col-md-3">
+                                                         Tap IN/OUT Attendance
+                                                      </div>
+                                                      <div class="col-md-9">
+                                                         <div id="tapSlider"></div>
+                                                         <!-- <input id="range_3_1" type="text" value="" /> -->
+                                                      </div>
+                                                   </div>
+                                                   <!-- form-group -->
+                                                   <div class="form-group">
+                                                      <div class="col-md-3">
+                                                         Absentia Attendance
+                                                      </div>
+                                                      <div class="col-md-9">
+                                                         <!-- <input id="range_3_2" type="text" value="" /> -->
+                                                         <div id="AiAabsentia"></div>
+                                                      </div>
+                                                   </div>
+                                                   <!-- form-group -->
+                                                   <div class="form-group">
+                                                      <div class="col-md-3">
+                                                         Buffer Time Utilization
+                                                      </div>
+                                                      <div class="col-md-9">
+                                                         <!-- <input id="range_3_3" type="text" value="" /> -->
+                                                         <div id="bufferTime"></div>
+                                                      </div>
+                                                   </div>
                                                        <!-- form-group -->
-                                                       <div class="form-group">
-                                                          <div class="col-md-3">
-                                                             Tap IN/OUT Attendance
-                                                          </div>
-                                                          <div class="col-md-9">
-                                                             <div id="tapSlider"></div>
-                                                             <!-- <input id="range_3_1" type="text" value="" /> -->
-                                                          </div>
-                                                       </div>
-                                                       <!-- form-group -->
-                                                       <div class="form-group">
-                                                          <div class="col-md-3">
-                                                             Absentia Attendance
-                                                          </div>
-                                                          <div class="col-md-9">
-                                                             <!-- <input id="range_3_2" type="text" value="" /> -->
-                                                             <div id="AiAabsentia"></div>
-                                                          </div>
-                                                       </div>
-                                                       <!-- form-group -->
-                                                       <div class="form-group">
-                                                          <div class="col-md-3">
-                                                             Buffer Time Utilization
-                                                          </div>
-                                                          <div class="col-md-9">
-                                                             <!-- <input id="range_3_3" type="text" value="" /> -->
-                                                             <div id="bufferTime"></div>
-                                                          </div>
-                                                       </div>
-                                                           <!-- form-group -->
-                                                             <div class="form-group">
-                                                                <div class="col-md-3">
-                                                                   Leave
-                                                                </div>
-                                                                <div class="col-md-9">
-                                                                   <!-- <input id="range_3_3" type="text" value="" /> -->
-                                                                   <div id="LeaveBar"></div>
-                                                                </div>
-                                                             </div>
-                                                       <!-- form-group -->
-                                                       <div class="form-group">
-                                                          <div class="col-md-3">
-                                                             Payroll Attendance
-                                                          </div>
-                                                          <div class="col-md-9">
-                                                             <!-- <input id="range_3_4" type="text" value="" /> -->
-                                                             <div id="PayrollAttendance"></div>
-                                                          </div>
-                                                       </div>
-                                                       <!-- form-group -->
-                                                       <div class="form-group">
-                                                          <div class="col-md-3">
-                                                             Complaince
-                                                          </div>
-                                                          <div class="col-md-9">
-                                                             <div class="col-md-2 text-center">
-                                                                <img src="img/complaint.png" width="24" class="compliance_one_img" /><br /><small>In Compliance</small>
-                                                             </div>
-                                                             <div class="col-md-8 text-center">
-                                                                <img src="img/noncomplaint.png" width="24" class="compliance_duration_img" /><br /><small>Duration Compliance</small>
-                                                             </div>
-                                                             <div class="col-md-2 text-center">
-                                                                <img src="img/complaint.png" width="24" class="compliance_two_img"  /><br /><small>Out Compliance</small>
-                                                             </div>
-                                                          </div>
-                                                       </div>
-                                                    </div>
-                                                    <!-- form-body -->
-                                                 </form>
-                                                 <!-- form-horizontal -->
-                                                 <div style="padding:10px 20px;">
-                                                 <h4 class="text-center">Compensation & Proportion details</h4>
-                                                 <table class="table table-striped table-hover table-bordered">
-                                                    <thead style="background: #efefef;">
-                                                       <tr>
-                                                           <!--  <th width="25%" class="text-center">Attendance Complaince<br />Proportion</th> -->
-                                                            <th width="33%" class="text-center">Non Compliant<br />Adjustment Factor</th>
-                                                            <th width="33%" class="text-center">Attendance Compensation<br />Proportion</th>
-                                                            <th width="34%" class="text-center">Attendance Deduction<br />Proportion</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                       <tr>
-                                                          <!-- <td class="text-center">0.89</td> -->
-                                                            <td class="text-center">0.8</td>
-                                                            <td class="text-center factor_remaining_deduction"></td>
-                                                            <td class="text-center factor_deduction_from"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                 </table>
-                                                 
-                                                 <h4 class="text-center">Leaves status & Buffer details</h4>
-                                                 <table class="table table-striped table-hover table-bordered">
-                                                    <thead style="background: #efefef;">
-                                                       <tr>
-                                                            <th width="25%" class="text-center">Previous EL<br />Balance</th>
-                                                            <th width="25%" class="text-center">Current EL<br />Balance</th>
-                                                            <th width="25%" class="text-center">Daily Buffer Used<br /><small class="daily_buffer_assign"></small></th>
-                                                            <th width="25%" class="text-center">Remaining Buffer<br /><small class="monthly_buffer_assign"></small></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                       <tr>
-                                                          <td class="text-center previous_el_balance"></td>
-                                                            <td class="text-center current_el_balance"></td>
-                                                            <td class="text-center daily_buffer_used" ><strong>0 min</strong> <small>/</small> <strong>5 min</strong></td>
-                                                            <td class="text-center monthly_buffer_used"><strong>0 min</strong> <small>/</small> <strong>15 min</strong></td>
-                                                        </tr>
-                                                    </tbody>
-                                                 </table>
-                                                 </div>
-                                              </div><!-- portlet-body -->
-                                           </div><!-- portlet -->
-                                           <!-- END PORTLET-->
-                                        </div><!-- col-md-12 -->
-                                    </div><!-- row -->
-                              </div>
-                            </div>
-                            <!-- tab_1_3_3 -->
+                                                         <div class="form-group">
+                                                            <div class="col-md-3">
+                                                               Leave
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                               <!-- <input id="range_3_3" type="text" value="" /> -->
+                                                               <div id="LeaveBar"></div>
+                                                            </div>
+                                                         </div>
+                                                   <!-- form-group -->
+                                                   <div class="form-group">
+                                                      <div class="col-md-3">
+                                                         Payroll Attendance
+                                                      </div>
+                                                      <div class="col-md-9">
+                                                         <!-- <input id="range_3_4" type="text" value="" /> -->
+                                                         <div id="PayrollAttendance"></div>
+                                                      </div>
+                                                   </div>
+                                                   <!-- form-group -->
+                                                   <div class="form-group">
+                                                      <div class="col-md-3">
+                                                         Complaince
+                                                      </div>
+                                                      <div class="col-md-9">
+                                                         <div class="col-md-2 text-center">
+                                                            <img src="img/complaint.png" width="24" class="compliance_one_img" /><br /><small>In Compliance</small>
+                                                         </div>
+                                                         <div class="col-md-8 text-center">
+                                                            <img src="img/noncomplaint.png" width="24" class="compliance_duration_img" /><br /><small>Duration Compliance</small>
+                                                         </div>
+                                                         <div class="col-md-2 text-center">
+                                                            <img src="img/complaint.png" width="24" class="compliance_two_img"  /><br /><small>Out Compliance</small>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <!-- form-body -->
+                                             </form>
+                                             <!-- form-horizontal -->
+                                             <div style="padding:10px 20px;">
+                                             <h4 class="text-center">Compensation & Proportion details</h4>
+                                             <table class="table table-striped table-hover table-bordered">
+                                                <thead style="background: #efefef;">
+                                                   <tr>
+                                                       <!--  <th width="25%" class="text-center">Attendance Complaince<br />Proportion</th> -->
+                                                        <th width="33%" class="text-center">Non Compliant<br />Adjustment Factor</th>
+                                                        <th width="33%" class="text-center">Attendance Compensation<br />Proportion</th>
+                                                        <th width="34%" class="text-center">Attendance Deduction<br />Proportion</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   <tr>
+                                                      <!-- <td class="text-center">0.89</td> -->
+                                                        <td class="text-center">0.8</td>
+                                                        <td class="text-center factor_remaining_deduction"></td>
+                                                        <td class="text-center factor_deduction_from"></td>
+                                                    </tr>
+                                                </tbody>
+                                             </table>
+                                             
+                                             <h4 class="text-center">Leaves status & Buffer details</h4>
+                                             <table class="table table-striped table-hover table-bordered">
+                                                <thead style="background: #efefef;">
+                                                   <tr>
+                                                        <th width="25%" class="text-center">Previous EL<br />Balance</th>
+                                                        <th width="25%" class="text-center">Current EL<br />Balance</th>
+                                                        <th width="25%" class="text-center">Daily Buffer Used<br /><small class="daily_buffer_assign"></small></th>
+                                                        <th width="25%" class="text-center">Remaining Buffer<br /><small class="monthly_buffer_assign"></small></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   <tr>
+                                                      <td class="text-center previous_el_balance"></td>
+                                                        <td class="text-center current_el_balance"></td>
+                                                        <td class="text-center daily_buffer_used" ><strong>0 min</strong> <small>/</small> <strong>5 min</strong></td>
+                                                        <td class="text-center monthly_buffer_used"><strong>0 min</strong> <small>/</small> <strong>15 min</strong></td>
+                                                    </tr>
+                                                </tbody>
+                                             </table>
+                                             </div>
+                                          </div><!-- portlet-body -->
+                                       </div><!-- portlet -->
+                                       <!-- END PORTLET-->
+                                    </div><!-- col-md-12 -->
+                                </div><!-- row -->
+                              </div><!-- portlet-body -->
+                            </div><!-- tab_1_3_3 -->
                             <div class="tab-pane" id="tab_1_3_2">
                                <div class="portlet light bordered padding0 marginBottom0">
                                   <div class="portlet-title">
                                      <div class="caption">
                                         <i class="icon-users font-dark"></i>
                                         <span class="caption-subject font-dark sbold uppercase">Absentia </span>
-                                     </div>
+                                     </div><!-- caption -->
                                      <div class="actions">
                                         <div class="btn-group btn-group-devided" data-toggle="buttons">
                                            <!-- <input type="radio" name="options" class="toggle" id="profileDefinationAdd">Add New Profile</label> -->
                                            <button class="tooltips btn btn-transparent dark btn-outline btn-circle btn-sm" data-placement="bottom" data-original-title="Add Absentia" data-toggle="modal" href="#AddAIA" id="">Add Absentia</button>
                                         </div>
-                                     </div>
+                                     </div><!-- actions -->
                                   </div>
                                   <!-- portlet-title -->
                                   <div class="portlet-body" style="padding:15px;">
@@ -3743,7 +3580,7 @@ display: none;
                                            <div class="modal-header">
                                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                               <h3 class="modal-title">Add Absentia</h3>
-                                           </div>
+                                           </div><!-- modal-header -->
                                            <div class="modal-body" style="float:left;width:100%;">
                                               <div class="portlet box blue-hoki">
                                                  <div class="portlet-title">
@@ -3848,21 +3685,14 @@ display: none;
                                               <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
                                               <button onclick="addAbsentia()" type="button" class="btn dark btn-outline active" data-dismiss="">Add</button>
                                               <!--button type="button" class="btn green">Add Badge</button -->
-                                           </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                     </div>
-                                     <!-- /.modal-dialog -->
-                                  </div>
-                                  <!-- Start Edit Absenia_id -->
+                                           </div><!-- modal-footer -->
+                                        </div><!-- /.modal-content -->
+                                     </div><!-- /.modal-dialog -->
+                                  </div><!-- Start Edit Absenia_id -->
                                     @include('attendance.staff.modals.absentia_edit_modal')
-
                                   <!-- End Edit Absenia_id-->
-                                </div>
-                               <!-- portlet -->
-                            </div>
-                            <!-- tab_1_3_2 -->
-                            
+                                </div><!-- portlet -->
+                            </div><!-- tab_1_3_2 -->
                             <div class="tab-pane" id="tab_1_3_4">
                                <div class="portlet light bordered padding0">
                                   <div class="portlet-title">
@@ -3876,8 +3706,7 @@ display: none;
                                            <button class="tooltips btn btn-transparent dark btn-outline btn-circle btn-sm" data-placement="bottom" data-original-title="Leave Application" data-toggle="modal" href="#LeaveApp" onClick="clearLeave()">Apply for Leave</button>
                                         </div>
                                      </div>
-                                  </div>
-                                  <!-- portlet-title -->
+                                  </div><!-- portlet-title -->
                                   <div class="portlet-body" style="padding:15px;">
                                      <table width="100%" border="0" class="table table-striped table-hover table-bordered" id="leave_table">
                                         <thead>
@@ -3894,16 +3723,14 @@ display: none;
                               
                                         </tbody>
                                      </table>
-                                  </div>
-                         
-                                  <!-- portlet-body -->
+                                  </div><!-- portlet-body -->
                                   <div class="modal fade" id="LeaveApproval" tabindex="-1" role="basic" aria-hidden="true">
                                      <div class="modal-dialog">
                                         <div class="modal-content">
                                            <div class="modal-header">
                                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                               <h3 class="modal-title">Leave Application Approval</h3>
-                                           </div>
+                                           </div><!-- modal-header -->
                                            <div class="modal-body" style="float:left;width:100%;">
                                               <div class="portlet box blue-hoki">
                                                  <div class="portlet-title">
@@ -4132,243 +3959,236 @@ display: none;
                                               <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
                                               <button onClick="LeaveUpdateById()" type="button" class="btn dark btn-outline active" data-dismiss="">Submit</button>
                                               <!--button type="button" class="btn green">Add Badge</button -->
-                                           </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                     </div>
-                                     <!-- /.modal-dialog -->
-                                  </div>
+                                           </div><!-- modal-footer -->
+                                        </div><!-- /.modal-content -->
+                                     </div><!-- /.modal-dialog -->
+                                  </div><!-- modal -->
                                   
                          
-                                <div class="modal fade" id="LeaveApp" tabindex="-1" role="basic" aria-hidden="true">
-                                     <div class="modal-dialog">
-                                        <div class="modal-content">
-                                           <div class="modal-header">
-                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                              <h3 class="modal-title">Leave Application</h3>
-                                           </div>
-                                           <div class="modal-body" style="float:left;width:100%;">
-                                              <div class="portlet box blue-hoki">
-                                                 <div class="portlet-title">
-                                                    <div class="caption">
-                                                       <i class="fa fa-user"></i><font id="">Leave form</font>
-                                                    </div>
-                                                 </div>
-                                                 <!-- portlet-title -->
-                                                 <div class="headRightDetailsInner">
-                                                    <table>
-                                                       <tbody>
-                                                          <tr id="">
-                                                             <td class="" style="padding-right:10px;">
-                                                                <img class="user-pic rounded absentia_staff_img tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="" width="42">
-                                                             </td>
-                                                             <td class="staffView_StaffName">
-                                                                <a href="javascript:;" class="primary-link tooltips absentia_staff_name" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="289" data-staffgtid="12-045"></a> - <small class="absentia_name_code tooltips" data-container="body" data-placement="top" data-original-title="" ></small><br><small class="shortHeight"><span class="absentia_bottom_line tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"></span></small>
-                                                             </td>
-                                                          </tr>
-                                                       </tbody>
-                                                    </table>
-                                                    <!-- col-md-4 -->
-                                                 </div>
-                                                 <!-- headRightDetailsInner -->
-                                                 <div class="portlet-body fixedHeightmodalPortlet">
-                                                    <div class="form-body">
-                                                       <div class="row">
-                                                          <div class="col-md-6 paddingBottom10">
-                                                             <div class="form-group">
-                                                                  <label class="">Form #:</label>
-                                                                  <div class="">
-                                                                     <input type="text" class="form_part_a
-                                                                      form-control form_number_leave_application_a " disabled="" name="" id="form_number_leave_application_a" value="<?= 
-                                                                      App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(2); ?>" data-id="">
-                                                                  </div>
-                                                                  <div class="">
-                                                                     <input type="text" class="form_part_b form-control form_number_leave_application_b" name="" id="form_number_leave_application_b" data-id="">
-                                                                  </div>
-                                                               </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
+                                    <div class="modal fade" id="LeaveApp" tabindex="-1" role="basic" aria-hidden="true">
+                                         <div class="modal-dialog">
+                                            <div class="modal-content">
+                                               <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                  <h3 class="modal-title">Leave Application</h3>
+                                               </div><!-- modal-header -->
+                                               <div class="modal-body" style="float:left;width:100%;">
+                                                  <div class="portlet box blue-hoki">
+                                                     <div class="portlet-title">
+                                                        <div class="caption">
+                                                           <i class="fa fa-user"></i><font id="">Leave form</font>
                                                         </div>
-                                                        <!-- row -->
-                                                       <div class="row">
-                                                          <div class="col-md-6 paddingBottom10">
-
-                                                             <div class="form-group">
-                                                                <label class="">Leave Title:</label>
-                                                                <div class="">
-                                                                   <input type="text" class="form-control" name="" id="leave_title" >
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                          <div class="col-md-6 paddingBottom10">
-                                                             <div class="form-group">
-                                                                <label class="">Leave Type:</label>
-                                                                <div class="leave_type">
-                                                                   <select class="form-control">
-                                                                   <option selected disabled value="0">Select Leave Type</option>
-                                                                   @foreach($leaveType as $type)
-                                                                      <option value="{{$type->id}}">{{$type->leave_type_name}}</option>
-                                                                   @endforeach
-                                                                   </select>
-                                                                   <!-- select -->
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                       </div>
-                                                       <!-- row -->
-                                                       <div class="row">
-                                                          <div class="col-md-6 paddingBottom10">
-                                                             <div class="form-group">
-                                                                <label class="">From date:</label>
-                                                                <div class="">
-                                                                   <input type="date" class="form-control" name="" id="leave_from">
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                          <div class="col-md-6 paddingBottom10">
-                                                             <div class="form-group">
-                                                                <label class="">To date:</label>
-                                                                <div class="">
-                                                                   <input type="date" class="form-control" name="" id="leave_to">
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                       </div>
-                                                       <!-- row -->
-                                                       <div class="row">
-                                                          <div class="col-md-6 paddingBottom10">
-                                                            <input type="checkbox" id="DayBaseLeave" onClick="setTodate('DayBaseLeave','leave_from','leave_to')"> <label for="DayBaseLeave">Hourly Leave</label>
-                                                          </div>
-                                                       </div>
-                                                       <!-- row -->
-                                                       <div class="row" id="showHourly" style="display: none;">
-                                                          <div class="col-md-6 paddingBottom10">
-                                                             <div class="form-group">
-                                                                <label class="">From time:</label>
-                                                                <div class="">
-                                                                   <input type="time" class="form-control" name="" id="time_from" required>
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                          <div class="col-md-6 paddingBottom10">
-                                                             <div class="form-group">
-                                                                <label class="">To time:</label>
-                                                                <div class="">
-                                                                   <input type="time" class="form-control" name="" id="time_to" required>
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                       </div>
-                                                       <!-- row -->
-                                                       <div class="row">
-                                                          <div class="col-md-12 paddingBottom10">
-                                                             <div class="form-group">
-                                                                <label class="">Additional Comments <small>(if any)</small>:</label>
-                                                                <div class="">
-                                                                   <textarea id="leave_comment" cols="85" rows="5"></textarea>
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                       </div>
-                                                       <!-- row -->
-                                                       <div class="row">
-                                                          <div class="col-md-12 paddingBottom10">
-                                                             <div class="form-group">
-                                                                <label class="">Request for a paid Compensation</label>
-                                                                <div class="">
-                                                                   <input type="checkbox" class="make-switch" data-on-text="Yes" data-off-text="No" id="limit">
-                                                                </div>
-                                                             </div>
-                                                             <!-- form-group -->
-                                                          </div>
-                                                          <!-- col-md-6 -->
-                                                       </div>
-                                                       <!-- row -->
-                                                    </div>
-                                                    <!-- form-body -->
-                                                 </div>
-                                                 <!-- portlet-body fixedHeightmodalPortlet-->
-                                              </div>
-                                           </div>
-                                           <div class="modal-footer text-center" style="text-align:center;">
-                                              <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
-                                              <button onClick="add_leave()" type="button" class="btn dark btn-outline active" data-dismiss="">Add</button>
-                                              <!--button type="button" class="btn green">Add Badge</button -->
-                                           </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                     </div>
-                                     <!-- /.modal-dialog -->
-                                </div>
-                              
-                                <!-- Kashif Solangi Leave Application Edit Functionality Modal-->
-                                <div class="modal fade" id="LeaveAppForEdit" tabindex="-1" role="basic" aria-hidden="true">
-                                   <div class="modal-dialog">
-                                      <div class="modal-content">
-                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                            <h3 class="modal-title">Leave Application</h3>
-                                         </div>
-                                         <div class="modal-body" style="float:left;width:100%;">
-                                            <div class="portlet box blue-hoki">
-                                               <div class="portlet-title">
-                                                  <div class="caption">
-                                                     <i class="fa fa-user"></i><font id="">Leave form</font>
+                                                     </div>
+                                                     <!-- portlet-title -->
+                                                     <div class="headRightDetailsInner">
+                                                        <table>
+                                                           <tbody>
+                                                              <tr id="">
+                                                                 <td class="" style="padding-right:10px;">
+                                                                    <img class="user-pic rounded absentia_staff_img tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="" width="42">
+                                                                 </td>
+                                                                 <td class="staffView_StaffName">
+                                                                    <a href="javascript:;" class="primary-link tooltips absentia_staff_name" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="289" data-staffgtid="12-045"></a> - <small class="absentia_name_code tooltips" data-container="body" data-placement="top" data-original-title="" ></small><br><small class="shortHeight"><span class="absentia_bottom_line tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"></span></small>
+                                                                 </td>
+                                                              </tr>
+                                                           </tbody>
+                                                        </table>
+                                                        <!-- col-md-4 -->
+                                                     </div>
+                                                     <!-- headRightDetailsInner -->
+                                                     <div class="portlet-body fixedHeightmodalPortlet">
+                                                        <div class="form-body">
+                                                           <div class="row">
+                                                              <div class="col-md-6 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                      <label class="">Form #:</label>
+                                                                      <div class="">
+                                                                         <input type="text" class="form_part_a
+                                                                          form-control form_number_leave_application_a " disabled="" name="" id="form_number_leave_application_a" value="<?= 
+                                                                          App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(2); ?>" data-id="">
+                                                                      </div>
+                                                                      <div class="">
+                                                                         <input type="text" class="form_part_b form-control form_number_leave_application_b" name="" id="form_number_leave_application_b" data-id="">
+                                                                      </div>
+                                                                   </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                            </div>
+                                                            <!-- row -->
+                                                           <div class="row">
+                                                              <div class="col-md-6 paddingBottom10">
+                                    
+                                                                 <div class="form-group">
+                                                                    <label class="">Leave Title:</label>
+                                                                    <div class="">
+                                                                       <input type="text" class="form-control" name="" id="leave_title" >
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                              <div class="col-md-6 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                    <label class="">Leave Type:</label>
+                                                                    <div class="leave_type">
+                                                                       <select class="form-control">
+                                                                       <option selected disabled value="0">Select Leave Type</option>
+                                                                       @foreach($leaveType as $type)
+                                                                          <option value="{{$type->id}}">{{$type->leave_type_name}}</option>
+                                                                       @endforeach
+                                                                       </select>
+                                                                       <!-- select -->
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                           </div>
+                                                           <!-- row -->
+                                                           <div class="row">
+                                                              <div class="col-md-6 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                    <label class="">From date:</label>
+                                                                    <div class="">
+                                                                       <input type="date" class="form-control" name="" id="leave_from">
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                              <div class="col-md-6 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                    <label class="">To date:</label>
+                                                                    <div class="">
+                                                                       <input type="date" class="form-control" name="" id="leave_to">
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                           </div>
+                                                           <!-- row -->
+                                                           <div class="row">
+                                                              <div class="col-md-6 paddingBottom10">
+                                                                <input type="checkbox" id="DayBaseLeave" onClick="setTodate('DayBaseLeave','leave_from','leave_to')"> <label for="DayBaseLeave">Hourly Leave</label>
+                                                              </div>
+                                                           </div>
+                                                           <!-- row -->
+                                                           <div class="row" id="showHourly" style="display: none;">
+                                                              <div class="col-md-6 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                    <label class="">From time:</label>
+                                                                    <div class="">
+                                                                       <input type="time" class="form-control" name="" id="time_from" required>
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                              <div class="col-md-6 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                    <label class="">To time:</label>
+                                                                    <div class="">
+                                                                       <input type="time" class="form-control" name="" id="time_to" required>
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                           </div>
+                                                           <!-- row -->
+                                                           <div class="row">
+                                                              <div class="col-md-12 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                    <label class="">Additional Comments <small>(if any)</small>:</label>
+                                                                    <div class="">
+                                                                       <textarea id="leave_comment" cols="85" rows="5"></textarea>
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                           </div>
+                                                           <!-- row -->
+                                                           <div class="row">
+                                                              <div class="col-md-12 paddingBottom10">
+                                                                 <div class="form-group">
+                                                                    <label class="">Request for a paid Compensation</label>
+                                                                    <div class="">
+                                                                       <input type="checkbox" class="make-switch" data-on-text="Yes" data-off-text="No" id="limit">
+                                                                    </div>
+                                                                 </div>
+                                                                 <!-- form-group -->
+                                                              </div>
+                                                              <!-- col-md-6 -->
+                                                           </div>
+                                                           <!-- row -->
+                                                        </div>
+                                                        <!-- form-body -->
+                                                     </div>
+                                                     <!-- portlet-body fixedHeightmodalPortlet-->
                                                   </div>
                                                </div>
-                                               <!-- portlet-title -->
-                                               <div class="headRightDetailsInner">
-                                                  <table>
-                                                     <tbody>
-                                                        <tr id="">
-                                                           <td class="" style="padding-right:10px;">
-                                                              <img class="user-pic rounded absentia_staff_img tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="" width="42">
-                                                           </td>
-                                                           <td class="staffView_StaffName">
-                                                              <a href="javascript:;" class="primary-link tooltips absentia_staff_name" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="289" data-staffgtid="12-045"></a> - <small class="absentia_name_code tooltips" data-container="body" data-placement="top" data-original-title="" ></small><br><small class="shortHeight"><span class="absentia_bottom_line tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"></span></small>
-                                                           </td>
-                                                        </tr>
-                                                     </tbody>
-                                                  </table>
-                                                  <!-- col-md-4 -->
-                                               </div>
-                                               <!-- headRightDetailsInner -->
-                                               <div class="portlet-body fixedHeightmodalPortlet">
-                                                  <div class="form-body" id="Leave_main_containter">
-                                                 </div>
-                                                  <!-- form-body -->
-                                               </div>
-                                               <!-- portlet-body fixedHeightmodalPortlet-->
-                                            </div>
-                                         </div>
-                                         <div class="modal-footer text-center" style="text-align:center;">
-                                            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
-                                            <button onClick="edit_leave()" type="button" class="btn dark btn-outline active" data-dismiss=""> Update </button>
-                                            <!--button type="button" class="btn green">Add Badge</button -->
-                                         </div>
-                                      </div>
-                                      <!-- /.modal-content -->
-                                   </div>
-                                   <!-- /.modal-dialog -->
-                                </div>
-                               <!-- End Kashi Solangi Leave Applicaiton Modal -->
-                                </div>
-                               <!-- portlet -->
+                                               <div class="modal-footer text-center" style="text-align:center;">
+                                                  <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                                                  <button onClick="add_leave()" type="button" class="btn dark btn-outline active" data-dismiss="">Add</button>
+                                                  <!--button type="button" class="btn green">Add Badge</button -->
+                                               </div><!-- modal-footer -->
+                                            </div><!-- /.modal-content -->
+                                         </div><!-- /.modal-dialog -->
+                                    </div><!-- modal -->
+                              
+                                    <!-- Kashif Solangi Leave Application Edit Functionality Modal-->
+                                    <div class="modal fade" id="LeaveAppForEdit" tabindex="-1" role="basic" aria-hidden="true">
+                                       <div class="modal-dialog">
+                                          <div class="modal-content">
+                                             <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3 class="modal-title">Leave Application</h3>
+                                             </div><!-- modal-header -->
+                                             <div class="modal-body" style="float:left;width:100%;">
+                                                <div class="portlet box blue-hoki">
+                                                   <div class="portlet-title">
+                                                      <div class="caption">
+                                                         <i class="fa fa-user"></i><font id="">Leave form</font>
+                                                      </div>
+                                                   </div>
+                                                   <!-- portlet-title -->
+                                                   <div class="headRightDetailsInner">
+                                                      <table>
+                                                         <tbody>
+                                                            <tr id="">
+                                                               <td class="" style="padding-right:10px;">
+                                                                  <img class="user-pic rounded absentia_staff_img tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="" width="42">
+                                                               </td>
+                                                               <td class="staffView_StaffName">
+                                                                  <a href="javascript:;" class="primary-link tooltips absentia_staff_name" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="289" data-staffgtid="12-045"></a> - <small class="absentia_name_code tooltips" data-container="body" data-placement="top" data-original-title="" ></small><br><small class="shortHeight"><span class="absentia_bottom_line tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"></span></small>
+                                                               </td>
+                                                            </tr>
+                                                         </tbody>
+                                                      </table>
+                                                      <!-- col-md-4 -->
+                                                   </div>
+                                                   <!-- headRightDetailsInner -->
+                                                   <div class="portlet-body fixedHeightmodalPortlet">
+                                                      <div class="form-body" id="Leave_main_containter">
+                                                     </div>
+                                                      <!-- form-body -->
+                                                   </div>
+                                                   <!-- portlet-body fixedHeightmodalPortlet-->
+                                                </div>
+                                             </div>
+                                             <div class="modal-footer text-center" style="text-align:center;">
+                                                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                                                <button onClick="edit_leave()" type="button" class="btn dark btn-outline active" data-dismiss=""> Update </button>
+                                                <!--button type="button" class="btn green">Add Badge</button -->
+                                             </div><!-- modal-footer -->
+                                          </div><!-- /.modal-content -->
+                                       </div><!-- /.modal-dialog -->
+                                    </div><!-- modal -->
+                                   <!-- End Kashi Solangi Leave Applicaiton Modal -->
+                                </div><!-- portlet -->
                                <div class="portlet light bordered padding0">
                                   <div class="portlet-title">
                                      <div class="caption">
@@ -4381,8 +4201,7 @@ display: none;
                                            <button class="tooltips btn btn-transparent dark btn-outline btn-circle btn-sm" data-placement="bottom" data-original-title="Unauthorized Leave Penalty" data-toggle="modal" href="#UnAuthLeavePen" id="">Penalty</button>
                                         </div>
                                      </div>
-                                  </div>
-                                  <!-- portlet-title -->
+                                  </div><!-- portlet-title -->
                                   <div class="portlet-body" style="padding:15px;">
                                      <table width="100%" border="0" class="table table-striped table-hover table-bordered" id="penaltyTable">
                                         <thead>
@@ -4399,8 +4218,7 @@ display: none;
 
                                         </tbody>
                                      </table>
-                                  </div>
-                                  <!-- portlet-body -->
+                                  </div><!-- portlet-body -->
                                   <div class="modal fade" id="UnAuthLeavePen" tabindex="-1" role="basic" aria-hidden="true">
                                      <div class="modal-dialog">
                                         <div class="modal-content">
@@ -4414,8 +4232,7 @@ display: none;
                                                     <div class="caption">
                                                        <i class="fa fa-user"></i><font id="">Penalty</font>
                                                     </div>
-                                                 </div>
-                                                 <!-- portlet-title -->
+                                                 </div><!-- portlet-title -->
                                                  <div class="headRightDetailsInner">
                                                     <table>
                                                        <tbody>
@@ -4430,8 +4247,7 @@ display: none;
                                                        </tbody>
                                                     </table>
                                                     <!-- col-md-4 -->
-                                                 </div>
-                                                 <!-- headRightDetailsInner -->
+                                                 </div><!-- headRightDetailsInner -->
                                                  <div class="portlet-body fixedHeightmodalPortlet">
                                                     <div class="form-body">
                                                        <div class="row">
@@ -4506,68 +4322,60 @@ display: none;
                                                           <!-- col-md-6 -->
                                                        </div>
                                                        <!-- row -->
-                                                    </div>
-                                                    <!-- form-body -->
-                                                 </div>
-                                                 <!-- portlet-body fixedHeightmodalPortlet-->
-                                              </div>
-                                           </div>
+                                                    </div><!-- form-body -->
+                                                 </div><!-- portlet-body fixedHeightmodalPortlet-->
+                                              </div><!-- portlet -->
+                                           </div><!-- modal-body -->
                                            <div class="modal-footer text-center" style="text-align:center;">
                                               <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
                                               <button onCLick="addPenalty()" type="button" class="btn dark btn-outline active" data-dismiss="">Submit</button>
                                               <!--button type="button" class="btn green">Add Badge</button -->
-                                           </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                     </div>
-                                     <!-- /.modal-dialog -->
-                                  </div>
-                                <!-- Edit Penalties -->
-                                 <div class="modal fade" id="UnAuthLeavePenEdit" tabindex="-1" role="basic" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                       <div class="modal-body" style="float:left;width:100%;">
-                                          <div class="portlet box blue-hoki">
-                                             <div class="portlet-title">
-                                               <div class="caption">
-                                                 <i class="fa fa-user"></i><font id="">Penalty</font>
-                                               </div>
-                                             </div>
-                                             <div class="headRightDetailsInner">
-                                               <table>
-                                                 <tbody>
-                                                   <tr id="">
-                                                      <td class="" style="padding-right:10px;">
-                                                        <img class="user-pic rounded absentia_staff_img tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="" width="42">
-                                                      </td>
-                                                      <td class="staffView_StaffName">
-                                                        <a href="javascript:;" class="primary-link tooltips absentia_staff_name" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="289" data-staffgtid="12-045"></a> - <small class="absentia_name_code tooltips" data-container="body" data-placement="top" data-original-title="" ></small><br><small class="shortHeight"><span class="absentia_bottom_line tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"></span></small>
-                                                      </td>
-                                                   </tr>
-                                                 </tbody>
-                                               </table>
-                                               <!-- col-md-4 -->
-                                             </div>
-                                             <!-- headRightDetailsInner -->
-                                             <div class="portlet-body fixedHeightmodalPortlet">
-                                               <div class="form-body" id="Penalties_Contents">
-                                                
-                                               </div>
-                                             </div>
-                                          </div>
-                                        </div>
-                                        <div class="modal-footer text-center" style="text-align:center;">
-                                          <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
-                                          <button onCLick="editPenalty()" type="button" class="btn dark btn-outline active" data-dismiss=""> Update </button>
-                                        </div>
-                                      </div>
+                                           </div><!-- modal-footer -->
+                                        </div><!-- /.modal-content -->
+                                     </div><!-- /.modal-dialog -->
+                                  </div><!-- Edit Penalties -->
+                                  <div class="modal fade" id="UnAuthLeavePenEdit" tabindex="-1" role="basic" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                           <div class="modal-body" style="float:left;width:100%;">
+                                              <div class="portlet box blue-hoki">
+                                                 <div class="portlet-title">
+                                                   <div class="caption">
+                                                     <i class="fa fa-user"></i><font id="">Penalty</font>
+                                                   </div>
+                                                 </div>
+                                                 <div class="headRightDetailsInner">
+                                                   <table>
+                                                     <tbody>
+                                                       <tr id="">
+                                                          <td class="" style="padding-right:10px;">
+                                                            <img class="user-pic rounded absentia_staff_img tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="" width="42">
+                                                          </td>
+                                                          <td class="staffView_StaffName">
+                                                            <a href="javascript:;" class="primary-link tooltips absentia_staff_name" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="289" data-staffgtid="12-045"></a> - <small class="absentia_name_code tooltips" data-container="body" data-placement="top" data-original-title="" ></small><br><small class="shortHeight"><span class="absentia_bottom_line tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"></span></small>
+                                                          </td>
+                                                       </tr>
+                                                     </tbody>
+                                                   </table>
+                                                   <!-- col-md-4 -->
+                                                 </div><!-- headRightDetailsInner -->
+                                                 <div class="portlet-body fixedHeightmodalPortlet">
+                                                   <div class="form-body" id="Penalties_Contents">
+                                                    
+                                                   </div>
+                                                 </div>
+                                              </div><!-- portlet -->
+                                            </div><!-- modal-body -->
+                                            <div class="modal-footer text-center" style="text-align:center;">
+                                              <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
+                                              <button onCLick="editPenalty()" type="button" class="btn dark btn-outline active" data-dismiss=""> Update </button>
+                                            </div><!-- modal-footer -->
+                                          </div><!-- modal-content -->
+                                        </div><!-- modal-dialog -->
                                     </div>
-                                 </div>
                                   <!-- End Penalties -->
-                               </div>
-                               <!-- portlet -->
-                            </div>
-                            <!-- tab_1_3_4 -->
+                               </div><!-- portlet -->
+                            </div><!-- tab_1_3_4 -->
                             <div class="tab-pane" id="tab_1_3_5">
                                <div class="portlet light bordered padding0">
                                   <div class="portlet-title">
@@ -4581,8 +4389,7 @@ display: none;
                                            <button class="tooltips btn btn-transparent dark btn-outline btn-circle btn-sm" data-placement="bottom" data-original-title="Add Exceptional Adjustment" data-toggle="modal" href="#ExceptionalAdjustmentForm" onClick="clearAdjustment()">Adjustments</button>
                                         </div>
                                      </div>
-                                  </div>
-                                  <!-- portlet-title -->
+                                  </div><!-- portlet-title -->
                                   <div class="portlet-body" style="padding:15px;">
                                      <table width="100%" border="0" class="table table-striped table-hover table-bordered" id="adjustment_table">
                                         <thead>
@@ -4597,8 +4404,7 @@ display: none;
                                         <tbody class="font-grey-mint">
                                         </tbody>
                                      </table>
-                                  </div>
-                                  <!-- portlet-body -->
+                                  </div><!-- portlet-body -->
                                   <div class="modal fade" id="ExceptionalAdjustmentForm" tabindex="-1" role="basic" aria-hidden="true">
                                      <div class="modal-dialog">
                                         <div class="modal-content">
@@ -4612,8 +4418,7 @@ display: none;
                                                     <div class="caption">
                                                        <i class="fa fa-user"></i><font id="">Adjustments</font>
                                                     </div>
-                                                 </div>
-                                                 <!-- portlet-title -->
+                                                 </div><!-- portlet-title -->
                                                  <div class="headRightDetailsInner">
                                                     <table>
                                                        <tbody>
@@ -4628,8 +4433,7 @@ display: none;
                                                        </tbody>
                                                     </table>
                                                     <!-- col-md-4 -->
-                                                 </div>
-                                                 <!-- headRightDetailsInner -->
+                                                 </div><!-- headRightDetailsInner -->
                                                  <div class="portlet-body fixedHeightmodalPortlet">
                                                     <div class="form-body">
                                                       <div class="form-group">
@@ -4681,9 +4485,8 @@ display: none;
                                                           <!-- col-md-6 -->
                                                        </div>
                                                        <!-- row -->
-                                                    </div>
-                                                    <!-- form-body -->
-                                                 </div>
+                                                    </div><!-- form-body -->
+                                                 </div><!-- fixedHeightmodalPortlet -->
                                                  <!-- portlet-body fixedHeightmodalPortlet-->
                                               </div>
                                            </div>
@@ -4692,24 +4495,20 @@ display: none;
                                               <button onClick="addAdjustment()" type="button" class="btn dark btn-outline active">Submit</button>
                                               <!--button type="button" class="btn green">Add Badge</button -->
                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                     </div>
-                                     <!-- /.modal-dialog -->
-                                  </div>
+                                        </div><!-- /.modal-content -->
+                                     </div><!-- /.modal-dialog -->
+                                  </div><!-- modal -->
                                   <!-- portlet-body -->
                                   <div class="modal fade" id="ExceptionalAdjustmentFormEdit" tabindex="-1" role="basic" aria-hidden="true">
                                      <div class="modal-dialog">
                                         <div class="modal-content">
-                                          
                                            <div class="modal-body" style="float:left;width:100%;">
                                               <div class="portlet box blue-hoki">
                                                  <div class="portlet-title">
                                                     <div class="caption">
                                                        <i class="fa fa-user"></i><font id="">Adjustments</font>
                                                     </div>
-                                                 </div>
-                                                 <!-- portlet-title -->
+                                                 </div><!-- portlet-title -->
                                                  <div class="headRightDetailsInner">
                                                     <table>
                                                        <tbody>
@@ -4724,32 +4523,25 @@ display: none;
                                                        </tbody>
                                                     </table>
                                                     <!-- col-md-4 -->
-                                                 </div>
-                                                 <!-- headRightDetailsInner -->
+                                                 </div><!-- headRightDetailsInner -->
                                                  <div class="portlet-body fixedHeightmodalPortlet">
                                                     <div class="form-body" id="Adjustment_Contents">
                                        
                                                     
-                                       </div>
-                                                    <!-- form-body -->
-                                                 </div>
-                                                 <!-- portlet-body fixedHeightmodalPortlet-->
-                                              </div>
-                                           </div>
+                                       				</div><!-- form-body -->
+                                                 </div><!-- portlet-body fixedHeightmodalPortlet-->
+                                              </div><!-- portlet -->
+                                           </div><!-- modal-body -->
                                            <div class="modal-footer text-center" style="text-align:center;">
                                               <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
                                               <button onClick="editAdjustment()" type="button" class="btn dark btn-outline active">Update</button>
                                               <!--button type="button" class="btn green">Add Badge</button -->
-                                           </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                     </div>
-                                     <!-- /.modal-dialog -->
-                                  </div>
-                                </div>
-                               <!-- portlet -->
-                            </div>
-                            <!-- tab_1_3_5 -->
+                                           </div><!-- modal-footer -->
+                                        </div><!-- /.modal-content -->
+                                     </div><!-- /.modal-dialog -->
+                                  </div><!-- modal-->
+                                </div><!-- portlet -->
+                            </div><!-- tab_1_3_5 -->
                             <div class="tab-pane" id="tab_1_3_6">
                                <div class="portlet light bordered padding0">
                                   <div class="portlet-title">
@@ -4766,13 +4558,10 @@ display: none;
                                   </div>
                                   <!-- portlet-title -->
                                   <div class="portlet-body" style="padding:15px;">
-                         
                                      <input type="hidden" name="Missed_id" id="Missed_id" value="0" />
                                      <input type="hidden" name="Table_name" id="Table_name" value="0" />
-                         
                                      <table width="100%" border="0" class="table table-striped table-hover table-bordered" id="manual_table">
                                         <thead>
-                                          
                                            <tr>
                                               <th width="15%">Attendance Date </th>
                                               <th width="12%">Tap</th>
@@ -4781,59 +4570,7 @@ display: none;
                                               <th width="10%">Action</th>
                                            </tr>
                                         </thead>
-                                     
                                         <tbody class="font-grey-mint">
-                                           <!-- <tr class="">
-                                              <td>
-                                                 Mon Oct 09, 2017
-                                              </td>
-                                              <td>
-                                                 07:23 am
-                                              </td>
-                                              <td>
-                                                 04:05 pm
-                                              </td>
-                                              <td>
-                                                 <strong>Mon Oct 09, 2017</strong> at <strong>07:23 am</strong>
-                                              </td>
-                                              <td>
-                                                 Lorem ipsum dolor sit amet
-                                              </td>
-                                           </tr>
-                                           <tr class="">
-                                              <td>
-                                                 Mon Oct 09, 2017
-                                              </td>
-                                              <td>
-                                                 07:23 am
-                                              </td>
-                                              <td>
-                                                 04:05 pm
-                                              </td>
-                                              <td>
-                                                 <strong>Mon Oct 09, 2017</strong> at <strong>07:23 am</strong>
-                                              </td>
-                                              <td>
-                                                 Lorem ipsum dolor sit amet
-                                              </td>
-                                           </tr>
-                                           <tr class="">
-                                              <td>
-                                                 Mon Oct 09, 2017
-                                              </td>
-                                              <td>
-                                                 07:23 am
-                                              </td>
-                                              <td>
-                                                 04:05 pm
-                                              </td>
-                                              <td>
-                                                 <strong>Mon Oct 09, 2017</strong> at <strong>07:23 am</strong>
-                                              </td>
-                                              <td>
-                                                 Lorem ipsum dolor sit amet
-                                              </td>
-                                           </tr> -->
                                         </tbody>
                                      </table>
                                   </div>
@@ -4863,8 +4600,7 @@ display: none;
                                                        </tbody>
                                                     </table>
                                                     <!-- col-md-4 -->
-                                                 </div>
-                                                 <!-- headRightDetailsInner -->
+                                                 </div><!-- headRightDetailsInner -->
                                                  <div class="portlet-body fixedHeightmodalPortlet">
                                                     <div class="form-body">
                                                        <div class="form-group">
@@ -4917,7 +4653,7 @@ display: none;
                                                        </div>
                                                        <!-- row -->
                                                     </div>
-                                                    <!-- form-body -->
+                                                    </div><!-- form-body -->
                                                  </div>
                                                  <!-- portlet-body fixedHeightmodalPortlet-->
                                               </div>
@@ -4985,8 +4721,8 @@ display: none;
                          </div>
                          <!-- tab-content -->
                       </div>
-                      </div>
-                      <!-- //unexpected div close -->
+                      <!--</div>
+                       //unexpected div close -->
                       <!-- tabbable-line -->
                    </div>
                    <!-- tab_1_3 -->
@@ -5719,6 +5455,8 @@ display: none;
 <!-- END USE PROFILE -->
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+
+@include('master_layout.footer')
 <script type="text/javascript">
 
       $(document).ready(function () {
@@ -5729,12 +5467,15 @@ display: none;
           $('#showHourly').fadeToggle();
       });
 
-        $(".form_part_b").inputmask("mask", {
-            "mask": "9999-999"
-          });
+        
       
     });
 
+    function createFormNumberMask(){
+         $(".form_part_b").inputmask("mask", {
+            "mask": "9999-999"
+          });
+    }
 
   //Zk Code Adding Start Here TIF-B Foam
 
@@ -6514,6 +6255,7 @@ $('#staffView_StaffList_Search').val('');
              var form_number_a=$('#form_number_absentia_a').val();
              var form_number_b=$('#form_number_absentia_b').val();
              var form_number=form_number_a+form_number_b;
+
 
              var staffID = staff_ids[i];
              if (date !== '' && title !== '' && start_time !== '' && end_time !== '') {
@@ -7560,7 +7302,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['comments']){
                  var commentsHTML = '';
                  var school_name="Generation's School";
-  
+                 var login_user_id={{Sentinel::getUser()->id}};
                  for(var i=0; i< data['comments'].length; i++){
 
                       if(data['comments'][i].type=='tap-in' || data['comments'][i].type=='tap-out'){
@@ -7570,8 +7312,14 @@ $('#staffView_StaffList_Search').val('');
                         name_and_location=data['comments'][i].location_name;
                         var user_name=name_and_location.split("//")[0];
                         var user_image=name_and_location.split("//")[1];
+                        var user_id=name_and_location.split("//")[2];
+                        if(login_user_id==parseInt(user_id)){
+                          my_class="out";
+                        }else{
+                           my_class="in";
+                        }
 
-                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/'+user_image+'.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+user_name+'</a><span class="body">'+data['comments'][i].description+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
+                        commentsHTML=commentsHTML+'<li class="'+my_class+' commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/'+user_image+'.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+user_name+'</a><span class="body">'+data['comments'][i].description+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
                       }
                                                                            
                  }
@@ -8094,6 +7842,7 @@ $.ajax({
   // var data = jQuery.parseJSON(result);
   $('#Absenia_Contents').html(result);
   $('#AddAIAE').modal('toggle');
+      createFormNumberMask();
    }
 });
 }
@@ -8118,6 +7867,11 @@ $.ajax({
     var form_number_a=$('.form_number_absentia_a:visible').val();
     var form_number_b=$('.form_number_absentia_b:visible').val();
     var form_number=form_number_a+form_number_b;
+    var pvs_form_no=$('.absentia_pvs_form_no').val();
+    if(pvs_form_no!=form_number_b){
+          checkHrFormNumberExistance(form_number,'absenta_manual_description');
+    }
+
 
     bootbox.dialog({
         message: "Are you sure you want to change this Absentia?",
@@ -8147,7 +7901,7 @@ $.ajax({
                             },
                             success: function(result) {
 
-
+                                  $('#AddAIAE').modal('toggle');
                                     $('#absentia_title_'+Edit_Absentia_id_hidden).text(titles);
                                     $('#absentia_aiaStamp_'+Edit_Absentia_id_hidden).text( formatDate(new Date(date)));
                                     $('#absentia_aiaStart_time_'+Edit_Absentia_id_hidden).text(format_time(start_time));
@@ -8157,7 +7911,7 @@ $.ajax({
 
                       
                                 
-                                $('#AddAIAE').modal('toggle');
+                                
                                 $("#absentia_date_edit").val('');
                                 $("#absentia_title_edit").val('');
                                 $("#absentia_startTime_edit").val('');
@@ -8244,13 +7998,15 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
         var data = JSON.parse(e);
 
 
-       
+
         $("#Leave_main_containter").html( data.LT );
         $('#LeaveAppForEdit').modal('toggle');
          
         var paid_percentage_edit = $("#paid_compensation_edit").val();
          
         $("#limit_edit").bootstrapSwitch();
+                 createFormNumberMask();
+
          
         if( paid_percentage_edit == 1){ 
           $("#limit_edit").bootstrapSwitch('state', true);
@@ -8297,6 +8053,11 @@ var delete_Absentia = function(Absentia_id, Staff_id ){
     var form_number_b=$('.form_number_leave_application_b:visible').val();
 
     var form_number=form_number_a+form_number_b;
+    var pvs_form_no=$('.leave_pvs_form_no').val();
+
+    if(pvs_form_no!=form_number_b){
+          checkHrFormNumberExistance(form_number,'leave_application');
+    }
    
    
    var paid_compensation_percentage = $('#paid_percentage_edit').val();
@@ -8465,6 +8226,8 @@ $.ajax({
  $("#Penalties_Contents").html('');
  $("#Penalties_Contents").html(res);
  $("#UnAuthLeavePenEdit").modal('toggle');
+         createFormNumberMask();
+
  }
 });
 }
@@ -8482,7 +8245,11 @@ $.ajax({
     var form_number_a=$('.form_number_penalty_a:visible').val();
     var form_number_b=$('.form_number_penalty_b:visible').val();
     var form_number=form_number_a+form_number_b;
-   
+    var pvs_form_no=$('.penalty_pvs_form_no').val();
+
+    if(pvs_form_no!=form_number_b){
+      checkHrFormNumberExistance(form_number,'daily_penalty');
+    }
     // console.log(penalty_to);
 
    bootbox.dialog({
@@ -8612,10 +8379,14 @@ $.ajax({
  "_token": "{{ csrf_token() }}"
  },
  success:function(res){
+
  // var data = jQuery.parseJSON(res);
  $("#Adjustment_Contents").html('');
  $("#Adjustment_Contents").html(res);
+          createFormNumberMask();
+
  $("#ExceptionalAdjustmentFormEdit").modal('toggle');
+
  }
 });
 }
@@ -8623,16 +8394,21 @@ $.ajax({
  
 var editAdjustment = function(){
  
-   var adjustment_title = $('#adjustment_title_edit').val();
+    var adjustment_title = $('#adjustment_title_edit').val();
     var adjustment_no = $('#adjustment_no_edit').val();
     var adjustment_description = $('#adjustment_description_edit').val();
-   
-   var adjustment_id = $('#adjustment_id_edit').val();
+
+    var adjustment_id = $('#adjustment_id_edit').val();
     var staff_id = $('#adjustment_staff_edit').val();
-     var form_number_a=$('.form_number_exceptional_adjustment_a:visible').val();
+    var form_number_a=$('.form_number_exceptional_adjustment_a:visible').val();
     var form_number_b=$('.form_number_exceptional_adjustment_b:visible').val();
 
     var form_number=form_number_a+form_number_b;
+
+    var pvs_form_no=$('.pvs_form_no_adj').val();
+     if(pvs_form_no!=form_number_b){
+          checkHrFormNumberExistance(form_number,'exception_adjustment');
+     }
    
     bootbox.dialog({
           message: "Are you sure you want to edit this Adjustment?",
@@ -8765,6 +8541,8 @@ $.ajax({
  $("#Manual_Form_Entry").html('');
  $("#Manual_Form_Entry").html(res);
  $("#ManualAttendanceFormEdit").modal('toggle');
+        createFormNumberMask();
+
  }
 });
 }
@@ -8788,6 +8566,10 @@ var Table_name = $('#Table_name_edit').val();
     var form_number_a=$('.form_number_miss_tap_a:visible').val();
     var form_number_b=$('.form_number_miss_tap_b:visible').val();
     var form_number=form_number_a+form_number_b;
+    var pvs_form_no=$('.mis_pvs_form_no').val();
+    if(pvs_form_no!=form_number_b){
+      checkHrFormNumberExistance(form_number,'absenta_manual_description');
+    }
 
 bootbox.dialog({
           message: "Are you sure you want to edit this Missed Tap?",
@@ -8975,6 +8757,11 @@ $.ajax({
       var form_number_a=$('.form_number_absentia_a').val();
       var form_number_b=$('.form_number_absentia_b').val();
       var form_number=form_number_a+form_number_b;
+      // if(checkHrFormNumberExistance(form_number,'form_number_absentia_b')>0){
+      //   alert('form number already exists')
+      //   throw new Error("form number already exists");
+      // }
+          checkHrFormNumberExistance(form_number,'absenta_manual_description')
        if( date !== '' && title !== '' && start_time !== '' && end_time !== ''){
    
            $.ajax({
@@ -9035,7 +8822,7 @@ bootbox.dialog({
     var form_number_a=$('.form_number_miss_tap_a').val();
     var form_number_b=$('.form_number_miss_tap_b').val();
     var form_number=form_number_a+form_number_b;
-
+      checkHrFormNumberExistance(form_number,'absenta_manual_description');
        var description = $("#manual_description").val();
        var staffID = $('#tab_1_3').data('staffID');
 
@@ -9192,6 +8979,8 @@ bootbox.dialog({
         var form_number_b=$('.form_number_leave_application_b').val();
 
         var form_number=form_number_a+form_number_b;
+
+        checkHrFormNumberExistance(form_number,'leave_application')
 
 
 
@@ -9511,6 +9300,8 @@ bootbox.dialog({
         var form_number_b=$('.form_number_penalty_b').val();
 
         var form_number=form_number_a+form_number_b;
+        checkHrFormNumberExistance(form_number,'daily_penalty')
+
         // console.log(penalty_to);
 
         if(staff_id != '' && penalty_title != '' && penalty_from != '' && penalty_to != '' && penalty_day != ''){
@@ -9570,6 +9361,9 @@ bootbox.dialog({
         var form_number_a=$('.form_number_exceptional_adjustment_a').val();
         var form_number_b=$('.form_number_exceptional_adjustment_b').val();
         var form_number=form_number_a+form_number_b;
+
+        checkHrFormNumberExistance(form_number,'exception_adjustment')
+
         if(adjustment_title != '' && adjustment_no != ''){
            $.ajax({
               type:"POST",
@@ -12034,6 +11828,8 @@ loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
 
 });
 </script>
+<script src="{{ URL::to('metronic') }}/global/scripts/global_functions.js" type="text/javascript"></script>
+
 <!--<script src="assets/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
  <script src="assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>
  <script src="./assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>

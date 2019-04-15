@@ -166,7 +166,7 @@ class Edit_delete_management_controller extends StaffReportController
 		  $hr_forms_log->staff_id=$logs['staff_id'];
           $hr_forms_log->type='delete';
           $hr_forms_log->effected_entry_table='atif_gs_events.absenta_manual_description';
-          $hr_forms_log->effected_table_id=$logs['title'];
+          $hr_forms_log->effected_table_id=$logs['effected_table_id'];
           $hr_forms_log->form_number=$logs['form_number'];
           $hr_forms_log->title=$logs['title'];
           $hr_forms_log->description=$logs['description'];
@@ -241,7 +241,7 @@ class Edit_delete_management_controller extends StaffReportController
           $hr_forms_log->description=$description;
           $hr_forms_log->date=date('Y-m-d');
           $hr_forms_log->time=date("H:i:s");
-          $hr_forms_log->time_details=$tap_in.'///'.$tap_out;
+          $hr_forms_log->time_details=$tap_in.'///'.$tap_out.'///'.$date;
           $hr_forms_log->created_by=$userID;
           $hr_forms_log->updated_by=$userID;
           $hr_forms_log->save();
@@ -301,6 +301,9 @@ class Edit_delete_management_controller extends StaffReportController
                     <label class="">Form No:</label><br>
                     <input type="text" class="form-control form_part_a form_number_leave_application_a" name="form_number_leave_application_a" id="form_number_leave_application_a" value="'.@$format_code.'" disabled="" />
 					<input type="text" class="form-control form_part_b form_number_leave_application_b" name="form_number_leave_application_b" id="form_number_leave_application_b" value="'.@$form_number[1].'" />
+
+					<input type="hidden" class="form-control leave_pvs_form_no" name="leave_pvs_form_no" id="leave_pvs_form_no" value="'.@$form_number[1].'" />
+
                  </div>
               </div>
             </div>';

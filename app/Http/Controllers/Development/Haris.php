@@ -1388,6 +1388,8 @@ class Haris extends StaffReportController
             'form_number' => $form_number,
             'date' => $date,
             'description' => $description,
+            'attendance_id' => $staff_manual_attendance,
+            'attendance_type' => $tableFlag,
             'location_id' => 18,
             'created' => $timeNow,
             'register_by' => $userID,
@@ -3154,4 +3156,25 @@ class Haris extends StaffReportController
       $adjustment_approval->modified_by=$modified_by;
       $adjustment_approval->save();
    } 
+
+   public function checkFormNumberExistance(request $request){
+        $staffInfo = new StaffInformationModel();
+          $form_number=$request->form_number;
+          $table_name=$request->table_name;
+        if($table_name=='leave_application'){
+          // $where = array(
+          //   'form_number' => $table_name,
+          // );
+          $feild_name='form_no';
+        }else{
+          $feild_name='form_number';
+        }
+
+        $where = array(
+                  $feild_name => $form_number,
+                );       
+        $staffDescription = $staffInfo->get('atif_gs_events.'.$table_name,$where);
+        return count($staffDescription);
+
+   }
 }

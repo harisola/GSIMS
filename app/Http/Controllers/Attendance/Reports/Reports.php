@@ -7,11 +7,10 @@
 namespace App\Http\Controllers\Attendance\Reports;
 
 use Sentinel;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Core\SelectionList;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\HR_Attendance\Adjustment_Approvel_model;
 
 class Reports extends Controller
 {
@@ -19,6 +18,29 @@ class Reports extends Controller
 
       return view('attendance.reports.hr_reports_view');
 
+    }
+
+
+
+    public function reporst_staff_attendance(Request $request)
+    {
+    	$Gt_id 		= $request->input("Gt_id");
+    	$From_date  = $request->input("From_date");
+    	$Till_date  = $request->input("Till_date");
+
+
+    	$AAM = new Adjustment_Approvel_model();
+    	$result = $AAM->reports_staff_attendance($Gt_id, $From_date, $Till_date);
+
+
+    	 
+
+
+    	$returnHTML = view('attendance.reports.staff_attendance.staff_attendance_feedback')->with( array('Staff_Attendance' => $result))->render();
+		return response()->json(array('success' => true, 'html'=>$returnHTML));
+
+
+    	
     }
 
 }

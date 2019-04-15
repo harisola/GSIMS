@@ -2261,7 +2261,7 @@ UNION ALL
         hfs.time                                   AS time, 
         Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
         hfs.description                            AS d_description, 
-        Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id) AS location_name, 
+        Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id,'//',sdd.id) AS location_name, 
         Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
         hfs.type                                   AS type, 
         CASE 

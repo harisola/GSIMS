@@ -12,6 +12,8 @@
 				  <div class="">
 						<input type="text" class="form-control form_part_a form_number_absentia_a" name="form_number_absentia_a" id="form_number_absentia_a" value="{{$format_code}}" disabled="" />
 						<input type="text" class="form-control form_part_b form_number_absentia_b" name="form_number_absentia_b" id="form_number_absentia_b" value="{{@$form_number[1]}}" />
+						
+						<input type="hidden" class="form-control  absentia_pvs_form_no" name="pvs_form_no" value="{{@$form_number[1]}}" />
 				  </div>
 			   </div>
 			   <!-- form-group -->

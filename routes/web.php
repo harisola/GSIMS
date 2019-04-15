@@ -126,6 +126,7 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/masterLayout/staff/OverRightPenalties', 'Development\Edit_delete_management_controller@OverRightPenalties');
 	
 	Route::post('/masterLayout/staff/deletePenalties', 'Development\Edit_delete_management_controller@deletePenalties');
+
 	
 	
 	
@@ -139,6 +140,13 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::post('/masterLayout/staff/editAddManual', 'Development\Edit_delete_management_controller@editAddManual');
 	Route::post('/masterLayout/staff/OverRightAddManual', 'Development\Edit_delete_management_controller@OverRightAddManual');
 	Route::post('/masterLayout/staff/deleteAddManual ', 'Development\Edit_delete_management_controller@deleteAddManual');
+
+	Route::get('/masterLayout/staff/check_form_existance ', 'Development\Haris@deleteAddManual');
+
+Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumberExistance');
+
+
+
 	
 	Route::post('/masterLayout/staff/role_distance', 'Development\Staff_role_position_distance@Layout_html');
 	
@@ -462,8 +470,10 @@ Route::group(['middleware' => 'authenticated'], function () {
     Route::get('/new_admission','Account_Process\Accounts\AccountReportController@newAdmssionView');
     Route::get('/account_reports/admission_report','Account_Process\Accounts\AccountReportController@newAdmissionFeeBillReport');
     
-
-
+    /* Adjustment Aapproval Pages URL Route */
+	Route::get('/adjustment_approval', 'Development\AdujstmentApproval@landingPage');
+	Route::post('/adjustment_approval_Operation', 'Development\AdujstmentApproval@Operation');
+	Route::post('/delete_approval_Operation', 'Development\AdujstmentApproval@Delete_Operation');
 	
 		
 		

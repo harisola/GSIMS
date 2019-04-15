@@ -9,6 +9,7 @@
 		  <div class="">
 				<input type="text" class="form-control form_part_a form_number_penalty_a" name="form_number_penalty_a" id="form_number_penalty_a" value="{{@$format_code}}" disabled="" />
 				<input type="text" class="form-control form_part_b form_number_penalty_b" name="form_number_penalty_b" id="form_number_penalty_b" value="{{@$form_number[1]}}" />
+				<input type="hidden" class="form-control penalty_pvs_form_no" name="pvs_form_no" id="penalty_pvs_form_no" value="{{@$form_number[1]}}" />
 		  </div>
 	   </div>
 	   <div class="form-group">
@@ -17,6 +18,7 @@
 		  <input type="hidden" name="staff_id_edit" id="staff_id_edit" value="{{$Staff_id}}" />
 		  <input type="hidden" name="penalty_id_edit" id="penalty_id_edit" value="{{$Action_id}}" />
 			 <input type="text" class="form-control" name="" id="penalty_title_edit" value="{{$Penalty_Title}}" />
+
 		  </div>
 	   </div>
 	</div>

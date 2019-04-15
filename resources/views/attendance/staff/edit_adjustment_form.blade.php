@@ -9,6 +9,8 @@
 		  <div class="">
 				<input type="text" class="form-control form_part_a form_number_exceptional_adjustment_a" name="form_number_exceptional_adjustment_a" id="form_number_exceptional_adjustment_a" value="{{$format_code}}" disabled="" />
 				<input type="text" class="form-control form_part_b form_number_exceptional_adjustment_b" name="form_number_exceptional_adjustment_b" id="form_number_exceptional_adjustment_b" value="{{@$form_number[1]}}" />
+				<input type="hidden" class="form-control pvs_form_no_adj" name="pvs_form_no_adj" id="pvs_form_no_adj" value="{{@$form_number[1]}}" />
+
 		  </div>
 	   </div>
 	   <div class="form-group">
