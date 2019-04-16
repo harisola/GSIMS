@@ -80,7 +80,14 @@ class ConcessionController extends Controller
     	 $Installment_2 = $output['Installment_2'];
     	 $Installment_3 = $output['Installment_3'];
     	 $Installment_4 = $output['Installment_4'];
-    	 $Installment_5 = $output['Installment_5'];
+         $Installment_5 = $output['Installment_5'];
+         $Installment_6 = $output['Installment_6'];
+         $Installment_7 = $output['Installment_7'];
+         $Installment_8 = $output['Installment_8'];
+         $Installment_9 = $output['Installment_9'];
+         $Installment_10 = $output['Installment_10'];
+         $Installment_11 = $output['Installment_11'];
+         $Installment_12 = $output['Installment_12'];
          $Operation = $output['Operation'];
 
 
@@ -92,7 +99,9 @@ if( $Operation == 1 )
 {
 
 
-$Insert_query = "INSERT INTO `atif_fee_student`.`concessions_for_session` ( `student_id`, `concession_code_id`, `academic_session_id`, `Installment_1`, `Installment_2`, `Installment_3`, `Installment_4`, `Installment_5`, `created_at`, `created_by`,`modified_at`,`modified_by`) VALUES ('".$Student_id."', '".$concession_type."', '".$Academic_id."', '".$Installment_1."', '".$Installment_2."', '".$Installment_3."', '".$Installment_4."', '".$Installment_5."', '".$created_at."', '".$userID."', '".$created_at."', '".$userID."');";
+$Insert_query = "INSERT INTO `atif_fee_student`.`concessions_for_session` ( `student_id`, `concession_code_id`, `academic_session_id`, `Installment_1`, `Installment_2`, `Installment_3`, `Installment_4`, `Installment_5`, `Installment_6`, `Installment_7`, `Installment_8`, `Installment_9`, `Installment_10`, `Installment_11`, `Installment_12`, `created_at`, `created_by`,`modified_at`,`modified_by`) VALUES ('".$Student_id."', '".$concession_type."', '".$Academic_id."', '".$Installment_1."', '".$Installment_2."', '".$Installment_3."', '".$Installment_4."', '".$Installment_5."','".$Installment_6."','".$Installment_7."','".$Installment_8."','".$Installment_9."','".$Installment_10."','".$Installment_11."','".$Installment_12."', '".$created_at."', '".$userID."', '".$created_at."', '".$userID."');";
+
+
 
 	
 	if( (int)$concession_type == 111 || (int)$concession_type == 122 )
@@ -137,7 +146,17 @@ $Insert_query = "INSERT INTO `atif_fee_student`.`concessions_for_session` ( `stu
      }else
      {
         
-$query = "UPDATE `atif_fee_student`.`concessions_for_session` SET `concession_code_id`='".$concession_type."', `Installment_1`='".$Installment_1."', `Installment_2`='".$Installment_2."', `Installment_3`='".$Installment_3."', `Installment_4`='".$Installment_4."', `Installment_5`='".$Installment_5."', `modified_at`='".$created_at."', `modified_by`='".$userID."' 
+$query = "UPDATE `atif_fee_student`.`concessions_for_session` SET `concession_code_id`='".$concession_type."', `Installment_1`='".$Installment_1."', `Installment_2`='".$Installment_2."', `Installment_3`='".$Installment_3."', `Installment_4`='".$Installment_4."', 
+    `Installment_5`='".$Installment_5."', 
+    `Installment_6`='".$Installment_6."', 
+    `Installment_7`='".$Installment_7."', 
+    `Installment_8`='".$Installment_8."', 
+    `Installment_9`='".$Installment_9."', 
+    `Installment_10`='".$Installment_10."', 
+    `Installment_11`='".$Installment_11."', 
+    `Installment_12`='".$Installment_12."', 
+
+`modified_at`='".$created_at."', `modified_by`='".$userID."' 
     WHERE `concession_id` = ".$Concession_id." AND `student_id`=".$Student_id." AND `academic_session_id`=".$Academic_id."";
 
 

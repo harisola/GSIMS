@@ -277,8 +277,8 @@ $(document).on("click", "#btn_search", function(){
     App.startPageLoading(); 
     $.ajax({
        type:'POST',
-       data: {'_token': '{{ csrf_token() }}', 'Gs_id':Gs_id },
-       url:"{{url('/concession_search')}}",
+       data: {'_token': '<?php echo e(csrf_token()); ?>', 'Gs_id':Gs_id },
+       url:"<?php echo e(url('/concession_search')); ?>",
        dataType: "json",
        async: false,
        cache: false,
@@ -436,4 +436,4 @@ loadScript("http://10.10.10.50/gsims/public/metronic/global/scripts/datatable.js
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
 <!-- END PAGE LEVEL PLUGINS --></div>
-@include('master_layout.footer')
+<?php echo $__env->make('master_layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
