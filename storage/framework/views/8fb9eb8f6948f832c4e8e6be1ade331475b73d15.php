@@ -44,31 +44,31 @@
                         		</thead>
                         		<tbody>
                                                 
-                                                @foreach($get_lastest_bills as $get_lastest_bill)
+                                                <?php $__currentLoopData = $get_lastest_bills; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $get_lastest_bill): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         			<tr>
                                                 
-                                                        <td>{{$get_lastest_bill->student_gs_id}}</td>
-                                                        <td>{{$get_lastest_bill->student_name}}</td>
-                                                        <td>{{$get_lastest_bill->std_status_code}}</td>
-                                                        <td>{{$get_lastest_bill->wing_name}}</td>
-                                                        <td>{{$get_lastest_bill->grade_dname}}</td>
-                                                        <td>{{$get_lastest_bill->section_dname}}</td>
-                                                        <td>{{$get_lastest_bill->gfid}}</td>
+                                                        <td><?php echo e($get_lastest_bill->student_gs_id); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->student_name); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->std_status_code); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->wing_name); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->grade_dname); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->section_dname); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->gfid); ?></td>
                                                         <td><?= 
                                                         App\Models\Accounts\student_family_records::getFamilyData($get_lastest_bill->gf_id)['name']; ?></td>
-                                                        <td>{{$get_lastest_bill->gt_id}}</td>
+                                                        <td><?php echo e($get_lastest_bill->gt_id); ?></td>
                                                         <!-- <td><?php 
                                                         // App\Models\Accounts\students_all::getTaxnicData($get_lastest_bill->student_id)['tax_nic']; ?></td> -->
-                                                        <td>{{$get_lastest_bill->tax_nic}}</td>
-                                                        <td>{{$get_lastest_bill->gb_id_mc_a}}</td>
-                                                        <td>{{$get_lastest_bill->bill_title}}</td>
-                                                        <td>{{$get_lastest_bill->bill_issue_date}}</td>
-                                                        <td>{{$get_lastest_bill->bill_due_date}}</td>
-                                                        <td>{{$get_lastest_bill->bill_bank_valid_date}}</td>
+                                                        <td><?php echo e($get_lastest_bill->tax_nic); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->gb_id_mc_a); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->bill_title); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->bill_issue_date); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->bill_due_date); ?></td>
+                                                        <td><?php echo e($get_lastest_bill->bill_bank_valid_date); ?></td>
                                                         <td>1</td>
                                                         <td><?= number_format($get_lastest_bill->arrears_suspended) ?></td>
                                                         <td><?= number_format($get_lastest_bill->fee_a_discount)?></td>
-                                                        <td>{{$get_lastest_bill->concession_code}}</td>
+                                                        <td><?php echo e($get_lastest_bill->concession_code); ?></td>
                                                         <td><?php 
                                                             if($get_lastest_bill->concession_percentage!=0){
                                                                 echo $get_lastest_bill->concession_percentage.'%';
@@ -86,23 +86,23 @@
                                                        
                                                         <td><?= number_format($get_lastest_bill->adjustment)?></td>
                                                         <td>-<?= number_format($get_lastest_bill->summer_fee_adjustment)?></td>
-                                                        <td>{{$get_lastest_bill->roll_over_charges}}</td>
+                                                        <td><?php echo e($get_lastest_bill->roll_over_charges); ?></td>
                                                         <td><?= number_format($get_lastest_bill->gross_tuition_fee)?></td>
                                                         <td><?= number_format($get_lastest_bill->additional_charges)?></td>
                                                         <td><?= number_format($get_lastest_bill->total_current_bill)?></td>
-                                                        <td>{{$get_lastest_bill->oc_smartcard_charges}}</td>
+                                                        <td><?php echo e($get_lastest_bill->oc_smartcard_charges); ?></td>
                                                         <td><?= number_format($get_lastest_bill->waive_amount)?></td>
                                                         <td><?= number_format($get_lastest_bill->oc_adv_tax)?></td>
                                                         <td><?= ($get_lastest_bill->resource_fee)*$installment_number_months; ?></td>
                                                         <td><?= ($get_lastest_bill->difference); ?></td>
                                                         <td><?= ($get_lastest_bill->musakhar)*2; ?></td>
-                                                        <td>{{$get_lastest_bill->oc_yearly}}</td>
+                                                        <td><?php echo e($get_lastest_bill->oc_yearly); ?></td>
                                                         <td><?=number_format($get_lastest_bill->total_payable)?></td>
                                                         <td><?php App\Models\Accounts\remittance::remitanceStatus($get_lastest_bill->student_id) ?></td>
 
 
                         			</tr>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         		</tbody>
                         	</table><!-- sample_4 -->
 

@@ -46,6 +46,7 @@ class fee_bill extends Model
                     'std_info.grade_name as grade_name','std_info.campus as campus',
                     'std_info.section_name as section_name','std_info.section_id as section_id',
                     'std_info.generation_of as generation_of',
+                    'sa.tax_nic as tax_nic',
                     'std_info.class_no as class_no',
                     'std_info.created as ra_created',
                     'std_info.grade_id as my_grade_id','std_data.name as parent_name',
