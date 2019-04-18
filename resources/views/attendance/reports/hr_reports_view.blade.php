@@ -75,14 +75,22 @@
     table tr td {
      vertical-align:middle !important;
    }
-   table tr:nth-child(5n) {
+   /*table tr:nth-child(5n) {
      border-bottom:2px solid #ccc;	
-   }
+   }*/
    table#as_reportTable tr:nth-child(2n) {
      border-bottom:2px solid #ccc;	
    }
    table tr th:nth-child(n+5) {
      /*width:100px !important;	*/
+   }
+   #isa_reportTable_filter {
+    float: right;
+   }
+   .reportUserImage {
+        border-radius: 50% !important;
+    border: 1px solid #000;
+    width: 70px;
    }
  </style>
 
@@ -112,22 +120,37 @@
           <div class="portlet-body">
             <div class="tab-content">
               <div class="tab-pane active" id="portlet_tab1">
+
                 <div class="row customRow">
                   <div class="col-md-2">
                     <label>Date from</label>
-                    <input type="date" class="form-control" id="txt_gt_id">
+                    <input type="date" class="form-control" />
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Date to</label>
-                    <input type="date" class="form-control" id="txt_gt_id">
+                    <input type="date" class="form-control" />
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Staff name</label>
-                    <input type="text" placeholder="Staff Name" class="form-control" id="txt_gt_id">
+                    
+
+                    
+                    <select id="txt_gt_id_asmry" multiple="multiple">
+                      <option value="">All</option>
+
+                      <?php foreach ($staffinfo as $value) { ?>
+                        <option value="<?php echo $value["Staff_id"]; ?>"><?php echo $value["abridged_name"]; ?></option>
+                      <?php } ?>
+                      
+                      
+
+                    </select>
+
+
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Designation</label>
-                    <select id="designationFilter" multiple="multiple">
+                    <select id="designationFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">PG</option>
                       <option value="">PN</option>
@@ -135,7 +158,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Department</label>
-                    <select id="departmentFilter" multiple="multiple">
+                    <select id="departmentFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">PG</option>
                       <option value="">PN</option>
@@ -143,7 +166,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Timing Profile</label>
-                    <select id="timingProfileFilter" multiple="multiple">
+                    <select id="timingProfileFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">PG</option>
                       <option value="">PN</option>
@@ -151,7 +174,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>OC Level</label>
-                    <select id="OCLevelFilter" multiple="multiple">
+                    <select id="OCLevelFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">PG</option>
                       <option value="">PN</option>
@@ -159,7 +182,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>OC Category</label>
-                    <select id="OCCategoryFilter" multiple="multiple">
+                    <select id="OCCategoryFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">PG</option>
                       <option value="">PN</option>
@@ -167,7 +190,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Campus</label>
-                    <select id="CampusFilter" multiple="multiple">
+                    <select id="CampusFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">North</option>
                       <option value="">South</option>
@@ -175,7 +198,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Category</label>
-                    <select id="CategoryFilter" multiple="multiple">
+                    <select id="CategoryFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">Domestic</option>
                       <option value="">Admin</option>
@@ -183,7 +206,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Status</label>
-                    <select id="StatusFilter" multiple="multiple">
+                    <select id="StatusFilter_asmry" multiple="multiple">
                       <option value="">All</option>
                       <option value="">PG</option>
                       <option value="">PN</option>
@@ -191,7 +214,7 @@
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>&nbsp;</label><br />
-                    <input type="button" id="" data-re_generate="0" class="btn btn-group green Generate_Fee_Bill_1" value="Generate Report" style="width: 100%;">
+                    <input type="button" id="_asmry" data-re_generate="0" class="btn btn-group green Generate_Fee_Bill_1" value="Generate Report" style="width: 100%;">
                   </div>
                 </div><!-- row -->
                 <div class="reportOutput padding20">
@@ -771,11 +794,11 @@
                 <div class="row customRow">
                   <div class="col-md-2">
                     <label>Date from</label>
-                    <input type="date" class="form-control" id="txt_gt_id">
+                    <input type="date" class="form-control" id="txt_gt_id_from_date">
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Date to</label>
-                    <input type="date" class="form-control" id="txt_gt_id">
+                    <input type="date" class="form-control" id="txt_gt_id_to_date">
                   </div><!-- col-md-2 -->
                   <div class="col-md-2">
                     <label>Staff name</label>
@@ -1013,6 +1036,13 @@
 //   });
 // }
     //Mask for GS-ID.
+    
+
+    $("#txt_gt_id").inputmask("mask", {
+      "mask": "99-999"
+    });
+
+
     $("#txt_gs_id").inputmask("mask", {
       "mask": "99-999"
     });
@@ -1021,11 +1051,122 @@
       "mask": "99-999"
     });
 
-    //Mask for GT-ID.
-    $("#txt_gt_id").inputmask("mask", {
+
+     
+
+
+
+
+     
+      //Mask for GT-ID.
+
+
+    /*$("#txt_gt_id_asmry").inputmask("mask", {
       "mask": "99-999"
-    });
+    });*/
     
+
+
+    $('#txt_gt_id_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+
+   
+
+    
+    $('#as_designationFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#as_departmentFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#as_timingProfileFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#as_OCLevelFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#as_OCCategoryFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#as_CampusFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#as_CategoryFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#as_StatusFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+
+    /* MOnthly Attendance Summary*/
+    $('#designationFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#departmentFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#timingProfileFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#OCLevelFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#OCCategoryFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#CampusFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#CategoryFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+    $('#StatusFilter_asmry').multiselect({
+     enableFiltering: true,
+     filterBehavior: 'value',
+     numberDisplayed: 1
+   });
+     
+
+
+
+ 
+    
+
+   
+
     /* Attendance Summary */
     $('#as_designationFilter').multiselect({
      enableFiltering: true,

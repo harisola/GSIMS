@@ -78,15 +78,32 @@ Route::group(['middleware' => 'authenticated'], function () {
 	Route::get('/ateeb_rec_modal', 'Development\Haris@AteebRecModal'); 
 	Route::get('/update_staff', 'Development\Haris@Update_Staff');
 	Route::get('/masterLayout/staff/add_row', 'Development\Haris@AddRow');
+	
 	Route::get('/screening_gate', 'Attendance\Staff\ScreeningGate@mainPage');
-	// Route::get('/tap_in_staff', 'Attendance\Staff\ScreeningGate@Tap_In_Staff');
 	Route::get('/staff_interim_card', 'Attendance\Staff\ScreeningGate@Staff_Interim_Card'); 
+
 	Route::get('/tap_in_interim', 'Attendance\Staff\ScreeningGate@Tap_In_Interim');
-	//Route::get('/live_search', 'LiveSearch@index'); tap_in_interim
-	//Route::get('/search_action', 'Attendance\Staff\ScreeningGate@Search_Action'); interim_table_list
-	Route::get('/interim_table_list', 'Attendance\Staff\ScreeningGate@Staff_interim_table_list');
-	Route::post('/fetch_autocomplete', 'Attendance\Staff\ScreeningGate@fetch_autocomplete');
 	Route::post('/tap_in_staff', 'Attendance\Staff\ScreeningGate@Tap_In_Staff');
+
+	Route::post('/fetch_familylist_autocomplete', 'Attendance\Staff\ScreeningGate@FetchFamilyListAutoComplete');
+	Route::post('/fetch_autocomplete', 'Attendance\Staff\ScreeningGate@fetch_autocomplete');
+	Route::get('/get_fetch_staff_pix', 'Attendance\Staff\ScreeningGate@Get_Fetch_Staff_Pix');
+	Route::get('/student_parent_daypass_info', 'Attendance\Staff\ScreeningGate@StudentParentDaypassInfo');
+	Route::get('/family_parent_info', 'Attendance\Staff\ScreeningGate@FamilyParentInfo');
+
+	Route::get('/interim_table_list', 'Attendance\Staff\ScreeningGate@Staff_interim_table_list');
+	Route::get('/interim_parent_table_list', 'Attendance\Staff\ScreeningGate@Parent_interim_table_list');
+	Route::get('/interim_visitor_table_list', 'Attendance\Staff\ScreeningGate@Visitor_interim_table_list');
+
+	Route::get('/parent_save_data', 'Attendance\Staff\ScreeningGate@ParentSaveData');
+	Route::get('/tap_parent_save_data', 'Attendance\Staff\ScreeningGate@TapParentSaveData');
+	Route::get('/admission_save_data', 'Attendance\Staff\ScreeningGate@AdmissionSaveData');
+	Route::get('/tap_visitor_save_data', 'Attendance\Staff\ScreeningGate@TapVisitorSaveData');
+	Route::get('/applicant_save_data', 'Attendance\Staff\ScreeningGate@ApplicantSaveData');
+	Route::get('/vendor_save_data', 'Attendance\Staff\ScreeningGate@VendorSaveData');
+	Route::get('/worker_save_data', 'Attendance\Staff\ScreeningGate@WorkerSaveData');
+	Route::get('/guest_save_data', 'Attendance\Staff\ScreeningGate@GuestSaveData');
+
 	Route::get('/reports', 'Attendance\Reports\Reports@mainPage');
 	Route::post('/reporst_staff_attendance', 'Attendance\Reports\Reports@reporst_staff_attendance');
 	

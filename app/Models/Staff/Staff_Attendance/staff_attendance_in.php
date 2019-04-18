@@ -34,10 +34,45 @@ class staff_attendance_in extends Model
         $details=staff_attendance_in::where([['staff_id',$staff_id],['date',$date]])->get();
         return count($details);
         //echo $details;
+    
     }
 
-    public function getStaffAttendanceData($RFID)
-    {
+    public function getStaffPHOTOData($staff_id){
+       
+       $cQuery = "select
+                sr.id as staff_id, title.title as salutation, sr.abridged_name as name,
+                sr.gt_id as gen_id, sr.employee_id as photo_id, sr.gender, 
+                sr.gender, REPLACE(sr.mobile_phone, '-', '') as mobile_phone
+                from atif.staff_registered as sr
+                left join atif._title_person as title
+                    on title.id = sr.title_person_id
+                where sr.id = '".$staff_id."' ";
+         
+        // $result = DB::connection($this->dbCon)->select($cQuery);
+        // return $result;
+
+        $staff = DB::connection($this->dbCon)->select($cQuery);
+        if($staff == '')
+        {
+            return false;
+        }
+        else{
+        $i = 0;
+        foreach ($staff as $u) 
+        {
+            $pic = $this->get_Staff_Pic($u->photo_id, $u->gender);
+            $staff[$i]->photo500 = $pic['photo500'];
+            $staff[$i]->photo150 = $pic['photo150'];
+            $i++;
+        }
+        $staff = collect($staff)->map(function($x){ return (array) $x; })->toArray();
+        return $staff;
+        }
+
+    }
+
+    public function getStaffAttendanceData($RFID){
+       
        $cQuery = "select * from
         (select
                 sr.id as staff_id, title.title as salutation, sr.abridged_name as name, sr.gt_id as gen_id, sr.employee_id as photo_id, 
@@ -97,8 +132,12 @@ class staff_attendance_in extends Model
         // return $result;
 
         $staff = DB::connection($this->dbCon)->select($cQuery);
+        if($staff == '')
+        {
+            return false;
+        }
+        else{
         $i = 0;
-        
         foreach ($staff as $u) 
         {
             $pic = $this->get_Staff_Pic($u->photo_id, $u->gender);
@@ -108,20 +147,19 @@ class staff_attendance_in extends Model
         }
         $staff = collect($staff)->map(function($x){ return (array) $x; })->toArray();
         return $staff;
-
-
-
-
-
+        }
 
     }
 
     public function insert($table_name,$data){
+
         $id = DB::connection($this->dbCon)->table($table_name)->insertGetId($data);
         return $id;
+    
     }
 
     public function getStaffAttendance($staff_id,$date){
+
         $query = "Select 
             ( select count(staff_attendance_in.id) from atif_attendance_staff.staff_attendance_in as staff_attendance_in
             where staff_attendance_in.staff_id = ".$staff_id." and  staff_attendance_in.date = '".$date."' and staff_attendance_in.location_id in (3,4,18) and staff_attendance_in.record_deleted=0 ) as attendance_in , 
@@ -130,10 +168,11 @@ class staff_attendance_in extends Model
             where staff_attendance_out.staff_id = ".$staff_id." and  staff_attendance_out.date = '".$date."' and staff_attendance_out.location_id in (3,4,18)  and staff_attendance_out.record_deleted=0 ) as attendance_out";
         $result = DB::connection($this->dbCon)->select($query);
         return $result;
+    
     }
 
-    public function checkIsLastIN($StaffID)
-    {
+    public function checkIsLastIN($StaffID){
+
         $result = false;
 
         $cQuery = "select * from
@@ -176,16 +215,20 @@ class staff_attendance_in extends Model
         }
 
         return $result;
+    
     }
 
     public function makeSMSPool($mobilePhone, $message){
+
         $data = array( 
             'mobile_phone' => $mobilePhone, 
             'message' => $message);
         $this->db->insert('atif_sms.sms_pool', $data);
+    
     }
 
     public function get($id = NULL, $single = FALSE){
+
         if($id != NULL){
             $filter = $this->_primary_filter;
             $id = $filter($id);
@@ -204,14 +247,18 @@ class staff_attendance_in extends Model
             $this->db_staff_attendance->order_by($this->_order_by);
         }
         return $this->db_staff_attendance->get($this->_table_name)->$method();
+    
     }
 
     public function get_by($where, $single = FALSE){
+
         $this->db_staff_attendance->where($where);
         return $this->get(NULL, $single);
+    
     }
 
     public function delete(){
+
         $filter = $this->_primary_filter;
         $id = $fileter($id);
 
@@ -222,6 +269,7 @@ class staff_attendance_in extends Model
         $this->db_staff_attendance->where($this->_primary_key, $id);
         $this->db_staff_attendance->limit(1);
         $this->db_staff_attendance->delete($this->_table_name);
+    
     }
 
     // public function checkStaffRegRecordExistance($staff_id){
@@ -238,8 +286,8 @@ class staff_attendance_in extends Model
     // }
 
 
-    public function CheckTapEvent($Today_Data, $Staff_id)
-    {
+    public function CheckTapEvent($Today_Data, $Staff_id){
+
        $SqlQuery = "SELECT f.*FROM(
                     SELECT d.* 
                     FROM ( 
@@ -265,11 +313,7 @@ class staff_attendance_in extends Model
         $result = DB::connection($this->dbCon)->select($SqlQuery);
         return $result;
 
-
     }
-
-
-
 
     /**********************************************************************
     * Calling Staff Pic 500px and 150px 
@@ -279,6 +323,7 @@ class staff_attendance_in extends Model
     *       If no picture found then get blankPic according to gender
     ***********************************************************************/
     public function get_Staff_Pic($PhotoID, $Gender){
+
         if (!file_exists(STAFF_PIC_500 . $PhotoID . STAFF_PIC500_TYPE)){
             if($Gender == 'M'){
                 $PhotoID = 'male';
@@ -291,10 +336,7 @@ class staff_attendance_in extends Model
 
 
         return $user;
+    
     }
-
-
-
-   
 
 }

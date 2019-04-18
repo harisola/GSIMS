@@ -34,10 +34,10 @@
                                                <label class="control-label col-md-3 text-right paddingRight0">Staff Title:</label>
                                                <div class="col-md-9">
                                                   <select class="form-control" id="staf_title" >
-                                                    <option <?php if ($personalInfo[0]->staff_title == "1" ) echo 'selected' ; ?>value="1">Mr</option>
-                                                    <option <?php if ($personalInfo[0]->staff_title == "2" ) echo 'selected' ; ?>value="1">Ms</option>
-                                                    <option <?php if ($personalInfo[0]->staff_title == "3" ) echo 'selected' ; ?>value="1">Mrs</option>
-                                                    <option <?php if ($personalInfo[0]->staff_title == "4" ) echo 'selected' ; ?>value="1">Dr</option>
+                                                    <option <?php if ($personalInfo[0]->staff_title == "Mr" ) echo 'selected' ; ?> value="1">Mr</option>
+                                                    <option <?php if ($personalInfo[0]->staff_title == "Ms" ) echo 'selected' ; ?> value="2">Ms</option>
+                                                    <option <?php if ($personalInfo[0]->staff_title == "Mrs" ) echo 'selected' ; ?> value="3">Mrs</option>
+                                                    <option <?php if ($personalInfo[0]->staff_title == "Dr" ) echo 'selected' ; ?> value="4">Dr</option>
                                                   </select>
                                                </div>
                                             </div>
@@ -347,11 +347,7 @@
  -->
                                                   <select class="form-control"  id="region_txt" >
                                                     <!-- <option  >{{ $personalInfo[0]->region }}</option> -->
-                                                    @foreach($region as $regions)
-                                                      <option <?php if ($regions->region_name == $personalInfo[0]->region ) echo 'selected' ; ?> value="{{$regions->region_id}}">
-                                                      {{$regions->region_name}}
-                                                      </option>
-                                                    @endforeach
+                                                    
                                                   </select>
                                                   <!-- Region drop down end -->
                                                </div>
@@ -364,12 +360,7 @@
                                                <div class="col-md-9">
                                                   <!-- <input type="text" class="form-control" placeholder="" id="sub_region_txt" value="{{ $personalInfo[0]->sub_region }}"> -->
                                                   <select class="form-control"  id="sub_region_txt" >
-                                                    <!-- <option  value="{{ $personalInfo[0]->sub_region_id}}">{{ $personalInfo[0]->sub_region }}</option> -->
-                                                    @foreach($sub_region as $sub_regions)
-                                                      <option <?php if ($sub_regions->region_sub_name == $personalInfo[0]->sub_region ) echo 'selected' ; ?> value="{{$sub_regions->region_sub_id}}">
-                                                          {{$sub_regions->region_sub_name}}
-                                                      </option>
-                                                    @endforeach
+                                        
                                                   </select>
                                                </div>
                                             </div>

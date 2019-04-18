@@ -14,9 +14,11 @@ use App\Models\HR_Attendance\Adjustment_Approvel_model;
 
 class Reports extends Controller
 {
-    public function mainPage(){
-
-      return view('attendance.reports.hr_reports_view');
+    public function mainPage()
+    {
+        $AAM = new Adjustment_Approvel_model();
+        $staffinfo=$AAM->staff_info();
+      return view('attendance.reports.hr_reports_view')->with(array("staffinfo"=>$staffinfo));
 
     }
 

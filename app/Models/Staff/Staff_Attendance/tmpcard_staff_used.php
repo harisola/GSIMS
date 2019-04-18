@@ -32,10 +32,10 @@ class tmpcard_staff_used extends Model
                 where u.date=curdate()";
         $tmpcard = DB::connection($this->dbCon)->select($query);        
         return $tmpcard;
+    
     }
 
-    public function getimterimcard($tmpcard_rfid)
-    {
+    public function getimterimcard($tmpcard_rfid){
        // $cQuery = "select tsu.staff_id,gt_id,sr.abridged_name,sr.name_code,tsu.ip4,tsu.tmp_card_no,trc.rfid_dec,
        //          tsu.date,tsu.time,tsu.created,tsu.register_by,tsu.modified,tsu.modified_by,tsu.record_deleted
        //          from atif_attendance_staff.tmpcard_staff_used as tsu
@@ -59,6 +59,7 @@ class tmpcard_staff_used extends Model
     }
 
     public function staff_reg($staff_id){
+
         $SqlQuery = "select
         sr.id as staff_id, sr.employee_id as photo_id, sr.gt_id, sr.name, sr.name_code, sr.abridged_name, sr.nic, sr.gender, tl.title as staff_title,
         sr.dob, sr.doj, SUBSTRING(sr.gg_id, 1, LOCATE('@',sr.gg_id)-1) as email, IF(sr.branch_id=1, 'North', 'South') as campus,
@@ -76,9 +77,7 @@ class tmpcard_staff_used extends Model
 
     }
 
-    //edit by zk
-    public function checkinterim($interim_rfid,$interim_rfid_cardtype)
-    {
+    public function checkinterim($interim_rfid,$interim_rfid_cardtype){
        // $SqlQuery = "select trc.id,trc.card_no,trc.card_type,trc.rfid_dec,trc.rfid_hex from atif._tmp_rfid_cards as trc WHERE trc.rfid_dec = ".$interim_rfid.""; 
 
         $SqlQuery = "select trc.id,trc.card_no,trt.name,trc.card_type,trc.rfid_dec,trc.rfid_hex 
@@ -91,23 +90,23 @@ class tmpcard_staff_used extends Model
         $result = DB::connection($this->dbCon)->select($SqlQuery);
         return $result;
 
-
     }
 
     public function checkStaffRegRecordExistance($Today_Data,$Staff_id){
         $details=tmpcard_staff_used::where([['date',$Today_Data],['staff_id',$Staff_id]])->get();
         return count($details);
         //echo $details;
+    
     }
 
     public function checkStaffRegRecordCardExistance($Today_Data,$interim,$Card_no){
         $details=tmpcard_staff_used::where([['date',$Today_Data],['org_card_hex',$interim],['tmp_card_no',$Card_no]])->get();
         return count($details);
         //echo $details;
+    
     }
 
-    public function CheckTapInterim($Today_Data,$interim_rfid)
-    {
+    public function CheckTapInterim($Today_Data,$interim_rfid){
         $SqlQuery = "select tsu.staff_id,gt_id,sr.abridged_name,sr.name_code,tsu.ip4,tsu.tmp_card_no,trc.rfid_dec,
                 tsu.date,tsu.time,tsu.created,tsu.register_by,tsu.modified,tsu.modified_by,tsu.record_deleted
                 from atif_attendance_staff.tmpcard_staff_used as tsu
@@ -119,12 +118,34 @@ class tmpcard_staff_used extends Model
         $result = DB::connection($this->dbCon)->select($SqlQuery);
         return $result;
 
-
     }
 
     public function insert($table_name,$data){
         $id = DB::connection($this->dbCon)->table($table_name)->insertGetId($data);
         return $id;
+    
+    }
+
+    public function Get_Family_list($parameter){
+
+             // $SqlQuery = "SELECT 
+      //               ifnull(sr.abridged_name,'Not Defined') as abridged_name,
+      //               sr.gs_id,sr.gf_id,sr.gr_no              /*//REPLACE(sr.gf_id, ',', '-') as gf_id*/
+      //               FROM atif.student_registered AS sr
+      //               WHERE ( sr.gs_id='".$parameter."' 
+      //               or sr.gf_id= CONVERT( REPLACE('".$parameter."','-',''), UNSIGNED INTEGER) 
+      //               or sr.abridged_name LIKE '%$parameter%' )  and sr.gf_id != 0 order by sr.abridged_name";
+        $SqlQuery = "SELECT 
+                    ifnull(sr.abridged_name,'Not Defined') as abridged_name,
+                    sr.gs_id,sr.gf_id,sr.gr_no              /*//REPLACE(sr.gf_id, ',', '-') as gf_id*/
+                    FROM atif.student_registered AS sr
+                    WHERE ( sr.gs_id='".$parameter."' 
+                    or sr.gf_id LIKE REPLACE('$parameter%','-','') 
+                    or sr.abridged_name LIKE '%$parameter%' )
+                    and sr.gf_id != 0 order by sr.abridged_name";
+        $result = DB::connection($this->dbCon)->select($SqlQuery);
+        return $result;
+
     }
 
 }

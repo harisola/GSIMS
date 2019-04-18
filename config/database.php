@@ -118,7 +118,7 @@ return [
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => 'atif',
             'username' => 'root',
-            'password' => '',
+            'password' => 'abc',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -172,7 +172,7 @@ return [
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
 
-  'mysql_Career_fee' => [
+        'mysql_Career_fee' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST_fee', '127.0.0.1'),
             'database' => env('DB_DATABASE_fee', 'forge'),
@@ -215,6 +215,19 @@ return [
             'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
         ],
 
+        'mysql_Visitor' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_Attendance', '127.0.0.1'),
+            'database' => env('DB_DATABASE_Visitor', 'forge'),
+            'username' => env('DB_USERNAME_Visitor', 'forge'),
+            'password' => env('DB_PASSWORD_Visitor', 'forge'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+            'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],
+        ],
 
         'my_VechilesDB' => [
             'driver' => 'mysql',

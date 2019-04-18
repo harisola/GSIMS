@@ -802,10 +802,10 @@ class Haris extends StaffReportController
                          );
                 $data_get= $staff_reg_bank_details->updateStaffBankRegRecord($staff_id,$data);
               }else{
-                $staff_reg_bank_details->bank_name = $banknametxt;
-                $staff_reg_bank_details->branch = $bankbranchname;
-                $staff_reg_bank_details->account_number = $bankaccountnumber;
-                $staff_reg_bank_details->save();
+                // $staff_reg_bank_details->bank_name = $banknametxt;
+                // $staff_reg_bank_details->branch = $bankbranchname;
+                // $staff_reg_bank_details->account_number = $bankaccountnumber;
+                // $staff_reg_bank_details->save();
                 //console.log('Insert');
               }
       //Staff Bank Registered Code Goes here End///
@@ -1188,10 +1188,10 @@ class Haris extends StaffReportController
             $other = $staffInfo->getStaffOtherInfo($staffID);
             $staff_region = new _region;
             $staff_sub_region = new _region_sub;
-            $regions=$staff_region->get_region($staffID);
-            $sub_regions=$staff_sub_region->get_sub_region($staffID);
+            // $regions=$staff_region->get_region($staffID);
+            // $sub_regions=$staff_sub_region->get_sub_region($staffID);
 
-            // print_r($sub_regions);
+            // print_r($personalInfo);
             // die;
 
             return view('master_layout.staff.staff_recruitment_modal',[
@@ -1202,8 +1202,8 @@ class Haris extends StaffReportController
               'sc'=>$sc,
               'ac'=>$ac,
               'other'=>$other,
-              'region'=>$regions,
-              'sub_region'=>$sub_regions,
+              // 'region'=>$regions,
+              // 'sub_region'=>$sub_regions,
             ]);
 
     }

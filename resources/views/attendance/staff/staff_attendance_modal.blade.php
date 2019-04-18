@@ -1,10 +1,18 @@
 <div class="requestTapIn textCenter requestAssign ">
     
     <!-- hr /-->
-    <div class="imageCenterDefault defaultAssign">
+    <div class="imageCenterDefault defaultAssign rf_staff_default">
         <img src="http://10.10.10.50/new_gs/gs/components/gs_theme/images/nfc_updated.png" width="160">
         <h4 type="hidden" name="error" id="error"> </h4>
     </div><!-- imageCenter -->
+    <div class="requestTapIn textCenter  rf_staff">
+        <div class="Image" >
+            <img id="staff_photo" src="" width="410"><br><br>
+        </div><!-- imageCenter get_attendance-->
+        <div class="staffName">
+
+        </div><!-- staffName -->
+    </div>
     <div class="successAssign ">
         <span aria-hidden="true" class="icon-check true" style=""></span><br /><br />
         <select name="location_id" id="location_id">

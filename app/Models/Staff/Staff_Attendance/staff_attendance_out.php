@@ -32,18 +32,18 @@ class staff_attendance_out extends Model
       
         $details=staff_attendance_out::where([['staff_id',$staff_id],['date',$date]])->get();
         return count($details);
-        //echo $details;
+    
     }
 
     public function updateStaffRegRecord($staff_id,$data){
         $record=staff_attendance_out::where('id',$staff_id)->update($data);
-        //echo $data;
 
     }
 
     public function insert($table_name,$data){
         $id = DB::connection($this->dbCon)->table($table_name)->insertGetId($data);
         return $id;
+    
     }
    
 

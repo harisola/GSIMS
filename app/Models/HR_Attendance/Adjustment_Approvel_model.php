@@ -273,10 +273,55 @@ class Adjustment_Approvel_model extends Model
 	
 	public function reports_staff_attendance($gt_id, $from_date, $to_date)
 	{
-		$query = "CALL atif_gs_events.`sp_staff_attendance_report`('".$gt_id."','".$from_date."','".$to_date."')";
+
+		//$query = "CALL atif_gs_events.`sp_staff_attendance_report`('".$gt_id."','".$from_date."','".$to_date."')";
+
+		$Staff_q = "SELECT 
+sr.id AS Staff_id, sr.employee_id, sr.gt_id, sr.abridged_name, sr.name_code, sr.gender, sr.department, sr.designation
+FROM atif.staff_registered AS sr WHERE sr.gt_id='".$gt_id."'";
+
+
+		$Staff_id =0;
+		$staff = DB::connection($this->dbCon)->select($Staff_q);
+
+		$Staff_id = $staff[0]->Staff_id;
+
+
+		$i = 0;
+		foreach ($staff as $u) {
+		    $pic = $this->get_Staff_Pic($u->employee_id, $u->gender);
+			$staff[$i]->photo500 = $pic['photo500'];
+		    $staff[$i]->photo150 = $pic['photo150'];
+
+
+		     
+
+		    $i++;
+		}
+		$staff = collect($staff)->map(function($x){ return (array) $x; })->toArray();
+		 
+
+
+
+
+
+		$query = "CALL atif_gs_events.sp_get_attendance_info('".$Staff_id."','".$from_date."','".$to_date."')";
 		$result = DB::connection($this->dbCon)->select($query);
-		return $result;
+
+		return array("Store_procedure" => $result,  "Staff_data" => $staff );
+		
 	}
+
+
+
+	public function staff_info()
+	{
+		$Staff_q = "SELECT 
+sr.id AS Staff_id, sr.employee_id, sr.gt_id, sr.abridged_name, sr.name_code, sr.gender, sr.department, sr.designation
+FROM atif.staff_registered AS sr WHERE sr.is_posted=1 AND sr.is_active=1";
+		$staff = DB::connection($this->dbCon)->select($Staff_q);
+		return collect($staff)->map(function($x){ return (array) $x; })->toArray();
+    }
 
 
 }

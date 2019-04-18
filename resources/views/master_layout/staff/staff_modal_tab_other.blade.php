@@ -162,6 +162,9 @@
                 <script type="text/javascript">
                   $(document).ready(function()
                     {
-                      $("#bank_account_number").inputmask({"mask": "9999-9999999999"});
+                      $('#bank_account_number').on('input', function() {
+                        $("#bank_account_number").inputmask({"mask": "9999-9999999999"});
+                      });
+                      
                     });
                 </script>

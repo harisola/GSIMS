@@ -19,7 +19,7 @@ class staff_registered_bank_account extends Model
     protected $dbCon = 'mysql';
     protected $table = 'staff_registered_bank_account';
     public $timestamps = false;
-    protected $primaryKey = 'staff_id';
+    // protected $primaryKey = 'staff_id';
 
     public function checkStaffBankRegRecordExistance($staff_id){
         $details=staff_registered_bank_account::where('staff_id',$staff_id)->first();

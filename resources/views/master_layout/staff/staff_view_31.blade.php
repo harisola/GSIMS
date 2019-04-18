@@ -278,6 +278,24 @@ display: none;
 .marginBottom20 {
   margin-bottom: 20px;
 }
+.in span.commentDate {
+    float: right;
+    position: relative;
+    right: 6px;
+    bottom: 14px;
+    color: #ccc;
+    font-style: italic;
+    font-size: 12px;
+    border-top: 1px solid #e4e4e4;
+    width: 100%;
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 3px;
+}
+input#staffView_StaffList_Search {
+    width: 94.5% !important;
+    margin-left: 40px !important;
+}
 </style>
 <link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css') }}" rel="stylesheet" type="text/css" />
@@ -369,10 +387,12 @@ display: none;
              <h3 id="staffView_StaffList_Total" class="marginTop0 marginBottom0 padding0">Staff List</h3>
           </div><!-- caption -->
           <div class="actions">
+              <?php /*
               <div class="btn-group btn-group-devided" data-toggle="buttons">
                       <!-- <input type="radio" name="options" class="toggle" id="profileDefinationAdd">Add New Profile</label> -->
                       <button class="tooltips btn btn-transparent dark btn-outline btn-circle btn-sm btn-calenadar" data-placement="bottom" data-original-title="Add new profile"data-toggle="modal" href="#ProcessEntry" id="">Entry Forms</button>
               </div>
+              
               <div class="modal fade 100pxwidth" id="ProcessEntry" tabindex="-1" role="basic" aria-hidden="true">
                  <div class="modal-dialog">
                     <div class="modal-content">
@@ -601,6 +621,7 @@ display: none;
                  </div>
                  <!-- /.modal-dialog -->
               </div>
+              */ ?>
           </div><!-- actions -->
        </div>
 
@@ -674,7 +695,8 @@ display: none;
                 <!-- theme-options -->
              </div>
              <!-- theme-panel -->
-             <div class="theme-panel hidden-xs hidden-sm">
+             
+             <?php /*<div class="theme-panel hidden-xs hidden-sm">
                 <div class="toggler2"> </div>
                 <div class="toggler2-close"> </div>
                 <div class="theme-options2">
@@ -705,7 +727,8 @@ display: none;
                    </div>
                 </div>
                 <!-- theme-options -->
-             </div>
+             </div> */?>
+             
              <!-- updated sorter -->
              <?php /* ?>
              <div class="theme-panel hidden-xs hidden-sm">
@@ -3609,19 +3632,23 @@ display: none;
                                                        <div class="row">
                                                           <div class="col-md-6 paddingBottom10">
                                                               <div class="form-group">
-                                                                  <label class="">Form #:</label>
+                                                                  <label class="">Form # <span class="required">*</span>:</label>
                                                                   <div class="">
                                                                      <input type="text" class="form-control form_number_absentia_a form_part_a" disabled="" name="" id="form_number_absentia_a" value="<?= 
                                                                       App\Models\Staff\Staff_Information\hr_form_number_format::getFormNumberFormat(1); ?>" data-id="">
                                                                   </div>
                                                                   <div class="">
-                                                                     <input type="text" class="form-control  form_number_absentia_b form_part_b " name="" id="form_number_absentia_b" data-id="">
+                                                                     <input type="text" class="form-control  form_number_absentia_b form_part_b " name="" id="form_number_absentia_b" data-id="" required="required">
                                                                   </div>
-                                                               </div>
+                                                              </div>
+                                                          </div>
+                                                       </div><!-- row -->
+                                                       <div class="row">
+                                                          <div class="col-md-6 paddingBottom10">
                                                              <div class="form-group">
-                                                                <label class="">Title:</label>
+                                                                <label class="">Title: <span class="required">*</span></label>
                                                                 <div class="">
-                                                                   <input type="text" class="form-control" name="" id="absentia_title" data-id="">
+                                                                   <input type="text" class="form-control" name="" id="absentia_title" data-id="" required="required">
                                                                 </div>
                                                              </div>
                                                              <!-- form-group -->
@@ -3629,9 +3656,9 @@ display: none;
                                                           <!-- col-md-6 -->
                                                           <div class="col-md-6 paddingBottom10">
                                                              <div class="form-group">
-                                                                <label class="">Date:</label>
+                                                                <label class="">Date: <span class="required">*</span></label>
                                                                 <div class="">
-                                                                   <input type="date" class="form-control" name="" id="absentia_date" data-id="">
+                                                                   <input type="date" class="form-control" name="" id="absentia_date" data-id="" required="required">
                                                                 </div>
                                                              </div>
                                                              <!-- form-group -->
@@ -3642,9 +3669,9 @@ display: none;
                                                        <div class="row">
                                                           <div class="col-md-6 paddingBottom10">
                                                              <div class="form-group">
-                                                                <label class="">Start Time:</label>
+                                                                <label class="">Start Time: <span class="required">*</span></label>
                                                                 <div class="">
-                                                                   <input type="time" class="form-control" name="" id="absentia_startTime" data-id="">
+                                                                   <input type="time" class="form-control" name="" id="absentia_startTime" data-id="" required="required">
                                                                 </div>
                                                              </div>
                                                              <!-- form-group -->
@@ -3652,16 +3679,15 @@ display: none;
                                                           <!-- col-md-6 -->
                                                           <div class="col-md-6 paddingBottom10">
                                                              <div class="form-group">
-                                                                <label class="">End Time:</label>
+                                                                <label class="">End Time: <span class="required">*</span></label>
                                                                 <div class="">
-                                                                   <input type="time" class="form-control" name="" id="absentia_endTime" data-id="">
+                                                                   <input type="time" class="form-control" name="" id="absentia_endTime" data-id="" required="required">
                                                                 </div>
                                                              </div>
                                                              <!-- form-group -->
                                                           </div>
                                                           <!-- col-md-6 -->
-                                                       </div>
-                                                       <!-- row -->
+                                                       </div><!-- row -->
                                                        <div class="row">
                                                           <div class="col-md-12 paddingBottom10">
                                                              <div class="form-group">
@@ -3673,8 +3699,7 @@ display: none;
                                                              <!-- form-group -->
                                                           </div>
                                                           <!-- col-md-6 -->
-                                                       </div>
-                                                       <!-- row -->
+                                                       </div><!-- row -->
                                                     </div>
                                                     <!-- form-body -->
                                                  </div>
@@ -7306,7 +7331,7 @@ $('#staffView_StaffList_Search').val('');
                  for(var i=0; i< data['comments'].length; i++){
 
                       if(data['comments'][i].type=='tap-in' || data['comments'][i].type=='tap-out'){
-                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+school_name+'</strong> </span></a><span class="body">'+data['comments'][i].description.replace('tap_type',data['comments'][i].type)+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
+                        commentsHTML=commentsHTML+'<li class="in commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/gs_logo.png"><div class="message"><div class="messagebody"><span class="arrow"> </span><a href="javascript:;" class="name">'+school_name+'</strong> </span></a><span class="body">'+data['comments'][i].description.replace('tap_type',data['comments'][i].type)+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"></div><span class="commentDate">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
                       }else{
                         var name_and_location="";
                         name_and_location=data['comments'][i].location_name;
@@ -7319,7 +7344,7 @@ $('#staffView_StaffList_Search').val('');
                            my_class="in";
                         }
 
-                        commentsHTML=commentsHTML+'<li class="'+my_class+' commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/'+user_image+'.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+user_name+'</a><span class="body">'+data['comments'][i].description+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"><span style="margin-left: 223px;">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></div></li>';
+                        commentsHTML=commentsHTML+'<li class="'+my_class+' commentsLI"><img class="avatar" alt="" src="assets/photos/hcm/150x150/staff/'+user_image+'.png"><div class="message"><span class="arrow"> </span><a href="javascript:;" class="name">'+user_name+'</a><span class="body">'+data['comments'][i].description+'</span><input type="hidden" class="dateSearch" value="'+data['comments'][i].date_format+'"></div><span class="commentDate">'+data['comments'][i].date_format+' at '+data['comments'][i].time_12hr+'</span></li>';
                       }
                                                                            
                  }
@@ -7331,16 +7356,16 @@ $('#staffView_StaffList_Search').val('');
           
            // leave Response
             
-             if(data['leave_description']){
+            if(data['leave_description']){
                   
-                var leaveHTML = '';
+              var leaveHTML = '';
 
-                for(var i = 0 ;i < data['leave_description'].length;i++){
-             if(data['leave_description'][i].leave_approve_status==1){ 
-                var tr = 'approvedBorder'; 
-             }  else{
-                var tr = 'PendingapprovedBorder'; 
-             }
+              for(var i = 0 ;i < data['leave_description'].length;i++){
+                if(data['leave_description'][i].leave_approve_status==1){ 
+                    var tr = 'approvedBorder'; 
+                       }  else{
+                    var tr = 'PendingapprovedBorder'; 
+                 }
                 leaveHTML = leaveHTML + '<tr  class="'+tr+'" data-id='+data['leave_description'][i].id+'><td>'+data['leave_description'][i].leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+data['leave_description'][i].paid_compensation+' </td></tr>';
                 if(data['leave_description'][i].leave_approve_status==1){
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+data['leave_description'][i].paid_percentage+'</td></tr>';
@@ -7475,7 +7500,23 @@ $('#staffView_StaffList_Search').val('');
  
  
  
- 
+//********Ateeb Modal Show Function On Click Start ********//zk
+  $(document).on('click','.profile_StaffName',function(){
+      var staffID = $(this).attr('data-staffID');
+      //console.log(staffID);
+    $.ajax({
+        type:'GET',
+        data: {
+                "staff_id":staffID,
+                "_token": "{{ csrf_token() }}"
+        },
+        url:'/gsims/public/ateeb_rec_modal',
+        success:function(res){
+
+          $('.modal_body_fetch').html(res);
+        }
+    })
+  })
  
  
  
@@ -8842,6 +8883,7 @@ bootbox.dialog({
                    "_token": "{{ csrf_token() }}"
                },
                success:function(result){
+                  console.log
                   var time = new Date();
                   var hours = AddZeroDate(time.getHours());
                   var min = AddZeroDate(time.getMinutes());
