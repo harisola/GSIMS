@@ -156,7 +156,8 @@ class visitor extends Model
 				left join atif_visitors.visitor_card as vc on vc.card_rfid_dec = v.rfid_dec
 				left join atif_visitors.visitor_type as vt on vt.id = v.type_id
 				where FROM_UNIXTIME(v.created,'%Y-%m-%d') =  CURRENT_DATE()
-				and v.type_id in (".$type_id.",".$type_id1.",".$type_id2.") "; 
+				and v.type_id in (".$type_id.",".$type_id1.",".$type_id2.") 
+                group by timeIn"; 
 
 		$query = DB::connection($this->dbCon)->select($VQuery);
     	return $query;

@@ -119,7 +119,8 @@
  <!-- <option value="2">2</option> -->
                                         <!-- <option value="3">3</option> -->
                                         <!-- <option value="4">4</option> -->
-                                        <option value="5">5</option>
+                                        <!-- <option value="5">5</option> -->
+                                        <option value="6">6</option>
                                 </select>
                           </div>
                           <div class="col-md-2">
@@ -150,10 +151,15 @@
                             <label>GT-ID</label>
                             <input type="text" class="form-control" id="txt_gt_id">
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-2">
                             <label>&nbsp;</label><br />
                             <input type="button" id="" data-re_generate="0" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
                           </div>
+                          <div class="col-md-1">
+                            <label>&nbsp;</label><br />
+                            <input type="button" id="" data-pvs_bills="1" class="btn btn-group green Generate_Fee_Bill_1" value="Previous Bills" style="width: 100%;">
+                          </div>
+
                         </div><!-- row -->
                     <div class="portlet-body padding20" >
                         <hr />
@@ -412,6 +418,13 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
    }else{
        re_generate=0;
    }
+   if($(this).data('pvs_bills')==1){
+       pvs_bills=$(this).data('pvs_bills');
+   }else{
+       pvs_bills=0;
+   }
+
+
    var current_url=window.location.href.split('public/')
    var base_url=current_url[0]+'public/';
    var studentStatus =  $( "#student_status option:selected" ).val();
@@ -478,6 +491,7 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
                  'status_code':studentStatus,
                  'pdf':pdf,
                  're_generate':re_generate,
+                 'pvs_bills':pvs_bills,
                 }
     }
 

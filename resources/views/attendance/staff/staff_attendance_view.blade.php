@@ -856,13 +856,13 @@ $(document).ready(function(){
         alert("Rukhsar Hussain");
         refresh_page();
     }
-    else if(userID == 335){
-        alert("Faisal HOD");
-        refresh_page();
-    }
-    else{
-        alert("Other User");
-    }
+    // else if(userID == 335){
+    //     alert("Faisal HOD");
+    //     refresh_page();
+    // }
+    // else{
+    //     // alert("Other User");
+    // }
 
     //diable keyboard on textbox
     var delay = (function(){
