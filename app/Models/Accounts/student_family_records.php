@@ -12,7 +12,7 @@ class student_family_records extends Model
     protected $table = 'student_family_record';
 
      public static function getFamilyData($gf_id){
-                   $data=student_family_records::where([['gf_id',$gf_id]])->first();
+                   $data=student_family_records::select('name')->where([['gf_id',$gf_id]])->first();
                       return $data;
     }
 

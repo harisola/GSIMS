@@ -81,6 +81,21 @@ class AccountsController extends Controller
         }
 
 
+        if($request->pvs_bills==1){
+             $list=$class_list->getStudentInformationByParamters($array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
+            $array_student_ids="";
+            $i=0;
+            foreach ($list as $lists) {
+                 $array_student_ids.=$lists->gs_id.',';
+                 $current_acadmic_session=$lists->academic_session_id;
+                 $student_id=$lists->id;
+            }
+            $array_student_ids=substr_replace($array_student_ids, "", -1);
+            $get_lastest_bills=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
+                return view('account_process.accounts.fee_billing_table_1',['get_lastest_bills'=>$get_lastest_bills]);
+        }
+       
+
         if($request->get('pdf')==false){
             $list=$class_list->getStudentInformationByParamters($array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
             $array_student_ids="";
@@ -91,7 +106,7 @@ class AccountsController extends Controller
                  $student_id=$lists->id;
 
 
-
+                 
                  if($lists->gs_id!=="" && $billing_cycle!==""){
                     if($re_generate==1){
                         $fee_bill->deleteBill($student_id,$current_acadmic_session,$billing_cycle);
@@ -1266,9 +1281,10 @@ Supreme Court particularly regarding the summer fee refund and we will keep you 
 on this matter. This is a computer generated bill. If you have any queries - or notice any
 inconsistencies / errors, please contact on email below.
 ";*/
-$bill_notes="This Provisional Fee Bill is the fourth instalment for the Academic Session 2018-19 and incorporates fee for the months of Feb'19 and Mar'19. In compliance with the SCP's interim orders, the bill reflects provisional adjustment of 50% of last year's summer fee.
-This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.
-";
+// $bill_notes="This Provisional Fee Bill is the fourth instalment for the Academic Session 2018-19 and incorporates fee for the months of Feb'19 and Mar'19. In compliance with the SCP's interim orders, the bill reflects provisional adjustment of 50% of last year's summer fee.
+// This is a computer generated bill. If you have any queries - or notice any inconsistencies / errors, please contact on email below.
+// ";
+                    $bill_notes=$parameters['notes'];
 
                   }
                  if($grade_id==17){

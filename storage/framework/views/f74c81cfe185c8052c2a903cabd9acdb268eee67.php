@@ -266,12 +266,12 @@ $("#sectionFilter_container").html('');
 
     $.ajax({
        type:'POST',
-       data: {'_token': '{{ csrf_token() }}', 
+       data: {'_token': '<?php echo e(csrf_token()); ?>', 
        'Gname':Grade_names_list, 
       // 'Snames':Section_names_list, 
       // 'st':Status_names_list 
         },
-       url:"{{url('/generate_bill_1')}}",
+       url:"<?php echo e(url('/generate_bill_1')); ?>",
        dataType: "json",
        async: false,
        cache: false,
@@ -363,12 +363,12 @@ $("#statusFilter_container").html('');
 
     $.ajax({
        type:'POST',
-       data: {'_token': '{{ csrf_token() }}', 
+       data: {'_token': '<?php echo e(csrf_token()); ?>', 
        'Gname':Grade_names_list, 
        'Snames':Section_names_list, 
       // 'st':Status_names_list 
         },
-       url:"{{url('/generate_bill_2')}}",
+       url:"<?php echo e(url('/generate_bill_2')); ?>",
        dataType: "json",
        async: false,
        cache: false,
@@ -473,7 +473,7 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
   }else{
 
     if(gs_id!==""){
-          var  myData={'_token': '{{ csrf_token() }}', 
+          var  myData={'_token': '<?php echo e(csrf_token()); ?>', 
                  'gs_id':gs_id, 
                  'pdf':pdf,
                  'billing_cycle_number':installment_number,
@@ -482,7 +482,7 @@ $(document).on("click", "#Generate_Fee_Bill_1,#export_pdf,.Generate_Fee_Bill_1",
                 }    
     }else{
           var  myData={
-                 '_token': '{{ csrf_token() }}', 
+                 '_token': '<?php echo e(csrf_token()); ?>', 
                  'Grade_id':Grade_id_list, 
                  'Gname':Grade_names_list,
                  'billing_cycle_number':installment_number, 
