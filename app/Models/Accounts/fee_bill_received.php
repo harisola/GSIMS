@@ -58,6 +58,8 @@ class fee_bill_received extends Model
         return  $received;
     }
 
+    
+
     public function getOnlylastReceived($bill_id){
                 $fee=fee_bill_received::where([['fee_bill_id',$bill_id],['received_date','>','2018-06-30']])->select('received_amount')->OrderBy('id','desc')->first();
                 return @$fee['received_amount'];
@@ -74,7 +76,7 @@ class fee_bill_received extends Model
     	$result=fee_bill_received::where([['fee_bill.student_id',$student_id],['fee_bill.academic_session_id',$academic_session_id]])->join('fee_bill','fee_bill_received.fee_bill_id','=','fee_bill.id')->count();
     	return $result;	
     }
-     public function sumTotalPayments($student_id,$academic_session_id){
+     public static function sumTotalPayments($student_id,$academic_session_id){
         $july_fee=fee_bill_received::where(
              [
 

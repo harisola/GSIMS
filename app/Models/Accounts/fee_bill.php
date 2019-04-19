@@ -648,6 +648,19 @@ class fee_bill extends Model
         }
     }
 
+
+    public static function getLastBillReceivedByStudentId($student_id,$academic_session_id=""){
+        $details=fee_bill::join('fee_bill_received as fbr','fbr.fee_bill_id','fee_bill.id')
+        ->where('student_id',$student_id)
+        ->select('received_amount','security_deposit','gb_id','total_payable','computer_subcription_fee','fee_a_discount','received_amount')
+        ->where([['received_date','>','2018-06-30']])
+        ->where('academic_session_id',$academic_session_id)
+        ->Orderby('fbr.id','desc')->first();
+
+        // die;
+        return $details['received_amount'];
+    }
+
     public function getLastBillPaidNotPaid($student_id){
         $details=fee_bill::where('student_id',$student_id)->select('bill_status')->Orderby('id','desc')->first();
         return $details['bill_status'];   
@@ -757,7 +770,7 @@ class fee_bill extends Model
             left JOIN atif_fee_student.fee_bill_received fbr
             on fbr.fee_bill_id=fb.id
             where fb.academic_session_id IN (11,12)
-            and fb.bill_cycle_no in (1,2,3,4,5)
+            and fb.bill_cycle_no in (1,2,3,4,5,6)
             and fb.student_id=$student_id";
             
             

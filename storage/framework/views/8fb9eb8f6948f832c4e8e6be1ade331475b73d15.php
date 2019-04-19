@@ -38,6 +38,8 @@
                                                         <th>Musakhar PM</th>
                                                         <th>Yearly</th>
                                                         <th>total payable</th>
+                                                        <th>Last Recevied</th>
+                                                        <th>total received</th>
                                                         <th>Allow Remitance</th>
                                                         <!-- <th> Remitance </th> -->
                         			</tr>
@@ -98,6 +100,17 @@
                                                         <td><?= ($get_lastest_bill->musakhar)*2; ?></td>
                                                         <td><?php echo e($get_lastest_bill->oc_yearly); ?></td>
                                                         <td><?=number_format($get_lastest_bill->total_payable)?></td>
+                                                        <?php 
+                                                        $total_received=App\Models\Accounts\fee_bill_received::sumTotalPayments($get_lastest_bill->student_id,$get_lastest_bill->academic_session_id);
+                                                        $last_received="";
+                                                        $last_received=App\Models\Accounts\fee_bill::getLastBillReceivedByStudentId($get_lastest_bill->student_id,$get_lastest_bill->academic_session_id);
+
+
+
+                                                        ?>
+                                                        <td><?php echo e(@number_format($last_received)); ?></td>
+                                                        <td><?php echo e(@number_format($total_received)); ?></td>
+
                                                         <td><?php App\Models\Accounts\remittance::remitanceStatus($get_lastest_bill->student_id) ?></td>
 
 
