@@ -103,6 +103,8 @@
 <th class="text-center">Installment<br />#3</th>
 <th class="text-center">Installment<br />#4</th>
 <th class="text-center">Installment<br />#5</th>
+<th class="text-center">Installment<br />#6</th>
+<th class="text-center">Installment<br />#7</th>
 <th class="text-center">By</th>
 </tr>
 </thead>
@@ -191,6 +193,30 @@ echo ($cf->Installment_4);
         }
     ?>
 </td>
+<td class="text-center">
+    <?php 
+        if( !empty($cf->Installment_6) && $cf->Concession_Type_id != 9 )  
+        {
+        echo $cf->Installment_6.'%';
+        }else 
+        {
+ echo ($cf->Installment_6);
+        }
+    ?>
+</td>
+<td class="text-center">
+    <?php 
+        if( !empty($cf->Installment_7) && $cf->Concession_Type_id != 9 )  
+        {
+        echo $cf->Installment_7.'%';
+        }else 
+        {
+ echo ($cf->Installment_7);
+        }
+    ?>
+</td>
+
+
 <td class="text-center">
     <?php 
         if( $cf->Name_code != '' )

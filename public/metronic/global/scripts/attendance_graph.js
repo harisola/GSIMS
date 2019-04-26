@@ -1072,7 +1072,6 @@ var dailyReport = function(date,staffID){
                     // }
                     a=2;
                     $.each( getAllTimes, function( i, l ){
-                      debugger;
                       $('.noUi-tooltip').eq(a+i).text(l);
                     console.log( "Index #" + i + ": " + l );
                   });
@@ -1081,8 +1080,7 @@ var dailyReport = function(date,staffID){
                  },100)
                  console.log('connect1_actual_tap'+connect1)
                  console.log('classes_actual_tap'+classes) 
-                 console.log('ateeb'+time) 
-                 debugger;
+
                 tapSlider.noUiSlider.destroy();
                 var slider = document.getElementById('tapSlider');
                 noUiSlider.create(slider,{

@@ -12,5 +12,10 @@ class fee_bill_setup extends Model
         $data=fee_bill_setup::select('installment_number_of_months')->first();
         return $data['installment_number_of_months'];
     }
+    public static function getInstallmentNumber(){
+        $data=fee_bill_setup::select('current_installment')->first();
+        return $data['current_installment'];
+    }
+
 
 }

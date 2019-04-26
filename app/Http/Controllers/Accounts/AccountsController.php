@@ -22,7 +22,8 @@ use App\Models\Accounts\fee_bill_received_info;
 use App\Models\Accounts\scholarship_for_session;
 use App\Models\Accounts\students_all;
 use App\Models\Accounts\student_family_records;
-
+use App\Models\Accounts\rip_student;
+;
 
 use App\Models\Accounts\adjustment;
 
@@ -51,6 +52,7 @@ class AccountsController extends Controller
         ini_set('max_execution_time', 50000); //3 minutes
         $class_list= new class_list;
         $fee_bill= new fee_bill;
+        $rip_student=new rip_student;
         $grade_id = $request->input("Grade_id");
         $billing_cycle=        $request->input('billing_cycle_number');
         $section_name=         $request->input('Snames');
@@ -107,14 +109,17 @@ class AccountsController extends Controller
 
 
                  
-                 if($lists->gs_id!=="" && $billing_cycle!==""){
+                 if($lists->gs_id!="" && $billing_cycle!=""){
                     if($re_generate==1){
                         $fee_bill->deleteBill($student_id,$current_acadmic_session,$billing_cycle);
                     }
-                    $this->insertFeeBill($lists->gs_id,$billing_cycle);
+                     $rip=$rip_student->checkExistance($lists->gs_id);
+                    
+                    if($rip==0){
+                            $this->insertFeeBill($lists->gs_id,$billing_cycle);
+                    }
                  }
             }
-
             $array_student_ids=substr_replace($array_student_ids, "", -1);
             
             $get_lastest_bills=$fee_bill->feeInformationFilter($current_acadmic_session,$billing_cycle,$array_ids,$array_section_names,$gs_id,$gf_id,$gt_id,$std_status_id);
@@ -436,16 +441,23 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                
         
                @$fee_details=$fee_bill->getLastBillByStudentId($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
-               @$received_amount=$fee_bill_received->getLastReceivedAmount(@$fee_details['id']);
-                if($billing_cycle==2){
+                @$received_amount=$fee_bill_received->checkAmountExceed(@$list['student_id']);
+                $mytax=true;
+                if($billing_cycle>2){
+                    
                    if($received_amount>200000){
                         $amount_exceed=true;
-                        $adjustment_taxes=$total_adjustment_taxes=$this->calculate_adjustment_taxes($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
-                        $total_adjustments=-($adjustment_taxes-$total_adjustments);
+                        $sumTotalTaxes=$fee_bill->sumTotalTaxes(@$list['student_id'],$list['academic_session_id']);
+                        if($sumTotalTaxes>0){
+                            $mytax=false; //for temp use only
+                        }else{
+                            $adjustment_taxes=$total_adjustment_taxes=$this->calculate_adjustment_taxes($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
+                            $total_adjustments=-($adjustment_taxes-$total_adjustments);
+
+                        }
 
                     }
                 }
-                
                 $custom_arrear_adjustment=$arrear_adjustment_model->get_custom_pending_amount_id($list['student_id'],$billing_cycle);
                  $total_adjustments=$total_adjustments+$custom_arrear_adjustment;
                 if($total_adjustments<0){
@@ -455,7 +467,6 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     //     $total_adjustments=$total_adjustments+$previos_roll_over;
                     // }
                     // echo $total_adjustments;
-                    // die;
                 //if last bill in negative with rollover and last bill recving 0 5ht installment
 
                     $adjustment->insertUpdateAdjustment($list['student_id'],str_replace("-","",$total_adjustments));
@@ -513,7 +524,6 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $total_adjustments=($total_arriers+$std_adjustments);
 
                 $total_current_billing=((($gross_tution_fee+$additional_charges+$total_arriers)-$net_discount_amount));
-                // die;
                 $total_current_billing_with_arrears=($gross_tution_fee+$additional_charges)-$net_discount_amount;//if student paid first bill and 2nd bill paid partially e.g payable 2 lac and received 1 lac so for tax calculation
 
                  $total_current_billing2=(($gross_tution_fee+$additional_charges))-$net_discount_amount;
@@ -524,6 +534,12 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     $tax_allow=$this->StudentApplicableForTaxes($list,($total_current_billing-(str_replace('-','',$std_adjustments))),$billing_cycle);
 
                 }  
+                if(@$mytax==false){
+                    $tax_allow=0;
+                }else{
+                    $tax_allow=$tax_allow;
+                }
+             
                
                 $billing_amount_with_adjustment="";
                 $total_current_billing;
@@ -844,12 +860,12 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
 
 
                         //if received amount greater than 0 (paid bill amount or  more than bill amoount)
-                        $received_amount=$received_amount-($previous_bill_taxes+ @$fee_details->roll_over_charges);
+                        $received_amount=$received_amount-($previous_bill_taxes);
                         $total_received_amount=$fee_bill_received->sumTotalPayments($list['student_id'],$list['academic_session_id']);
-                        // $applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-@$fee_details->roll_over_charges),$tax_percentage);previoud code
 
-                         @$applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-$fee_details->roll_over_charges),$tax_percentage);
-                       // $applicable_taxes= $applicable_taxes-$previous_bill_taxes;
+                         // @$applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing-$fee_details->roll_over_charges),$tax_percentage); commit in 6th installment previos rollver remove-
+                         @$applicable_taxes=$this->calculateDiscount($admission_fee+$total_received_amount+($total_current_billing),$tax_percentage);
+
                     }else if(($received_amount<@$fee_details['total_payable'] && $received_amount!=0) && $previous_bill_taxes!=0){
 
                         //if received amount paid but less than total payable
@@ -985,14 +1001,14 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
 
     public function uploadList(){
         $class_list=  new class_list;
-        $query="select tl.*,cl.id as student_id from 
-        temp_lists tl
+        $query="select tl.*,cl.id as student_id,cl.academic_session_id as a_id from 
+        concession_tem_table tl
         inner join atif.class_list cl 
         on cl.gs_id=tl.gs_id 
         where 
         cl.academic_session_id 
-        in (11,12) and 
-        tl.billing_cycle_no=3";
+        in (11,12)";
+        //$query="SELECT * FROM concession_tem_table";
 
         $details = DB::connection('mysql_Career_fee_bill')->select($query);
 
@@ -1000,20 +1016,13 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
         $i=0;
        
         foreach ($details as  $detail) {
-           
+            $fee_bill = new fee_bill;
             $student_id=$detail['student_id'];
-            $academic_session_id=$detail['academic_session_id'];
-            $billing_cycle_no=$detail['billing_cycle_no'];
-            $percentage=$detail['percentage'];
-            $name_code=$detail['type'];
-            $concession_id=$this->getConcessionId($name_code);
-            $record_exists=$this->checkStudentExists($student_id,'concessions_for_session',$academic_session_id,$billing_cycle_no,$concession_id);
-            if($record_exists>0){ //for scholarships
-                // $this->deleteStudent('concession_for_session',$academic_session_id,$billing_cycle_no);
-                // $this->updateConcession($student_id,'concessions_for_session',$academic_session_id,$billing_cycle_no,$concession_id,$percentage);
-            }else{
-                // $this->insertConcessions($student_id,'concessions_for_session',$academic_session_id,$billing_cycle_no,$concession_id,$percentage);
-            }
+            $academic_session_id=$detail['a_id'];
+
+            // $fee_bill->deleteBill($student_id,$academic_session_id,6);
+
+            
           
         }
 
@@ -1958,7 +1967,7 @@ inconsistencies / errors, please contact on email below.
                     $received_amount_with_out_tax=($received_amount/1.05);
                 }
 
-            $pendings=$received_amount-$received_amount_with_out_tax;
+            $pendings=$received_amount-@$received_amount_with_out_tax;
 
         return $pendings;
     }

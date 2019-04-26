@@ -103,6 +103,8 @@
 <th class="text-center">Installment<br />#3</th>
 <th class="text-center">Installment<br />#4</th>
 <th class="text-center">Installment<br />#5</th>
+<th class="text-center">Installment<br />#6</th>
+<th class="text-center">Installment<br />#7</th>
 <th class="text-center">By</th>
 </tr>
 </thead>
@@ -193,6 +195,30 @@ echo ($cf->Installment_4);
 </td>
 <td class="text-center">
     <?php 
+        if( !empty($cf->Installment_6) && $cf->Concession_Type_id != 9 )  
+        {
+        echo $cf->Installment_6.'%';
+        }else 
+        {
+ echo ($cf->Installment_6);
+        }
+    ?>
+</td>
+<td class="text-center">
+    <?php 
+        if( !empty($cf->Installment_7) && $cf->Concession_Type_id != 9 )  
+        {
+        echo $cf->Installment_7.'%';
+        }else 
+        {
+ echo ($cf->Installment_7);
+        }
+    ?>
+</td>
+
+
+<td class="text-center">
+    <?php 
         if( $cf->Name_code != '' )
         {
             echo $cf->Name_code.' <br /><small>'.$cf->Dated.'</small>';
@@ -257,8 +283,9 @@ echo ($cf->Installment_4);
     };
 
 }();
-
-   
+var main_url=$('.main_url').val();
+var csrf=$('.csrf').val();
+ 
 var pagefunction = function() {
     
     Demo.init();
@@ -296,19 +323,28 @@ $(document).on("click", "#btn_search", function(){
 
 $(document).on("click", "#Create_Installment", function(e){
 e.preventDefault();
+debugger;
+// if( $("[name='Installment_1']").val() != '' && 
+// $("[name='Installment_2']").val() != '' &&
+// $("[name='Installment_3']").val() != '' &&
+// $("[name='Installment_4']").val() != '' &&
+// $("[name='Installment_5']").val() != '' &&
+// $("[name='Installment_5']").val() != '' &&
+// $("[name='Installment_6']").val() != '' &&
+// $("[name='Installment_7']").val() != '' &&
+// $("[name='Installment_8']").val() != '' &&
+// $("[name='Installment_9']").val() != '' &&
+// $("[name='Installment_10']").val() != '' &&
+// $("[name='Installment_11']").val() != '' &&
+// $("[name='Installment_12']").val() != '' ) 
 
-if( $("[name='Installment_1']").val() != '' && 
-$("[name='Installment_2']").val() != '' &&
-$("[name='Installment_3']").val() != '' &&
-$("[name='Installment_4']").val() != '' &&
-$("[name='Installment_5']").val() != '' 
- ) {
+// {
 App.startPageLoading(); 
 
 $.ajax({
     type:'POST',
-    data: {'_token': '<?php echo e(csrf_token()); ?>','Formdata': $("#Form_add_concession").serialize() },
-    url:"<?php echo e(url('/add_concession')); ?>",
+    data: {'_token': csrf,'Formdata': $("#Form_add_concession").serialize() },
+    url:main_url+'/add_concession',
     dataType: "json",
     async: false,
     cache: false,
@@ -322,8 +358,8 @@ $.ajax({
 
     $.ajax({
        type:'POST',
-       data: {'_token': '<?php echo e(csrf_token()); ?>', 'Gs_id':Gs_id, 'Academic_session_id':Academic_session_id },
-       url:"<?php echo e(url('/student_concession_info')); ?>",
+       data: {'_token': csrf, 'Gs_id':Gs_id, 'Academic_session_id':Academic_session_id },
+       url:main_url+'/student_concession_info',
        dataType: "json",
        async: false,
        cache: false,
@@ -344,6 +380,13 @@ $.ajax({
     $("[name='Installment_3']").val('');
     $("[name='Installment_4']").val('');
     $("[name='Installment_5']").val('');
+    $("[name='Installment_6']").val('');
+    $("[name='Installment_7']").val('');
+    $("[name='Installment_8']").val('');
+    $("[name='Installment_9']").val('');
+    $("[name='Installment_10']").val('');
+    $("[name='Installment_11']").val('');
+    $("[name='Installment_12']").val('');
     $("#profileDetail_Left").show('slow');
     $("#Student_info_div_m").hide('slow');
 
@@ -358,7 +401,7 @@ $.ajax({
     }
 });
 
-}
+// }
 
 });
 
@@ -366,12 +409,14 @@ $(document).on("click", ".Student_info_click", function(e){
 var Gs_id = $(this).prop('id');
 var tableType = $(this).attr('data-tableType');
 
+
+
 App.startPageLoading(); 
 
     $.ajax({
        type:'POST',
-       data: {'_token': '<?php echo e(csrf_token()); ?>', 'Gs_id':Gs_id, 'tableType':tableType },
-       url:"<?php echo e(url('/concession_search2')); ?>",
+       data: {'_token': csrf, 'Gs_id':Gs_id, 'tableType':tableType },
+       url:  main_url+'/concession_search2',
        dataType: "json",
        async: false,
        cache: false,
@@ -417,3 +462,4 @@ loadScript("http://10.10.10.50/gsims/public/metronic/global/scripts/datatable.js
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
 <!-- END PAGE LEVEL PLUGINS --></div>
+<?php echo $__env->make('master_layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

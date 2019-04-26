@@ -35,7 +35,7 @@ class Adjustment_Approvel_model extends Model
 	public function Get_Ajustment()
 	{
 		$query = "SELECT * FROM (
-		SELECT 
+		/*SELECT 
 		ap.id AS Approval_id,
 		ap.approve_status AS Approval_Status,
 		ap.approval_type_id AS Approval_Type_id,
@@ -131,7 +131,7 @@ class Adjustment_Approvel_model extends Model
 		WHERE atp.id=3 AND ap.approve_status=0 AND ap.record_deleted=0
 
 
-		UNION 
+		UNION */
 
 
 		SELECT 

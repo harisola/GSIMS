@@ -10,6 +10,7 @@ use App\Models\Accounts\bill_type_model;
 use App\Models\Accounts\arrear_adjustment_model;
 use Illuminate\Support\Facades\View;
 use App\Models\Accounts\billing_cycle_definition;
+use App\Models\Accounts\fee_bill_setup;
 
 class arrears extends Controller
 {
@@ -35,10 +36,10 @@ class arrears extends Controller
     public function insertAndUpdateArrear(Request $request){
         // Model load
         $arrear_adjustment_model = new arrear_adjustment_model();
+        $fee_bill_setup=new fee_bill_setup;
         $billing_cycle_definition=new billing_cycle_definition;
-        $installment_id=$billing_cycle_definition->getCurrentInstallmentNumber();
+        $installment_id=$fee_bill_setup->getInstallmentNumber();
         
-
         // Ajax POST Request
         $student_id = $request->input('studentId');
         $amount = $request->input('amount');

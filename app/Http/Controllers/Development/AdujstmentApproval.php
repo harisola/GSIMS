@@ -280,7 +280,10 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 
 					/*$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$payroll_leaveBalanced.", `remaining_leave`=".$payroll_remaining_leave.", `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; */
 
-					$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id."";
+$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$payroll_leaveBalanced.", `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; 
+
+
+					/*$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; */
 
 
 				}

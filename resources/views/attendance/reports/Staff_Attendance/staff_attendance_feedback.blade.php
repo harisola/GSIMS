@@ -17,6 +17,8 @@
   $photo500    = "";
   $photo150 = "";
 
+  $Remarks='-';
+
 
 
   if( !empty( $Staff_Attendance['Staff_data'] )): 
@@ -28,6 +30,8 @@
     $name_code      = $Staff_Attendance['Staff_data'][0]['name_code'];
     $department     = $Staff_Attendance['Staff_data'][0]['department'];
     $designation    = $Staff_Attendance['Staff_data'][0]['designation'];
+
+
 
     $photo500    = $Staff_Attendance['Staff_data'][0]['photo500'];
     $photo150    = $Staff_Attendance['Staff_data'][0]['photo150'];
@@ -103,18 +107,42 @@
           echo $st->tap_min ? date("g:i s A", strtotime($st->tap_min)) : "-";
           @endphp</td>
       <td>@php
-          echo $st->tap_max ? date("g:i s A", strtotime($st->tap_max)) : "-";
+          echo $st->TapOut ? date("g:i s A", strtotime($st->TapOut)) : "-";
 
           @endphp</td>
       <td>@php
+          
+
+        if($st->Dated == 0 && $st->tap_io_num > 1)
+        {
           echo $st->w_hrs ? $st->w_hrs : "-";
+        }else 
+        {
+          echo "-"; 
+        }
+        
+
+
+
           @endphp</td>
       <td>
-        @php
-          echo $st->fuctor_nod ? $st->fuctor_nod : "-";
-          @endphp
+        @php 
+
+        if($st->thisDay != 'Sat' && $st->Dated == 0 )
+        {
+          echo $st->fuctor_nod ? $st->fuctor_nod : "-"; 
+        }else 
+        {
+          echo "-"; 
+        }
+
+
+        @endphp
       </td>
-      <td>-</td>
+      <td> 
+         @php echo $st->Remarks; @endphp
+
+      </td>
     </tr>
     @php 
     $counter++
