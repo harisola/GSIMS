@@ -94,7 +94,8 @@ class AdujstmentApproval extends Controller
 
 $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1, `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
 
-		$this->MyUpdateTable($Query, $Approval_id);
+		$Trigger_Sp=1;
+		$this->MyUpdateTable($Query, $Approval_id, $Trigger_Sp);
 
 		$this->Activity_logs($Approval_id, $activity_id, $activity_action_id, $User_id);
 
@@ -123,10 +124,13 @@ $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1,
 
 			$activity_action_id=0;
 
+			$Trigger_Sp=0;
+
 			if( $Operation=='Missed Tap Event')
 			{
-				$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
-				$this->MyUpdateTable($Update_Query,$Approval_id);
+$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
+				$Trigger_Sp=1;
+				$this->MyUpdateTable($Update_Query,$Approval_id, $Trigger_Sp );
 
 				$activity_id=5;
 
@@ -136,15 +140,16 @@ $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1,
 			}
 			else if( $Operation=='Exceptional Adjustments')
 			{
+				$Trigger_Sp=0;
 				$this->ExceptionalAdjustment( $Adjust_Effect[0], $Approval_id );
 
 				$activity_id=4;
 
 				$activity_action_id=4;
 
-				$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
+$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
 
-				$this->MyUpdateTable($Update_Query, $Approval_id);
+				$this->MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp);
 
 			}
 
@@ -175,15 +180,17 @@ $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1,
 
 
 
-		public function MyUpdateTable($Update_Query, $Approval_id)
+		public function MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp)
 		{
 			
 			$AAM = new Adjustment_Approvel_model();
+			 
+
 
 			$AAM->MyUpdateTable_Model($Update_Query);
 
 
-			if( $Approval_id > 0 )
+			if( $Approval_id > 0 && $Trigger_Sp == 1 )
 			{
 
 $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_events`.`adjustment_approvals` AS ap WHERE ap.id= ".$Approval_id."";
@@ -260,6 +267,7 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 				$payroll_id=$EffedInfo[0]["payroll_id"];
 				$payroll_leaveBalanced=$EffedInfo[0]["payroll_leaveBalanced"];
 				$payroll_remaining_leave=$EffedInfo[0]["payroll_remaining_leave"];
+
 				$payroll_exceptional_adjustments=$EffedInfo[0]["payroll_exceptional_adjustments"];
 				$EL_Balanced=$EffedInfo[0]["EL_Balanced"];
 
@@ -276,11 +284,17 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 
 					$payroll_leaveBalanced += $Effected_day;
 					$payroll_remaining_leave += $Effected_day;
+
 					$payroll_exceptional_adjustments += $Effected_day; 
 
 					/*$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$payroll_leaveBalanced.", `remaining_leave`=".$payroll_remaining_leave.", `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; */
 
-$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$payroll_leaveBalanced.", `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; 
+					  
+					
+
+  $Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `remaining_leave`='".$payroll_remaining_leave."' WHERE `id`=".$payroll_id."";
+
+
 
 
 					/*$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; */
@@ -292,14 +306,14 @@ $Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$
 					$EL_Balanced += $Effected_day; 
 
 					$Sql = "UPDATE `atif`.`staff_registered` SET `leave_balance`=".$EL_Balanced." WHERE  `id`=".$Staff_id."";
-
-
-
-
 				}
 
+
 				$Approvalid=0;
-				$this->MyUpdateTable($Sql, $Approvalid );
+
+				$Trigger_Sp=0;
+
+				$this->MyUpdateTable($Sql, $Approvalid, $Trigger_Sp );
 
 
 				

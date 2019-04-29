@@ -270,13 +270,16 @@ var dailyReport = function(date,staffID){
                       }
 
                       
-                      console.log("payRollAttendanceArrayAfter--------"+payRollAttendanceArray);
-                      console.log("payRollAttendanceArrayAfter--------"+payRollFlag);
-
+                      console.log("payRollAttendanceArrayAfter2--------"+payRollAttendanceArray);
+                      console.log("payRollAttendanceArrayAfter2--------"+payRollFlag);
+ 
 
                       if(payRollFlag.length > 0 && data[0].holiday == null){
+
                           
                          for(var i = 0 ; i < payRollFlag.length ; i++){
+
+
 
                             if(payRollFlag[i] == 'Ei'){
                                connectPayRoll.push(true);

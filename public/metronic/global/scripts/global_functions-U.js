@@ -1,11 +1,3 @@
-$(document).on('click','.btn-transparent',function(){
-    $('.form_part_b').val("");
-    $('#absentia_title').val("")
-    $('#absentia_date').val("")
-    $('#absentia_startTime').val("")
-    $('#absentia_endTime').val("")
-    $('#absentia_description').val("")
-});
 
 function createFormNumberMask(){
       $(".form_part_b").inputmask("mask", {

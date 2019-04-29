@@ -7041,7 +7041,7 @@ $('#staffView_StaffList_Search').val('');
        },
        format: {
           to: function to(value) {
-           //return value + ',-';
+          
            return moment().startOf('day').add(value, 'minutes').format('HH:mm');
           },
           from: function from(value) {

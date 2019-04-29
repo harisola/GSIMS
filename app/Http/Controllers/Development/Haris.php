@@ -28,6 +28,12 @@ use App\Models\Staff\Staff_Information\staff_registered_father_spouse;
 use App\Models\Staff\Staff_Information\staff_registered_alternativecontact;
 use App\Models\Staff\Staff_Information\hr_forms_log;
 use App\Models\Staff\Staff_Information\adjustment_approval;
+use App\Models\Staff\Staff_Information\leave_approved;
+use DateTime;
+use DatePeriod;
+use DateInterval;
+
+
 
 
 class Haris extends StaffReportController
@@ -1509,10 +1515,10 @@ class Haris extends StaffReportController
             $l_leave_type='Personal';
          }
          if($time_from==""){
-            $time_from='none';
+            $time_from='07:00:00';
          }
          if($time_to==""){
-            $time_to='none';
+            $time_to='16:00:00';
          }
 
           $leave =  $staffInfo->insertComments('atif_gs_events.leave_application',$data);
@@ -1533,6 +1539,33 @@ class Haris extends StaffReportController
           $hr_forms_log->save();
 
           $this->adjustmentApproval($staff_id,'atif_gs_events.leave_application',$leave,2,$userID,$userID);
+          // echo $my_leave_to=date('Y-m-d H:i:s', strtotime('+1 day', $leave_to));
+          
+          $date = $leave_to;
+        $date1 = str_replace('-', '/', $date);
+        $leave_to_interval = date('Y-m-d',strtotime($date1 . "+1 days"));
+        $period = new DatePeriod(
+           new DateTime($leave_from),
+           new DateInterval('P1D'),
+           new DateTime($leave_to_interval)
+        );
+
+        foreach ($period as $key => $value) {
+            $leave_approved=new leave_approved;
+            $leave_approved->staff_id=$staff_id;
+            $leave_approved->leave_application_id=$leave;
+            $leave_approved->date=$value->format('Y-m-d');
+            $leave_approved->time_from=$time_from;
+            $leave_approved->time_to=$time_to;
+            $leave_approved->created=time();
+            $leave_approved->register_by=$userID;
+            $leave_approved->modified=time();
+            $leave_approved->modified_by=$userID;
+            $leave_approved->save();
+      }
+
+
+
 
         echo $leave;
     }
@@ -3155,7 +3188,10 @@ class Haris extends StaffReportController
       $adjustment_approval->created_by=$created_by;
       $adjustment_approval->modified_by=$modified_by;
       $adjustment_approval->save();
-   } 
+   }
+
+
+
 
    public function checkFormNumberExistance(request $request){
         $staffInfo = new StaffInformationModel();

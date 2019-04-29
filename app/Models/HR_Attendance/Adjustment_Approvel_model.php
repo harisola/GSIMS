@@ -243,7 +243,17 @@ class Adjustment_Approvel_model extends Model
 
 	public function MyUpdateTable_Model($Update_Query)
 	{
+
+		 
+
+		 
+		 
 		return DB::connection($this->dbCon)->update($Update_Query);
+		 
+		 
+		
+
+		
 	}
 
 

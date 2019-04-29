@@ -115,7 +115,7 @@
 
         if($st->Dated == 0 && $st->tap_io_num > 1)
         {
-          echo $st->w_hrs ? $st->w_hrs : "-";
+          echo $st->TotalWorkingHours ? $st->TotalWorkingHours : "-";
         }else 
         {
           echo "-"; 
