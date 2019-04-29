@@ -7129,6 +7129,8 @@ $('#staffView_StaffList_Search').val('');
              "_token": "{{ csrf_token() }}",
          },
          success:function(result){
+            $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
+            $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
             var data = jQuery.parseJSON(result);
             $('#Generations_AjaxLoader').hide();
             data['info'][0] = setNotAcceptable(data['info'][0]);

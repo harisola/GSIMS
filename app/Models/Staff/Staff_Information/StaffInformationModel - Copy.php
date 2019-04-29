@@ -2138,7 +2138,9 @@ on (  ao.date = amd.date and ai.location_id = ao.location_id and ao.created = am
 where amd.staff_id=".$staff_id."
 and amd.record_deleted =0
 and ai.record_deleted =0 
-and ao.record_deleted =0";
+and ao.record_deleted =0
+order by amd.modified desc
+";
 
 			
 
@@ -2453,7 +2455,9 @@ select Concat(DATE_FORMAT(from_unixtime(sao.created),'%a %b %d %Y'),', at ',DATE
 				DATE_FORMAT(sao.date,'%a %b %d %Y') as date,Date_FORMAT(sao.time,'%I:%i %p') as manual_time, mdes.id as Manual_id, mdes.description,
 				sao.id as Missed_id, 'Out_Table' as Table_name
 				from atif_attendance_staff.staff_attendance_out as sao left join atif_gs_events.absenta_manual_description mdes on sao.`created` = mdes.`created`  where sao.staff_id = ".$staff_id." and sao.location_id = 18 and mdes.record_deleted = 0 
-				order by Manual_id";
+				order by created_time desc";
+				
+
 	$staff = DB::connection($this->dbCon)->select($query);
 	    
 		return $staff;
@@ -2515,7 +2519,7 @@ $staff = DB::connection($this->dbCon)->select($Qeury);
 			 
 			from atif_gs_events.leave_application la
 
-			left join atif_gs_events.leave_type lt on lt.id = la.leave_type where la.staff_id = ".$staff_id." and la.record_deleted=0";
+			left join atif_gs_events.leave_type lt on lt.id = la.leave_type where la.staff_id = ".$staff_id." and la.record_deleted=0 order by la.modified desc";
 		$leave_description = DB::connection($this->dbCon)->select($query);
 		return $leave_description;
     }
@@ -2540,7 +2544,8 @@ $staff = DB::connection($this->dbCon)->select($Qeury);
 	public function getPenalty($staff_id){
 		$query = "SELECT dp.id,dp.penalty_title,dp.penalty_day, CONCAT(DATE_FORMAT(dp.penalty_from, '%a %b %d, %Y'),'-', DATE_FORMAT(dp.penalty_to, '%a %b %d, %Y')) AS 'penalty_date', DATE_FORMAT(FROM_UNIXTIME(dp.created),'%a %b %d, %Y at %r') AS 'timestamp',dp.penalty_description
 			FROM atif_gs_events.daily_penalty dp
-			WHERE dp.staff_id = ".$staff_id." AND dp.record_deleted=0 ";
+			WHERE dp.staff_id = ".$staff_id." AND dp.record_deleted=0 order by dp.modified desc";
+
 			
 		$result = DB::connection($this->dbCon)->select($query);
 		return $result;
@@ -2556,7 +2561,7 @@ public function getSinglePenalty($ID){
 	public function getExceptionAdjustment($staff_id){
 	$query = "SELECT ea.id, IFNULL(ea.adjustment_title,'') AS adjustment_title, ea.adjustment_day, DATE_FORMAT(FROM_UNIXTIME(ea.modified),'%a %b %d %Y, at %r') AS created, IFNULL(ea.adjustment_description,'') AS adjustment_description
 			FROM atif_gs_events.exception_adjustment ea
-			WHERE ea.staff_id = ".$staff_id." AND ea.record_deleted=0 ";
+			WHERE ea.staff_id = ".$staff_id." AND ea.record_deleted=0 order by ea.modified desc";
 		$result = DB::connection($this->dbCon)->select($query);
 		return $result;
 	}

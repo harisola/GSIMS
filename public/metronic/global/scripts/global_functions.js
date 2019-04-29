@@ -7,6 +7,9 @@ $(document).on('click','.btn-transparent',function(){
     $('#absentia_description').val("")
 });
 
+
+
+
 function createFormNumberMask(){
       $(".form_part_b").inputmask("mask", {
         "mask": "9999-999"
