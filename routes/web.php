@@ -39,7 +39,12 @@ define("WHERE_ACDSES", "academic_session_id = 11 or academic_session_id = 12");
 |
 */
 
+Route::get('clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+    // $exitCode = Artisan::call('view:clear');
 
+});
 /************************************** Login - Dashboard - Profile - Logout *****/
 /*********************************************************************************/
 Route::get('/login', 'LoginController@login');

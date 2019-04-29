@@ -1367,23 +1367,24 @@ class Haris extends StaffReportController
 
            if($attendanceData[0]->attendance_in == $attendanceData[0]->attendance_out){
 
-              $time = strtotime($missTap);
-              $data['time'] = date("H:i", strtotime('+1 minutes', $time));
+              // $time = strtotime($missTap);
+              // $data['time'] = date("H:i", strtotime('+1 minutes', $time));
+              $data['time'] = $missTap;
 
               $staff_manual_attendance =  $staffInfo->insertComments('atif_attendance_staff.staff_attendance_in',$data);
               $tableFlag = 'In_Table';
            } else {
               
-              $time = strtotime($missTap);
-              $data['time'] = date("H:i", strtotime('-1 minutes', $time));
+              // $time = strtotime($missTap);
+              $data['time'] = $missTap;
 
               $staff_manual_attendance =  $staffInfo->insertComments('atif_attendance_staff.staff_attendance_out',$data);
               $tableFlag = 'Out_Table';
            
            }
         } else {
-            $time = strtotime($missTap);
-            $data['time'] = date("H:i", strtotime('+1 minutes', $time));
+            // $time = strtotime($missTap);
+            $data['time'] = $missTap;
 
             $staff_manual_attendance =  $staffInfo->insertComments('atif_attendance_staff.staff_attendance_in',$data);
             $tableFlag = 'In_Table';
