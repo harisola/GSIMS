@@ -6306,7 +6306,7 @@ $('#staffView_StaffList_Search').val('');
                 var Edit_Absentia_id_hidden = data["Last_id"];
                  //var Edit_Absentia_id_hidden = data.Last_id;
               
-                 $('#absentia_table').append('<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ title +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>');
+                 $('#absentia_table').append('<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ title +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a class="edit_btn" onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>');
 
                      $("#multiple_absentia_date").val('');
                      $("#multiple_absentia_title").val('');
@@ -6379,7 +6379,7 @@ $('#staffView_StaffList_Search').val('');
                  var Last_id = data.id;
                  
               
-              $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td>  </tr>'); 
+              $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td>  </tr>'); 
                   $('#multiple_penalty_title').val('');
                   $('#multiple_penalty_day').val('');
                   $('#multiple_penalty_from').val('');
@@ -6522,7 +6522,7 @@ $('#staffView_StaffList_Search').val('');
              var Last_id = result['Last_id'];
             var Missed_id= result['Missed_id'];
             var Table_name= result['Table_name'];
-            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
+            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a classs="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
             $("#multiple_manual_attendance").val('');
                 $("#multiple_manual_tap").val('');
                 $("#multiple_manual_description").val('');
@@ -7130,8 +7130,8 @@ $('#staffView_StaffList_Search').val('');
              "_token": "<?php echo e(csrf_token()); ?>",
          },
          success:function(result){
-            $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
-            $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+          $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
+          $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
             var data = jQuery.parseJSON(result);
             $('#Generations_AjaxLoader').hide();
             data['info'][0] = setNotAcceptable(data['info'][0]);
@@ -7290,7 +7290,7 @@ $('#staffView_StaffList_Search').val('');
           
           
                 absentiaHTML = absentiaHTML + '<tr class="absentia_table_row" id="absentia_table_row_'+data['absentia'][i].Absenia_id+'"><td>'+data['absentia'][i].title +'</td><td>'+data['absentia'][i].date +'</td><td>'+
-                  changeTimeFormat(data['absentia'][i].From_time)  +'</td><td>'+changeTimeFormat(data['absentia'][i].to_time) +'</td><td>'+data['absentia'][i].description +'</td><td><a onClick="Edit_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-close"></i></a></td></tr>';
+                  changeTimeFormat(data['absentia'][i].From_time)  +'</td><td>'+changeTimeFormat(data['absentia'][i].to_time) +'</td><td>'+data['absentia'][i].description +'</td><td><a class="edit_btn" onClick="Edit_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delete_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-close"></i></a></td></tr>';
 
              }
           
@@ -7317,7 +7317,7 @@ $('#staffView_StaffList_Search').val('');
              }
              var Manual_id=data['manual'][i].Manual_id;
              manualHTML = manualHTML + '<tr class="missedTapEven" data-missed_id="'+Missedid+'" data-table_name="'+Tablename+'" data-id="'+data['manual'][i].Manual_id+'"><td>'+data['manual'][i].date +'</td><td>'+data['manual'][i].manual_time 
-                       +'</td><td><small class="tooltips" data-original-title="'+data['info'][0]['abridged_name']+'">'+data['info'][0]['name_code']+' </small> - '+data['manual'][i].created_time +'</td><td>'+(data['manual'][i].description === null ? '': data['manual'][i].description) +'</td> <td><a onClick="editAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-close"></i></a></td> </tr>';
+                       +'</td><td><small class="tooltips" data-original-title="'+data['info'][0]['abridged_name']+'">'+data['info'][0]['name_code']+' </small> - '+data['manual'][i].created_time +'</td><td>'+(data['manual'][i].description === null ? '': data['manual'][i].description) +'</td> <td><a class="edit_btn" onClick="editAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-close"></i></a></td> </tr>';
                  }
              
           $('#Missed_id').val(Missedid);
@@ -7386,7 +7386,7 @@ $('#staffView_StaffList_Search').val('');
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+data['leave_description'][i].leave_approve_date_to+' </td> </tr>';
                 }
 
-                leaveHTML = leaveHTML + '</table></td><td>'+data['leave_description'][i].leave_description+'</td><td class="text-center"><a onClick="ReWriteLeave('+data['leave_description'][i].id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+data['leave_description'][i].id+')" ><i class="fa fa-check"></i></a> | <a onClick="delectLeave('+data['leave_description'][i].id+')"><i class="fa fa-close"></i></a></td></tr>';
+                leaveHTML = leaveHTML + '</table></td><td>'+data['leave_description'][i].leave_description+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+data['leave_description'][i].id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+data['leave_description'][i].id+')" ><i class="fa fa-check"></i></a> | <a class="del_btn" onClick="delectLeave('+data['leave_description'][i].id+')"><i class="fa fa-close"></i></a></td></tr>';
 
                 }
 
@@ -7397,7 +7397,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['penalty']){
                 var penaltyHTML = '';
                 for(var i = 0 ; i < data['penalty'].length; i++){
-                   penaltyHTML = penaltyHTML + '<tr class="penaltyRowClass" data-id="'+data['penalty'][i].id+'"><td>'+data['penalty'][i].penalty_title+'</td><td>'+data['penalty'][i].penalty_day+'</td><td><strong>'+data['penalty'][i].penalty_date+'</td><td>'+data['penalty'][i].timestamp+'</td><td>'+data['penalty'][i].penalty_description+'</td> <td class="text-center"><a onClick="ReWriteLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-edit"></i></a> | <a onClick="delectLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
+                   penaltyHTML = penaltyHTML + '<tr class="penaltyRowClass" data-id="'+data['penalty'][i].id+'"><td>'+data['penalty'][i].penalty_title+'</td><td>'+data['penalty'][i].penalty_day+'</td><td><strong>'+data['penalty'][i].penalty_date+'</td><td>'+data['penalty'][i].timestamp+'</td><td>'+data['penalty'][i].penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
                 }
 
                 $('#penaltyTable tbody').html(penaltyHTML);   
@@ -7408,7 +7408,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['exception_adjustment']){
              var exception_adjustment = '';
           for (var i = 0 ; i < data['exception_adjustment'].length; i++){
-             exception_adjustment = exception_adjustment + '<tr class="AddAdjustment" data-id="'+data['exception_adjustment'][i].id+'"><td>'+data['exception_adjustment'][i].adjustment_title+'</td><td>'+data['exception_adjustment'][i].adjustment_day+'days</td><td>'+data['exception_adjustment'][i].created+'</td><td>'+data['exception_adjustment'][i].adjustment_description+'</td> <td class="text-center"><a onClick="ReWriteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
+             exception_adjustment = exception_adjustment + '<tr class="AddAdjustment" data-id="'+data['exception_adjustment'][i].id+'"><td>'+data['exception_adjustment'][i].adjustment_title+'</td><td>'+data['exception_adjustment'][i].adjustment_day+'days</td><td>'+data['exception_adjustment'][i].created+'</td><td>'+data['exception_adjustment'][i].adjustment_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
               }
 
                 $('#adjustment_table tbody').html(exception_adjustment);
@@ -7420,9 +7420,14 @@ $('#staffView_StaffList_Search').val('');
               for(var i = 0 ; i < data['get_cut_date'].length;i++){
                 // Absentia
                 if(data['get_cut_date'][i].name == 'absentia'){
+
                   if(data['get_cut_date'][i].to_date >= data['get_cut_date'][i].currentDate){
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].from_date);
                   }else{
+                    $(".edit_btn,.del_btn").prop( "onclick", null);
+                    $(".edit_btn,.del_btn").css( "cursor","not-allowed");
+
+
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].new_payroll_start);
                   }
                 }
@@ -8664,7 +8669,7 @@ if(date != '' && missTap != '' && Tap_id != ''){
        var id = Last_id;
           if(filter == id){
           var leaveHTML = '';
-          leaveHTML = leaveHTML + '<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="abridged_name"> name_code </small> - '+ formatDate(date)+'</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>';
+          leaveHTML = leaveHTML + '<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="abridged_name"> name_code </small> - '+ formatDate(date)+'</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a class="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>';
           $(this).replaceWith(leaveHTML);
           }
        });
@@ -8904,7 +8909,7 @@ bootbox.dialog({
             var Last_id = result['Last_id'];
             var Missed_id= result['Missed_id'];
             var Table_name= result['Table_name'];
-            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
+            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a class="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
             $("#manual_attendance").val('');
             $("#manual_missTap").val('');
             $("#manual_description").val('');
@@ -9073,7 +9078,7 @@ bootbox.dialog({
                 "_token": "<?php echo e(csrf_token()); ?>"
               },
           success:function(result){
-          $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
+          $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a class="delectLeave" onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
             $('#LeaveApp').modal('toggle'); 
           }
         });
@@ -9280,8 +9285,8 @@ bootbox.dialog({
                 leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+formatDate(approve_to)+' </td> </tr>';
                }
 
-            // leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a></td></tr>';
-         leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"> <a onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i> | <a onClick="delectLeave('+id+')"><i class="fa fa-close"> </a></td></tr>';
+           
+         leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"> <a class="edit_btn" onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i> | <a class="del_btn" onClick="delectLeave('+id+')"><i class="fa fa-close"> </a></td></tr>';
 
               $(this).replaceWith(leaveHTML);
           }
@@ -9380,7 +9385,7 @@ bootbox.dialog({
               
               var data = JSON.parse(res);
               var Last_id = data.id;
-                 $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>'); 
+                 $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>'); 
                  $('#penalty_title').val('');
                  $('#penalty_day').val('');
                  $('#penalty_from').val('');
