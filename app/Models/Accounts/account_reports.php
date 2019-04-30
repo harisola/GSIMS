@@ -122,7 +122,7 @@ GROUP  BY `std_info`.`grade_id` ";
                 }elseif($installment_number==3){
                     $billing_months=1.2;
                 }else{
-                	$billing_months=2;
+                	$billing_months=1;
                 }
                 return $billing_months;
     }

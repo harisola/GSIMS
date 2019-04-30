@@ -182,7 +182,7 @@ class fee_bill extends Model
                 }elseif($installment_number==3){
                     $billing_months=1.2;
                 }else{
-                    $billing_months=2;
+                    $billing_months=1;
                 }
         if($grade_id==""){
                 $query = "SELECT cl.abridged_name,cl.id,cl.grade_name, cl.gs_id,cl.gfid,cl.std_status_code,fb.bill_cycle_no,fb.gb_id,
