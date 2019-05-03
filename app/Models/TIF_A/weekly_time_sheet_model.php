@@ -158,7 +158,7 @@ class weekly_time_sheet_model extends Model
 
         return DB::statement("INSERT INTO $table_name 
          
-        (staff_id, date, record_deleted, time_in, time_out, is_on_flexy, is_on_relaxation, flexy_time, relaxation_time, created, register_by, modified, modified_by, holidayFlag ) SELECT " . $data['staff_id'] . ", '". $data['date'] ."', ". $data['record_deleted'] ." , sat_in, sat_out, `is_on_flexy`, `is_on_relaxation`, `flexy_time`, `relaxation_time`, ". $data['created'] .", ". $data['register_by'] ." , ". $data['modified'] ." , ". $data['modified_by'] .", 0 FROM atif_gs_events.tt_profile_time_staff where `staff_id` = 1 
+        (staff_id, date, record_deleted, time_in, time_out, is_on_flexy, is_on_relaxation, flexy_time, relaxation_time, created, register_by, modified, modified_by, holidayFlag ) SELECT " . $data['staff_id'] . ", '". $data['date'] ."', ". $data['record_deleted'] ." , sat_in, sat_out, `is_on_flexy`, `is_on_relaxation`, `flexy_time`, `relaxation_time`, ". $data['created'] .", ". $data['register_by'] ." , ". $data['modified'] ." , ". $data['modified_by'] .", 0 FROM atif_gs_events.tt_profile_time_staff where `staff_id` =".$data['staff_id']."
         ON DUPLICATE KEY UPDATE record_deleted = ". $data['record_deleted'] );
         
     }   
