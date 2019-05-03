@@ -1,5 +1,5 @@
  
- <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_2">
+ <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_12">
                 <thead>
                   <tr>
                      <th style="text-align: center;background-color: #2f353b;color: #fff;">Department</th>
@@ -20,8 +20,6 @@
                 </thead>
 
                  <tbody>
-
-                  <!-- Add Loop and Dynamic Work and Excel  Arif Khan -->
                       <?php 
                         if(!empty($data))
                           {
@@ -56,7 +54,7 @@
  </table>
 
   <script type="text/javascript">
-         $('#sample_2').DataTable({
+         $('#sample_12').DataTable({
                       "destroy": true,
                       //"scrollX": true,
                       //"ordering": true,

@@ -7129,8 +7129,11 @@ $('#staffView_StaffList_Search').val('');
              "_token": "{{ csrf_token() }}",
          },
          success:function(result){
-          $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
-          $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+          
+            setTimeout(function(){
+                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
+                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+            },1000)
             var data = jQuery.parseJSON(result);
             $('#Generations_AjaxLoader').hide();
             data['info'][0] = setNotAcceptable(data['info'][0]);
@@ -7422,9 +7425,10 @@ $('#staffView_StaffList_Search').val('');
 
                   if(data['get_cut_date'][i].to_date >= data['get_cut_date'][i].currentDate){
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].from_date);
-                  }else{
                     $(".edit_btn,.del_btn").prop( "onclick", null);
                     $(".edit_btn,.del_btn").css( "cursor","not-allowed");
+                  }else{
+                    
 
 
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].new_payroll_start);

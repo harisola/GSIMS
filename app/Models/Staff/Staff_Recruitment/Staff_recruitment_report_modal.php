@@ -13,7 +13,6 @@ class Staff_recruitment_report_modal extends Model
     protected $table = 'career_form_data';
     protected $dbCon = 'mysql_Career';
 
-
  /**********************************************************************
     * Calling Career Forms
     * 
@@ -22,10 +21,10 @@ class Staff_recruitment_report_modal extends Model
   
  				public function filter_report_data_online_screening($date_1,$date_2){
 
-					$query = "select COUNT(a.created) as online_screening_dates
-						from career_form_data as a 
-						where from_unixtime(a.created, '%Y-%m-%d')= curdate() and a.status_id ='13'
-						";
+						$query = "select COUNT(a.created) as online_screening_dates
+						from career_form as a 
+						where  a.status_id ='1' and a.stage_id = '1' and a.form_source = '1' and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01'
+						 and from_unixtime(a.created ,'%Y-%m-%d') <=  CURDATE(); ";
 
 					 $filter = DB::connection($this->dbCon)->select($query);
 					
@@ -35,10 +34,10 @@ class Staff_recruitment_report_modal extends Model
 
 				public function filter_report_data_call_for_part_b($date_1,$date_2){
 
-					$query = "select COUNT(a.created) as call_for_part_b_dates
-						from career_form_data as a 
-						where from_unixtime(a.created, '%Y-%m-%d') = curdate() and a.status_id ='11'
-						";
+						$query = "select COUNT(a.created) as call_for_part_b_dates
+						from career_form as a 
+						where  a.status_id ='11' and a.stage_id = '9' and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01'
+						and from_unixtime(a.created ,'%Y-%m-%d') <=  CURDATE();";
 
 					 $filter = DB::connection($this->dbCon)->select($query);
 					
@@ -48,10 +47,10 @@ class Staff_recruitment_report_modal extends Model
 
 				public function filter_report_data_full_screening($date_1,$date_2){
 
-					$query = "select COUNT(a.created) as full_screening_dates
-						from career_form_data as a 
-						where from_unixtime(a.created, '%Y-%m-%d') = curdate() and a.status_id ='1'
-						";
+						$query = "select COUNT(a.created) as full_screening_dates
+						from career_form as a left join career_form_data as cf on a.id = cf.form_id 
+						where  a.status_id ='1' and a.stage_id = '1' and cf.status_id ='11' and cf.stage_id='10' and a.form_source='1' and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01'
+						 and from_unixtime(a.created ,'%Y-%m-%d') <=  CURDATE();";
 
 					 $filter = DB::connection($this->dbCon)->select($query);
 					
@@ -62,10 +61,20 @@ class Staff_recruitment_report_modal extends Model
 
 				public function filter_report_data_call_b_followup($date_1,$date_2){
 
-					$query = "select COUNT(a.created) as follow_up_dates
-						from career_form_data as a 
-						where from_unixtime(a.created, '%Y-%m-%d') = curdate() and a.status_id ='11' and a.stage_id ='5'
-						";
+					/* $query = "select COUNT(a.created) as follow_up_dates
+						from career_form as a 
+						where  a.status_id ='11' and a.stage_id ='5' and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01'
+						";*/
+
+
+						$query = "select COUNT(a.created) as follow_up_dates
+						from career_form as a 
+						where a.status_id = 11
+						and a.stage_id = 5
+						and from_unixtime(a.created ,'%Y-%m-%d') >=  '2018-10-01'
+						and from_unixtime(a.created ,'%Y-%m-%d') <=  CURDATE(); and a.form_source = '1'";
+
+
 
 					 $filter = DB::connection($this->dbCon)->select($query);
 					
@@ -161,7 +170,7 @@ class Staff_recruitment_report_modal extends Model
 				}
 
 
-				public function filter_report_data_departs($departs){
+				/*public function filter_report_data_departs($departs){
 
 
 					if(isset($departs)&& !empty($departs) && $departs!='null' && $departs!=''){
@@ -187,7 +196,7 @@ class Staff_recruitment_report_modal extends Model
 
 					FROM `career_form_data` as a 
 					left join career_dept as d on a.depart_id = d.id 
-					where a.depart_id IN('".implode("','", $departs)."') GROUP BY d.id  ";
+					where a.depart_id IN('".implode("','", $departs)."') and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01'  GROUP BY d.id  ";
 
 					$filter = DB::connection($this->dbCon)->select($query1);
 					
@@ -196,9 +205,9 @@ class Staff_recruitment_report_modal extends Model
 					}
 
 					 
-				}
+				}*/
 
-				public function filter_report_data_subjects($subjects){
+				/*public function filter_report_data_subjects($subjects){
 
 					if(isset($subjects)&& !empty($subjects) && $subjects!='null' && $subjects!=''){
 						$subjects = explode(",", $subjects);
@@ -263,7 +272,7 @@ class Staff_recruitment_report_modal extends Model
 					return $filter;
 
 									
-				}
+				}*/
 			
 
 				public function filter_report_data_departs_dates($date_depart1,$date_depart2){
@@ -285,7 +294,7 @@ class Staff_recruitment_report_modal extends Model
 					 SUM(if( a.status_id=7 && a.stage_id=5 ,1,0)) as Offer_Confirmation_Follow_Up
 					 
 					 from career_form_data as a  left join career_dept as d on a.depart_id = d.id
-					 where from_unixtime(a.created, '%Y-%m-%d') between '".$date_depart1."' and '".$date_depart2."' GROUP BY d.id
+					 where from_unixtime(a.created, '%Y-%m-%d') between '".$date_depart1."' and '".$date_depart2."'   GROUP BY d.id
 						";
 					$filter = DB::connection($this->dbCon)->select($query);
 					
@@ -315,7 +324,7 @@ class Staff_recruitment_report_modal extends Model
 					 SUM(if( a.status_id=7 && a.stage_id=5 ,1,0)) as Offer_Confirmation_Follow_Up
 					 
 					 from career_form_data as a  left join career_dept as d on a.depart_id = d.id
-					 where from_unixtime(a.created, '%Y-%m-%d') = '".$date_depart1."'  GROUP BY d.id
+					 where from_unixtime(a.created, '%Y-%m-%d') = '".$date_depart1."' and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01' GROUP BY d.id
 						";
 					$filter = DB::connection($this->dbCon)->select($query);
 					
@@ -325,7 +334,36 @@ class Staff_recruitment_report_modal extends Model
 			}
 
 
-			public function filter_report_data_departs_dates_depart($date_depart1,$date_depart2,$departs){
+			public function filter_report_data_date_depart2($date_depart2){
+
+					 $query = "select a.tag,a.depart_id,d.id,d.departments,a.created,
+					 SUM(if( a.status_id=2,1,0 )) as Initial_Interview,
+					 SUM(if( a.status_id=3,1,0 )) as Formal_Interview,
+					 SUM(if( a.status_id=4,1,0 )) as Observation,
+					 SUM(if( a.status_id=5,1,0 )) as Final_Consultation,
+					 SUM(if( a.status_id=6,1,0 )) as Offer,
+					 SUM(if( a.status_id=7,1,0 )) as Offer_Confirmation,
+					 SUM(if( a.status_id=10,1,0 )) as Archive,
+					 SUM(if( a.status_id=12,1,0 )) as Regret,
+					 SUM(if( a.status_id=15,1,0 )) as Not_Interested,
+
+					 SUM(if( a.status_id=3 && a.stage_id=5 ,1,0)) as Formal_Inteview_Follow_Up,
+					 SUM(if( a.status_id=4 && a.stage_id=5 ,1,0)) as Observation_Follow_Up,
+					 SUM(if( a.status_id=5 && a.stage_id=5 ,1,0)) as Final_Consultation_Follow_Up,
+					 SUM(if( a.status_id=7 && a.stage_id=5 ,1,0)) as Offer_Confirmation_Follow_Up
+					 
+					 from career_form_data as a  left join career_dept as d on a.depart_id = d.id
+					 where from_unixtime(a.created, '%Y-%m-%d') = '".$date_depart2."' and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01'  GROUP BY d.id
+						";
+					$filter = DB::connection($this->dbCon)->select($query);
+					
+					return $filter;
+
+									
+			}
+
+
+			/*public function filter_report_data_departs_dates_depart($date_depart1,$date_depart2,$departs){
 
 					$departs = explode(",", $departs);
 					
@@ -931,8 +969,6 @@ class Staff_recruitment_report_modal extends Model
 
 					 from career_form_data as a  left join career_dept as d on a.depart_id = d.id left join career_form as fm on a.form_id = fm.id where a.depart_id IN('".implode("','", $departs)."') AND fm.form_source = ".$Onlinew."  GROUP BY d.id
 						";
-					
-
 					$filter = DB::connection($this->dbCon)->select($query);
 					
 					return $filter;
@@ -988,7 +1024,7 @@ class Staff_recruitment_report_modal extends Model
 					 SUM(if( a.status_id=7 && a.stage_id=5 ,1,0)) as Offer_Confirmation_Follow_Up
 					 
 
-				 from career_form_data as a  left join career_dept as d on a.depart_id = d.id left join career_form as fm on a.form_id = fm.id where a.depart_id IN('".implode("','", $departs)."') AND a.campus = ".$campus." AND fm.form_source = ".$Onlinew."  GROUP BY d.id
+					 from career_form_data as a  left join career_dept as d on a.depart_id = d.id left join career_form as fm on a.form_id = fm.id where a.depart_id IN('".implode("','", $departs)."') AND a.campus = ".$campus." AND fm.form_source = ".$Onlinew."  GROUP BY d.id
 						";
 						
 						$filter = DB::connection($this->dbCon)->select($query);
@@ -1029,37 +1065,36 @@ class Staff_recruitment_report_modal extends Model
 					
 					return $filter;
 
-					}
+					}*/
 
 
 					public function filter_report_data_departs_dates_depart_null(){
 
-					 $query = "select a.depart_id,d.id,d.departments,a.form_id,fm.id,fm.form_source,
-					 SUM(if( a.status_id=2,1,0 )) as Initial_Interview,
-					 SUM(if( a.status_id=3,1,0 )) as Formal_Interview,
-					 SUM(if( a.status_id=4,1,0 )) as Observation,
-					 SUM(if( a.status_id=5,1,0 )) as Final_Consultation,
-					 SUM(if( a.status_id=6,1,0 )) as Offer,
-					 SUM(if( a.status_id=7,1,0 )) as Offer_Confirmation,
-					 SUM(if( a.status_id=10,1,0 )) as Archive,
-					 SUM(if( a.status_id=12,1,0 )) as Regret,
-					 SUM(if( a.status_id=15,1,0 )) as Not_Interested,
+						 $query = "select a.depart_id,d.id,d.departments,a.form_id,fm.id,fm.form_source,
+						 SUM(if( a.status_id=2,1,0 )) as Initial_Interview,
+						 SUM(if( a.status_id=3,1,0 )) as Formal_Interview,
+						 SUM(if( a.status_id=4,1,0 )) as Observation,
+						 SUM(if( a.status_id=5,1,0 )) as Final_Consultation,
+						 SUM(if( a.status_id=6,1,0 )) as Offer,
+						 SUM(if( a.status_id=7,1,0 )) as Offer_Confirmation,
+						 SUM(if( a.status_id=10,1,0 )) as Archive,
+						 SUM(if( a.status_id=12,1,0 )) as Regret,
+						 SUM(if( a.status_id=15,1,0 )) as Not_Interested,
 
-					 SUM(if( a.status_id=3 && a.stage_id=5 ,1,0)) as Formal_Inteview_Follow_Up,
-					 SUM(if( a.status_id=4 && a.stage_id=5 ,1,0)) as Observation_Follow_Up,
-					 SUM(if( a.status_id=5 && a.stage_id=5 ,1,0)) as Final_Consultation_Follow_Up,
-					 SUM(if( a.status_id=7 && a.stage_id=5 ,1,0)) as Offer_Confirmation_Follow_Up
-					 
+						 SUM(if( a.status_id=3 && a.stage_id=5 ,1,0)) as Formal_Inteview_Follow_Up,
+						 SUM(if( a.status_id=4 && a.stage_id=5 ,1,0)) as Observation_Follow_Up,
+						 SUM(if( a.status_id=5 && a.stage_id=5 ,1,0)) as Final_Consultation_Follow_Up,
+						 SUM(if( a.status_id=7 && a.stage_id=5 ,1,0)) as Offer_Confirmation_Follow_Up
+						 
 
-					 from career_form_data as a  left join career_dept as d on a.depart_id = d.id
-					 left join career_form as fm on a.form_id = fm.id and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01' 
-					 GROUP BY d.id
-						";
-					$filter = DB::connection($this->dbCon)->select($query);
-					
-					return $filter;
-
-									
+						 from career_form_data as a  left join career_dept as d on a.depart_id = d.id
+						 left join career_form as fm on a.form_id = fm.id and from_unixtime(a.created ,'%Y-%m-%d') >= '2018-10-01' 
+						 GROUP BY d.id
+							";
+						$filter = DB::connection($this->dbCon)->select($query);
+						
+						return $filter;
+				
 			}
 
 
@@ -1107,7 +1142,7 @@ class Staff_recruitment_report_modal extends Model
 			
 			public function filter_report_data_today($date_2){
 
-					 $query = "select * from ( 
+								 $query = "select * from ( 
 								select  d.departments as Department_name, 
 
 
@@ -1153,8 +1188,8 @@ class Staff_recruitment_report_modal extends Model
 								from atif_career.career_form as cf 
 								left  join (  select * from atif_Career.career_form_data as cfd where cfd.id in (
 								select max(cfd.id) from atif_career.career_form_data as cfd group by cfd.form_id ) ) as cfd on cfd.form_id=cf.id
-								left JOIN atif_Career.career_dept AS de ON de.id=cfd.depart_id
-								where from_unixtime(cf.modified, '%Y-%m-%d') = curdate()  group by cfd.depart_id ) as dd on dd.departments = d.departments ) as data
+								left JOIN atif_Career.career_dept AS de ON de.id=cfd.depart_id where from_unixtime(cfd.created ,'%Y-%m-%d') >= '2018-10-01'
+								  group by cfd.depart_id ) as dd on dd.departments = d.departments ) as data
 
 						";
 						

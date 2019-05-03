@@ -21,8 +21,7 @@ class Staff_recruitment_model extends Model
     ***********************************************************************/
     public function get_recruitment_data(){
 	   
-	   
-	   	    $query = "select
+	    $query = "select
 			c.id as career_id, c.gc_id, c.name, c.email, c.mobile_phone, c.land_line,
 			c.nic, c.gender, c.position_applied, c.comments,
 			c.status_id, c.stage_id,
@@ -82,14 +81,14 @@ class Staff_recruitment_model extends Model
 	    $career = DB::connection($this->dbCon)->select($query);
 		$career = collect($career)->map(function($x){ return (array) $x; })->toArray(); 
 		return $career;
-	}
+		}
 
 	public function custom_query($query)
-	{
-		$career = DB::connection($this->dbCon)->select($query);
+		{
+		$career = DB::connection($this->dbCon)->select($query); 
 		$career = collect($career)->map(function($x){ return (array) $x; })->toArray(); 
 		return $career;
-	}
+		}
 
 
 
@@ -410,15 +409,6 @@ left join atif_career.career_form_data as part_b on part_b.form_id = c.id and pa
 		
 	}
 
-
-
-
-
-
-
-
-
-
 	/**********************************************************************
     * Calling Career Forms
     * 
@@ -436,7 +426,7 @@ left join atif_career.career_form_data as part_b on part_b.form_id = c.id and pa
     	return $id;
     }
     public function updateFormdata($table_name,$where,$data){
-        $update_data =  DB::connection($this->dbCon)->table($table_name)->where($where)->update($data);
+         $update_data =  DB::connection($this->dbCon)->table($table_name)->where($where)->update($data);
         return $update_data;
     }
 
@@ -1066,7 +1056,6 @@ concat( ' Next step decision from   <strong> Observation  </strong> to <strong>'
 )
 
 
-
 	WHEN ( (lg.status_id=5 and lg.comment_type='allocation')   ) THEN 
 	 concat( ' <strong> Final Consultation  </strong>, applicant tagged to <strong>', 
 	 if( lg.tag is not null, concat('  ', lg.tag),'') , '</strong>',' allocated to <strong>', ca.name , '</strong>',' with ', 'grade <strong>', cg.name , 
@@ -1134,10 +1123,6 @@ on sr.gg_id = users.email
 where final_data.Applicat_name is not null and 
 final_data.Form_id=".$Form_id."
 order by final_data.order_Date  ";
-
-
-
-
 
 
 
@@ -1997,206 +1982,210 @@ order by final_data.order_Date  ";
     ***********************************************************************/
     public function get_recruitment_followup_data(){
 
-$query= "select 
-af.id as career_id, af.gc_id, af.name, af.email, af.mobile_phone, af.land_line,
-      af.nic, af.gender, af.position_applied, af.comments,
-      af.status_id, af.stage_id,
-      cs.name as status_name, cs.name_code as status_code,
-      ct.name as stage_name, ct.name_code as stage_code, from_unixtime(af.created) as created, 
+			$query= "select 
+			af.id as career_id, af.gc_id, af.name, af.email, af.mobile_phone, af.land_line,
+			      af.nic, af.gender, af.position_applied, af.comments,
+			      af.status_id, af.stage_id,
+			      cs.name as status_name, cs.name_code as status_code,
+			      ct.name as stage_name, ct.name_code as stage_code, from_unixtime(af.created) as created, 
 
-      if(af.form_source=1, 'Online', 'Walkin' ) as form_source2,
-      af.form_source as form_source,
-      
-      d.p_date as call_date, 
-      d.p_time as call_time,
-      
-      
-      if(d.p_campus=2, 'South',if(d.p_campus=1, 'North', '')) as Campus,
-      
-      if(af.status_id != 11 and d.p_time is not null, 'Part-B completed', '') as part_b_complete,
-      
-      (case 
-      when af.status_id=11 and af.stage_id=9 then 'CallForPartB'
-      when af.status_id=11 and af.stage_id=10 then 'CommunicatedForPartB'
-      when af.status_id != 11 and d.p_time is not null then 'CompletedPartB'
-      else ''
-      end ) as PartB,
-      
-     
-      
-      from_unixtime(af.created,'%b %e, %Y %h:%i:%S %p') as Created_date,
-      from_unixtime(af.modified,'%b %e, %Y %h:%i:%S %p') as Modified_date,
-        
-      
-      from_unixtime(af.modified, '%b %e, %Y %h:%i:%S %p') as Date_of_application,
+			      if(af.form_source=1, 'Online', 'Walkin' ) as form_source2,
+			      af.form_source as form_source,
+			      
+			      d.p_date as call_date, 
+			      d.p_time as call_time,
+			      
+			      
+			      if(d.p_campus=2, 'South',if(d.p_campus=1, 'North', '')) as Campus,
+			      
+			      if(af.status_id != 11 and d.p_time is not null, 'Part-B completed', '') as part_b_complete,
+			      
+			      (case 
+			      when af.status_id=11 and af.stage_id=9 then 'CallForPartB'
+			      when af.status_id=11 and af.stage_id=10 then 'CommunicatedForPartB'
+			      when af.status_id != 11 and d.p_time is not null then 'CompletedPartB'
+			      else ''
+			      end ) as PartB,
+			      
+			     
+			      
+			      from_unixtime(af.created,'%b %e, %Y %h:%i:%S %p') as Created_date,
+			      from_unixtime(af.modified,'%b %e, %Y %h:%i:%S %p') as Modified_date,
+			        
+			      
+			      from_unixtime(af.modified, '%b %e, %Y %h:%i:%S %p') as Date_of_application,
 
-      if( lcf.created is null, from_unixtime(af.modified,'%Y-%m-%d'), from_unixtime(lcf.created,'%Y-%m-%d')) as log_created
-      
-      
-      
-from atif_career.career_form as af 
-left outer join (
-select 
+			      if( lcf.created is null, from_unixtime(af.modified,'%Y-%m-%d'), from_unixtime(lcf.created,'%Y-%m-%d')) as log_created
+			      
+			      
+			      
+			from atif_career.career_form as af 
+			left outer join (
+			select 
 
-(
-case when s.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.date
-end
-) as p_date,
+			(
+			case when s.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
+			and dd.form_id= s.form_id order by dd.id desc limit 1)
+			else s.date
+			end
+			) as p_date,
 
-(
-case when s.date = '1970-01-01' then 
-(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.time
-end
-) as p_time,
-(
-case when s.date = '1970-01-01' then 
-(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.campus
-end
-) as p_campus,
-
-
-
-s.* from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id 
-)
-) 
-as d on d.form_id = af.id
-left join atif_career.career_status as cs on cs.id = af.status_id 
-left join atif_career.career_stage as ct on ct.id = af.stage_id 
-left join (
-select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
-from atif_career.log_career_form as lcf 
-order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-
-
-WHERE 1  and af.status_id != 10 and af.status_id != 12  
-and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
- 
-
-and af.id in (     select 
-cf.id as Total_form
-    from atif_career.career_form as cf 
-left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id= cf.status_id
-where cf.status_id=11 and cf.stage_id=10 and ( u.date is null or u.date < curdate() )
-
-union
-
-select 
-cf.id  as Total_form
-from atif_Career.career_form as cf 
-left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
-where cf.status_id=2 and ( u.date is null or u.date < curdate() )
-
-union
-
-select 
- 
-(ff.form_id) as Total_form
-from(
-select 
-(
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-) as p_date,
-( d.date ) as Total_form, f.id as form_id
-from atif_career.career_form as f
-left outer join (
-select * from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id )
-) as d on d.form_id = f.id
-where f.status_id=3 and (
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-)  <  curdate() ) as ff
-
-
-union
+			(
+			case when s.date = '1970-01-01' then 
+			(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
+			and dd.form_id= s.form_id order by dd.id desc limit 1)
+			else s.time
+			end
+			) as p_time,
+			(
+			case when s.date = '1970-01-01' then 
+			(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
+			and dd.form_id= s.form_id order by dd.id desc limit 1)
+			else s.campus
+			end
+			) as p_campus,
 
 
 
-    select 
-  ff.form_id as Total_form
-from(
-select 
-(
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-) as p_date,
-( d.date ) as Total_form, f.id as form_id
-from atif_career.career_form as f
-left outer join (
-select * from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id )
-) as d on d.form_id = f.id
-where f.status_id=4 and (
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-)  <  curdate() ) as ff
+			s.* from atif_career.career_form_data as s where s.id in(
+			select 
+			max( cf.id ) as latest
+			from atif_career.career_form_data as cf 
+			group by cf.form_id 
+			)
+			) 
+			as d on d.form_id = af.id
+			left join atif_career.career_status as cs on cs.id = af.status_id 
+			left join atif_career.career_stage as ct on ct.id = af.stage_id 
+			left join (
+			select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
+			from atif_career.log_career_form as lcf 
+			order by lcf.created limit 1) as lcf on lcf.form_id = af.id
+
+
+			WHERE 1  and af.status_id != 10 and af.status_id != 12  
+			and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
+			 
+
+			and af.id in (     select 
+			cf.id as Total_form
+			    from atif_career.career_form as cf 
+			left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id= cf.status_id
+			where cf.status_id=11 and cf.stage_id=10 and ( u.date is null or u.date < curdate() )
+
+			union
+
+			select 
+			cf.id  as Total_form
+			from atif_Career.career_form as cf 
+			left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
+			where cf.status_id=2 and ( u.date is null or u.date < curdate() )
+
+			union
+
+			select 
+			 
+			(ff.form_id) as Total_form
+			from(
+			select 
+			(
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+			and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			) as p_date,
+			( d.date ) as Total_form, f.id as form_id
+			from atif_career.career_form as f
+			left outer join (
+			select * from atif_career.career_form_data as s where s.id in(
+			select 
+			max( cf.id ) as latest
+			from atif_career.career_form_data as cf 
+			group by cf.form_id )
+			) as d on d.form_id = f.id
+			where f.status_id=3 and (
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			)  <  curdate() ) as ff
+
+
+			union
 
 
 
-union 
-
-    select 
- 
- (ff.form_id) as Total_form
-from(
-select 
-(
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-) as p_date,
- ( d.date ) as Total_form, f.id as form_id
-from atif_career.career_form as f
-left outer join (
-select * from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id )
-) as d on d.form_id = f.id
-where f.status_id=5 and (
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-)  <  curdate() ) as ff
- )
-order by af.created desc";
+			    select 
+			  ff.form_id as Total_form
+			from(
+			select 
+			(
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+			and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			) as p_date,
+			( d.date ) as Total_form, f.id as form_id
+			from atif_career.career_form as f
+			left outer join (
+			select * from atif_career.career_form_data as s where s.id in(
+			select 
+			max( cf.id ) as latest
+			from atif_career.career_form_data as cf 
+			group by cf.form_id )
+			) as d on d.form_id = f.id
+			where f.status_id=4 and (
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			)  <  curdate() ) as ff
 
 
-	    $career = DB::connection($this->dbCon)->select($query);
-		$career = collect($career)->map(function($x){ return (array) $x; })->toArray(); 
-		return $career;
-	}	
+
+			union 
+
+			    select 
+			 
+			 (ff.form_id) as Total_form
+			from(
+			select 
+			(
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+			and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			) as p_date,
+			 ( d.date ) as Total_form, f.id as form_id
+			from atif_career.career_form as f
+			left outer join (
+			select * from atif_career.career_form_data as s where s.id in(
+			select 
+			max( cf.id ) as latest
+			from atif_career.career_form_data as cf 
+			group by cf.form_id )
+			) as d on d.form_id = f.id
+			where f.status_id=5 and (
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			)  <  curdate() ) as ff
+			 )
+			order by af.created desc";
+
+
+				    $career = DB::connection($this->dbCon)->select($query);
+					$career = collect($career)->map(function($x){ return (array) $x; })->toArray(); 
+					return $career;
+				}	
+
+
+			
+
 
 }

@@ -2,14 +2,14 @@
 
                   
 
-                            <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_12">
+                            <table class="table table-bordered report_table table-striped" style="margin-bottom: 0;" width="100%"  id="sample_4">
                             <thead>
                               <tr>
-                                <th style="text-align: center;">Online Form Screening</th>
-                                <th style="text-align: center;">Call for Part B</th>
-                                <th style="text-align: center;">Full Form Screening</th>
+                                <th style="text-align: center; background: rgb(47, 53, 59); color: #fff;">Online Form Screening</th>
+                                <th style="text-align: center; background: rgb(47, 53, 59); color: #fff;">Call for Part B</th>
+                                <th style="text-align: center; background: rgb(47, 53, 59); color: #fff;">Full Form Screening</th>
                                  
-                                 <th style="text-align: center;">Call for Part B Follow Up</th>     
+                                 <th style="text-align: center; background: rgb(47, 53, 59); color: #fff;">Call for Part B Follow Up</th>     
 
                                 
                               </tr>
@@ -37,15 +37,15 @@
                          
                         <script type="text/javascript">
 
-                                    $('#sample_12').DataTable({
+                                    $('#sample_4').DataTable({
                                             "destroy": true,
-                                            "scrollX": true,
-                                            "ordering": true,
+                                            //"scrollX": true,
+                                            //"ordering": true,
                                             dom: 'Bfrtip',
                                             "pageLength": 20,
                                             
                                            "buttons": [
-                                            
+                                             
                                             {
                                                 extend: 'excelHtml5',
                                         
