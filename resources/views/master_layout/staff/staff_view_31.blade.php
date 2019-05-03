@@ -9278,10 +9278,10 @@ bootbox.dialog({
     }else if(approve_to==""){
          return window.applyRequiredError("id","approve_to","Please enter approve to");
          
-    }else if(time_from!="" && time_approval_from_update==null){
+    }else if(time_from!=null && time_approval_from_update==null){
          return window.applyRequiredError("id","time_approval_from_update","Please enter approve time");
          
-    }else if(time_to!="" && time_approval_to_update==null){
+    }else if(time_to!=null && time_approval_to_update==null){
          return window.applyRequiredError("id","time_approval_to_update","Please enter approve time to");
          
     }
