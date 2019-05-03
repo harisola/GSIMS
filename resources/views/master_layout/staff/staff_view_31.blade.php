@@ -3949,7 +3949,13 @@ input#staffView_StaffList_Search {
                                                                 <div class="form-group">
                                                                    <label class="">Paid Percent:</label>
                                                                    <div class="input-group">
-                                                                      <input type="number" min="0" max="100" step="50" class="form-control" id="paid_compensation_percentage">
+                                                                    <select class="form-control" id="paid_compensation_percentage">
+                                                                      <option value="">Paid compensation</option>
+                                                                      <option value="0">0</option>
+                                                                      <option value="50">50</option>
+                                                                      <option value="100">100</option>
+
+                                                                    </select>
                                                                       <span class="input-group-addon">
                                                                       <i class="fa fa-percent"></i>
                                                                       </span>
@@ -8798,22 +8804,54 @@ $.ajax({
 
 
  var addAbsentia = function addAbsentia(){
+
+    var title = $("#absentia_title").val();
+    var date = $("#absentia_date").val();
+    var start_time = $("#absentia_startTime").val();
+    var end_time = $("#absentia_endTime").val();
+    var description = $("#absentia_description").val();
+    var staffID = $('#tab_1_3').data('staffID');
+    var form_number_a=$('.form_number_absentia_a').val();
+    var form_number_b=$('.form_number_absentia_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_absentia_b","Please enter form number");
+    }else if(title==""){
+         return window.applyRequiredError("id","absentia_title","Please enter title");
+         
+    }else if(date==""){
+         return window.applyRequiredError("id","absentia_date","Please enter date");
+         
+    }else if(start_time==""){
+         return window.applyRequiredError("id","absentia_startTime","Please enter start time");
+         
+    }else if(end_time==""){
+         return window.applyRequiredError("id","absentia_endTime","Please enter end time");
+    }
+
+
+
+
+
+
     var confirmation = confirm("Are you sure you want to add absentia?");
     if(confirmation){
-       var date = $("#absentia_date").val();
-       var title = $("#absentia_title").val();
-       var start_time = $("#absentia_startTime").val();
-       var end_time = $("#absentia_endTime").val();
-       var description = $("#absentia_description").val();
-       var staffID = $('#tab_1_3').data('staffID');
-      var form_number_a=$('.form_number_absentia_a').val();
-      var form_number_b=$('.form_number_absentia_b').val();
+      
       var form_number=form_number_a+form_number_b;
       // if(checkHrFormNumberExistance(form_number,'form_number_absentia_b')>0){
       //   alert('form number already exists')
       //   throw new Error("form number already exists");
       // }
           checkHrFormNumberExistance(form_number,'absenta_manual_description')
+       if( date == '' && title == '' && start_time == '' && end_time == ''){
+           noty({text: 'Please fill all feilds', layout: 'topRight', type: 'error' , timeout: 4000,});
+           return false;
+        }
+
+
+
+
+
        if( date !== '' && title !== '' && start_time !== '' && end_time !== ''){
    
            $.ajax({
@@ -8854,7 +8892,21 @@ $.ajax({
 
  var insert_manual = function(){
    // var confirmation = confirm("Are you sure you want to add miss tap?");
-   
+    var date = $("#manual_attendance").val();
+       var missTap = $("#manual_missTap").val();
+
+    var form_number_a=$('.form_number_miss_tap_a').val();
+    var form_number_b=$('.form_number_miss_tap_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_miss_tap_b","Please enter form number");
+    }else if(date==""){
+         return window.applyRequiredError("id","manual_attendance","Please enter miss tap date");
+         
+    }else if(missTap==""){
+         return window.applyRequiredError("id","manual_missTap","Please enter miss tap time");
+         
+    }
 
 
 bootbox.dialog({
@@ -8868,11 +8920,7 @@ bootbox.dialog({
 
 
 
-       var date = $("#manual_attendance").val();
-       var missTap = $("#manual_missTap").val();
-
-    var form_number_a=$('.form_number_miss_tap_a').val();
-    var form_number_b=$('.form_number_miss_tap_b').val();
+      
     var form_number=form_number_a+form_number_b;
       checkHrFormNumberExistance(form_number,'absenta_manual_description');
        var description = $("#manual_description").val();
@@ -8991,7 +9039,46 @@ bootbox.dialog({
  // Leave Inserttion 
 
  var add_leave = function(){
-  
+        var staffID = $('#tab_1_3').data('staffID');
+        var leave_title = $('#leave_title').val();
+        var leave_form_no = $('#leave_form_no').val();
+        var leave_type = $('.leave_type option:selected').val();
+        var leave_from = $('#leave_from').val();
+        var leave_to = $('#leave_to').val();
+        var leave_comment = $('#leave_comment').val();
+        var hourlyConfirm  = $('#DayBaseLeave').prop('checked');
+        var time_from = $('#time_from').val();
+        var time_to = $('#time_to').val();
+        var form_number_a=$('.form_number_leave_application_a').val();
+        var form_number_b=$('.form_number_leave_application_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_leave_application_b","Please enter form number");
+    }else if(leave_title==""){
+         return window.applyRequiredError("id","leave_title","Please enter leave title");
+         
+    }else if(leave_type==0){
+         return window.applyRequiredError("class","leave_type","Please enter leave type");
+         
+    }else if(leave_from==""){
+         return window.applyRequiredError("id","leave_from","Please enter leave from");
+         
+    }else if(leave_to==""){
+         return window.applyRequiredError("id","leave_to","Please enter leave to");
+    }
+
+    if(hourlyConfirm==true){
+
+         if(time_from==""){
+             return window.applyRequiredError("id","time_from","Please enter time from");
+        }else if(time_to==""){
+             return window.applyRequiredError("id","time_to","Please enter time to");
+             
+        }
+    }
+
+
+
     var confirmation = confirm("Are you sure you want to add leave?");
     if(confirmation){        
           
@@ -9004,17 +9091,7 @@ bootbox.dialog({
            paid_compensation = 0;
         }
 
-        var staffID = $('#tab_1_3').data('staffID');
-
-        var leave_title = $('#leave_title').val();
-        var leave_form_no = $('#leave_form_no').val();
-        var leave_type = $('.leave_type option:selected').val();
-        var leave_from = $('#leave_from').val();
-        var leave_to = $('#leave_to').val();
-        var leave_comment = $('#leave_comment').val();
-        var hourlyConfirm  = $('#DayBaseLeave').prop('checked');
-        var time_from = $('#time_from').val();
-        var time_to = $('#time_to').val();
+        
         var paid_compensation_display;
 
         if(paid_compensation == 1){
@@ -9028,8 +9105,7 @@ bootbox.dialog({
           time_from = null;
         }
 
-        var form_number_a=$('.form_number_leave_application_a').val();
-        var form_number_b=$('.form_number_leave_application_b').val();
+      
 
         var form_number=form_number_a+form_number_b;
 
@@ -9200,6 +9276,23 @@ bootbox.dialog({
     var  LeaveApproval =$('#change-color-switch').bootstrapSwitch('state');//returns true or false
     if(LeaveApproval == true){
        LeaveApproval = 1;
+
+    if(approve_from==""){
+         return window.applyRequiredError("id","approve_from","Please enter approve from");
+    }else if(approve_to==""){
+         return window.applyRequiredError("id","approve_to","Please enter approve to");
+         
+    }else if(time_from!=null && time_approval_from_update==null){
+         return window.applyRequiredError("id","time_approval_from_update","Please enter approve time");
+         
+    }else if(time_to!=null && time_approval_to_update==null){
+         return window.applyRequiredError("id","time_approval_to_update","Please enter approve time to");
+         
+    }
+
+
+
+
     }else{
        LeaveApproval = 0;
     }
@@ -9306,6 +9399,16 @@ bootbox.dialog({
  }
 
 
+  $(document).on("click",".bootstrap-switch-container",function(){
+      console.log("asdasd")
+    var state=$('#changeSwitch').bootstrapSwitch('state');
+    if(state==false){
+             $('#paid_compensation_percentage').val('0')
+    }
+
+  })
+
+
  var clearLeave = function(){
 
 
@@ -9341,8 +9444,7 @@ bootbox.dialog({
 
 
  var addPenalty = function(){
-    var confirmation = confirm("Are you sure you want to add penalty?");
-    if(confirmation){
+
         var penalty_title = $('#penalty_title').val();
         var penalty_day =  $('#penalty_day').val();
         var penalty_from = $('#penalty_from').val();
@@ -9351,6 +9453,24 @@ bootbox.dialog({
         var staff_id = $('#tab_1_3').data('staffID');
         var form_number_a=$('.form_number_penalty_a').val();
         var form_number_b=$('.form_number_penalty_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_penalty_b","Please enter form number");
+    }else if(penalty_title==""){
+         return window.applyRequiredError("id","penalty_title","Please enter title");
+         
+    }else if(penalty_day==""){
+         return window.applyRequiredError("id","penalty_day","Please enter day");
+         
+    }else if(penalty_from==""){
+         return window.applyRequiredError("id","penalty_from","Please enter penalty from");
+         
+    }else if(penalty_to==""){
+         return window.applyRequiredError("id","penalty_to","Please enter penalty to");
+    }
+    var confirmation = confirm("Are you sure you want to add penalty?");
+    if(confirmation){
+        
 
         var form_number=form_number_a+form_number_b;
         checkHrFormNumberExistance(form_number,'daily_penalty')
@@ -9404,15 +9524,27 @@ bootbox.dialog({
  }
 
  var addAdjustment = function(){
+    var adjustment_title = $('#adjustment_title').val();
+    var adjustment_no = $('#adjustment_no').val();
+    var adjustment_description = $('#adjustment_description').val();
+    var staff_id = $('#tab_1_3').data('staffID');
+    var form_number_a=$('.form_number_exceptional_adjustment_a').val();
+    var form_number_b=$('.form_number_exceptional_adjustment_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_exceptional_adjustment_b","Please enter form number");
+    }else if(adjustment_title==""){
+         return window.applyRequiredError("id","adjustment_title","Please enter title");
+         
+    }else if(adjustment_no==""){
+         return window.applyRequiredError("id","adjustment_no","Please enter days");
+         
+    }
+
     var confirmation = confirm("Are you sure you want to add adjustment?");
     if(confirmation){
 
-        var adjustment_title = $('#adjustment_title').val();
-        var adjustment_no = $('#adjustment_no').val();
-        var adjustment_description = $('#adjustment_description').val();
-        var staff_id = $('#tab_1_3').data('staffID');
-        var form_number_a=$('.form_number_exceptional_adjustment_a').val();
-        var form_number_b=$('.form_number_exceptional_adjustment_b').val();
+        
         var form_number=form_number_a+form_number_b;
 
         checkHrFormNumberExistance(form_number,'exception_adjustment')

@@ -5,6 +5,7 @@ $(document).on('click','.btn-transparent',function(){
     $('#absentia_startTime').val("")
     $('#absentia_endTime').val("")
     $('#absentia_description').val("")
+    $(".error").remove();
 });
 
 
