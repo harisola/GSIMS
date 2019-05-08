@@ -22,6 +22,10 @@ display: none;
 #tapSlider .green-color {
  background: #89c589 !important;
 }
+.orange-color{
+      background: #ef9a5f !important;
+
+}
  .red-bar .noUi-tooltip {
   top: 34px !important;
   height: 19px !important;
@@ -374,7 +378,7 @@ input#staffView_StaffList_Search {
 
 <!-- BEGIN USE PROFILE -->
 <div class="row marginTop20">
-	<div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
+  <div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
     <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
     </div><!-- div -->
     
@@ -452,7 +456,7 @@ input#staffView_StaffList_Search {
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleAbsentia">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div><!-- form-actions -->
+                                        </div><!-- form-actions -->
                                      </div>
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
@@ -479,7 +483,7 @@ input#staffView_StaffList_Search {
                                                   <span class="glyphicon glyphicon-search"></span>
                                               </button>
                                           </span>
-                                      	</div>
+                                        </div>
                                      </div><!-- -->
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
@@ -490,7 +494,7 @@ input#staffView_StaffList_Search {
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleLeave">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div>
+                                        </div>
                                      </div><!-- fixedHeightmodalPortlet -->
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
@@ -517,7 +521,7 @@ input#staffView_StaffList_Search {
                                                   <span class="glyphicon glyphicon-search"></span>
                                               </button>
                                           </span>
-                                      	</div>
+                                        </div>
                                      </div><!-- headRightDetailsInner2 -->
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
@@ -3422,8 +3426,8 @@ input#staffView_StaffList_Search {
                          <div class="tab-content">
                             <div class="tab-pane fade active in" id="tab_1_3_3">
                               <div class="portlet-body">
-                              	<div class="row">
-                                	<div id="datepaginator"> </div>
+                                <div class="row">
+                                  <div id="datepaginator"> </div>
                                     <div class="col-md-12" style="margin-top:20px;">
                                        <!-- BEGIN PORTLET-->
                                        <div class="portlet light form-fit bordered">
@@ -4559,7 +4563,7 @@ input#staffView_StaffList_Search {
                                                     <div class="form-body" id="Adjustment_Contents">
                                        
                                                     
-                                       				</div><!-- form-body -->
+                                              </div><!-- form-body -->
                                                  </div><!-- portlet-body fixedHeightmodalPortlet-->
                                               </div><!-- portlet -->
                                            </div><!-- modal-body -->
@@ -5487,6 +5491,8 @@ input#staffView_StaffList_Search {
 <!-- END USE PROFILE -->
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/attendance_graph.js" type="text/javascript"></script>
 
 <?php echo $__env->make('master_layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <script type="text/javascript">
@@ -7136,8 +7142,11 @@ $('#staffView_StaffList_Search').val('');
              "_token": "<?php echo e(csrf_token()); ?>",
          },
          success:function(result){
-          $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
-          $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+          
+            setTimeout(function(){
+                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
+                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+            },1000)
             var data = jQuery.parseJSON(result);
             $('#Generations_AjaxLoader').hide();
             data['info'][0] = setNotAcceptable(data['info'][0]);
@@ -7429,9 +7438,10 @@ $('#staffView_StaffList_Search').val('');
 
                   if(data['get_cut_date'][i].to_date >= data['get_cut_date'][i].currentDate){
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].from_date);
-                  }else{
                     $(".edit_btn,.del_btn").prop( "onclick", null);
                     $(".edit_btn,.del_btn").css( "cursor","not-allowed");
+                  }else{
+                    
 
 
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].new_payroll_start);
@@ -9130,6 +9140,10 @@ bootbox.dialog({
                   "_token": "<?php echo e(csrf_token()); ?>"
               },
               success:function(result){
+                if(result=='leaves_already'){
+                  alert('Leaves already exists in these dates');
+                  return false;
+                }
               $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
                  $('#LeaveApp').modal('toggle'); 
               }
@@ -9154,6 +9168,10 @@ bootbox.dialog({
                 "_token": "<?php echo e(csrf_token()); ?>"
               },
           success:function(result){
+            if(result=='leaves_already'){
+                  alert('Leaves already exists in these dates');
+                  return false;
+            }
           $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a class="delectLeave" onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
             $('#LeaveApp').modal('toggle'); 
           }
@@ -9944,8 +9962,6 @@ loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", 
 
 });
 </script>
-<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
-<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/attendance_graph.js" type="text/javascript"></script>
 
 <!--<script src="assets/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
  <script src="assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>

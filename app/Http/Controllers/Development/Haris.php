@@ -1480,7 +1480,11 @@ class Haris extends StaffReportController
         $time_from = $request->input('time_from');
         $time_to = $request->input('time_to');
         $form_number = $request->input('form_number');
-
+        $leave_exists =  $staffInfo->checkLeaves($staff_id,$leave_from,$leave_to);
+        if(@$leave_exists[0]->staff_id!=""){
+          return 'leaves_already';
+          die;
+        }
 
 
 
@@ -3212,6 +3216,5 @@ class Haris extends StaffReportController
                 );       
         $staffDescription = $staffInfo->get('atif_gs_events.'.$table_name,$where);
         return count($staffDescription);
-
    }
 }

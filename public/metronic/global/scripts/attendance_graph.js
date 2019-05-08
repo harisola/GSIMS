@@ -1,5 +1,6 @@
 var url=$('.main_url').val();
 var csrf=$('.csrf').val();
+var classPayRollFlexy = [];
 var dailyReport = function(date,staffID){
     $.ajax({
        type:"POST",
@@ -11,11 +12,18 @@ var dailyReport = function(date,staffID){
        },
        url:url+'/masterLayout/getDailyReport',
        success:function(e){
+        var connectPayRoll=[false];
+
        $('.noShow').removeClass('noShow');
        var data = JSON.parse(e);
        if(data.length != 0){
-             
-          console.log(data);
+      
+
+           var expected_time = timeToMinute(data[0].day_time_in);
+           var first_tap = timeToMinute(data[0].tap_min);
+           
+
+          
 
           getLeaveDailyReport(staffID,date,data);
 
@@ -196,9 +204,14 @@ var dailyReport = function(date,staffID){
                  // PayRoll Attendace Without Flexy
 
                 if(is_on_flexy == 0){
+
+
                     if(time.length > 0 && data[0].holiday == null){
 
-                      var connectPayRoll = [false];
+
+
+
+                      // var connectPayRoll = [false];
                       var classPayRoll = [];
                       var payRollAttendance = data[0].payroll_time_slot;
                       payRollAttendance = payRollAttendance.split(',')
@@ -207,8 +220,55 @@ var dailyReport = function(date,staffID){
                       var TapCount = data[0].tap_io_num;
 
                       var payRollFlag = data[0].payroll_time_code;
-                      payRollFlag = payRollFlag.split(',');
+                      var payRollFlag = payRollFlag.split(',');
+                      absentia_start_time=0;
 
+                      if(data[0].ab_rec_time!=""){
+                               var absentia_start_time = timeToMinute(data[0].ab_rec_time.split(",")[0]);
+                               var absentia_end_time = timeToMinute(data[0].ab_rec_time.split(",")[1]);
+                               var absentia_end_time_simple = data[0].ab_rec_time.split(",")[1];
+
+                               var taps=  data[0].ab_rec_time.split(",");
+                               var total_taps=taps.length;
+                                if(absentia_start_time>expected_time){
+                                    //absentia in middle day
+                                     // absentia_time='after morrning';
+                                        var absentia_in_afternoon=true;
+
+                                        
+
+                                        var total_tap_1=data[0].payroll_time_slot.split(absentia_end_time_simple)[0];
+                                        var total_tap_2=data[0].payroll_time_slot.split(absentia_end_time_simple)[1];
+                                        var new_time_slot=total_tap_1+data[0].ab_rec_time+total_tap_2;
+                                        // data[0].payroll_time_slot=new_time_slot;
+
+                                        // payRollAttendance = new_time_slot;
+                                        // payRollAttendance = payRollAttendance.split(',')
+                                        // payRollAttendanceArray = timeToMinuteForArray(payRollAttendance);
+                                        // console.log("Apply Absentia"+payRollAttendanceArray)
+                                        // if(total_taps>2){
+                                        //   //if tap and absentia and user avail absentia
+                                        // }else{
+                                        //     //if tap and absentia and user not avail absentia
+
+
+                                        // }
+                                        // if(absentia_end_time)
+
+
+
+
+                                 }else{
+                                    //absentia in morrning 
+                                    //and tap found in morning
+
+                                    if(first_tap<absentia_start_time){
+                                        console.log('absentia will apply in morning')
+                                        var morning_tap_and_absentia=true;
+                                    }
+                                 }
+
+                           }
                       // Arranging PayRoll Flag if Actual Time is Greater Then Expected Time
 
                       for(var i = 0 ; i< payRollFlag.length ; i++){
@@ -290,12 +350,24 @@ var dailyReport = function(date,staffID){
                             if(payRollFlag[i] == '1' || payRollFlag[i] == '8'){
                                connectPayRoll.push(true);
                                // If Staff Only Tap IN OR NOT TAP OUT TapCount == 1 
+
+                                // if(first_tap<absentia_start_time){
+                                //         console.log('absentia will apply in morning')
+                                //         connectPayRoll.push(true);
+                                //         classPayRoll.push('orange-color');
+
+                                // }
+                                if(morning_tap_and_absentia==true){
+                                  classPayRoll.push('orange-color');
+
+                                }
                                if(TapCount == 1){
                                 classPayRoll.push('red-color');
                                }else{
                                 classPayRoll.push('green-color');
-                                
                                }
+                              
+
 
                             }
 
@@ -336,7 +408,8 @@ var dailyReport = function(date,staffID){
                             if(payRollFlag[i] == 'ARi'){
 
                                if(payRollFlag[i+1] == 'Ai'){
-                                  classPayRoll.push('red-color');
+                                //here i have to place condition for absentia and not check
+                                  classPayRoll.push('orange-color');
                                }else{
                                   classPayRoll.push('green-color');
                                }
@@ -373,7 +446,7 @@ var dailyReport = function(date,staffID){
                                classPayRoll.push('red-color');
                             }
                          }
-
+                         console.log(payRollAttendanceArray)
                         PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range);
                       }else if(data[0].holiday != null && data[0].holidayflag == 0){
                         //Case # 1 Holiday and is off for Particular Staff
@@ -477,7 +550,6 @@ var dailyReport = function(date,staffID){
                       var tap_max = data[0].tap_max;
                       tap_max = timeToMinute(tap_max);
                       var connectPayRollFlexy = [false];
-                      var classPayRollFlexy = [];
                       var payRollAttendanceFlexy = data[0].payroll_time_slot;
                       payRollAttendanceFlexy = payRollAttendanceFlexy.split(',')
                       var  payRollAttendanceArrayFlexy = timeToMinuteForArray(payRollAttendanceFlexy);
@@ -1216,6 +1288,19 @@ var dailyReport = function(date,staffID){
 
 
     }
+
+function absentiaFormSignal(){
+  var absentia_slider=$('#AiAabsentia').find('.noUi-connect').css('left');
+  window.absentia=false;
+
+  if(absentia_slider!=undefined){
+  if(parseInt(absentia_slider.split('px')[0])>0){
+      window.absentia=true;
+    }
+  }
+return window.absentia;
+}
+
 
 
     //====================== Buffer In Buffer Out ======================//

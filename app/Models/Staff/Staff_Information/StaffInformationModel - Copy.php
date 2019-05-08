@@ -509,7 +509,6 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 		where ro.id = ".$RoleID." and ro.record_deleted=0";
 		$query="call `get_StaffReportingInfo`(".$RoleID.")";
 
-
         $staff = DB::connection($this->dbCon)->select($query);
         $staff = collect($staff)->map(function($x){ return (array) $x; })->toArray();
         return $staff;
@@ -1340,6 +1339,17 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
         $staff = DB::connection($this->dbCon)->select($query);
         return $staff;
     }
+
+    public function checkLeaves($StaffID,$leave_from,$leave_to)
+    {
+		$query="select * from atif_gs_events.leave_application la
+		where la.staff_id=$StaffID and la.leave_from <= '$leave_from' AND la.leave_to >= '$leave_to'";
+        $staff = DB::connection($this->dbCon)->select($query);
+        return $staff;
+    }
+
+
+    
     /**********************************************************************
     * Staff Information - TIF B - Staff Employement
     * Author:   Atif Naseem, a.naseem@generations.edu.pk, +92-313-5521122 
