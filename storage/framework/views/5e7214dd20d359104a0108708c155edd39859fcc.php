@@ -7142,11 +7142,18 @@ $('#staffView_StaffList_Search').val('');
              "_token": "<?php echo e(csrf_token()); ?>",
          },
          success:function(result){
-          
             setTimeout(function(){
-                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
-                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
-            },1000)
+
+
+                if ( ! $.fn.DataTable.isDataTable( '#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table' ) ) {
+
+                      $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
+                      $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+
+                }
+          
+               
+            },5000)
             var data = jQuery.parseJSON(result);
             $('#Generations_AjaxLoader').hide();
             data['info'][0] = setNotAcceptable(data['info'][0]);
