@@ -97,11 +97,11 @@
                                                         <td><?= number_format($get_lastest_bill->oc_adv_tax)?></td>
                                                         <td><?= ($get_lastest_bill->resource_fee)*$installment_number_months; ?></td>
                                                         <td><?= ($get_lastest_bill->difference); ?></td>
-                                                        <td><?= ($get_lastest_bill->musakhar)*2; ?></td>
+                                                        <td><?= ($get_lastest_bill->musakhar)*$installment_number_months; ?></td>
                                                         <td><?php echo e($get_lastest_bill->oc_yearly); ?></td>
                                                         <td><?=number_format($get_lastest_bill->total_payable)?></td>
                                                         <?php 
-                                                        $total_received=App\Models\Accounts\fee_bill_received::sumTotalPayments($get_lastest_bill->student_id,$get_lastest_bill->academic_session_id);
+                                                        $total_received=App\Models\Accounts\fee_bill::getAllReceivedByStudentId($get_lastest_bill->student_id);
                                                         $last_received="";
                                                         $last_received=App\Models\Accounts\fee_bill::getLastBillReceivedByStudentId($get_lastest_bill->student_id,$get_lastest_bill->academic_session_id);
 

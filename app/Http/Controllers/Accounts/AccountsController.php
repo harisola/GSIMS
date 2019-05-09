@@ -556,6 +556,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                          $applicable_taxes=$this->calculateTaxes($list,$total_current_billing,$bill_cycle_no,$total_current_billing_with_arrears,$total_arriers,$total_current_billing2);
                     }
                 }
+                
                 $fee_bill->fee_bill_type_id=$fee_bill_type_id;//by default 1 for regular bill
                 $fee_bill->gb_id=$bill_number_remove_dash;
                 $fee_bill->academic_session_id= $list['a_session_id'];
@@ -584,7 +585,6 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
 
                 // echo $additional_charges;
                 // die;
-                $fee_bill->adjustment=$total_adjustments;
                 $fee_bill->arrears_suspended=$arrears_suspended;
                 $fee_bill->gross_tuition_fee=$gross_tution_fee;
                                 if($installment_dicount_percentage==100){
@@ -605,7 +605,20 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 }else{
                      $total_current_bill=($total_current_billing2);
                 }
-                 $summer_adjustments=$this->getSummerAdjustment($list['gs_id']);
+               
+                $total_received_amount=$fee_bill->getAllReceivedByStudentId($list['student_id']);
+                if($total_received_amount>200000 && $last_bill_taxes>0 && $total_adjustments>0){
+                         $actual_fee_received= $total_received_amount/1.05;
+                         $total_taxes=$total_received_amount-$actual_fee_received;
+                         $total_adjustments;
+                         $total_adjustments=$total_taxes+$total_adjustments;
+                         $new_taxable_amount=$total_adjustments+$actual_fee_received+$total_current_bill;
+                         $applicable_taxes=(($new_taxable_amount/100)*5)-$total_taxes;
+                        $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
+                        $adjustment->insertUpdateAdjustment($list['student_id'],0);
+                }
+                $fee_bill->adjustment=$total_adjustments;
+                $summer_adjustments=$this->getSummerAdjustment($list['gs_id']);
                 $fee_bill->additional_charges=$additional_charges-$summer_adjustments;
                 $total_current_billing2;
 
