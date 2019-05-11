@@ -29,23 +29,14 @@ class Staff_role_position_distance extends StaffReportController
 		$StaffRole = count($Staff_role);
 		
 		$ht='';
-		$ht_2='';
 		
 		if ( !empty($Staff_role) ){
 			$Role_id = $Staff_role[0]->Role_id;
-
-			
 			
 			if( $StaffRole == 1){
 				$ht = $this->Single_Role_Staff_Html($Role_id,$Staff_id);
-
 			}else{
-				$Role_id_Two = $Staff_role[1]->Role_id;
-				$ht = $this->Single_Role_Staff_Html($Role_id, $Staff_id);
-				$ht_2 = $this->Single_Role_Staff_Html_Solangi($Role_id_Two, $Staff_id);
-
-				
-				///$ht = $this->Double_Role_Staff_Html($Staff_role,$Staff_id);	
+				$ht = $this->Double_Role_Staff_Html($Staff_role,$Staff_id);	
 			}
 		}
 		
@@ -56,7 +47,7 @@ class Staff_role_position_distance extends StaffReportController
 		
 		
 		
-		$arr = array("ht"=>$ht, "ht_2"=>$ht_2 );
+		$arr = array("ht"=>$ht);
 		echo json_encode($arr);
 		
 	}
@@ -147,7 +138,7 @@ class Staff_role_position_distance extends StaffReportController
 			if($ST->gt_id != ''):
 				$Html .= '<tr class="pBottom10" >';
 				$Html .= '<td width="50%" class="padRight1">';
-				$Percent=100;
+				$Percent=50;
 					$Html .= $this->Staff_Upper_Role($ST,$Percent);
 				$Html .= '</td>';
 				$Html .= '</tr>';
@@ -163,14 +154,14 @@ class Staff_role_position_distance extends StaffReportController
 			$Staff_Roles = $staffInfo->Get_Current_Staff_Role($Last_Role);
 			#var_dump($Staff_Roles); exit;
 
-			$Percent=100;
+			$Percent=50;
 			if( !empty( $Staff_Roles ) ):
 				foreach($Staff_Roles as $ST):
 				
 					if($ST->s1 == $Staff_id){
 						
 						if($ST->s1 == $Staff_id)
-							$currentStaff = 'currentStaff_c';
+							$currentStaff = 'currentStaff';
 						else
 							$currentStaff='';
 					
@@ -190,14 +181,14 @@ class Staff_role_position_distance extends StaffReportController
 		// Current Staff Role Lower Staff
 		if( $Current_Staff_Last_Role > 0 ){
 			$Current_Staff_Last_Role = $staffInfo->Get_Current_Staff_Role($Current_Staff_Last_Role);
-			$Percent=100;
+			$Percent=50;
 			$LowerStff_id=0;
 			
 			if( !empty( $Current_Staff_Last_Role ) ):
 				foreach($Current_Staff_Last_Role as $ST):
 				
 					if($ST->s1 == $Staff_id)
-						$currentStaff = 'currentStaff_c';
+						$currentStaff = 'currentStaff';
 					else
 						$currentStaff='';
 					
@@ -284,7 +275,7 @@ class Staff_role_position_distance extends StaffReportController
 	{
 		
 		if($ST->s1 == $Staff_id)
-			$currentStaff = 'currentStaff_c';
+			$currentStaff = 'currentStaff';
 		else
 			$currentStaff='';
 		
@@ -344,7 +335,7 @@ class Staff_role_position_distance extends StaffReportController
 	{
 		
 		if($ST->s1 == $Staff_id)
-			$currentStaff = 'currentStaff_c';
+			$currentStaff = 'currentStaff';
 		else
 			$currentStaff='';
 		
@@ -717,116 +708,6 @@ class Staff_role_position_distance extends StaffReportController
 		}
 		
 		$Html .= '</table>';
-		$Html .= '</div>';
-		$Html .= '</div>';
-		
-		return $Html;
-	}
-
-
-
-
-
-
-
-
-
-
-	public function Single_Role_Staff_Html_Solangi($Staff_role_id,$Staff_id)
-	{
-		$staffInfo = new StaffInformationModel();
-		$Staff_role = $staffInfo->Get_Staff_Role($Staff_role_id);
-		
-		
-		$Html = '';
-		$Html .= '<div class="portlet box light">';
-		$Html .= '<div class="portlet-body padding0" >';
-		$Html .= '<table width="100%" class="rolesTable"> ';
-		
-		
-		$Last_Role=0;
-		$Current_Staff_Last_Role=0;
-		
-		// Upper Role
-		if( !empty( $Staff_role ) ):
-		foreach($Staff_role as $ST ):
-			if($ST->gt_id != ''):
-				$Html .= '<tr class="pBottom10" >';
-				$Html .= '<td width="50%" class="padleft1">';
-				$Percent=100;
-					$Html .= $this->Staff_Upper_Role($ST,$Percent);
-				$Html .= '</td>';
-				$Html .= '</tr>';
-				$Last_Role = $ST->id; // Current Staff Head Role id
-			endif;
-		endforeach;
-		endif;
-		//echo $Last_Role; exit;
-		
-		// Current Staff Role
-		if( $Last_Role > 0 ){
-			
-			$Staff_Roles = $staffInfo->Get_Current_Staff_Role($Last_Role);
-			#var_dump($Staff_Roles); exit;
-
-			$Percent=100;
-			if( !empty( $Staff_Roles ) ):
-				foreach($Staff_Roles as $ST):
-				
-					if($ST->s1 == $Staff_id){
-						
-						if($ST->s1 == $Staff_id)
-							$currentStaff = 'currentStaff_c';
-						else
-							$currentStaff='';
-					
-						$Html .= '<tr class="pBottom10 '.$currentStaff.'" >';
-						$Html .= '<td width="50%" class="padleft1">';
-							$Html .= $this->Current_Staff_Html($ST,$Staff_id,$Percent);
-						$Html .= '</td>';
-						$Html .= '</tr>';
-					
-						$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
-					}
-				endforeach;
-			endif;
-		}
-		
-		
-		// Current Staff Role Lower Staff
-		if( $Current_Staff_Last_Role > 0 ){
-			$Current_Staff_Last_Role = $staffInfo->Get_Current_Staff_Role($Current_Staff_Last_Role);
-			$Percent=100;
-			$LowerStff_id=0;
-			
-			if( !empty( $Current_Staff_Last_Role ) ):
-				foreach($Current_Staff_Last_Role as $ST):
-				
-					if($ST->s1 == $Staff_id)
-						$currentStaff = 'currentStaff_c';
-					else
-						$currentStaff='';
-					
-					
-					if($LowerStff_id != $ST->s1):
-					$Html .= '<tr class="pBottom10 '.$currentStaff.'" >';
-					$Html .= '<td width="50%" class="padleft1">';
-						$Html .= $this->Staff_Lower_Role($ST,$Staff_id,$Percent);
-					$Html .= '</td>';
-					$Html .= '</tr>';
-					
-					$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
-					$LowerStff_id=$ST->id;
-					endif;
-					
-				endforeach;
-			endif;
-		}
-		
-		
-		
-		
-        $Html .= '</table>';
 		$Html .= '</div>';
 		$Html .= '</div>';
 		

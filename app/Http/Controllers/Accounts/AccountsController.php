@@ -837,9 +837,10 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                if($billing_cycle>2){
               
                     if($total_received_amount>0 &&$previous_bill_taxes!=0){
-
                        if($total_received_amount>$previous_bill_taxes){
+
                                   if($total_received_amount<200001){
+
                                        //as per miss hina new requirement in 5th billing 
                                           $current_bill_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
                                               $total_payable=$fee_detail->total_payable;//get last bill total payable amount
@@ -851,8 +852,12 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                                             }
                                          // echo $previous_bill_adjsutment;
 
+
                                   }else{
                                       $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
+                                      if($last_bill_received=="" && $previous_bill_taxes>0){
+                                        $applicable_taxes=$applicable_taxes+$previous_bill_taxes;
+                                      }
                                   }
                                 //if received amount greater than taxes then first system will deduct taxes by his received amount and taxes is only for current billing.
                             }else{
