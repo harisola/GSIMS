@@ -116,7 +116,12 @@ class AccountsController extends Controller
                      $rip=$rip_student->checkExistance($lists->gs_id);
                     
                     if($rip==0){
-                            $this->insertFeeBill($lists->gs_id,$billing_cycle);
+                        $ej=$fee_bill->getAdmissionBill($gs_id,$current_acadmic_session,$billing_cycle);
+                        // var_dump($ej);
+                        if($ej==false){
+                        }else{
+                                $this->insertFeeBill($lists->gs_id,$billing_cycle);
+                        }
                     }
                  }
             }
@@ -449,7 +454,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                         $amount_exceed=true;
                         $sumTotalTaxes=$fee_bill->sumTotalTaxes(@$list['student_id'],$list['academic_session_id']);
                         if($sumTotalTaxes>0){
-                            $mytax=false; //for temp use only
+                            $mytax=true; //for temp use only
                         }else{
                             $adjustment_taxes=$total_adjustment_taxes=$this->calculate_adjustment_taxes($list['student_id'],$billing_cycle,$list['academic_session_id'],$list['std_status_code']);
                             $total_adjustments=-($adjustment_taxes-$total_adjustments);
@@ -534,6 +539,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     $tax_allow=$this->StudentApplicableForTaxes($list,($total_current_billing-(str_replace('-','',$std_adjustments))),$billing_cycle);
 
                 }  
+               
                 if(@$mytax==false){
                     $tax_allow=0;
                 }else{
@@ -544,13 +550,14 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 $billing_amount_with_adjustment="";
                 $total_current_billing;
                $tax_allow;
+               $amount_exceed=false;
                 if($tax_allow==0){
                     $applicable_taxes=0;
                 }else{
                     if($amount_exceed==true){
                         $admission_fee=$fee_bill->getAdmissionFee($list['student_id']);
                         $total=$this->calculateDiscount($admission_fee,5);
-                        $applicable_taxes=$adjustment_taxes+$total;
+                        $applicable_taxes=@$adjustment_taxes+$total;
                     }else{
                         $total_current_billing;
                          $applicable_taxes=$this->calculateTaxes($list,$total_current_billing,$bill_cycle_no,$total_current_billing_with_arrears,$total_arriers,$total_current_billing2);

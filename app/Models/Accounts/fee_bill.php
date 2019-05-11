@@ -775,12 +775,53 @@ class fee_bill extends Model
             left JOIN atif_fee_student.fee_bill_received fbr
             on fbr.fee_bill_id=fb.id
             where fb.academic_session_id IN (11,12)
-            and fb.bill_cycle_no in (1,2,3,4,5,6)
+            and fb.bill_cycle_no in (1,2,3,4,5,6,7,8,9,10)
             and fb.student_id=$student_id";
             
             
          $details = DB::connection('mysql_Career_fee_bill')->select($query)[0];
          return $details->total_received;
+    }    
+   
+
+   public static function getAdmissionBill($gs_id,$billing_cycle_number,$academic_session_id){
+        $last_bill_exists_date="";
+        $query = "SELECT fb.bill_issue_date,fb.bill_cycle_no,cl.gs_id,fb.student_id,fb.total_current_bill,fb.oc_adv_tax,fb.total_payable,fb.adjustment,fbr.received_amount,fb.roll_over_charges,fb.id,fb.arrears_suspended FROM atif.class_list cl
+        left JOIN atif_fee_student.fee_bill fb
+        on fb.student_id=cl.id
+        left JOIN atif_fee_student.fee_bill_received fbr
+        on fbr.fee_bill_id=fb.id
+        where fb.bill_cycle_no in (0)
+        and cl.gs_id='$gs_id'";
+        @$details = DB::connection('mysql_Career_fee_bill')->select($query)[0];
+        @$issue_date= $details->bill_issue_date;
+        $year=explode('-', $issue_date)[0];
+        $current_year=date('Y');
+        if($year==$current_year){
+            $query = "SELECT fb.bill_issue_date,fb.bill_cycle_no,cl.gs_id,fb.student_id,fb.total_current_bill,fb.oc_adv_tax,fb.total_payable,fb.adjustment,fbr.received_amount,fb.roll_over_charges,fb.id,fb.arrears_suspended FROM atif.class_list cl
+            left JOIN atif_fee_student.fee_bill fb
+            on fb.student_id=cl.id
+            left JOIN atif_fee_student.fee_bill_received fbr
+            on fbr.fee_bill_id=fb.id
+            where fb.bill_cycle_no !=0 and fb.academic_session_id=$academic_session_id
+            and cl.gs_id='$gs_id'";
+            $details = DB::connection('mysql_Career_fee_bill')->select($query)[0];
+            $last_bill_exists_date= $details->bill_issue_date;
+        }
+        //if admission bill in currrent year and student current acadmic session bill exists
+
+        if($last_bill_exists_date!=""){
+            return false;
+            //if return false it means bills will not be generate
+        }else{
+            return true;
+            //if return false it means bills will  be generate
+
+        }
+                // if($details->bill_issue_date>)
+
+
+
     }
 
 
