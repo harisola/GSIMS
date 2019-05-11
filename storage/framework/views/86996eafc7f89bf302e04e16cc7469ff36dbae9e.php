@@ -120,7 +120,8 @@
                                         <!-- <option value="3">3</option> -->
                                         <!-- <option value="4">4</option> -->
                                         <!-- <option value="5">5</option> -->
-                                        <option value="6">6</option>
+                                        
+                                        <option value="7">7</option>
                                 </select>
                           </div>
                           <div class="col-md-2">
@@ -153,7 +154,7 @@
                           </div>
                           <div class="col-md-2">
                             <label>&nbsp;</label><br />
-                            <input type="button" id="" data-re_generate="0" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
+                            <input type="button" id="" data-re_generate="1" class="btn btn-group green Generate_Fee_Bill_1" value="Re-Generate Fee Bill" style="width: 100%;">
                           </div>
                           <div class="col-md-1">
                             <label>&nbsp;</label><br />

@@ -328,10 +328,28 @@ FROM atif.staff_registered AS sr WHERE sr.gt_id='".$gt_id."'";
 	{
 		$Staff_q = "SELECT 
 sr.id AS Staff_id, sr.employee_id, sr.gt_id, sr.abridged_name, sr.name_code, sr.gender, sr.department, sr.designation
-FROM atif.staff_registered AS sr WHERE sr.is_posted=1 AND sr.is_active=1";
+FROM atif.staff_registered AS sr WHERE sr.is_posted=1 AND sr.is_active=1 order by sr.abridged_name";
 		$staff = DB::connection($this->dbCon)->select($Staff_q);
 		return collect($staff)->map(function($x){ return (array) $x; })->toArray();
     }
+
+
+
+    public function reports_monthly_attendance($Staff_id, $from_date, $to_date)
+	{
+
+		 
+
+		$staff=array();
+
+		$query = "CALL atif_gs_events.sp_get_monthly_attendance_info('".$Staff_id."','".$from_date."','".$to_date."')";
+		$result = DB::connection($this->dbCon)->select($query);
+
+		return collect($result)->map(function($x){ return (array) $x; })->toArray();
+		
+	}
+
+
 
 
 }

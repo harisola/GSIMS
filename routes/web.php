@@ -49,6 +49,9 @@ Route::get('clear-cache', function() {
 /*********************************************************************************/
 Route::get('/login', 'LoginController@login');
 Route::post('login', 'LoginController@postLogin');
+//ar
+Route::post('log_user', 'LoginController@log_user');
+
 Route::post('/logout', 'LoginController@logout');
 Route::get('/logout_x', 'LoginController@logout');
 Route::post('/changePassword', 'LoginController@changePassword');
@@ -111,6 +114,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::get('/reports', 'Attendance\Reports\Reports@mainPage');
 	Route::post('/reporst_staff_attendance', 'Attendance\Reports\Reports@reporst_staff_attendance');
+	Route::post('/Create_Dw', 'Attendance\Reports\Reports@Create_Dw');
+
 	
 	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');

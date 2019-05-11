@@ -22,6 +22,10 @@ display: none;
 #tapSlider .green-color {
  background: #89c589 !important;
 }
+.orange-color{
+      background: #ef9a5f !important;
+
+}
  .red-bar .noUi-tooltip {
   top: 34px !important;
   height: 19px !important;
@@ -374,7 +378,7 @@ input#staffView_StaffList_Search {
 
 <!-- BEGIN USE PROFILE -->
 <div class="row marginTop20">
-	<div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
+  <div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
     <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
     </div><!-- div -->
     
@@ -452,7 +456,7 @@ input#staffView_StaffList_Search {
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleAbsentia">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div><!-- form-actions -->
+                                        </div><!-- form-actions -->
                                      </div>
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
@@ -479,7 +483,7 @@ input#staffView_StaffList_Search {
                                                   <span class="glyphicon glyphicon-search"></span>
                                               </button>
                                           </span>
-                                      	</div>
+                                        </div>
                                      </div><!-- -->
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
@@ -490,7 +494,7 @@ input#staffView_StaffList_Search {
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleLeave">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div>
+                                        </div>
                                      </div><!-- fixedHeightmodalPortlet -->
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
@@ -517,7 +521,7 @@ input#staffView_StaffList_Search {
                                                   <span class="glyphicon glyphicon-search"></span>
                                               </button>
                                           </span>
-                                      	</div>
+                                        </div>
                                      </div><!-- headRightDetailsInner2 -->
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
@@ -3422,8 +3426,8 @@ input#staffView_StaffList_Search {
                          <div class="tab-content">
                             <div class="tab-pane fade active in" id="tab_1_3_3">
                               <div class="portlet-body">
-                              	<div class="row">
-                                	<div id="datepaginator"> </div>
+                                <div class="row">
+                                  <div id="datepaginator"> </div>
                                     <div class="col-md-12" style="margin-top:20px;">
                                        <!-- BEGIN PORTLET-->
                                        <div class="portlet light form-fit bordered">
@@ -3949,7 +3953,13 @@ input#staffView_StaffList_Search {
                                                                 <div class="form-group">
                                                                    <label class="">Paid Percent:</label>
                                                                    <div class="input-group">
-                                                                      <input type="number" min="0" max="100" step="50" class="form-control" id="paid_compensation_percentage">
+                                                                    <select class="form-control" id="paid_compensation_percentage">
+                                                                      <option value="">Paid compensation</option>
+                                                                      <option value="0">0</option>
+                                                                      <option value="50">50</option>
+                                                                      <option value="100">100</option>
+
+                                                                    </select>
                                                                       <span class="input-group-addon">
                                                                       <i class="fa fa-percent"></i>
                                                                       </span>
@@ -4553,7 +4563,7 @@ input#staffView_StaffList_Search {
                                                     <div class="form-body" id="Adjustment_Contents">
                                        
                                                     
-                                       				</div><!-- form-body -->
+                                              </div><!-- form-body -->
                                                  </div><!-- portlet-body fixedHeightmodalPortlet-->
                                               </div><!-- portlet -->
                                            </div><!-- modal-body -->
@@ -5481,6 +5491,8 @@ input#staffView_StaffList_Search {
 <!-- END USE PROFILE -->
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/attendance_graph.js" type="text/javascript"></script>
 
 <?php echo $__env->make('master_layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <script type="text/javascript">
@@ -7130,11 +7142,18 @@ $('#staffView_StaffList_Search').val('');
              "_token": "<?php echo e(csrf_token()); ?>",
          },
          success:function(result){
-          
             setTimeout(function(){
-                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
-                $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
-            },1000)
+
+
+                if ( ! $.fn.DataTable.isDataTable( '#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table' ) ) {
+
+                      $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
+                      $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+
+                }
+          
+               
+            },5000)
             var data = jQuery.parseJSON(result);
             $('#Generations_AjaxLoader').hide();
             data['info'][0] = setNotAcceptable(data['info'][0]);
@@ -8799,22 +8818,54 @@ $.ajax({
 
 
  var addAbsentia = function addAbsentia(){
+
+    var title = $("#absentia_title").val();
+    var date = $("#absentia_date").val();
+    var start_time = $("#absentia_startTime").val();
+    var end_time = $("#absentia_endTime").val();
+    var description = $("#absentia_description").val();
+    var staffID = $('#tab_1_3').data('staffID');
+    var form_number_a=$('.form_number_absentia_a').val();
+    var form_number_b=$('.form_number_absentia_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_absentia_b","Please enter form number");
+    }else if(title==""){
+         return window.applyRequiredError("id","absentia_title","Please enter title");
+         
+    }else if(date==""){
+         return window.applyRequiredError("id","absentia_date","Please enter date");
+         
+    }else if(start_time==""){
+         return window.applyRequiredError("id","absentia_startTime","Please enter start time");
+         
+    }else if(end_time==""){
+         return window.applyRequiredError("id","absentia_endTime","Please enter end time");
+    }
+
+
+
+
+
+
     var confirmation = confirm("Are you sure you want to add absentia?");
     if(confirmation){
-       var date = $("#absentia_date").val();
-       var title = $("#absentia_title").val();
-       var start_time = $("#absentia_startTime").val();
-       var end_time = $("#absentia_endTime").val();
-       var description = $("#absentia_description").val();
-       var staffID = $('#tab_1_3').data('staffID');
-      var form_number_a=$('.form_number_absentia_a').val();
-      var form_number_b=$('.form_number_absentia_b').val();
+      
       var form_number=form_number_a+form_number_b;
       // if(checkHrFormNumberExistance(form_number,'form_number_absentia_b')>0){
       //   alert('form number already exists')
       //   throw new Error("form number already exists");
       // }
           checkHrFormNumberExistance(form_number,'absenta_manual_description')
+       if( date == '' && title == '' && start_time == '' && end_time == ''){
+           noty({text: 'Please fill all feilds', layout: 'topRight', type: 'error' , timeout: 4000,});
+           return false;
+        }
+
+
+
+
+
        if( date !== '' && title !== '' && start_time !== '' && end_time !== ''){
    
            $.ajax({
@@ -8855,7 +8906,21 @@ $.ajax({
 
  var insert_manual = function(){
    // var confirmation = confirm("Are you sure you want to add miss tap?");
-   
+    var date = $("#manual_attendance").val();
+       var missTap = $("#manual_missTap").val();
+
+    var form_number_a=$('.form_number_miss_tap_a').val();
+    var form_number_b=$('.form_number_miss_tap_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_miss_tap_b","Please enter form number");
+    }else if(date==""){
+         return window.applyRequiredError("id","manual_attendance","Please enter miss tap date");
+         
+    }else if(missTap==""){
+         return window.applyRequiredError("id","manual_missTap","Please enter miss tap time");
+         
+    }
 
 
 bootbox.dialog({
@@ -8869,11 +8934,7 @@ bootbox.dialog({
 
 
 
-       var date = $("#manual_attendance").val();
-       var missTap = $("#manual_missTap").val();
-
-    var form_number_a=$('.form_number_miss_tap_a').val();
-    var form_number_b=$('.form_number_miss_tap_b').val();
+      
     var form_number=form_number_a+form_number_b;
       checkHrFormNumberExistance(form_number,'absenta_manual_description');
        var description = $("#manual_description").val();
@@ -8992,7 +9053,46 @@ bootbox.dialog({
  // Leave Inserttion 
 
  var add_leave = function(){
-  
+        var staffID = $('#tab_1_3').data('staffID');
+        var leave_title = $('#leave_title').val();
+        var leave_form_no = $('#leave_form_no').val();
+        var leave_type = $('.leave_type option:selected').val();
+        var leave_from = $('#leave_from').val();
+        var leave_to = $('#leave_to').val();
+        var leave_comment = $('#leave_comment').val();
+        var hourlyConfirm  = $('#DayBaseLeave').prop('checked');
+        var time_from = $('#time_from').val();
+        var time_to = $('#time_to').val();
+        var form_number_a=$('.form_number_leave_application_a').val();
+        var form_number_b=$('.form_number_leave_application_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_leave_application_b","Please enter form number");
+    }else if(leave_title==""){
+         return window.applyRequiredError("id","leave_title","Please enter leave title");
+         
+    }else if(leave_type==0){
+         return window.applyRequiredError("class","leave_type","Please enter leave type");
+         
+    }else if(leave_from==""){
+         return window.applyRequiredError("id","leave_from","Please enter leave from");
+         
+    }else if(leave_to==""){
+         return window.applyRequiredError("id","leave_to","Please enter leave to");
+    }
+
+    if(hourlyConfirm==true){
+
+         if(time_from==""){
+             return window.applyRequiredError("id","time_from","Please enter time from");
+        }else if(time_to==""){
+             return window.applyRequiredError("id","time_to","Please enter time to");
+             
+        }
+    }
+
+
+
     var confirmation = confirm("Are you sure you want to add leave?");
     if(confirmation){        
           
@@ -9005,17 +9105,7 @@ bootbox.dialog({
            paid_compensation = 0;
         }
 
-        var staffID = $('#tab_1_3').data('staffID');
-
-        var leave_title = $('#leave_title').val();
-        var leave_form_no = $('#leave_form_no').val();
-        var leave_type = $('.leave_type option:selected').val();
-        var leave_from = $('#leave_from').val();
-        var leave_to = $('#leave_to').val();
-        var leave_comment = $('#leave_comment').val();
-        var hourlyConfirm  = $('#DayBaseLeave').prop('checked');
-        var time_from = $('#time_from').val();
-        var time_to = $('#time_to').val();
+        
         var paid_compensation_display;
 
         if(paid_compensation == 1){
@@ -9029,8 +9119,7 @@ bootbox.dialog({
           time_from = null;
         }
 
-        var form_number_a=$('.form_number_leave_application_a').val();
-        var form_number_b=$('.form_number_leave_application_b').val();
+      
 
         var form_number=form_number_a+form_number_b;
 
@@ -9058,6 +9147,10 @@ bootbox.dialog({
                   "_token": "<?php echo e(csrf_token()); ?>"
               },
               success:function(result){
+                if(result=='leaves_already'){
+                  alert('Leaves already exists in these dates');
+                  return false;
+                }
               $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
                  $('#LeaveApp').modal('toggle'); 
               }
@@ -9082,6 +9175,10 @@ bootbox.dialog({
                 "_token": "<?php echo e(csrf_token()); ?>"
               },
           success:function(result){
+            if(result=='leaves_already'){
+                  alert('Leaves already exists in these dates');
+                  return false;
+            }
           $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a class="delectLeave" onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
             $('#LeaveApp').modal('toggle'); 
           }
@@ -9201,6 +9298,23 @@ bootbox.dialog({
     var  LeaveApproval =$('#change-color-switch').bootstrapSwitch('state');//returns true or false
     if(LeaveApproval == true){
        LeaveApproval = 1;
+
+    if(approve_from==""){
+         return window.applyRequiredError("id","approve_from","Please enter approve from");
+    }else if(approve_to==""){
+         return window.applyRequiredError("id","approve_to","Please enter approve to");
+         
+    }else if(time_from!=null && time_approval_from_update==null){
+         return window.applyRequiredError("id","time_approval_from_update","Please enter approve time");
+         
+    }else if(time_to!=null && time_approval_to_update==null){
+         return window.applyRequiredError("id","time_approval_to_update","Please enter approve time to");
+         
+    }
+
+
+
+
     }else{
        LeaveApproval = 0;
     }
@@ -9307,6 +9421,16 @@ bootbox.dialog({
  }
 
 
+  $(document).on("click",".bootstrap-switch-container",function(){
+      console.log("asdasd")
+    var state=$('#changeSwitch').bootstrapSwitch('state');
+    if(state==false){
+             $('#paid_compensation_percentage').val('0')
+    }
+
+  })
+
+
  var clearLeave = function(){
 
 
@@ -9342,8 +9466,7 @@ bootbox.dialog({
 
 
  var addPenalty = function(){
-    var confirmation = confirm("Are you sure you want to add penalty?");
-    if(confirmation){
+
         var penalty_title = $('#penalty_title').val();
         var penalty_day =  $('#penalty_day').val();
         var penalty_from = $('#penalty_from').val();
@@ -9352,6 +9475,24 @@ bootbox.dialog({
         var staff_id = $('#tab_1_3').data('staffID');
         var form_number_a=$('.form_number_penalty_a').val();
         var form_number_b=$('.form_number_penalty_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_penalty_b","Please enter form number");
+    }else if(penalty_title==""){
+         return window.applyRequiredError("id","penalty_title","Please enter title");
+         
+    }else if(penalty_day==""){
+         return window.applyRequiredError("id","penalty_day","Please enter day");
+         
+    }else if(penalty_from==""){
+         return window.applyRequiredError("id","penalty_from","Please enter penalty from");
+         
+    }else if(penalty_to==""){
+         return window.applyRequiredError("id","penalty_to","Please enter penalty to");
+    }
+    var confirmation = confirm("Are you sure you want to add penalty?");
+    if(confirmation){
+        
 
         var form_number=form_number_a+form_number_b;
         checkHrFormNumberExistance(form_number,'daily_penalty')
@@ -9405,15 +9546,27 @@ bootbox.dialog({
  }
 
  var addAdjustment = function(){
+    var adjustment_title = $('#adjustment_title').val();
+    var adjustment_no = $('#adjustment_no').val();
+    var adjustment_description = $('#adjustment_description').val();
+    var staff_id = $('#tab_1_3').data('staffID');
+    var form_number_a=$('.form_number_exceptional_adjustment_a').val();
+    var form_number_b=$('.form_number_exceptional_adjustment_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_exceptional_adjustment_b","Please enter form number");
+    }else if(adjustment_title==""){
+         return window.applyRequiredError("id","adjustment_title","Please enter title");
+         
+    }else if(adjustment_no==""){
+         return window.applyRequiredError("id","adjustment_no","Please enter days");
+         
+    }
+
     var confirmation = confirm("Are you sure you want to add adjustment?");
     if(confirmation){
 
-        var adjustment_title = $('#adjustment_title').val();
-        var adjustment_no = $('#adjustment_no').val();
-        var adjustment_description = $('#adjustment_description').val();
-        var staff_id = $('#tab_1_3').data('staffID');
-        var form_number_a=$('.form_number_exceptional_adjustment_a').val();
-        var form_number_b=$('.form_number_exceptional_adjustment_b').val();
+        
         var form_number=form_number_a+form_number_b;
 
         checkHrFormNumberExistance(form_number,'exception_adjustment')
@@ -9816,8 +9969,6 @@ loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", 
 
 });
 </script>
-<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
-<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/attendance_graph.js" type="text/javascript"></script>
 
 <!--<script src="assets/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
  <script src="assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>

@@ -607,16 +607,16 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                 }
                
                 $total_received_amount=$fee_bill->getAllReceivedByStudentId($list['student_id']);
-                if($total_received_amount>200000 && $last_bill_taxes>0 && $total_adjustments>0){
-                         $actual_fee_received= $total_received_amount/1.05;
-                         $total_taxes=$total_received_amount-$actual_fee_received;
-                         $total_adjustments;
-                         $total_adjustments=$total_taxes+$total_adjustments;
-                         $new_taxable_amount=$total_adjustments+$actual_fee_received+$total_current_bill;
-                         $applicable_taxes=(($new_taxable_amount/100)*5)-$total_taxes;
-                        $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
-                        $adjustment->insertUpdateAdjustment($list['student_id'],0);
-                }
+                // if(@$total_received_amount>200000 && @$last_bill_taxes>0 && @$total_adjustments>0){
+                //          $actual_fee_received= $total_received_amount/1.05;
+                //          $total_taxes=$total_received_amount-$actual_fee_received;
+                //          $total_adjustments;
+                //          $total_adjustments=$total_taxes+$total_adjustments;
+                //          $new_taxable_amount=$total_adjustments+$actual_fee_received+$total_current_bill;
+                //          $applicable_taxes=(($new_taxable_amount/100)*5)-$total_taxes;
+                //         $arriers_adjustment->InsertUpdateArriers($list['student_id'],$total_adjustments);
+                //         $adjustment->insertUpdateAdjustment($list['student_id'],0);
+                // }
                 $fee_bill->adjustment=$total_adjustments;
                 $summer_adjustments=$this->getSummerAdjustment($list['gs_id']);
                 $fee_bill->additional_charges=$additional_charges-$summer_adjustments;
@@ -1015,9 +1015,9 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
     public function uploadList(){
         $class_list=  new class_list;
         $query="select tl.*,cl.id as student_id,cl.academic_session_id as a_id from 
-        concession_tem_table tl
+        rip_students tl
         inner join atif.class_list cl 
-        on cl.gs_id=tl.gs_id 
+        on cl.gs_id=tl.rgs_id 
         where 
         cl.academic_session_id 
         in (11,12)";
@@ -1032,11 +1032,11 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
             $fee_bill = new fee_bill;
             $student_id=$detail['student_id'];
             $academic_session_id=$detail['a_id'];
+            if($student_id!=8395 && $student_id!=8143 && $student_id!=4905 && $student_id!=8188 && $student_id!=8145 && $student_id!=8144 ){
+                // $fee_bill->deleteBill($student_id,$academic_session_id,6);
 
-            // $fee_bill->deleteBill($student_id,$academic_session_id,6);
+            }
 
-            
-          
         }
 
     }
