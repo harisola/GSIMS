@@ -75,7 +75,7 @@ class LoginController extends Controller
                 // $date = $detail[0]['date'];
                 $ipa = $_SERVER['REMOTE_ADDR'];
 
-                  $system_name = gethostbyaddr($_SERVER['REMOTE_ADDR']);  
+                  //$system_name = gethostbyaddr($_SERVER['REMOTE_ADDR']);  
                 
 
            
@@ -88,7 +88,7 @@ class LoginController extends Controller
                      
                     $RecM_Obj1->date =  $cur_date;
                     $RecM_Obj1->ip4 = $ipa;
-                     $RecM_Obj1->system_user = $system_name;
+                     //$RecM_Obj1->system_user = $system_name;
                     $RecM_Obj1->created_at = $mytime;
                     
                     $RecM_Obj1->register_by = $user_id;

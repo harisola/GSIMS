@@ -41,6 +41,8 @@ class Staff_role_position_distance extends StaffReportController
 
 			}else{
 				$Role_id_Two = $Staff_role[1]->Role_id;
+
+
 				$ht = $this->Single_Role_Staff_Html($Role_id, $Staff_id);
 				$ht_2 = $this->Single_Role_Staff_Html_Solangi($Role_id_Two, $Staff_id);
 
@@ -130,6 +132,8 @@ class Staff_role_position_distance extends StaffReportController
 	{
 		$staffInfo = new StaffInformationModel();
 		$Staff_role = $staffInfo->Get_Staff_Role($Staff_role_id);
+
+
 		
 		
 		$Html = '';
@@ -144,7 +148,7 @@ class Staff_role_position_distance extends StaffReportController
 		// Upper Role
 		if( !empty( $Staff_role ) ):
 		foreach($Staff_role as $ST ):
-			if($ST->gt_id != ''):
+			if($ST->id != ''):
 				$Html .= '<tr class="pBottom10" >';
 				$Html .= '<td width="50%" class="padRight1">';
 				$Percent=100;
@@ -155,8 +159,9 @@ class Staff_role_position_distance extends StaffReportController
 			endif;
 		endforeach;
 		endif;
-		//echo $Last_Role; exit;
-		
+		//echo $Last_Role; exit;// 		
+
+
 		// Current Staff Role
 		if( $Last_Role > 0 ){
 			
@@ -737,18 +742,24 @@ class Staff_role_position_distance extends StaffReportController
 		$staffInfo = new StaffInformationModel();
 		$Staff_role = $staffInfo->Get_Staff_Role($Staff_role_id);
 		
-		
+		 
+
 		$Html = '';
 		$Html .= '<div class="portlet box light">';
 		$Html .= '<div class="portlet-body padding0" >';
 		$Html .= '<table width="100%" class="rolesTable"> ';
 		
 		
-		$Last_Role=0;
-		$Current_Staff_Last_Role=0;
+		$Last_Role=1;
+		$Current_Staff_Last_Role=1;
 		
 		// Upper Role
 		if( !empty( $Staff_role ) ):
+
+			$Last_Role=0;
+			$Current_Staff_Last_Role=0;
+
+
 		foreach($Staff_role as $ST ):
 			if($ST->gt_id != ''):
 				$Html .= '<tr class="pBottom10" >';
