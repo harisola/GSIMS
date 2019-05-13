@@ -798,12 +798,14 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                     $total_current_billing_with_arrears=$total_current_billing_with_arrears;
                 }
 
+
                  $total_current_billing=$total_current_billing-$this->getSummerAdjustment($list['gs_id']);
 
                 $tax_percentage=$tax_amount->getTaxPercentage($list['a_session_id'])['tax_percentage'];
 
                 $fee_details=$fee_bill->getLastBillByStudentId($list['student_id']);
-
+                $last_payable=$fee_details['total_payable'];
+                
                  $last_bill_id=$fee_details['id'];
                  $last_bill_received=$fee_bill_received->getOnlylastReceived($last_bill_id);
 
@@ -840,7 +842,7 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
                   }
 
                  
-              
+             
                if($billing_cycle>2){
               
                     if($total_received_amount>0 &&$previous_bill_taxes!=0){
@@ -862,8 +864,9 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
 
                                   }else{
                                       $applicable_taxes=$this->calculateDiscount($total_current_billing2,$tax_percentage);
-                                      if($last_bill_received=="" && $previous_bill_taxes>0){
-                                        $applicable_taxes=$applicable_taxes+$previous_bill_taxes;
+                                    
+                                      if(($received_amount<$last_payable) && $previous_bill_taxes>0){
+                                         $applicable_taxes=$applicable_taxes+(($arrears/100)*5);
                                       }
                                   }
                                 //if received amount greater than taxes then first system will deduct taxes by his received amount and taxes is only for current billing.
