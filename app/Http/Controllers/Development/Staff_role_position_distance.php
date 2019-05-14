@@ -267,11 +267,14 @@ class Staff_role_position_distance extends StaffReportController
 							$Html_Current .= '</span>';
 							$Html_Current .= '</small>';
 						$Html_Current .= '</span>';
+
 						$Html_Current .= '<span class="rightInformationRoleStaff">';
 						$Html_Current .= '<span class="rolesRelations">';
 						$Html_Current .= $ST->d10. ' '.$ST->finalGrade;
 						$Html_Current .= '</span>';
 						$Html_Current .= '</span>';
+
+						
 					$Html_Current .= '</td>';
 				$Html_Current .= '</tr>';
 			$Html_Current .= '</tbody>';
