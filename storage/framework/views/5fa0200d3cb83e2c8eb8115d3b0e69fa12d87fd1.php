@@ -12,7 +12,7 @@
 <!-- page-breadcrumb -->
 </div>
 
-@php 
+<?php  
 
    $num_1=0;
    $num_2=0;
@@ -272,7 +272,7 @@
   endif;
 
  
-@endphp
+ ?>
 <style type="text/css">
 .customRow {
     padding: 20px;
@@ -435,21 +435,23 @@ button.multiselect.dropdown-toggle.btn.btn-default {
     <img src="img/RecruitmentProcessflow.jpg" width="3500" />
       <div class="startTillCSL3">
           <span class="OnlineFormSubmissions absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Online_Application" class="tooltips gray counter" data-container="body" data-placement="top" value="{!! $num_1 !!}" data-original-title="Applicants applied Online" id="allocte_online_data" >{!! $num_1 !!} </a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Online_Application" class="tooltips gray counter" data-container="body" data-placement="top" value="<?php echo $num_1; ?>" data-original-title="Applicants applied Online" id="allocte_online_data" ><?php echo $num_1; ?> </a>
           </span>
           <span class="fillPartA absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Fill_part_A" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants applied Online and completed Part A - Awaiting for Part A screening">{!! $num_2 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Fill_part_A" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants applied Online and completed Part A - Awaiting for Part A screening"><?php echo $num_2; ?></a>
           </span>
           <span class="partAScreeningToRegret absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Part_A_Screening" charset=" " 
               class="tooltips counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Regret from Part A screening">
-              {!! $num_9 !!}
+              <?php echo $num_9; ?>
+
             </a>
           </span><!-- partAScreeningToRegret -->
           <!-- partAScreeningToPartBAllocation: Applicants who were called for Part B and communication to the applicant is still pending  -->
           <span class="partAScreeningToPartBAllocation absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_triggered" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants triggered for Part B - Awaiting to be communicated">
-              {!! $num_3 !!}
+              <?php echo $num_3; ?>
+
             </a>
           </span><!-- partAScreeningToPartBAllocation -->
           <?php /* 
@@ -460,60 +462,65 @@ button.multiselect.dropdown-toggle.btn.btn-default {
           */ ?>
            <!-- partAScreeningToPartBPresence: Applicants awaited for Part B presence -->
           <span class="partAScreeningToPartBPresence absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_awating" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awating for Part B presence - Communicated for Part B ">{!! $num_4 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_awating" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awating for Part B presence - Communicated for Part B "><?php echo $num_4; ?></a>
           </span><!-- partAScreeningToPartBPresence -->
           <!-- partAScreeningToPartBFollowupOverall: Overall applicants moved to Followup for Part B presence -->
           <span class="partAScreeningToPartBFollowupOverall absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Part B presence">
-              {!! $num_4_1 !!}
+              <?php echo $num_4_1; ?>
+
             </a>
           </span><!-- partAScreeningToPartBFollowupOverall -->
           <!-- partAScreeningToPartBFollowup: Applicants currently in Followup for Part B presence -->
           <span class="partAScreeningToPartBFollowup absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_currently" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Part B presence">{!! $num_4_2 !!}</a> &nbsp;
-              <span  class="noFollow tooltips"  data-original-title="7 Days passed no action taken">({!! $num_4_3 !!})</span>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_currently" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Part B presence"><?php echo $num_4_2; ?></a> &nbsp;
+              <span  class="noFollow tooltips"  data-original-title="7 Days passed no action taken">(<?php echo $num_4_3; ?>)</span>
           </span><!-- partAScreeningToPartBFollowup -->
           <!-- partAScreeningToPartBFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
           <span class="partAScreeningToPartBFollowupExtension absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_part_A" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Part B presence">
-                {!! $num_4_4 !!}
+                <?php echo $num_4_4; ?>
+
               </a>
           </span><!-- partAScreeningToPartBFollowupExtension -->
           <!-- partAScreeningToPartBFollowupNotInterested: Overall applicants moved to Not Interested from Followup for Part B presence -->
           <span class="partAScreeningToPartBFollowupNotInterested absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Part B presence">  
-              {!! $num_4_5 !!}
+              <?php echo $num_4_5; ?>
+
             </a>
           </span><!-- partAScreeningToPartBFollowupNotInterested -->
           <!-- partAScreeningToPartBPresent: Overall applicants marked Present for Part B -->
           <span class="partAScreeningToPartBPresent absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_marked" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Part B"> 
-               {!! $num_7 !!}
+               <?php echo $num_7; ?>
+
              </a>
           </span><!-- partAScreeningToPartBPresent -->
           <!------------------------------------------ Walkin ---------------------------------->
           <!-- walkinFormSubmissions: Walkin applicants  -->
           <span class="walkinFormSubmissions absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Walkin_applications" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall Walkin applications"> {!! $num_5 !!} </a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Walkin_applications" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall Walkin applications"> <?php echo $num_5; ?> </a>
           </span><!-- walkinFormSubmissions -->
           <!-- walkinFormSubmissionsPartA: Walkin applicants fill part A  -->
           <span class="walkinFormSubmissionsPartA absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Walkin_applications_part_A" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall Walkin applications Fill Part A"> {!! $num_5 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Walkin_applications_part_A" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall Walkin applications Fill Part A"> <?php echo $num_5; ?></a>
           </span><!-- walkinFormSubmissionsPartA -->
           <!-- partAtoPartBWalkin: Overall moved to Part B from Part A -->
           <span class="partAtoPartBWalkin absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_moved_to" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall moved to Part B from Part A"> {!! $num_5 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_moved_to" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall moved to Part B from Part A"> <?php echo $num_5; ?></a>
           </span><!-- partAtoPartBWalkin -->
           <!----------------------------------- Combined  ---------------------------------------->
           <!----------------------------------- Full Form Screening Start ------------------------>
           <!-- FullFormScreening: Applicants moved to Full Form Screening -->
           <span class="FullFormScreening absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_moved_to" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Fill Form Screening">{!! ( $num_5 + $num_7 ) !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_moved_to" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Fill Form Screening"><?php echo ( $num_5 + $num_7 ); ?></a>
           </span><!-- FullFormScreening -->
           <!-- FullFormScreeningToRegret: Overall applicant moved to Regret from Full Form screening  -->
           <span class="FullFormScreeningToRegret absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_moved_to_Regret" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Regret from Part A screening">
-                {!! $num_10 !!}
+                <?php echo $num_10; ?>
+
               </a>
           </span><!-- FullFormScreeningToRegret -->
           <!-- FullFormScreeningtoHold: Overall applicants moved to Hold from Full Form Screening -->
@@ -523,173 +530,178 @@ button.multiselect.dropdown-toggle.btn.btn-default {
           <!-- FullFormScreeningtoInitialInterview: Applicants awaiting for Initial Interview  -->
           <span class="FullFormScreeningtoInitialInterview absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicant_awaiting_for_full_form" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awaiting for Initial Interview ">
-                 {!! $num_11 !!}
+                 <?php echo $num_11; ?>
+
               </a>
           </span><!-- FullFormScreeningtoInitialInterview -->
           <!-- ApplicantsMarkedPresentInitialInterview: Overall applicants marked Present for Part B -->
           <span class="ApplicantsMarkedPresentInitialInterview absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_present" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Initial Interview"> 
-              {!! $num_12 !!}
+              <?php echo $num_12; ?>
+
             </a>
           </span><!-- ApplicantsMarkedPresentInitialInterview -->
           <!-- InitialInterview: Applicants currently in Initial Interview  -->
           <span class="InitialInterview absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_currently_initial" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Initial Interview, awaiting for Next Step decision ">
-                {!! $num_19 !!}
+                <?php echo $num_19; ?>
+
                  
               </a>
           </span><!-- InitialInterview -->
           <!-- InitialInterviewToRegret: Overall applicant moved to Regret from Initial Interview  -->
           <span class="InitialInterviewToRegret absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicant_moved_to_regret" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicant moved to Regret from Initial Interview">{!! $num_30 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicant_moved_to_regret" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicant moved to Regret from Initial Interview"><?php echo $num_30; ?></a>
           </span><!-- InitialInterviewToRegret -->
           <!-- InitialInterviewPresenceFollowup: Overall applicants moved to Followup for Initial Interview presence -->
           <span class="InitialInterviewPresenceFollowup absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_moved_to_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Initial Interview presence">
-                 {!! $num_13 !!}
+                 <?php echo $num_13; ?>
+
               </a>
           </span><!-- InitialInterviewPresenceFollowup -->
           <!-- InitialInterviewPresenceFollowupCurrent: Applicants currently in Followup for Part B presence -->
           <span class="InitialInterviewPresenceFollowupCurrent absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_currently_in" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Initial Interview presence">
-                 {!! $num_14 !!}
+                 <?php echo $num_14; ?>
+
               </a> &nbsp;
               <a data-toggle="modal" data-status="7_Days_passed" class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">
-              ({!! $num_15 !!})
+              (<?php echo $num_15; ?>)
             </a>
           </span><!-- InitialInterviewPresenceFollowupCurrent -->
           <!-- IntialInterviewFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
           <span class="IntialInterviewFollowupExtension absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_given" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Part B presence"> {!! $num_16 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_given" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Part B presence"> <?php echo $num_16; ?></a>
           </span><!-- IntialInterviewFollowupExtension -->
           <!-- IntialInterviewFollowupNotInterested: Overall applicants moved to Not Interested from Followup for Initial Interview presence -->
           <span class="IntialInterviewFollowupNotInterested absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_not_interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Initial Interview presence">{!! $num_17 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_not_interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Initial Interview presence"><?php echo $num_17; ?></a>
           </span><!-- IntialInterviewFollowupNotInterested -->
           <!-- IntialInterviewCommunicationNotInterested: Overall applicants moved to Not Interested from Initial Interview Communication -->
           <span class="IntialInterviewCommunicationNotInterested absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Intial_Interview_Communication_Not" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Initial Interview Communication">{!! $num_18 !!}</a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Intial_Interview_Communication_Not" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Initial Interview Communication"><?php echo $num_18; ?></a>
           </span><!-- IntialInterviewCommunicationNotInterested -->
       </div><!-- startTillCSL3 -->
       <div class="CSL3TillDDM3">          
         <!-- InitialInterviewToFormalInterview: Applicants awaiting for Initial Interview  -->
         <span class="InitialInterviewToFormalInterview absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Intial_Interview_for_formal" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awaiting for Formal Interview ">{!! $num_20 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Intial_Interview_for_formal" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awaiting for Formal Interview "><?php echo $num_20; ?></a>
         </span><!-- InitialInterviewToFormalInterview -->
         <!-- ApplicantsMarkedPresentFormalInterview: Overall applicants marked Present for Formal Interview -->
         <span class="ApplicantsMarkedPresentFormalInterview absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Present_for_Formal_Interview" data-stage = "" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Formal Interview">{!! $num_21 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Present_for_Formal_Interview" data-stage = "" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Formal Interview"><?php echo $num_21; ?></a>
         </span><!-- ApplicantsMarkedPresentFormalInterview -->
         <!-- FormalInterview: Applicants currently in Formal Interview  -->
         <span class="FormalInterview absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="awaiting_for_Next_Step_interiew" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Formal Interview, awaiting for Next Step decision ">{!! $num_22 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="awaiting_for_Next_Step_interiew" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Formal Interview, awaiting for Next Step decision "><?php echo $num_22; ?></a>
         </span><!-- FormalInterview -->
         <!-- FormalInterviewToRegret: Overall applicant moved to Regret from Initial Interview  -->
         <span class="FormalInterviewToRegret absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Regret_from_Formal" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicant moved to Regret from Formal Interview">{!! $num_29 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Regret_from_Formal" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicant moved to Regret from Formal Interview"><?php echo $num_29; ?></a>
         </span><!-- FormalInterviewToRegret -->
 
         <!-- FormalInterviewPresenceFollowup: Overall applicants moved to Followup for Initial Interview presence -->
         <span class="FormalInterviewPresenceFollowup absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="moved_to_Followup_interview" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Formal Interview presence">{!! $num_23 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="moved_to_Followup_interview" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Formal Interview presence"><?php echo $num_23; ?></a>
         </span><!-- FormalInterviewPresenceFollowup -->
 
         <!-- FormalInterviewPresenceFollowupCurrent: Applicants currently in Followup for Part B presence -->
         <span class="FormalInterviewPresenceFollowupCurrent absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="currently_in_Followup_presence" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Formal Interview presence">{!! $num_24 !!}</a> &nbsp;
-            <a  class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">({!! $num_25 !!})</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="currently_in_Followup_presence" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Formal Interview presence"><?php echo $num_24; ?></a> &nbsp;
+            <a  class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">(<?php echo $num_25; ?>)</a>
         </span><!-- FormalInterviewPresenceFollowupCurrent -->
         <!-- FormalInterviewFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
         <span class="FormalInterviewFollowupExtension absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="given_extension" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Formal Interview presence">{!! $num_28 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="given_extension" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Formal Interview presence"><?php echo $num_28; ?></a>
         </span><!-- FormalInterviewFollowupExtension -->
         <!-- FormalInterviewFollowupNotInterested: Overall applicants moved to Not Interested from Followup for Initial Interview presence -->
         <span class="FormalInterviewFollowupNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Formal Interview presence">{!! $num_26 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Formal Interview presence"><?php echo $num_26; ?></a>
         </span><!-- FormalInterviewFollowupNotInterested -->
         <!-- FormalInterviewCommunicationNotInterested: Overall applicants moved to Not Interested from Initial Interview Communication -->
         <span class="FormalInterviewCommunicationNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="moved_to_Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Formal Interview Communication">{!! $num_27 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="moved_to_Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Formal Interview Communication"><?php echo $num_27; ?></a>
         </span><!-- FormalInterviewCommunicationNotInterested -->
         <!-------------------------------------------------------------------------------------------------------------------------------- -->
         <!-- FormalInterviewToObservation: Applicants awaiting for Observation  -->
         <span class="FormalInterviewToObservation absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="awaiting_for_Observation" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awaiting for Observation">{!! $num_31 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="awaiting_for_Observation" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awaiting for Observation"><?php echo $num_31; ?></a>
         </span><!-- FormalInterviewToObservation -->
         <!-- ApplicantsMarkedPresentObservation: Overall applicants marked Present for Observation -->
         <span class="ApplicantsMarkedPresentObservation absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="marked_Present_for_job" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Observation">{!! $num_32 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="marked_Present_for_job" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Observation"><?php echo $num_32; ?></a>
         </span><!-- ApplicantsMarkedPresentObservation -->
         <!-- Obsevation: Applicants currently in Formal Interview  -->
         <span class="Obsevation absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="currently_in_Observatio_for" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Observation, awaiting for Next Step decision ">{!! $num_33 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="currently_in_Observatio_for" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Observation, awaiting for Next Step decision "><?php echo $num_33; ?></a>
         </span><!-- Obsevation -->
         <!-- ObservationToRegret: Overall applicant moved to Regret from Initial Interview  -->
         <span class="ObservationToRegret absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="applicant_moved_to_regret_form" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicant moved to Regret from Observation">{!! $num_38 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="applicant_moved_to_regret_form" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicant moved to Regret from Observation"><?php echo $num_38; ?></a>
         </span><!-- ObservationToRegret -->
         <!-- ObservationPresenceFollowup: Overall applicants moved to Followup for Initial Interview presence -->
         <span class="ObservationPresenceFollowup absolute">
             <a href="#allocateProfileModal" data-toggle="modal" data-status="Observation_Presence_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Observation presence">
-            {!! $num_34 !!}</a>
+            <?php echo $num_34; ?></a>
         </span><!-- ObservationPresenceFollowup -->
         <!-- ObservationPresenceFollowupCurrent: Applicants currently in Followup for Part B presence -->
         <span class="ObservationPresenceFollowupCurrent absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="no_actions" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Observation presence"> {!! $num_35 !!}</a> &nbsp;
-            <a  class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">({!! $num_36 !!})</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="no_actions" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Observation presence"> <?php echo $num_35; ?></a> &nbsp;
+            <a  class="noFollow tooltips counter" data-container="body" data-placement="top" data-original-title="7 Days passed no action taken">(<?php echo $num_36; ?>)</a>
         </span><!-- ObservationPresenceFollowupCurrent -->
         <!-- ObservationFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
         <span class="ObservationFollowupExtension absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="given_extension_from_observation" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Formal Interview presence">{!! $num_39 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="given_extension_from_observation" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup for Formal Interview presence"><?php echo $num_39; ?></a>
         </span><!-- ObservationFollowupExtension -->
         <!-- ObservationFollowupNotInterested: Overall applicants moved to Not Interested from Followup for Initial Interview presence -->
         <span class="ObservationFollowupNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="applicants_moved_to_Not_Interested_to_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Observation presence">{!! $num_37 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="applicants_moved_to_Not_Interested_to_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Observation presence"><?php echo $num_37; ?></a>
         </span><!-- ObservationFollowupNotInterested -->
         <!-- ObservationCommunicationNotInterested: Overall applicants moved to Not Interested from Observation Communication -->
         <span class="ObservationCommunicationNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Observation_Communication_not_interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Observation Communication">{!! $num_37 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Observation_Communication_not_interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Observation Communication"><?php echo $num_37; ?></a>
         </span><!-- ObservationCommunicationNotInterested -->
         <!--------------------------------------------------------------------------------------------------------------------------------- -->
         <!-- ObservationToFinalCons: Applicants awaiting for Final Consultation  -->
         <span class="ObservationToFinalCons absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Final_consultation_awaiting" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awaiting for Final Consultation">{!! $num_40 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Final_consultation_awaiting" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants awaiting for Final Consultation"><?php echo $num_40; ?></a>
         </span><!-- ObservationToFinalCons -->
         <!-- ApplicantsMarkedPresentFinalCons: Overall applicants marked Present for Final Consultation -->
         <span class="ApplicantsMarkedPresentFinalCons absolute">
             <a href="#allocateProfileModal" data-toggle="modal" data-status="present_for_Final" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Final Consultation">
-            {!! $num_41 !!}</a>
+            <?php echo $num_41; ?></a>
         </span><!-- ApplicantsMarkedPresentFinalCons -->
         <!-- FinalCons: Applicants currently in Final Consultation  -->
         <span class="FinalCons absolute">
             <a href="#allocateProfileModal" data-toggle="modal" data-status="currently_in_Final" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Final Consultation, awaiting for Next Step decision ">
-            {!! $num_42 !!}</a>
+            <?php echo $num_42; ?></a>
         </span><!-- FinalCons -->
         <!-- FinalConsToRegret: Overall applicant moved to Regret from Final Consultation  -->
         <span class="FinalConsToRegret absolute">
             <a href="#allocateProfileModal" data-toggle="modal" data-status="Final_Cons_To" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicant moved to Regret from FInal Consultation">
-            {!! $num_47 !!}</a>
+            <?php echo $num_47; ?></a>
         </span><!-- FinalConsToRegret -->
         <!-- FinalConsPresenceFollowup: Overall applicants moved to Followup for Final Consultation presence -->
         <span class="FinalConsPresenceFollowup absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Final_Cons_Presence" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Final Consultation presence">{!! $num_43 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Final_Cons_Presence" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Final Consultation presence"><?php echo $num_43; ?></a>
         </span><!-- FinalCons -->
         <!-- FinalConsPresenceFollowupCurrent: Applicants currently in Followup for Final Consultation presence -->
         <span class="FinalConsPresenceFollowupCurrent absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="recenntly_in_Followup_for_F" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Final Consultation presence">{!! $num_44 !!}</a> &nbsp;
-            <span class="noFollow tooltips" data-original-title="7 Days passed no action taken">({!! $num_45 !!})</span>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="recenntly_in_Followup_for_F" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Final Consultation presence"><?php echo $num_44; ?></a> &nbsp;
+            <span class="noFollow tooltips" data-original-title="7 Days passed no action taken">(<?php echo $num_45; ?>)</span>
         </span><!-- FinalConsPresenceFollowupCurrent -->
         <!-- FinalConsFollowupExtension: Overall applicants given extension from Followup for Part B presence -->
         <span class="FinalConsFollowupExtension absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Followup_Extension" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup focresence">{!! $num_48 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Followup_Extension" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants given extension from Followup focresence"><?php echo $num_48; ?></a>
         </span><!-- FinalConsFollowupExtension -->
         <!-- FinalConsFollowupNotInterested: Overall applicants moved to Not Interested from Followup for Final Consultation presence -->
         <span class="FinalConsFollowupNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Consultation_presence" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Final Consultation presence">{!! $num_46 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Consultation_presence" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Final Consultation presence"><?php echo $num_46; ?></a>
         </span><!-- FinalConsFollowupNotInterested -->
         <!-- FinalConsCommunicationNotInterested: Overall applicants moved to Not Interested from Initial Interview Communication -->
         <span class="FinalConsCommunicationNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="final_communication_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Final Consultation Communication">{!! $num_47 !!}</a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="final_communication_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Final Consultation Communication"><?php echo $num_47; ?></a>
         </span><!-- FinalConsCommunicationNotInterested -->
       </div><!-- CSL3TillDDM3 -->
       <!-- zk -->
@@ -800,8 +812,8 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 //  // console.log(stage);
 //  $.ajax({
 //        type:'POST',
-//        data:{ '_token': '{{ csrf_token() }}', stage },
-//        url:"{{url('/get_form_online')}}",
+//        data:{ '_token': '<?php echo e(csrf_token()); ?>', stage },
+//        url:"<?php echo e(url('/get_form_online')); ?>",
 //        // data:formdata,
 //        dataType: "json",
 //        success: function(response)
@@ -833,7 +845,7 @@ $(document).on("click",".counter",function(){
   $.ajax({
         type:'GET',
         data: data , 
-        // data:{ '_token': '{{ csrf_token() }}', data , stage },
+        // data:{ '_token': '<?php echo e(csrf_token()); ?>', data , stage },
     //     data: {
     //      date1 ,
       // date2 ,
@@ -844,7 +856,7 @@ $(document).on("click",".counter",function(){
       // formSourceFilter ,
       // stage 
     //     },
-        url:"{{url('/get_form')}}",
+        url:"<?php echo e(url('/get_form')); ?>",
         // data:formdata,
         // dataType: "json",
         success: function(response)
@@ -860,8 +872,8 @@ $(document).on("click",".counter",function(){
 // var stage = $(this).data("status");
 // $.ajax({
 //       type:'POST',
-//       data:{ '_token': '{{ csrf_token() }}', "stage":stage },
-//       url:"{{url('/get_form')}}",
+//       data:{ '_token': '<?php echo e(csrf_token()); ?>', "stage":stage },
+//       url:"<?php echo e(url('/get_form')); ?>",
 //       dataType: "json",
 //       success: function(response)
 //       {
@@ -882,10 +894,10 @@ function Create_new_table()
       'serverSide': true,
       'serverMethod': 'post',
       'ajax': {
-          "url": "{{ url('/process_flow') }}", 
+          "url": "<?php echo e(url('/process_flow')); ?>", 
            "dataType": "json",
            "type": "POST",
-           "data":{ _token: "{{csrf_token()}}"}
+           "data":{ _token: "<?php echo e(csrf_token()); ?>"}
       },
       'columns': [
       
@@ -909,8 +921,8 @@ $("#applicant_name_write").text(name);
 
 $.ajax({
       type:'POST',
-      data:{ '_token': '{{ csrf_token() }}', "Form_id":Form_id },
-      url:"{{url('/loadLogs')}}",
+      data:{ '_token': '<?php echo e(csrf_token()); ?>', "Form_id":Form_id },
+      url:"<?php echo e(url('/loadLogs')); ?>",
       dataType: "json",
       success: function(response)
       {
@@ -1353,40 +1365,40 @@ top: 475px;
 <!-- BEGIN USE PROFILE -->
 
 <script>
-   loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){   
-    loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){    
+   loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootbox/bootbox.min.js", function(){   
+    loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", function(){    
 
-     loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/datatables.min.js", function(){
+     loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/datatables.min.js", function(){
 
-      loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
-       loadScript("{{ URL::to('metronic') }}/pages/scripts/profile.js", function(){
-
-
-         loadScript("{{ URL::to('metronic') }}/pages/scripts/table-datatables-managed.js", function(){
+      loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
+       loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/profile.js", function(){
 
 
-             loadScript("{{ URL::to('metronic') }}/global/plugins/jquery.sparkline.min.js", function(){
-              loadScript("{{ URL::to('metronic') }}/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
-                  loadScript("{{ URL::to('metronic') }}/global/plugins/moment.js", function(){
-                     loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js", function(){
-                         loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.js", function(){
-                                      // loadScript("{{ URL::to('metronic') }}/pages/scripts/ui-datepaginator.min.js", function(){
-                                         loadScript("{{ URL::to('metronic') }}/layouts/layout/scripts/demo.min.js", function(){ 
-                                             loadScript("{{ URL::to('metronic') }}/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js", function(){
-                                                 loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-markdown/lib/markdown.js", function(){
-                                                     loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js", function(){
-                                                         loadScript("{{ URL::to('metronic') }}/global/plugins/bootstrap-summernote/summernote.min.js", function(){
-                                                             loadScript("{{ URL::to('metronic') }}/pages/scripts/components-ion-sliders.js", function(){
-                                                                loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/vue.min.js", function(){
-                                                                    loadScript("{{ URL::to('metronic') }}/global/plugins/select2/js/select2.full.min.js", function(){
-                                                                        loadScript("{{ URL::to('metronic') }}/pages/scripts/components-select2.min.js", function(){
-                                                                          loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/flatpickr.min.js", function(){
-                                                                                loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/nouislider.min.js", function(){
-                                                                                    loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/moment.min.js", function(){
-                                                                                        //loadScript("{{ URL::to('metronic') }}/global/plugins/time-range/js/index.js", function(){
-                                                                                            loadScript("{{URL::to('metronic')}}/global/plugins/jquery-validation/js/jquery.validate.js",function(){
-                                                                                                loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
-                                                                                                    loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
+         loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/table-datatables-managed.js", function(){
+
+
+             loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jquery.sparkline.min.js", function(){
+              loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
+                  loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/moment.js", function(){
+                     loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js", function(){
+                         loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-datepaginator/bootstrap-datepaginator.min.js", function(){
+                                      // loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/ui-datepaginator.min.js", function(){
+                                         loadScript("<?php echo e(URL::to('metronic')); ?>/layouts/layout/scripts/demo.min.js", function(){ 
+                                             loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js", function(){
+                                                 loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-markdown/lib/markdown.js", function(){
+                                                     loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js", function(){
+                                                         loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootstrap-summernote/summernote.min.js", function(){
+                                                             loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/components-ion-sliders.js", function(){
+                                                                loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/vue.min.js", function(){
+                                                                    loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/select2/js/select2.full.min.js", function(){
+                                                                        loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/components-select2.min.js", function(){
+                                                                          loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/flatpickr.min.js", function(){
+                                                                                loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/nouislider.min.js", function(){
+                                                                                    loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/moment.min.js", function(){
+                                                                                        //loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/time-range/js/index.js", function(){
+                                                                                            loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jquery-validation/js/jquery.validate.js",function(){
+                                                                                                loadScript("<?php echo e(URL::to('')); ?>/js/jquery.filtertable.min.js", function(){
+                                                                                                    loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/app.min.js", pagefunction);
                                                                                                     });
                                                                                                 });
                                                                                             });

@@ -144,6 +144,58 @@ endif; ?>
             </div>
         </div>
         <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #6</label>
+                <input type="text" name="Installment_6" class="form-control" placeholder="" value="" />
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #7</label>
+                <input type="text" name="Installment_7" class="form-control" placeholder="" value="" />
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #8</label>
+                <input type="text" name="Installment_8" class="form-control" placeholder="" value="" />
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #9</label>
+                <input type="text" name="Installment_9" class="form-control" placeholder="" value="" />
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #10</label>
+                <input type="text" name="Installment_10" class="form-control" placeholder="" value="" />
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #11</label>
+                <input type="text" name="Installment_11" class="form-control" placeholder="" value="" />
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #12</label>
+                <input type="text" name="Installment_12" class="form-control" placeholder="" value="" />
+            </div>
+        </div>
+        <!--/span-->
+
+
+
     </div>
     <!--/row-->
     <?php else : ?>
@@ -215,6 +267,14 @@ endif; ?>
             </div>
         </div>
         <!--/span-->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Installment #6</label>
+                <input type="text" name="Installment_6" class="form-control" placeholder="" value="<?=$Installment_6;?>" />
+            </div>
+        </div>
+        <!--/span-->
+
     </div>
     <!--/row-->
 

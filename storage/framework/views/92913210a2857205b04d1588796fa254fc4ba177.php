@@ -22,6 +22,10 @@ display: none;
 #tapSlider .green-color {
  background: #89c589 !important;
 }
+.orange-color{
+      background: #ef9a5f !important;
+
+}
  .red-bar .noUi-tooltip {
   top: 34px !important;
   height: 19px !important;
@@ -374,7 +378,7 @@ input#staffView_StaffList_Search {
 
 <!-- BEGIN USE PROFILE -->
 <div class="row marginTop20">
-	<div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
+  <div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
     <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
     </div><!-- div -->
     
@@ -452,7 +456,7 @@ input#staffView_StaffList_Search {
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleAbsentia">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div><!-- form-actions -->
+                                        </div><!-- form-actions -->
                                      </div>
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
@@ -479,7 +483,7 @@ input#staffView_StaffList_Search {
                                                   <span class="glyphicon glyphicon-search"></span>
                                               </button>
                                           </span>
-                                      	</div>
+                                        </div>
                                      </div><!-- -->
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
@@ -490,7 +494,7 @@ input#staffView_StaffList_Search {
                                         <div class="form-actions">
                                           <button type="submit" class="btn blue saveMultipleLeave">Submit</button>
                                           <button type="button" class="btn default">Cancel</button>
-                                      	</div>
+                                        </div>
                                      </div><!-- fixedHeightmodalPortlet -->
                                      <!-- portlet-body fixedHeightmodalPortlet-->
                                      
@@ -517,7 +521,7 @@ input#staffView_StaffList_Search {
                                                   <span class="glyphicon glyphicon-search"></span>
                                               </button>
                                           </span>
-                                      	</div>
+                                        </div>
                                      </div><!-- headRightDetailsInner2 -->
                                      <!-- headRightDetailsInner -->
                                      <div class="portlet-body fixedHeightmodalPortlet">
@@ -3422,8 +3426,8 @@ input#staffView_StaffList_Search {
                          <div class="tab-content">
                             <div class="tab-pane fade active in" id="tab_1_3_3">
                               <div class="portlet-body">
-                              	<div class="row">
-                                	<div id="datepaginator"> </div>
+                                <div class="row">
+                                  <div id="datepaginator"> </div>
                                     <div class="col-md-12" style="margin-top:20px;">
                                        <!-- BEGIN PORTLET-->
                                        <div class="portlet light form-fit bordered">
@@ -3949,7 +3953,13 @@ input#staffView_StaffList_Search {
                                                                 <div class="form-group">
                                                                    <label class="">Paid Percent:</label>
                                                                    <div class="input-group">
-                                                                      <input type="number" min="0" max="100" step="50" class="form-control" id="paid_compensation_percentage">
+                                                                    <select class="form-control" id="paid_compensation_percentage">
+                                                                      <option value="">Paid compensation</option>
+                                                                      <option value="0">0</option>
+                                                                      <option value="50">50</option>
+                                                                      <option value="100">100</option>
+
+                                                                    </select>
                                                                       <span class="input-group-addon">
                                                                       <i class="fa fa-percent"></i>
                                                                       </span>
@@ -4553,7 +4563,7 @@ input#staffView_StaffList_Search {
                                                     <div class="form-body" id="Adjustment_Contents">
                                        
                                                     
-                                       				</div><!-- form-body -->
+                                              </div><!-- form-body -->
                                                  </div><!-- portlet-body fixedHeightmodalPortlet-->
                                               </div><!-- portlet -->
                                            </div><!-- modal-body -->
@@ -5024,445 +5034,37 @@ input#staffView_StaffList_Search {
 }
 </style>                     
                    <div class="tab-pane fade" id="tab_1_6">
-                      <div id="content_role_position_distance"> 
+                     
+
+
+                     <div class="container">
+                      <div class="">
+
+
+                      <div id="content_role_position_distance" class="col-md-4"> 
           
-                         <div class="portlet-body padding0">
-                            <table width="100%" class="rolesTable">
-                               <tr class="pBottom10">
-                                     <td class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-001" src="assets/photos/hcm/150x150/staff/973.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="DGS" data-staffid="19" data-staffgtid="90-001" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Ghazala Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="g.siddiqui">DGS</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">20 B</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Principal, Generation's School">Generation's School: Principal</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  20 B
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->                                                             
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-001" src="assets/photos/hcm/150x150/staff/973.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="DGS" data-staffid="19" data-staffgtid="90-001" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Ghazala Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="g.siddiqui">DGS</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">20 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Principal, Generation's School">Generation's School: Principal</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  20 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff --> 
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Director, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-003" src="assets/photos/hcm/150x150/staff/299.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="SSD" data-staffid="15" data-staffgtid="90-003" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Shoaib Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="s.siddiqui">SSD</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">20 B</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Director, Generation's School">Generation's School: Director</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  20 B
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Director, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-003" src="assets/photos/hcm/150x150/staff/299.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="SSD" data-staffid="15" data-staffgtid="90-003" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Shoaib Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="s.siddiqui">SSD</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Director, Generation's School">Generation's School: Director</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="" data-department="Senior General Manager, Generation's School">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-067" src="assets/photos/hcm/150x150/staff/1010.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="KSM" data-staffid="606" data-staffgtid="15-067" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Kashif Shamim</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="k.shamim">KSM</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 B</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Senior General Manager, Generation's School">Generation's School: Senior General Manager</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 B
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                   
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10 currentStaff">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row " data-attendance="Absent" data-campus="South" data-profile="Software Team" data-department="Head, Digital Systems, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-076" src="assets/photos/hcm/150x150/staff/1014.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <a href="" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MHF" data-staffid="615" data-staffgtid="15-076" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Faisal</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.faisal2">MHF</small><br>
-                                                          <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">R</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Head, Digital Systems, Digital Infrastructures">Digital Infrastructures: Head, Digital Systems</span></small>
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row " data-attendance="Absent" data-campus="South" data-profile="Software Team" data-department="Head, Digital Systems, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-076" src="assets/photos/hcm/150x150/staff/1014.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <a href="" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MHF" data-staffid="615" data-staffgtid="15-076" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Faisal</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.faisal2">MHF</small><br>
-                                                          <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">R</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Head, Digital Systems, Digital Infrastructures">Digital Infrastructures: Head, Digital Systems</span></small>
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software test Profile" data-department="Software, Team Lead, Software">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="09-008" src="assets/photos/hcm/150x150/staff/298.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="ANA" data-staffid="1" data-staffgtid="09-008" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Atif Naseem Ahmed</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="a.naseem">ANA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software, Team Lead, Software">Software: Software, Team Lead</span></small>
-                                                          </span>
-                                                          <span class="rightInformationRoleStaff">
-                                                             <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>   
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="DI" data-department="IT Incharge, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="12-043" src="assets/photos/hcm/150x150/staff/714.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="SAA" data-staffid="287" data-staffgtid="12-043" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Syed Asder Ahmed</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="s.a.ahmed">SAA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Incharge, Digital Infrastructures">Digital Infrastructures: IT Incharge</span></small>
-                                                          </span>
-                                                          <span class="rightInformationRoleStaff">
-                                                             <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>   
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software test Profile" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-009" src="assets/photos/hcm/150x150/staff/1103.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="KMS" data-staffid="774" data-staffgtid="16-009" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Kashif Mustafa</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="k.mustafa">KMS</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="" data-department="CCTV Technician, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-195" src="assets/photos/hcm/150x150/staff/1076.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MAV" data-staffid="737" data-staffgtid="15-195" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Amin Vohra</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="a.vohra">MAV</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="CCTV Technician, Digital Infrastructures">Digital Infrastructures: CCTV Technician</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->     
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Digital Infrastructure" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-070" src="assets/photos/hcm/150x150/staff/1159.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="HOL" data-staffid="835" data-staffgtid="16-070" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Haris Ola</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="h.ola">HOL</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Digital Infrastructure" data-department="IT Administrator, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="13-025" src="assets/photos/hcm/150x150/staff/818.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="RHA" data-staffid="350" data-staffgtid="13-025" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">M Rehan Akhtar</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="r.akhtar">RHA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Administrator, Digital Infrastructures">Digital Infrastructures: IT Administrator</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff --> 
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Lead Teachers SC" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-008" src="assets/photos/hcm/150x150/staff/1104.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="ROA" data-staffid="773" data-staffgtid="16-008" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Rohail Aslam</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="r.aslam">ROA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                   
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Digital Infrastructure" data-department="IT Administrator, Digital Infrastructures" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-010" src="assets/photos/hcm/150x150/staff/1105.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="NAB" data-staffid="775" data-staffgtid="16-010" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Mirza Numair</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.numair">NAB</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Administrator, Digital Infrastructures">Digital Infrastructures: IT Administrator</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software Team" data-department="SIS Officer, Coordination">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="13-035" src="assets/photos/hcm/150x150/staff/878.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MSQ" data-staffid="2" data-staffgtid="13-035" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Saqib</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.saqib">MSQ</small><br>
-                                                             <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 C</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="SIS Officer, Coordination">Coordination: SIS Officer</span></small>
-                                                         </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 C
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->   
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="North" data-profile="" data-department="IT Administrator, Digital Infrastructures" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="12-034" src="assets/photos/hcm/150x150/staff/718.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="KAM" data-staffid="278" data-staffgtid="12-034" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Khurram Majeed</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="k.a.majeed">KAM</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 C</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Administrator, Digital Infrastructures">Digital Infrastructures: IT Administrator</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 C
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software test Profile" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="17-066" src="assets/photos/hcm/150x150/staff/male.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="ABL" data-staffid="933" data-staffgtid="17-066" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Asim Bilal</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="a.bilal2">ABL</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-TPB: Probation">T</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  
-                                  <!-- -->
-                              </table>
-                         </div>
-                         <!-- portlet-body-->
+                          
+                      </div>
+
+                      <div id="content_role_position_distance_kashifSolangi" class="col-md-4"> 
                       </div>
                       <!-- portlet -->
+
+                    </div>
                    </div>
+                   <!-- tab_1_6 -->
+
+
+
+
+
+
+                      <!-- portlet -->
+                   </div>
+
+
+
+
                    <!-- tab_1_6 -->
                 </div>
                 <!-- tab-content -->
@@ -5481,6 +5083,8 @@ input#staffView_StaffList_Search {
 <!-- END USE PROFILE -->
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/attendance_graph.js" type="text/javascript"></script>
 
 <?php echo $__env->make('master_layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <script type="text/javascript">
@@ -6306,7 +5910,7 @@ $('#staffView_StaffList_Search').val('');
                 var Edit_Absentia_id_hidden = data["Last_id"];
                  //var Edit_Absentia_id_hidden = data.Last_id;
               
-                 $('#absentia_table').append('<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ title +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>');
+                 $('#absentia_table').append('<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ title +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a class="edit_btn" onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>');
 
                      $("#multiple_absentia_date").val('');
                      $("#multiple_absentia_title").val('');
@@ -6379,7 +5983,7 @@ $('#staffView_StaffList_Search').val('');
                  var Last_id = data.id;
                  
               
-              $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td>  </tr>'); 
+              $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td>  </tr>'); 
                   $('#multiple_penalty_title').val('');
                   $('#multiple_penalty_day').val('');
                   $('#multiple_penalty_from').val('');
@@ -6522,7 +6126,7 @@ $('#staffView_StaffList_Search').val('');
              var Last_id = result['Last_id'];
             var Missed_id= result['Missed_id'];
             var Table_name= result['Table_name'];
-            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
+            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a classs="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
             $("#multiple_manual_attendance").val('');
                 $("#multiple_manual_tap").val('');
                 $("#multiple_manual_description").val('');
@@ -7119,6 +6723,7 @@ $('#staffView_StaffList_Search').val('');
 
    
     $("#content_role_position_distance").html('');
+    $("#content_role_position_distance_kashifSolangi").html('');
     Staff_Role_Distance(staffID);
      $('.profile-userpic img').attr("src", "<?php echo url('/assets/img/loading.png'); ?>");
      $.ajax({
@@ -7130,6 +6735,18 @@ $('#staffView_StaffList_Search').val('');
              "_token": "<?php echo e(csrf_token()); ?>",
          },
          success:function(result){
+            setTimeout(function(){
+
+
+                if ( ! $.fn.DataTable.isDataTable( '#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table' ) ) {
+
+                      $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable().destroy()
+                      $('#absentia_table,#leave_table,#adjustment_table,#penaltyTable,#manual_table').DataTable();
+
+                }
+          
+               
+            },5000)
             var data = jQuery.parseJSON(result);
             $('#Generations_AjaxLoader').hide();
             data['info'][0] = setNotAcceptable(data['info'][0]);
@@ -7288,7 +6905,7 @@ $('#staffView_StaffList_Search').val('');
           
           
                 absentiaHTML = absentiaHTML + '<tr class="absentia_table_row" id="absentia_table_row_'+data['absentia'][i].Absenia_id+'"><td>'+data['absentia'][i].title +'</td><td>'+data['absentia'][i].date +'</td><td>'+
-                  changeTimeFormat(data['absentia'][i].From_time)  +'</td><td>'+changeTimeFormat(data['absentia'][i].to_time) +'</td><td>'+data['absentia'][i].description +'</td><td><a onClick="Edit_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-close"></i></a></td></tr>';
+                  changeTimeFormat(data['absentia'][i].From_time)  +'</td><td>'+changeTimeFormat(data['absentia'][i].to_time) +'</td><td>'+data['absentia'][i].description +'</td><td><a class="edit_btn" onClick="Edit_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delete_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-close"></i></a></td></tr>';
 
              }
           
@@ -7315,7 +6932,7 @@ $('#staffView_StaffList_Search').val('');
              }
              var Manual_id=data['manual'][i].Manual_id;
              manualHTML = manualHTML + '<tr class="missedTapEven" data-missed_id="'+Missedid+'" data-table_name="'+Tablename+'" data-id="'+data['manual'][i].Manual_id+'"><td>'+data['manual'][i].date +'</td><td>'+data['manual'][i].manual_time 
-                       +'</td><td><small class="tooltips" data-original-title="'+data['info'][0]['abridged_name']+'">'+data['info'][0]['name_code']+' </small> - '+data['manual'][i].created_time +'</td><td>'+(data['manual'][i].description === null ? '': data['manual'][i].description) +'</td> <td><a onClick="editAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-close"></i></a></td> </tr>';
+                       +'</td><td><small class="tooltips" data-original-title="'+data['info'][0]['abridged_name']+'">'+data['info'][0]['name_code']+' </small> - '+data['manual'][i].created_time +'</td><td>'+(data['manual'][i].description === null ? '': data['manual'][i].description) +'</td> <td><a class="edit_btn" onClick="editAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-close"></i></a></td> </tr>';
                  }
              
           $('#Missed_id').val(Missedid);
@@ -7384,7 +7001,7 @@ $('#staffView_StaffList_Search').val('');
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+data['leave_description'][i].leave_approve_date_to+' </td> </tr>';
                 }
 
-                leaveHTML = leaveHTML + '</table></td><td>'+data['leave_description'][i].leave_description+'</td><td class="text-center"><a onClick="ReWriteLeave('+data['leave_description'][i].id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+data['leave_description'][i].id+')" ><i class="fa fa-check"></i></a> | <a onClick="delectLeave('+data['leave_description'][i].id+')"><i class="fa fa-close"></i></a></td></tr>';
+                leaveHTML = leaveHTML + '</table></td><td>'+data['leave_description'][i].leave_description+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+data['leave_description'][i].id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+data['leave_description'][i].id+')" ><i class="fa fa-check"></i></a> | <a class="del_btn" onClick="delectLeave('+data['leave_description'][i].id+')"><i class="fa fa-close"></i></a></td></tr>';
 
                 }
 
@@ -7395,7 +7012,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['penalty']){
                 var penaltyHTML = '';
                 for(var i = 0 ; i < data['penalty'].length; i++){
-                   penaltyHTML = penaltyHTML + '<tr class="penaltyRowClass" data-id="'+data['penalty'][i].id+'"><td>'+data['penalty'][i].penalty_title+'</td><td>'+data['penalty'][i].penalty_day+'</td><td><strong>'+data['penalty'][i].penalty_date+'</td><td>'+data['penalty'][i].timestamp+'</td><td>'+data['penalty'][i].penalty_description+'</td> <td class="text-center"><a onClick="ReWriteLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-edit"></i></a> | <a onClick="delectLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
+                   penaltyHTML = penaltyHTML + '<tr class="penaltyRowClass" data-id="'+data['penalty'][i].id+'"><td>'+data['penalty'][i].penalty_title+'</td><td>'+data['penalty'][i].penalty_day+'</td><td><strong>'+data['penalty'][i].penalty_date+'</td><td>'+data['penalty'][i].timestamp+'</td><td>'+data['penalty'][i].penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
                 }
 
                 $('#penaltyTable tbody').html(penaltyHTML);   
@@ -7406,7 +7023,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['exception_adjustment']){
              var exception_adjustment = '';
           for (var i = 0 ; i < data['exception_adjustment'].length; i++){
-             exception_adjustment = exception_adjustment + '<tr class="AddAdjustment" data-id="'+data['exception_adjustment'][i].id+'"><td>'+data['exception_adjustment'][i].adjustment_title+'</td><td>'+data['exception_adjustment'][i].adjustment_day+'days</td><td>'+data['exception_adjustment'][i].created+'</td><td>'+data['exception_adjustment'][i].adjustment_description+'</td> <td class="text-center"><a onClick="ReWriteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
+             exception_adjustment = exception_adjustment + '<tr class="AddAdjustment" data-id="'+data['exception_adjustment'][i].id+'"><td>'+data['exception_adjustment'][i].adjustment_title+'</td><td>'+data['exception_adjustment'][i].adjustment_day+'days</td><td>'+data['exception_adjustment'][i].created+'</td><td>'+data['exception_adjustment'][i].adjustment_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
               }
 
                 $('#adjustment_table tbody').html(exception_adjustment);
@@ -7418,9 +7035,15 @@ $('#staffView_StaffList_Search').val('');
               for(var i = 0 ; i < data['get_cut_date'].length;i++){
                 // Absentia
                 if(data['get_cut_date'][i].name == 'absentia'){
+
                   if(data['get_cut_date'][i].to_date >= data['get_cut_date'][i].currentDate){
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].from_date);
+                    $(".edit_btn,.del_btn").prop( "onclick", null);
+                    $(".edit_btn,.del_btn").css( "cursor","not-allowed");
                   }else{
+                    
+
+
                     $('#absentia_date').attr('min' , data['get_cut_date'][i].new_payroll_start);
                   }
                 }
@@ -8662,7 +8285,7 @@ if(date != '' && missTap != '' && Tap_id != ''){
        var id = Last_id;
           if(filter == id){
           var leaveHTML = '';
-          leaveHTML = leaveHTML + '<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="abridged_name"> name_code </small> - '+ formatDate(date)+'</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>';
+          leaveHTML = leaveHTML + '<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="abridged_name"> name_code </small> - '+ formatDate(date)+'</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a class="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>';
           $(this).replaceWith(leaveHTML);
           }
        });
@@ -8776,6 +8399,11 @@ $.ajax({
   var d =  jQuery.parseJSON(res);
   $("#content_role_position_distance").html('');
   $("#content_role_position_distance").html( d.ht );
+
+
+  $("#content_role_position_distance_kashifSolangi").html('');
+  $("#content_role_position_distance_kashifSolangi").html( d.ht_2 );
+  
   }
 });
      
@@ -8788,22 +8416,54 @@ $.ajax({
 
 
  var addAbsentia = function addAbsentia(){
+
+    var title = $("#absentia_title").val();
+    var date = $("#absentia_date").val();
+    var start_time = $("#absentia_startTime").val();
+    var end_time = $("#absentia_endTime").val();
+    var description = $("#absentia_description").val();
+    var staffID = $('#tab_1_3').data('staffID');
+    var form_number_a=$('.form_number_absentia_a').val();
+    var form_number_b=$('.form_number_absentia_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_absentia_b","Please enter form number");
+    }else if(title==""){
+         return window.applyRequiredError("id","absentia_title","Please enter title");
+         
+    }else if(date==""){
+         return window.applyRequiredError("id","absentia_date","Please enter date");
+         
+    }else if(start_time==""){
+         return window.applyRequiredError("id","absentia_startTime","Please enter start time");
+         
+    }else if(end_time==""){
+         return window.applyRequiredError("id","absentia_endTime","Please enter end time");
+    }
+
+
+
+
+
+
     var confirmation = confirm("Are you sure you want to add absentia?");
     if(confirmation){
-       var date = $("#absentia_date").val();
-       var title = $("#absentia_title").val();
-       var start_time = $("#absentia_startTime").val();
-       var end_time = $("#absentia_endTime").val();
-       var description = $("#absentia_description").val();
-       var staffID = $('#tab_1_3').data('staffID');
-      var form_number_a=$('.form_number_absentia_a').val();
-      var form_number_b=$('.form_number_absentia_b').val();
+      
       var form_number=form_number_a+form_number_b;
       // if(checkHrFormNumberExistance(form_number,'form_number_absentia_b')>0){
       //   alert('form number already exists')
       //   throw new Error("form number already exists");
       // }
           checkHrFormNumberExistance(form_number,'absenta_manual_description')
+       if( date == '' && title == '' && start_time == '' && end_time == ''){
+           noty({text: 'Please fill all feilds', layout: 'topRight', type: 'error' , timeout: 4000,});
+           return false;
+        }
+
+
+
+
+
        if( date !== '' && title !== '' && start_time !== '' && end_time !== ''){
    
            $.ajax({
@@ -8844,7 +8504,21 @@ $.ajax({
 
  var insert_manual = function(){
    // var confirmation = confirm("Are you sure you want to add miss tap?");
-   
+    var date = $("#manual_attendance").val();
+       var missTap = $("#manual_missTap").val();
+
+    var form_number_a=$('.form_number_miss_tap_a').val();
+    var form_number_b=$('.form_number_miss_tap_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_miss_tap_b","Please enter form number");
+    }else if(date==""){
+         return window.applyRequiredError("id","manual_attendance","Please enter miss tap date");
+         
+    }else if(missTap==""){
+         return window.applyRequiredError("id","manual_missTap","Please enter miss tap time");
+         
+    }
 
 
 bootbox.dialog({
@@ -8858,11 +8532,7 @@ bootbox.dialog({
 
 
 
-       var date = $("#manual_attendance").val();
-       var missTap = $("#manual_missTap").val();
-
-    var form_number_a=$('.form_number_miss_tap_a').val();
-    var form_number_b=$('.form_number_miss_tap_b').val();
+      
     var form_number=form_number_a+form_number_b;
       checkHrFormNumberExistance(form_number,'absenta_manual_description');
        var description = $("#manual_description").val();
@@ -8902,7 +8572,7 @@ bootbox.dialog({
             var Last_id = result['Last_id'];
             var Missed_id= result['Missed_id'];
             var Table_name= result['Table_name'];
-            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
+            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a class="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
             $("#manual_attendance").val('');
             $("#manual_missTap").val('');
             $("#manual_description").val('');
@@ -8981,7 +8651,46 @@ bootbox.dialog({
  // Leave Inserttion 
 
  var add_leave = function(){
-  
+        var staffID = $('#tab_1_3').data('staffID');
+        var leave_title = $('#leave_title').val();
+        var leave_form_no = $('#leave_form_no').val();
+        var leave_type = $('.leave_type option:selected').val();
+        var leave_from = $('#leave_from').val();
+        var leave_to = $('#leave_to').val();
+        var leave_comment = $('#leave_comment').val();
+        var hourlyConfirm  = $('#DayBaseLeave').prop('checked');
+        var time_from = $('#time_from').val();
+        var time_to = $('#time_to').val();
+        var form_number_a=$('.form_number_leave_application_a').val();
+        var form_number_b=$('.form_number_leave_application_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_leave_application_b","Please enter form number");
+    }else if(leave_title==""){
+         return window.applyRequiredError("id","leave_title","Please enter leave title");
+         
+    }else if(leave_type==0){
+         return window.applyRequiredError("class","leave_type","Please enter leave type");
+         
+    }else if(leave_from==""){
+         return window.applyRequiredError("id","leave_from","Please enter leave from");
+         
+    }else if(leave_to==""){
+         return window.applyRequiredError("id","leave_to","Please enter leave to");
+    }
+
+    if(hourlyConfirm==true){
+
+         if(time_from==""){
+             return window.applyRequiredError("id","time_from","Please enter time from");
+        }else if(time_to==""){
+             return window.applyRequiredError("id","time_to","Please enter time to");
+             
+        }
+    }
+
+
+
     var confirmation = confirm("Are you sure you want to add leave?");
     if(confirmation){        
           
@@ -8994,17 +8703,7 @@ bootbox.dialog({
            paid_compensation = 0;
         }
 
-        var staffID = $('#tab_1_3').data('staffID');
-
-        var leave_title = $('#leave_title').val();
-        var leave_form_no = $('#leave_form_no').val();
-        var leave_type = $('.leave_type option:selected').val();
-        var leave_from = $('#leave_from').val();
-        var leave_to = $('#leave_to').val();
-        var leave_comment = $('#leave_comment').val();
-        var hourlyConfirm  = $('#DayBaseLeave').prop('checked');
-        var time_from = $('#time_from').val();
-        var time_to = $('#time_to').val();
+        
         var paid_compensation_display;
 
         if(paid_compensation == 1){
@@ -9018,8 +8717,7 @@ bootbox.dialog({
           time_from = null;
         }
 
-        var form_number_a=$('.form_number_leave_application_a').val();
-        var form_number_b=$('.form_number_leave_application_b').val();
+      
 
         var form_number=form_number_a+form_number_b;
 
@@ -9047,6 +8745,10 @@ bootbox.dialog({
                   "_token": "<?php echo e(csrf_token()); ?>"
               },
               success:function(result){
+                if(result=='leaves_already'){
+                  alert('Leaves already exists in these dates');
+                  return false;
+                }
               $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
                  $('#LeaveApp').modal('toggle'); 
               }
@@ -9071,7 +8773,11 @@ bootbox.dialog({
                 "_token": "<?php echo e(csrf_token()); ?>"
               },
           success:function(result){
-          $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
+            if(result=='leaves_already'){
+                  alert('Leaves already exists in these dates');
+                  return false;
+            }
+          $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a class="delectLeave" onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
             $('#LeaveApp').modal('toggle'); 
           }
         });
@@ -9190,6 +8896,23 @@ bootbox.dialog({
     var  LeaveApproval =$('#change-color-switch').bootstrapSwitch('state');//returns true or false
     if(LeaveApproval == true){
        LeaveApproval = 1;
+
+    if(approve_from==""){
+         return window.applyRequiredError("id","approve_from","Please enter approve from");
+    }else if(approve_to==""){
+         return window.applyRequiredError("id","approve_to","Please enter approve to");
+         
+    }else if(time_from!=null && time_approval_from_update==null){
+         return window.applyRequiredError("id","time_approval_from_update","Please enter approve time");
+         
+    }else if(time_to!=null && time_approval_to_update==null){
+         return window.applyRequiredError("id","time_approval_to_update","Please enter approve time to");
+         
+    }
+
+
+
+
     }else{
        LeaveApproval = 0;
     }
@@ -9278,8 +9001,8 @@ bootbox.dialog({
                 leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+formatDate(approve_to)+' </td> </tr>';
                }
 
-            // leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"><a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i></a></td></tr>';
-         leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"> <a onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i> | <a onClick="delectLeave('+id+')"><i class="fa fa-close"> </a></td></tr>';
+           
+         leaveHTML = leaveHTML + '</table></td><td>'+leave_comment+'</td><td class="text-center"> <a class="edit_btn" onClick="ReWriteLeave('+id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+id+')" ><i class="fa fa-check"></i> | <a class="del_btn" onClick="delectLeave('+id+')"><i class="fa fa-close"> </a></td></tr>';
 
               $(this).replaceWith(leaveHTML);
           }
@@ -9294,6 +9017,16 @@ bootbox.dialog({
 
     }
  }
+
+
+  $(document).on("click",".bootstrap-switch-container",function(){
+      console.log("asdasd")
+    var state=$('#changeSwitch').bootstrapSwitch('state');
+    if(state==false){
+             $('#paid_compensation_percentage').val('0')
+    }
+
+  })
 
 
  var clearLeave = function(){
@@ -9331,8 +9064,7 @@ bootbox.dialog({
 
 
  var addPenalty = function(){
-    var confirmation = confirm("Are you sure you want to add penalty?");
-    if(confirmation){
+
         var penalty_title = $('#penalty_title').val();
         var penalty_day =  $('#penalty_day').val();
         var penalty_from = $('#penalty_from').val();
@@ -9341,6 +9073,24 @@ bootbox.dialog({
         var staff_id = $('#tab_1_3').data('staffID');
         var form_number_a=$('.form_number_penalty_a').val();
         var form_number_b=$('.form_number_penalty_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_penalty_b","Please enter form number");
+    }else if(penalty_title==""){
+         return window.applyRequiredError("id","penalty_title","Please enter title");
+         
+    }else if(penalty_day==""){
+         return window.applyRequiredError("id","penalty_day","Please enter day");
+         
+    }else if(penalty_from==""){
+         return window.applyRequiredError("id","penalty_from","Please enter penalty from");
+         
+    }else if(penalty_to==""){
+         return window.applyRequiredError("id","penalty_to","Please enter penalty to");
+    }
+    var confirmation = confirm("Are you sure you want to add penalty?");
+    if(confirmation){
+        
 
         var form_number=form_number_a+form_number_b;
         checkHrFormNumberExistance(form_number,'daily_penalty')
@@ -9378,7 +9128,7 @@ bootbox.dialog({
               
               var data = JSON.parse(res);
               var Last_id = data.id;
-                 $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>'); 
+                 $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>'); 
                  $('#penalty_title').val('');
                  $('#penalty_day').val('');
                  $('#penalty_from').val('');
@@ -9394,15 +9144,27 @@ bootbox.dialog({
  }
 
  var addAdjustment = function(){
+    var adjustment_title = $('#adjustment_title').val();
+    var adjustment_no = $('#adjustment_no').val();
+    var adjustment_description = $('#adjustment_description').val();
+    var staff_id = $('#tab_1_3').data('staffID');
+    var form_number_a=$('.form_number_exceptional_adjustment_a').val();
+    var form_number_b=$('.form_number_exceptional_adjustment_b').val();
+
+    if(form_number_b==""){
+         return window.applyRequiredError("id","form_number_exceptional_adjustment_b","Please enter form number");
+    }else if(adjustment_title==""){
+         return window.applyRequiredError("id","adjustment_title","Please enter title");
+         
+    }else if(adjustment_no==""){
+         return window.applyRequiredError("id","adjustment_no","Please enter days");
+         
+    }
+
     var confirmation = confirm("Are you sure you want to add adjustment?");
     if(confirmation){
 
-        var adjustment_title = $('#adjustment_title').val();
-        var adjustment_no = $('#adjustment_no').val();
-        var adjustment_description = $('#adjustment_description').val();
-        var staff_id = $('#tab_1_3').data('staffID');
-        var form_number_a=$('.form_number_exceptional_adjustment_a').val();
-        var form_number_b=$('.form_number_exceptional_adjustment_b').val();
+        
         var form_number=form_number_a+form_number_b;
 
         checkHrFormNumberExistance(form_number,'exception_adjustment')
@@ -9805,8 +9567,6 @@ loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", 
 
 });
 </script>
-<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
-<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/attendance_graph.js" type="text/javascript"></script>
 
 <!--<script src="assets/global/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
  <script src="assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>

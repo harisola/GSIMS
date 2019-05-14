@@ -49,6 +49,9 @@ Route::get('clear-cache', function() {
 /*********************************************************************************/
 Route::get('/login', 'LoginController@login');
 Route::post('login', 'LoginController@postLogin');
+//ar
+Route::post('log_user', 'LoginController@log_user');
+
 Route::post('/logout', 'LoginController@logout');
 Route::get('/logout_x', 'LoginController@logout');
 Route::post('/changePassword', 'LoginController@changePassword');
@@ -111,6 +114,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::get('/reports', 'Attendance\Reports\Reports@mainPage');
 	Route::post('/reporst_staff_attendance', 'Attendance\Reports\Reports@reporst_staff_attendance');
+	Route::post('/Create_Dw', 'Attendance\Reports\Reports@Create_Dw');
+
 	
 	//zk added end route
 	Route::get('/masterLayoutStaff', 'Development\Haris@development');
@@ -394,18 +399,16 @@ Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumber
 
 
 /************************* Staff Recuriment Process ************************/
-
+	//Arif Khan Working
 	Route::get('/staff_recruitment_initiation','Development\staff_recruitment_initiation@index');
-
 	Route::get('/staff_recruitment_all_applicants','Development\staff_recruitment_all_applicants@index');
 	Route::post('/allposts_all_app','Development\staff_recruitment_all_applicants@allposts');
-
 	Route::get('/staff_recruitment_process','Development\staff_recruitment_process@index');
-
 	Route::get('/staff_recruitment_process1','Development\staff_recruitment_process@process_flow');
-	Route::post( '/get_form', 'Development\staff_recruitment_process@get_process');
-	
+	// Route::post( '/get_form', 'Development\staff_recruitment_process@get_process');
+	Route::get( '/get_form', 'Development\staff_recruitment_process@get_process');
 	Route::post('/staff_recruitment_initiation_add','Development\staff_recruitment_initiation@addFormData');
+	Route::get('/staff_recruitment_process_flow_filter','Development\staff_recruitment_process_filter_report@process_flow_filter');
 
 	
 	Route::post('/staff_recruitment_initiation_addcareerform','Development\staff_recruitment_initiation@addCareerForm');

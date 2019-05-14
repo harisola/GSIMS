@@ -10,120 +10,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Sentinel;
 use Session;
 use Redirect;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
-use App\Models\Staff\Staff_Information\StaffInformationModel as StaffInformationModel;
-
-use App\Models\User_logs\users as USLM;
-
-use App\Models\User_logs\users_logs as USLIM;
-
 class LoginController extends Controller
 {
     public function login(){
         if(Sentinel::check()){
-           /* print_r();
-            die;*/
-
-
             return redirect(url("/"));
         }else{
-           /* print_r("else expression");
-            die;*/
             return view('login.login_01');
         }
     }
 
 
-
- //see the method below
-// clent ip
-
-
-
-
-    public function log_user(Request $request){
-
-         $RecM_Obj = new USLM();
-         $StaffInformationModel = new StaffInformationModel();
-
-         $mytime = Carbon::now('Asia/Karachi');
-         // $real_time = $mytime->formate('h:i:s A');
-        
-            
-
-           $email = $request['email'];
-
-            $get_user_id=$RecM_Obj->get_user_details($email);
-            $user_id = $get_user_id[0]->id;           
-
-            if($user_id != "" )
-            {
-
-            $RecM_Obj1 = new USLIM();
-            $detail = $RecM_Obj1->test_logs($user_id);
-            $get_Staff = $StaffInformationModel->get_Staff_Info($user_id);
-            // var_dump($get_Staff['info'][0]->name_code);
-            $name_code = $get_Staff['info'][0]->name_code;
-            $abridged_name = $get_Staff['info'][0]->abridged_name;
-                
-                // $date = $detail[0]['date'];
-                $ipa = $_SERVER['REMOTE_ADDR'];
-
-                  //$system_name = gethostbyaddr($_SERVER['REMOTE_ADDR']);  
-                
-
-           
-
-                    $cur_date = date('Y-m-d');
-                
-                    $RecM_Obj1->user_id = $user_id;
-                    $RecM_Obj1->name_code = $name_code;
-                    $RecM_Obj1->abridged_name = $abridged_name;
-                     
-                    $RecM_Obj1->date =  $cur_date;
-                    $RecM_Obj1->ip4 = $ipa;
-                     //$RecM_Obj1->system_user = $system_name;
-                    $RecM_Obj1->created_at = $mytime;
-                    
-                    $RecM_Obj1->register_by = $user_id;
-                     $RecM_Obj1->updated_at = $mytime;
-                    
-                    $RecM_Obj1->modified_by = $user_id;
-                    $RecM_Obj1->record_deleted = 0;
-
-                    $RecM_Obj1->save();
-
-             }
-            
-              //return $data;
-        }
-
-
-
     public function postLogin(Request $request){
-
-
         $query = "delete from throttle";
         DB::connection('mysql')->select($query);
-         
+
         if($request->remember == 'on'){
-
-           $user = Sentinel::authenticateAndRemember($request->all());
-
-
-
+            $user = Sentinel::authenticateAndRemember($request->all());
             if($user->is_active == 0){Sentinel::logout(null, true);}
         }else{
-
-            
             $user = Sentinel::authenticate($request->all());
-
             if(!empty($user) && $user->is_active == 0){Sentinel::logout(null, true);}
         }
 
@@ -228,8 +140,6 @@ class LoginController extends Controller
 
 
         $html = '';
-
-
         /**********************************************
         * Calling User Info
         ***********************************************/

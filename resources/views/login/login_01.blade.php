@@ -116,6 +116,8 @@
 
                     var token = "{{ csrf_token() }}";
                     var email = $("#username").val() + '@generations.edu.pk';
+
+                     var email1 = $("#username").val();
                     var password = $("#password").val();
                     var error = false;
 
@@ -130,6 +132,7 @@
                     }
 
                     if(!error){
+
                         $.ajax({
                             type: "POST",
                             url: "{{url('/login')}}",
@@ -150,6 +153,30 @@
                                     */ ?>
                                     window.location = data;
                                 }
+                            }
+                        }); 
+                        //ar
+                        $.ajax({
+                            type: "POST",
+                            url: "{{url('/log_user')}}",
+                            data: {
+                                _token: token,
+                                email: email1,
+                                password: password
+                            },
+                            success: function(data)
+                            {
+                                console.log(data);
+                                // if(data == "CN"){
+                                //     $("#alert").show();
+                                //     $("#errorText").text("Username or Password Mismatched");
+                                // }else{
+                                //     $("#alert").hide();
+                                //     <?php /*
+                                //     var rdURL = 'http://10.10.10.63/gs/index.php/welcome/logininfo_ID?api=4A53953C3AEF996224E5258D9588A&username='+$("#username").val()+'&password='+password;
+                                //     */ ?>
+                                //     window.location = data;
+                                //}
                             }
                         });                     
                     }

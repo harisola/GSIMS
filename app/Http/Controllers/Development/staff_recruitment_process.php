@@ -1,6 +1,6 @@
 <?php
 /******************************************************************
-* Author : Kashif solangi
+* Author : Arif Khan
 *******************************************************************/
 
 namespace App\Http\Controllers\Development;
@@ -11,33 +11,223 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Core\SelectionList;
 use App\Models\Staff\Staff_Recruitment\Staff_recruitment_process_model as RecM;
+use App\Models\Staff\Staff_Recruitment\Staff_recruitment_process_filter_data_view_modal as RecMD;
 
 class staff_recruitment_process extends Controller{
 
-  public function index()
-  {
-    $userId = Sentinel::getUser()->id;
-    
-    $query_resultant = $this->Create_Query();
-
-    //var_dump($query_resultant); exit;
-
-    return view('master_layout.staff.staff_recruitment.staff_recruitment_process_view')
+  public function index(){
+      $userId = Sentinel::getUser()->id;
+      $query_resultant = $this->Create_Query();
+      //Arif Khan Working///
+      $RecM_Obj = new RecM();
+      //var_dump($query_resultant); exit;
+      $all_departments=$RecM_Obj->all_departments();
+      $all_subjects=$RecM_Obj->all_subjects();
+      $all_designations=$RecM_Obj->all_designations();
+      return view('master_layout.staff.staff_recruitment.staff_recruitment_process_view')
       ->with(
-          array('query_resultant' => $query_resultant)
+          array('query_resultant' => $query_resultant,'all_departments'=>$all_departments,'all_designations'=>$all_designations,'all_subjects'=>$all_subjects)
         );
+  
   }
 
+  public function get_process(Request $request)
+    {   
+      $RecM_Obj = new RecMD();
+      $stage = $request['stage'];
+      $date_1 = $request['date1'];
+      $date_2 = $request['date2'];
+      $departmentFilter = $request['departmentFilter'];
+      $subjectFilter = $request['subjectFilter'];
+      $designationFilter = $request['designationFilter'];
+      $campusFilter = $request['campusFilter'];
+      $formSourceFilter = $request['formSourceFilter'];
+      $Stage_info = $this->Query_Get_Form_Info($stage);
+      // print_r($departmentFilter);
+      // print_r($subjectFilter);
+      // die;
+     
+      if($stage == 'Online_Application'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->online_get_data_filter($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+      if($stage == 'Fill_part_A'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->fill_part_a_online($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      if($stage == 'Part_A_Screening'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Part_A_Screening($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+       if($stage == 'Applicants_triggered'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Applicants_triggered($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+       if($stage == 'Applicants_awating'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Applicants_awating($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+      if($stage == 'Overall_applicants'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+      if($stage == 'Applicants_currently'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Applicants_currently($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+       if($stage == 'Overall_applicants_part_A'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants_part_A($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+       if($stage == 'Overall_applicants_moved'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants_moved($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
 
 
 
-public function get_process(Request $request)
-{
-  $Stage_id = $request->input('stage');
-  $Stage_info = $this->Query_Get_Form_Info($Stage_id);
-  $html =  view('master_layout.staff.staff_recruitment.sr_process_view_modal_table')->with( array('Stage_info' => $Stage_info ) )->render();
-  return response()->json(array('success' => true, 'html'=>$html));
-}
+      if($stage == 'Overall_applicants_marked'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants_marked($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      if($stage == 'Overall_Walkin_applications'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_Walkin_applications($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      if($stage == 'Overall_Walkin_applications_part_A'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_Walkin_applications_part_A($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+      if($stage == 'Overall_moved_to'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_moved_to($date_1,$date_2,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      
+      if($stage == 'Applicants_moved_to'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Applicants_moved_to($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+      if($stage == 'Overall_applicants_moved_to_Regret'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants_moved_to_Regret($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+      
+
+        if($stage == 'Applicant_awaiting_for_full_form'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Applicant_awaiting_for_full_form($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      if($stage == 'Overall_applicants_present'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants_present($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      
+  if($stage == 'Applicants_currently_initial'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Applicants_currently_initial($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+
+      if($stage == 'Overall_applicant_moved_to_regret'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicant_moved_to_regret($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+         if($stage == 'Overall_applicants_moved_to_Followup'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants_moved_to_Followup($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+
+      if($stage == 'Applicants_currently_in'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Applicants_currently_in($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      if($stage == 'Overall_applicants_given'){
+        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
+
+          $Stage_info=$RecM_Obj->Overall_applicants_given($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
+        // }
+      }
+
+      
+      
+      
+      
+         
+      // var_dump("else");
+      // die;
+      // $Stage_info = $this->Query_Get_Form_Info($stage);
+      // if($departmentFilter >0 && $subjectFilter >0){
+      //   $Stage_info=$RecM_Obj->online_get_data_filter_arif($departmentFilter,$subjectFilter);
+      // }
+      $html =  view('master_layout.staff.staff_recruitment.sr_process_view_modal_table')->with( array('Stage_info' => $Stage_info ) )->render();
+      return response()->json(array('success' => true, 'html'=>$html));
+  }
 
 public function Query_Get_Form_Info($Stage_id)
 {
@@ -51,21 +241,21 @@ public function Query_Get_Form_Info($Stage_id)
 
     cf.id
     
-from atif_career.career_form as cf where cf.form_source=1 
+    from atif_career.career_form as cf where cf.form_source=1 
 
   )";
   }
 
   else if($Stage_id == 'Fill_part_A')
   {
-    $Where =" and af.id in(
-select 
- 
- cf.id 
+      $Where =" and af.id in(
+  select 
+   
+   cf.id 
 
-from atif_career.career_form as cf 
-left join atif_career.log_career_form as lcf on lcf.form_id=cf.id
-where cf.form_source=1 and lcf.id is null
+  from atif_career.career_form as cf 
+  left join atif_career.log_career_form as lcf on lcf.form_id=cf.id
+  where cf.form_source=1 and lcf.id is null
 
   )";
   }
@@ -1055,6 +1245,8 @@ where (f.status_id=12 or f.status_id=10 ) and d.status_id=5
 $Query_Return = $this->Query_Function($Where);
 return $RecM_Obj->Create_query($Query_Return);
 
+
+
 }
 
 
@@ -1248,14 +1440,14 @@ union
 select 
 4.5 as Query_num,
 count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=11 and l.stage_id=6
+from atif_career.career_form as l where l.status_id=11 and l.stage_id=6 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
 
 
 union
 select 
 5 as Query_num,
 count( cf.id ) as Total_form
-from atif_career.career_form as cf where cf.form_source=0 and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
+from atif_career.career_form as cf where cf.form_source=0 and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 
 
 union
@@ -1274,12 +1466,12 @@ select 7 as Query_num,
 count( d.id ) as Total_form
 from( 
 select (l.form_id) as id  from atif_career.log_career_form as l  
-where l.status_id=11 and l.stage_id =4  and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
+where l.status_id=11 and l.stage_id =4 
 union
 select (l.id) as id  from atif_career.career_form as l 
 where l.status_id=11 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'  and l.stage_id =4
 
-) as d 
+) as d  
 
 union
 select 
@@ -1356,6 +1548,7 @@ group by l.form_id ) as f
 
 
 union
+
 select 
 13 as Query_num,
 count(dd.Total_form) from(
@@ -1363,14 +1556,17 @@ select
  ( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
-and (cf.stage_id=5 or cf.stage_id=6 or cf.stage_id=13)  
+and (cf.stage_id=5 or cf.stage_id=6 or cf.stage_id=13) 
+ 
 union
 select
 ( cf.id ) as Total_form
 from atif_Career.career_form as cf 
 left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
-where cf.status_id=2 and ( u.date is null or u.date < curdate() )
-) as dd
+where cf.status_id=2
+ and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
+ and ( u.date is null or u.date < curdate() ) group by cf.id
+) as dd 
 
 
 union

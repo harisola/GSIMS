@@ -5033,445 +5033,37 @@ input#staffView_StaffList_Search {
 }
 </style>                     
                    <div class="tab-pane fade" id="tab_1_6">
-                      <div id="content_role_position_distance"> 
+                     
+
+
+                     <div class="container">
+                      <div class="">
+
+
+                      <div id="content_role_position_distance" class="col-md-4"> 
           
-                         <div class="portlet-body padding0">
-                            <table width="100%" class="rolesTable">
-                               <tr class="pBottom10">
-                                     <td class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-001" src="assets/photos/hcm/150x150/staff/973.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="DGS" data-staffid="19" data-staffgtid="90-001" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Ghazala Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="g.siddiqui">DGS</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">20 B</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Principal, Generation's School">Generation's School: Principal</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  20 B
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->                                                             
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-001" src="assets/photos/hcm/150x150/staff/973.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="DGS" data-staffid="19" data-staffgtid="90-001" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Ghazala Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="g.siddiqui">DGS</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">20 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Principal, Generation's School">Generation's School: Principal</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  20 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff --> 
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Director, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-003" src="assets/photos/hcm/150x150/staff/299.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="SSD" data-staffid="15" data-staffgtid="90-003" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Shoaib Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="s.siddiqui">SSD</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">20 B</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Director, Generation's School">Generation's School: Director</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  20 B
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Director, Generation's School" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="90-003" src="assets/photos/hcm/150x150/staff/299.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="SSD" data-staffid="15" data-staffgtid="90-003" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Shoaib Siddiqui</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="s.siddiqui">SSD</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Director, Generation's School">Generation's School: Director</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="" data-department="Senior General Manager, Generation's School">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-067" src="assets/photos/hcm/150x150/staff/1010.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="KSM" data-staffid="606" data-staffgtid="15-067" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Kashif Shamim</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="k.shamim">KSM</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 B</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Senior General Manager, Generation's School">Generation's School: Senior General Manager</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 B
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                   
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10 currentStaff">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row " data-attendance="Absent" data-campus="South" data-profile="Software Team" data-department="Head, Digital Systems, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-076" src="assets/photos/hcm/150x150/staff/1014.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <a href="" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MHF" data-staffid="615" data-staffgtid="15-076" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Faisal</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.faisal2">MHF</small><br>
-                                                          <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">R</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Head, Digital Systems, Digital Infrastructures">Digital Infrastructures: Head, Digital Systems</span></small>
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row " data-attendance="Absent" data-campus="South" data-profile="Software Team" data-department="Head, Digital Systems, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-076" src="assets/photos/hcm/150x150/staff/1014.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <a href="" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MHF" data-staffid="615" data-staffgtid="15-076" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Faisal</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.faisal2">MHF</small><br>
-                                                          <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">R</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Head, Digital Systems, Digital Infrastructures">Digital Infrastructures: Head, Digital Systems</span></small>
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software test Profile" data-department="Software, Team Lead, Software">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="09-008" src="assets/photos/hcm/150x150/staff/298.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="ANA" data-staffid="1" data-staffgtid="09-008" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Atif Naseem Ahmed</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="a.naseem">ANA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software, Team Lead, Software">Software: Software, Team Lead</span></small>
-                                                          </span>
-                                                          <span class="rightInformationRoleStaff">
-                                                             <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>   
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="DI" data-department="IT Incharge, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="12-043" src="assets/photos/hcm/150x150/staff/714.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="SAA" data-staffid="287" data-staffgtid="12-043" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Syed Asder Ahmed</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="s.a.ahmed">SAA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Incharge, Digital Infrastructures">Digital Infrastructures: IT Incharge</span></small>
-                                                          </span>
-                                                          <span class="rightInformationRoleStaff">
-                                                             <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>   
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software test Profile" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-009" src="assets/photos/hcm/150x150/staff/1103.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="KMS" data-staffid="774" data-staffgtid="16-009" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Kashif Mustafa</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="k.mustafa">KMS</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="" data-department="CCTV Technician, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="15-195" src="assets/photos/hcm/150x150/staff/1076.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MAV" data-staffid="737" data-staffgtid="15-195" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Amin Vohra</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="a.vohra">MAV</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="CCTV Technician, Digital Infrastructures">Digital Infrastructures: CCTV Technician</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->     
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Digital Infrastructure" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-070" src="assets/photos/hcm/150x150/staff/1159.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="HOL" data-staffid="835" data-staffgtid="16-070" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Haris Ola</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="h.ola">HOL</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Digital Infrastructure" data-department="IT Administrator, Digital Infrastructures">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="13-025" src="assets/photos/hcm/150x150/staff/818.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="RHA" data-staffid="350" data-staffgtid="13-025" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">M Rehan Akhtar</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="r.akhtar">RHA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Administrator, Digital Infrastructures">Digital Infrastructures: IT Administrator</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff --> 
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Lead Teachers SC" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-008" src="assets/photos/hcm/150x150/staff/1104.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="ROA" data-staffid="773" data-staffgtid="16-008" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Rohail Aslam</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="r.aslam">ROA</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                   
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Digital Infrastructure" data-department="IT Administrator, Digital Infrastructures" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-010" src="assets/photos/hcm/150x150/staff/1105.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="NAB" data-staffid="775" data-staffgtid="16-010" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Mirza Numair</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.numair">NAB</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Administrator, Digital Infrastructures">Digital Infrastructures: IT Administrator</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software Team" data-department="SIS Officer, Coordination">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="13-035" src="assets/photos/hcm/150x150/staff/878.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MSQ" data-staffid="2" data-staffgtid="13-035" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Saqib</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="m.saqib">MSQ</small><br>
-                                                             <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 C</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="SIS Officer, Coordination">Coordination: SIS Officer</span></small>
-                                                         </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 C
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->   
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="North" data-profile="" data-department="IT Administrator, Digital Infrastructures" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="12-034" src="assets/photos/hcm/150x150/staff/718.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="KAM" data-staffid="278" data-staffgtid="12-034" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Khurram Majeed</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="k.a.majeed">KAM</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">C</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">13 C</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="IT Administrator, Digital Infrastructures">Digital Infrastructures: IT Administrator</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  13 C
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  <!-- -->
-                                  <tr class="pBottom10">
-                                     <td width="50%" class="padRight1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="Software test Profile" data-department="Software Developer, Software" style="display: table-row;">
-                                                       <td class="">
-                                                          <img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="17-066" src="assets/photos/hcm/150x150/staff/male.png">
-                                                       </td>
-                                                       <td class="staffView_StaffName">
-                                                          <span class="leftInformationRoleStaff">
-                                                              <a href="javascript:;" class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="ABL" data-staffid="933" data-staffgtid="17-066" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Asim Bilal</a> - <small class="tooltips" data-container="body" data-placement="top" data-original-title="a.bilal2">ABL</small><br>
-                                                              <small class="shortHeight"><span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-TPB: Probation">T</span> <span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">10 A</span> <span class="tooltips" data-container="body" data-placement="top" data-original-title="Software Developer, Software">Software: Software Developer</span></small>
-                                                          </span><!-- leftInformation -->
-                                                          <span class="rightInformationRoleStaff">
-                                                              <span class="rolesRelations">
-                                                                  10 A
-                                                              </span>  
-                                                          </span><!-- rightInformationRoleStaff -->  
-                                                       </td>
-                                                 </tr>
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padRight1 -->
-                                      <td width="50%" class="padLeft1">
-                                        <table width="100%">
-                                           <tbody class="innerTbodyStaff">
-                                                  
-                                              </tbody><!-- tbody .innerTbodyStaff -->
-                                          </table><!-- table -->
-                                      </td><!-- padLeft1 -->
-                                  </tr>
-                                  
-                                  <!-- -->
-                              </table>
-                         </div>
-                         <!-- portlet-body-->
+                          
+                      </div>
+
+                      <div id="content_role_position_distance_kashifSolangi" class="col-md-4"> 
                       </div>
                       <!-- portlet -->
+
+                    </div>
                    </div>
+                   <!-- tab_1_6 -->
+
+
+
+
+
+
+                      <!-- portlet -->
+                   </div>
+
+
+
+
                    <!-- tab_1_6 -->
                 </div>
                 <!-- tab-content -->
@@ -7130,6 +6722,7 @@ $('#staffView_StaffList_Search').val('');
 
    
     $("#content_role_position_distance").html('');
+    $("#content_role_position_distance_kashifSolangi").html('');
     Staff_Role_Distance(staffID);
      $('.profile-userpic img').attr("src", "<?php echo url('/assets/img/loading.png'); ?>");
      $.ajax({
@@ -8805,6 +8398,11 @@ $.ajax({
   var d =  jQuery.parseJSON(res);
   $("#content_role_position_distance").html('');
   $("#content_role_position_distance").html( d.ht );
+
+
+  $("#content_role_position_distance_kashifSolangi").html('');
+  $("#content_role_position_distance_kashifSolangi").html( d.ht_2 );
+  
   }
 });
      

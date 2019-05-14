@@ -502,6 +502,61 @@ var TableDatatablesManaged = function () {
         });
     }
 	
+	var initTable10 = function () {
+
+        var table = $('#PendingAprovalsAdjustments');
+
+        // begin: third table
+        table.dataTable({
+
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+				"rowsGroup": [0],
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ records",
+                "infoEmpty": "No records found",
+                "infoFiltered": "(filtered1 from _MAX_ total records)",
+                "lengthMenu": "Show _MENU_",
+                "search": "Search:",
+                "zeroRecords": "No matching records found",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            paging: false,
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+            
+            "lengthMenu": [
+                [-1],
+                ["All"] // change per page values here
+            ],
+            // set the initial value
+			"lengthChange": false,
+            "ordering": false
+        });
+
+        var tableWrapper = jQuery('#PendingAprovalsAdjustments_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).prop("checked", true);
+                } else {
+                    $(this).prop("checked", false);
+                }
+            });
+        });
+    }
+	
 	/* End of what Haris had work on */
 
     var initTable4 = function () {
