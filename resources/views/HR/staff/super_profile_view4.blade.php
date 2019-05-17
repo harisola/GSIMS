@@ -7,8 +7,8 @@
 .table-fixed-column-inner {
   overflow-x: scroll;
   overflow-y: visible;
-      width: 89%;
-    margin-left: 45%;
+      width: 80%;
+    margin-left: 700px;
 }
 
 table.table-fixed-column {
@@ -26,12 +26,13 @@ table#harisOla th:first-child,
 table#harisOla tr td:first-child {
     position: absolute;
     left: 0;
-    width: 25%;
+    width: 60px;
     text-align:left;
     height: 37px;
     line-height: 22px;
     background: #f1f1f1;
     border: 1px solid #e6e6e6;
+    text-align: center;
 }
 table#harisOla td {
     color:#888; 
@@ -39,8 +40,60 @@ table#harisOla td {
 table#harisOla th:nth-child(2),
 table#harisOla tr td:nth-child(2) {
     position: absolute;
-    left: 25%;
-    width: 20%;
+    left: 60px;
+    width: 60px;
+    text-align:left;
+    height: 37px;
+    overflow: hidden;
+    line-height: 22px;
+    background: #f1f1f1;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+}
+table#harisOla th:nth-child(3),
+table#harisOla tr td:nth-child(3) {
+    position: absolute;
+    left: 120px;
+    width: 60px;
+    text-align:left;
+    height: 37px;
+    overflow: hidden;
+    line-height: 22px;
+    background: #f1f1f1;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+}
+table#harisOla th:nth-child(4),
+table#harisOla tr td:nth-child(4) {
+    position: absolute;
+    left: 180px;
+    width: 60px;
+    text-align:left;
+    height: 37px;
+    overflow: hidden;
+    line-height: 22px;
+    background: #f1f1f1;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+}
+table#harisOla th:nth-child(5),
+table#harisOla tr td:nth-child(5) {
+    position: absolute;
+    left: 240px;
+    width: 60px;
+    text-align:left;
+    height: 37px;
+    overflow: hidden;
+    line-height: 22px;
+    background: #f1f1f1;
+    border: 1px solid #e6e6e6;
+    text-align: center;
+}
+table#harisOla th:nth-child(6),
+table#harisOla tr td:nth-child(6) {
+    position: absolute;
+    left: 300px;
+    width: 250px;
     text-align:left;
     height: 37px;
     overflow: hidden;
@@ -48,7 +101,75 @@ table#harisOla tr td:nth-child(2) {
     background: #f1f1f1;
     border: 1px solid #e6e6e6;
 }
-
+table#harisOla th:nth-child(7),
+table#harisOla tr td:nth-child(7) {
+    position: absolute;
+    left: 550px;
+    width: 150px;
+    text-align:left;
+    height: 37px;
+    overflow: hidden;
+    line-height: 22px;
+    background: #f1f1f1;
+    border: 1px solid #e6e6e6;
+}
+#SSP .modal-dialog {
+    width: 70%;
+    margin: 30px auto;
+}
+#SSPTable {
+	width: 100%;
+}
+#SSPTable td {
+	vertical-align: middle;
+}
+#SSPTable td:nth-child(n+2),
+#SSPTable th:nth-child(n+2) {
+	text-align: center;
+	width: 150px;
+}
+.SSPOFF {
+	background: #CCC !important;
+}
+.SSPON {
+	background: #9fd4a5 !important;
+}
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary {
+    color: #fff !important;
+    background: #9fd4a5 !important;
+}
+@media screen and (max-width: 1822px) {
+	.table-fixed-column-inner {
+	  overflow-x: scroll;
+	  overflow-y: visible;
+	      width: 70%;
+	    margin-left: 700px;
+	}
+}
+@media screen and (max-width: 1550px) {
+	.table-fixed-column-inner {
+	  overflow-x: scroll;
+	  overflow-y: visible;
+	      width: 65%;
+	    margin-left: 700px;
+	}
+}
+@media screen and (max-width: 1450px) {
+	.table-fixed-column-inner {
+	  overflow-x: scroll;
+	  overflow-y: visible;
+	      width: 55%;
+	    margin-left: 700px;
+	}
+}
+@media screen and (max-width: 1270px) {
+	.table-fixed-column-inner {
+	  overflow-x: scroll;
+	  overflow-y: visible;
+	      width: 45%;
+	    margin-left: 700px;
+	}
+}
 </style>
 <link rel="stylesheet" type="text/css" href="{{url('metronic')}}/global/css/x-editable/bootstrap-editable.css">
 <div class="page-bar" style="margin-bottom:20px; ">
@@ -58,7 +179,7 @@ table#harisOla tr td:nth-child(2) {
          <i class="fa fa-circle"></i>
       </li>
       <li>
-         <span>Super Profile</span>
+         <span>Timing Super Profile</span>
       </li>
    </ul>
    <!-- page-breadcrumb -->
@@ -70,7 +191,7 @@ table#harisOla tr td:nth-child(2) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Super Profile</h4>
+                <h4 class="modal-title">Timing Super Profile</h4>
             </div>
 
                 <form class="form-horizontal" role="form" id="insert_super_profile">
@@ -108,7 +229,75 @@ table#harisOla tr td:nth-child(2) {
     </div>
     <!-- /.modal-dialog -->
 </div>
-
+<!-- Added by HOL -->
+<div class="modal fade" id="SSP" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Schedule Super Profile</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="">
+                	<table class="table table-striped table-bordered" id="SSPTable">
+                		<thead>
+                			<tr>
+                				<th>TT Profiles</th>
+                				<th>Level 0</th>
+                				<th>Level 1</th>
+                				<th>Level 2</th>
+                				<th>Level 3</th>
+                				<th>Level 4</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<tr>
+                				<td>Profile A - Teachers @ NC</td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                			</tr>
+                			<tr>
+                				<td>Profile B - Resource Faculty @ NC </td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                			</tr>
+                			<tr>
+                				<td>Profile C - Lead Teachers @ NC</td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                			</tr>
+                			<tr>
+                				<td>Profile D - Year Tutors, Librarians @ NC</td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </form>
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                
+                <button type="button" class="btn green" onClick="insertSuper()" id="super_profile" >Save Changes</button>
+                <button type="button" class="btn gray btn-outline close2" data-dismiss="modal" >Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- End Schedule Profile Modal -->
 <div class="portlet light bordered fixed-height marginBottom0">
     <div class="portlet-title">
         <div class="caption">
@@ -119,6 +308,9 @@ table#harisOla tr td:nth-child(2) {
             <div class="btn-group">
                <a class="btn red btn-outline sbold" data-toggle="modal" href="#basic"> Add Super Profile</a>
             </div>
+            <div class="btn-group">
+               <a class="btn red btn-outline sbold" data-toggle="modal" href="#SSP"> Schedule Super Profile</a>
+            </div>
         </div>
     </div>
     <div class="portlet-body">
@@ -128,9 +320,14 @@ table#harisOla tr td:nth-child(2) {
               <div class="table-fixed-column-inner">
                 <?php $TTpush = array(); ?>
                         <?php $SUpush = array(); ?>
-                <table class="table-fixed-column table-fixed-column table table-bordered table-striped" id="harisOla">
+                <table class="table-fixed-column table table-bordered table-striped" id="harisOla">
                   <thead style="">
                     <tr>
+                      <th>Level 0</th>
+                      <th>Level 1</th>
+                      <th>Level 2</th>
+                      <th>Level 3</th>
+                      <th>Level 4</th>
                       <th>TT Profiles</th>
                       <th>TT Profile Timings</th>
                       <?php if(!empty($superProfile)) { ?>
@@ -146,6 +343,11 @@ table#harisOla tr td:nth-child(2) {
                     <?php foreach($profileDetail as $profile) { ?>
                       <?php $profile_flag = 0; ?>
                       <tr>
+                      	<td class="SSPOFF">&nbsp;</td>
+                      	<td class="SSPON">&nbsp;</td>
+                      	<td class="SSPOFF">&nbsp;</td>
+                      	<td class="SSPON">&nbsp;</td>
+                      	<td class="SSPOFF">&nbsp;</td>
                         <td><span class="tooltips" data-original-title="<?=ucwords($profile->name) ?>"><?=ucwords($profile->name) ?></span></td>
                         <td><?php echo date('g:i A',strtotime($profile->mon_in)) ?>-<?php echo date('g:i A',strtotime($profile->mon_out)) ?></td>
                         <?php foreach($superProfile as $super) { ?>

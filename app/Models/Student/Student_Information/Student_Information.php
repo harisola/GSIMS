@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 
+
 class Student_Information extends Model
 {
     public function getStudent($Grade,$Section)

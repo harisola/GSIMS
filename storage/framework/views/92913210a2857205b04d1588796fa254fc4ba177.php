@@ -300,6 +300,60 @@ input#staffView_StaffList_Search {
     width: 94.5% !important;
     margin-left: 40px !important;
 }
+/* */
+.padRight1 {
+ padding-right:1%; 
+ text-align:right;
+ width:49%;
+}
+.padLeft1 {
+ padding-left:1%;
+ width:49%;  
+}
+.currentStaff tbody {
+ background:#f5eba3;  
+}
+.innerTbodyStaff {
+ text-align: left;
+  padding: 4px;
+  float: left;
+  width: 100%;
+ border: 1px solid #e0dfdf;
+ height: 55px;
+ background: #efefef;
+}
+.innerTbodyStaff .user-pic {
+  height: 43px !important;
+}
+.rolesTable tr.pBottom10 {
+  width: 100%;
+ height: 60px;
+}
+.rolesTable td.staffView_StaffName {
+  padding-left: 6px;
+ width:100%;
+}
+.innerTbodyStaff .row td {
+ float:left; 
+}
+.innerTbodyStaff .row tdLlast-child {
+ float:right;
+ width:15%;
+    
+}
+.leftInformationRoleStaff {
+ float:left;
+}
+.rightInformationRoleStaff {
+  float: right;
+  padding: 12px 10px;
+  font-weight: bold;
+  color: #717171;
+  font-size: 14px;
+  border: 1px solid #c3c3c3;
+  background: #d0d0d0;
+}
+
 </style>
 <link href="<?php echo e(URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css')); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo e(URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css')); ?>" rel="stylesheet" type="text/css" />
@@ -4978,94 +5032,40 @@ input#staffView_StaffList_Search {
                       </div>
                       <!-- portlet -->
                    </div>
-                   <!-- tab_1_5 -->
-<style>
-.padRight1 {
- padding-right:1%; 
- text-align:right;
- width:49%;
-}
-.padLeft1 {
- padding-left:1%;
- width:49%;  
-}
-.currentStaff tbody {
- background:#f5eba3;  
-}
-.innerTbodyStaff {
- text-align: left;
-  padding: 4px;
-  float: left;
-  width: 100%;
- border: 1px solid #e0dfdf;
- height: 55px;
- background: #efefef;
-}
-.innerTbodyStaff .user-pic {
-  height: 43px !important;
-}
-.rolesTable tr.pBottom10 {
-  width: 100%;
- height: 60px;
-}
-.rolesTable td.staffView_StaffName {
-  padding-left: 6px;
- width:100%;
-}
-.innerTbodyStaff .row td {
- float:left; 
-}
-.innerTbodyStaff .row tdLlast-child {
- float:right;
- width:15%;
-    
-}
-.leftInformationRoleStaff {
- float:left;
-}
-.rightInformationRoleStaff {
-  float: right;
-  padding: 12px 10px;
-  font-weight: bold;
-  color: #717171;
-  font-size: 14px;
-  border: 1px solid #c3c3c3;
-  background: #d0d0d0;
-}
-</style>                     
+                   <!-- tab_1_5 -->                 
                    <div class="tab-pane fade" id="tab_1_6">
-                     
-
-
-                     <div class="container">
-                      <div class="">
-
-
-                      <div id="content_role_position_distance" class="col-md-4"> 
-          
-                          
-                      </div>
-
-                      <div id="content_role_position_distance_kashifSolangi" class="col-md-4"> 
-                      </div>
-                      <!-- portlet -->
-
-                    </div>
-                   </div>
+                    <ul class="nav nav-pills fullWidthTabs" id="relationTabs">
+                     <li class="active">
+                        <a href="#tab_1_1_1" data-toggle="tab"> Relationships </a>
+                     </li>
+                     <li class="">
+                        <a href="#tab_1_1_2" data-toggle="tab"> Filtered </a>
+                     </li>
+                   </ul><!-- relationTabs-->
+                   <div class="tab-content">
+                    <div class="tab-pane fade" id="tab_1_1_1">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div id="content_role_position_distance" class="col-md-6">
+                            
+                          </div><!-- content_role_position_distance -->
+                          <div id="content_role_position_distance_kashifSolangi" class="col-md-6"> 
+                          </div><!-- content_role_position_distance_kashifSolangi -->
+                        </div><!-- row -->
+                      </div><!-- col-md-12 -->
+                    </div><!-- tab_1_1_1 -->
+                    <div class="tab-pane fade" id="tab_1_1_2">
+                      <div class="filterArea">
+                        <form>
+                          Filtered area
+                        </form>
+                      </div><!-- filterArea -->
+                    </div><!-- -->
+                   </div><!-- tab-content -->
                    <!-- tab_1_6 -->
-
-
-
-
-
-
-                      <!-- portlet -->
-                   </div>
-
-
-
-
-                   <!-- tab_1_6 -->
+                   <!-- portlet -->
+                 </div>
+                 <!-- tab_1_6 -->
                 </div>
                 <!-- tab-content -->
              </div>

@@ -212,6 +212,11 @@ class super_profile extends Controller
         $html .= '<table class="table-fixed-column table-fixed-column table table-bordered table-striped" id="harisOla">';
         $html .= '<thead style="">';
         $html .= '<tr>';
+        $html .= '<th>Level 0</th>';
+        $html .= '<th>Level 1</th>';
+        $html .= '<th>Level 2</th>';
+        $html .= '<th>Level 3</th>';
+        $html .= '<th>Level 4</th>';
         $html .= '<th>TT Profiles</th>';
         $html .= '<th>TT Profile Timings</th>';
         if(!empty($superProfileDetail)) { 
@@ -227,6 +232,11 @@ class super_profile extends Controller
             foreach($profileDetail as $profile) { 
                 $profile_flag = 0;
                 $html .= '<tr>';
+                $html .= '<td>ola</td>';
+                $html .= '<td>ola</td>';
+                $html .= '<td>ola</td>';
+                $html .= '<td>ola</td>';
+                $html .= '<td>ola</td>';
                 $html .= '<td><span class="tooltips" data-original-title="'.ucwords($profile->name).'">'.ucwords($profile->name).'</span></td>';
                 $html .= '<td>'.date('g:i A',strtotime($profile->mon_in)).'-'.date('g:i A',strtotime($profile->mon_out)).'</td>';
                     foreach($superProfileDetail as $super) {

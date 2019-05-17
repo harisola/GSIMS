@@ -72,11 +72,13 @@ return [
         ],
 		
 		'mysql_att_lo' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'database' => 'atif_attendance',
-            'username' => 'root',
-            'password' => '',
+          'driver' => 'mysql',
+            'host' => env('DB_HOST_Attendance', '127.0.0.1'),
+            'port' => env('DB_PORT_Attendance', '3306'),
+            'database' => env('DB_DATABASE_Attendance', 'forge'),
+            'username' => env('DB_USERNAME_Attendance', 'forge'),
+            'password' => env('DB_PASSWORD_Attendance', ''),
+            
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

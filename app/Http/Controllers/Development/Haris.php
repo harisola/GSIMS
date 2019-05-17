@@ -1954,6 +1954,9 @@ class Haris extends StaffReportController
     * Date:     Jul 27, 2017 (Thu)
     ***********************************************************************/
     public function getStaff_tifA(Request $request){
+
+      error_reporting(0); 
+      
     $html = '';
     if(count($request)){
       $GTID = $request->input('GTID');

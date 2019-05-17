@@ -490,7 +490,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
     ***********************************************************************/
     public function get_StaffReportingInfo($RoleID)
     {
-        $query="select 
+        $query2="select 
 		ro.id as role_id, ro.gp_id, IF(ro.is_transparent =2, 'TRP', 'OPQ') as report_ok, ro.roleCode,
 		rc.position as reporting_line,
 		IFNULL(ro.role_title_tl, '  ') as role_title_tl, IFNULL(ro.role_title_bl, '  ') as role_title_bl,
@@ -507,8 +507,7 @@ left join atif_gs_events.weekly_time_sheet as wts on ( wts.staff_id = sr.id and 
 			
 
 		where ro.id = ".$RoleID." and ro.record_deleted=0";
-
-		#$query="call `get_StaffReportingInfo`(".$RoleID.")";
+		$query="call `get_StaffReportingInfo`(".$RoleID.")";
 
         $staff = DB::connection($this->dbCon)->select($query);
         $staff = collect($staff)->map(function($x){ return (array) $x; })->toArray();

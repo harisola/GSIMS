@@ -24,7 +24,7 @@ use Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-#use App\Models\Student\Student_Information\Student_Information;
+use App\Models\Student\Student_Information\Student_Information;
 
 class Grade extends Controller
 {

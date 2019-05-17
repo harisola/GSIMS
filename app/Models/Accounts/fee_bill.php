@@ -616,7 +616,7 @@ class fee_bill extends Model
     //     return $total_fee=($details['received_amount']);
     // }
 
-    public function getAdmissionFee($student_id,$academic_session_id=""){
+    public static function getAdmissionFee($student_id,$academic_session_id=""){
         $details=fee_bill::join('fee_bill_received as fbr','fbr.fee_bill_id','fee_bill.id')
         ->where('student_id',$student_id)
         ->select('admission_fee','security_deposit','gb_id','total_payable','computer_subcription_fee','fee_a_discount','received_amount')
@@ -698,7 +698,7 @@ class fee_bill extends Model
             } 
     }
 
-    public function getAdmissionFeeReport($from_date,$to_date,$grade_id){
+    public static function getAdmissionFeeReport($from_date,$to_date,$grade_id){
             $query = "SELECT 
 
             if( 
@@ -778,9 +778,21 @@ class fee_bill extends Model
             and fb.bill_cycle_no in (1,2,3,4,5,6,7,8,9,10)
             and fb.student_id=$student_id";
             
-            
          $details = DB::connection('mysql_Career_fee_bill')->select($query)[0];
-         return $details->total_received;
+         $total_this_session=$details->total_received;
+
+            $query = "SELECT fbr.received_amount FROM atif_fee_student.fee_bill fb 
+            inner join atif_fee_student.fee_bill_received fbr
+            on fb.id=fbr.fee_bill_id
+
+            and fb.academic_session_id IN (9,10)
+            and fb.bill_cycle_no=5
+            and fbr.received_date>'2018-06-30'
+            and fb.student_id=$student_id";
+            
+         @$details = DB::connection('mysql_Career_fee_bill')->select($query)[0];
+         @$admission_fee= fee_bill::getAdmissionFee($student_id);
+         return @$total_this_session+@$details->received_amount+@$admission_fee;
     }    
    
 
