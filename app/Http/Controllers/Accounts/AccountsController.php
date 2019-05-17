@@ -1047,10 +1047,12 @@ where s.adjustment_amount != '0' and ( ifnull(s.adjustment_amount,0) - ifnull(ff
             $fee_bill = new fee_bill;
             $student_id=$detail['student_id'];
             $academic_session_id=$detail['a_id'];
-            if($student_id!=8395 && $student_id!=8143 && $student_id!=4905 && $student_id!=8188 && $student_id!=8145 && $student_id!=8144 ){
-                // $fee_bill->deleteBill($student_id,$academic_session_id,6);
+            $fee_bill->deleteBill($student_id,$academic_session_id,7);
 
-            }
+            // if($student_id!=8395 && $student_id!=8143 && $student_id!=4905 && $student_id!=8188 && $student_id!=8145 && $student_id!=8144 ){
+                // $fee_bill->deleteBill($student_id,$academic_session_id,7);
+
+            // }
 
         }
 

@@ -95,7 +95,7 @@ class AdujstmentApproval extends Controller
 $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1, `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
 
 		$Trigger_Sp=1;
-		$this->MyUpdateTable($Query, $Approval_id, $Trigger_Sp);
+		$this->MyUpdateTable($Query, $Approval_id, $Trigger_Sp,0);
 
 		$this->Activity_logs($Approval_id, $activity_id, $activity_action_id, $User_id);
 
@@ -109,10 +109,9 @@ $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1,
 		{
 			$Operation   = $request->input("Operation");
 
-			$Approval_id = $request->input("Approval_id");
+			$Approval_id = $request->input("Approval_id");//table_id
 			
 			$Adjust_Effect = $request->input("Adjust_Effect");  
- 
 
 			$User_id = Sentinel::getUser()->id;
 
@@ -128,9 +127,9 @@ $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1,
 
 			if( $Operation=='Missed Tap Event')
 			{
-$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
+$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  table_id=$Approval_id and approval_type_id=5";
 				$Trigger_Sp=1;
-				$this->MyUpdateTable($Update_Query,$Approval_id, $Trigger_Sp );
+				$this->MyUpdateTable($Update_Query,$Approval_id, $Trigger_Sp,5);
 
 				$activity_id=5;
 
@@ -141,15 +140,18 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 			else if( $Operation=='Exceptional Adjustments')
 			{
 				$Trigger_Sp=0;
-				$this->ExceptionalAdjustment( $Adjust_Effect[0], $Approval_id );
+				$this->ExceptionalAdjustment( $Adjust_Effect, $Approval_id );
 
 				$activity_id=4;
 
 				$activity_action_id=4;
 
-$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
+// $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  `id`=".$Approval_id."";
+$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  table_id=$Approval_id and approval_type_id=4";
 
-				$this->MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp);
+
+
+				$this->MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp,4);
 
 			}
 
@@ -180,7 +182,7 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 
 
 
-		public function MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp)
+		public function MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp,$approval_type_id)
 		{
 			
 			$AAM = new Adjustment_Approvel_model();
@@ -193,7 +195,7 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 			if( $Approval_id > 0 && $Trigger_Sp == 1 )
 			{
 
-$Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_events`.`adjustment_approvals` AS ap WHERE ap.id= ".$Approval_id."";
+$Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_events`.`adjustment_approvals` AS ap WHERE ap.table_id=$Approval_id AND ap.approval_type_id=$approval_type_id";
 				$EffedInfo = $AAM->SelectQeury($Query);	
 				$Staff_id=0;
 				$Cur_Date = date("Y-m-d");
@@ -214,12 +216,12 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 
 
 
-		public function ExceptionalAdjustment( $Adjust_Effect, $Approval_id )
+		public function ExceptionalAdjustment( $Adjust_Effect, $table_id )
 		{
 
 			$AAM = new Adjustment_Approvel_model();
 
-			$SelectQeury = "SELECT 
+			 $SelectQeury = "SELECT 
 				ap.staff_id AS Staff_id,
 				tab.adjustment_day AS Effected_day,
 				pr.payroll_id AS payroll_id,
@@ -237,11 +239,11 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 				(
 				
 				SELECT d.id AS payroll_id, d.staff_id, d.leave_balance, d.remaining_leave, d.exceptional_adjustments FROM atif_gs_events.daily_attendance_report AS d 
-				WHERE d.staff_id=(SELECT  ap.staff_id  FROM atif_gs_events.adjustment_approvals AS ap  WHERE ap.id=$Approval_id LIMIT 1 )
+				WHERE d.staff_id=(SELECT  ap.staff_id  FROM atif_gs_events.adjustment_approvals AS ap  WHERE ap.table_id=$table_id and ap.approval_type_id=4 LIMIT 1 )
 				ORDER BY d.id DESC LIMIT 1
 
 				) AS pr ON pr.staff_id=ap.staff_id
-				WHERE ap.id=$Approval_id LIMIT 1";
+				WHERE ap.table_id=$table_id and ap.approval_type_id=4 LIMIT 1";
 
 
 			$Staff_id=0;
@@ -313,7 +315,7 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 
 				$Trigger_Sp=0;
 
-				$this->MyUpdateTable($Sql, $Approvalid, $Trigger_Sp );
+				$this->MyUpdateTable($Sql, $Approvalid, $Trigger_Sp,4);
 
 
 				
@@ -341,6 +343,26 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 			$AAM->MyInsertTable_Model($Query);
 
 			return TRUE;
+		}
+
+		public function adjustmentApproveRows(request $request){
+			$aam = new Adjustment_Approvel_model;
+			$gt_id=$request->gt_id;
+			$adjustment_type=$request->adjustment_type;
+			$from_date=$request->from_date;
+			$to_date=$request->to_date;
+			$approve_status=$request->approval_status;
+
+			$data=$aam->adjustmentFilter($gt_id,$adjustment_type,$from_date,$to_date,$approve_status);
+
+			return view('attendance.adjustment_approval.adjustment_approve_tr',['data'=>$data]);
+		}
+
+		public function UpdateAdjustment(request $request){
+			$id=$request->id;
+			$table_name=$request->table_name;
+			$id=$request->status;
+
 		}
 
 

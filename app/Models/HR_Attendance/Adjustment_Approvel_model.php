@@ -35,103 +35,7 @@ class Adjustment_Approvel_model extends Model
 	public function Get_Ajustment()
 	{
 		$query = "SELECT * FROM (
-		/*SELECT 
-		ap.id AS Approval_id,
-		ap.approve_status AS Approval_Status,
-		ap.approval_type_id AS Approval_Type_id,
-		ap.staff_id AS Staff_id,
-		DATE_FORMAT(tab.`date`, '%a %d %b, %Y' )  AS Effected_Date,
-		ap.updated_at AS Dated,
-		atp.activity_title AS Approval_Title,
-		sr.employee_id AS Photo_id,
-		sr.abridged_name AS Staff_abridged_name,
-		sr.name_code AS Name_code,
-		sr.gender AS Gender,
-		sr.designation AS Designation,
-		sr.gt_id AS Gt_id,
-		src.employee_id AS Photo_id_created_by,
-		src.abridged_name AS Staff_abridged_name_created_by,
-		src.name_code AS Name_code_created_by,
-		src.gender AS Gender_created_by,
-		src.designation AS Designation_created_by,
-		src.gt_id AS Gt_id_created_by,
-		tab.id AS Edit_id,
-		tab.attendance_type AS Edit_type,
-		tab.attendance_id AS Eattendance_id
-		FROM atif_gs_events.activities AS atp
-		left JOIN atif_gs_events.adjustment_approvals AS ap ON ap.approval_type_id=atp.id
-		LEFT JOIN atif_gs_events.absenta_manual_description AS tab ON tab.id=ap.table_id
-		LEFT OUTER JOIN atif.staff_registered AS sr ON sr.id=ap.staff_id
-		LEFT OUTER JOIN atif.staff_registered AS src ON src.id = ap.created_by 
-		WHERE atp.id=1 AND ap.approve_status=0 AND ap.record_deleted=0
-		UNION
 
-
-		SELECT 
-		ap.id AS Approval_id,
-		ap.approve_status AS Approval_Status,
-		ap.approval_type_id AS Approval_Type_id,
-		ap.staff_id AS Staff_id,
-		DATE_FORMAT(tab.`date`, '%a %d %b, %Y' )  AS Effected_Date,
-		ap.updated_at AS Dated,
-		atp.activity_title AS Approval_Title,
-
-		sr.employee_id AS Photo_id,
-		sr.abridged_name AS Staff_abridged_name,
-		sr.name_code AS Name_code,
-		sr.gender AS Gender,
-		sr.designation AS Designation,
-		sr.gt_id AS Gt_id,
-		src.employee_id AS Photo_id_created_by,
-		src.abridged_name AS Staff_abridged_name_created_by,
-		src.name_code AS Name_code_created_by,
-		src.gender AS Gender_created_by,
-		src.designation AS Designation_created_by,
-		src.gt_id AS Gt_id_created_by,
-		tab.id AS Edit_id,
-		tab.attendance_type AS Edit_type,
-		tab.attendance_id AS Eattendance_id
-		FROM atif_gs_events.activities AS atp
-		left JOIN atif_gs_events.adjustment_approvals AS ap ON ap.approval_type_id=atp.id
-		LEFT JOIN atif_gs_events.absenta_manual_description AS tab ON tab.id=ap.table_id
-		LEFT OUTER JOIN atif.staff_registered AS sr ON sr.id=ap.staff_id
-		LEFT OUTER JOIN atif.staff_registered AS src ON src.id = ap.created_by 
-		WHERE atp.id=2 AND ap.approve_status=0 AND ap.record_deleted=0
-
-		UNION
-
-		SELECT 
-		ap.id AS Approval_id,
-		ap.approve_status AS Approval_Status,
-		ap.approval_type_id AS Approval_Type_id,
-		ap.staff_id AS Staff_id,
-		DATE_FORMAT(tab.`date`, '%a %d %b, %Y' )  AS Effected_Date,
-		ap.updated_at AS Dated,
-		atp.activity_title AS Approval_Title,
-		sr.employee_id AS Photo_id,
-		sr.abridged_name AS Staff_abridged_name,
-		sr.name_code AS Name_code,
-		sr.gender AS Gender,
-		sr.designation AS Designation,
-		sr.gt_id AS Gt_id,
-		src.employee_id AS Photo_id_created_by,
-		src.abridged_name AS Staff_abridged_name_created_by,
-		src.name_code AS Name_code_created_by,
-		src.gender AS Gender_created_by,
-		src.designation AS Designation_created_by,
-		src.gt_id AS Gt_id_created_by,
-		tab.id AS Edit_id,
-		tab.attendance_type AS Edit_type,
-		tab.attendance_id AS Eattendance_id
-		FROM atif_gs_events.activities AS atp
-		left JOIN atif_gs_events.adjustment_approvals AS ap ON ap.approval_type_id=atp.id
-		LEFT JOIN atif_gs_events.absenta_manual_description AS tab ON tab.id=ap.table_id
-		LEFT OUTER JOIN atif.staff_registered AS sr ON sr.id=ap.staff_id
-		LEFT OUTER JOIN atif.staff_registered AS src ON src.id = ap.created_by 
-		WHERE atp.id=3 AND ap.approve_status=0 AND ap.record_deleted=0
-
-
-		UNION */
 
 
 		SELECT 
@@ -217,6 +121,232 @@ class Adjustment_Approvel_model extends Model
         return $staff;
 
 
+	}
+	public function adjustmentFilter($gt_id="",$adjustment_type="",$from_date="",$to_date="",$approve_status=""){
+		$miss_tap=false;
+		$exceptional=false;
+		if($adjustment_type=="Miss Tap"){
+			$miss_tap=true;
+		}elseif ($adjustment_type=="Exceptional Adjustment") {
+				$exceptional=true;
+
+		}	
+
+
+		if($gt_id!="" && $adjustment_type=="" && $from_date=="" && $to_date=="" && $approve_status==""){
+			$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
+			and ap.approval_type_id=4  and hfs.type='insert'";
+			$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' and ap.approve_status=1 
+			and ap.approval_type_id=5  and hfs.type='insert'";
+
+		}
+		if($gt_id!="" && $adjustment_type!="" && $from_date=="" && $to_date=="" && $approve_status==""){
+			
+				$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' and ap.approve_status=1 
+				and ap.approval_type_id=5  and hfs.type='insert'";
+				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
+				and ap.approval_type_id=4  and hfs.type='insert'";
+
+		}
+		if($gt_id!="" && $adjustment_type!="" && $from_date!="" && $to_date!="" && $approve_status==""){
+				$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' and ap.approve_status=1 
+				and ap.approval_type_id=5  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
+				and ap.approval_type_id=4  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+
+		}
+		if($gt_id!="" && $adjustment_type!="" && $from_date!="" && $to_date!="" && $approve_status!=""){
+			
+
+				$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' and ap.approve_status=1 
+				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
+				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+
+		}
+		
+		if($miss_tap==true){
+			$query="SELECT 
+			hfs.effected_table_id,
+			hfs.time_details,
+			sr.designation,
+			srr.abridged_name as enter_by,
+			'Missed Tap' as adjustment_type,
+			hfs.form_number as form_number,
+			hfs.title AS type_title,
+			hfs.description as additional_comments,
+			date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y') as missed_tap_date,
+			date_format(Split_string(hfs.time_details, '///', 1),'%a, %b %d %Y') as missed_tap_time, 
+			'' as no_of_days,
+			'' as leave_to_date,
+			sr.employee_id,
+			sr.name_code,
+			sr.gt_id,
+			hfs.staff_id                               AS id, 
+			sr.name                                    AS NAME, 
+			tp.title                                   AS title, 
+			hfs.date                                   AS date, 
+			hfs.time                                   AS time, 
+			Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
+			hfs.description                            AS d_description, 
+			Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id,'//',sdd.id) AS location_name, 
+			Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
+			hfs.type                                   AS type 
+
+			FROM   atif_gs_events.hr_forms_logs hfs 
+			inner join atif.staff_registered sr 
+			    ON sr.id = hfs.staff_id 
+			inner join atif_gs_sims.users sdd 
+			    ON sdd.id = hfs.updated_by 
+			inner join atif.staff_registered srr
+					 ON srr.gg_id=sdd.email
+			left join atif._title_person tp 
+			   ON tp.id = sr.title_person_id
+			inner join atif_gs_events.adjustment_approvals ap
+			on ap.table_id=hfs.effected_table_id
+			$search_miss_tap";		
+	}elseif ($exceptional==true) {
+		$query="SELECT 
+			hfs.effected_table_id,
+			 hfs.time_details,sr.designation,
+			 srr.abridged_name as enter_by,
+			'Exceptional Adjustment' as adjustment_type,
+			hfs.form_number as form_number,
+			hfs.title AS type_title,
+			hfs.description as additional_comments,		
+			date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y') as missed_tap_date,
+			date_format(Split_string(hfs.time_details, '///', 1),'%a, %b %d %Y') as missed_tap_time, 
+			hfs.time_details as no_of_days,
+			'' as leave_to,  
+			sr.employee_id,
+			sr.name_code,
+			sr.gt_id,
+			hfs.staff_id                               AS id, 
+			sr.name                                    AS NAME, 
+			tp.title                                   AS title, 
+			hfs.date                                   AS date, 
+			hfs.time                                   AS time, 
+
+			Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
+			hfs.description                            AS d_description, 
+			Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id,'//',sdd.id) AS location_name, 
+			Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
+			hfs.type                                   AS type
+
+			FROM   atif_gs_events.hr_forms_logs hfs 
+			inner join atif.staff_registered sr 
+			    ON sr.id = hfs.staff_id 
+			inner join atif_gs_sims.users sdd 
+			    ON sdd.id = hfs.updated_by 
+			inner join atif.staff_registered srr
+					 ON srr.gg_id=sdd.email
+			left join atif._title_person tp 
+			   ON tp.id = sr.title_person_id
+			inner join atif_gs_events.adjustment_approvals ap
+			on ap.table_id=hfs.effected_table_id
+
+					 
+			$search_exceptional";
+	}else{
+
+		$query="SELECT * FROM (SELECT 
+		hfs.effected_table_id,
+
+	    hfs.time_details,
+		 sr.designation,
+		  srr.abridged_name as enter_by,
+		  'Missed Tap' as adjustment_type,
+		  hfs.form_number as form_number,
+		  hfs.title AS type_title,
+		  hfs.description as additional_comments,
+		   date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y') as missed_tap_date,
+		  date_format(Split_string(hfs.time_details, '///', 1),'%a, %b %d %Y') as missed_tap_time, 
+		  '' as no_of_days,
+		  '' as leave_to_date,
+		  sr.employee_id,
+		  sr.name_code,
+		  sr.gt_id,
+		  hfs.staff_id                               AS id, 
+        sr.name                                    AS NAME, 
+        tp.title                                   AS title, 
+        hfs.date                                   AS date, 
+        hfs.time                                   AS time, 
+        Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
+        hfs.description                            AS d_description, 
+        Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id,'//',sdd.id) AS location_name, 
+        Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
+        hfs.type                                   AS type 
+
+ FROM   atif_gs_events.hr_forms_logs hfs 
+        inner join atif.staff_registered sr 
+                ON sr.id = hfs.staff_id 
+        inner join atif_gs_sims.users sdd 
+                ON sdd.id = hfs.updated_by 
+        inner join atif.staff_registered srr
+					 ON srr.gg_id=sdd.email
+        left join atif._title_person tp 
+               ON tp.id = sr.title_person_id
+       inner join atif_gs_events.adjustment_approvals ap
+       on ap.table_id=hfs.effected_table_id
+		
+		$search_miss_tap			 
+ 
+  UNION ALL
+ SELECT 
+		hfs.effected_table_id,
+ 		 hfs.time_details,sr.designation,
+ 		 srr.abridged_name as enter_by,
+		 'Exceptional Adjustment' as adjustment_type,
+		 hfs.form_number as form_number,
+		 hfs.title AS type_title,
+		  hfs.description as additional_comments,		
+		  date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y') as missed_tap_date,
+		  date_format(Split_string(hfs.time_details, '///', 1),'%a, %b %d %Y') as missed_tap_time, 
+		  hfs.time_details as no_of_days,
+		  '' as leave_to,  
+		  sr.employee_id,
+		  sr.name_code,
+		  sr.gt_id,
+		  hfs.staff_id                               AS id, 
+        sr.name                                    AS NAME, 
+        tp.title                                   AS title, 
+        hfs.date                                   AS date, 
+        hfs.time                                   AS time, 
+        
+        Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
+        hfs.description                            AS d_description, 
+        Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id,'//',sdd.id) AS location_name, 
+        Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
+        hfs.type                                   AS type
+ 
+ FROM   atif_gs_events.hr_forms_logs hfs 
+        inner join atif.staff_registered sr 
+                ON sr.id = hfs.staff_id 
+        inner join atif_gs_sims.users sdd 
+                ON sdd.id = hfs.updated_by 
+        inner join atif.staff_registered srr
+					 ON srr.gg_id=sdd.email
+        left join atif._title_person tp 
+               ON tp.id = sr.title_person_id
+       inner join atif_gs_events.adjustment_approvals ap
+       on ap.table_id=hfs.effected_table_id
+		
+					 
+ 		$search_exceptional
+ 
+ 
+ ) as miss_tap
+
+
+	
+ORDER  BY date DESC, 
+          TIME DESC";
+      }
+      
+		$staff = DB::connection($this->dbCon)->select($query);
+        $staff = collect($staff)->map(function($x){ return (array) $x; })->toArray();
+        return $staff;
+    
 	}
 
 	
