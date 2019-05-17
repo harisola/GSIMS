@@ -89,35 +89,37 @@ td.ExceptionalAdjEvent {
                             	<div class="row customRow">
                                   <div class="col-md-2">
                                     <label>GT-ID</label>
-                                    <input type="text" class="form-control" value="" id="txt_gs_id">
+                                    <input type="text" class="form-control" value="" id="gt_id">
                                   </div>
                                   <div class="col-md-2" id="">
                                     <label>Adjustment Type</label>
-                                    <select id="student_status"  class="form-control">
+                                    <select id="adjustment_type"  class="form-control">
                                         <option value="">Select </option>
-                                        <option value="21">S-CFS</option>
-                                        <option value="2">S-CPT</option>
+                                        <option value="Miss Tap">Miss Tap</option>
+                                        <option value="Exceptional Adjustment">Exceptional Adjustment</option>
                                     </select>
                                   </div>
                                   <div class="col-md-2">
                                     <label>From</label>
-                                    <input type="date" class="form-control" id="txt_gt_id">
+                                    <input type="date" class="form-control" id="from_date">
                                   </div>
                                   <div class="col-md-2">
                                     <label>To</label>
-                                    <input type="date" class="form-control" id="txt_gt_id">
+                                    <input type="date" class="form-control" id="to_date">
                                   </div>
                                   <div class="col-md-2">
-                                    <label>Added by</label>
-                                    <select id="by"  class="form-control">
+                                    <label>Approval Status</label>
+                                    <select id="approval_status"  class="form-control">
                                         <option value="">Select </option>
-                                        <option value="21">S-CFS</option>
-                                        <option value="2">S-CPT</option>
+                                        <option value="0">Pending</option>
+                                        <option value="1">Approved</option>
+                                        <option value="2">Disapproved</option>
+                                        <option value="3">Unattended</option>
                                     </select>
                                   </div>
                                   <div class="col-md-2">
                                     <label>&nbsp;</label><br />
-                                    <input type="button" id="" data-re_generate="0" class="btn btn-group green Generate_Fee_Bill_1" value="Filter Results" style="width: 100%;">
+                                    <input type="button" id="" data-re_generate="0" class="btn btn-group green get_result" value="Filter Results" style="width: 100%;">
                                   </div>
                                 </div><!-- row -->
                                 <div class="contentArea">
@@ -131,185 +133,8 @@ td.ExceptionalAdjEvent {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd gradeX">
-                                                    <td style="text-align:center;vertical-align:middle;">1</td>
-                                                    <td style="vertical-align:middle;">
-                                                    	<span class="staffImg"><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="18-052" src="assets/photos/hcm/150x150/staff/1159.png"></span>
-                                                    	<strong>Muhammad Haris Ola - <small>HOL</small></strong><br />
-                                                        <span><strong>GT ID:</strong>16-070</span><br />
-                                                        <small><span class="tooltips" data-container="body" data-placement="top" data-original-title="Faculty  Member, Middle Section">Middle Section: Faculty  Member</span></small>
-                                                    </td>
-                                                    <td class="MissedTapEvent">
-                                                        <span class="adjType"><strong class="light">Adjustment Type: </strong>Missed Tap</span><br />
-                                                        <span class="MissedTap">
-                                                        	<span><strong class="light">Attendance Date:</strong> Thu, Apr 11 2019 </span><br />
-                                                            <span><strong class="light">Missed Tap Time: </strong>11:30 PM</span><br />
-                                                            <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="Hassan Ahmed Khan">HAK</span></span><br />
-                                                            <span><strong class="light">Added on: </strong>Fri Apr 26 2019, at 10:01:25 AM</span><br />
-                                                            <span><strong class="light">Additional Comments: </strong>Lorem Ipsum dolor sit amet</span>
-                                                        </span><!-- MissedTap -->
-                                                    </td>
-                                                    <td style="vertical-align:middle;">
-                                                        <!-- <span class="label label-sm label-success"> Approved </span> -->
-                                                        <a href="#">Approve</a> | <a href="#">Disapprove</a>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td style="text-align:center;vertical-align:middle;">2</td>
-                                                    <td style="vertical-align:middle;">
-                                                    	<span class="staffImg"><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="18-052" src="assets/photos/hcm/150x150/staff/1159.png"></span>
-                                                    	<strong>Muhammad Haris Ola - <small>HOL</small></strong><br />
-                                                        <span><strong>GT ID:</strong>16-070</span><br />
-                                                        <small><span class="tooltips" data-container="body" data-placement="top" data-original-title="Faculty  Member, Middle Section">Middle Section: Faculty  Member</span></small>
-                                                    </td>
-                                                    <td class="ExceptionalAdjEvent">
-                                                        <span class="adjType"><strong class="light">Adjustment Type: </strong>Exceptional Adjustment</span><br />
-                                                        <span class="MissedTap">
-                                                        	<span><strong class="light">Title:</strong> 2 days Exceptional Adjustment</span><br />
-                                                        	<span><strong class="light">No of days:</strong> 2 days</span><br />
-                                                            <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="Hassan Ahmed Khan">HAK</span></span><br />
-                                                            <span><strong class="light">Added on: </strong>Fri Apr 26 2019, at 10:01:25 AM</span><br />
-                                                            
-                                                            <span><strong class="light">Additional Comments: </strong>Lorem Ipsum dolor sit amet</span>
-                                                        </span><!-- MissedTap -->
-                                                    </td>
-                                                    <td style="vertical-align:middle;">
-                                                        <!-- <span class="label label-sm label-success"> Approved </span> -->
-                                                        <a href="#">Approve</a> | <a href="#">Disapprove</a>
-                                                    </td>
-                                                </tr>
-                                               <!--  <tr class="odd gradeX">
-                                                    <td>
-                                                        2
-                                                    </td>
-                                                    <td> looper </td>
-                                                    <td>
-                                                        <a href="mailto:looper90@gmail.com"> looper90@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-warning"> Suspended </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        3
-                                                    </td>
-                                                    <td> userwow </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@yahoo.com"> userwow@yahoo.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        4
-                                                    </td>
-                                                    <td> user1wow </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> userwow@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-default"> Blocked </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        5
-                                                    </td>
-                                                    <td> restest </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> test@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        6
-                                                    </td>
-                                                    <td> foopl </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> good@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        7
-                                                    </td>
-                                                    <td> weep </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> good@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        8
-                                                    </td>
-                                                    <td> coop </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> good@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        9
-                                                    </td>
-                                                    <td> pppol </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> good@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        10
-                                                    </td>
-                                                    <td> test </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> good@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        11
-                                                    </td>
-                                                    <td> userwow </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> userwow@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-default"> Blocked </span>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        12
-                                                    </td>
-                                                    <td> test </td>
-                                                    <td>
-                                                        <a href="mailto:userwow@gmail.com"> test@gmail.com </a>
-                                                    </td>
-                                                    <td>
-                                                        <span class="label label-sm label-success"> Approved </span>
-                                                    </td>
-                                                </tr> -->
+                                                
+                                               
                                             </tbody>
                                         </table>
                                 </div><!-- contentArea -->
@@ -344,121 +169,8 @@ td.ExceptionalAdjEvent {
     </div><!-- col-md-8 -->
 </div><!-- row -->
 <!-- End content section -->
-<!--================================================== -->
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-<?php /* ?>
-
-<!-- END PAGE BAR -->
-<!-- BEGIN USE PROFILE -->
-<div class="row">
-    
-    
-
-       <div class="col-md-12">
-                                <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                                <div class="portlet light portlet-fit bordered">
-
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="icon-settings font-red"></i>
-                                            <span class="caption-subject font-red sbold uppercase"> Adjustmet Approve List </span>
-                                        </div>
-                                         
-                                    </div>
 
 
-
-                                    
-                                    <div class="portlet-body">
-                                         
-                                        <table class="table table-striped table-hover table-bordered" id="sample_1">
-                                            <thead>
-                                                <tr>
-                                                    <th> Title </th>
-                                                    <th> Full Name </th>
-                                                    
-                                                    
-                                                    <th> Operation </th>
-                                                    
-
-                                                </tr>
-                                            </thead>
-                                            <!-- 
-                                                  'Approval_id' => int 1
-      'Approval_Status' => int 1
-      'Approval_Type_id' => int 5
-      'Staff_id' => int 774
-      'Effected_Date' => string '2019-04-05' (length=10)
-      'Approval_Title' => string 'Missed Tap Event' (length=16)
-      'Photo_id' => int 1103
-      'Staff_abridged_name' => string 'Kashif Mustafa' (length=14)
-      'Name_code' => string 'KMS' (length=3)
-      'Gender' => string 'M' (length=1)
-      'Designation' => string 'Software Developer' (length=18)
-      'Gt_id' => string '16-009' (length=6)
-      'Photo_id_created_by' => int 1085
-      'Staff_abridged_name_created_by' => string 'Hassan Ahmed' (length=12)
-      'Name_code_created_by' => string 'HAK' (length=3)
-      'Gender_created_by' => string 'M' (length=1)
-      'Designation_created_by' => string 'HR Officer (HRIS)' (length=17)
-      'Gt_id_created_by' => string '15-211' (length=6)
-      'photo500' => string 'assets/photos/hcm/500x500/staff/1103.jpg' (length=40)
-      'photo150' => string 'assets/photos/hcm/150x150/staff/1103.png' (length=40)
-      'createdphoto500' => string 'assets/photos/hcm/500x500/staff/1085.jpg' (length=40)
-      'createdphoto150' => string 'assets/photos/hcm/150x150/staff/1085.png' (length=40) 
-                                            -->
-
-                                            <tbody>
-
-                                               @if( !empty( $Staffinfo ))
-
-                                                @foreach( $Staffinfo as $sr ) 
-
-
-
-                                    <tr data-eattendance_id="@php echo $sr['Eattendance_id'] @endphp" data-editid="@php echo $sr['Edit_id'] @endphp" data-edittype="@php echo $sr['Edit_type'] @endphp"  data-rowid="@php echo $sr['Approval_id'] @endphp" data-type="@php echo $sr['Approval_Title'] @endphp">
-                                                    <td> @php echo $sr['Approval_Title'] @endphp </td>
-                                                    <td> 
-    <div class="adjustment_staff_info_container">
-       <img class="user-pic rounded tooltips" data-original-title="@php echo $sr['Gt_id'] @endphp" src="@php echo $sr['photo150'] @endphp"> 
-       @php  echo $sr['Staff_abridged_name'] @endphp
-
-       @php  echo $sr['Name_code'] @endphp
-
-       @php  echo $sr['Designation'] @endphp
-    </div>
-
-                                                        
-                                                        
-
-                                                    </td>
-                                                    
-                                                    
-
-                                                    <td> @php echo $HtmlUPermission @endphp </td>
-                                                     
-                                                </tr>
-
-                                                @endforeach
-
-                                                 @endif
-                                                
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- END EXAMPLE TABLE PORTLET-->
-                            </div>
-
-
-
-
-</div>
-<!-- END USE PROFILE -->
-
-<!--================================================== -->
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-<?php */ ?>
 <script type="text/javascript">
 
 loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
@@ -485,6 +197,38 @@ loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
     });
 });
 
+
+$(document).on('click','.get_result',function(){
+    var main_url=$('.main_url').val();
+var gt_id=$('#gt_id').val();
+var adjustment_type=$('#adjustment_type').val();
+var from_date=$('#from_date').val();
+var to_date=$('#to_date').val();
+var approval_status=$('#approval_status').val()
+
+var data={
+            'gt_id':gt_id,
+            'adjustment_type':adjustment_type,
+            'from_date':from_date,
+            'to_date':to_date,
+            'approval_status':approval_status,
+        };
+           $.ajax({
+                data:data,
+                method:'GET',
+                url:main_url+'/adjustment_approval_table_rows',
+                    success:function(response){
+                            $('#PendingAprovalsAdjustments tbody').html("");
+                            $('#PendingAprovalsAdjustments tbody').append(response);                
+                            
+                    }
+                
+             });
+
+
+
+
+})
 
 
 
