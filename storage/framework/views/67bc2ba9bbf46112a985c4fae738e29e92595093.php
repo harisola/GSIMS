@@ -225,7 +225,9 @@ loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", 
         });
     });
 });
-
+$("#gt_id").inputmask("mask", {
+            "mask": "99-999"
+          });
 
 $(document).on('click','.get_result',function(){
     var main_url=$('.main_url').val();
