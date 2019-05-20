@@ -232,6 +232,33 @@ var data={
 
 
 
+$(document).on('click','.approve_btn',function(){
+    var main_url=$('.main_url').val();
+    var table_id=$(this).data('approval_id');
+    var operation_name=$(this).data('operation');
+    var effected_date=$(this).data('effected_date');
+    debugger;
+    var data={
+            'Approval_id':table_id,
+            'Operation':operation_name,
+            'Adjust_Effect':effected_date
+        };
+
+           $.ajax({
+                data:data,
+                method:'GET',
+                url:main_url+'/adjustment_approval_Operation',
+                    success:function(response){
+                                   
+                            
+                    }
+                
+             });
+    return false;
+});
+
+
+
 var pagefunction = function() {
 
 
