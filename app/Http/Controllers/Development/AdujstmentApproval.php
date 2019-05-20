@@ -147,11 +147,11 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 				$activity_action_id=4;
 
 
-// $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  table_id=$Approval_id and approval_type_id=4";
+$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='1',  `modified_by`=".$User_id."  WHERE  table_id=$Approval_id and approval_type_id=4";
 
 
 
-				// $this->MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp,4);
+				$this->MyUpdateTable($Update_Query, $Approval_id, $Trigger_Sp,4);
 
 			}
 
