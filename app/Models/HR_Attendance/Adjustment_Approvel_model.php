@@ -158,7 +158,7 @@ class Adjustment_Approvel_model extends Model
 		if($gt_id!="" && $adjustment_type!="" && $from_date!="" && $to_date!="" && $approve_status!=""){
 			
 
-				$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' and ap.approve_status=1 
+				$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' 
 				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
