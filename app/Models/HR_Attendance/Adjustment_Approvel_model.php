@@ -233,6 +233,13 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert'";
 
 		}
+		if($gt_id=="" && $adjustment_type=="" && $from_date=="" && $to_date=="" && $approve_status==""){
+			
+				$search_miss_tap="WHERE   hfs.title='Miss Tap' 
+				and ap.approval_type_id=5  and hfs.type='insert'";
+				$search_exceptional="WHERE   hfs.effected_entry_table='atif_gs_events.exception_adjustment'
+				and ap.approval_type_id=4  and hfs.type='insert'";
+		}
 
 
 

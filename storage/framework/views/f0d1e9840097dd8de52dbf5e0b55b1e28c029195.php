@@ -38,7 +38,7 @@
     <tr class="odd gradeX">
         <td style="text-align:center;vertical-align:middle;"><?php echo e($count+1); ?></td>
         <td style="vertical-align:middle;">
-            <span class="staffImg"><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="18-052" src="assets/photos/hcm/150x150/staff/<?php echo e($approval_data['employee_id']); ?>.pngf"></span>
+            <span class="staffImg"><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="18-052" src="assets/photos/hcm/150x150/staff/<?php echo e($approval_data['employee_id']); ?>.png"></span>
             <strong><?php echo e($approval_data['NAME']); ?> - <small><?php echo e($approval_data['name_code']); ?></small></strong><br />
             <span><strong>GT ID:</strong><?php echo e($approval_data['gt_id']); ?></span><br />
             <small><span class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($approval_data['designation']); ?>"><?php echo e($approval_data['designation']); ?></span></small>
