@@ -17,10 +17,11 @@
             <span class="adjType"><strong class="light">Form #: </strong><?php echo e($approval_data['form_number']); ?></span><br />
             <span class="adjType"><strong class="light">Adjustment Type: </strong><?php echo e($approval_data['adjustment_type']); ?></span><br />
             <span class="MissedTap">
-                <span><strong class="light">Attendance Date:</strong><?php echo e($approval_data['missed_tap_date']); ?></span><br />
-                <span><strong class="light">Missed Tap Time: </strong><?php echo e($time_details[0]); ?></span><br />
+                <span><strong class="light">Attendance Date: </strong><?php echo e($approval_data['missed_tap_date']); ?></span><br />
+
+                <span><strong class="light">Missed Tap Time: </strong><?php echo e(date('h:i:s a', strtotime($time_details[0]))); ?></span><br />
                 <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($approval_data['enter_by']); ?>"><?php echo e($approval_data['enter_by']); ?></span></span><br />
-                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e($approval_data['time']); ?></span><br />
+                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e(date('h:i:s a', strtotime($approval_data['time']))); ?></span><br />
                 <span><strong class="light">Additional Comments: </strong><?php echo e($approval_data['additional_comments']); ?></span>
             </span><!-- MissedTap -->
         </td>
@@ -37,7 +38,7 @@
     <tr class="odd gradeX">
         <td style="text-align:center;vertical-align:middle;"><?php echo e($count+1); ?></td>
         <td style="vertical-align:middle;">
-            <span class="staffImg"><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="18-052" src="assets/photos/hcm/150x150/staff/<?php echo e($approval_data['employee_id']); ?>.png"></span>
+            <span class="staffImg"><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="18-052" src="assets/photos/hcm/150x150/staff/<?php echo e($approval_data['employee_id']); ?>.pngf"></span>
             <strong><?php echo e($approval_data['NAME']); ?> - <small><?php echo e($approval_data['name_code']); ?></small></strong><br />
             <span><strong>GT ID:</strong><?php echo e($approval_data['gt_id']); ?></span><br />
             <small><span class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($approval_data['designation']); ?>"><?php echo e($approval_data['designation']); ?></span></small>
@@ -47,10 +48,10 @@
 
             <span class="adjType"><strong class="light">Adjustment Type: </strong><?php echo e($approval_data['adjustment_type']); ?></span><br />
             <span class="MissedTap">
-                <span><strong class="light">Title:</strong><?php echo e($approval_data['type_title']); ?></span><br />
+                <span><strong class="light">Title: </strong><?php echo e($approval_data['type_title']); ?></span><br />
                 <span><strong class="light">No of days:</strong><?php echo e($approval_data['no_of_days']); ?></span><br />
                 <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($approval_data['enter_by']); ?>"><?php echo e($approval_data['enter_by']); ?></span></span><br />
-                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e($approval_data['time']); ?></span><br />
+                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e(date('h:i:s a', strtotime($approval_data['time']))); ?></span><br />
                 
                 <span><strong class="light">Additional Comments: </strong><?php echo e($approval_data['additional_comments']); ?></span>
             </span><!-- MissedTap -->
