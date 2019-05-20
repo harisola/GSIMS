@@ -17,6 +17,9 @@
     background: #ebebeb;
     color: #888;
 }
+.pointer{
+        cursor: pointer;
+}
 #sample_4 tbody tr td {vertical-align: middle;}
 
 .btn-group>.dropdown-menu, .dropdown-toggle>.dropdown-menu, .dropdown>.dropdown-menu {
@@ -171,6 +174,32 @@ td.ExceptionalAdjEvent {
 <!-- End content section -->
 
 
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Adjustment Approval</h4>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" name="Approval_id" id="Approval_id">
+            <input type="hidden" name="operation" id="operation">
+            <input type="hidden" name="effected_date" id="effected_date">
+          <p><input type="radio" name="adjustment" value="1" class="adjustment">  Effect on leave</p>
+          <p><input type="radio" name="adjustment" value="2" class="adjustment">  Effect on Pay role</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info exceptional_approve" data-dismiss="modal">Approve</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
 <script type="text/javascript">
 
 loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", function(){
@@ -213,13 +242,17 @@ var data={
             'to_date':to_date,
             'approval_status':approval_status,
         };
+             App.startPageLoading(); 
+
            $.ajax({
                 data:data,
                 method:'GET',
                 url:main_url+'/adjustment_approval_table_rows',
                     success:function(response){
                             $('#PendingAprovalsAdjustments tbody').html("");
-                            $('#PendingAprovalsAdjustments tbody').append(response);                
+                            $('#PendingAprovalsAdjustments tbody').append(response);   
+                                 App.stopPageLoading(); 
+             
                             
                     }
                 
@@ -231,6 +264,75 @@ var data={
 })
 
 
+
+$(document).on('click','.approve_btn',function(){
+    var main_url=$('.main_url').val();
+    var table_id=$(this).data('approval_id');
+    var operation_name=$(this).data('operation');
+    var effected_date=$(this).data('effected_date');
+    var data={
+            'Approval_id':table_id,
+            'Operation':operation_name,
+            'Adjust_Effect':effected_date
+        };
+
+           $.ajax({
+                data:data,
+                method:'GET',
+                url:main_url+'/adjustment_approval_Operation',
+                    success:function(response){
+                                   
+                            
+                    }
+                
+             });
+    return false;
+});
+
+$(document).on('click','.approval_modal',function(){
+    var main_url=$('.main_url').val();
+    var table_id=$(this).data('approval_id');
+    var operation_name=$(this).data('operation');
+    var effected_date=$(this).data('effected_date');
+    $('#Approval_id').val(table_id);
+    $('#operation').val(operation_name);
+    $('#effected_date').val(effected_date);
+
+
+           
+    return false;
+});
+
+
+
+
+$(document).on('click','.exceptional_approve',function(){
+    var main_url=$('.main_url').val();
+    var approval_id=$('#Approval_id').val();
+    var operation=$('#operation').val();
+    var effected_date=$('#effected_date').val();
+    var adjustment_type=$('.adjustment:checked').val();
+
+    var data={
+        'adjustment_type':adjustment_type,
+        'Approval_id':approval_id,
+        'Operation':operation,
+        'Adjust_Effect':adjustment_type
+    };
+     App.startPageLoading(); 
+$.ajax({
+                data:data,
+                method:'GET',
+                url:main_url+'/adjustment_approval_Operation',
+                    success:function(response){
+                               App.stopPageLoading(); 
+     
+                            
+                    }
+                
+             });
+
+});
 
 var pagefunction = function() {
 
