@@ -105,6 +105,30 @@ $Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `record_deleted`=1,
 
 	}
 
+		public function disApproval(Request $request){
+
+			$AAM = new Adjustment_Approvel_model();
+
+
+			$Operation   = $request->input("Operation");
+
+			$Approval_id = $request->input("Approval_id");//table_id
+			
+			$Adjust_Effect = $request->input("Adjust_Effect"); 
+
+			$User_id = Sentinel::getUser()->id;
+
+			if($Operation=='Missed Tap Event'){
+				$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='2',  `modified_by`=".$User_id."  WHERE  table_id=$Approval_id and approval_type_id=5";
+			}else if( $Operation=='Exceptional Adjustments'){
+				$Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_status`='2',  `modified_by`=".$User_id."  WHERE  table_id=$Approval_id and approval_type_id=4";
+			}
+			 return $AAM->SelectQeury($Update_Query);
+
+
+
+		}
+
 		public function Operation(Request $request)
 		{
 			$Operation   = $request->input("Operation");

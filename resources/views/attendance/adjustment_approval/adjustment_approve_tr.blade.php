@@ -34,7 +34,10 @@
             data-Approval_id='{{$approval_data['effected_table_id']}}'
             data-operation='Missed Tap Event'
             data-effected_date='{{$approval_data['date']}}'
-            href="#">Approve</span> | <span class="disapprove_btn pointer"  href="#">Disapprove</span>
+            href="#">Approve</span> | <span class="disapprove_btn pointer" 
+            data-Approval_id='{{$approval_data['effected_table_id']}}'
+            data-operation='Missed Tap Event'
+            data-effected_date='{{$approval_data['date']}}'  href="#">Disapprove</span>
          </div>
         @elseif($approval_data['approval_status']==1)
             <span>Status Approved</span>
@@ -77,7 +80,11 @@
                     href="#"
                     data-toggle="modal" data-target="#myModal"
                     >Approve</span> 
-                    | <span class="disapprove_btn pointer" href="#">Disapprove</span> 
+                    | <span class="disapprove_btn pointer" 
+                            data-Approval_id='{{$approval_data['effected_table_id']}}'
+                            data-operation='Exceptional Adjustments'
+                            data-effected_date='{{$approval_data['date']}}'
+                    >Disapprove</span> 
                 </div> 
         @elseif($approval_data['approval_status']==1)
             <span>Status Approved</span>

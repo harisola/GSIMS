@@ -302,6 +302,33 @@ $(document).on('click','.approve_btn',function(){
     return false;
 });
 
+$(document).on('click','.disapprove_btn',function(){
+    var main_url=$('.main_url').val();
+    var table_id=$(this).data('approval_id');
+    var operation_name=$(this).data('operation');
+    var effected_date=$(this).data('effected_date');
+    var data={
+            'Approval_id':table_id,
+            'Operation':operation_name,
+            'Adjust_Effect':effected_date
+        };
+         App.startPageLoading(); 
+
+           $.ajax({
+                data:data,
+                method:'GET',
+                url:main_url+'/adjustment_disapproval_Operation',
+                    success:function(response){
+                     App.stopPageLoading(); 
+                     $('.div_'+table_id).html('<p>Status Disapproved</p>')
+                     // $(this).html()
+                      // noty({text: 'Approved Successfully', layout: 'topRight', type: 'success' , timeout: 4000,});
+                    }
+                
+             });
+    return false;
+});
+
 $(document).on('click','.approval_modal',function(){
     var main_url=$('.main_url').val();
     var table_id=$(this).data('approval_id');
