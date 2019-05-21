@@ -255,12 +255,12 @@ var data={
                             $('#PendingAprovalsAdjustmentsT tbody').append(response);   
                                  App.stopPageLoading(); 
 
-                            setTimeout(function(){
-                                if( ! $.fn.DataTable.isDataTable( '#PendingAprovalsAdjustmentsT' ) ) {
-                                  $('#PendingAprovalsAdjustmentsT').DataTable().destroy()
-                                  $('#PendingAprovalsAdjustmentsT').DataTable();
-                                 }
-                            },1000)
+                            // setTimeout(function(){
+                            //     if( ! $.fn.DataTable.isDataTable( '#PendingAprovalsAdjustmentsT' ) ) {
+                            //       $('#PendingAprovalsAdjustmentsT').DataTable().destroy()
+                            //       $('#PendingAprovalsAdjustmentsT').DataTable();
+                            //      }
+                            // },1000)
                             
              
                             
@@ -293,8 +293,9 @@ $(document).on('click','.approve_btn',function(){
                 url:main_url+'/adjustment_approval_Operation',
                     success:function(response){
                      App.stopPageLoading(); 
-
-                      noty({text: 'Approved Successfully', layout: 'topRight', type: 'success' , timeout: 4000,});
+                     $('.div_'+table_id).html('<p>Status Approved</p>')
+                     // $(this).html()
+                      // noty({text: 'Approved Successfully', layout: 'topRight', type: 'success' , timeout: 4000,});
                     }
                 
              });
@@ -338,7 +339,9 @@ $.ajax({
                 url:main_url+'/adjustment_approval_Operation',
                     success:function(response){
                            App.stopPageLoading(); 
-                         noty({text: 'Approved Successfully', layout: 'topRight', type: 'success' , timeout: 4000,});
+                         // noty({text: 'Approved Successfully', layout: 'topRight', type: 'success' , timeout: 4000,});
+                          $('.div_'+approval_id).html('<p>Status Approved</p>')
+
 
      
                             

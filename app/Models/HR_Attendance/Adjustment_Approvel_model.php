@@ -249,10 +249,13 @@ class Adjustment_Approvel_model extends Model
 		
 		if($miss_tap==true){
 			$query="SELECT 
+			ap.id as approval_id,
+			ap.approve_status as approval_status, 
 			hfs.effected_table_id,
 			hfs.time_details,
 			sr.designation,
 			srr.abridged_name as enter_by,
+	  		 srr.name_code as name_code_enter_by,
 			'Missed Tap' as adjustment_type,
 			hfs.form_number as form_number,
 			hfs.title AS type_title,
@@ -286,12 +289,15 @@ class Adjustment_Approvel_model extends Model
 			   ON tp.id = sr.title_person_id
 			inner join atif_gs_events.adjustment_approvals ap
 			on ap.table_id=hfs.effected_table_id
-			$search_miss_tap";		
+			$search_miss_tap ORDER BY approval_id DESC";		
 	}elseif ($exceptional==true) {
 		$query="SELECT 
+		ap.id as approval_id,
+ 		ap.approve_status as approval_status, 
 			hfs.effected_table_id,
 			 hfs.time_details,sr.designation,
 			 srr.abridged_name as enter_by,
+	  		 srr.name_code as name_code_enter_by,
 			'Exceptional Adjustment' as adjustment_type,
 			hfs.form_number as form_number,
 			hfs.title AS type_title,
@@ -328,15 +334,18 @@ class Adjustment_Approvel_model extends Model
 			on ap.table_id=hfs.effected_table_id
 
 					 
-			$search_exceptional";
+			$search_exceptional ORDER BY approval_id DESC";
 	}else{
 
-		$query="SELECT * FROM (SELECT 
+		$query="SELECT * FROM (SELECT
+		ap.id as approval_id,
+ 		ap.approve_status as approval_status, 
 		hfs.effected_table_id,
 
 	    hfs.time_details,
 		 sr.designation,
 		  srr.abridged_name as enter_by,
+   		 srr.name_code as name_code_enter_by,
 		  'Missed Tap' as adjustment_type,
 		  hfs.form_number as form_number,
 		  hfs.title AS type_title,
@@ -374,10 +383,12 @@ class Adjustment_Approvel_model extends Model
 		$search_miss_tap			 
  
   UNION ALL
- SELECT 
+ SELECT ap.id as approval_id,
+ 		ap.approve_status as approval_status,
 		hfs.effected_table_id,
  		 hfs.time_details,sr.designation,
  		 srr.abridged_name as enter_by,
+ 		 srr.name_code as name_code_enter_by,
 		 'Exceptional Adjustment' as adjustment_type,
 		 hfs.form_number as form_number,
 		 hfs.title AS type_title,
@@ -421,11 +432,10 @@ class Adjustment_Approvel_model extends Model
 
 
 	
-ORDER  BY date DESC, 
-          TIME DESC";
+ORDER  BY approval_id DESC";
       }
 
-     
+    
 		$staff = DB::connection($this->dbCon)->select($query);
         $staff = collect($staff)->map(function($x){ return (array) $x; })->toArray();
         return $staff;
