@@ -501,6 +501,7 @@ Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumber
 	Route::get('/adjustment_approval', 'Development\AdujstmentApproval@landingPage');
 	Route::get('/adjustment_approval_table_rows', 'Development\AdujstmentApproval@adjustmentApproveRows');
 	Route::get('/adjustment_approval_Operation', 'Development\AdujstmentApproval@Operation');
+	Route::get('/adjustment_disapproval_Operation', 'Development\AdujstmentApproval@disApproval');
 	Route::post('/adjustment_update', 'Development\AdujstmentApproval@UpdateAdjustment');
 	Route::post('/delete_approval_Operation', 'Development\AdujstmentApproval@Delete_Operation');
 	
