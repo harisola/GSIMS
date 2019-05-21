@@ -19,9 +19,9 @@
             <span class="MissedTap">
                 <span><strong class="light">Attendance Date: </strong><?php echo e($approval_data['missed_tap_date']); ?></span><br />
 
-                <span><strong class="light">Missed Tap Time: </strong><?php echo e(date('h:i:s a', strtotime($time_details[0]))); ?></span><br />
+                <span><strong class="light">Missed Tap Time: </strong><?php echo e(date('h:i:s A', strtotime($time_details[0]))); ?></span><br />
                 <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($approval_data['enter_by']); ?>"><?php echo e($approval_data['enter_by']); ?></span></span><br />
-                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e(date('h:i:s a', strtotime($approval_data['time']))); ?></span><br />
+                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e(date('h:i:s A', strtotime($approval_data['time']))); ?></span><br />
                 <span><strong class="light">Additional Comments: </strong><?php echo e($approval_data['additional_comments']); ?></span>
             </span><!-- MissedTap -->
         </td>
@@ -49,9 +49,9 @@
             <span class="adjType"><strong class="light">Adjustment Type: </strong><?php echo e($approval_data['adjustment_type']); ?></span><br />
             <span class="MissedTap">
                 <span><strong class="light">Title: </strong><?php echo e($approval_data['type_title']); ?></span><br />
-                <span><strong class="light">No of days:</strong><?php echo e($approval_data['no_of_days']); ?></span><br />
+                <span><strong class="light">No of days: </strong><?php echo e($approval_data['no_of_days']); ?></span><br />
                 <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="<?php echo e($approval_data['enter_by']); ?>"><?php echo e($approval_data['enter_by']); ?></span></span><br />
-                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e(date('h:i:s a', strtotime($approval_data['time']))); ?></span><br />
+                <span><strong class="light">Added on: </strong><?php echo e($approval_data['date_format']); ?>, at <?php echo e(date('h:i:s A', strtotime($approval_data['time']))); ?></span><br />
                 
                 <span><strong class="light">Additional Comments: </strong><?php echo e($approval_data['additional_comments']); ?></span>
             </span><!-- MissedTap -->

@@ -19,9 +19,9 @@
             <span class="MissedTap">
                 <span><strong class="light">Attendance Date: </strong>{{$approval_data['missed_tap_date']}}</span><br />
 
-                <span><strong class="light">Missed Tap Time: </strong>{{date('h:i:s a', strtotime($time_details[0]))}}</span><br />
+                <span><strong class="light">Missed Tap Time: </strong>{{date('h:i:s A', strtotime($time_details[0]))}}</span><br />
                 <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="{{$approval_data['enter_by']}}">{{$approval_data['enter_by']}}</span></span><br />
-                <span><strong class="light">Added on: </strong>{{$approval_data['date_format']}}, at {{date('h:i:s a', strtotime($approval_data['time']))}}</span><br />
+                <span><strong class="light">Added on: </strong>{{$approval_data['date_format']}}, at {{date('h:i:s A', strtotime($approval_data['time']))}}</span><br />
                 <span><strong class="light">Additional Comments: </strong>{{$approval_data['additional_comments']}}</span>
             </span><!-- MissedTap -->
         </td>
@@ -51,7 +51,7 @@
                 <span><strong class="light">Title: </strong>{{$approval_data['type_title']}}</span><br />
                 <span><strong class="light">No of days: </strong>{{$approval_data['no_of_days']}}</span><br />
                 <span><strong class="light">Entry by: </strong><span class="tooltips" data-container="body" data-placement="top" data-original-title="{{$approval_data['enter_by']}}">{{$approval_data['enter_by']}}</span></span><br />
-                <span><strong class="light">Added on: </strong>{{$approval_data['date_format']}}, at {{date('h:i:s a', strtotime($approval_data['time']))}}</span><br />
+                <span><strong class="light">Added on: </strong>{{$approval_data['date_format']}}, at {{date('h:i:s A', strtotime($approval_data['time']))}}</span><br />
                 
                 <span><strong class="light">Additional Comments: </strong>{{$approval_data['additional_comments']}}</span>
             </span><!-- MissedTap -->
