@@ -1,4 +1,9 @@
 <?php
+/******************************************************************
+* Author : Atif Naseem
+* Email : atif.naseem22@gmail.com
+* Cell : +92-313-5521122
+*******************************************************************/
 ?>
 			<!-- BEGIN CONTAINER -->
             <div class="page-container">
@@ -167,6 +172,99 @@
                             <!-- End: My Team Menu -->
                             
 
+                            <?php /*
+                            <!-- Begin: My Profile Menu -->
+                            <li class="nav-item  ">
+                                <a href="#user_profile" class="nav-link">
+                                    <i class="fa fa-file-text-o font-red-intense"></i>
+                                    <span class="title">My Profile</span>
+                                </a>
+                            </li>
+                            <!-- End: My Profile Menu -->
+                            */ ?>
+
+
+
+
+
+
+
+
+
+
+
+
+                            <?php /*
+                            <li class="nav-item staff_list">
+                                <a href="#haris" class="nav-link ">
+                                    <i class="icon-user"></i>
+                                    <span class="title">Staff List</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+                            <li class="nav-item student_list">
+                                <a href="#student_layout" class="nav-link ">
+                                    <i class="icon-users"></i>
+                                    <span class="title">Student List</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+
+
+                            <!-- Begin: TT Profile -->
+                            <li class="nav-item tt_profile_definition">
+                                <a href="#ttprofile_definition" class="nav-link ">
+                                    <i class="icon-users"></i>
+                                    <span class="title">TT Profile Definition</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+                            <li class="nav-item tt_profile_allocation">
+                                <a href="#ttprofile_allocation" class="nav-link ">
+                                    <i class="icon-users"></i>
+                                    <span class="title">TT Profile Allocation</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+                            <!-- End: TT Profile -->
+                            
+
+
+
+
+
+
+                            <!-- Begin: Sep 07, 2017 (Thu) -->
+                            <li class="nav-item tt_profile_definition">
+                                <a href="#weekly_timesheet" class="nav-link ">
+                                    <i class="icon-puzzle"></i>
+                                    <span class="title">Weekly Time-Sheet</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+                            <li class="nav-item tt_profile_allocation">
+                                <a href="#applicant_form" class="nav-link ">
+                                    <i class="icon-bulb"></i>
+                                    <span class="title">Applicant Form</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+                            <li class="nav-item tt_profile_allocation">
+                                <a href="#online_applicant_form" class="nav-link ">
+                                    <i class="icon-layers"></i>
+                                    <span class="title">Online Applicant Form</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+                            <li class="nav-item tt_profile_allocation">
+                                <a href="#staff_on_boarding" class="nav-link ">
+                                    <i class="icon-social-dribbble"></i>
+                                    <span class="title">Staff On-boarding</span>
+                                    <span class=""></span>
+                                </a>
+                            </li>
+                            <!-- End: Sep 07, 2017 (Thu) -->
+                            */?>
 
 
 
@@ -176,7 +274,7 @@
                             <?php //echo $LNavMenu; ?>
                         </ul>
                         <!-- END SIDEBAR MENU -->
-                    <span class="copy">2019-20 &copy; Generation's School</span>
+                    <span class="copy">2017-18 &copy; Generation's School</span>
                     </div>
                     
                     <!-- END SIDEBAR -->

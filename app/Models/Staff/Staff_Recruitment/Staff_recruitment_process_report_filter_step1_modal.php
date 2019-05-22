@@ -814,7 +814,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 					if( $departmentFilter !='null' && $departmentFilter !=""){
 						$departmentFilter = explode(",", $departmentFilter);
-
+//and l.status_id != 2 and l.stage_id != 4
 						$Query="select 
 										12 as Query_num,
 										count( f.form_id ) as Overall_applicants_marked_Present_for_Initial_Interview
@@ -824,7 +824,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 										and l.status_id != 10 
 										and l.status_id != 11 
 										and l.status_id != 12 
-										and l.status_id != 13
+										and l.status_id != 13										
 										and l.stage_id != 8 
 										 and u.depart_id IN('".implode("','", $departmentFilter)."') 
 										 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
@@ -2088,6 +2088,11 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 					public function Applicants_currently_in_Followup_for_Initial_Interview_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
 
+
+
+
+						
+
 						
 						/////AKHAN////////////////////////////////////////
 
@@ -2867,237 +2872,213 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 
 
-					public function Overall_applicants_given_extension_from_Followup_for_Part_B_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
+	public function Overall_applicants_given_extension_from_Followup_for_Part_B_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
+		// echo 'zkhan';
+		// exit;
+
+		// if($date_1 =='null' && $date_1 =="" && $date_2 =='null' && $date_2 =="" && $departmentFilter =='null' && $departmentFilter =="" && $subjectFilter =='null' && $subjectFilter =="" && $designationFilter =='null' && $designationFilter ==""  && $campusFilter =='null' && $campusFilter =="" && $formSourceFilter =='null' && $formSourceFilter ==""){
 
 
-						/////AKHAN////////////////////////////////////////
+		// 		 $Query = "select 
+		// 		16 as Query_num,
+		// 		count( cf.id ) as Overall_applicants_given
+		// 		from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+		// 		where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')and accf.level_id IN('".implode("','", $designationFilter)."')
+		// 		and accf.campus IN('".implode("','", $campusFilter)."') and acf.form_source IN('".implode("','", $formSourceFilter)."')
+		// 		and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+		// 	}
 
-					if( $departmentFilter !='null' && $departmentFilter !=""){
-						$departmentFilter = explode(",", $departmentFilter);
+			/////AKHAN////////////////////////////////////////
+		if( $departmentFilter !='null' && $departmentFilter !=""){
+			$departmentFilter = explode(",", $departmentFilter);
 
-							$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.depart_id IN('".implode("','", $departmentFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									}	
+				$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.depart_id IN('".implode("','", $departmentFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}	
 
-				
+		if( $subjectFilter !='null' && $subjectFilter !=""){
+			$subjectFilter = explode(",", $subjectFilter);
 
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.tag IN('".implode("','", $subjectFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}	
 
-					if( $subjectFilter !='null' && $subjectFilter !=""){
-						$subjectFilter = explode(",", $subjectFilter);
+		if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
 
-								$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.tag IN('".implode("','", $subjectFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									}	
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}	
+		
+		if( $designationFilter !='null' && $designationFilter !=""){
+			$designationFilter = explode(",", $designationFilter);
 
-					
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}	
 
-					if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+		if( $campusFilter !='null' && $campusFilter !=""){
+			$campusFilter = explode(",", $campusFilter);
 
-								$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									
-									}	
-					
-					
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.campus IN('".implode("','", $campusFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}	
 
+		if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
 
-					if( $designationFilter !='null' && $designationFilter !=""){
-						$designationFilter = explode(",", $designationFilter);
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."') and accf.campus IN('".implode("','", $campusFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}	
 
-							$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									}	
-					
+		if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
 
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.campus IN('".implode("','", $campusFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
 
+		if( $departmentFilter !='null' && $departmentFilter !="" && $designationFilter !='null' && $designationFilter!="" ){
 
-					if( $campusFilter !='null' && $campusFilter !=""){
-						$campusFilter = explode(",", $campusFilter);
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."') and accf.depart_id IN('".implode("','", $departmentFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}	
+		
+		if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
 
-							$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.campus IN('".implode("','", $campusFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									}	
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
 
-					
-					if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+		if( $formSourceFilter !='null' && $formSourceFilter !=""){
+			$formSourceFilter = explode(",", $formSourceFilter);
 
-							$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."') and accf.campus IN('".implode("','", $campusFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									}	
-					
+			$Query="select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and acf.form_source IN('".implode("','", $formSourceFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
 
-					if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+		if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
 
-							$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.campus IN('".implode("','", $campusFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-				
-							}
+			$Query = "select 
+			16 as Query_num,
+			count( cf.id ) as Overall_applicants_given
+			from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+			where cf.status_id=2   and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."') and accf.level_id IN('".implode("','", $designationFilter)."')
+			and accf.campus IN('".implode("','", $campusFilter)."') and acf.form_source IN('".implode("','", $formSourceFilter)."')
+			and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+		}
+		//////////////////AKHAN ///////////////////////////////
 
-					if( $departmentFilter !='null' && $departmentFilter !="" && $designationFilter !='null' && $designationFilter!="" ){
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
 
-					$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."') and accf.depart_id IN('".implode("','", $departmentFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									}	
-					
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-							$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and accf.level_id IN('".implode("','", $designationFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-									}	
-
-					
-
-
-
-					if( $formSourceFilter !='null' && $formSourceFilter !=""){
-						$formSourceFilter = explode(",", $formSourceFilter);
-
-						$Query="select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and acf.form_source IN('".implode("','", $formSourceFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-									
-
-									}	
-
-
-									if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
-
-								 $Query = "select 
-									16 as Query_num,
-									count( cf.id ) as Overall_applicants_given
-									from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-									where cf.status_id=2   and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')and accf.level_id IN('".implode("','", $designationFilter)."')
-									and accf.campus IN('".implode("','", $campusFilter)."') and acf.form_source IN('".implode("','", $formSourceFilter)."')
-									and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
-								}
-
-					//////////////////AKHAN ///////////////////////////////
-
-					
-
-						if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
-
-							$Query = "select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id 
-							where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
-						}
+			$Query = "select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id 
+				where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+		}
 
 
-						if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !=""){
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !=""){
 
-							//$departmentFilter = explode(",", $departmentFilter);
+			//$departmentFilter = explode(",", $departmentFilter);
+			$Query = "select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+		}
 
-							 $Query = "select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
-						}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
 
+			$Query = "select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+		}
 
-						if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  ){
 
+			$Query = "select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."') and accf.level_id IN('".implode("','", $designationFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+		}
 
-							 $Query = "select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
-						}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
 
-						if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  ){
+			$Query = "select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')and accf.level_id IN('".implode("','", $designationFilter)."')
+				and accf.campus IN('".implode("','", $campusFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+		}
 
-
-							 $Query = "select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."') and accf.level_id IN('".implode("','", $designationFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
-						}
-
-						if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
-
-
-							 $Query = "select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')and accf.level_id IN('".implode("','", $designationFilter)."')
-							and accf.campus IN('".implode("','", $campusFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
-						}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
 
 
-						if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
+			$Query = "select 
+				16 as Query_num,
+				count( cf.id ) as Overall_applicants_given
+				from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
+				where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')and accf.level_id IN('".implode("','", $designationFilter)."')
+				and accf.campus IN('".implode("','", $campusFilter)."') and acf.form_source IN('".implode("','", $formSourceFilter)."')
+				and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
+			}
 
+		$getStatus = DB::connection($this->dbCon)->select($Query);
+		return $getStatus;
 
-							 $Query = "select 
-							16 as Query_num,
-							count( cf.id ) as Overall_applicants_given
-							from atif_Career.log_career_form as cf left join atif_career.career_form as acf on cf.form_id = acf.id left join atif_career.career_form_data as accf on acf.id = accf.form_id 
-							where cf.status_id=2  and from_unixtime(acf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and accf.depart_id IN('".implode("','", $departmentFilter)."') and accf.tag IN('".implode("','", $subjectFilter)."')and accf.level_id IN('".implode("','", $designationFilter)."')
-							and accf.campus IN('".implode("','", $campusFilter)."') and acf.form_source IN('".implode("','", $formSourceFilter)."')
-							and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";	
-						}
-
-							$getStatus = DB::connection($this->dbCon)->select($Query);
-
-							return $getStatus;
-
-					}
+	}
 					
 						public function Overall_applicants_moved_to_Not_Interested_from_Followup_for_Initial_Interview_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
 
-
+							
 							/////AKHAN////////////////////////////////////////
 
 					if( $departmentFilter !='null' && $departmentFilter !=""){
@@ -4084,7 +4065,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 									$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.depart_id IN('".implode("','", $departmentFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";		
@@ -4098,7 +4079,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 										$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4110,7 +4091,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 										$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.depart_id IN('".implode("','", $departmentFilter)."') and cfa.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";		
@@ -4125,7 +4106,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 									$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.level_id IN('".implode("','", $designationFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";		
@@ -4139,7 +4120,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 									$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";			
@@ -4150,7 +4131,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 									$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.level_id IN('".implode("','", $designationFilter)."') and cfa.campus IN('".implode("','", $campusFilter)."')  and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4161,7 +4142,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 									$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.depart_id IN('".implode("','", $departmentFilter)."') and cfa.campus IN('".implode("','", $campusFilter)."') and  from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4172,7 +4153,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 							$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.level_id IN('".implode("','", $designationFilter)."') and cfa.depart_id IN('".implode("','", $departmentFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";		
@@ -4185,7 +4166,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 									$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and cfa.level_id IN('".implode("','", $designationFilter)."') and cfa.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";		
@@ -4201,7 +4182,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 						$Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id  left join atif_career.career_form as ca on cf.form_id = ca.id
 										where cf.status_id=3 and ca.form_source IN('".implode("','", $formSourceFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4217,7 +4198,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 						
 							 $Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and from_unixtime(cf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4) ";	
@@ -4230,7 +4211,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 							 $Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id 
 										where cf.status_id=3 and from_unixtime(cf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and cfa.depart_id IN('".implode("','", $departmentFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4242,7 +4223,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 							 $Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id
 										where cf.status_id=3 and from_unixtime(cf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and cfa.depart_id IN('".implode("','", $departmentFilter)."')  and cfa.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4254,7 +4235,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 							 $Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id
 										where cf.status_id=3 and from_unixtime(cf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and cfa.depart_id IN('".implode("','", $departmentFilter)."')  and cfa.tag IN('".implode("','", $subjectFilter)."') and cfa.level_id IN('".implode("','", $designationFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4265,7 +4246,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 							 $Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id
 										where cf.status_id=3 and from_unixtime(cf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and cfa.depart_id IN('".implode("','", $departmentFilter)."')  and cfa.tag IN('".implode("','", $subjectFilter)."') and cfa.level_id IN('".implode("','", $designationFilter)."') and cfa.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	
@@ -4276,7 +4257,7 @@ class Staff_recruitment_process_report_filter_step1_modal extends Model
 
 							 $Query = "select 
 										21 as Query_num, 
-										count( cf.id ) as Present_for_Formal_Interview 
+										count(distinct cf.id ) as Present_for_Formal_Interview 
 										from atif_Career.log_career_form as cf left join atif_career.career_form_data as cfa on cf.form_id = cfa.form_id left join atif_career.career_form as cff on cfa.form_id = cff.id
 										where cf.status_id=3 and from_unixtime(cf.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and cfa.depart_id IN('".implode("','", $departmentFilter)."')  and cfa.tag IN('".implode("','", $subjectFilter)."') and cfa.level_id IN('".implode("','", $designationFilter)."') and cfa.campus IN('".implode("','", $campusFilter)."') and cff.form_source IN('".implode("','", $formSourceFilter)."') and from_unixtime(cfa.created ,'%Y-%m-%d') >= '2018-10-01' 
 										and (cf.stage_id=4)";	

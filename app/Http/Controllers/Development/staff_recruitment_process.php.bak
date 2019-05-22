@@ -214,348 +214,9 @@ class staff_recruitment_process extends Controller{
         // }
       }
 
-
-      if($stage == 'Overall_applicants_not_interested'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_applicants_not_interested($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-      if($stage == 'Intial_Interview_Communication_Not'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Intial_Interview_Communication_Not($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Intial_Interview_for_formal'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Intial_Interview_for_formal($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-          
-              if($stage == 'Present_for_Formal_Interview'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Present_for_Formal_Interview($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-               if($stage == 'awaiting_for_Next_Step_interiew'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->awaiting_for_Next_Step_interiew($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-
-               if($stage == 'Regret_from_Formal'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Regret_from_Formal($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-          
-      
-
-
-  if($stage == 'moved_to_Followup_interview'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->moved_to_Followup_interview($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-
-  if($stage == 'currently_in_Followup_presence'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->currently_in_Followup_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-    
-      if($stage == 'given_extension'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->given_extension($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Not_Interested_formal'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Not_Interested_formal($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'moved_to_Not_Interested'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          // $Stage_info=$RecM_Obj->moved_to_Not_Interested($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-       if($stage == 'awaiting_for_Observation'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->awaiting_for_Observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-        
-if($stage == 'marked_Present_for_job'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->marked_Present_for_job($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-if($stage == 'currently_in_Observatio_for'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->currently_in_Observatio_for($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'applicant_moved_to_regret_form'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->applicant_moved_to_regret_form($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-       if($stage == 'Observation_Presence_Followup'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Observation_Presence_Followup($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
- if($stage == 'no_actions'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->no_actions($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-      if($stage == 'given_extension_from_observation'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->given_extension_from_observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-
-
-      if($stage == 'applicants_moved_to_Not_Interested_to_moved'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->applicants_moved_to_Not_Interested_to_moved($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-       if($stage == 'Observation_Communication_not_interested'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Observation_Communication_not_interested($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-      if($stage == 'present_for_Final'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->present_for_Final($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-
-
-       if($stage == 'currently_in_Final'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->currently_in_Final($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-       if($stage == 'Final_Cons_To'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Final_Cons_To($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-       if($stage == 'Final_consultation_awaiting'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Final_consultation_awaiting($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-      if($stage == 'Final_Cons_Presence'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Final_Cons_Presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-
-      if($stage == 'recenntly_in_Followup_for_F'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->recenntly_in_Followup_for_F($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-      if($stage == 'Followup_Extension'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Followup_Extension($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-
-       if($stage == 'Consultation_presence'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Consultation_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-//ZK
-      if($stage == 'Overall_Offer_Prep_Allocation'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Offer_Prep_Allocation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Offer_Prep_Allocation'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Offer_Prep_Allocation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Offer_Proc_Communication'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Offer_Proc_Communication($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-      
-      if($stage == 'Offer_Proc_Presence'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Offer_Proc_Presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Overall_Offer_Proc_Followup'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Offer_Proc_Followup($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Applicants_InOffer_Proc_Followup'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Applicants_InOffer_Proc_Followup($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Overall_Offer_Proc_Follwup_Extensions'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Offer_Proc_Follwup_Extensions($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Overall_Offer_Proc_Not_Interested'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Offer_Proc_Not_Interested($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Applicant_InOffer_Procedure'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Applicant_InOffer_Procedure($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Overall_Applicantto_Comp_Checklist'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Applicantto_Comp_Checklist($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-      
-      if($stage == 'Applicants_In_Comp_Checklist'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Applicants_In_Comp_Checklist($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Overall_Applicants_Comp_Checklist_Followup'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Applicants_Comp_Checklist_Followup($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Overall_Applicants_Extension_From_Comp_Checklist_Followup'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Applicants_Extension_From_Comp_Checklist_Followup($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Overall_Applicants_Not_Interested_From_Comp_Checklist_Followup'){
-        // if($departmentFiltehelpr != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Overall_Applicants_Not_Interested_From_Comp_Checklist_Followup($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Applicants_Recruitment_Complete'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Applicants_Recruitment_Complete($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
-      if($stage == 'Applicant_Archive'){
-        // if($departmentFilter != 'null' || $subjectFilter != 'null' || $designationFilter != 'null'|| $date_1 != '' || $date_2 != '' || $campusFilter != '' || $formSourceFilter != ''){
-
-          $Stage_info=$RecM_Obj->Applicant_Archive($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter);
-        // }
-      }
-
       
       
-
+      
       
          
       // var_dump("else");
@@ -587,21 +248,30 @@ public function Query_Get_Form_Info($Stage_id)
 
   else if($Stage_id == 'Fill_part_A')
   {
-    $Where =" and af.id in(
-      select  cf.id 
-      from atif_career.career_form as cf 
-      left join atif_career.log_career_form as lcf on lcf.form_id=cf.id
-      where cf.form_source=1 and lcf.id is null
-      )";
+      $Where =" and af.id in(
+  select 
+   
+   cf.id 
+
+  from atif_career.career_form as cf 
+  left join atif_career.log_career_form as lcf on lcf.form_id=cf.id
+  where cf.form_source=1 and lcf.id is null
+
+  )";
   }
 
   else if($Stage_id == 'Overall_Walkin_applications_part_A')
   {
-    $Where =" and af.id in(
-      select 
-      cf.id
-      from atif_career.career_form as cf where cf.form_source=0
-      )";
+    $Where =" and af.id in
+    (
+
+    select 
+ 
+cf.id
+ 
+from atif_career.career_form as cf where cf.form_source=0
+
+  ) ";
 
   }
 /*select *
@@ -627,12 +297,14 @@ and dd.status_id=1 and cf.stage_id=1 and cf.form_source=1 )";
   }
 
   else if($Stage_id == 'Applicants_triggered')
-  {
+{
     $Where =" and af.id in (
-      select 
-      cf.id 
-      from atif_career.career_form as cf where cf.status_id=11 and cf.stage_id=9
-      )";
+
+    select 
+ cf.id 
+from atif_career.career_form as cf where cf.status_id=11 and cf.stage_id=9
+  )";
+
   } 
 
   else if($Stage_id == 'Applicants_awating')
@@ -719,12 +391,14 @@ where l.status_id=11 and l.stage_id =4 group by l.id
   }
 
   else if($Stage_id == 'Overall_Walkin_applications')
-  {
+{
     $Where =" and af.id in(
-      select 
-      cf.id
-      from atif_career.career_form as cf where cf.form_source=0
-      )";
+select 
+
+cf.id
+
+from atif_career.career_form as cf where cf.form_source=0
+  )";
   }
 
   else if($Stage_id == 'Overall_moved_to')
@@ -1140,7 +814,6 @@ from atif_career.career_form as lcf where lcf.status_id=3 and lcf.stage_id=13
   )";
   }
 
-
   else if($Stage_id == 'moved_to_Not_Interested')
   {
     $Where =" and af.id in(
@@ -1148,7 +821,7 @@ select
 
 lcf.id
 
-from atif_career.career_form as lcf where lcf.status_id=20 and lcf.stage_id=6
+from atif_career.career_form as lcf where lcf.status_id=2 and lcf.stage_id=6
 
   )";
   }
@@ -1568,25 +1241,6 @@ where (f.status_id=12 or f.status_id=10 ) and d.status_id=5
   )";
   } 
 
- /* else if($Stage_id == 'Offer_Prep_Allocation')
-  {
-    $Where =" and af.id in(
-
-    select 
-
-f.id
-
-from atif_career.career_form as f
-left join ( 
-select * from atif_career.log_career_form as lf where lf.id in(
-select max(lcf.id) as id
-from atif_career.log_career_form as lcf  group by lcf.form_id )
-) as d
-on d.form_id = f.id
-where (f.status_id=6 or f.stage_id=1 ) 
-  )";
-  } */
-
 
 $Query_Return = $this->Query_Function($Where);
 return $RecM_Obj->Create_query($Query_Return);
@@ -1788,22 +1442,13 @@ select
 count( l.id ) as Total_form
 from atif_career.career_form as l where l.status_id=11 and l.stage_id=6 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
 
-#zk code
+
 union
 select 
 5 as Query_num,
 count( cf.id ) as Total_form
-from atif_career.career_form as cf where cf.form_source=0 and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
+from atif_career.career_form as cf where cf.form_source=0 and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
 
-union
-select 
-5.1 as Query_num,
-count( cf.id ) as Total_form
-from atif_career.career_form as cf 
-left join atif_career.log_career_form as l on l.form_id=cf.id
-where cf.form_source=0 and l.id is null and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01' 
-
-#zk code
 
 union
 select 
@@ -1814,19 +1459,7 @@ left join atif_career.log_career_form as l on l.form_id=cf.id
 where cf.form_source=0 
 and l.id is not null
 
-# Applicants_moved_to zk-ak
-union 
-select 235 as Query_num,
-count( d.id ) as Total_form
-from(
-select (l.form_id) as id  from atif_career.log_career_form as l
-where l.status_id= 1  and l.stage_id =4  
-union 
-select (l.id) as id  from atif_career.career_form as l 
-where l.status_id=1 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-and (l.form_source=0 or l.form_source=1 ) 
-) as d
-# Applicants_moved_to zk-ak
+
 
 union
 select 7 as Query_num,
@@ -1862,6 +1495,7 @@ group by cff.form_id
 )
 ) as dd on dd.form_id = cf.id
 where (cf.status_id=12 or cf.status_id=10 ) 
+
 and dd.status_id=1 and cf.stage_id=1 and cf.form_source=1 and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
 
 
@@ -1871,8 +1505,9 @@ select
 count( cf.id ) as Total_form
 from atif_Career.career_form as cf
 left join ( 
-select * from atif_career.log_career_form as cf
-where cf.id in(   
+
+ select * from atif_career.log_career_form as cf
+ where cf.id in(   
 select max(cff.id)
 from atif_career.log_career_form as cff  
 where cff.status_id <> 10 and cff.status_id <> 12
@@ -1892,43 +1527,25 @@ left join atif_career.career_form_data as u on u.form_id=cf.id and u.status_id=1
 where cf.status_id=2
 and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
  and cf.stage_id=8
-And ( u.date is null or u.date >= curdate())
+And ( u.date is null or u.date >= curdate() )
 
 
-/*union
+
+union
 select 
 12 as Query_num,
 count( f.form_id ) as Total_form
 from (
 select  count(l.form_id) as form_id from atif_career.log_career_form as l 
-where l.status_id = 2 
+where l.status_id > 1 
 and l.status_id != 10 
 and l.status_id != 11 
 and l.status_id != 12 
 and l.status_id != 13
 and l.stage_id != 8 
 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-group by l.form_id ) as f */
+group by l.form_id ) as f  
 
-#edit add by zk
-union
-select 
-12 as Query_num,
-count( f.form_id ) as Total_form
-from ( 
-select (cf.form_id) as form_id from atif_career.career_form_data as cf 
-left join atif_career.career_form as cfd on cfd.id = cf.form_id
-left join  atif_career.log_career_form as lcf on lcf.form_id = cfd.id
-where cf.status_id = 2 
-and cf.status_id != 10 
-and cf.status_id != 11 
-and cf.status_id != 12 
-and cf.status_id != 13
-and cf.stage_id != 8 
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-group by cf.form_id
- )as f
-#edit add by zk
 
 union
 
@@ -1936,7 +1553,7 @@ select
 13 as Query_num,
 count(dd.Total_form) from(
 select 
- ( cf.form_id ) as Total_form
+ ( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
 and (cf.stage_id=5 or cf.stage_id=6 or cf.stage_id=13) 
@@ -1967,7 +1584,6 @@ select
 from atif_Career.career_form as cf 
 left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
 where cf.status_id=2 and ( u.date is null or u.date < curdate() ) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-and cf.stage_id not in (6,10,12)
 ) as dd
 
 
@@ -1987,43 +1603,26 @@ select
 from atif_Career.career_form as cf 
 left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
 where cf.status_id=2 and ( u.date is null or u.date < curdate() ) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
+
+
 and from_unixtime(cf.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 7 day )
-and cf.stage_id not in (6,10,12)
 ) as dd
 
 union 
 select 
 16 as Query_num,
-count( distinct cf.form_id ) as Total_form
+count( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
-where cf.status_id=1
+where cf.status_id=2 
 and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
 
 union 
-select 17 as Query_num,
-sum( d.Total_form ) as Total_form
- from (
 select 
-count( cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=2 
-and cf.stage_id=6
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'  
-union
-select 
-count( cf.id ) as Total_form
-from atif_Career.career_form as cf 
-where cf.status_id=2 
-and cf.stage_id=6
-) as d
-
-/*select 
 17 as Query_num,
-count( cf.form_id ) as Total_form
+count( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=2 
-and cf.stage_id=6
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'  */
+and (cf.stage_id=6)  
 
 
 union
@@ -2058,7 +1657,7 @@ And ( u.date is null or u.date >= curdate() )*/
 
 select 
 20 as Query_num, 
-(ff.Total_form) as Total_form
+sum(ff.Total_form) as Total_form
 from(
 select 
 (
@@ -2075,13 +1674,11 @@ select * from atif_career.career_form_data as s where s.id in(
 select 
 max( cf.id ) as latest
 from atif_career.career_form_data as cf 
-where  from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=3 and f.stage_id = 8 and (
+where f.status_id=3 and (
 case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd 
-where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
 else d.date
 end
 )  >=  curdate() ) as ff
@@ -2119,7 +1716,7 @@ max( cf.id ) as latest
 from atif_career.career_form_data as cf 
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=3 and f.stage_id = 4
+where f.status_id=3
 ) as f_data
 where f_data.p_date >= curdate()
 
@@ -2130,13 +1727,17 @@ union
 select 
 23 as Query_num, 
 count(ff.Total_form) as Total_form
+
 from(
+
+
 select 
 curdate() as p_date,
 ( cf.id ) as Total_form, cf.form_id as form_id
 from atif_Career.log_career_form as cf 
 where cf.status_id=3 
 and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   group by cf.form_id
+
 union
 select 
 (
@@ -2146,6 +1747,7 @@ else d.date
 end
 ) as p_date,
 ( d.date ) as Total_form, f.id as form_id
+
 from atif_career.career_form as f
 left outer join (
 select * from atif_career.career_form_data as s where s.id in(
@@ -2187,7 +1789,7 @@ max( cf.id ) as latest
 from atif_career.career_form_data as cf 
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=3 and f.stage_id not in (6,10,12) and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+where f.status_id=3 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
 case when d.date = '1970-01-01' then 
 (select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
 else d.date
@@ -2218,7 +1820,7 @@ max( cf.id ) as latest
 from atif_career.career_form_data as cf 
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=3 and f.stage_id not in (6,10,12) and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+where f.status_id=3 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
 case when d.date = '1970-01-01' then 
 (select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
 else d.date
@@ -2229,21 +1831,8 @@ end
 union
 select 
 26 as Query_num,
-sum( d.Total_form ) as Total_form
- from (
-select 
-count( cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=3 
-and cf.stage_id=6
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'  
-union
-select 
-count( cf.id ) as Total_form
-from atif_Career.career_form as cf 
-where cf.status_id=3 
-and cf.stage_id=6
-) as d
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=3 and l.stage_id=6
 
 
 
@@ -2251,16 +1840,14 @@ union
 select 
 27 as Query_num,
 count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=3 and l.stage_id=6
+from atif_career.career_form as l where l.status_id=2 and l.stage_id=6
 
 
 union
 select 
 28 as Query_num,
-count( distinct cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=2 
-and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=3 and l.stage_id=13
 
 
 union
@@ -2316,7 +1903,7 @@ max( cf.id ) as latest
 from atif_career.career_form_data as cf 
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=4 and f.stage_id=8 and (
+where f.status_id=4 and (
 case when d.date = '1970-01-01' then 
 (select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
 else d.date
@@ -2355,7 +1942,7 @@ max( cf.id ) as latest
 from atif_career.career_form_data as cf 
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=4  and f.stage_id =4
+where f.status_id=4
 ) as f_data
 where f_data.p_date >= curdate()
 
@@ -2366,6 +1953,7 @@ union
 select 
 34 as Query_num, 
 sum(ff.Total_form) as Total_form
+
 from(
 select 
 curdate() as p_date,
@@ -2373,6 +1961,7 @@ count( Distinct (cf.form_id) ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=4 
 and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
 union
 select 
 (
@@ -2462,30 +2051,12 @@ end
 )  <  curdate() and from_unixtime(f.modified, '%Y-%m-%d') < ( curdate() - INTERVAL 7 day ) ) as ff
 
 
-/*union
+union
 select 
 37 as Query_num,
 count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=15 and l.stage_id=8*/
+from atif_career.career_form as l where l.status_id=4 and l.stage_id=6
 
-union
-select 
-37 as Query_num,
-sum( d.Total_form ) as Total_form
- from (
-select 
-count( cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=4 
-and cf.stage_id=6
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'  
-union
-select 
-count( cf.id ) as Total_form
-from atif_Career.career_form as cf 
-where cf.status_id=4 
-and cf.stage_id=6
-) as d
 
 
 union
@@ -2505,10 +2076,8 @@ where f.status_id=12 and d.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') 
 union
 select 
 39 as Query_num,
-count( distinct cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=3 
-and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=4 and l.stage_id=13 
 
 # End Obervation
 
@@ -2541,7 +2110,7 @@ max( cf.id ) as latest
 from atif_career.career_form_data as cf 
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=5  and f.stage_id=8 and (
+where f.status_id=5  and (
 case when d.date = '1970-01-01' and from_unixtime(d.created ,'%Y-%m-%d') >= '2018-10-01' then 
 (select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
 else d.date
@@ -2643,7 +2212,7 @@ max( cf.id ) as latest
 from atif_career.career_form_data as cf 
 group by cf.form_id )
 ) as d on d.form_id = f.id
-where f.status_id=5 and f.stage_id=4
+where f.status_id=5
 ) as f_data
 where f_data.p_date >= curdate()
 
@@ -2654,6 +2223,7 @@ union
 select 
 43 as Query_num, 
 sum(ff.Total_form) as Total_form
+
 from(
 select 
 curdate() as p_date,
@@ -2661,6 +2231,7 @@ count( cf.id ) as Total_form
 from atif_Career.log_career_form as cf 
 where cf.status_id=5 
 and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)  
+
 union
 select 
 (
@@ -2670,6 +2241,7 @@ else d.date
 end
 ) as p_date,
 count( d.date ) as Total_form
+
 from atif_career.career_form as f
 left outer join (
 select * from atif_career.career_form_data as s where s.id in(
@@ -2717,25 +2289,6 @@ end
 )  <  curdate() ) as ff
 
 
-/*select 
-44 as Query_num,
- count(dd.Total_form) from(
-select 
- ( cf.id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=5 
-and (cf.status_id=12 or cf.status_id=10 )  
-union
-select
- ( cf.id ) as Total_form
-from atif_Career.career_form as cf 
-left join atif_career.career_form_data as u on u.form_id = cf.id and u.status_id=1
-where cf.status_id=5 and ( u.date is null or u.date < curdate() ) 
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-and cf.stage_id not in (6,10,12)
-) as dd*/
-
-
 union
 select 
 45 as Query_num, 
@@ -2766,30 +2319,11 @@ end
 ) <  curdate() < ( curdate() - INTERVAL 7 day ) ) as ff 
 
 
-/*union
+union
 select 
 46 as Query_num,
 count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=5 and l.stage_id=6*/
-
-union
-select 
-46 as Query_num,
-sum( d.Total_form ) as Total_form
- from (
-select 
-count( cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=5 
-and cf.stage_id=6
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'  
-union
-select 
-count( cf.id ) as Total_form
-from atif_Career.career_form as cf 
-where cf.status_id=5
-and cf.stage_id=6
-) as d
+from atif_career.career_form as l where l.status_id=5 and l.stage_id=6
 
 
 
@@ -2810,322 +2344,10 @@ where (f.status_id=12 or f.status_id=10 ) and d.status_id=5 and from_unixtime(f.
 union
 select 
 48 as Query_num,
-count( distinct cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=4 
-and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
+count( l.id ) as Total_form
+from atif_career.career_form as l where l.status_id=5 and l.stage_id=13 
 
 # End Final Consultation
-
-union
-select 
-49 as Query_num,
-count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=6 and l.stage_id=8 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-
-union
-select 
-49.2 as Query_num,
-count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=7 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-
-# Offer Preparation from Final Consultation Allocation
-union
-select
-49.1 as Query_num, 
-count( d.Total_form ) as Total_form  from (
-select 
-( cf.id ) as Total_form 
-from atif_Career.log_career_form as cf 
-where cf.form_id in 
-(
-select 
-af.id as career_id     
-from atif_career.career_form as af 
-left outer join (
-select 
-(
-case when s.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.date
-end
-) as p_date,
-(
-case when s.date = '1970-01-01' then 
-(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.time
-end
-) as p_time,
-(
-case when s.date = '1970-01-01' then 
-(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.campus
-end
-) as p_campus,
-s.* from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id  
-)
-) 
-as d on d.form_id = af.id
-left join atif_career.career_status as cs on cs.id = af.status_id 
-left join atif_career.career_stage as ct on ct.id = af.stage_id 
-left join (
-select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
-from atif_career.log_career_form as lcf where  from_unixtime(lcf.modified ,'%Y-%m-%d') >= '2018-10-01'
-order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE af.id in (
-select 
-cf.form_id
-from atif_Career.log_career_form as cf 
-where cf.status_id = 6
-) and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
-)  group by cf.form_id ) as d
-# Offer Preparation from Final Consultation Allocation
-
-
-union
-select 
-50 as Query_num,
-count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=7 and stage_id = 8  and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-
-# Overall applicants marked Present for Offer Procedureion
-union
-select
-50.1 as Query_num, 
-count( d.Total_form ) as Total_form  from (
-select 
-( cf.id ) as Total_form 
-from atif_Career.log_career_form as cf 
-where cf.form_id in 
-(
-select 
-af.id as career_id     
-from atif_career.career_form as af 
-left outer join (
-select 
-(
-case when s.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.date
-end
-) as p_date,
-(
-case when s.date = '1970-01-01' then 
-(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.time
-end
-) as p_time,
-(
-case when s.date = '1970-01-01' then 
-(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.campus
-end
-) as p_campus,
-s.* from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id  
-)
-) 
-as d on d.form_id = af.id
-left join atif_career.career_status as cs on cs.id = af.status_id 
-left join atif_career.career_stage as ct on ct.id = af.stage_id 
-left join (
-select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
-from atif_career.log_career_form as lcf where  from_unixtime(lcf.modified ,'%Y-%m-%d') >= '2018-10-01'
-order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE af.id in (
-select 
-cf.form_id
-from atif_Career.log_career_form as cf 
-where cf.status_id = 6 and cf.stage_id = 8
-) and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
-)  group by cf.form_id ) as d
-# Overall applicants marked Present for Offer Procedure
-
-# Overall applicants moved to Followup for Offer Procedure
-union
-select 
-50.2 as Query_num, 
-sum(ff.Total_form) as Total_form
-from(
-select 
-curdate() as p_date,
-count( cf.id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=7 
-and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)  
-union
-select 
-(
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  order by dd.id desc limit 1) 
-else d.date
-end
-) as p_date,
-count( d.date ) as Total_form
-from atif_career.career_form as f
-left outer join (
-select * from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id )
-) as d on d.form_id = f.id
-where f.status_id=7 and from_unixtime(d.created ,'%Y-%m-%d') >= '2018-10-01' and (
-case when d.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-else d.date
-end
-)  < curdate()
-) as ff
-# Overall applicants moved to Followup for Offer Procedure
-
-# Overall applicants moved to Extension from Followup for Offer Procedure
-union
-select 
-50.3 as Query_num,
-count( distinct cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=6 
-and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-# Overall applicants moved to Extension from Followup for Offer Procedure
-
-# Overall applicants moved to Not interested from Followup for Offer Procedure 
-union
-select 
-50.4 as Query_num,
-count( cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=7 
-and cf.stage_id=6
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-# Overall applicants moved to Not interested from Followup for Offer Procedure 
-
-union
-select 
-51 as Query_num,
-count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=7 and stage_id = 4  and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-
-# Overall applicants moved to Complete Checklist from Offer Procedure 
-union
-select
-51.1 as Query_num, 
-count( d.Total_form ) as Total_form  from (
-select 
-( cf.id ) as Total_form 
-from atif_Career.log_career_form as cf 
-where cf.form_id in 
-(
-select 
-af.id as career_id     
-from atif_career.career_form as af 
-left outer join (
-select 
-(
-case when s.date = '1970-01-01' then 
-(select dd.date from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.date
-end
-) as p_date,
-(
-case when s.date = '1970-01-01' then 
-(select dd.time from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.time
-end
-) as p_time,
-(
-case when s.date = '1970-01-01' then 
-(select dd.campus from atif_career.career_form_data as dd where dd.id < s.id 
-and dd.form_id= s.form_id order by dd.id desc limit 1)
-else s.campus
-end
-) as p_campus,
-s.* from atif_career.career_form_data as s where s.id in(
-select 
-max( cf.id ) as latest
-from atif_career.career_form_data as cf 
-group by cf.form_id  
-)
-) 
-as d on d.form_id = af.id
-left join atif_career.career_status as cs on cs.id = af.status_id 
-left join atif_career.career_stage as ct on ct.id = af.stage_id 
-left join (
-select lcf.form_id, (lcf.created) as created, (lcf.modified) as modified, lcf.status_id, lcf.stage_id
-from atif_career.log_career_form as lcf where  from_unixtime(lcf.modified ,'%Y-%m-%d') >= '2018-10-01'
-order by lcf.created limit 1) as lcf on lcf.form_id = af.id
-WHERE af.id in (
-select 
-cf.form_id
-from atif_Career.log_career_form as cf 
-where cf.status_id = 7 and cf.stage_id = 8
-) and from_unixtime(af.created ,'%Y-%m-%d') >= '2018-10-01'
-)  group by cf.form_id ) as d
-# Overall applicants moved to Complete Checklist from Offer Procedure 
-
-union
-select 
-52 as Query_num,
-count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=8 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-
-# Overall applicants moved to Followup For Complete Checklist
-union
-select 
-52.1 as Query_num, 
-count(cf.id) as Total_form
-from atif_Career.career_form as cf 
-where cf.status_id=8
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-# Overall applicants moved to Followup For Complete Checklist
-
-union
-select 
-53 as Query_num,
-count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=9 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
-
-# Overall applicants moved to Extension from Followup For Complete Checklist
-union
-select 
-53.1 as Query_num,
-count( distinct cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=7 
-and (cf.stage_id=13) and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-# Overall applicants moved to Extension from Followup For Complete Checklist
-
-# Overall applicants moved to Not Interested from Followup For Complete Checklist 
-union
-select 
-53.2 as Query_num,
-count( cf.form_id ) as Total_form
-from atif_Career.log_career_form as cf 
-where cf.status_id=8 
-and cf.stage_id=6
-and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'
-# Overall applicants moved to Not Interested from Followup For Complete Checklist 
-
-union
-select 
-54 as Query_num,
-count( l.id ) as Total_form
-from atif_career.career_form as l where l.status_id=10 and from_unixtime(l.created ,'%Y-%m-%d') >= '2018-10-01'
 
 ";
 

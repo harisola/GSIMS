@@ -32,7 +32,7 @@ class staff_recruitment_reports extends Controller
     
   }
 
-//Add New Controller for Start End Date  Data By Arif Khan
+
 
    public function Get_recruitment_filter(Request $request){
 
@@ -60,8 +60,6 @@ class staff_recruitment_reports extends Controller
                           ]);
       }
 
-      //Add New Controller for Multiple  Data By Arif Khan
-
      public function staff_recruitment_all_reports_data(Request $request){
 
               ini_set('max_execution_time', 50000); 
@@ -82,13 +80,20 @@ class staff_recruitment_reports extends Controller
 
                       }
 
-                     if($subjects !='null' && $subjects !=""){
+                     if($date_depart2 !='null' && $date_depart2 !=""){
 
-                       $all_filter_data=$filterdata->filter_report_data_subjects($subjects);
+                       $all_filter_data=$filterdata->filter_report_data_date_depart2($date_depart2);
 
                       }
 
-                     if($departs !='null'&& $departs !=""){
+                       if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" ){
+
+
+                         $all_filter_data=$filterdata->filter_report_data_departs_dates($date_depart1,$date_depart2);
+                         }
+
+
+                     /*if($departs !='null'&& $departs !=""){
 
                        $all_filter_data=$filterdata->filter_report_data_departs($departs);
  
@@ -175,15 +180,12 @@ class staff_recruitment_reports extends Controller
                       if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" &&  $campus !='null' && $campus !="" &&  $Onlinew !='null' && $Onlinew !="" && $departs !='null' && $departs !="" && $subjects !='null' && $subjects !="" && $designations !='null' && $designations !="" ){
 
                          $all_filter_data=$filterdata->filter_report_data_departs_dates_campus_online_desig_subject_all($date_depart1,$date_depart2,$departs,$subjects,$designations,$campus,$Onlinew);
-                        }
+                        }*/
 
-                      if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $subjects !='null' && $subjects !="" && $campus !='null'  && $campus !=""   ){
-
-                         $all_filter_data=$filterdata->filter_report_data_departs_dates_campus_subject_all($date_depart1,$date_depart2,$subjects,$campus);
-                         }
+                     
 
 
-                         if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $subjects !='null' && $subjects !=""){
+                         /*if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !="" && $subjects !='null' && $subjects !=""){
 
                           $all_filter_data=$filterdata->filter_report_data_departs_dates_subject_all($date_depart1,$date_depart2,$subjects);
                          }
@@ -242,11 +244,11 @@ class staff_recruitment_reports extends Controller
                            if($date_depart1 !='null' && $date_depart1 !="" && $date_depart2 !='null' && $date_depart2 !=""&& $subjects !='null'  && $subjects !="" && $designations !='null'  && $designations !=""   ){
 
                           $all_filter_data=$filterdata->filter_report_data_departs_dates_desig_subject($date_depart1,$date_depart2,$subjects,$designations);
-                         }
+                         }*/
 
                            //Select All Data //
 
-                           if($date_depart1 =="" && $date_depart2 =="" && $departs =='null' && $subjects =='null' && $designations =='null' && $campus =="" && $Onlinew ==""){
+                           if($date_depart1 =="" && $date_depart2 =="" ){
 
                                  $all_filter_data=$filterdata->filter_report_data_departs_dates_depart_null();
                              }
@@ -256,7 +258,7 @@ class staff_recruitment_reports extends Controller
 
       }
 
-    //Add New Controller for Current Date Data By Arif Khan
+
       public function today_report(Request $request){
 
         $date_2 = $request['today_date'];

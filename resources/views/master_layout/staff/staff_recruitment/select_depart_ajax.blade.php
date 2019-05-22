@@ -1,6 +1,6 @@
 
 
-								<select placeholder="Department" class="form-control" id="depart_id_1">
+								<select placeholder="Department" class="form-control" id="depart_id_1" required="required">
                                   <!-- {{@$get_depart[0]->id}} -->
                                   <!-- <option disabled="disabled" selected="">Department</option> -->
                                   <option value="" disabled > Select Department</option>
@@ -14,7 +14,7 @@
                                      </select>
 <br />
 
-                                     <select placeholder="Levels" class="form-control" id="level_id_1">
+                                     <select placeholder="Levels" class="form-control" id="level_id_1" required="required">
                               <!-- <option disabled="disabled" selected="">Levels</option> -->
                                        <option value="" disabled > Select Level</option>
                                    <?php foreach($get_level as $get_levels){

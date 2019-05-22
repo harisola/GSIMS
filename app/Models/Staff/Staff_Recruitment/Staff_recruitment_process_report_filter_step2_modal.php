@@ -2697,2374 +2697,2141 @@ class Staff_recruitment_process_report_filter_step2_modal extends Model
 
 						}
 
-
-						public function Applicants_awaiting_for_Observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
-
-			///////////////////////////AKHAN ///////////////////////////////
-
-				  	if( $departmentFilter !='null' && $departmentFilter !=""){
-						$departmentFilter = explode(",", $departmentFilter);
-
-						  $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and  dd.depart_id IN('".implode("','", $departmentFilter)."')  order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-					}
-
-
-					if( $subjectFilter !='null' && $subjectFilter !=""){
-						$subjectFilter = explode(",", $subjectFilter);
-
-						 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.tag IN('".implode("','", $subjectFilter)."')  order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						   $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-
-					}
-
-
-					if( $designationFilter !='null' && $designationFilter !=""){
-						$designationFilter = explode(",", $designationFilter);
-
-						 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.level_id IN('".implode("','", $designationFilter)."')  order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-
-					}
-
-
-
-
-					if( $campusFilter !='null' && $campusFilter !=""){
-						$campusFilter = explode(",", $campusFilter);
-
-						 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id   and dd.campus IN('".implode("','", $campusFilter)."')  order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-					}
-
-					if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						   $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						  $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id   and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
-
-						
-
-						  $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						
-
-						  $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."')  order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-
-					}
-
-
-
-					if( $formSourceFilter !='null' && $formSourceFilter !=""){
-						$formSourceFilter = explode(",", $formSourceFilter);
-
-						  $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and f.form_source IN('".implode("','", $formSourceFilter)."')  order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-
-					}
-
-
-					/////////////////////////AKHAN ///////////////////////////////
-
-
-
-
-
-
-
-
-							if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
-							$Query="select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4  and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-
-								}
-
-
-
-								if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !=""){
-
-								//$departmentFilter = explode(",", $departmentFilter);
-
-									 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."')  order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-									}
-
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-
-									 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""){
-
-
-									 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-									}
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
-
-								
-
-									 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."')  and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-									}
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
-
-
-									 $Query = "select 
-									31 as Query_num, 
-									sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
-									from(
-									select 
-									(
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
-									and dd.form_id= d.form_id order by dd.id desc limit 1)
-									else d.date
-									end
-									) as p_date,
-									count( d.date ) as awaiting_for_Observation 
-									from atif_career.career_form as f
-									left outer join (
-									select * from atif_career.career_form_data as s where s.id in(
-									select 
-									max( cf.id ) as latest
-									from atif_career.career_form_data as cf 
-									group by cf.form_id )
-									) as d on d.form_id = f.id
-									where f.status_id=4 and (
-									case when d.date = '1970-01-01' then 
-									(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."')  and dd.campus IN('".implode("','", $campusFilter)."')and f.form_source IN('".implode("','", $formSourceFilter)."') order by dd.id desc limit 1)
-									else d.date
-									end
-									)  >=  curdate() ) as ff";
-								}
-
-
-									
-
-
-						$getStatus = DB::connection($this->dbCon)->select($Query);
-
-							return $getStatus;
-						}
-
-
-
-						public function Overall_applicants_marked_Present_for_Observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
-
-
-
-							///////////////////////////AKHAN ///////////////////////////////
-
-				  	if( $departmentFilter !='null' && $departmentFilter !=""){
-						$departmentFilter = explode(",", $departmentFilter);
-
-						   $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+//zk
+	public function Applicants_awaiting_for_Observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
+
+		///////////////////////////AKHAN ///////////////////////////////
+
+	  	if( $departmentFilter !='null' && $departmentFilter !=""){
+			$departmentFilter = explode(",", $departmentFilter);
+
+			  $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and  dd.depart_id IN('".implode("','", $departmentFilter)."')  order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $subjectFilter !='null' && $subjectFilter !=""){
+			$subjectFilter = explode(",", $subjectFilter);
+
+			 $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.tag IN('".implode("','", $subjectFilter)."')  order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			   $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !=""){
+			$designationFilter = explode(",", $designationFilter);
+
+			 $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.level_id IN('".implode("','", $designationFilter)."')  order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $campusFilter !='null' && $campusFilter !=""){
+			$campusFilter = explode(",", $campusFilter);
+
+			 $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id   and dd.campus IN('".implode("','", $campusFilter)."')  order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			   $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			  $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id   and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
+
+			
+
+			  $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			
+
+			  $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."')  order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if( $formSourceFilter !='null' && $formSourceFilter !=""){
+			$formSourceFilter = explode(",", $formSourceFilter);
+
+			  $Query = "select 
+						31 as Query_num, 
+						sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+						from(
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+						and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as awaiting_for_Observation 
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and f.form_source IN('".implode("','", $formSourceFilter)."')  order by dd.id desc limit 1)
+						else d.date
+						end
+						)  >=  curdate() ) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
+		
+			$Query="select 
+				31 as Query_num, 
+				sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+				from(
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+				and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date,
+				count( d.date ) as awaiting_for_Observation 
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4  and (
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' order by dd.id desc limit 1)
+				else d.date
+				end
+				)  >=  curdate() ) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !=""){
+			//$departmentFilter = explode(",", $departmentFilter);
+
+			$Query = "select 
+				31 as Query_num, 
+				sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+				from(
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+				and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date,
+				count( d.date ) as awaiting_for_Observation 
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and (
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."')  order by dd.id desc limit 1)
+				else d.date
+				end
+				)  >=  curdate() ) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+
+			$Query = "select 
+			31 as Query_num, 
+			sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+			from(
+			select 
+			(
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+			and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			) as p_date,
+			count( d.date ) as awaiting_for_Observation 
+			from atif_career.career_form as f
+			left outer join (
+			select * from atif_career.career_form_data as s where s.id in(
+			select 
+			max( cf.id ) as latest
+			from atif_career.career_form_data as cf 
+			group by cf.form_id )
+			) as d on d.form_id = f.id
+			where f.status_id=4 and (
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
+			else d.date
+			end
+			)  >=  curdate() ) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""){
+
+			$Query = "select 
+				31 as Query_num, 
+				sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+				from(
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+				and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date,
+				count( d.date ) as awaiting_for_Observation 
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and (
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
+				else d.date
+				end
+				)  >=  curdate() ) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
+
+			$Query = "select 
+			31 as Query_num, 
+			sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+			from(
+			select 
+			(
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+			and dd.form_id= d.form_id order by dd.id desc limit 1)
+			else d.date
+			end
+			) as p_date,
+			count( d.date ) as awaiting_for_Observation 
+			from atif_career.career_form as f
+			left outer join (
+			select * from atif_career.career_form_data as s where s.id in(
+			select 
+			max( cf.id ) as latest
+			from atif_career.career_form_data as cf 
+			group by cf.form_id )
+			) as d on d.form_id = f.id
+			where f.status_id=4 and (
+			case when d.date = '1970-01-01' then 
+			(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."')  and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
+			else d.date
+			end
+			)  >=  curdate() ) as ff";
+		
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
+
+
+			$Query = "select 
+				31 as Query_num, 
+				sum(ff.awaiting_for_Observation ) as awaiting_for_Observation 
+				from(
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id 
+				and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date,
+				count( d.date ) as awaiting_for_Observation 
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and (
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."')  and dd.campus IN('".implode("','", $campusFilter)."')and f.form_source IN('".implode("','", $formSourceFilter)."') order by dd.id desc limit 1)
+				else d.date
+				end
+				)  >=  curdate() ) as ff";
+		}
+			$getStatus = DB::connection($this->dbCon)->select($Query);
+			return $getStatus;
+	}
+
+
+
+	public function Overall_applicants_marked_Present_for_Observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
+
+		///////////////////////////AKHAN ///////////////////////////////
+	  	if( $departmentFilter !='null' && $departmentFilter !=""){
+			$departmentFilter = explode(",", $departmentFilter);
+
+			   $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and u.depart_id IN('".implode("','", $departmentFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $subjectFilter !='null' && $subjectFilter !=""){
+			$subjectFilter = explode(",", $subjectFilter);
+
+			  $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			    $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $designationFilter !='null' && $designationFilter !=""){
+			$designationFilter = explode(",", $designationFilter);
+
+			  $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and u.level_id IN('".implode("','", $designationFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $campusFilter !='null' && $campusFilter !=""){
+			$campusFilter = explode(",", $campusFilter);
+
+			 $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			    $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and u.level_id IN('".implode("','", $designationFilter)."') and u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			   $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and  u.depart_id IN('".implode("','", $departmentFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
+
+			
+
+			  $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and u.level_id IN('".implode("','", $designationFilter)."') and u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			
+
+			  $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.level_id IN('".implode("','", $designationFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if( $formSourceFilter !='null' && $formSourceFilter !=""){
+			$formSourceFilter = explode(",", $formSourceFilter);
+
+			 $Query = "select 
+							32 as Query_num, 
+							count( cf.id ) as marked_Present_for_job  
+							from atif_Career.log_career_form as cf left join atif_career.career_form as f
+							  on f.id= cf.form_id left join atif_career.career_form_data as u
+							  on u.form_id= cf.form_id
+							where cf.status_id=4 
+							and (cf.stage_id=4) and f.form_source IN('".implode("','", $formSourceFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		/////////////////////////AKHAN //////////////////////////////
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
+
+				$Query = "select 
+					32 as Query_num, 
+					count( cf.id ) as marked_Present_for_job  
+					from atif_Career.log_career_form as cf left join atif_career.career_form as f
+					  on f.id= cf.form_id
+					where cf.status_id=4 
+					and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" ){
+
+			//$departmentFilter = explode(",", $departmentFilter);
+
+		 $Query = "select 
+			32 as Query_num, 
+			count( cf.id ) as marked_Present_for_job  
+			from atif_Career.log_career_form as cf left join atif_career.career_form as f
+			  on f.id= cf.form_id left join atif_career.career_form_data as u
+			  on u.form_id= cf.form_id
+			where cf.status_id=4 
+			and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" ){
+
+
+		 $Query = "select 
+			32 as Query_num, 
+			count( cf.id ) as marked_Present_for_job  
+			from atif_Career.log_career_form as cf left join atif_career.career_form as f
+			  on f.id= cf.form_id left join atif_career.career_form_data as u
+			  on u.form_id= cf.form_id
+			where cf.status_id=4 
+			and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !="" ){
+
+
+		 $Query = "select 
+			32 as Query_num, 
+			count( cf.id ) as marked_Present_for_job  
+			from atif_Career.log_career_form as cf left join atif_career.career_form as f
+			  on f.id= cf.form_id left join atif_career.career_form_data as u
+			  on u.form_id= cf.form_id
+			where cf.status_id=4 
+			and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and u.level_id IN('".implode("','", $designationFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
+
+
+		 $Query = "select 
+			32 as Query_num, 
+			count( cf.id ) as marked_Present_for_job  
+			from atif_Career.log_career_form as cf left join atif_career.career_form as f
+			  on f.id= cf.form_id left join atif_career.career_form_data as u
+			  on u.form_id= cf.form_id
+			where cf.status_id=4 
+			and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
+
+
+		 $Query = "select 
+			32 as Query_num, 
+			count( cf.id ) as marked_Present_for_job  
+			from atif_Career.log_career_form as cf left join atif_career.career_form as f
+			  on f.id= cf.form_id left join atif_career.career_form_data as u
+			  on u.form_id= cf.form_id
+			where cf.status_id=4 
+			and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and  f.form_source IN('".implode("','", $formSourceFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+		$getStatus = DB::connection($this->dbCon)->select($Query);
+		return $getStatus;
+
+	}
+
+	public function Applicants_currently_in_Observation_awaiting_for_Next_Step_decision($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
+
+		///////////////////////////AKHAN ///////////////////////////////
+
+		if( $departmentFilter !='null' && $departmentFilter !=""){
+			$departmentFilter = explode(",", $departmentFilter);
+
+			$Query = "select 
+						33 as Query_num, 
+						count( f_data.p_date ) as currently_in_Observatio_for 
+						from (
+						select 
+						(
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and  d.depart_id IN('".implode("','", $departmentFilter)."')
+						) as f_data
+						where f_data.p_date >= curdate() ";
+		}
+
+		if( $subjectFilter !='null' && $subjectFilter !=""){
+			$subjectFilter = explode(",", $subjectFilter);
+
+			  $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and d.tag IN('".implode("','", $subjectFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			     $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and  d.depart_id IN('".implode("','", $departmentFilter)."') and  d.tag IN('".implode("','", $subjectFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !=""){
+			$designationFilter = explode(",", $designationFilter);
+
+			   $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and d.level_id IN('".implode("','", $designationFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $campusFilter !='null' && $campusFilter !=""){
+			$campusFilter = explode(",", $campusFilter);
+
+			 $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and  d.campus IN('".implode("','", $campusFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			     $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and  d.level_id IN('".implode("','", $designationFilter)."')  and  d.campus IN('".implode("','", $campusFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			    $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and d.depart_id IN('".implode("','", $departmentFilter)."') and d.campus IN('".implode("','", $campusFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
+
+			  $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and d.level_id IN('".implode("','", $designationFilter)."') and d.depart_id IN('".implode("','", $departmentFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			
+
+			   $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and  d.level_id IN('".implode("','", $designationFilter)."') and  d.tag IN('".implode("','", $subjectFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if( $formSourceFilter !='null' && $formSourceFilter !=""){
+			$formSourceFilter = explode(",", $formSourceFilter);
+
+			 $Query = "select 
+								33 as Query_num, 
+								count( f_data.p_date ) as currently_in_Observatio_for 
+								from (
+								select 
+								(
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and f.form_source IN('".implode("','", $formSourceFilter)."')
+								) as f_data
+								where f_data.p_date >= curdate() ";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
+
+			 $Query = "select 
+					33 as Query_num, 
+					count( f_data.p_date ) as currently_in_Observatio_for 
+					from (
+					select 
+					(
+					case when d.date = '1970-01-01' then 
+					(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+					else d.date
+					end
+					) as p_date
+					from atif_career.career_form as f
+					left outer join (
+					select * from atif_career.career_form_data as s where s.id in(
+					select 
+					max( cf.id ) as latest
+					from atif_career.career_form_data as cf 
+					group by cf.form_id )
+					) as d on d.form_id = f.id
+					where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'
+					) as f_data
+					where f_data.p_date >= curdate()";	
+
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" ){
+
+			//$departmentFilter = explode(",", $departmentFilter);
+
+			$Query = "select 
+				33 as Query_num, 
+				count( f_data.p_date ) as currently_in_Observatio_for 
+				from (
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."')
+				) as f_data
+				where f_data.p_date >= curdate() ";
+
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+
+			$Query = "select 
+				33 as Query_num, 
+				count( f_data.p_date ) as currently_in_Observatio_for 
+				from (
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and  d.tag IN('".implode("','", $subjectFilter)."')
+				) as f_data
+				where f_data.p_date >= curdate()";
+
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""){
+
+
+			$Query = "select 
+				33 as Query_num, 
+				count( f_data.p_date ) as currently_in_Observatio_for 
+				from (
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and d.tag IN('".implode("','", $subjectFilter)."') and d.level_id IN('".implode("','", $designationFilter)."') 
+				) as f_data
+				where f_data.p_date >= curdate()";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
+
+
+			$Query = "select 
+				33 as Query_num, 
+				count( f_data.p_date ) as currently_in_Observatio_for 
+				from (
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and d.tag IN('".implode("','", $subjectFilter)."') and d.level_id IN('".implode("','", $designationFilter)."') and d.campus IN('".implode("','", $campusFilter)."') 
+				) as f_data
+				where f_data.p_date >= curdate()";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
+
+
+			$Query = "select 
+				33 as Query_num, 
+				count( f_data.p_date ) as currently_in_Observatio_for 
+				from (
+				select 
+				(
+				case when d.date = '1970-01-01' then 
+				(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+				else d.date
+				end
+				) as p_date
+				from atif_career.career_form as f
+				left outer join (
+				select * from atif_career.career_form_data as s where s.id in(
+				select 
+				max( cf.id ) as latest
+				from atif_career.career_form_data as cf 
+				group by cf.form_id )
+				) as d on d.form_id = f.id
+				where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and d.tag IN('".implode("','", $subjectFilter)."') and d.level_id IN('".implode("','", $designationFilter)."') and d.campus IN('".implode("','", $campusFilter)."') and f.form_source IN('".implode("','", $formSourceFilter)."')  
+				) as f_data
+				where f_data.p_date >= curdate()";
+		}
+
+		$getStatus = DB::connection($this->dbCon)->select($Query);
+		return $getStatus;
+
+	}
+
+
+	public function Overall_applicant_moved_to_Regret_from_Observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
+
+		///////////////////////////AKHAN ///////////////////////////////
+
+	  	if( $departmentFilter !='null' && $departmentFilter !=""){
+			$departmentFilter = explode(",", $departmentFilter);
+
+			    $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4 and u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $subjectFilter !='null' && $subjectFilter !=""){
+			$subjectFilter = explode(",", $subjectFilter);
+
+			   $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4 and  u.tag IN('".implode("','", $subjectFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			    $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4 and u.depart_id IN('".implode("','", $departmentFilter)."')  and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !=""){
+			$designationFilter = explode(",", $designationFilter);
+
+			    $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4  and  u.level_id IN('".implode("','", $designationFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $campusFilter !='null' && $campusFilter !=""){
+			$campusFilter = explode(",", $campusFilter);
+
+			 $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4 and  u.campus IN('".implode("','", $campusFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			     $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4 and   u.level_id IN('".implode("','", $designationFilter)."')  and   u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			 $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4 and  u.depart_id IN('".implode("','", $departmentFilter)."')  and  u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
+
+			
+
+			   $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4  and  u.level_id IN('".implode("','", $designationFilter)."') and  u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			
+
+			  $Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4  and  u.level_id IN('".implode("','", $designationFilter)."')  and  u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if( $formSourceFilter !='null' && $formSourceFilter !=""){
+			$formSourceFilter = explode(",", $formSourceFilter);
+
+			$Query = "select 
+								38 as Query_num,
+								count( f.id ) as applicant_moved_to_regret_form
+								from atif_career.career_form as f left join atif_career.career_form_data as u
+							  on f.id= u.form_id
+								left join ( 
+								select * from atif_career.log_career_form as lf where lf.id in(
+								select max(l.id) as id
+								from atif_career.log_career_form as l  group by l.form_id )
+								) as d
+								on d.form_id = f.id  
+								where f.status_id=12 and d.status_id=4 and  f.form_source IN('".implode("','", $formSourceFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
+
+
+			$Query = "select 
+						38 as Query_num,
+						count( f.id ) as applicant_moved_to_regret_form
+						from atif_career.career_form as f
+						left join ( 
+						select * from atif_career.log_career_form as lf where lf.id in(
+						select max(l.id) as id
+						from atif_career.log_career_form as l  group by l.form_id )
+						) as d
+						on d.form_id = f.id  
+						where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" ){
+
+			//$departmentFilter = explode(",", $departmentFilter);
+
+
+			 $Query = "select 
+						38 as Query_num,
+						count( f.id ) as applicant_moved_to_regret_form
+						from atif_career.career_form as f left join atif_career.career_form_data as u
+					  on f.id= u.form_id
+						left join ( 
+						select * from atif_career.log_career_form as lf where lf.id in(
+						select max(l.id) as id
+						from atif_career.log_career_form as l  group by l.form_id )
+						) as d
+						on d.form_id = f.id  
+						where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+
+			 $Query = "select 
+				38 as Query_num,
+				count( f.id ) as applicant_moved_to_regret_form
+				from atif_career.career_form as f left join atif_career.career_form_data as u
+			  on f.id= u.form_id
+				left join ( 
+				select * from atif_career.log_career_form as lf where lf.id in(
+				select max(l.id) as id
+				from atif_career.log_career_form as l  group by l.form_id )
+				) as d
+				on d.form_id = f.id  
+				where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and  u.tag IN('".implode("','", $subjectFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !="" ){
+
+			 $Query = "select 
+				38 as Query_num,
+				count( f.id ) as applicant_moved_to_regret_form
+				from atif_career.career_form as f left join atif_career.career_form_data as u
+			  on f.id= u.form_id
+				left join ( 
+				select * from atif_career.log_career_form as lf where lf.id in(
+				select max(l.id) as id
+				from atif_career.log_career_form as l  group by l.form_id )
+				) as d
+				on d.form_id = f.id  
+				where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and   u.level_id IN('".implode("','", $designationFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
+
+
+			 $Query = "select 
+				38 as Query_num,
+				count( f.id ) as applicant_moved_to_regret_form
+				from atif_career.career_form as f left join atif_career.career_form_data as u
+			  on f.id= u.form_id
+				left join ( 
+				select * from atif_career.log_career_form as lf where lf.id in(
+				select max(l.id) as id
+				from atif_career.log_career_form as l  group by l.form_id )
+				) as d
+				on d.form_id = f.id  
+				where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and   u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
+
+
+			$Query = "select 
+				38 as Query_num,
+				count( f.id ) as applicant_moved_to_regret_form
+				from atif_career.career_form as f left join atif_career.career_form_data as u
+			  on f.id= u.form_id
+				left join ( 
+				select * from atif_career.log_career_form as lf where lf.id in(
+				select max(l.id) as id
+				from atif_career.log_career_form as l  group by l.form_id )
+				) as d
+				on d.form_id = f.id  
+				where f.status_id=12 and d.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and   u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and  f.form_source IN('".implode("','", $formSourceFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
+		}
+
+		$getStatus = DB::connection($this->dbCon)->select($Query);
+		return $getStatus;
+
+
+	}
+
+	public function Overall_applicants_moved_to_Followup_for_Observation_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
+
+		/////AKHAN ///////////////////////////////
+
+		if( $departmentFilter !='null' && $departmentFilter !=""){
+			$departmentFilter = explode(",", $departmentFilter);
+
+				$Query = "select 
+						34 as Query_num, 
+						sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+						from(
+						select 
+						curdate() as p_date,
+						count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+						from atif_Career.log_career_form as cf 
+						where cf.status_id=4 
+						and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+						union
+						select 
+						(
+						case when d.date = '1970-01-01'  then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+						else d.date
+						end
+						) as p_date,
+						count( d.date ) as Observation_Presence_Followup
+
+						from atif_career.career_form as f
+						left outer join (
+						select * from atif_career.career_form_data as s where s.id in(
+						select 
+						max( cf.id ) as latest
+						from atif_career.career_form_data as cf 
+						group by cf.form_id )
+						) as d on d.form_id = f.id
+						where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+						case when d.date = '1970-01-01' then 
+						(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.depart_id IN('".implode("','", $departmentFilter)."') order by dd.id desc limit 1)
+						else d.date
+						end
+						)  < curdate()
+						) as ff
+						";
+		}
+
+		if( $subjectFilter !='null' && $subjectFilter !=""){
+			$subjectFilter = explode(",", $subjectFilter);
+
+			 						$Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and u.depart_id IN('".implode("','", $departmentFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
-					if( $subjectFilter !='null' && $subjectFilter !=""){
-						$subjectFilter = explode(",", $subjectFilter);
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
 
-						  $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+		if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+			  $Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
-					}
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
 
-					if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+		if( $designationFilter !='null' && $designationFilter !=""){
+			$designationFilter = explode(",", $designationFilter);
 
-						    $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+			 $Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
-					}
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
 
-					if( $designationFilter !='null' && $designationFilter !=""){
-						$designationFilter = explode(",", $designationFilter);
+		if( $campusFilter !='null' && $campusFilter !=""){
+			$campusFilter = explode(",", $campusFilter);
 
-						  $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+			 				$Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and u.level_id IN('".implode("','", $designationFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
-					}
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
 
+		if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
 
+			
 
-					if( $campusFilter !='null' && $campusFilter !=""){
-						$campusFilter = explode(",", $campusFilter);
+								  $Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
 
-						 $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
-					if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
-						    $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
+
+		if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+
+			
+										$Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and u.level_id IN('".implode("','", $designationFilter)."') and u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
-					if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
 
-						   $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+		if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
+
+			
+
+			 $Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and  u.depart_id IN('".implode("','", $departmentFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.depart_id IN('".implode("','", $departmentFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
 
-					if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
+		if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
 
-						
+			
+			 $Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
 
-						  $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and u.level_id IN('".implode("','", $designationFilter)."') and u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
 
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
 
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
 
-					if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+		if( $formSourceFilter !='null' && $formSourceFilter !=""){
+			$formSourceFilter = explode(",", $formSourceFilter);
 
-						
+			 $Query = "select 
+										34 as Query_num, 
+										sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
 
-						  $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
+										from(
+										select 
+										curdate() as p_date,
+										count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+										from atif_Career.log_career_form as cf 
 										where cf.status_id=4 
-										and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.level_id IN('".implode("','", $designationFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-					}
-
-
-
-					if( $formSourceFilter !='null' && $formSourceFilter !=""){
-						$formSourceFilter = explode(",", $formSourceFilter);
-
-						 $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
-										where cf.status_id=4 
-										and (cf.stage_id=4) and f.form_source IN('".implode("','", $formSourceFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-					}
-
-
-					/////////////////////////AKHAN ///////////////////////////////
-
-
-
-							if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
-
-							$Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id
-										where cf.status_id=4 
-										and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" ){
-
-										//$departmentFilter = explode(",", $departmentFilter);
-
-									 $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
-										where cf.status_id=4 
-										and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" ){
-
-
-									 $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
-										where cf.status_id=4 
-										and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-									}
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !="" ){
-
-
-									 $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
-										where cf.status_id=4 
-										and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and u.level_id IN('".implode("','", $designationFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-									}
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
-
-
-									 $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
-										where cf.status_id=4 
-										and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-									}
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
-
-
-									 $Query = "select 
-										32 as Query_num, 
-										count( cf.id ) as marked_Present_for_job  
-										from atif_Career.log_career_form as cf left join atif_career.career_form as f
-										  on f.id= cf.form_id left join atif_career.career_form_data as u
-										  on u.form_id= cf.form_id
-										where cf.status_id=4 
-										and (cf.stage_id=4) and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and  f.form_source IN('".implode("','", $formSourceFilter)."') and from_unixtime(cf.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-									}
-
-									$getStatus = DB::connection($this->dbCon)->select($Query);
-
-									return $getStatus;
-
-						}
-
-						public function Applicants_currently_in_Observation_awaiting_for_Next_Step_decision($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
-
-							///////////////////////////AKHAN ///////////////////////////////
-
-				  	if( $departmentFilter !='null' && $departmentFilter !=""){
-						$departmentFilter = explode(",", $departmentFilter);
-
-						    $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and  d.depart_id IN('".implode("','", $departmentFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-					}
-
-
-					if( $subjectFilter !='null' && $subjectFilter !=""){
-						$subjectFilter = explode(",", $subjectFilter);
-
-						  $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and d.tag IN('".implode("','", $subjectFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						     $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and  d.depart_id IN('".implode("','", $departmentFilter)."') and  d.tag IN('".implode("','", $subjectFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-
-					}
-
-
-					if( $designationFilter !='null' && $designationFilter !=""){
-						$designationFilter = explode(",", $designationFilter);
-
-						   $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and d.level_id IN('".implode("','", $designationFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-
-					}
-
-
-
-
-					if( $campusFilter !='null' && $campusFilter !=""){
-						$campusFilter = explode(",", $campusFilter);
-
-						 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and  d.campus IN('".implode("','", $campusFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-					}
-
-					if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						     $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and  d.level_id IN('".implode("','", $designationFilter)."')  and  d.campus IN('".implode("','", $campusFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						    $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and d.depart_id IN('".implode("','", $departmentFilter)."') and d.campus IN('".implode("','", $campusFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
-
-						
-
-						  $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and d.level_id IN('".implode("','", $designationFilter)."') and d.depart_id IN('".implode("','", $departmentFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						
-
-						   $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and  d.level_id IN('".implode("','", $designationFilter)."') and  d.tag IN('".implode("','", $subjectFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-
-					}
-
-
-
-					if( $formSourceFilter !='null' && $formSourceFilter !=""){
-						$formSourceFilter = explode(",", $formSourceFilter);
-
-						 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and f.form_source IN('".implode("','", $formSourceFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-
-					}
-
-
-					/////////////////////////AKHAN ///////////////////////////////
-
-
-							if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
-
-									 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'
-											) as f_data
-											where f_data.p_date >= curdate()";	
-
-									}
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" ){
-
-										//$departmentFilter = explode(",", $departmentFilter);
-
-									 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate() ";
-
-
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-
-									 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and  d.tag IN('".implode("','", $subjectFilter)."')
-											) as f_data
-											where f_data.p_date >= curdate()";
-
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""){
-
-
-									 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and d.tag IN('".implode("','", $subjectFilter)."') and d.level_id IN('".implode("','", $designationFilter)."') 
-											) as f_data
-											where f_data.p_date >= curdate()";
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
-
-
-									 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and d.tag IN('".implode("','", $subjectFilter)."') and d.level_id IN('".implode("','", $designationFilter)."') and d.campus IN('".implode("','", $campusFilter)."') 
-											) as f_data
-											where f_data.p_date >= curdate()";
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
-
-
-									 $Query = "select 
-											33 as Query_num, 
-											count( f_data.p_date ) as currently_in_Observatio_for 
-											from (
-											select 
-											(
-											case when d.date = '1970-01-01' then 
-											(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-											else d.date
-											end
-											) as p_date
-											from atif_career.career_form as f
-											left outer join (
-											select * from atif_career.career_form_data as s where s.id in(
-											select 
-											max( cf.id ) as latest
-											from atif_career.career_form_data as cf 
-											group by cf.form_id )
-											) as d on d.form_id = f.id
-											where f.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  d.depart_id IN('".implode("','", $departmentFilter)."') and d.tag IN('".implode("','", $subjectFilter)."') and d.level_id IN('".implode("','", $designationFilter)."') and d.campus IN('".implode("','", $campusFilter)."') and f.form_source IN('".implode("','", $formSourceFilter)."')  
-											) as f_data
-											where f_data.p_date >= curdate()";
-									}
-
-									
-
-
-									$getStatus = DB::connection($this->dbCon)->select($Query);
-
-									return $getStatus;
-
-						}
-
-
-						public function Overall_applicant_moved_to_Regret_from_Observation($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
-
-
-
-							///////////////////////////AKHAN ///////////////////////////////
-
-				  	if( $departmentFilter !='null' && $departmentFilter !=""){
-						$departmentFilter = explode(",", $departmentFilter);
-
-						    $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
-
-
-					if( $subjectFilter !='null' && $subjectFilter !=""){
-						$subjectFilter = explode(",", $subjectFilter);
-
-						   $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  u.tag IN('".implode("','", $subjectFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						    $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and u.depart_id IN('".implode("','", $departmentFilter)."')  and u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-					}
-
-
-					if( $designationFilter !='null' && $designationFilter !=""){
-						$designationFilter = explode(",", $designationFilter);
-
-						    $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4  and  u.level_id IN('".implode("','", $designationFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
-
-
-
-
-					if( $campusFilter !='null' && $campusFilter !=""){
-						$campusFilter = explode(",", $campusFilter);
-
-						 $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  u.campus IN('".implode("','", $campusFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
-
-					if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						     $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and   u.level_id IN('".implode("','", $designationFilter)."')  and   u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						 $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  u.depart_id IN('".implode("','", $departmentFilter)."')  and  u.campus IN('".implode("','", $campusFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
-
-						
-
-						   $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4  and  u.level_id IN('".implode("','", $designationFilter)."') and  u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						
-
-						  $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4  and  u.level_id IN('".implode("','", $designationFilter)."')  and  u.tag IN('".implode("','", $subjectFilter)."') and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-					}
-
-
-
-					if( $formSourceFilter !='null' && $formSourceFilter !=""){
-						$formSourceFilter = explode(",", $formSourceFilter);
-
-						$Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  f.form_source IN('".implode("','", $formSourceFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-					}
-
-
-					/////////////////////////AKHAN ///////////////////////////////
-
-							if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
-
-
-								$Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."'  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-
-
-							}
-
-
-							if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" ){
-
-										//$departmentFilter = explode(",", $departmentFilter);
-
-
-								 $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-
-
-									}
-
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-
-										 $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and  u.tag IN('".implode("','", $subjectFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-
-
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !="" ){
-
-
-										 $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and   u.level_id IN('".implode("','", $designationFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-
-
-									}
-
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
-
-
-										 $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and  from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and   u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-
-
-
-									}
-
-
-									if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
-
-
-										 $Query = "select 
-											38 as Query_num,
-											count( f.id ) as applicant_moved_to_regret_form
-											from atif_career.career_form as f left join atif_career.career_form_data as u
-										  on f.id= u.form_id
-											left join ( 
-											select * from atif_career.log_career_form as lf where lf.id in(
-											select max(l.id) as id
-											from atif_career.log_career_form as l  group by l.form_id )
-											) as d
-											on d.form_id = f.id  
-											where f.status_id=12 and d.status_id=4 and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and  u.depart_id IN('".implode("','", $departmentFilter)."') and u.tag IN('".implode("','", $subjectFilter)."') and   u.level_id IN('".implode("','", $designationFilter)."') and  u.campus IN('".implode("','", $campusFilter)."') and  f.form_source IN('".implode("','", $formSourceFilter)."')  and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01'";
-												}
-
-							$getStatus = DB::connection($this->dbCon)->select($Query);
-
-									return $getStatus;
-
-
-						}
-
-
-
-						public function Overall_applicants_moved_to_Followup_for_Observation_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
-
-
-
-
-								/////AKHAN ///////////////////////////////
-				  	if( $departmentFilter !='null' && $departmentFilter !=""){
-						$departmentFilter = explode(",", $departmentFilter);
-
-						 					$Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.depart_id IN('".implode("','", $departmentFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-					if( $subjectFilter !='null' && $subjectFilter !=""){
-						$subjectFilter = explode(",", $subjectFilter);
-
-						 						$Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						
-
-						  $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-					
-
-
-					if( $designationFilter !='null' && $designationFilter !=""){
-						$designationFilter = explode(",", $designationFilter);
-
-						 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-
-
-					if( $campusFilter !='null' && $campusFilter !=""){
-						$campusFilter = explode(",", $campusFilter);
-
-						 				$Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-					if( $designationFilter !='null' && $designationFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						
-
-											  $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-					if( $departmentFilter !='null' && $departmentFilter !="" && $campusFilter !='null' && $campusFilter !=""){
-
-						
- 												$Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id  and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $departmentFilter !='null' && $departmentFilter !=""){
-
-						
-
-						 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.depart_id IN('".implode("','", $departmentFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-
-					if( $designationFilter !='null' && $designationFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-						
-
-						 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and dd.level_id IN('".implode("','", $designationFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-
-					if( $formSourceFilter !='null' && $formSourceFilter !=""){
-						$formSourceFilter = explode(",", $formSourceFilter);
-
-						 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and f.form_source IN('".implode("','", $formSourceFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-					}
-
-
-					/////AKHAN ///////////////////////////////
-
-
-							if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
-
-										
-
-										 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-												}
-
-								if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !=""){
-
-										//$departmentFilter = explode(",", $departmentFilter);
-
-										 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff
-													";
-
-
-
-									}
-
-
-								if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
-
-
-										 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff";
-										}
-
-
-								if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  ){
-
-
-										 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff";
-										}
-
-
-								if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
-
-
-										 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff";
-									}
-
-
-
-								if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
-
-
-										 $Query = "select 
-													34 as Query_num, 
-													sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
-
-													from(
-													select 
-													curdate() as p_date,
-													count( Distinct (cf.form_id) ) as Observation_Presence_Followup
-													from atif_Career.log_career_form as cf 
-													where cf.status_id=4 
-													and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
-
-													union
-													select 
-													(
-													case when d.date = '1970-01-01'  then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
-													else d.date
-													end
-													) as p_date,
-													count( d.date ) as Observation_Presence_Followup
-
-													from atif_career.career_form as f
-													left outer join (
-													select * from atif_career.career_form_data as s where s.id in(
-													select 
-													max( cf.id ) as latest
-													from atif_career.career_form_data as cf 
-													group by cf.form_id )
-													) as d on d.form_id = f.id
-													where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
-													case when d.date = '1970-01-01' then 
-													(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') and f.form_source IN('".implode("','", $formSourceFilter)."') order by dd.id desc limit 1)
-													else d.date
-													end
-													)  < curdate()
-													) as ff";
-												}
-
-
-							$getStatus = DB::connection($this->dbCon)->select($Query);
-
-									return $getStatus;
-
-
-						}
-
-
+										and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+										union
+										select 
+										(
+										case when d.date = '1970-01-01'  then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+										else d.date
+										end
+										) as p_date,
+										count( d.date ) as Observation_Presence_Followup
+
+										from atif_career.career_form as f
+										left outer join (
+										select * from atif_career.career_form_data as s where s.id in(
+										select 
+										max( cf.id ) as latest
+										from atif_career.career_form_data as cf 
+										group by cf.form_id )
+										) as d on d.form_id = f.id
+										where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+										case when d.date = '1970-01-01' then 
+										(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and f.form_source IN('".implode("','", $formSourceFilter)."') order by dd.id desc limit 1)
+										else d.date
+										end
+										)  < curdate()
+										) as ff
+										";
+		}
+
+		/////AKHAN ///////////////////////////////
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !=""){
+
+					 $Query = "select 
+								34 as Query_num, 
+								sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+								from(
+								select 
+								curdate() as p_date,
+								count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+								from atif_Career.log_career_form as cf 
+								where cf.status_id=4 
+								and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+								union
+								select 
+								(
+								case when d.date = '1970-01-01'  then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+								else d.date
+								end
+								) as p_date,
+								count( d.date ) as Observation_Presence_Followup
+
+								from atif_career.career_form as f
+								left outer join (
+								select * from atif_career.career_form_data as s where s.id in(
+								select 
+								max( cf.id ) as latest
+								from atif_career.career_form_data as cf 
+								group by cf.form_id )
+								) as d on d.form_id = f.id
+								where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+								case when d.date = '1970-01-01' then 
+								(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' order by dd.id desc limit 1)
+								else d.date
+								end
+								)  < curdate()
+								) as ff
+								";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !=""){
+
+				//$departmentFilter = explode(",", $departmentFilter);
+				 $Query = "select 
+							34 as Query_num, 
+							sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+							from(
+							select 
+							curdate() as p_date,
+							count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+							from atif_Career.log_career_form as cf 
+							where cf.status_id=4 
+							and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+							union
+							select 
+							(
+							case when d.date = '1970-01-01'  then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+							else d.date
+							end
+							) as p_date,
+							count( d.date ) as Observation_Presence_Followup
+
+							from atif_career.career_form as f
+							left outer join (
+							select * from atif_career.career_form_data as s where s.id in(
+							select 
+							max( cf.id ) as latest
+							from atif_career.career_form_data as cf 
+							group by cf.form_id )
+							) as d on d.form_id = f.id
+							where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+							case when d.date = '1970-01-01' then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') order by dd.id desc limit 1)
+							else d.date
+							end
+							)  < curdate()
+							) as ff
+							";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !=""){
+
+				 $Query = "select 
+							34 as Query_num, 
+							sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+							from(
+							select 
+							curdate() as p_date,
+							count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+							from atif_Career.log_career_form as cf 
+							where cf.status_id=4 
+							and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+							union
+							select 
+							(
+							case when d.date = '1970-01-01'  then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+							else d.date
+							end
+							) as p_date,
+							count( d.date ) as Observation_Presence_Followup
+
+							from atif_career.career_form as f
+							left outer join (
+							select * from atif_career.career_form_data as s where s.id in(
+							select 
+							max( cf.id ) as latest
+							from atif_career.career_form_data as cf 
+							group by cf.form_id )
+							) as d on d.form_id = f.id
+							where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+							case when d.date = '1970-01-01' then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') order by dd.id desc limit 1)
+							else d.date
+							end
+							)  < curdate()
+							) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  ){
+
+				 $Query = "select 
+							34 as Query_num, 
+							sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+							from(
+							select 
+							curdate() as p_date,
+							count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+							from atif_Career.log_career_form as cf 
+							where cf.status_id=4 
+							and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+							union
+							select 
+							(
+							case when d.date = '1970-01-01'  then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+							else d.date
+							end
+							) as p_date,
+							count( d.date ) as Observation_Presence_Followup
+
+							from atif_career.career_form as f
+							left outer join (
+							select * from atif_career.career_form_data as s where s.id in(
+							select 
+							max( cf.id ) as latest
+							from atif_career.career_form_data as cf 
+							group by cf.form_id )
+							) as d on d.form_id = f.id
+							where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+							case when d.date = '1970-01-01' then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') order by dd.id desc limit 1)
+							else d.date
+							end
+							)  < curdate()
+							) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" ){
+
+				 $Query = "select 
+							34 as Query_num, 
+							sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+							from(
+							select 
+							curdate() as p_date,
+							count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+							from atif_Career.log_career_form as cf 
+							where cf.status_id=4 
+							and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+							union
+							select 
+							(
+							case when d.date = '1970-01-01'  then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+							else d.date
+							end
+							) as p_date,
+							count( d.date ) as Observation_Presence_Followup
+
+							from atif_career.career_form as f
+							left outer join (
+							select * from atif_career.career_form_data as s where s.id in(
+							select 
+							max( cf.id ) as latest
+							from atif_career.career_form_data as cf 
+							group by cf.form_id )
+							) as d on d.form_id = f.id
+							where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+							case when d.date = '1970-01-01' then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') order by dd.id desc limit 1)
+							else d.date
+							end
+							)  < curdate()
+							) as ff";
+		}
+
+		if($date_1 !='null' && $date_1 !="" && $date_2 !='null' && $date_2 !="" && $departmentFilter !='null' && $departmentFilter !="" && $subjectFilter !='null' && $subjectFilter !="" && $designationFilter !='null' && $designationFilter !=""  && $campusFilter !='null' && $campusFilter !="" && $formSourceFilter !='null' && $formSourceFilter !=""){
+
+				 $Query = "select 
+							34 as Query_num, 
+							sum(ff.Observation_Presence_Followup) as Observation_Presence_Followup
+
+							from(
+							select 
+							curdate() as p_date,
+							count( Distinct (cf.form_id) ) as Observation_Presence_Followup
+							from atif_Career.log_career_form as cf 
+							where cf.status_id=4 
+							and (cf.stage_id=5 or cf.stage_id=6  or cf.stage_id=13)   
+
+							union
+							select 
+							(
+							case when d.date = '1970-01-01'  then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id order by dd.id desc limit 1)
+							else d.date
+							end
+							) as p_date,
+							count( d.date ) as Observation_Presence_Followup
+
+							from atif_career.career_form as f
+							left outer join (
+							select * from atif_career.career_form_data as s where s.id in(
+							select 
+							max( cf.id ) as latest
+							from atif_career.career_form_data as cf 
+							group by cf.form_id )
+							) as d on d.form_id = f.id
+							where f.status_id=4 and from_unixtime(f.created ,'%Y-%m-%d') >= '2018-10-01' and (
+							case when d.date = '1970-01-01' then 
+							(select dd.date from atif_career.career_form_data as dd where dd.id < d.id and dd.form_id= d.form_id and from_unixtime(f.created, '%Y-%m-%d') between  '".$date_1."' and '".$date_2."' and dd.depart_id IN('".implode("','", $departmentFilter)."') and dd.tag IN('".implode("','", $subjectFilter)."') and dd.level_id IN('".implode("','", $designationFilter)."') and dd.campus IN('".implode("','", $campusFilter)."') and f.form_source IN('".implode("','", $formSourceFilter)."') order by dd.id desc limit 1)
+							else d.date
+							end
+							)  < curdate()
+							) as ff";
+		}
+		$getStatus = DB::connection($this->dbCon)->select($Query);
+		return $getStatus;
+
+
+	}
+
+//zk
 
 				public function Applicants_currently_in_Followup_for_Observation_presence($date_1,$date_2,$departmentFilter,$subjectFilter,$designationFilter,$campusFilter,$formSourceFilter){
 

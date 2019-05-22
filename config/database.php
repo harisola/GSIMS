@@ -131,11 +131,24 @@ return [
 	
 		
 		'mysql_StudentLog' => [
-            'driver' => 'mysql',
+          /*  'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'database' => 'atif_student_log',
             'username' => 'root',
             'password' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+            'options'   => [PDO::ATTR_EMULATE_PREPARES => true,],*/
+
+
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_StudentLog', '127.0.0.1'),
+            'database' => env('DB_DATABASE_StudentLog', ''),
+            'username' => env('DB_USERNAME_StudentLog', ''),
+            'password' => env('DB_PASSWORD_StudentLog', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

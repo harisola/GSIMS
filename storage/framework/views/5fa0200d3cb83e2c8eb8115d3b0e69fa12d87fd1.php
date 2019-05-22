@@ -53,7 +53,6 @@
   $num_22=0;
 
   $num_23=0;
-
   $num_24=0;
   $num_25=0;
   $num_26=0;
@@ -81,6 +80,26 @@
   $num_46=0;
   $num_47=0;
   $num_48=0;
+  $num_49=0;
+  $num_49_1=0;
+  $num_49_2=0;
+  $num_50=0;
+  $num_50_1=0;
+  $num_50_2=0;
+  $num_50_5_1=0;
+  $num_50_5_2=0;
+  $num_50_3=0;
+  $num_50_4=0;
+  $num_51=0;
+  $num_51_1=0;
+  $num_52=0;
+  $num_52_1=0;
+  $num_53=0;
+  $num_53_1=0;
+  $num_53_2=0;
+  $num_54=0;
+  $num_235=0;
+  $num_5_1=0;
 
   $counter=1;
   if( !empty( $query_resultant ) ) :
@@ -113,159 +132,197 @@
         if( $r["Query_num"] == 4.5 )
           $num_4_5 = number_format($r["Total_form"]);
 
-
-          if( $r["Query_num"] == 5 )
+        if( $r["Query_num"] == 5 )
           $num_5 = number_format($r["Total_form"]);
+        
+        if( $r["Query_num"] == 5.1 )
+          $num_5_1 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 6 )
+        if( $r["Query_num"] == 6 )
           $num_6 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 7.0 )
+        if( $r["Query_num"] == 7.0 )
           $num_7 = number_format($r["Total_form"]);
 
-
-         if( $r["Query_num"] == 8.0 )
+       if( $r["Query_num"] == 8.0 )
           $num_8 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 9.0 )
+        if( $r["Query_num"] == 9.0 )
           $num_9 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 10.0 )
+        if( $r["Query_num"] == 10.0 )
           $num_10 = number_format($r["Total_form"]);
 
-
-          if( $r["Query_num"] == 11.0 )
+        if( $r["Query_num"] == 11.0 )
           $num_11 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 12.0 )
+        if( $r["Query_num"] == 12.0 )
           $num_12 = number_format($r["Total_form"]);
 
-
-          if( $r["Query_num"] == 13.0 )
+        if( $r["Query_num"] == 13.0 )
           $num_13 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 14.0 )
+        if( $r["Query_num"] == 14.0 )
           $num_14 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 15.0 )
+        if( $r["Query_num"] == 15.0 )
           $num_15 = number_format($r["Total_form"]);
 
-          if( $r["Query_num"] == 16.0 )
+        if( $r["Query_num"] == 16.0 )
           $num_16 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 17.0 )
-         $num_17 = number_format($r["Total_form"]);
-
+        if( $r["Query_num"] == 17.0 )
+          $num_17 = number_format($r["Total_form"]);
 
         if( $r["Query_num"] == 18.0 )
-         $num_18 = number_format($r["Total_form"]);
-
+          $num_18 = number_format($r["Total_form"]);
 
         if( $r["Query_num"] == 19.0 )
-         $num_19 = number_format($r["Total_form"]);
+          $num_19 = number_format($r["Total_form"]);
 
-
-         if( $r["Query_num"] == 20.0 )
-         $num_20 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 20.0 )
+          $num_20 = number_format($r["Total_form"]);
 
         if( $r["Query_num"] == 21.0 )
-         $num_21 = number_format($r["Total_form"]);
+          $num_21 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 22.0 )
+          $num_22 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 22.0 )
-         $num_22 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 23.0 )
+          $num_23 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 23.0 )
-         $num_23 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 24.0 )
+          $num_24 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 25.0 )
+          $num_25 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 24.0 )
-         $num_24 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 26.0 )
+          $num_26 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 25.0 )
-         $num_25 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 27.0 )
+          $num_27 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 26.0 )
-         $num_26 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 28.0 )
+          $num_28 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 27.0 )
-         $num_27 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 29.0 )
+          $num_29 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 28.0 )
-         $num_28 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 30.0 )
+          $num_30 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 29.0 )
-         $num_29 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 31.0 )
+          $num_31 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 30.0 )
-         $num_30 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 32.0 )
+          $num_32 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 31.0 )
-         $num_31 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 33.0 )
+          $num_33 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 32.0 )
-         $num_32 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 34.0 )
+          $num_34 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 35.0 )
+          $num_35 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 33.0 )
-         $num_33 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 36.0 )
+          $num_36 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 37.0 )
+          $num_37 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 34.0 )
-         $num_34 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 38.0 )
+          $num_38 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 39.0 )
+          $num_39 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 35.0 )
-         $num_35 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 40.0 )
+          $num_40 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 41.0 )
+          $num_41 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 36.0 )
-         $num_36 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 42.0 )
+          $num_42 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 43.0 )
+          $num_43 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 37.0 )
-         $num_37 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 44.0 )
+          $num_44 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 45.0 )
+          $num_45 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 38.0 )
-         $num_38 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 46.0 )
+          $num_46 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 47.0 )
+          $num_47 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 39.0 )
-         $num_39 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 48.0 )
+          $num_48 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 49.0 )
+          $num_49 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 40.0 )
-         $num_40 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 49.1 )
+          $num_49_1 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 49.2 )
+          $num_49_2 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 41.0 )
-         $num_41 = number_format($r["Total_form"]);
+           if( $r["Query_num"] == 50.0 )
+          $num_50 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 50.1 )
+          $num_50_1 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 42.0 )
-         $num_42 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 50.2 )
+          $num_50_2 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 50.5 )
+          $num_50_5_1 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 43.0 )
-         $num_43 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 50.6 )
+          $num_50_5_2 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 44.0 )
-         $num_44 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 50.3 )
+          $num_50_3 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 50.4 )
+          $num_50_4 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 45.0 )
-         $num_45 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 51.0 )
+          $num_51 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 46.0 )
-         $num_46 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 51.1 )
+          $num_51_1 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 47.0 )
-         $num_47 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 52.0 )
+          $num_52 = number_format($r["Total_form"]);
 
-         if( $r["Query_num"] == 48.0 )
-         $num_48 = number_format($r["Total_form"]);
+        if( $r["Query_num"] == 52.1 )
+          $num_52_1 = number_format($r["Total_form"]);
 
+        if( $r["Query_num"] == 53.0 )
+          $num_53 = number_format($r["Total_form"]);
+
+        if( $r["Query_num"] == 53.1 )
+          $num_53_1 = number_format($r["Total_form"]);
+
+        if( $r["Query_num"] == 53.2 )
+          $num_53_2 = number_format($r["Total_form"]);
+
+        if( $r["Query_num"] == 54.0 )
+          $num_54 = number_format($r["Total_form"]);
+
+        if( $r["Query_num"] == 235.0 )
+          $num_235 = number_format($r["Total_form"]);
       
         $counter++;
     endforeach;
@@ -442,7 +499,7 @@ button.multiselect.dropdown-toggle.btn.btn-default {
           </span>
           <span class="partAScreeningToRegret absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Part_A_Screening" charset=" " 
-              class="tooltips counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Regret from Part A screening">
+              class="tooltips counter gray" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Regret from Part A screening">
               <?php echo $num_9; ?>
 
             </a>
@@ -514,8 +571,9 @@ button.multiselect.dropdown-toggle.btn.btn-default {
           <!----------------------------------- Full Form Screening Start ------------------------>
           <!-- FullFormScreening: Applicants moved to Full Form Screening -->
           <span class="FullFormScreening absolute">
-              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_moved_to" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Fill Form Screening"><?php echo ( $num_5 + $num_7 ); ?></a>
+              <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_moved_to" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Fill Form Screening"><?php echo $num_235; ?></a> 
           </span><!-- FullFormScreening -->
+          <!-- <?php echo ( $num_5 + $num_7 ); ?> -->
           <!-- FullFormScreeningToRegret: Overall applicant moved to Regret from Full Form screening  -->
           <span class="FullFormScreeningToRegret absolute">
               <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_applicants_moved_to_Regret" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Regret from Part A screening">
@@ -617,12 +675,13 @@ button.multiselect.dropdown-toggle.btn.btn-default {
         </span><!-- FormalInterviewFollowupExtension -->
         <!-- FormalInterviewFollowupNotInterested: Overall applicants moved to Not Interested from Followup for Initial Interview presence -->
         <span class="FormalInterviewFollowupNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Formal Interview presence"><?php echo $num_26; ?></a>
+         <!--  //cahnge Not_Interested// -->
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Not_Interested_formal" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup for Formal Interview presence"><?php echo $num_26; ?></a>
         </span><!-- FormalInterviewFollowupNotInterested -->
         <!-- FormalInterviewCommunicationNotInterested: Overall applicants moved to Not Interested from Initial Interview Communication -->
         <span class="FormalInterviewCommunicationNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="moved_to_Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Formal Interview Communication"><?php echo $num_27; ?></a>
-        </span><!-- FormalInterviewCommunicationNotInterested -->
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="moved_to_Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Formal Interview Communication">0</a>
+        </span><!-- FormalInterviewCommunicationNotInterested <?php echo $num_27; ?> -->
         <!-------------------------------------------------------------------------------------------------------------------------------- -->
         <!-- FormalInterviewToObservation: Applicants awaiting for Observation  -->
         <span class="FormalInterviewToObservation absolute">
@@ -660,7 +719,7 @@ button.multiselect.dropdown-toggle.btn.btn-default {
         </span><!-- ObservationFollowupNotInterested -->
         <!-- ObservationCommunicationNotInterested: Overall applicants moved to Not Interested from Observation Communication -->
         <span class="ObservationCommunicationNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="Observation_Communication_not_interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Observation Communication"><?php echo $num_37; ?></a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="Observation_Communication_not_interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Observation Communication">0</a>
         </span><!-- ObservationCommunicationNotInterested -->
         <!--------------------------------------------------------------------------------------------------------------------------------- -->
         <!-- ObservationToFinalCons: Applicants awaiting for Final Consultation  -->
@@ -701,60 +760,60 @@ button.multiselect.dropdown-toggle.btn.btn-default {
         </span><!-- FinalConsFollowupNotInterested -->
         <!-- FinalConsCommunicationNotInterested: Overall applicants moved to Not Interested from Initial Interview Communication -->
         <span class="FinalConsCommunicationNotInterested absolute">
-            <a href="#allocateProfileModal" data-toggle="modal" data-status="final_communication_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Final Consultation Communication"><?php echo $num_47; ?></a>
+            <a href="#allocateProfileModal" data-toggle="modal" data-status="final_communication_moved" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Final Consultation Communication">0</a>
         </span><!-- FinalConsCommunicationNotInterested -->
       </div><!-- CSL3TillDDM3 -->
       <!-- zk -->
       <div class="DDM3TillEnd">
               <!-- OverallOfferPrepAllocation : Overall applicants moved to Offer Preparation from Final Consultation Communication -->
               <span class="OverallOfferPrepAllocation absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Prep_Allocation" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Offer Preparation from Final Consultation">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Prep_Allocation" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Offer Preparation from Final Consultation"><?php echo $num_49_1; ?></a>
               </span><!-- OverallOfferPrepAllocation  -->
               <!-- OfferPrepAllocation: Applicants moved to Offer Preparation from Final Consultation Communication -->
               <span class="OfferPrepAllocation absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Offer_Prep_Allocation" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Offer Preparation from Final Consultation Allocation">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Offer_Prep_Allocation" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Offer Preparation from Final Consultation Allocation"><?php echo $num_49; ?></a>
               </span><!-- OfferPrepAllocation -->
               <!-- OfferProcCommunication: Applicants moved to Offer Procedure Communication from Offer Prep Allocation -->
               <span class="OfferProcCommunication absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Offer_Proc_Communication" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Offer Procedure Communication from Offer Prep Allocation">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Offer_Proc_Communication" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants moved to Offer Procedure Communication from Offer Prep Allocation"><?php echo $num_50; ?></a>
               </span><!-- OfferProcCommunication -->
               <!-- OfferProcPresence: Overall applicants marked Present for Offer Procedure -->
               <span class="OfferProcPresence absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Offer_Proc_Presence" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Offer Procedure">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Offer_Proc_Presence" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants marked Present for Offer Procedure"><?php echo $num_50_1; ?></a>
               </span><!-- OfferProcPresence -->
               <!-- OverallOfferProcFollwup: Overall applicants moved to Follwup for Offer Procedure -->
               <span class="OverallOfferProcFollowup absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Proc_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Offer Procedure ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Proc_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup for Offer Procedure "><?php echo $num_50_2; ?></a>
               </span><!-- OverallOfferProcFollowup  -->
               <!-- ApplicantsOfferProcFollwup: Applicants currently in Follwup for Offer Procedure Presence-->
               <span class="ApplicantsInOfferProcFollowup absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_InOffer_Proc_Followup" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Offer Procedure Presence">00</a>
-                  <span class="noFollow tooltips" data-original-title="7 Days passed no action taken">(3)</span>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_InOffer_Proc_Followup" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Followup for Offer Procedure Presence"><?php echo $num_50_5_1; ?></a>
+                  <span class="noFollow tooltips" data-original-title="7 Days passed no action taken">(<?php echo $num_50_5_2; ?>)</span>
               </span><!-- ApplicantsInOfferProcFollowup   -->
               <!-- OverallOfferProcFollwupExtensions: Overall applicants moved to Extension from Follwup for Offer Procedure -->
               <span class="OverallOfferProcFollwupExtensions absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Proc_Follwup_Extensions" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Extension from Followup for Offer Procedure">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Proc_Follwup_Extensions" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Extension from Followup for Offer Procedure"><?php echo $num_50_3; ?></a>
               </span><!-- OverallOfferProcFollwupExtensions  -->
               <!-- OverallOfferProcNotInterested: Overall applicants moved to Not interested from Followup for Offer Procedure -->
               <span class="OverallOfferProcNotInterested absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Proc_Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not interested from Followup for Offer Procedure ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Offer_Proc_Not_Interested" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not interested from Followup for Offer Procedure "><?php echo $num_50_4; ?></a>
               </span><!-- OverallOfferProcNotInterested  -->
               <!-- -->
-              <!-- ApplicantInOfferProcedure: Applicants currently in Offer Procedure -->
+              <!-- ApplicantInOfferProcedure: Applicants currently in Offer Procedure <?php echo $num_51; ?> -->
               <span class="ApplicantInOfferProcedure absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicant_InOffer_Procedure" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Offer Procedure from Offer preparation">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicant_InOffer_Procedure" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants currently in Offer Procedure from Offer preparation"><?php echo $num_49_2; ?></a>
               </span><!-- ApplicantInOfferProcedure  -->
               <!-- OverallApplicanttoCompChecklist: Overall applicants moved to Complete Checklist from Offer Procedure -->
               <span class="OverallApplicanttoCompChecklist absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicantto_Comp_Checklist" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Complete Checklist from Offer Procedure ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicantto_Comp_Checklist" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Complete Checklist from Offer Procedure "><?php echo $num_51_1; ?></a>
               </span><!-- OverallApplicanttoCompChecklist  -->
               <!-- ApplicantsInCompChecklist: Applicants Currently in Complete Checklist -->
               <span class="ApplicantsInCompChecklist absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_In_Comp_Checklist" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants Currently in Complete Checklist ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_In_Comp_Checklist" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants Currently in Complete Checklist "><?php echo $num_52; ?></a>
               </span><!-- ApplicantsInCompChecklist  -->
               <!-- OverallApplicantsCompChecklistFollowup: Overall applicants moved to Followup For Complete Checklist -->
               <span class="OverallApplicantsCompChecklistFollowup absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Comp_Checklist_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup For Complete Checklist">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Comp_Checklist_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Followup For Complete Checklist"><?php echo $num_52_1; ?></a>
               </span><!-- OverallApplicantsCompChecklistFollowup  -->
               <!-- ApplicantsInCompChecklistFollowup : Applicants In Followup For Complete Checklist -->
               <span class="ApplicantsInCompChecklistFollowup absolute">
@@ -763,30 +822,30 @@ button.multiselect.dropdown-toggle.btn.btn-default {
               </span><!-- ApplicantsInCompChecklistFollowup   -->
               <!-- OverallApplicantsNotInterestedFromCompChecklistFollowup: Overall applicants moved to Not Interested from Followup For Complete Checklist -->
               <span class="OverallApplicantsNotInterestedFromCompChecklistFollowup absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Not_Interested_From_Comp_Checklist_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup For Complete Checklist ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Not_Interested_From_Comp_Checklist_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Not Interested from Followup For Complete Checklist "><?php echo $num_53_2; ?></a>
               </span><!-- OverallApplicantsNotInterestedFromCompChecklistFollowup  -->
               <!-- OverallApplicantsExtensionFromCompChecklistFollowup: Overall applicants moved to Extension from Followup For Complete Checklist -->
               <span class="OverallApplicantsExtensionFromCompChecklistFollowup absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Extension_From_Comp_Checklist_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Extension from Followup For Complete Checklist ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Extension_From_Comp_Checklist_Followup" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants moved to Extension from Followup For Complete Checklist "><?php echo $num_53_1; ?></a>
               </span><!-- OverallApplicantsExtensionFromCompChecklistFollowup  -->
               <!-- -->
               <!-- OverallApplicantsExtensionFromCompChecklistFollowup: Overall applicants moved to Extension from Followup For Complete Checklist -->
               <span class="ApplicantsRecruitmentComplete absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_Recruitment_Complete" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicant Recruitment Complete ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicants_Recruitment_Complete" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicant Recruitment Complete "><?php echo $num_53; ?></a>
               </span><!-- ApplicantsRecruitmentComplete  -->
               
               <!-- OverallApplicantsAborted: Overall applicants Aborted/not Interested -->
               <span class="OverallApplicantsAborted absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Aborted" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants Aborted/not Interested">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Aborted" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants Aborted/not Interested"><?php echo $num_4_5+$num_18+$num_17+$num_27+$num_26+$num_37+$num_46+$num_50_4+$num_53_2; ?></a>
               </span><!-- OverallApplicantsAborted  -->
               <!-- OverallApplicantsRegretted: Overall applicants Regretted -->
               <span class="OverallApplicantsRegretted absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Regretted" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants Regretted">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Overall_Applicants_Regretted" class="tooltips gray counter" data-container="body" data-placement="top" data-original-title="Overall applicants Regretted"><?php echo $num_10+$num_30+$num_29+$num_38+$num_47; ?></a>
               </span><!-- OverallApplicantsRegretted  -->
               
               <!-- ApplicantArchive: Applicants in Archive -->
               <span class="ApplicantArchive absolute">
-                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicant_Archive" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants in Archive ">00</a>
+                  <a href="#allocateProfileModal" data-toggle="modal" data-status="Applicant_Archive" class="tooltips counter" data-container="body" data-placement="top" data-original-title="Applicants in Archive "><?php echo $num_54; ?></a>
               </span><!-- ApplicantArchive  -->
       </div><!-- DDM3TillEnd -->
   </div><!-- col-md-12 -->
@@ -804,67 +863,67 @@ button.multiselect.dropdown-toggle.btn.btn-default {
 //arif
 // $(document).on("click","#allocte_online_data",function(){
 
-//  var stage = 'date1='+$('#date1').val()+'&date2='+$('#date2').val()+'&departmentFilter='+$('#departmentFilter').val()
-//      +'&subjectFilter='+$('#subjectFilter').val()+'&designationFilter='+$('#designationFilter').val()
-//      +'&campusFilter='+$('#campusFilter').val()+'&formSourceFilter='+$('#formSourceFilter').val()+$(this).data("status")
-//  // var stage = $(this).data("status"); 
-//  // // var stage_ar = $(this).val();
-//  // console.log(stage);
-//  $.ajax({
-//        type:'POST',
-//        data:{ '_token': '<?php echo e(csrf_token()); ?>', stage },
-//        url:"<?php echo e(url('/get_form_online')); ?>",
-//        // data:formdata,
-//        dataType: "json",
-//        success: function(response)
-//        {
-//          $("#table_data").html('');
-//          $("#table_data").html(response.html);
-//        }
-//      });
+// 	var stage = 'date1='+$('#date1').val()+'&date2='+$('#date2').val()+'&departmentFilter='+$('#departmentFilter').val()
+// 			+'&subjectFilter='+$('#subjectFilter').val()+'&designationFilter='+$('#designationFilter').val()
+// 			+'&campusFilter='+$('#campusFilter').val()+'&formSourceFilter='+$('#formSourceFilter').val()+$(this).data("status")
+// 	// var stage = $(this).data("status"); 
+// 	// // var stage_ar = $(this).val();
+// 	// console.log(stage);
+// 	$.ajax({
+// 	      type:'POST',
+// 	      data:{ '_token': '<?php echo e(csrf_token()); ?>', stage },
+// 	      url:"<?php echo e(url('/get_form_online')); ?>",
+// 	      // data:formdata,
+// 	      dataType: "json",
+// 	      success: function(response)
+// 	      {
+// 	        $("#table_data").html('');
+// 	        $("#table_data").html(response.html);
+// 	      }
+// 	    });
 // });
 
 $(document).on("click",".counter",function(){
-  App.startPageLoading();
-  var data = 'date1='+$('#date1').val()+'&date2='+$('#date2').val()+'&departmentFilter='+$('#departmentFilter').val()
-      +'&subjectFilter='+$('#subjectFilter').val()+'&designationFilter='+$('#designationFilter').val()
-      +'&campusFilter='+$('#campusFilter').val()+'&formSourceFilter='+$('#formSourceFilter').val()+'&stage='+$(this).data("status")
-  // var stage = $(this).data("status");
-  // departmentFilters=[];
-  // var date1 = $('#date1').val();
-  // var date2 = $('#date2').val();
-  // var departmentFilter = $('#departmentFilter').val();
-  // var subjectFilter = $('#subjectFilter').val();
-  // var designationFilter = $('#designationFilter').val();
-  // var campusFilter = $('#campusFilter').val();
-  // var formSourceFilter = $('#formSourceFilter').val();
+	App.startPageLoading();
+	var data = 'date1='+$('#date1').val()+'&date2='+$('#date2').val()+'&departmentFilter='+$('#departmentFilter').val()
+			+'&subjectFilter='+$('#subjectFilter').val()+'&designationFilter='+$('#designationFilter').val()
+			+'&campusFilter='+$('#campusFilter').val()+'&formSourceFilter='+$('#formSourceFilter').val()+'&stage='+$(this).data("status")
+	// var stage = $(this).data("status");
+	// departmentFilters=[];
+	// var date1 = $('#date1').val();
+	// var date2 = $('#date2').val();
+	// var departmentFilter = $('#departmentFilter').val();
+	// var subjectFilter = $('#subjectFilter').val();
+	// var designationFilter = $('#designationFilter').val();
+	// var campusFilter = $('#campusFilter').val();
+	// var formSourceFilter = $('#formSourceFilter').val();
  //  +'&formSourceFilter='+$('#formSourceFilter').val()
  //  +'&stage='+$(this).data("status")
-  // var stage = $(this).data("status");
-  // departmentFilters.push(departmentFilter);
-  $.ajax({
-        type:'GET',
-        data: data , 
-        // data:{ '_token': '<?php echo e(csrf_token()); ?>', data , stage },
-    //     data: {
-    //      date1 ,
-      // date2 ,
-      // departmentFilter ,
-      // subjectFilter ,
-      // designationFilter ,
-      // campusFilter ,
-      // formSourceFilter ,
-      // stage 
-    //     },
-        url:"<?php echo e(url('/get_form')); ?>",
-        // data:formdata,
-        // dataType: "json",
-        success: function(response)
-        {
-          $("#table_data").html('');
-          $("#table_data").html(response.html);
-        }
-      });
+	// var stage = $(this).data("status");
+	// departmentFilters.push(departmentFilter);
+	$.ajax({
+	      type:'GET',
+	      data: data , 
+	      // data:{ '_token': '<?php echo e(csrf_token()); ?>', data , stage },
+	  //     data: {
+	  //     	date1 ,
+			// date2 ,
+			// departmentFilter ,
+			// subjectFilter ,
+			// designationFilter ,
+			// campusFilter ,
+			// formSourceFilter ,
+			// stage 
+	  //     },
+	      url:"<?php echo e(url('/get_form')); ?>",
+	      // data:formdata,
+	      // dataType: "json",
+	      success: function(response)
+	      {
+	        $("#table_data").html('');
+	        $("#table_data").html(response.html);
+	      }
+	    });
 });
 
 // $(document).on("click",".counter",function(){
@@ -1272,7 +1331,7 @@ a.gray {
 }
 .FinalConsCommunicationNotInterested {
     top: 585px;
-    left: 705px;
+    left: 715px;
 }
 .FinalConsFollowupNotInterested {
     top: 585px;
@@ -1285,80 +1344,80 @@ a.gray {
 /* Offer Preparation */
 /* Offer Preparation */
 .OverallOfferPrepAllocation  {
-  top: 300px;
-    left: 80px; 
+	top: 300px;
+    left: 80px;	
 }
 .OfferPrepAllocation {
-  top: 300px;
+	top: 300px;
     left: 180px;
 }
 .OfferProcCommunication {
-  top: 300px;
+	top: 300px;
     left: 310px;
 }
 .OfferProcPresence {
-  top: 300px;
+	top: 300px;
     left: 400px;
 }
 .OverallOfferProcFollowup {
-  top: 405px;
+	top: 405px;
     left: 420px;
 }
 .ApplicantsInOfferProcFollowup  {
-  top: 485px;
+	top: 485px;
     left: 430px;
 }
 .OverallOfferProcFollwupExtensions {
-  top: 475px;
+	top: 475px;
     left: 300px;
 }
 .OverallOfferProcNotInterested {
-  top: 585px;
+	top: 585px;
     left: 420px;
 }
 /* */
 .ApplicantInOfferProcedure {
-  top: 300px;
+	top: 300px;
     left: 460px;
 }
 .OverallApplicanttoCompChecklist {
-  top: 300px;
+	top: 300px;
     left: 560px;
 }
 .ApplicantsInCompChecklist {
-  top: 300px;
+	top: 300px;
     left: 670px;
 }
 .OverallApplicantsCompChecklistFollowup {
-  top: 405px;
-    left: 695px;  
+	top: 405px;
+    left: 695px;	
 }
 .ApplicantsInCompChecklistFollowup {
-      top: 485px;
+	    top: 485px;
     left: 705px;
 }
 .OverallApplicantsNotInterestedFromCompChecklistFollowup {
-      top: 585px;
+	    top: 585px;
     left: 695px;
 }
 .OverallApplicantsExtensionFromCompChecklistFollowup {
 top: 475px;
-    left: 615px;  
+    left: 615px;	
 }
 .ApplicantsRecruitmentComplete {
-  top: 300px;
+	top: 300px;
     left: 900px;
 }
 .OverallApplicantsAborted {
-  top: 580px;
-    left: 1030px; 
+	top: 580px;
+    left: 1030px;	
 }
 .OverallApplicantsRegretted {
-  top: 90px;
+	top: 90px;
     left: 1030px;
 }
 .ApplicantArchive {
-  top: 300px;
+	top: 300px;
     left: 1140px;
 }
 </style>
