@@ -214,12 +214,12 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 
 
 			$AAM->MyUpdateTable_Model($Update_Query);
-
+			
 
 			if( $Approval_id > 0 && $Trigger_Sp == 1 )
 			{
 
-$Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_events`.`adjustment_approvals` AS ap WHERE ap.table_id=$Approval_id AND ap.approval_type_id=$approval_type_id";
+				$Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_events`.`adjustment_approvals` AS ap WHERE ap.table_id=$Approval_id AND ap.approval_type_id=$approval_type_id";
 				$EffedInfo = $AAM->SelectQeury($Query);	
 				$Staff_id=0;
 				$Cur_Date = date("Y-m-d");
@@ -243,7 +243,8 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 		public function ExceptionalAdjustment( $Adjust_Effect, $table_id )
 		{
 
-			$AAM = new Adjustment_Approvel_model();
+
+			 $AAM = new Adjustment_Approvel_model();
 
 			 $SelectQeury = "SELECT 
 				ap.staff_id AS Staff_id,
@@ -313,13 +314,15 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 					$payroll_remaining_leave += $Effected_day;
 
 					$payroll_exceptional_adjustments += $Effected_day; 
-
+					 $payroll_remaining_leave;
 					/*$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$payroll_leaveBalanced.", `remaining_leave`=".$payroll_remaining_leave.", `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; */
 
 					  
 					
 
-  $Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `remaining_leave`='".$payroll_remaining_leave."' WHERE `id`=".$payroll_id."";
+   $Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `remaining_leave`='".$payroll_remaining_leave."' WHERE `id`=".$payroll_id."";
+   
+
 
 
 
@@ -333,6 +336,7 @@ $Query = "SELECT ap.staff_id AS Staff_id, CURDATE() AS Cur_Date FROM `atif_gs_ev
 					$EL_Balanced += $Effected_day; 
 
 					$Sql = "UPDATE `atif`.`staff_registered` SET `leave_balance`=".$EL_Balanced." WHERE  `id`=".$Staff_id."";
+
 				}
 
 
