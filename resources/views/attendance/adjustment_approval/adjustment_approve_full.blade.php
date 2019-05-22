@@ -251,16 +251,21 @@ var data={
                 method:'GET',
                 url:main_url+'/adjustment_approval_table_rows',
                     success:function(response){
-                            $('#PendingAprovalsAdjustmentsT tbody').html("");
-                            $('#PendingAprovalsAdjustmentsT tbody').append(response);   
-                                 App.stopPageLoading(); 
+   
 
-                            // setTimeout(function(){
+                            setTimeout(function(){
+                                    $('#PendingAprovalsAdjustmentsT').DataTable().destroy();
+
+                                    $('#PendingAprovalsAdjustmentsT tbody').html("");
+                            $('#PendingAprovalsAdjustmentsT tbody').append(response);
+                                  $('#PendingAprovalsAdjustmentsT').DataTable();
+                                                                 App.stopPageLoading(); 
+
                             //     if( ! $.fn.DataTable.isDataTable( '#PendingAprovalsAdjustmentsT' ) ) {
                             //       $('#PendingAprovalsAdjustmentsT').DataTable().destroy()
                             //       $('#PendingAprovalsAdjustmentsT').DataTable();
                             //      }
-                            // },1000)
+                            },1000)
                             
              
                             
