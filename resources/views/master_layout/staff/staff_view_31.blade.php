@@ -3644,11 +3644,12 @@ input#staffView_StaffList_Search {
                                         <thead>
                                            <tr>
                                               <th width="15%">Title</th>
+                                              <th width="15%">Form #</th>
                                               <th width="15%">Date</th>
-                                              <th width="15%">From <small>(time)</small></th>
-                                              <th width="15%">To <small>(time)</small></th>
+                                              <th width="10%">From <small>(time)</small></th>
+                                              <th width="10%">To <small>(time)</small></th>
                                               <th width="30%">Description</th>
-                                              <th width="30%">Action</th>
+                                              <th width="25%">Action</th>
                                            </tr>
                                         </thead>
                                         <tbody>
@@ -3795,6 +3796,7 @@ input#staffView_StaffList_Search {
                                      <table width="100%" border="0" class="table table-striped table-hover table-bordered" id="leave_table">
                                         <thead>
                                            <tr>
+                                              <th width="15%">Form #</th>
                                               <th width="15%">Title <small>(type)</small></th>
                                               <th width="12%">Compensation</th>
                                               <th width="15%">From </th>
@@ -4297,6 +4299,7 @@ input#staffView_StaffList_Search {
                                         <thead>
                                            <tr>
                                                <th width="15%">Penalty Title</th>
+                                               <th width="15%">Form #</th>
                                               <th width="10%" scope="row">Penalty <br /> (no of days)</th>
                                               <th width="15%">From - To </th>
                                               <th width="15%">Timestamp </th>
@@ -4485,6 +4488,7 @@ input#staffView_StaffList_Search {
                                         <thead>
                                            <tr>
                                              <th width="15%">Adjustment Title</th>
+                                             <th width="15%">Form Number</th>
                                               <th width="10%">Adjustment <br />(no of days)</th>
                                               <th width="15%">Timestamp </th>
                                               <th width="22%">Additional Comments</th>
@@ -4654,6 +4658,7 @@ input#staffView_StaffList_Search {
                                         <thead>
                                            <tr>
                                               <th width="15%">Attendance Date </th>
+                                              <th width="15%">Form #</th>
                                               <th width="12%">Tap</th>
                                               <th width="15%">Timestamp </th>
                                               <th width="23%">Additional Comments</th>
@@ -6206,18 +6211,10 @@ $('#staffView_StaffList_Search').val('');
                            missTap = changeTimeFormat(missTap);
                        }
                   
-                  // var r = JSON.parse(result);
-                  //var Last_id = r.id;
-              
+                
 
 
-                       /*var userData = result['userInfo']['info'];
-                       $('#manual_table').append('<tr><td>' + formatDate(date) + '</td><td>' + missTap + '</td><td><strong>' + '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '">' + userData[0]['name_code'] + '</small> - ' + formatDate(result['date']) + '</strong> at <strong>' + time + '</strong></td><td>' + description + '</td></tr>');
-
-                       $("#multiple_manual_attendance").val('');
-                       $("#multiple_manual_tap").val('');
-                       $("#multiple_manual_description").val(''); */
-                  
+                    
                   
                        
                  
@@ -7003,7 +7000,7 @@ $('#staffView_StaffList_Search').val('');
                 
           
           
-                absentiaHTML = absentiaHTML + '<tr class="absentia_table_row" id="absentia_table_row_'+data['absentia'][i].Absenia_id+'"><td>'+data['absentia'][i].title +'</td><td>'+data['absentia'][i].date +'</td><td>'+
+                absentiaHTML = absentiaHTML + '<tr class="absentia_table_row" id="absentia_table_row_'+data['absentia'][i].Absenia_id+'"><td>'+data['absentia'][i].title +'</td><td>'+data['absentia'][i].form_number +'</td><td>'+data['absentia'][i].date +'</td><td>'+
                   changeTimeFormat(data['absentia'][i].From_time)  +'</td><td>'+changeTimeFormat(data['absentia'][i].to_time) +'</td><td>'+data['absentia'][i].description +'</td><td><a class="edit_btn" onClick="Edit_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delete_Absentia('+data['absentia'][i].Absenia_id +','+data['absentia'][i].Staff_id +')"><i class="fa fa-close"></i></a></td></tr>';
 
              }
@@ -7030,7 +7027,8 @@ $('#staffView_StaffList_Search').val('');
                 var Tablename='Out_Table';
              }
              var Manual_id=data['manual'][i].Manual_id;
-             manualHTML = manualHTML + '<tr class="missedTapEven" data-missed_id="'+Missedid+'" data-table_name="'+Tablename+'" data-id="'+data['manual'][i].Manual_id+'"><td>'+data['manual'][i].date +'</td><td>'+data['manual'][i].manual_time 
+             manualHTML = manualHTML + '<tr class="missedTapEven" data-missed_id="'+Missedid+'" data-table_name="'+Tablename+'" data-id="'+data['manual'][i].Manual_id+'"><td>'+data['manual'][i].date +'</td><td>'+data['manual'][i].form_number 
+                       +'</td><td>'+data['manual'][i].manual_time 
                        +'</td><td><small class="tooltips" data-original-title="'+data['info'][0]['abridged_name']+'">'+data['info'][0]['name_code']+' </small> - '+data['manual'][i].created_time +'</td><td>'+(data['manual'][i].description === null ? '': data['manual'][i].description) +'</td> <td><a class="edit_btn" onClick="editAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Manual_id+','+Missedid+',\''+Tablename+'\')"><i class="fa fa-close"></i></a></td> </tr>';
                  }
              
@@ -7083,7 +7081,7 @@ $('#staffView_StaffList_Search').val('');
                        }  else{
                     var tr = 'PendingapprovedBorder'; 
                  }
-                leaveHTML = leaveHTML + '<tr  class="'+tr+'" data-id='+data['leave_description'][i].id+'><td>'+data['leave_description'][i].leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+data['leave_description'][i].paid_compensation+' </td></tr>';
+                leaveHTML = leaveHTML + '<tr  class="'+tr+'" data-id='+data['leave_description'][i].id+'><td>'+data['leave_description'][i].form_number+'</td><td>'+data['leave_description'][i].leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+data['leave_description'][i].paid_compensation+' </td><td>'+data['leave_description'][i].leave_title+'</small></td></tr>';
                 if(data['leave_description'][i].leave_approve_status==1){
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+data['leave_description'][i].paid_percentage+'</td></tr>';
                 }
@@ -7111,7 +7109,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['penalty']){
                 var penaltyHTML = '';
                 for(var i = 0 ; i < data['penalty'].length; i++){
-                   penaltyHTML = penaltyHTML + '<tr class="penaltyRowClass" data-id="'+data['penalty'][i].id+'"><td>'+data['penalty'][i].penalty_title+'</td><td>'+data['penalty'][i].penalty_day+'</td><td><strong>'+data['penalty'][i].penalty_date+'</td><td>'+data['penalty'][i].timestamp+'</td><td>'+data['penalty'][i].penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
+                   penaltyHTML = penaltyHTML + '<tr class="penaltyRowClass" data-id="'+data['penalty'][i].id+'"><td>'+data['penalty'][i].penalty_title+'</td><td>'+data['penalty'][i].form_number+'</td><td>'+data['penalty'][i].penalty_day+'</td><td><strong>'+data['penalty'][i].penalty_date+'</td><td>'+data['penalty'][i].timestamp+'</td><td>'+data['penalty'][i].penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+data['penalty'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
                 }
 
                 $('#penaltyTable tbody').html(penaltyHTML);   
@@ -7122,7 +7120,7 @@ $('#staffView_StaffList_Search').val('');
              if(data['exception_adjustment']){
              var exception_adjustment = '';
           for (var i = 0 ; i < data['exception_adjustment'].length; i++){
-             exception_adjustment = exception_adjustment + '<tr class="AddAdjustment" data-id="'+data['exception_adjustment'][i].id+'"><td>'+data['exception_adjustment'][i].adjustment_title+'</td><td>'+data['exception_adjustment'][i].adjustment_day+'days</td><td>'+data['exception_adjustment'][i].created+'</td><td>'+data['exception_adjustment'][i].adjustment_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
+             exception_adjustment = exception_adjustment + '<tr class="AddAdjustment" data-id="'+data['exception_adjustment'][i].id+'"><td>'+data['exception_adjustment'][i].adjustment_title+'</td><td>'+data['exception_adjustment'][i].form_number+'</td><td>'+data['exception_adjustment'][i].adjustment_day+'days</td><td>'+data['exception_adjustment'][i].created+'</td><td>'+data['exception_adjustment'][i].adjustment_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAdjustment('+data['exception_adjustment'][i].id+')"><i class="fa fa-close"></i></a> </td> </tr>';
               }
 
                 $('#adjustment_table tbody').html(exception_adjustment);

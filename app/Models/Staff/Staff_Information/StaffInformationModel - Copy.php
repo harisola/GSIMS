@@ -2139,7 +2139,7 @@ if( ( (atd.time is null) and (curtime() < TIME_FORMAT( wts.time_in, '%H:%i:%s') 
 			JOIN atif_gs_events.absenta_manual_description amd ON (amd.date = ai.date AND amd.location_id = ai.location_id  and amd.staff_id = ai.staff_id)
 			WHERE ai.location_id = 17 AND ai.staff_id =".$staff_id." AND amd.record_deleted=0 group by amd.id";*/
 			
-			$query = "select 
+			$query = "select amd.form_number as form_number,
 amd.id as Absenia_id, ai.staff_id as Staff_id,amd.title, DATE_FORMAT(amd.date,'%a %b %d %Y') AS `date`, DATE_FORMAT(ao.time,'%I:%i %p') AS From_time, DATE_FORMAT(ai.time,'%I:%i %p') AS to_time,IFNULL(amd.description,'') as description
 			from atif_gs_events.absenta_manual_description amd 
 left join ( select *  from  atif_attendance_staff.staff_attendance_in aii where aii.staff_id=".$staff_id." ) as ai
@@ -2455,14 +2455,14 @@ ORDER  BY date DESC,
 
 
     public function getStaffManual($staff_id){
-   $query = "select Concat(DATE_FORMAT(from_unixtime(sai.created),'%a %b %d %Y'),', at ',DATE_FORMAT(from_unixtime(sai.created),'%I:%i %p')) as created_time,
+   $query = "select mdes.form_number,Concat(DATE_FORMAT(from_unixtime(sai.created),'%a %b %d %Y'),', at ',DATE_FORMAT(from_unixtime(sai.created),'%I:%i %p')) as created_time,
 				DATE_FORMAT(sai.date,'%a %b %d %Y') as date,Date_FORMAT(sai.time,'%I:%i %p') as manual_time, mdes.id as Manual_id, mdes.description,
 				sai.id as Missed_id,'In_Table' as Table_name
 				from atif_attendance_staff.staff_attendance_in as sai left join atif_gs_events.absenta_manual_description mdes on sai.`created` = mdes.`created`  where sai.staff_id = ".$staff_id." and sai.location_id = 18 and mdes.record_deleted = 0
 
 UNION 
 
-select Concat(DATE_FORMAT(from_unixtime(sao.created),'%a %b %d %Y'),', at ',DATE_FORMAT(from_unixtime(sao.created),'%I:%i %p')) as created_time,
+select mdes.form_number,Concat(DATE_FORMAT(from_unixtime(sao.created),'%a %b %d %Y'),', at ',DATE_FORMAT(from_unixtime(sao.created),'%I:%i %p')) as created_time,
 				DATE_FORMAT(sao.date,'%a %b %d %Y') as date,Date_FORMAT(sao.time,'%I:%i %p') as manual_time, mdes.id as Manual_id, mdes.description,
 				sao.id as Missed_id, 'Out_Table' as Table_name
 				from atif_attendance_staff.staff_attendance_out as sao left join atif_gs_events.absenta_manual_description mdes on sao.`created` = mdes.`created`  where sao.staff_id = ".$staff_id." and sao.location_id = 18 and mdes.record_deleted = 0 
@@ -2521,7 +2521,7 @@ $staff = DB::connection($this->dbCon)->select($Qeury);
 
     public function get_leave_desscription($staff_id){
     	
-    	$query  = "Select la.id,lt.leave_type_name,la.leave_title,DATE_FORMAT(la.leave_from,'%a, %d %b %Y') as leave_from,
+    	$query  = "Select la.form_no as form_number,la.id,lt.leave_type_name,la.leave_title,DATE_FORMAT(la.leave_from,'%a, %d %b %Y') as leave_from,
 			DATE_FORMAT(la.leave_to,'%a, %d %b %Y') as leave_to,
 			if(la.paid_compensation=1,'Yes','No') as paid_compensation,
 			if(la.paid_percentage=null,'',CONCAT(la.paid_percentage,'% paid')) as paid_percentage,
@@ -2553,7 +2553,7 @@ $staff = DB::connection($this->dbCon)->select($Qeury);
     }   
 
 	public function getPenalty($staff_id){
-		$query = "SELECT dp.id,dp.penalty_title,dp.penalty_day, CONCAT(DATE_FORMAT(dp.penalty_from, '%a %b %d, %Y'),'-', DATE_FORMAT(dp.penalty_to, '%a %b %d, %Y')) AS 'penalty_date', DATE_FORMAT(FROM_UNIXTIME(dp.created),'%a %b %d, %Y at %r') AS 'timestamp',dp.penalty_description
+		$query = "SELECT dp.form_number,dp.id,dp.penalty_title,dp.penalty_day, CONCAT(DATE_FORMAT(dp.penalty_from, '%a %b %d, %Y'),'-', DATE_FORMAT(dp.penalty_to, '%a %b %d, %Y')) AS 'penalty_date', DATE_FORMAT(FROM_UNIXTIME(dp.created),'%a %b %d, %Y at %r') AS 'timestamp',dp.penalty_description
 			FROM atif_gs_events.daily_penalty dp
 			WHERE dp.staff_id = ".$staff_id." AND dp.record_deleted=0 order by dp.modified desc";
 
@@ -2570,7 +2570,7 @@ public function getSinglePenalty($ID){
 	}
 	
 	public function getExceptionAdjustment($staff_id){
-	$query = "SELECT ea.id, IFNULL(ea.adjustment_title,'') AS adjustment_title, ea.adjustment_day, DATE_FORMAT(FROM_UNIXTIME(ea.modified),'%a %b %d %Y, at %r') AS created, IFNULL(ea.adjustment_description,'') AS adjustment_description
+	$query = "SELECT ea.form_number,ea.id, IFNULL(ea.adjustment_title,'') AS adjustment_title, ea.adjustment_day, DATE_FORMAT(FROM_UNIXTIME(ea.modified),'%a %b %d %Y, at %r') AS created, IFNULL(ea.adjustment_description,'') AS adjustment_description
 			FROM atif_gs_events.exception_adjustment ea
 			WHERE ea.staff_id = ".$staff_id." AND ea.record_deleted=0 order by ea.modified desc";
 		$result = DB::connection($this->dbCon)->select($query);
