@@ -114,6 +114,23 @@ class super_profile extends Controller
             
         }
 
+        public function updateSuperProfileLevel(Request $request){
+                $superModel = new Super_Profile_Model();
+                $where = array(
+                'id' => $request->profile_id
+                );
+                $data = array(
+                                $request->column_name => $request->status
+                            );
+                // print_r($data);
+                // die;
+                $super_profile_id = $superModel->update_data('atif_gs_events.tt_profile',$where,$data);
+
+
+
+        }
+
+
         public function get_table_interface(){
 
             $superModel = new Super_Profile_Model();
@@ -468,6 +485,15 @@ class super_profile extends Controller
                 echo  $insertProfile = $superModel->insertSuperProfile('atif_gs_events.super_profile_time',$data);
 
             }
+
+        }
+
+        public function getSuperProfileModal(request $request){
+            $superModel = new Super_Profile_Model();
+            $getSuperProfile = $superModel->getSuperProfile();
+            return view('HR.staff.super_profile_modal_view')->with(array(
+                'getSuperProfileDetails' => $getSuperProfile
+            ));
 
         }
 

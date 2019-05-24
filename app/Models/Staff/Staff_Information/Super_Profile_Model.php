@@ -18,7 +18,7 @@ class Super_Profile_Model extends Model{
 
     public function getProfileDetail(){
 
-    	$query = "select tt.id,tt.profile_type_id,tt.name,IF(tt_time.is_on_mon = 1,tt_time.mon_in,'') as mon_in,
+    	$query = "select tt.level_0,tt.level_1,tt.level_2,tt.level_3,tt.level_4,tt.id,tt.profile_type_id,tt.name,IF(tt_time.is_on_mon = 1,tt_time.mon_in,'') as mon_in,
 			IF(tt_time.is_on_mon = 1,tt_time.mon_out,'') as mon_out 
 			from atif_gs_events.tt_profile tt
 

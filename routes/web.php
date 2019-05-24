@@ -271,11 +271,13 @@ Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumber
 	//Super Profile
 
 	Route::get('/super_profile','Development\Super_profile@getSuperProfile');
+	Route::get('/get_super_profile_modal','Development\Super_profile@getSuperProfileModal');
 	Route::post('/insertSuperProfile','Development\Super_profile@insertSuperProfile');
 	Route::post('/get_table_interface','Development\Super_profile@get_table_interface');
 	Route::post('/getSuperProfileInteface','Development\Super_profile@getSuperProfileInteface');
 	Route::post('/updateTimeIn','Development\Super_profile@updateTimeIn');
 	Route::post('/updateTimeOut','Development\Super_profile@updateTimeOut');
+	Route::get('/updateLevel','Development\Super_profile@updateSuperProfileLevel');
 	
 	Route::post('/InsertTimeIn','Development\Super_profile@InsertTimeIn');
 	Route::post('/InsertTimeOut','Development\Super_profile@InsertTimeOut');

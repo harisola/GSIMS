@@ -138,7 +138,7 @@ table#harisOla tr td:nth-child(7) {
     color: #fff !important;
     background: #9fd4a5 !important;
 }
-@media screen and (max-width: 1822px) {
+@media  screen and (max-width: 1822px) {
 	.table-fixed-column-inner {
 	  overflow-x: scroll;
 	  overflow-y: visible;
@@ -146,7 +146,7 @@ table#harisOla tr td:nth-child(7) {
 	    margin-left: 700px;
 	}
 }
-@media screen and (max-width: 1550px) {
+@media  screen and (max-width: 1550px) {
 	.table-fixed-column-inner {
 	  overflow-x: scroll;
 	  overflow-y: visible;
@@ -154,7 +154,7 @@ table#harisOla tr td:nth-child(7) {
 	    margin-left: 700px;
 	}
 }
-@media screen and (max-width: 1450px) {
+@media  screen and (max-width: 1450px) {
 	.table-fixed-column-inner {
 	  overflow-x: scroll;
 	  overflow-y: visible;
@@ -162,7 +162,7 @@ table#harisOla tr td:nth-child(7) {
 	    margin-left: 700px;
 	}
 }
-@media screen and (max-width: 1270px) {
+@media  screen and (max-width: 1270px) {
 	.table-fixed-column-inner {
 	  overflow-x: scroll;
 	  overflow-y: visible;
@@ -171,7 +171,7 @@ table#harisOla tr td:nth-child(7) {
 	}
 }
 </style>
-<link rel="stylesheet" type="text/css" href="{{url('metronic')}}/global/css/x-editable/bootstrap-editable.css">
+<link rel="stylesheet" type="text/css" href="<?php echo e(url('metronic')); ?>/global/css/x-editable/bootstrap-editable.css">
 <div class="page-bar" style="margin-bottom:20px; ">
    <ul class="page-breadcrumb">
       <li>
@@ -251,34 +251,33 @@ table#harisOla tr td:nth-child(7) {
                 			</tr>
                 		</thead>
                 		<tbody>
-                    @foreach($profileDetail as $profile)
+                    <?php $__currentLoopData = $profileDetail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $profile): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <tr>
-                        <td>{{$profile->name}}</td>
-                        <td><input type="checkbox" @if($profile->level_0=='1') checked @endif class="make-switch myswicth" data-profile_id="{{$profile->id}}" 
-                          data-column_name="level_0" id="{{$profile->id}}" data-size="small"></td>
-                        <td><input type="checkbox" @if($profile->level_1=='1') checked @endif class="make-switch myswicth" data-profile_id="{{$profile->id}}" 
-                          data-column_name="level_1" id="{{$profile->id}}" data-size="small"></td>
-                        <td><input type="checkbox" @if($profile->level_2=='1') checked @endif class="make-switch myswicth" data-profile_id="{{$profile->id}}" 
-                          data-column_name="level_2" id="{{$profile->id}}" data-size="small"></td>
-                        <td><input type="checkbox" @if($profile->level_3=='1') checked @endif class="make-switch myswicth" data-profile_id="{{$profile->id}}" 
-                          data-column_name="level_3" id="{{$profile->id}}" data-size="small"></td>
-                        <td><input type="checkbox" @if($profile->level_4=='1') checked @endif class="make-switch myswicth" data-profile_id="{{$profile->id}}" 
-                          data-column_name="level_4" id="{{$profile->id}}" data-size="small"></td>
+                        <td><?php echo e($profile->name); ?></td>
+                        <td><input type="checkbox" <?php if($profile->level_0=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_0" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_1=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_1" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_2=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_2" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_3=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_3" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_4=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_4" id="<?php echo e($profile->id); ?>" data-size="small"></td>
                       </tr>
-                    @endforeach            
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>            
 
 
                 		</tbody>
                 	</table>
-                  <input type="hidden" name="url" value="{{url('/')}}" class="main_url">
+                  <input type="hidden" name="url" value="<?php echo e(url('/')); ?>" class="main_url">
 
                 </form>
             </div>
             <div class="modal-footer" style="text-align:center;">
                 
                 <button type="button" class="btn green" onClick="insertSuper()" id="super_profile" >Save Changes</button>
-{{--                 <button type="button" class="btn gray btn-outline close2" data-dismiss="modal" >Close</button>
- --}}                <button type="button" class="btn close2" id="0" data-dismiss="modal" >Close</button>
+                <button type="button" class="btn close2" id="0" data-dismiss="modal" >Close</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -331,11 +330,11 @@ table#harisOla tr td:nth-child(7) {
                     <?php foreach($profileDetail as $profile) { ?>
                       <?php $profile_flag = 0; ?>
                       <tr>
-                      	<td class="@if($profile->level_0==1) SSPON @else SSPOFF @endif">&nbsp;</td>
-                      	<td class="@if($profile->level_1==1) SSPON @else SSPOFF @endif">&nbsp;</td>
-                      	<td class="@if($profile->level_2==1) SSPON @else SSPOFF @endif">&nbsp;</td>
-                      	<td class="@if($profile->level_3==1) SSPON @else SSPOFF @endif">&nbsp;</td>
-                      	<td class="@if($profile->level_4==1) SSPON @else SSPOFF @endif">&nbsp;</td>
+                      	<td class="<?php if($profile->level_0==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_1==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_2==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_3==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_4==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
                         <td><span class="tooltips" data-original-title="<?=ucwords($profile->name) ?>"><?=ucwords($profile->name) ?></span></td>
                         <td><?php echo date('g:i A',strtotime($profile->mon_in)) ?>-<?php echo date('g:i A',strtotime($profile->mon_out)) ?></td>
                         <?php foreach($superProfile as $super) { ?>
@@ -365,8 +364,8 @@ table#harisOla tr td:nth-child(7) {
 
                               <?php if($super_flag == 0) { ?>
                               <td>
-                               <a href="javascript:void(0)"  class="MonINInsert" data-placement="bottom" data-title="Morning" data-profile ="<?php echo $profile->id ?>" data-super="<?php echo $super->ID ?>" data-pk="1"  data-type="combodate" data-url="{{url('/InsertTimeIn')}}">00:00:00
-                              </a> &nbsp; - &nbsp; <a href="javascript:void(0)"  class="MonOUTInsert" data-placement="bottom" data-title="Afternoon" data-profile ="<?php echo $profile->id ?>" data-super="<?php echo $super->ID ?>" data-pk="1" data-type="combodate" data-url="{{url('/InsertTimeOut')}}"> 00:00:00
+                               <a href="javascript:void(0)"  class="MonINInsert" data-placement="bottom" data-title="Morning" data-profile ="<?php echo $profile->id ?>" data-super="<?php echo $super->ID ?>" data-pk="1"  data-type="combodate" data-url="<?php echo e(url('/InsertTimeIn')); ?>">00:00:00
+                              </a> &nbsp; - &nbsp; <a href="javascript:void(0)"  class="MonOUTInsert" data-placement="bottom" data-title="Afternoon" data-profile ="<?php echo $profile->id ?>" data-super="<?php echo $super->ID ?>" data-pk="1" data-type="combodate" data-url="<?php echo e(url('/InsertTimeOut')); ?>"> 00:00:00
                                </a>
                               </td>
                               <?php } ?>
@@ -422,11 +421,11 @@ var insertSuper =  function(){
         var super_profile_desc = $('#super_profile_desc').val();
         $.ajax({
             type:"POST",
-            url:"{{ url('/insertSuperProfile')}}",
+            url:"<?php echo e(url('/insertSuperProfile')); ?>",
             data:{
                 super_profile:super_profile,
                 super_profile_desc:super_profile_desc,
-                 "_token": "{{ csrf_token() }}",
+                 "_token": "<?php echo e(csrf_token()); ?>",
             },
             success:function(e){
                 var html = '';
@@ -481,9 +480,9 @@ $('.close').click(function(){
   }else{
     $.ajax({
         type:"POST",
-        url:"{{url('/getSuperProfileInteface')}}",
+        url:"<?php echo e(url('/getSuperProfileInteface')); ?>",
         data:{
-            "_token": "{{ csrf_token() }}",
+            "_token": "<?php echo e(csrf_token()); ?>",
         },
         success:function(res){
         console.log(res);
@@ -505,9 +504,9 @@ $('.close2').click(function(){
   }else{
     $.ajax({
         type:"POST",
-        url:"{{url('/getSuperProfileInteface')}}",
+        url:"<?php echo e(url('/getSuperProfileInteface')); ?>",
         data:{
-            "_token": "{{ csrf_token() }}",
+            "_token": "<?php echo e(csrf_token()); ?>",
         },
         success:function(res){
         console.log(res);
@@ -534,7 +533,7 @@ $('.close2').click(function(){
 
     //   $.ajax({
     //     type:"GET",
-    //     url:"{{url('/get_super_profile_modal')}}",
+    //     url:"<?php echo e(url('/get_super_profile_modal')); ?>",
     //     success:function(res){
     //     console.log(res);
     //     $("#SSPTable tbody").html("");
@@ -562,9 +561,9 @@ $('.close2').click(function(){
             template: 'h:mm a',
             name:'mon_in',
             params:{
-                "_token":"{{ csrf_token() }}"
+                "_token":"<?php echo e(csrf_token()); ?>"
             },
-            url:"{{url('/updateTimeIn')}}",
+            url:"<?php echo e(url('/updateTimeIn')); ?>",
             success: function(e){
                     console.log(e)
             }
@@ -577,10 +576,10 @@ $('.close2').click(function(){
             viewformat:'h:mm A',
             template: 'h:mm a',
             params:{
-                "_token":"{{ csrf_token() }}"
+                "_token":"<?php echo e(csrf_token()); ?>"
             },
             name:'mon_in',
-            url:"{{url('/updateTimeOut')}}",
+            url:"<?php echo e(url('/updateTimeOut')); ?>",
             success: function(e){
                 console.log(e)
             }
@@ -600,7 +599,7 @@ $('.close2').click(function(){
             params: function(params){
             params.profile_id = $(this).editable().data('profile');
             params.super_profile_id = $(this).editable().data('super');
-            params._token ="{{ csrf_token() }}"
+            params._token ="<?php echo e(csrf_token()); ?>"
                 return params;
             }
 
@@ -615,7 +614,7 @@ $('.close2').click(function(){
             params: function(params){
             params.profile_id = $(this).editable().data('profile');
             params.super_profile_id = $(this).editable().data('super');
-            params._token ="{{ csrf_token() }}"
+            params._token ="<?php echo e(csrf_token()); ?>"
             return params;
             }
 
@@ -626,19 +625,19 @@ $('.close2').click(function(){
 var pagedestroy = function(){
 }
 
-loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
-    loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/datatables.min.js", function(){
-        loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
-            loadScript("{{ URL::to('metronic') }}/pages/scripts/profile.js", function(){
-                loadScript("{{ URL::to('metronic') }}/pages/scripts/table-datatables-managed.js", function(){
-                    loadScript("{{ URL::to('metronic') }}/global/plugins/jquery.sparkline.min.js", function(){
-                        loadScript("{{ URL::to('metronic') }}/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
-                            loadScript("{{ URL::to('metronic') }}/layouts/layout/scripts/demo.min.js", function(){
-                                loadScript("{{ URL::to('metronic') }}/global/plugins/jquery-validation/js/jquery.validate.min.js",function(){
-                                    loadScript("{{ URL::to('') }}/js/jquery.filtertable.min.js", function(){
-                                        loadScript("{{ URL::to('metronic') }}/global/plugins/x-editable/bootstrap-editable.min.js",function(){
-                                            loadScript("{{ URL::to('metronic') }}/global/plugins/x-editable/moment.min.js",function(){
-                                                loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
+loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", function(){
+    loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/datatables.min.js", function(){
+        loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
+            loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/profile.js", function(){
+                loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/table-datatables-managed.js", function(){
+                    loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jquery.sparkline.min.js", function(){
+                        loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
+                            loadScript("<?php echo e(URL::to('metronic')); ?>/layouts/layout/scripts/demo.min.js", function(){
+                                loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jquery-validation/js/jquery.validate.min.js",function(){
+                                    loadScript("<?php echo e(URL::to('')); ?>/js/jquery.filtertable.min.js", function(){
+                                        loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/x-editable/bootstrap-editable.min.js",function(){
+                                            loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/x-editable/moment.min.js",function(){
+                                                loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/app.min.js", pagefunction);
                                             });
                                         });
                                     });
