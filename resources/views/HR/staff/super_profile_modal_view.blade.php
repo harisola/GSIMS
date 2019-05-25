@@ -30,3 +30,4 @@
                 				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
                 				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
                 			</tr>
+                                        

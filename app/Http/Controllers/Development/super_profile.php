@@ -248,12 +248,38 @@ class super_profile extends Controller
         if(!empty($profileDetail)) {
             foreach($profileDetail as $profile) { 
                 $profile_flag = 0;
+
                 $html .= '<tr>';
-                $html .= '<td>ola</td>';
-                $html .= '<td>ola</td>';
-                $html .= '<td>ola</td>';
-                $html .= '<td>ola</td>';
-                $html .= '<td>ola</td>';
+                if($profile->level_0==1){
+                        $css_class_0='SSPON';
+                }else{
+                        $css_class_0='SSPOFF';
+                }
+                if($profile->level_1==1){
+                        $css_class_1='SSPON';
+                }else{
+                        $css_class_1='SSPOFF';
+                }
+                if($profile->level_2==1){
+                        $css_class_2='SSPON';
+                }else{
+                        $css_class_2='SSPOFF';
+                }
+                if($profile->level_3==1){
+                        $css_class_3='SSPON';
+                }else{
+                        $css_class_3='SSPOFF';
+                }
+                if($profile->level_4==1){
+                        $css_class_4='SSPON';
+                }else{
+                        $css_class_4='SSPOFF';
+                }
+                $html .= "<td class='$css_class_0' ></td>";
+                $html .= "<td class='$css_class_1' ></td>";
+                $html .= "<td class='$css_class_2' ></td>";
+                $html .= "<td class='$css_class_3' ></td>";
+                $html .= "<td class='$css_class_4' ></td>";
                 $html .= '<td><span class="tooltips" data-original-title="'.ucwords($profile->name).'">'.ucwords($profile->name).'</span></td>';
                 $html .= '<td>'.date('g:i A',strtotime($profile->mon_in)).'-'.date('g:i A',strtotime($profile->mon_out)).'</td>';
                     foreach($superProfileDetail as $super) {

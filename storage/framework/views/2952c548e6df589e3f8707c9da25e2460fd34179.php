@@ -475,9 +475,7 @@ $(".myswicth").on('switchChange.bootstrapSwitch', function (event, state) {
 
 
 $('.close').click(function(){
-  if($(this).attr('id')==0){
-
-  }else{
+ 
     $.ajax({
         type:"POST",
         url:"<?php echo e(url('/getSuperProfileInteface')); ?>",
@@ -493,15 +491,11 @@ $('.close').click(function(){
         }
 
     }); // end replace html ajax 
-  }
      
 
 });
 $('.close2').click(function(){
-  if($(this).attr('id')==0){
-
-
-  }else{
+  
     $.ajax({
         type:"POST",
         url:"<?php echo e(url('/getSuperProfileInteface')); ?>",
@@ -517,8 +511,7 @@ $('.close2').click(function(){
         }
 
     }); // end replace html ajax 
-  }
-
+  
      
 
 });
