@@ -164,6 +164,7 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 			else if( $Operation=='Exceptional Adjustments')
 			{
 				$Trigger_Sp=0;
+
 				$this->ExceptionalAdjustment( $Adjust_Effect, $Approval_id );
 
 				$activity_id=4;
@@ -214,7 +215,7 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 
 
 			$AAM->MyUpdateTable_Model($Update_Query);
-			
+
 
 			if( $Approval_id > 0 && $Trigger_Sp == 1 )
 			{
@@ -315,13 +316,14 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 
 					$payroll_exceptional_adjustments += $Effected_day; 
 					 $payroll_remaining_leave;
-					/*$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$payroll_leaveBalanced.", `remaining_leave`=".$payroll_remaining_leave.", `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; */
+					
+					$Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `leave_balance`=".$payroll_leaveBalanced.", `remaining_leave`=".$payroll_remaining_leave.", `exceptional_adjustments`=".$payroll_exceptional_adjustments." WHERE  `id`=".$payroll_id.""; 
 
 					  
 					
 
-   $Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `remaining_leave`='".$payroll_remaining_leave."' WHERE `id`=".$payroll_id."";
-   
+   // $Sql ="UPDATE `atif_gs_events`.`daily_attendance_report` SET `remaining_leave`='".$payroll_remaining_leave."' WHERE `id`=".$payroll_id."";
+
 
 
 

@@ -300,6 +300,60 @@ input#staffView_StaffList_Search {
     width: 94.5% !important;
     margin-left: 40px !important;
 }
+/* */
+.padRight1 {
+ padding-right:1%; 
+ text-align:right;
+ width:49%;
+}
+.padLeft1 {
+ padding-left:1%;
+ width:49%;  
+}
+.currentStaff tbody {
+ background:#f5eba3;  
+}
+.innerTbodyStaff {
+ text-align: left;
+  padding: 4px;
+  float: left;
+  width: 100%;
+ border: 1px solid #e0dfdf;
+ height: 55px;
+ background: #efefef;
+}
+.innerTbodyStaff .user-pic {
+  height: 43px !important;
+}
+.rolesTable tr.pBottom10 {
+  width: 100%;
+ height: 60px;
+}
+.rolesTable td.staffView_StaffName {
+  padding-left: 6px;
+ width:100%;
+}
+.innerTbodyStaff .row td {
+ float:left; 
+}
+.innerTbodyStaff .row tdLlast-child {
+ float:right;
+ width:15%;
+    
+}
+.leftInformationRoleStaff {
+ float:left;
+}
+.rightInformationRoleStaff {
+  float: right;
+  padding: 12px 10px;
+  font-weight: bold;
+  color: #717171;
+  font-size: 14px;
+  border: 1px solid #c3c3c3;
+  background: #d0d0d0;
+}
+
 </style>
 <link href="<?php echo e(URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.css')); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo e(URL::to('/metronic/global/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css')); ?>" rel="stylesheet" type="text/css" />
@@ -380,7 +434,7 @@ input#staffView_StaffList_Search {
 <div class="row marginTop20">
   <div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 40%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
     <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
-    </div><!-- div -->
+  </div><!-- div -->
     
  <div class="col-md-4 borderRightDashed">
     <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -886,6 +940,7 @@ input#staffView_StaffList_Search {
                       </span>
                    </td>
                    <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->name_code); ?> </td>
+                   <td class="text-center" style="display:none;text-transform: lowercase;"> <span aria-hidden="true"></span> <?php echo e($data->name_code); ?> </td>
                    <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->gt_id); ?> </td>
                    <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->tt_profile_name); ?> </td>
                    <td class="text-center" style="display:none;"> <span aria-hidden="true"></span> <?php echo e($data->c_bottomline); ?> </td>
@@ -4983,94 +5038,124 @@ input#staffView_StaffList_Search {
                       </div>
                       <!-- portlet -->
                    </div>
-                   <!-- tab_1_5 -->
-<style>
-.padRight1 {
- padding-right:1%; 
- text-align:right;
- width:49%;
-}
-.padLeft1 {
- padding-left:1%;
- width:49%;  
-}
-.currentStaff tbody {
- background:#f5eba3;  
-}
-.innerTbodyStaff {
- text-align: left;
-  padding: 4px;
-  float: left;
-  width: 100%;
- border: 1px solid #e0dfdf;
- height: 55px;
- background: #efefef;
-}
-.innerTbodyStaff .user-pic {
-  height: 43px !important;
-}
-.rolesTable tr.pBottom10 {
-  width: 100%;
- height: 60px;
-}
-.rolesTable td.staffView_StaffName {
-  padding-left: 6px;
- width:100%;
-}
-.innerTbodyStaff .row td {
- float:left; 
-}
-.innerTbodyStaff .row tdLlast-child {
- float:right;
- width:15%;
-    
-}
-.leftInformationRoleStaff {
- float:left;
-}
-.rightInformationRoleStaff {
-  float: right;
-  padding: 12px 10px;
-  font-weight: bold;
-  color: #717171;
-  font-size: 14px;
-  border: 1px solid #c3c3c3;
-  background: #d0d0d0;
-}
-</style>                     
+                   <!-- tab_1_5 -->                 
                    <div class="tab-pane fade" id="tab_1_6">
-                     
-
-
-                     <div class="container">
-                      <div class="">
-
-
-                      <div id="content_role_position_distance" class="col-md-4"> 
-          
-                          
-                      </div>
-
-                      <div id="content_role_position_distance_kashifSolangi" class="col-md-4"> 
-                      </div>
-                      <!-- portlet -->
-
-                    </div>
-                   </div>
+                    <ul class="nav nav-tabs nav-justified" id="relationTabs">
+                     <li class="active">
+                        <a href="#tab_1_1_1" data-toggle="tab"> Multi Role Relationships </a>
+                     </li>
+                     <li class="">
+                        <a href="#tab_1_1_2" data-toggle="tab"> Consolidated Relationships </a>
+                     </li>
+                   </ul><!-- relationTabs-->
+                   <div class="tab-content">
+                    <div class="tab-pane fade" id="tab_1_1_1">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div id="content_role_position_distance" class="col-md-6">
+                            
+                          </div><!-- content_role_position_distance -->
+                          <div id="content_role_position_distance_kashifSolangi" class="col-md-6"> 
+                          </div><!-- content_role_position_distance_kashifSolangi -->
+                        </div><!-- row -->
+                      </div><!-- col-md-12 -->
+                    </div><!-- tab_1_1_1 -->
+                    <div class="tab-pane fade" id="tab_1_1_2">
+                      <div class="float">
+                      <div class="filterArea">
+                        <form>
+                          <div class="form-body">
+                            <div class="col-md-4">
+                                <label>Filter by Relationship</label>
+                                <select class="form-control" id="installment_number">
+                                  <option disabled="" selected="">Select</option>
+                                  <option class="tooltips" value="1" title="10 A  -  19 A">Fundamental Direct Reporting</option>
+                                  <option value="2" title="01 X  -  09 X  or  10 B/C/D  -  19 B/C/D">Non-Fundamental Direct Reporting</option>
+                                  <option value="3" title="20 A  -  29 A">Fundamental Grand Reporting</option>
+                                  <option value="4" title="20 B/C/D - 29 B/C/D">Non-Fundamental Grand Reporting</option>
+                                  <option value="5" title="01 X  -  19 X">All Single Layers</option>
+                                  <option value="7" title="01 X  -  29 X">All Double Layers</option>
+                                  <option value="7" title="01 X  -  99 X">All Layers</option>
+                                </select>
+                              </div><!-- col-md-4 -->
+                              <div class="col-md-3">
+                                <label style="float: left;width: 100%;">Flow</label>
+                                <input type="checkbox" class="make-switch" data-on-text="&nbsp;UPWARD&nbsp;" data-off-text="&nbsp;DOWNWARD&nbsp;">
+                              </div><!-- col-md-4 -->
+                              <div class="col-md-4">
+                                <label style="float: left;width: 100%;">&nbsp;</label>
+                                <input type="button" id="" data-pdf="0" class="btn btn-group green" value="Apply Filter" style="">
+                              </div><!-- col-md-4 -->
+                          </div><!-- form-body -->
+                        </form>
+                      </div><!-- filterArea -->
+                      <div class="relationshipArea">
+                        <table width="50%" class="rolesTable">
+                          <tbody>
+                            <tr class="pBottom10 currentStaff_c">
+                              <td width="50%" class="padRight1"><table width="100%">
+                                  <tbody class="innerTbodyStaff">
+                                    <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generations School" style="display: table-row;">
+                                      <td class=""><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="12-045" src="assets/photos/hcm/150x150/staff/782.png"></td>
+                                      <td class="staffView_StaffName"><span class="leftInformationRoleStaff"><a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="AHK" data-staffid="171" data-staffgtid="12-045" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Aamir Hussain Khan</a>-<small class="tooltips" data-container="body" data-placement="top" data-original-title="a.hussain@generations.edu.pk">AHK</small><br>
+                                        <small class="shortHeight"><span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">I</span><span class="tooltips" data-container="body" data-placement="top" data-original-title="Manager, Operations"> Manager, Operations</span></small></span></td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                            </tr>
+                            <tr class="pBottom10 ">
+                              <td width="50%" class="padRight1"><table width="100%">
+                                  <tbody class="innerTbodyStaff">
+                                    <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generations School" style="display: table-row;">
+                                      <td class=""><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="18-107" src="assets/photos/hcm/150x150/staff/1370.png"></td>
+                                      <td class="staffView_StaffName"><span class="leftInformationRoleStaff"><a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="FHD" data-staffid="174" data-staffgtid="18-107" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Fahad Ahmed</a>-<small class="tooltips" data-container="body" data-placement="top" data-original-title="f.ahmed@generations.edu.pk">FHD</small><br>
+                                        <small class="shortHeight"><span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">N</span><span class="tooltips" data-container="body" data-placement="top" data-original-title="Admin Officer"> Admin Officer</span></small></span><span class="rightInformationRoleStaff"><span class="rolesRelations">10 A</span></span></td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                            </tr>
+                            <tr class="pBottom10 ">
+                              <td width="50%" class="padRight1"><table width="100%">
+                                  <tbody class="innerTbodyStaff">
+                                    <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generations School" style="display: table-row;">
+                                      <td class=""><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="10-012" src="assets/photos/hcm/150x150/staff/434.png"></td>
+                                      <td class="staffView_StaffName"><span class="leftInformationRoleStaff"><a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="IQA" data-staffid="172" data-staffgtid="10-012" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Iqbal Ahmed</a>-<small class="tooltips" data-container="body" data-placement="top" data-original-title="k.iqbal@generations.edu.pk">IQA</small><br>
+                                        <small class="shortHeight"><span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">N</span><span class="tooltips" data-container="body" data-placement="top" data-original-title="Admin Officer"> Admin Officer</span></small></span><span class="rightInformationRoleStaff"><span class="rolesRelations">10 A</span></span></td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                            </tr>
+                            <tr class="pBottom10 ">
+                              <td width="50%" class="padRight1"><table width="100%">
+                                  <tbody class="innerTbodyStaff">
+                                    <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generations School" style="display: table-row;">
+                                      <td class=""><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="16-039" src="assets/photos/hcm/150x150/staff/1126.png"></td>
+                                      <td class="staffView_StaffName"><span class="leftInformationRoleStaff"><a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MAJ" data-staffid="175" data-staffgtid="16-039" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Majid  Ali</a>-<small class="tooltips" data-container="body" data-placement="top" data-original-title="m.ali2@generations.edu.pk">MAJ</small><br>
+                                        <small class="shortHeight"><span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">N</span><span class="tooltips" data-container="body" data-placement="top" data-original-title="Admin Officer"> Admin Officer</span></small></span><span class="rightInformationRoleStaff"><span class="rolesRelations">10 A</span></span></td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                            </tr>
+                            <tr class="pBottom10 ">
+                              <td width="50%" class="padRight1"><table width="100%">
+                                  <tbody class="innerTbodyStaff">
+                                    <tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generations School" style="display: table-row;">
+                                      <td class=""><img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="10-009" src="assets/photos/hcm/150x150/staff/401.png"></td>
+                                      <td class="staffView_StaffName"><span class="leftInformationRoleStaff"><a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="MAF" data-staffid="173" data-staffgtid="10-009" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">Muhammad Asif</a>-<small class="tooltips" data-container="body" data-placement="top" data-original-title="m.asif2@generations.edu.pk">MAF</small><br>
+                                        <small class="shortHeight"><span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">N</span><span class="tooltips" data-container="body" data-placement="top" data-original-title="Admin Officer"> Admin Officer</span></small></span><span class="rightInformationRoleStaff"><span class="rolesRelations">10 A</span></span></td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div><!-- -->
+                    </div><!-- -->
+                   </div><!-- tab-content -->
                    <!-- tab_1_6 -->
-
-
-
-
-
-
-                      <!-- portlet -->
-                   </div>
-
-
-
-
-                   <!-- tab_1_6 -->
+                   <!-- portlet -->
+                 </div>
+                 <!-- tab_1_6 -->
                 </div>
                 <!-- tab-content -->
              </div>
@@ -5085,6 +5170,21 @@ input#staffView_StaffList_Search {
  <!-- col-md-8 -->
 </div>
 <!-- row -->
+<!-- CSS by HOL -->
+<style type="text/css">
+.filterArea {
+  background: #e8bc40;
+  padding: 10px;
+  margin-top: -9px;
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}  
+#relationTabs li.active a {
+    background: #e6e7e8 !important;
+        border-top: 2px solid #38c6e6;
+}
+</style>
 <!-- END USE PROFILE -->
 <!--================================================== -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->

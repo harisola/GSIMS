@@ -2605,7 +2605,8 @@ public function getSinglePenalty($ID){
 	}
 
 	public function getDailyReportData($staff_id,$from_date,$to_date){
-		$query = "CALL atif_gs_events.`sp_get_attendance_info`(".$staff_id.",'".$from_date."','".$to_date."')";
+		echo $query = "CALL atif_gs_events.`sp_get_attendance_info`(".$staff_id.",'".$from_date."','".$to_date."')";
+		die;
 		$result = DB::connection($this->dbCon)->select($query);
 		return $result;
 	}
