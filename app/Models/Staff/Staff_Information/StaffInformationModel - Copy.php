@@ -2696,9 +2696,26 @@ public function getSinglePenalty($ID){
 		
 		$i = 0;
 	    foreach ($result as $u) {
-		    $pic = $this->get_Staff_Pic($u->employee_id, $u->gender);
-		    $result[$i]->photo500 = $pic['photo500'];
-		    $result[$i]->photo150 = $pic['photo150'];
+		    // $pic = $this->get_Staff_Pic($u->employee_id, $u->gender);
+		    // $result[$i]->photo500 = $pic['photo500'];
+		    // $result[$i]->photo150 = $pic['photo150'];
+
+
+		    if( $u->employee_id == '' )
+	    	{
+	    		$pic = $this->get_Staff_Pic(0, 'M');
+		    	$result[$i]->photo500 = $pic['photo500'];
+		    	$result[$i]->photo150 = $pic['photo150'];	
+
+	    	}else
+	    	{
+	    		$pic = $this->get_Staff_Pic($u->employee_id, $u->gender);
+		    	$result[$i]->photo500 = $pic['photo500'];
+		    	$result[$i]->photo150 = $pic['photo150'];	
+	    	}
+
+
+	    	
 		    $i++;
 	    }
 

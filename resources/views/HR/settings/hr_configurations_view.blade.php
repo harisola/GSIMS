@@ -73,702 +73,83 @@
                     </tr>
                   </thead>
                   <tbody>
+                      <?php
+                        // foreach ($data as $all_data) {
+                      ?>
+                      @foreach($get_months_hr as $months_hr)
+                      <!-- get_months_hr -->
                     <tr>
-                      <td>July</td>
+                      <td >
+                        <!-- < ? php echo $all_data->months; ?>  -->
+                        {{ $months_hr->hr_month }} </td>
                       <td>
                         <div class="input-group monthDate">
-                            <select class="form-control " id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31">31</option>
+                          <!-- <input type="text" id='id' value="<?php //echo $all_data->id; ?>" readonly> -->
+                            <select class="form-control monthwise cut_off_date1" id="cut_off_date1" data-id="{{ $months_hr->monthid }}">
+                             <option <?php if ($months_hr->hr_cut_off == 1 ) echo 'selected' ; ?> value=1>1</option>
+                             <option <?php if ($months_hr->hr_cut_off == 2 ) echo 'selected' ; ?> value=2>2</option>
+                             <option <?php if ($months_hr->hr_cut_off == 3 ) echo 'selected' ; ?> value=3>3</option>
+                             <option <?php if ($months_hr->hr_cut_off == 4 ) echo 'selected' ; ?> value=4>4</option>
+                             <option <?php if ($months_hr->hr_cut_off == 5 ) echo 'selected' ; ?> value=5>5</option>
+                             <option <?php if ($months_hr->hr_cut_off == 6 ) echo 'selected' ; ?> value=6>6</option>
+                             <option <?php if ($months_hr->hr_cut_off == 7 ) echo 'selected' ; ?> value=7>7</option>
+                             <option <?php if ($months_hr->hr_cut_off == 8 ) echo 'selected' ; ?> value=8>8</option>
+                             <option <?php if ($months_hr->hr_cut_off == 9 ) echo 'selected' ; ?> value=9>9</option>
+                             <option <?php if ($months_hr->hr_cut_off == 10 ) echo 'selected' ; ?> value=10>10</option>
+                             <option <?php if ($months_hr->hr_cut_off == 11 ) echo 'selected' ; ?> value=11>11</option>
+                             <option <?php if ($months_hr->hr_cut_off == 12 ) echo 'selected' ; ?> value=12>12</option>
+                             <option <?php if ($months_hr->hr_cut_off == 13 ) echo 'selected' ; ?> value=13>13</option>
+                             <option <?php if ($months_hr->hr_cut_off == 14 ) echo 'selected' ; ?> value=14>14</option>
+                             <option <?php if ($months_hr->hr_cut_off == 15 ) echo 'selected' ; ?> value=15>15</option>
+                             <option <?php if ($months_hr->hr_cut_off == 16 ) echo 'selected' ; ?> value=16>16</option>
+                             <option <?php if ($months_hr->hr_cut_off == 17 ) echo 'selected' ; ?> value=17>17</option>
+                             <option <?php if ($months_hr->hr_cut_off == 18 ) echo 'selected' ; ?> value=18>18</option>
+                             <option <?php if ($months_hr->hr_cut_off == 19 ) echo 'selected' ; ?> value=19>19</option>
+                             <option <?php if ($months_hr->hr_cut_off == 20 ) echo 'selected' ; ?> value=20>20</option>
+                             <option <?php if ($months_hr->hr_cut_off == 21 ) echo 'selected' ; ?> value=21>21</option>
+                             <option <?php if ($months_hr->hr_cut_off == 22 ) echo 'selected' ; ?> value=22>22</option>
+                             <option <?php if ($months_hr->hr_cut_off == 23 ) echo 'selected' ; ?> value=23>23</option>
+                             <option <?php if ($months_hr->hr_cut_off == 24 ) echo 'selected' ; ?> value=24>24</option>
+                             <option <?php if ($months_hr->hr_cut_off == 25 ) echo 'selected' ; ?> value=25>25</option>
+                             <option <?php if ($months_hr->hr_cut_off == 26 ) echo 'selected' ; ?> value=26>26</option>
+                             <option <?php if ($months_hr->hr_cut_off == 27 ) echo 'selected' ; ?> value=27>27</option>
+                             <option <?php if ($months_hr->hr_cut_off == 28 ) echo 'selected' ; ?> value=28>28</option>
+                             <option <?php if ($months_hr->hr_cut_off == 29 ) echo 'selected' ; ?> value=29>29</option>
+                             <option <?php if ($months_hr->hr_cut_off == 30 ) echo 'selected' ; ?> value=30>30</option>
+                             <option <?php if ($months_hr->hr_cut_off == 31 ) echo 'selected' ; ?> value=31>31</option>
                             </select>
                             <span class="input-group-addon">
-                                of July
+                                of {{ $months_hr->hr_month }}
                             </span>
                         </div><!-- input-group -->
                       </td>
                       <td>
                         <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
+                          <select class="form-control freeze_after" id="freeze_after" data-id="{{ $months_hr->monthid }}">
+                            <option <?php if ($months_hr->hr_freeze_day == 2 ) echo 'selected' ; ?> value=2>2</option>
+                            <option <?php if ($months_hr->hr_freeze_day == 3 ) echo 'selected' ; ?> value=3>3</option>
+                            <option <?php if ($months_hr->hr_freeze_day == 4 ) echo 'selected' ; ?> value=4>4</option>
+                            <option <?php if ($months_hr->hr_freeze_day == 5 ) echo 'selected' ; ?> value=5>5</option>
+                            <option <?php if ($months_hr->hr_freeze_day == 6 ) echo 'selected' ; ?> value=6>6</option>
+                          </select>
+                          <span class="input-group-addon">
+                            days
+                          </span>
                         </div><!-- input-group -->
                       </td>
                       <td>01 Jul - 20 Jul</td>
                     </tr><!-- July -->
-                    <tr>
-                      <td>August</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control " id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15" selected="">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31">31</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of August
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>21 Jul - 15 Aug</td>
-                    </tr><!-- August -->
-                    <tr>
-                      <td>September</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of September
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>16 Aug - 20 Sep</td>
-                    </tr><!-- September -->
-                    <tr>
-                      <td>October</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control " id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17" selected="">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31">31</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of October
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>21 Sep - 17 Oct</td>
-                    </tr><!-- October -->
-                    <tr>
-                      <td>November</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of November
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>18 Oct - 20 Nov</td>
-                    </tr><!-- November -->
-                    <tr>
-                      <td>December</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31">31</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of December
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>21 Nov - 20 Dec</td>
-                    </tr><!-- December -->
-                    <tr>
-                      <td>January</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31">31</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of January
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>21 Dec - 20 Jan</td>
-                    </tr><!-- January -->
-                    <tr>
-                      <td>February</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28" selected="">28</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of February
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>20 Jan - 28 Feb</td>
-                    </tr><!-- February -->
-                    <tr>
-                      <td>March</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31">31</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of March
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>01 Mar - 20 Mar</td>
-                    </tr><!-- March -->
-                    <tr>
-                      <td>April</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of April
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>21 Mar - 20 Apr</td>
-                    </tr><!-- April -->
-                    <tr>
-                      <td>May</td>
-                      <td>
-                        <div class="input-group monthDate">
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20" selected="">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31">31</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of May
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>21 Apr - 20 May</td>
-                    </tr><!-- May -->
-                    <tr>
-                      <td>June</td>
-                      <td>
-                        <div class="input-group monthDate"> 
-                            <select class="form-control" id="">
-                              <option value="01">01</option>
-                              <option value="02">02</option>
-                              <option value="03">03</option>
-                              <option value="04">04</option>
-                              <option value="05">05</option>
-                              <option value="06">06</option>
-                              <option value="07">07</option>
-                              <option value="08">08</option>
-                              <option value="09">09</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20">20</option>
-                              <option value="21">21</option>
-                              <option value="22">22</option>
-                              <option value="23">23</option>
-                              <option value="24">24</option>
-                              <option value="25">25</option>
-                              <option value="26">26</option>
-                              <option value="27">27</option>
-                              <option value="28">28</option>
-                              <option value="29">29</option>
-                              <option value="30">30</option>
-                              <option value="31" selected="">31</option>
-                            </select>
-                            <span class="input-group-addon">
-                                of June
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>
-                        <div class="input-group freezeDays">
-                            <select class="form-control" id="">
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                            </select>
-                            <span class="input-group-addon">
-                                days
-                            </span>
-                        </div><!-- input-group -->
-                      </td>
-                      <td>21 May - 30 June</td>
-                    </tr><!-- June -->
+                    <?php 
+                  // } 
+                    ?>
+                    @endforeach
+                   <!-- June -->
                   </tbody>
                 </table><!-- AdjustmentCycleTable -->
               </div><!-- form-body -->
               <div class="form-actions text-center">
                     <button type="button" class="btn default">Cancel</button>
-                    <button type="submit" class="btn blue" id="btnSubmit">
+                    <button type="submit" class="btn blue btnSubmit" id="btnSubmit">
                         <i class="fa fa-check"></i> Save</button>
                 </div>
             </form>
@@ -880,38 +261,107 @@
 
 
 <script type="text/javascript">
-$('#day_from').val(<?php echo $pageData[0]->lock_day_start; ?>);
-$('#day_to').val(<?php echo $pageData[0]->lock_day_end; ?>);
-$('#day_buffer').val(<?php echo $pageData[0]->lock_day_buffer; ?>);
 
-$('#btnSubmit').click(
-  function(event){
-    event.preventDefault();
-    var day_from = $('#day_from').val();
-    var day_to = $('#day_to').val();
-    var day_buffer = $('#day_buffer').val();
 
+ $(document).on("click",".btnSubmit",function(){
+
+
+    location.reload();
+       });
+
+
+
+
+
+
+
+  $(document).ready(function(){
+
+  })
+
+// by zk
+  $(document).on('click','.profile_StaffName',function(){
+    var staffID = $(this).attr('data-staffID');
+    //console.log(staffID);
+    $.ajax({
+        type:'GET',
+        data: {
+                "staff_id":staffID,
+                "_token": "{{ csrf_token() }}"
+        },
+        url:'/gsims/public/ateeb_rec_modal',
+        success:function(res){
+
+          $('.modal_body_fetch').html(res);
+        }
+    })
+  })
+// by zk
+ 
+$('#cut_off_date').val(<?php //echo $pageData[0]->lock_day_start; ?>);
+$('#freeze_after').val(<?php //echo $pageData[0]->lock_day_end; ?>);
+//$('#day_buffer').val(<?php //echo $pageData[0]->lock_day_buffer; ?>);
+
+    // $(document).on("click",".monthDate",function(){
+      
+    // })
+       
+
+       /* $(document).on("change","#cut_off_date1",function(){
+       
+                 
+      
+           })*/
+
+  $("select.cut_off_date1").change(function(){
+    var cut_off_date = $(this).children("option:selected").val();
+    var get_id = $(this).attr("data-id");
     var token = "{{ csrf_token() }}";
-
+      
     $.ajax({
       type: "POST",
-      url: "{{url('/hr_save_configurations')}}",
+      url: "{{url('/hr_save_month_data')}}",
       data: {
           _token: token,
-          day_from: day_from,
-          day_to: day_to,
-          day_buffer:day_buffer
+          cut_off_date: cut_off_date,
+          get_id:get_id,
       },
       success: function(data)
       {
-          //console.log('From: ' + day_from);
-          //console.log(data);
-          $("#success-alert").show();
-          $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-              $("#success-alert").slideUp(500);
-          });
+        $("#success-alert").show();
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+          $("#success-alert").slideUp(500);
+        });
       }
-  });     
-  }
-);
+    });   
+  })
+
+
+  $("select.freeze_after").change(function(){
+    var freeze_after = $(this).children("option:selected").val();
+    var get_id = $(this).attr("data-id");
+    var token = "{{ csrf_token() }}";
+      
+    $.ajax({
+      type: "POST",
+      url: "{{url('/hr_save_day_data')}}",
+      data: {
+          _token: token,
+          freeze_after: freeze_after,
+          get_id:get_id,
+      },
+      success: function(data)
+      {
+        $("#success-alert").show();
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+          $("#success-alert").slideUp(500);
+        });
+      }
+    });   
+  })
+
+
+
+
+
 </script>

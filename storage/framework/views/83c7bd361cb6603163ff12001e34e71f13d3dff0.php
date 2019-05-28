@@ -234,7 +234,7 @@ table#harisOla tr td:nth-child(7) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close" id="0" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Schedule Super Profile</h4>
             </div>
             <div class="modal-body">
@@ -251,46 +251,33 @@ table#harisOla tr td:nth-child(7) {
                 			</tr>
                 		</thead>
                 		<tbody>
-                			<tr>
-                				<td>Profile A - Teachers @ NC</td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                			</tr>
-                			<tr>
-                				<td>Profile B - Resource Faculty @ NC </td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                			</tr>
-                			<tr>
-                				<td>Profile C - Lead Teachers @ NC</td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                			</tr>
-                			<tr>
-                				<td>Profile D - Year Tutors, Librarians @ NC</td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                				<td><input type="checkbox" checked class="make-switch" data-size="small"></td>
-                			</tr>
+                    <?php $__currentLoopData = $profileDetail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $profile): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <tr>
+                        <td><?php echo e($profile->name); ?></td>
+                        <td><input type="checkbox" <?php if($profile->level_0=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_0" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_1=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_1" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_2=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_2" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_3=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_3" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                        <td><input type="checkbox" <?php if($profile->level_4=='1'): ?> checked <?php endif; ?> class="make-switch myswicth" data-profile_id="<?php echo e($profile->id); ?>" 
+                          data-column_name="level_4" id="<?php echo e($profile->id); ?>" data-size="small"></td>
+                      </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>            
+
+
                 		</tbody>
                 	</table>
+                  <input type="hidden" name="url" value="<?php echo e(url('/')); ?>" class="main_url">
+
                 </form>
             </div>
             <div class="modal-footer" style="text-align:center;">
                 
                 <button type="button" class="btn green" onClick="insertSuper()" id="super_profile" >Save Changes</button>
-                <button type="button" class="btn gray btn-outline close2" data-dismiss="modal" >Close</button>
+                <button type="button" class="btn close2" id="0" data-dismiss="modal" >Close</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -309,7 +296,7 @@ table#harisOla tr td:nth-child(7) {
                <a class="btn red btn-outline sbold" data-toggle="modal" href="#basic"> Add Super Profile</a>
             </div>
             <div class="btn-group">
-               <a class="btn red btn-outline sbold" data-toggle="modal" href="#SSP"> Schedule Super Profile</a>
+               <a class="btn red btn-outline sbold sp_modal" data-toggle="modal" href="#SSP"> Schedule Super Profile</a>
             </div>
         </div>
     </div>
@@ -343,11 +330,11 @@ table#harisOla tr td:nth-child(7) {
                     <?php foreach($profileDetail as $profile) { ?>
                       <?php $profile_flag = 0; ?>
                       <tr>
-                      	<td class="SSPOFF">&nbsp;</td>
-                      	<td class="SSPON">&nbsp;</td>
-                      	<td class="SSPOFF">&nbsp;</td>
-                      	<td class="SSPON">&nbsp;</td>
-                      	<td class="SSPOFF">&nbsp;</td>
+                      	<td class="<?php if($profile->level_0==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_1==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_2==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_3==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
+                      	<td class="<?php if($profile->level_4==1): ?> SSPON <?php else: ?> SSPOFF <?php endif; ?>">&nbsp;</td>
                         <td><span class="tooltips" data-original-title="<?=ucwords($profile->name) ?>"><?=ucwords($profile->name) ?></span></td>
                         <td><?php echo date('g:i A',strtotime($profile->mon_in)) ?>-<?php echo date('g:i A',strtotime($profile->mon_out)) ?></td>
                         <?php foreach($superProfile as $super) { ?>
@@ -455,9 +442,41 @@ var insertSuper =  function(){
 
 
 
-$('.close').click(function(){
+$(".myswicth").on('switchChange.bootstrapSwitch', function (event, state) {
 
-     $.ajax({
+  var column_name=$(this).data('column_name');
+  var profile_id=$(this).data('profile_id');
+  var status=$(this).is(':checked');
+  if(status==true){
+    var level_status=1;
+  }else{
+    var level_status=0;
+    }
+
+  var data={
+      'column_name':column_name,
+      'profile_id':profile_id,
+      'status':level_status,
+  
+    }
+
+      $.ajax({
+                data:data,
+                method:'GET',
+                url:$('.main_url').val()+'/updateLevel',
+                    success:function(response){
+            
+                    }
+             });
+  
+
+});  
+
+
+
+$('.close').click(function(){
+ 
+    $.ajax({
         type:"POST",
         url:"<?php echo e(url('/getSuperProfileInteface')); ?>",
         data:{
@@ -472,11 +491,12 @@ $('.close').click(function(){
         }
 
     }); // end replace html ajax 
+     
 
 });
 $('.close2').click(function(){
-
-     $.ajax({
+  
+    $.ajax({
         type:"POST",
         url:"<?php echo e(url('/getSuperProfileInteface')); ?>",
         data:{
@@ -491,6 +511,8 @@ $('.close2').click(function(){
         }
 
     }); // end replace html ajax 
+  
+     
 
 });
 
@@ -500,62 +522,21 @@ $('.close2').click(function(){
         $('#super_descr').val('');
     });
 
+    $(document).on('click','.sp_modal',function(){
 
+    //   $.ajax({
+    //     type:"GET",
+    //     url:"<?php echo e(url('/get_super_profile_modal')); ?>",
+    //     success:function(res){
+    //     console.log(res);
+    //     $("#SSPTable tbody").html("");
+    //     $("#SSPTable tbody").html(res);
+        
+    //     }
 
+    // }); // end replace html ajax 
 
-
-// var updateTimeIn = function(){
-
-//     $.fn.editable.defaults.params = function (params) {
-//         params._token = "<?php echo e(csrf_token()); ?>";
-//         return params;
-//     };
-//     $('.MonIN').editable({
-
-//          type: 'text',
-//          format:'h:mm A',
-//          viewformat:'h:mm A',
-//          template: 'h:mm a',
-//          name:'mon_in',
-//          url:"<?php echo e(url('/updateTimeIn')); ?>",
-//          success: function(e){
-//                 console.log(e)
-//         }
-
-//     });
-// }
-    
-    
-
-    // $(document).on('click','.MonINInsert',function(){
-
-
-    //       var profile_id = $(this).attr('data-profile_id');
-    //       var super_profile_id = $(this).attr('data-super_profile');
-
-
-    //       $.fn.editable.defaults.params = function (params) {
-    //           params._token = "<?php echo e(csrf_token()); ?>";
-    //           params.profile_id = profile_id;
-    //           params.super_profile_id = super_profile_id;
-    //           return params;
-    //       };
-    //       // $('.MonINInsert').editable('destroy');
-    //       $('.MonINInsert').editable({
-
-    //        type: 'text',
-    //        format:'h:mm A',
-    //        viewformat:'h:mm A',
-    //        template: 'h:mm a',
-    //        name:'mon_in',
-    //        url:"<?php echo e(url('/InsertTimeIn')); ?>",
-    //        success: function(e){
-    //               console.log(e)
-    //       }
-
-    //       });
-
-    // });
+    });
 
 
 
@@ -563,84 +544,6 @@ $('.close2').click(function(){
 
 
 
-
-//   $(document).on('click','.MonOUTInsert',function(){
-
-//     var profile_id = $(this).attr('data-profile_id');
-//     var super_profile_id = $(this).attr('data-super_profile');
-
-
-//     $.fn.editable.defaults.params = function (params) {
-//         params._token = "<?php echo e(csrf_token()); ?>";
-//         params.profile_id = profile_id;
-//         params.super_profile_id = super_profile_id;
-//         return params;
-//     };
-
-//     $('.MonOUTInsert').editable({
-
-//      type: 'text',
-//      format:'h:mm A',
-//      viewformat:'h:mm A',
-//      template: 'h:mm a',
-//      name:'mon_in',
-//      url:"<?php echo e(url('/InsertTimeOut')); ?>",
-//      success: function(e){
-//             console.log(e)
-//     }
-
-//     });
-
-// });
-
-
-
-
-// $(document).on('click','.MonIN',function(){
-//   $.fn.editable.defaults.params = function (params) {
-//         params._token = "<?php echo e(csrf_token()); ?>";
-//         return params;
-//     };
-//     $('.MonIN').editable({
-
-//          type: 'text',
-//          format:'h:mm A',
-//          viewformat:'h:mm A',
-//          template: 'h:mm a',
-//          name:'mon_in',
-//          url:"<?php echo e(url('/updateTimeIn')); ?>",
-//          success: function(e){
-//                 console.log(e)
-//         }
-
-//     });
-
-// });
-
-// $(document).on('click','.MonOUT',function(){
-
-
-
-//     $.fn.editable.defaults.params = function (params) {
-//         params._token = "<?php echo e(csrf_token()); ?>";
-//         return params;
-//     };
-
-//     $('.MonOUT').editable({
-
-//      type: 'text',
-//      format:'h:mm A',
-//      viewformat:'h:mm A',
-//      template: 'h:mm a',
-//      name:'mon_in',
-//      url:"<?php echo e(url('/updateTimeOut')); ?>",
-//      success: function(e){
-//             console.log(e)
-//     }
-
-//     });
-
-// });
 
      function editableMonInOut(){
 

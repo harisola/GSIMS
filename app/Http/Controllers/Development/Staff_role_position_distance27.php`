@@ -16,14 +16,9 @@ use App\Models\Staff\Staff_Information\Edit_delete_management_model;
 
 class Staff_role_position_distance extends StaffReportController
 {
-	protected $Request_Staff_id=0;
-
-
 	public function Layout_html(Request $request){
 		
 		$Staff_id = $request->input('Staff_id');
-
-		$this->Request_Staff_id=$Staff_id;
 		
 		
 		$staffInfo = new StaffInformationModel();
@@ -33,21 +28,18 @@ class Staff_role_position_distance extends StaffReportController
 		
 		$StaffRole = count($Staff_role);
 		
-		$ht = '';
-		$ht_2 = '';
+		$ht='';
+		$ht_2='';
 		
 		if ( !empty($Staff_role) ){
-			$Role_id = $Staff_role[0]->Role_id; 
+			$Role_id = $Staff_role[0]->Role_id;
 
 			
 			
-			if( $StaffRole == 1)
-			{
-
-				$ht = $this->Single_Role_Staff_Html($Role_id, $Staff_id);
+			if( $StaffRole == 1){
+				$ht = $this->Single_Role_Staff_Html($Role_id,$Staff_id);
 
 			}else{
-
 				$Role_id_Two = $Staff_role[1]->Role_id;
 
 
@@ -55,7 +47,7 @@ class Staff_role_position_distance extends StaffReportController
 				$ht_2 = $this->Single_Role_Staff_Html_Solangi($Role_id_Two, $Staff_id);
 
 				
-				
+				///$ht = $this->Double_Role_Staff_Html($Staff_role,$Staff_id);	
 			}
 		}
 		
@@ -138,20 +130,8 @@ class Staff_role_position_distance extends StaffReportController
 	*/
 	public function Single_Role_Staff_Html($Staff_role_id,$Staff_id)
 	{
-		
 		$staffInfo = new StaffInformationModel();
-
-
-
-
-
 		$Staff_role = $staffInfo->Get_Staff_Role($Staff_role_id);
-
-
-
-
-		 
-
 
 
 		
@@ -165,36 +145,28 @@ class Staff_role_position_distance extends StaffReportController
 		$Last_Role=0;
 		$Current_Staff_Last_Role=0;
 		
-		
 		// Upper Role
 		if( !empty( $Staff_role ) ):
-		foreach($Staff_role as $STr ):
-			if($STr->id != ''):
+		foreach($Staff_role as $ST ):
+			if($ST->id != ''):
 				$Html .= '<tr class="pBottom10" >';
 				$Html .= '<td width="50%" class="padRight1">';
 				$Percent=100;
-				
-					$Html .= $this->Staff_Upper_Role_KashifSolangi($STr,$Percent);
-				endif;	
+					$Html .= $this->Staff_Upper_Role($ST,$Percent);
 				$Html .= '</td>';
 				$Html .= '</tr>';
-
-				$Last_Role = $STr->id; // Current Staff Head Role id
-			
-
+				$Last_Role = $ST->id; // Current Staff Head Role id
+			endif;
 		endforeach;
 		endif;
-		
+		//echo $Last_Role; exit;// 		
 
-		//echo $Last_Role; exit;
 
 		// Current Staff Role
 		if( $Last_Role > 0 ){
-			 
 			
-			//$Staff_Roles = $staffInfo->Get_Current_Staff_Role($Last_Role);
-			$Staff_Roles = $staffInfo->Get_Current_Staff_Role_Single($Last_Role, $Staff_role_id );
-			 
+			$Staff_Roles = $staffInfo->Get_Current_Staff_Role($Last_Role);
+			#var_dump($Staff_Roles); exit;
 
 			$Percent=100;
 			if( !empty( $Staff_Roles ) ):
@@ -203,7 +175,7 @@ class Staff_role_position_distance extends StaffReportController
 					if($ST->s1 == $Staff_id){
 						
 						if($ST->s1 == $Staff_id)
-							$currentStaff = 'currentStaff';
+							$currentStaff = 'currentStaff_c';
 						else
 							$currentStaff='';
 					
@@ -213,23 +185,16 @@ class Staff_role_position_distance extends StaffReportController
 						$Html .= '</td>';
 						$Html .= '</tr>';
 					
-						$Current_Staff_Last_Role2 = $ST->id; // Current Staff Head Role id
+						$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
 					}
-
 				endforeach;
 			endif;
 		}
 		
-		#echo $Staff_role_id; exit;
-
-
-		$Current_Staff_Last_Role = array();
 		
-		$Current_Staff_Last_Role = $staffInfo->Get_Current_Staff_Role($Staff_role_id);
-
 		// Current Staff Role Lower Staff
-		if( !empty( $Current_Staff_Last_Role ) ){
-			
+		if( $Current_Staff_Last_Role > 0 ){
+			$Current_Staff_Last_Role = $staffInfo->Get_Current_Staff_Role($Current_Staff_Last_Role);
 			$Percent=100;
 			$LowerStff_id=0;
 			
@@ -242,19 +207,16 @@ class Staff_role_position_distance extends StaffReportController
 						$currentStaff='';
 					
 					
-					//if($LowerStff_id != $ST->s1):
-
+					if($LowerStff_id != $ST->s1):
 					$Html .= '<tr class="pBottom10 '.$currentStaff.'" >';
 					$Html .= '<td width="50%" class="padRight1">';
 						$Html .= $this->Staff_Lower_Role($ST,$Staff_id,$Percent);
-
 					$Html .= '</td>';
 					$Html .= '</tr>';
 					
 					$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
 					$LowerStff_id=$ST->id;
-
-					//endif;
+					endif;
 					
 				endforeach;
 			endif;
@@ -270,7 +232,7 @@ class Staff_role_position_distance extends StaffReportController
 		return $Html;
 	}
 	// Upper Staff HTML
-	public function Staff_Upper_Role($ST, $Percent)
+	public function Staff_Upper_Role($ST,$Percent)
 	{
 		$Html_Current = '';
 		//$Html_Current .= '<tr class="pBottom10" >';
@@ -290,7 +252,6 @@ class Staff_role_position_distance extends StaffReportController
 						$Html_Current .= '-';
 						$Html_Current .= '<small class="tooltips" data-container="body" data-placement="top" data-original-title="'.$ST->gg_id.'">';
 						$Html_Current .= $ST->name_code;
-
 						$Html_Current .= '</small>';
 						$Html_Current .= '<br>';
 						$Html_Current .= '<small class="shortHeight">';
@@ -304,28 +265,14 @@ class Staff_role_position_distance extends StaffReportController
 							$Html_Current .= '<span class="tooltips" data-container="body" data-placement="top" data-original-title="'.$ST->role_title_tl.'"> ';
 							$Html_Current .= $ST->role_title_tl;
 							$Html_Current .= '</span>';
-		$Html_Current .= '</small>';
-$Html_Current .= '</span>';
+							$Html_Current .= '</small>';
+						$Html_Current .= '</span>';
 
-						 
-						
-
-					//$Html_Current .= $ST->d10 .' '. $ST->finalGrade;
-					$dist =  "";
-					$fg = "";	
-							
-					if( ( $this->Request_Staff_id != $ST->staff_id ) || (substr($ST->roleCode, -1 ) == 'A') )
-					{
-						$dist =  "";
-					 	$fg = "";
-					 	$dist = $ST->d10;
-					 	$fg = $ST->finalGrade;
 						$Html_Current .= '<span class="rightInformationRoleStaff">';
 						$Html_Current .= '<span class="rolesRelations">';
-						$Html_Current .=  $dist .' '. $fg;
+						$Html_Current .= $ST->d10. ' '.$ST->finalGrade;
 						$Html_Current .= '</span>';
 						$Html_Current .= '</span>';
-					}
 
 						
 					$Html_Current .= '</td>';
@@ -339,82 +286,6 @@ $Html_Current .= '</span>';
 	}
 	
 	
-
-
-
-
-		// Upper Staff HTML
-	public function Staff_Upper_Role_KashifSolangi($Obj, $Percent)
-	{
-		$Html_Current = '';
-
-		
-	
-		
-		$Html_Current .= '<table width="'.$Percent.'%">';
-			$Html_Current .= '<tbody class="innerTbodyStaff">';
-				$Html_Current .= '<tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generations School" style="display: table-row;">';
-					$Html_Current .= '<td class="">';
-						$Html_Current .= '<img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="'.$Obj->gt_id.'" src="'.$Obj->photo150.'" />';
-					$Html_Current .= '</td>';
-					$Html_Current .= '<td class="staffView_StaffName">';
-						$Html_Current .= '<span class="leftInformationRoleStaff">';
-						$Html_Current .= '<a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="'.$Obj->name_code.'" data-staffid="'.$Obj->id.'" data-staffgtid="'.$Obj->gt_id.'" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">';
-						$Html_Current .= $Obj->abridged_name;
-						$Html_Current .= '</a>';
-						$Html_Current .= '-';
-						$Html_Current .= '<small class="tooltips" data-container="body" data-placement="top" data-original-title="'.$Obj->gg_id.'">';
-						$Html_Current .= $Obj->name_code;
-
-						$Html_Current .= '</small>';
-						$Html_Current .= '<br>';
-						$Html_Current .= '<small class="shortHeight">';
-							
-							$Html_Current .= '<span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">';
-							
-							$Html_Current .= $Obj->role_cat;
-							$Html_Current .= '</span>'; 
-							$Html_Current .= '<span class="tooltips" data-container="body" data-placement="top" data-original-title="'.$Obj->role_title_tl.'"> ';
-							$Html_Current .= $Obj->role_title_tl;
-							$Html_Current .= '</span>';
-		$Html_Current .= '</small>';
-$Html_Current .= '</span>';
-
-						 
-						
-
-					
-					$dist =  "";
-					$fg = "";	
-							
-					if( ( $Obj->d10 != 0 ) && ( ( $this->Request_Staff_id != $Obj->staff_id ) || (substr($Obj->roleCode, -1 ) == 'A') ) )
-					{
-						$dist =  "";
-					 	$fg = "";
-					 	$dist = $Obj->d10;
-					 	$fg = $Obj->finalGrade;
-						$Html_Current .= '<span class="rightInformationRoleStaff">';
-						$Html_Current .= '<span class="rolesRelations">';
-						$Html_Current .=  $dist .' '. $fg;
-						$Html_Current .= '</span>';
-						$Html_Current .= '</span>';
-					}
-
-						
-					$Html_Current .= '</td>';
-				$Html_Current .= '</tr>';
-			$Html_Current .= '</tbody>';
-		$Html_Current .= '</table>';
-		
-		
-		return $Html_Current;
-	}
-
-
-
-
-
-
 	
 	// Lower Staff HTML
 	public function Staff_Lower_Role($ST, $Staff_id,$Percent)
@@ -458,28 +329,11 @@ $Html_Current .= '</span>';
 							$Html_Current .= '</span>';
 							$Html_Current .= '</small>';
 						$Html_Current .= '</span>';
-
-						//if( $this->Request_Staff_id != $ST->s1 )
-						//if( ( $this->Request_Staff_id != $ST->s1 ) || (substr($ST->roleCode, -1 ) == 'A') )
-						//{
-
-							$Html_Current .= '<span class="rightInformationRoleStaff">';
-							$Html_Current .= '<span class="rolesRelations">';
-							/*if($ST->s1==0)
-							{
-								
-								$Html_Current .=  ( $ST->finalDistance = $ST->finalDistance - 9 ) . ' '.$ST->finalGrade;
-							}else
-							{
-								$Html_Current .=  $ST->finalDistance. ' '.$ST->finalGrade;	
-							}*/
-							
-							$Html_Current .=  $ST->finalDistance. ' '.$ST->finalGrade;	
-							
-							$Html_Current .= '</span>';
-							$Html_Current .= '</span>';
-					//	}	
-
+						$Html_Current .= '<span class="rightInformationRoleStaff">';
+						$Html_Current .= '<span class="rolesRelations">';
+						$Html_Current .= $ST->finalDistance. ' '.$ST->finalGrade;
+						$Html_Current .= '</span>';
+						$Html_Current .= '</span>';
 					$Html_Current .= '</td>';
 				$Html_Current .= '</tr>';
 			$Html_Current .= '</tbody>';
@@ -536,14 +390,12 @@ $Html_Current .= '</span>';
 							$Html_Current .= '</small>';
 						$Html_Current .= '</span>';
 						
-						if( ( $this->Request_Staff_id != $ST->s1 ) || (substr($ST->roleCode, -1 ) == 'B') )
-						{
-							$Html_Current .= '<span class="rightInformationRoleStaff">';
-							$Html_Current .= '<span class="rolesRelations">';
-							$Html_Current .= $ST->finalDistance. ' '.$ST->finalGrade;
-							$Html_Current .= '</span>';
-							$Html_Current .= '</span>';
-						}
+						/*$Html_Current .= '<span class="rightInformationRoleStaff">';
+						$Html_Current .= '<span class="rolesRelations">';
+						$Html_Current .= $ST->finalDistance. ' '.$ST->finalGrade;
+						$Html_Current .= '</span>';
+						$Html_Current .= '</span>';*/
+						
 					$Html_Current .= '</td>';
 				$Html_Current .= '</tr>';
 			$Html_Current .= '</tbody>';
@@ -888,7 +740,7 @@ $Html_Current .= '</span>';
 
 
 
-	public function Single_Role_Staff_Html_Solangi($Staff_role_id, $Staff_id)
+	public function Single_Role_Staff_Html_Solangi($Staff_role_id,$Staff_id)
 	{
 		$staffInfo = new StaffInformationModel();
 		$Staff_role = $staffInfo->Get_Staff_Role($Staff_role_id);
@@ -900,7 +752,7 @@ $Html_Current .= '</span>';
 		$Html .= '<div class="portlet-body padding0" >';
 		$Html .= '<table width="100%" class="rolesTable"> ';
 		
-		//var_dump( $Staff_role ); exit;
+		
 		$Last_Role=1;
 		$Current_Staff_Last_Role=1;
 		
@@ -912,13 +764,11 @@ $Html_Current .= '</span>';
 
 
 		foreach($Staff_role as $ST ):
-			if($ST->id != ''):
+			if($ST->gt_id != ''):
 				$Html .= '<tr class="pBottom10" >';
 				$Html .= '<td width="50%" class="padleft1">';
 				$Percent=100;
-					//if( $Staff_id != $ST->s1 )
-					$Html .= $this->Staff_Upper_Role_KashifSolangi($ST,$Percent);
-
+					$Html .= $this->Staff_Upper_Role($ST,$Percent);
 				$Html .= '</td>';
 				$Html .= '</tr>';
 				$Last_Role = $ST->id; // Current Staff Head Role id
@@ -926,60 +776,18 @@ $Html_Current .= '</span>';
 		endforeach;
 		endif;
 		//echo $Last_Role; exit;
-
-
-
-
-		
-
-
-
 		
 		// Current Staff Role
 		if( $Last_Role > 0 ){
 			
-			//$Staff_Roles = $staffInfo->Get_Current_Staff_Role($Staff_role_id);
-			$Staff_Roles = $staffInfo->Get_Current_Staff_Role_Single($Last_Role, $Staff_role_id );
+			$Staff_Roles = $staffInfo->Get_Current_Staff_Role($Last_Role);
 			#var_dump($Staff_Roles); exit;
 
 			$Percent=100;
 			if( !empty( $Staff_Roles ) ):
 				foreach($Staff_Roles as $ST):
 				
-					//if($ST->s1 == $Staff_id){
-						
-						if($ST->s1 == $Staff_id)
-							$currentStaff = 'currentStaff';
-						else
-							$currentStaff='';
-					
-						$Html .= '<tr class="pBottom10 '.$currentStaff.'" >';
-						$Html .= '<td width="50%" class="padleft1">';
-							$Html .= $this->Current_Staff_Html_ks($ST,$Staff_id,$Percent);
-						$Html .= '</td>';
-						$Html .= '</tr>';
-					
-						
-					//}
-					$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
-				endforeach;
-			endif;
-		}
-		
-
-
-		// Current Staff Role
-		if( $Last_Role > 0 ){
-			
-			$Staff_Roles = $staffInfo->Get_Current_Staff_Role($Staff_role_id);
-			
-			#var_dump($Staff_Roles); exit;
-
-			$Percent=100;
-			if( !empty( $Staff_Roles ) ):
-				foreach($Staff_Roles as $ST):
-				
-					//if($ST->s1 == $Staff_id){
+					if($ST->s1 == $Staff_id){
 						
 						if($ST->s1 == $Staff_id)
 							$currentStaff = 'currentStaff_c';
@@ -992,14 +800,43 @@ $Html_Current .= '</span>';
 						$Html .= '</td>';
 						$Html .= '</tr>';
 					
-						
-					//}
-					$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
+						$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
+					}
 				endforeach;
 			endif;
 		}
-
-	
+		
+		
+		// Current Staff Role Lower Staff
+		if( $Current_Staff_Last_Role > 0 ){
+			$Current_Staff_Last_Role = $staffInfo->Get_Current_Staff_Role($Current_Staff_Last_Role);
+			$Percent=100;
+			$LowerStff_id=0;
+			
+			if( !empty( $Current_Staff_Last_Role ) ):
+				foreach($Current_Staff_Last_Role as $ST):
+				
+					if($ST->s1 == $Staff_id)
+						$currentStaff = 'currentStaff_c';
+					else
+						$currentStaff='';
+					
+					
+					if($LowerStff_id != $ST->s1):
+					$Html .= '<tr class="pBottom10 '.$currentStaff.'" >';
+					$Html .= '<td width="50%" class="padleft1">';
+						$Html .= $this->Staff_Lower_Role($ST,$Staff_id,$Percent);
+					$Html .= '</td>';
+					$Html .= '</tr>';
+					
+					$Current_Staff_Last_Role = $ST->id; // Current Staff Head Role id
+					$LowerStff_id=$ST->id;
+					endif;
+					
+				endforeach;
+			endif;
+		}
+		
 		
 		
 		
@@ -1009,71 +846,5 @@ $Html_Current .= '</span>';
 		
 		return $Html;
 	}
-
-
-
-
-
-
-
-
-
-
-	// Current Staff HTML
-	public function Current_Staff_Html_ks($ST, $Staff_id,$Percent)
-	{
-		
-		if($ST->s1 == $Staff_id)
-			$currentStaff = 'currentStaff_c';
-		else
-			$currentStaff='';
-		
-		$Html_Current = '';
-		//$Html_Current .= '<tr class="pBottom10 '.$currentStaff.'" >';
-		//$Html_Current .= '<td width="50%" class="padRight1">';
-		
-		$Html_Current .= '<table width="'.$Percent.'%">';
-			$Html_Current .= '<tbody class="innerTbodyStaff">';
-				$Html_Current .= '<tr class="Row" data-attendance="Absent" data-campus="South" data-profile="VP/HM" data-department="Principal, Generations School" style="display: table-row;">';
-					$Html_Current .= '<td class="">';
-						$Html_Current .= '<img class="user-pic rounded tooltips" data-container="body" data-placement="top" data-original-title="'.$ST->gt_id.'" src="'.$ST->photo150.'" />';
-					$Html_Current .= '</td>';
-					$Html_Current .= '<td class="staffView_StaffName">';
-						$Html_Current .= '<span class="leftInformationRoleStaff">';
-						$Html_Current .= '<a class="primary-link tooltips profile_StaffName" data-container="body" data-placement="top" data-original-title="'.$ST->name_code.'" data-staffid="'.$ST->id.'" data-staffgtid="'.$ST->gt_id.'" data-src="http://10.10.10.50/gsims/public/metronic/pages/img/AbsentIcon.png" data-content="Tap In awaited" data-title="Absent">';
-						$Html_Current .= $ST->abridged_name;
-						$Html_Current .= '</a>';
-						$Html_Current .= '-';
-						$Html_Current .= '<small class="tooltips" data-container="body" data-placement="top" data-original-title="'.$ST->gg_id.'">';
-						$Html_Current .= $ST->name_code;
-						$Html_Current .= '</small>';
-						$Html_Current .= '<br>';
-						$Html_Current .= '<small class="shortHeight">';
-							//$Html_Current .= '<span class="staffStatus T tooltips" data-container="body" data-placement="top" data-original-title="T-CPM: Permanent">';
-							//$Html_Current .= $ST->finalGrade;
-							//$Html_Current .= '</span>'; 
-							$Html_Current .= '<span class="staffStatus A tooltips" data-container="body" data-placement="top" data-original-title="Reporting To">';
-							//$Html_Current .= $ST->finalDistance. ' '.$ST->role_cat;
-							$Html_Current .= $ST->role_cat;
-							$Html_Current .= '</span>'; 
-							$Html_Current .= '<span class="tooltips" data-container="body" data-placement="top" data-original-title="'.$ST->role_title_tl.'"> ';
-							$Html_Current .= $ST->role_title_tl;
-							$Html_Current .= '</span>';
-							$Html_Current .= '</small>';
-						$Html_Current .= '</span>';
-						
-						 
-					$Html_Current .= '</td>';
-				$Html_Current .= '</tr>';
-			$Html_Current .= '</tbody>';
-		$Html_Current .= '</table>';
-	//	$Html_Current .= '</td>';
-	//	$Html_Current .= '</tr>';
-		return $Html_Current;
-	}
-
-
-
-
 }
 	

@@ -172,7 +172,8 @@ Route::group(['middleware' => 'authenticated'], function () {
 
 	Route::get('/masterLayout/staff/check_form_existance ', 'Development\Haris@deleteAddManual');
 
-Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumberExistance');
+		Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumberExistance');
+
 
 
 
@@ -415,6 +416,17 @@ Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumber
 	
 	Route::post('/staff_recruitment_initiation_addcareerform','Development\staff_recruitment_initiation@addCareerForm');
 	Route::get('/hr_configurations','Development\hr_settings@configurations');
+
+	//Arif Khan Working HR Configuration
+
+	Route::get('/hr_configurations','HR_Configuration\Hrsettings@configurations_view');
+	Route::post('/hr_save_month_data','HR_Configuration\Hrsettings@update_Configurations');
+	Route::post('/hr_save_day_data','HR_Configuration\Hrsettings@update_Configurations');
+
+		//Arif Khan Working END HR Configuration
+
+
+	
 	Route::post('/hr_save_configurations','Development\hr_settings@saveConfigurations');
 	Route::get('/staff_recruitment_followup','Development\hr_followup@index');
 	Route::post('/staff_recruitment_followup_logs','Development\hr_followup@followupLogs');
