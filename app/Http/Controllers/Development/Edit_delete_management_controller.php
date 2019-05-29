@@ -262,6 +262,7 @@ class Edit_delete_management_controller extends StaffReportController
 		$getLeave = $staffInfo->get('atif_gs_events.leave_application',$where);
 		$leaveType = $staffInfo->get('atif_gs_events.leave_type','');
 		$form_number=$getLeave[0]->form_no;
+		@$leave_time_to=$getLeave[0]->time_to;
 
 
 		
@@ -397,7 +398,7 @@ class Edit_delete_management_controller extends StaffReportController
                      <div class="form-group">
                         <label class="">To time:</label>
                         <div class="">
-                           <input type="time" class="form-control" name="time_to_update_val" id="time_to_update_val" value="'.@$time_to.'">
+                           <input type="time" class="form-control" name="time_to_update_val" id="time_to_update_val" value="'.@$leave_time_to.'">
                         </div>
                      </div>
                      <!-- form-group -->

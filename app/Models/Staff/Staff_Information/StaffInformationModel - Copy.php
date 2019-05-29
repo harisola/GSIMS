@@ -2521,7 +2521,7 @@ $staff = DB::connection($this->dbCon)->select($Qeury);
 
     public function get_leave_desscription($staff_id){
     	
-    	$query  = "Select la.form_no as form_number,la.id,lt.leave_type_name,la.leave_title,DATE_FORMAT(la.leave_from,'%a, %d %b %Y') as leave_from,
+    	$query  = "Select TIME_FORMAT(la.time_from,'%h:%i:%s %p') as time_from,TIME_FORMAT(la.time_to,'%h:%i:%s %p') as time_to,la.form_no as form_number,la.id,lt.leave_type_name,la.leave_title,DATE_FORMAT(la.leave_from,'%a, %d %b %Y') as leave_from,
 			DATE_FORMAT(la.leave_to,'%a, %d %b %Y') as leave_to,
 			if(la.paid_compensation=1,'Yes','No') as paid_compensation,
 			if(la.paid_percentage=null,'',CONCAT(la.paid_percentage,'% paid')) as paid_percentage,
