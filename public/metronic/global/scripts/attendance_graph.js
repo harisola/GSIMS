@@ -20,21 +20,34 @@ var dailyReport = function(date,staffID){
       
 
            var expected_time = timeToMinute(data[0].day_time_in);
-           
-                  if(data[0].ab_rec_time!="" && data[0].tap_min!=""){
+           var ab_actual_tap_in="";
+           var ab_actual_tap_out="";
+           var expected_time_out = timeToMinute(data[0].day_time_out);
+           var expected_time_out = timeToMinute(data[0].day_time_out);
+           var TapOutInMins = timeToMinute(data[0].day_time_out);
 
-                    var expected_time_out = timeToMinute(data[0].day_time_out);
+
                     var expected_time_in = timeToMinute(data[0].day_time_in);
                     var first_tap = timeToMinute(data[0].tap_min);
                     var payRollAttendance = data[0].payroll_time_slot;
-                    var ab_actual_tap_in=data[0].ab_actual_tap.split(',')[0];
-                    var ab_actual_tap_out=data[0].ab_actual_tap.split(',')[1];
-                    var ab_actual_tap_in_min=timeToMinute(data[0].ab_actual_tap.split(',')[0]);
-                    var ab_actual_tap_out_min=timeToMinute(data[0].ab_actual_tap.split(',')[1]);
-                    var ab_set_tap_in_his_format=data[0].ab_rec_time.split(',')[0];
-                    var ab_set_tap_out_his_format=data[0].ab_rec_time.split(',')[1];
-                    var ab_set_tap_in=timeToMinute(data[0].ab_rec_time.split(',')[0]);
-                    var ab_set_tap_out=timeToMinute(data[0].ab_rec_time.split(',')[1]);
+                    if(data[0].ab_actual_tap!=""){
+                        var ab_actual_tap_in=data[0].ab_actual_tap.split(',')[0];
+                        var ab_actual_tap_out=data[0].ab_actual_tap.split(',')[1];
+                        var ab_actual_tap_in_min=timeToMinute(data[0].ab_actual_tap.split(',')[0]);
+                        var ab_actual_tap_out_min=timeToMinute(data[0].ab_actual_tap.split(',')[1]);
+                    }
+                   if(data[0].ab_actual_tap!=""){
+                        var ab_set_tap_in_his_format=data[0].ab_rec_time.split(',')[0];
+                        var ab_set_tap_out_his_format=data[0].ab_rec_time.split(',')[1];
+                        var ab_set_tap_in=timeToMinute(data[0].ab_rec_time.split(',')[0]);
+                        var ab_set_tap_out=timeToMinute(data[0].ab_rec_time.split(',')[1]);
+                   }
+                    
+                    
+           
+                  if(data[0].ab_rec_time!="" && data[0].tap_min!=""){
+
+                    
                       if(ab_actual_tap_in_min<ab_set_tap_in){
                           myString=payRollAttendance;
                           rangestart_timings=payRollAttendance.split(',')[0];
@@ -53,33 +66,59 @@ var dailyReport = function(date,staffID){
                           var css_class_name=['red-color','green-color','green-color','grey-color'];
                       }
                   }
-if(data[0].ab_rec_time!="" && data[0].tap_min==""){
-          var expected_time_out = timeToMinute(data[0].day_time_out);
-          var expected_time_in = timeToMinute(data[0].day_time_in);
-          var first_tap = timeToMinute(data[0].tap_min);
-          var payRollAttendance = data[0].payroll_time_slot;
-          var ab_actual_tap_in=data[0].ab_actual_tap.split(',')[0];
-          var ab_actual_tap_out=data[0].ab_actual_tap.split(',')[1];
-          var ab_actual_tap_in_min=timeToMinute(data[0].ab_actual_tap.split(',')[0]);
-          var ab_actual_tap_out_min=timeToMinute(data[0].ab_actual_tap.split(',')[1]);
-          var ab_set_tap_in_his_format=data[0].ab_rec_time.split(',')[0];
-          var ab_set_tap_out_his_format=data[0].ab_rec_time.split(',')[1];
-          var ab_set_tap_in=timeToMinute(data[0].ab_rec_time.split(',')[0]);
-          var ab_set_tap_out=timeToMinute(data[0].ab_rec_time.split(',')[1]);
-             if(ab_set_tap_out==expected_time_out && ab_set_tap_in==expected_time_in){
-                  myString=payRollAttendance;
-                  rangestart_timings=payRollAttendance.split(',')[0];
-                  myString = myString.substring(myString.indexOf(',')+1)
-                  myNewPayroll=ab_set_tap_in_his_format+','+ab_set_tap_in_his_format+','+ab_set_tap_out_his_format+','+ab_set_tap_out_his_format;
-                  myNewPayroll = myNewPayroll.split(',');
-                  var display_class_sequence=[false,true,true,true,false];
-                  var css_class_name=['red-color','green-color','red-color','green-color'];
-              }
-              setTimeout(function(){
-                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
-                      PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
-                      },1000);
-          }
+                if(data[0].ab_rec_time!="" && data[0].tap_min==""){
+                        
+                             if(ab_set_tap_out==expected_time_out && ab_set_tap_in==expected_time_in){
+                                  myString=payRollAttendance;
+                                  rangestart_timings=payRollAttendance.split(',')[0];
+                                  myString = myString.substring(myString.indexOf(',')+1)
+                                  myNewPayroll=ab_set_tap_in_his_format+','+ab_set_tap_in_his_format+','+ab_set_tap_out_his_format+','+ab_set_tap_out_his_format;
+                                  myNewPayroll = myNewPayroll.split(',');
+                                  var display_class_sequence=[false,true,true,true,false];
+                                  var css_class_name=['red-color','green-color','red-color','green-color'];
+                              }
+                              setTimeout(function(){
+                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                                      PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
+                                      },2000);
+                          }
+                          if(data[0].ab_rec_time!="" && first_tap<=ab_set_tap_out && expected_time==ab_set_tap_in){
+                              myString=payRollAttendance;
+                              rangestart_timings=payRollAttendance.split(',')[0];
+                              myString = myString.substring(myString.indexOf(',')+1)
+                              myNewPayroll=rangestart_timings+','+rangestart_timings+','+data[0].tap_min+','+data[0].day_time_out;
+                              myNewPayroll = myNewPayroll.split(',')
+                              var display_class_sequence=[false,true,true,true,false];
+                              var css_class_name=['green-color','red-color','green-color','red-color'];
+                              // if(TapOutInMins<expected_time_out){
+                              //   myNewPayroll=rangestart_timings+','+rangestart_timings+','+ab_actual_tap_in+','+data[0].day_time_out;
+                              //   myNewPayroll = myNewPayroll.split(',');
+                              //   var display_class_sequence=[false,true,true,true,false];
+                              //   var css_class_name=['red-color','green-color','green-color','grey-color'];
+                              // }
+
+                               setTimeout(function(){
+                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                                    PayRollAttendanceSlider(payRollAttendanceArray,[false,true,true,true,true],['red-color','green-color','green-color','grey-color'],[360,1020]);
+                              },2000);
+                          }
+
+                          if(data[0].ab_rec_time!="" && first_tap>ab_set_tap_out && expected_time==ab_set_tap_in){
+                              myString=payRollAttendance;
+                              rangestart_timings=payRollAttendance.split(',')[0];
+                              myString = myString.substring(myString.indexOf(',')+1)
+                              myNewPayroll=rangestart_timings+','+ab_set_tap_out_his_format+','+data[0].tap_min+','+data[0].day_time_out;
+                              myNewPayroll = myNewPayroll.split(',')
+                              var display_class_sequence=[false, true, true, true, false];
+                              var css_class_name=['green-color','red-color','green-color','red-color'];
+                             
+
+                               setTimeout(function(){
+                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                                    PayRollAttendanceSlider(payRollAttendanceArray,[false, true, true, true, false],['green-color','red-color','green-color','red-color'],[360,1020]);
+                              },2000);
+                          }
+
 
 
           getLeaveDailyReport(staffID,date,data);

@@ -47,7 +47,7 @@
 
 <!-- BEGIN USE PROFILE -->
 <div class="row " style="margin: 20px 0 0 0 !important;">
-	<div class="portlet box blue">
+  <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
                 <i class="fa fa-setting"></i>HR Adjustment Cycle </div>
@@ -74,7 +74,11 @@
                   </thead>
                   <tbody>
                       <?php
-                        // foreach ($data as $all_data) {
+                        // foreach ($data as $all_data) {\
+                      $Adder = 1;
+
+                      $Adder = 1;
+
                       ?>
                       <?php $__currentLoopData = $get_months_hr; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $months_hr): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <!-- get_months_hr -->
@@ -85,7 +89,7 @@
                       <td>
                         <div class="input-group monthDate">
                           <!-- <input type="text" id='id' value="<?php //echo $all_data->id; ?>" readonly> -->
-                            <select class="form-control monthwise cut_off_date1" id="cut_off_date1" data-id="<?php echo e($months_hr->monthid); ?>">
+                            <select class="form-control monthwise cut_off_date1" id="cut_off_date_<?php echo e($months_hr->monthid); ?>" data-id="<?php echo e($months_hr->monthid); ?>" data-kashif_id="<?php echo e($months_hr->mid); ?>" >
                              <option <?php if ($months_hr->hr_cut_off == 1 ) echo 'selected' ; ?> value=1>1</option>
                              <option <?php if ($months_hr->hr_cut_off == 2 ) echo 'selected' ; ?> value=2>2</option>
                              <option <?php if ($months_hr->hr_cut_off == 3 ) echo 'selected' ; ?> value=3>3</option>
@@ -138,12 +142,81 @@
                           </span>
                         </div><!-- input-group -->
                       </td>
-                      <td>01 Jul - 20 Jul</td>
+                          <?php
+                          if( $months_hr->hr_cut_off == 31 )
+                          {
+                            $Adder2 =  $months_hr->hr_cut_off + 0;
+                          }
+                          else
+                          {
+                             $Adder2 =  $months_hr->hr_cut_off + $Adder;
+                          }
+
+                       
+
+                      ?>
+                     
+                      <td> 
+                        
+                        
+                         <span id="" ></span><?php echo e($months_hr->Label); ?> </td>
+
+
                     </tr><!-- July -->
                     <?php 
                   // } 
                     ?>
+
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                     <tr>
+                      <td >
+                        <!-- < ? php echo $all_data->months; ?>  -->
+                      June 
+                      <td>
+                        <div class="input-group monthDate">
+                          <!-- <input type="text" id='id' value="<?php //echo $all_data->id; ?>" readonly> -->
+                          <!--   <select class="form-control monthwise cut_off_date1" id="cut_off_date1" data-id="<?php echo e($months_hr->monthid); ?>">
+                             <option  value=1>1</option>
+                             <option value=2>2</option>
+                             <option value=3>3</option>
+                             <option  value=4>4</option>
+                             <option  value=5>5</option>
+                             <option value=6>6</option>
+                             <option  value=7>7</option>
+                             <option  value=8>8</option>
+                             <option value=9>9</option>
+                             <option  value=10>10</option>
+                             <option value=11>11</option>
+                             <option  value=12>12</option>
+                             <option value=13>13</option>
+                             <option  value=14>14</option>
+                             <option  value=15>15</option>
+                             <option  value=16>16</option>
+                             <option value=17>17</option>
+                           
+                            </select> -->
+                            <span class="input-group-addon">
+                             of  June
+                            </span>
+                        </div><!-- input-group -->
+                      </td>
+                      <td>
+                        <div class="input-group freezeDays">
+                          <!-- <select class="form-control freeze_after" id="freeze_after" data-id="<?php echo e($months_hr->monthid); ?>">
+                            <option  value=2>2</option>
+                            <option  value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=6>6</option>
+                          </select> -->
+                          <span class="input-group-addon">
+                            days
+                          </span>
+                        </div><!-- input-group -->
+                      </td>
+                      <td> - - -</td>
+                    </tr>
                    <!-- June -->
                   </tbody>
                 </table><!-- AdjustmentCycleTable -->
@@ -314,18 +387,166 @@ $('#freeze_after').val(<?php //echo $pageData[0]->lock_day_end; ?>);
       
            })*/
 
+         
+ function get_previous_data(Current_dropdown)
+ {
+
+    var pre_drpd_value=0;
+
+    var pre_month_id=0;
+
+
+
+    if(  Current_dropdown == 7 )
+    {
+      pre_drpd_value = $("#cut_off_date_5").val();
+      pre_month_id=5;
+    }
+    else if(  Current_dropdown == 8 )
+    {
+      pre_drpd_value = $("#cut_off_date_7").val();
+      pre_month_id=7;
+    }
+
+    else if(  Current_dropdown == 9 )
+    {
+      pre_drpd_value = $("#cut_off_date_8").val();
+      pre_month_id=8;
+    }
+
+
+    else if(  Current_dropdown == 10 )
+    {
+      pre_drpd_value = $("#cut_off_date_9").val();
+      pre_month_id=9;
+    }
+
+    else if(  Current_dropdown == 11 )
+    {
+      pre_drpd_value = $("#cut_off_date_10").val();
+      pre_month_id=10;
+    }
+
+
+
+
+    else if(  Current_dropdown == 4 )
+    {
+      pre_drpd_value = $("#cut_off_date_3").val();
+      pre_month_id=3;
+    }
+
+
+
+    else if(  Current_dropdown == 5 )
+    {
+      pre_drpd_value = $("#cut_off_date_4").val();
+      pre_month_id=4;
+    }
+
+
+
+
+    else if(  Current_dropdown == 12 )
+    {
+      pre_drpd_value = $("#cut_off_date_11").val();
+      pre_month_id=11;
+    }
+
+
+
+    else if(  Current_dropdown == 3 )
+    {
+      pre_drpd_value = $("#cut_off_date_2").val();
+      pre_month_id=2;
+    }
+
+
+    else if(  Current_dropdown == 2 )
+    {
+      pre_drpd_value = $("#cut_off_date_1").val();
+      pre_month_id=1;
+    }
+
+
+
+    else if(  Current_dropdown == 1 )
+    {
+      pre_drpd_value = $("#cut_off_date_12").val();
+      pre_month_id=12;
+    }
+
+
+
+    
+    else
+    {
+      pre_drpd_value=0;
+      pre_month_id=0;
+    }
+
+     
+
+
+
+var obj = {
+
+'pre_drpd_value': pre_drpd_value, 
+'pre_month_id': pre_month_id
+};
+
+return obj;
+
+
+
+ }          
+
   $("select.cut_off_date1").change(function(){
+
+
+
     var cut_off_date = $(this).children("option:selected").val();
+
+
     var get_id = $(this).attr("data-id");
     var token = "<?php echo e(csrf_token()); ?>";
+
+
+    var pre_drpd_value=0;
+
+    var pre_month_id=0;
+
       
-    $.ajax({
+    var returns = get_previous_data(get_id);
+
+
+
+    
+    var get_db_id = $(this).attr("data-kashif_id");
+     
+     
+
+
+  pre_drpd_value = returns['pre_drpd_value'];
+  pre_month_id = returns['pre_month_id'];
+
+ 
+
+
+
+
+  $.ajax({
       type: "POST",
       url: "<?php echo e(url('/hr_save_month_data')); ?>",
       data: {
           _token: token,
           cut_off_date: cut_off_date,
           get_id:get_id,
+          get_db_id:get_db_id,
+          pre_drpd_value:pre_drpd_value,
+
+          pre_month_id:pre_month_id,
+
       },
       success: function(data)
       {
@@ -335,6 +556,10 @@ $('#freeze_after').val(<?php //echo $pageData[0]->lock_day_end; ?>);
         });
       }
     });   
+
+
+
+
   })
 
 
