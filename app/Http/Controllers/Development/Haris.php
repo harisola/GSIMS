@@ -1745,6 +1745,18 @@ class Haris extends StaffReportController
 
     }
 
+    public function LeaveApprovalInfo(Request $request){
+      $userID = Sentinel::getUser()->id;
+      $staffInfo = new StaffInformationModel();
+      $date = $request->input('date');
+      $staff_id = $request->input('staff_id');
+      $approvals = $staffInfo->getLeaveApprovals($staff_id,$date);
+      echo json_encode($approvals);
+
+    }
+
+    
+
 
 
 
