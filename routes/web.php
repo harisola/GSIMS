@@ -252,6 +252,7 @@ Route::get('/check_hr_form_number_existance', 'Development\Haris@checkFormNumber
 	Route::post('/masterLayout/addPenalty','Development\Haris@addPenalty');
 	Route::post('/masterLayout/addAdjustment','Development\Haris@addAdjustment');
 	Route::post('/masterLayout/getDailyReport','Development\Haris@getDailyReport');
+	Route::get('/masterLayout/getLeaveApprovalUpdate','Development\Haris@LeaveApprovalInfo');
 	Route::post('/masterLayout/staff/getleaveUpdate','Development\Haris@getLeaveForDailyReport');
 	Route::post('/masterLayout/getYesterdayReport','Development\Haris@getYesterdayReport');
 	

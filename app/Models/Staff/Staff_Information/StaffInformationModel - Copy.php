@@ -2609,6 +2609,15 @@ public function getSinglePenalty($ID){
 		$result = DB::connection($this->dbCon)->select($query);
 		return $result;
 	}
+	public function getLeaveApprovals($staff_id,$from_date){
+		$query = "SELECT * FROM atif_gs_events.leave_approved lp
+		inner join atif_gs_events.leave_application la
+		on la.id=lp.leave_application_id
+		where la.staff_id='$staff_id' and lp.date='$from_date'";
+		$result = DB::connection($this->dbCon)->select($query);
+		return $result;
+	}
+
 
 
 	public function updateWeeklyTimeSheet($from_date,$to_date){

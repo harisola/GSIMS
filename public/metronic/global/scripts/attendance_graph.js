@@ -17,6 +17,8 @@ var dailyReport = function(date,staffID){
        var data = JSON.parse(e);
 
        if(data.length != 0){
+
+
       
 
            var expected_time = timeToMinute(data[0].day_time_in);
@@ -1218,7 +1220,47 @@ var dailyReport = function(date,staffID){
 
        }
     });
+
+      $.ajax({
+           type:"GET",
+           cache:true,
+           data:{ 
+            "date":date,
+            "staff_id":staffID,
+           },
+           url:url+'/masterLayout/getLeaveApprovalUpdate',
+           success:function(e){
+             setTimeout(function(){
+               var data = JSON.parse(e);
+              if(data.length != 0){
+                 if(data[0].paid_compensation==0){
+
+                  var time_from=timeToMinute(data[0].time_from);
+                  var time_to=timeToMinute(data[0].time_to);
+                  if(time_from!=""){
+                    var range=[time_from,time_to];
+                  }else{
+                    var range=[420,960];
+                  }
+
+
+                   leaveAllocatedTap(range,[false, true, false],['white-color'],[360,1020]);
+                 }else if(data[0].paid_compensation==50){
+                   leaveAllocatedTap(range,[false, true, false],['yello-color'],[360,1020]);
+                 }else if(data[0].paid_compensation==100){
+                   leaveAllocatedTap(range,[false, true, false],['black-color'],[360,1020]);
+                 }else{
+                   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[360,1020]);
+                 }
+             }
+             
+             },1000)
+
+           }
+       })
  
+
+
 
     // Asim Daily Report
 
