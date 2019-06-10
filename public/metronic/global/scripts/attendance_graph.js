@@ -31,7 +31,9 @@ var dailyReport = function(date,staffID){
 
                     var expected_time_in = timeToMinute(data[0].day_time_in);
                     var first_tap = timeToMinute(data[0].tap_min);
+                    var last_tap = timeToMinute(data[0].tap_max);
                     var payRollAttendance = data[0].payroll_time_slot;
+                    debugger;
                     if(data[0].ab_actual_tap!=""){
                         var ab_actual_tap_in=data[0].ab_actual_tap.split(',')[0];
                         var ab_actual_tap_out=data[0].ab_actual_tap.split(',')[1];
@@ -67,7 +69,35 @@ var dailyReport = function(date,staffID){
                           var display_class_sequence=[false,true,true,true,false];
                           var css_class_name=['red-color','green-color','green-color','grey-color'];
                       }
+                      if(ab_actual_tap_in_min<ab_set_tap_in && first_tap>expected_time_in){
+                        var display_class_sequence=[false, true, true, true, true,false];
+                        var css_class_name=["red-color", "green-color", "red-color","green-color", "red-color"];
+                          myNewPayroll=rangestart_timings+','+data[0].tap_min+','+data[0].tap_max+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
+                                                    myNewPayroll = myNewPayroll.split(',');
+                        // PayRollAttendanceSlider([420,440, 815, 840, 960],[false, true, true, true, true,false],["red-color", "green-color", "red-color","green-color", "red-color"],[360, 1020]);
+                      }
+                      // if(ab_actual_tap_in_min<ab_set_tap_in && last_tap<expected_time_out){
+                      //   var display_class_sequence=[false, true, true, true, true,false];
+                      //   var css_class_name=["red-color", "green-color", "red-color","green-color", "red-color"];
+                      //     myNewPayroll=rangestart_timings+','+data[0].tap_min+','+data[0].tap_max+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
+                      //     myNewPayroll = myNewPayroll.split(',');
+                      //   // PayRollAttendanceSlider([420,440, 815, 840, 960],[false, true, true, true, true,false],["red-color", "green-color", "red-color","green-color", "red-color"],[360, 1020]);
+                      // }
+                      // if(ab_actual_tap_in_min<ab_set_tap_in && last_tap>expected_time_out){
+                      //   var display_class_sequence=[false, true, true, true, true,false];
+                      //   var css_class_name=["red-color", "green-color", "red-color","green-color", "red-color"];
+                      //     myNewPayroll=rangestart_timings+','+data[0].tap_min+','+data[0].tap_max+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
+                      //                               myNewPayroll = myNewPayroll.split(',');
+                      //   // PayRollAttendanceSlider([420,440, 815, 840, 960],[false, true, true, true, true,false],["red-color", "green-color", "red-color","green-color", "red-color"],[360, 1020]);
+                      // }
+
+
+
+
+
+
                   }
+                  debugger;
                 if(data[0].ab_rec_time!="" && data[0].tap_min==""){
                         
                              if(ab_set_tap_out==expected_time_out && ab_set_tap_in==expected_time_in){
@@ -113,13 +143,33 @@ var dailyReport = function(date,staffID){
                               myNewPayroll = myNewPayroll.split(',')
                               var display_class_sequence=[false, true, true, true, false];
                               var css_class_name=['green-color','red-color','green-color','red-color'];
-                             
-
+                            
                                setTimeout(function(){
                                     var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
                                     PayRollAttendanceSlider(payRollAttendanceArray,[false, true, true, true, false],['green-color','red-color','green-color','red-color'],[360,1020]);
                               },2000);
                           }
+                          if(data[0].ab_rec_time!="" && first_tap>ab_set_tap_out && expected_time==ab_set_tap_in && last_tap<expected_time_out){
+                              
+                              
+                              
+
+                              
+                               setTimeout(function(){
+                                  myString=data[0].payroll_time_slot;
+                                  rangestart_timings=data[0].payroll_time_slot.split(',')[0];
+                                  myString = myString.substring(myString.indexOf(',')+1)
+                                  myNewPayroll=rangestart_timings+','+data[0].ab_rec_time.split(',')[1]+','+data[0].tap_min+','+data[0].tap_max+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
+                                  myNewPayroll = myNewPayroll.split(',')
+                                  var display_class_sequence=[false, true, true, true, true,true,false];
+                                  var css_class_name=["green-color","red-color", "green-color", "red-color","red-color", "red-color"];
+                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                                    PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
+                              },2000);
+                          }
+
+
+
 
 
 
@@ -1513,7 +1563,7 @@ return window.absentia;
     //=============================================================//
 
     function PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range){
-      debugger;
+      // debugger;
            if(payrollSlider != undefined){
             if(payrollSlider.noUiSlider!=undefined){
                               payrollSlider.noUiSlider.destroy();
