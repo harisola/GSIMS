@@ -1281,13 +1281,21 @@ var dailyReport = function(date,staffID){
            url:url+'/masterLayout/getLeaveApprovalUpdate',
            success:function(e){
              setTimeout(function(){
+                          debugger;
+
                var data = JSON.parse(e);
               if(data.length != 0){
                  if(data[0].paid_compensation==0){
+                  if(data[0].time_from==null){
+                                            var range=[420,960];
 
-                  var time_from=timeToMinute(data[0].time_from);
-                  var time_to=timeToMinute(data[0].time_to);
-                  if(time_from!=""){
+                  }else{
+                        var time_from=timeToMinute(data[0].time_from);
+                        var time_to=timeToMinute(data[0].time_to);
+                  }
+
+                  
+                  if(time_from!=null){
                     var range=[time_from,time_to];
                   }else{
                     var range=[420,960];
@@ -1304,7 +1312,7 @@ var dailyReport = function(date,staffID){
                  }
              }
              
-             },1000)
+             },2000)
 
            }
        })

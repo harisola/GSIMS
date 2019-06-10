@@ -2521,7 +2521,13 @@ $staff = DB::connection($this->dbCon)->select($Qeury);
 
     public function get_leave_desscription($staff_id){
     	
-    	$query  = "Select TIME_FORMAT(la.time_from,'%h:%i:%s %p') as time_from,TIME_FORMAT(la.time_to,'%h:%i:%s %p') as time_to,la.form_no as form_number,la.id,lt.leave_type_name,la.leave_title,DATE_FORMAT(la.leave_from,'%a, %d %b %Y') as leave_from,
+    	$query  = "Select 
+    	TIME_FORMAT(la.time_from,'%h:%i:%s %p') as time_from,
+    	TIME_FORMAT(la.time_to,'%h:%i:%s %p') as time_to,
+    	TIME_FORMAT(la.leave_approve_time_from,'%h:%i:%s %p') as leave_approve_time_from,
+    	TIME_FORMAT(la.leave_approve_time_to,'%h:%i:%s %p') as leave_approve_time_to,
+
+    	la.form_no as form_number,la.id,lt.leave_type_name,la.leave_title,DATE_FORMAT(la.leave_from,'%a, %d %b %Y') as leave_from,
 			DATE_FORMAT(la.leave_to,'%a, %d %b %Y') as leave_to,
 			if(la.paid_compensation=1,'Yes','No') as paid_compensation,
 			if(la.paid_percentage=null,'',CONCAT(la.paid_percentage,'% paid')) as paid_percentage,
@@ -2613,7 +2619,7 @@ public function getSinglePenalty($ID){
 		$query = "SELECT * FROM atif_gs_events.leave_approved lp
 		inner join atif_gs_events.leave_application la
 		on la.id=lp.leave_application_id
-		where la.staff_id='$staff_id' and lp.date='$from_date'";
+		where la.staff_id='$staff_id' and lp.approve_date='$from_date' and la.leave_approve_status=1";
 		$result = DB::connection($this->dbCon)->select($query);
 		return $result;
 	}

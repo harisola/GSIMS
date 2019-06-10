@@ -1733,16 +1733,12 @@ class Haris extends StaffReportController
 
 
     public function getDailyReport(Request $request){
-
-
       $userID = Sentinel::getUser()->id;
       $staffInfo = new StaffInformationModel();
       $date = $request->input('date');
       $staff_id = $request->input('staff_id');
       $getReport = $staffInfo->getDailyReportData($staff_id,$date,$date);
       echo json_encode($getReport);
-
-
     }
 
     public function LeaveApprovalInfo(Request $request){
@@ -1752,7 +1748,6 @@ class Haris extends StaffReportController
       $staff_id = $request->input('staff_id');
       $approvals = $staffInfo->getLeaveApprovals($staff_id,$date);
       echo json_encode($approvals);
-
     }
 
     
@@ -1799,6 +1794,7 @@ class Haris extends StaffReportController
 
       $userID = Sentinel::getUser()->id;
       $staffInfo = new StaffInformationModel();
+      $leave_approved=new leave_approved;
       $id = $request->input('id');
       $staff_id = $request->input('staffID');
       $leave_title = $request->input('leave_title');
@@ -1844,34 +1840,37 @@ class Haris extends StaffReportController
         'modified_by' => $userID
 
       );
-
-
       $update_id = $staffInfo->update_data('atif_gs_events.leave_application',$where,$update);
 
-     // Check wheather Leave Approval = 1 then insert or update in leave approval table depend on situation
-      
-      if($LeaveApproval == 1 && $leave_approve_time_from != null && $leave_approve_time_to != null){
+        $date = $approve_to;
+        $date1 = str_replace('-', '/', $date);
+        $leave_to_interval = date('Y-m-d',strtotime($date1 . "+1 days"));
+        $period = new DatePeriod(
+           new DateTime($approve_from),
+           new DateInterval('P1D'),
+           new DateTime($leave_to_interval)
+        );
+        $leave_date=$leave_approved
+        ->where('staff_id',$staff_id)
+        ->whereBetween('date', [$leave_from, $leave_to])
+        ->get();
+        if($leave_approve_time_from=="" && $leave_approve_time_to==""){
+          $leave_approve_time_from='07:00';
+          $leave_approve_time_to='16:00';
+        }
 
-        $dateRange =  $this->GetDays($approve_from,$approve_to);
-        for($j=0; $j<sizeof($dateRange); $j++){
-
-          $flag = 0;
-          $where = array(
-            'staff_id' => $staff_id,
-            'leave_application_id' => $id
-          );
-
-          $existData = $staffInfo->get_leaveApproved($where);
-
-          
-          // FLAG IS FOR INDICATION THAT THE DATA IS INSERTED OR NOT.
-          $flag = $this->getFlagForDateAvailable($existData,$dateRange,$j);
-         
-
-          if(empty($existData) || $flag == 1){
-            $insertData = array(
+       foreach ($period as $key => $value) {
+            //get leave
+            // $leave_approved=new leave_approved;
+            $staff_id;
+            $approve_date=$value->format('Y-m-d');
+            $where = array(
+              'id' => $leave_date[$key]->id
+            );
+           $update = array(
               'leave_application_id' => $id,
-              'date' => $dateRange[$j],
+              'date' => $leave_date[$key]->date,
+              'approve_date' => $approve_date,
               'staff_id' => $staff_id,
               'time_from' => $leave_approve_time_from,
               'time_to' => $leave_approve_time_to,
@@ -1881,38 +1880,82 @@ class Haris extends StaffReportController
               'modified_by' =>Sentinel::getUser()->id,
               'record_deleted' => 0
             );
-            $staffInfo->insertComments('atif_gs_events.leave_approved',$insertData);
-          }else{
-            for($k = 0;$k < sizeof($existData);$k++){
-                
-              $whereExistData = array(
-                'id' => $existData[$k]->id
-              );
-              // Check Wheather the Data is in DateRange
-              if(in_array($existData[$k]->date, $dateRange)){
-                 $updateData = array(
-                  'time_from' => $leave_approve_time_from,
-                  'time_to' => $leave_approve_time_to,
-                  'modified' => time(),
-                  'modified_by' =>Sentinel::getUser()->id,
-                  'record_deleted' => 0
-                );
 
-                 $staffInfo->update_data('atif_gs_events.leave_approved',$whereExistData,$updateData);
-              }else{
-               // IF DATERANGE IS NOT MATCH THEN RECORD DELETED = 1
-                $updateData = array(
-                  'record_deleted' => 1
-                );
-                $staffInfo->update_data('atif_gs_events.leave_approved',$whereExistData,$updateData);
-              }
+            $staffInfo->update_data('atif_gs_events.leave_approved',$where,$update);
 
-            }
-
-          }
-
-        }
       }
+die;
+
+     // Check wheather Leave Approval = 1 then insert or update in leave approval table depend on situation
+
+//       if($leave_approve_time_from != "" && $leave_approve_time_to !=""){
+// echo 'asdasd';
+//             die;
+//         $dateRange =  $this->GetDays($approve_from,$approve_to);
+
+
+//         for($j=0; $j<sizeof($dateRange); $j++){
+
+//           $flag = 0;
+//           $where = array(
+//             'staff_id' => $staff_id,
+//             'leave_application_id' => $id
+//           );
+
+//           $existData = $staffInfo->get_leaveApproved($where);
+
+          
+//           // FLAG IS FOR INDICATION THAT THE DATA IS INSERTED OR NOT.
+//           $flag = $this->getFlagForDateAvailable($existData,$dateRange,$j);
+         
+
+//           if(empty($existData) || $flag == 1){
+            // $insertData = array(
+            //   'leave_application_id' => $id,
+            //   'date' => $dateRange[$j],
+            //   'staff_id' => $staff_id,
+            //   'time_from' => $leave_approve_time_from,
+            //   'time_to' => $leave_approve_time_to,
+            //   'created' => time(),
+            //   'register_by' => Sentinel::getUser()->id,
+            //   'modified' => time(),
+            //   'modified_by' =>Sentinel::getUser()->id,
+            //   'record_deleted' => 0
+            // );
+//             $staffInfo->insertComments('atif_gs_events.leave_approved',$insertData);
+//           }else{
+
+
+//             for($k = 0;$k < sizeof($existData);$k++){
+                
+//               $whereExistData = array(
+//                 'id' => $existData[$k]->id
+//               );
+//               // Check Wheather the Data is in DateRange
+//               if(in_array($existData[$k]->date, $dateRange)){
+//                  $updateData = array(
+//                   'time_from' => $leave_approve_time_from,
+//                   'time_to' => $leave_approve_time_to,
+//                   'modified' => time(),
+//                   'modified_by' =>Sentinel::getUser()->id,
+//                   'record_deleted' => 0
+//                 );
+
+//                  $staffInfo->update_data('atif_gs_events.leave_approved',$whereExistData,$updateData);
+//               }else{
+//                // IF DATERANGE IS NOT MATCH THEN RECORD DELETED = 1
+//                 $updateData = array(
+//                   'record_deleted' => 1
+//                 );
+//                 $staffInfo->update_data('atif_gs_events.leave_approved',$whereExistData,$updateData);
+//               }
+
+//             }
+
+//           }
+
+//         }
+//       }
 
           
 
