@@ -29,9 +29,11 @@ return [
     |
     */
 
-    'lifetime' => 35791394,
+    // 'lifetime' => 1440, 24min
+        'lifetime' => 120, 
 
-    'expire_on_close' => false,
+
+    'expire_on_close' => true,
 
     /*
     |--------------------------------------------------------------------------

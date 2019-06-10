@@ -89,6 +89,108 @@ include(app_path().'/Metronic/inc/init.php');
 }
 </style>
 <script type="text/javascript">
+
+
+   $(document).ready(function() {
+        $(function(){
+            $('.sub-menuu li a').click(function(){
+                var url_link = ($(this).attr('href'));
+                var browser_link = ('/gsims/public/');
+                // <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                // $.ajax({
+                //     // type:'POST',
+                //     // data:{ '_token': '<?php echo e(csrf_token()); ?>', 
+                //     type:'post',
+                //     // url:'/gsims/public/user_log_links',
+                //     data:{ '_token': '<?php echo e(csrf_token()); ?>', url_link},
+                //     // url:"<?php echo e(url('/user_log_links')); ?>",
+                //     url:'user_log_links',
+                //     //dataType:'json',
+                //     success:function(data){
+                //         console.log(data);
+                //     }
+                //     // error:function(data){
+                //     //     console.log(data.responseText); 
+                //     // }
+                // });
+
+                $.ajax({
+                type:'POST',
+                data:{ '_token': '<?php echo e(csrf_token()); ?>', "url_link":url_link },
+                url:"<?php echo e(url('/user_log_links')); ?>",
+                dataType: "json",
+                success: function(response)
+                {
+                    console.log(response);
+                    // $("#modal_logs").html('');
+                    // $("#modal_logs").html(response.html);
+                }
+                });
+            })
+        });
+    });
+    //ZK Code End Here
+
+
+
+     $(document).ready(function() {
+        $(function(){
+            $('.nav-item li a').click(function(){
+                var url_link = ($(this).attr('href'));
+                var browser_link = ('/gsims/public/');
+                // <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                // $.ajax({
+                //     // type:'POST',
+                //     // data:{ '_token': '<?php echo e(csrf_token()); ?>', 
+                //     type:'post',
+                //     // url:'/gsims/public/user_log_links',
+                //     data:{ '_token': '<?php echo e(csrf_token()); ?>', url_link},
+                //     // url:"<?php echo e(url('/user_log_links')); ?>",
+                //     url:'user_log_links',
+                //     //dataType:'json',
+                //     success:function(data){
+                //         console.log(data);
+                //     }
+                //     // error:function(data){
+                //     //     console.log(data.responseText); 
+                //     // }
+                // });
+
+                $.ajax({
+                type:'POST',
+                data:{ '_token': '<?php echo e(csrf_token()); ?>', "url_link":url_link },
+                url:"<?php echo e(url('/user_log_links')); ?>",
+                dataType: "json",
+                success: function(response)
+                {
+                    console.log(response);
+                    // $("#modal_logs").html('');
+                    // $("#modal_logs").html(response.html);
+                }
+                });
+            })
+        });
+    });
+
+
+
+    $(document).ready(function() {
+        $(function(){
+            $('#pro_link').click(function(){
+
+
+                alert('ok');
+
+               
+            })
+        });
+    });
+
+    
+
+
+
+    
     $('#demo_5').click(function(){
         bootbox.dialog({
             message: "I am a custom dialog",

@@ -40,9 +40,9 @@
             data-effected_date='{{$approval_data['date']}}'  href="#">Disapprove</span>
          </div>
         @elseif($approval_data['approval_status']==1)
-            <span>Status Approved</span>
+            <span class="label label-sm label-success"> Approved </span>
         @elseif($approval_data['approval_status']==2)
-            <span>Status Disapproved</span>
+            <span class="label label-sm label-danger"> Disapproved </span>
 
         @endif        
          </td>

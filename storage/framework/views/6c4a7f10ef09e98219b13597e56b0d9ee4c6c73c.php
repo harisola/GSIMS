@@ -71,100 +71,61 @@ td.ExceptionalAdjEvent {
                             <i class="icon-users font-dark"></i>
                             <span class="caption-subject font-dark sbold uppercase caption_subject_profile">Adjustment Approvals
                         </div>
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#portlet_tab1" data-toggle="tab"> Pending Approvals </a>
-                            </li>
-                            <li>
-                                <a href="#portlet_tab2" data-toggle="tab"> Approved </a>
-                            </li>
-                            <li >
-                                <a href="#portlet_tab3" data-toggle="tab"> Disapproved </a>
-                            </li>
-                            <li >
-                                <a href="#portlet_tab4" data-toggle="tab"> Unattended </a>
-                            </li>
-                        </ul>
                     </div><!-- portlet-title -->
                     <div class="portlet-body" >
-                    	<div class="tab-content">
-                            <div class="tab-pane active" id="portlet_tab1">
-                            	<div class="row customRow">
-                                  <div class="col-md-2">
-                                    <label>GT-ID</label>
-                                    <input type="text" class="form-control" value="" id="gt_id">
-                                  </div>
-                                  <div class="col-md-2" id="">
-                                    <label>Adjustment Type</label>
-                                    <select id="adjustment_type"  class="form-control">
-                                        <option value="">Select </option>
-                                        <option value="Miss Tap">Miss Tap</option>
-                                        <option value="Exceptional Adjustment">Exceptional Adjustment</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-2">
-                                    <label>From</label>
-                                    <input type="date" class="form-control" id="from_date">
-                                  </div>
-                                  <div class="col-md-2">
-                                    <label>To</label>
-                                    <input type="date" class="form-control" id="to_date">
-                                  </div>
-                                  <div class="col-md-2">
-                                    <label>Approval Status</label>
-                                    <select id="approval_status"  class="form-control">
-                                        <option value="">Select </option>
-                                        <option value="0">Pending</option>
-                                        <option value="1">Approved</option>
-                                        <option value="2">Disapproved</option>
-                                        <option value="3">Unattended</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-2">
-                                    <label>&nbsp;</label><br />
-                                    <input type="button" id="" data-re_generate="0" class="btn btn-group green get_result" value="Filter Results" style="width: 100%;">
-                                  </div>
-                                </div><!-- row -->
-                                <div class="contentArea">
-                                	<table class="table table-striped table-bordered table-hover" id="PendingAprovalsAdjustmentsT">
-                                            <thead>
-                                                <tr>
-                                                    <th width="10" style="text-align:center;">S No.</th>
-                                                    <th> Person info </th>
-                                                    <th> Approval For </th>
-                                                    <th> Action </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                
-                                               
-                                            </tbody>
-                                        </table>
-                                </div><!-- contentArea -->
-                            </div>
-                            <div class="tab-pane" id="portlet_tab2">
-                                <p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-                                    ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo. </p>
-                                <p>
-                                    <a class="btn red" href="ui_tabs_accordions_navs.html#portlet_tab2" target="_blank"> Activate this tab via URL </a>
-                                </p>
-                            </div>
-                            <div class="tab-pane" id="portlet_tab3">
-                                <p> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                                    consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. </p>
-                                <p>
-                                    <a class="btn blue" href="ui_tabs_accordions_navs.html#portlet_tab3" target="_blank"> Activate this tab via URL </a>
-                                </p>
-                            </div>
-                            <div class="tab-pane" id="portlet_tab4">
-                                <p> Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                                    consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. </p>
-                                <p>
-                                    <a class="btn blue" href="ui_tabs_accordions_navs.html#portlet_tab3" target="_blank"> Activate this tab via URL </a>
-                                </p>
-                            </div>
-                        </div>
+                        <div class="row customRow">
+                          <div class="col-md-2">
+                            <label>GT-ID</label>
+                            <input type="text" class="form-control" value="" id="gt_id">
+                          </div>
+                          <div class="col-md-2" id="">
+                            <label>Adjustment Type</label>
+                            <select id="adjustment_type"  class="form-control">
+                                <option value="">Select </option>
+                                <option value="Miss Tap">Missed Tap</option>
+                                <option value="Exceptional Adjustment">Exceptional Adjustment</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2">
+                            <label>From</label>
+                            <input type="date" class="form-control" id="from_date">
+                          </div>
+                          <div class="col-md-2">
+                            <label>To</label>
+                            <input type="date" class="form-control" id="to_date">
+                          </div>
+                          <div class="col-md-2">
+                            <label>Approval Status</label>
+                            <select id="approval_status"  class="form-control">
+                                <option value="">Select </option>
+                                <option value="0">Pending</option>
+                                <option value="1">Approved</option>
+                                <option value="2">Disapproved</option>
+                                <option value="3">Unattended</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2">
+                            <label>&nbsp;</label><br />
+                            <input type="button" id="" data-re_generate="0" class="btn btn-group green get_result" value="Filter Results" style="width: 100%;">
+                          </div>
+                        </div><!-- row -->
+                        <div class="contentArea">
+                            <table class="table table-striped table-bordered table-hover" id="PendingAprovalsAdjustmentsT">
+                                    <thead>
+                                        <tr>
+                                            <th width="10" style="text-align:center;">S No.</th>
+                                            <th> Person info </th>
+                                            <th> Approval For </th>
+                                            <th> Action </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                       
+                                    </tbody>
+                                </table>
+                        </div><!-- contentArea -->
+
                     </div><!-- portlet-body -->
                 </div><!-- portlet -->
             </div><!-- col-md-12 v-->

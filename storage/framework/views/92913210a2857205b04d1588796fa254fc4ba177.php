@@ -7087,13 +7087,26 @@ $('#staffView_StaffList_Search').val('');
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+data['leave_description'][i].paid_percentage+'</td></tr>';
                 }
 
-                leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp;'+data['leave_description'][i].leave_from+'</td></tr>';
+                if(data['leave_description'][i].time_from!=null){
+                    var time_from=data['leave_description'][i].time_from;
+                }else{
+                  var time_from='';
+                }
+                if(data['leave_description'][i].time_to!=null){
+                    var time_to=data['leave_description'][i].time_to;
+                }else{
+                  var time_to='';
+                }
+
+                leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp;'+data['leave_description'][i].leave_from+'<br>'+time_from+'</td></tr>';
 
                 if(data['leave_description'][i].leave_approve_date_from){
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved From"></i> &nbsp; '+data['leave_description'][i].leave_approve_date_from+' </td></tr>';
                 }
+                
 
-                leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+data['leave_description'][i].leave_to+'</td></tr>';
+
+                leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+data['leave_description'][i].leave_to+'<br>'+time_to+'</td></tr>';
 
                 if(data['leave_description'][i].leave_approve_date_to){
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+data['leave_description'][i].leave_approve_date_to+' </td> </tr>';
@@ -8582,7 +8595,7 @@ $.ajax({
    
                    var data = jQuery.parseJSON(result);
                var Edit_Absentia_id_hidden = data.Last_id;
-               $('#absentia_table').append('<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ title +'</td> <td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>');
+               $('#absentia_table').append('<tr class="absentia_table_row" id="absentia_table_row_'+Edit_Absentia_id_hidden+'"> <td>'+ title +'</td><td>'+ form_number +'</td><td>'+ formatDate(date) +'</td> <td>'+ changeTimeFormat(start_time) +'<br /></td> <td>'+ changeTimeFormat(end_time) +'</td> <td>'+ description +'</td><td><a onClick="Edit_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-edit"></i></a> | <a onClick="delete_Absentia('+Edit_Absentia_id_hidden+','+staffID+')"><i class="fa fa-close"></i></a></td> </tr>');
                
                
                    $('#AddAIA').modal('toggle');
@@ -8670,7 +8683,7 @@ bootbox.dialog({
             var Last_id = result['Last_id'];
             var Missed_id= result['Missed_id'];
             var Table_name= result['Table_name'];
-            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a class="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
+            $('#manual_table').append('<tr class="missedTapEven" data-id="'+Last_id+'"><td>'+formatDate(date)+'</td><td>'+form_number+'</td><td>'+missTap+'</td><td><strong>'+ '<small class="tooltips" data-original-title="' + userData[0]['abridged_name'] + '"> ' + userData[0]['name_code'] + ' </small> - ' + formatDate(result['date']) + '</strong> at <strong>'+time+'</strong></td><td>'+description+'</td><td><a class="edit_btn" onClick="editAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="deleteAddManual('+Last_id+','+Missed_id+',\''+Table_name+'\')"><i class="fa fa-close"></i></a></td> </tr>'); 
             $("#manual_attendance").val('');
             $("#manual_missTap").val('');
             $("#manual_description").val('');
@@ -8847,7 +8860,7 @@ bootbox.dialog({
                   alert('Leaves already exists in these dates');
                   return false;
                 }
-              $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
+              $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+form_number+'</td><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
                  $('#LeaveApp').modal('toggle'); 
               }
           });
@@ -8875,7 +8888,7 @@ bootbox.dialog({
                   alert('Leaves already exists in these dates');
                   return false;
             }
-          $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a class="delectLeave" onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
+          $('#leave_table').append('<tr class="PendingapprovedBorder" data-id='+result+'><td>'+form_number+'</td><td>'+leave_title+'</td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+paid_compensation_display+'</td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp; '+formatDate(leave_from)+' </td></tr></table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+formatDate(leave_to)+'</td></tr></table></td><td>'+leave_comment+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+result+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval"  data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+result+')"><i class="fa fa-check"></i> | <a class="delectLeave" onClick="delectLeave('+result+')"><i class="fa fa-close"></i></a></td></tr>');
             $('#LeaveApp').modal('toggle'); 
           }
         });
@@ -9226,7 +9239,7 @@ bootbox.dialog({
               
               var data = JSON.parse(res);
               var Last_id = data.id;
-                 $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>'); 
+                 $('#penaltyTable').append('<tr class="penaltyRowClass" data-id="'+Last_id+'"><td>'+penalty_title+'</td><td>'+form_number+'</td><td>'+penalty_day+'</td><td>'+formatDate(penalty_from)+'-'+formatDate(penalty_to)+'</td><td>'+formatDate(curdate)+'<span> at <span>'+changeTimeFormat(time)+'</td><td>'+penalty_description+'</td> <td class="text-center"><a class="edit_btn" onClick="ReWriteLeavePenalties('+Last_id+')"><i class="fa fa-edit"></i></a> | <a class="del_btn" onClick="delectLeavePenalties('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>'); 
                  $('#penalty_title').val('');
                  $('#penalty_day').val('');
                  $('#penalty_from').val('');
@@ -9290,7 +9303,7 @@ bootbox.dialog({
                  var time = changeTimeFormat(hours+ ":" +min);
               
                  var adjustmentHTML = '';
-                 adjustmentHTML = '<tr class="AddAdjustment" data-id="'+Last_id+'"><td>'+adjustment_title+'</td><td>'+adjustment_no+'days</td><td>'+formatDate(date)+'<span> at </span>'+time+'</td><td>'+adjustment_description+'</td> <td class="text-center"><a onClick="ReWriteAdjustment('+Last_id+')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAdjustment('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>';
+                 adjustmentHTML = '<tr class="AddAdjustment" data-id="'+Last_id+'"><td>'+adjustment_title+'</td><td>'+form_number+'</td><td>'+adjustment_no+'days</td><td>'+formatDate(date)+'<span> at </span>'+time+'</td><td>'+adjustment_description+'</td> <td class="text-center"><a onClick="ReWriteAdjustment('+Last_id+')"><i class="fa fa-edit"></i></a> | <a onClick="deleteAdjustment('+Last_id+')"><i class="fa fa-close"></i></a> </td> </tr>';
                  $('#ExceptionalAdjustmentForm').modal('toggle');
                  $('#adjustment_table tbody').append(adjustmentHTML);
               

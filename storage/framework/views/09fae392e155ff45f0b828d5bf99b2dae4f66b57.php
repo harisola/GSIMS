@@ -40,9 +40,9 @@
             data-effected_date='<?php echo e($approval_data['date']); ?>'  href="#">Disapprove</span>
          </div>
         <?php elseif($approval_data['approval_status']==1): ?>
-            <span>Status Approved</span>
+            <span class="label label-sm label-success"> Approved </span>
         <?php elseif($approval_data['approval_status']==2): ?>
-            <span>Status Disapproved</span>
+            <span class="label label-sm label-danger"> Disapproved </span>
 
         <?php endif; ?>        
          </td>
