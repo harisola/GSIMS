@@ -2617,7 +2617,9 @@ public function getSinglePenalty($ID){
 	}
 	public function getLeaveApprovals($staff_id,$from_date){
 		$query = "SELECT * FROM atif_gs_events.leave_approved lp
-		where lp.staff_id='$staff_id' and lp.approve_date='$from_date'";
+		inner join atif_gs_events.leave_application la
+		on la.id=lp.leave_application_id
+		where lp.staff_id='$staff_id' and lp.approve_date='$from_date' and la.leave_approve_status=1";
 		$result = DB::connection($this->dbCon)->select($query);
 		return $result;
 	}
