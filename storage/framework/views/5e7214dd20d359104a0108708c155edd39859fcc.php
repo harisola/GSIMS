@@ -7082,7 +7082,7 @@ $('#staffView_StaffList_Search').val('');
                        }  else{
                     var tr = 'PendingapprovedBorder'; 
                  }
-                leaveHTML = leaveHTML + '<tr  class="'+tr+'" data-id='+data['leave_description'][i].id+'><td>'+data['leave_description'][i].form_number+'</td><td>'+data['leave_description'][i].leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+data['leave_description'][i].paid_compensation+' </td><td>'+data['leave_description'][i].leave_title+'</small></td></tr>';
+                leaveHTML = leaveHTML + '<tr  class="'+tr+'" data-id='+data['leave_description'][i].id+'><td>'+data['leave_description'][i].form_number+'</td><td>'+data['leave_description'][i].leave_title+'</small></td><td class=""><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested Compensation"></i> &nbsp; '+data['leave_description'][i].paid_compensation+' </td><td></small></td></tr>';
                 if(data['leave_description'][i].leave_approve_status==1){
                    leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved Compensation"></i> &nbsp; '+data['leave_description'][i].paid_percentage+'</td></tr>';
                 }
@@ -7096,12 +7096,23 @@ $('#staffView_StaffList_Search').val('');
                     var time_to=data['leave_description'][i].time_to;
                 }else{
                   var time_to='';
+                }                
+                if(data['leave_description'][i].leave_approve_time_from!=null){
+                    var leave_approve_time_from=data['leave_description'][i].leave_approve_time_from;
+                }else{
+                  var leave_approve_time_from='';
+                }
+
+                if(data['leave_description'][i].leave_approve_time_to!=null){
+                    var leave_approve_time_to=data['leave_description'][i].leave_approve_time_to;
+                }else{
+                  var leave_approve_time_to='';
                 }
 
                 leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested From"></i> &nbsp;'+data['leave_description'][i].leave_from+'<br>'+time_from+'</td></tr>';
-
                 if(data['leave_description'][i].leave_approve_date_from){
-                   leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved From"></i> &nbsp; '+data['leave_description'][i].leave_approve_date_from+' </td></tr>';
+                   leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved From"></i> &nbsp; '+data['leave_description'][i].leave_approve_date_from+'<br>'+
+                    leave_approve_time_from +'</td></tr>';
                 }
                 
 
@@ -7109,7 +7120,7 @@ $('#staffView_StaffList_Search').val('');
                 leaveHTML = leaveHTML + '</table></td><td><table width="100%" border="0" class="" style="margin:0;"><tr><td><i class="fa fa-file-text-o tooltips" data-placement="bottom" data-original-title="Requested till"></i> &nbsp; '+data['leave_description'][i].leave_to+'<br>'+time_to+'</td></tr>';
 
                 if(data['leave_description'][i].leave_approve_date_to){
-                   leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+data['leave_description'][i].leave_approve_date_to+' </td> </tr>';
+                   leaveHTML = leaveHTML + '<tr><td class="font-green-jungle "><i class="fa fa-check tooltips" data-placement="bottom" data-original-title="Approved till"></i> &nbsp;'+data['leave_description'][i].leave_approve_date_to+'<br>'+leave_approve_time_to+'</td> </tr>';
                 }
 
                 leaveHTML = leaveHTML + '</table></td><td>'+data['leave_description'][i].leave_description+'</td><td class="text-center"><a class="edit_btn" onClick="ReWriteLeave('+data['leave_description'][i].id+')"><i class="fa fa-edit"></i></a> | <a href="#" data-container="body" data-placement="bottom" data-original-title="Print Leave Application" class="tooltips" ><span aria-hidden="true" class="icon-printer"></span></a> | <a href="#LeaveApproval" data-toggle="modal" data-container="body" data-placement="bottom" data-original-title="Leave Approval" class="tooltips" onClick="updateLeave('+data['leave_description'][i].id+')" ><i class="fa fa-check"></i></a> | <a class="del_btn" onClick="delectLeave('+data['leave_description'][i].id+')"><i class="fa fa-close"></i></a></td></tr>';
@@ -7148,14 +7159,14 @@ $('#staffView_StaffList_Search').val('');
                 if(data['get_cut_date'][i].name == 'absentia'){
 
                   if(data['get_cut_date'][i].to_date >= data['get_cut_date'][i].currentDate){
-                    $('#absentia_date').attr('min' , data['get_cut_date'][i].from_date);
-                    $(".edit_btn,.del_btn").prop( "onclick", null);
-                    $(".edit_btn,.del_btn").css( "cursor","not-allowed");
+                    // $('#absentia_date').attr('min' , data['get_cut_date'][i].from_date);
+                    // $(".edit_btn,.del_btn").prop( "onclick", null);
+                    // $(".edit_btn,.del_btn").css( "cursor","not-allowed");
                   }else{
                     
 
 
-                    $('#absentia_date').attr('min' , data['get_cut_date'][i].new_payroll_start);
+                    // $('#absentia_date').attr('min' , data['get_cut_date'][i].new_payroll_start);
                   }
                 }
 
