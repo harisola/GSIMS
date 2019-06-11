@@ -33,15 +33,15 @@
 .INImage img {
     border-radius: 50% !important;
     border:1px solid #000;
-    width: 65%
+    /*width: 65%*/
 }
 .timeShow.IN {
-    background: green;
-    color: #fff;
+    /*background: green;*/
+    color: #000;
 }
 .timeShow.OUT {
-    background: red;
-    color: #fff;
+   /* background: red;*/
+    color: #000;
 }
 .timeShow {
     background: #ccc;
@@ -239,9 +239,9 @@ img#staff_photo {
 
 <meta http-equiv="refresh" content="3600; URL=http://localhost/gsims/public/#screening_gate">
 <div class="row" id="maindiv">
-    <div class="col-md-3">
+    <div class="col-md-1">
         <input type="hidden" name="user_id" id="user_id" value="<?php echo e($staff['UserID']); ?>" / >
-        <input type="number" name="rfid_dec" id="rfid_dec" autofocus value="" autocomplete="off" />
+        <input type="number" name="rfid_dec" id="rfid_dec" autofocus value="" autocomplete="off" style="" />
         <input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>" / >
         <!-- <input type="text" name="location_id" id="location_id" value="0" /> -->
         <select name="location_id" id="location_id">
@@ -252,7 +252,7 @@ img#staff_photo {
         </select>
     </div><!-- col-md-3 -->
 
-    <div class="col-md-6">
+    <div class="col-md-10">
         <div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 22%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
             <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
         </div>
@@ -281,7 +281,7 @@ img#staff_photo {
                         <!-- Tapin div staff -->
                         <div class="requestTapIn textCenter  rf_tapin">
                             <div class="INImage" >
-                                <img id="tapin_photo" src="" width="410"><br><br>
+                                <img id="tapin_photo" src="" width="380"><br><br>
                             </div><!-- imageCenter get_attendance-->
                             <h2 style="font-weight:normal;color:#000;" class="text-center" id="tapin_name"></h2>
                             <div class="timeShow IN text-center" id="tapin_time"></div>
@@ -289,7 +289,7 @@ img#staff_photo {
                         <!-- Tapout div staff-->
                         <div class="requestTapOut textCenter  rf_tapout">
                             <div class="INImage" >
-                                <img id="tapout_photo" src="" width="410"><br><br>
+                                <img id="tapout_photo" src="" width="380"><br><br>
                             </div><!-- imageCenter get_attendance-->
                             <h2 style="font-weight:normal;color:#000;" class="text-center" id="tapout_name"></h2>
                             <div class="timeShow OUT text-center" id="tapout_time"></div>
@@ -297,7 +297,7 @@ img#staff_photo {
                          <!-- Tapout div admission-->
                         <div class="requestTapOut textCenter  rf_admission_tapout">
                             <div class="INImage" >
-                                <img id="tapout_photo" src="" width="410"><br><br>
+                                <img id="tapout_photo" src="" width="380"><br><br>
                             </div><!-- imageCenter get_attendance-->
                             <h2 style="font-weight:normal;color:#000;" class="text-center" id="admission_tapout_name"></h2>
                             <h3 style="font-weight:normal;color:#000;" class="text-center" id="admission_tapout_cardno"></h3>
@@ -840,7 +840,7 @@ img#staff_photo {
             </div><!-- .portlet -->
     </div><!-- col-md-3 -->
 
-    <div class="col-md-3">
+    <div class="col-md-1">
     </div><!-- col-md-3 -->
 </div><!-- row -->
 
@@ -851,11 +851,11 @@ img#staff_photo {
 $(document).ready(function(){
 
     // Check User Loginid
-    var userID = $('#user_id').val();
-    if(userID == 35){
-        alert("Rukhsar Hussain");
-        refresh_page();
-    }
+    // var userID = $('#user_id').val();
+    // if(userID == 35){
+    //     alert("Rukhsar Hussain");
+    //     refresh_page();
+    // }
     // else if(userID == 335){
     //     alert("Faisal HOD");
     //     refresh_page();
@@ -1483,7 +1483,7 @@ $(document).ready(function(){
                                 $('#rfid_dec').val('');
                                 var image_url = 'http://10.10.10.50/gs/'+result["get_attendance"][0].photo500;
                                 $('#tapin_photo').attr('src',image_url);
-                                $('#tapin_time').text('Time IN : '+result["timeget"]);
+                                $('#tapin_time').text('Card Tap at '+result["timeget"]);
                                 $('#tapin_name').text(result["get_attendance"][0].salutation+' '+result["get_attendance"][0].name);
                                 myTimeOut();
                                 // debugger;
@@ -1504,7 +1504,7 @@ $(document).ready(function(){
                                 $('.rf_default').hide();
                                 var image_url_out = 'http://10.10.10.50/gs/'+result["get_attendance"][0].photo500;
                                 $('#tapout_photo').attr('src',image_url_out);
-                                $('#tapout_time').text('Time OUT : '+result["timeget"]);
+                                $('#tapout_time').text('Card Tap at '+result["timeget"]);
                                 $('#tapout_name').text(result["get_attendance"][0].salutation+' '+result["get_attendance"][0].name);
                                 myTimeOut();
                                 // myStopTimeOut();

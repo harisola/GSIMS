@@ -22,10 +22,15 @@ var dailyReport = function(date,staffID){
       
 
            var expected_time = timeToMinute(data[0].day_time_in);
+           localStorage.setItem('expected_time',expected_time);
+
+
            var ab_actual_tap_in="";
            var ab_actual_tap_out="";
            var expected_time_out = timeToMinute(data[0].day_time_out);
            var expected_time_out = timeToMinute(data[0].day_time_out);
+           localStorage.setItem('expected_time_out',expected_time_out);
+           
            var TapOutInMins = timeToMinute(data[0].day_time_out);
 
 
@@ -201,10 +206,15 @@ var dailyReport = function(date,staffID){
                 if(weekly_time_sheet_in && weekly_time_sheet_out){
                   range.push(parseInt(parseInt(weekly_time_sheet_in)-parseInt(60)));
                   range.push(parseInt(parseInt(weekly_time_sheet_out)+parseInt(60)));
+                  window.range_start=parseInt(parseInt(weekly_time_sheet_in)-parseInt(60));
+                  window.range_end=parseInt(parseInt(weekly_time_sheet_out)+parseInt(60));
+
                 }else{
                   $('#weeklySlider').addClass('noShow');
                   range.push(360);
                   range.push(1000);
+                  window.range_start=360;
+                  window.range_end=1000;
                 }
 
                 var compliance_in = data[0].compliance_in;
@@ -1281,13 +1291,16 @@ var dailyReport = function(date,staffID){
            url:url+'/masterLayout/getLeaveApprovalUpdate',
            success:function(e){
              setTimeout(function(){
-                          debugger;
 
                var data = JSON.parse(e);
+               var expected_time_in=localStorage.getItem('expected_time');
+               var expected_time_out=localStorage.getItem('expected_time_out');
+                localStorage.setItem('expected_time','');
+                localStorage.setItem('expected_time_out','');
               if(data.length != 0){
                  if(data[0].paid_compensation==0){
                   if(data[0].time_from==null){
-                                            var range=[420,960];
+                                            var range=[expected_time_in,expected_time_out];
 
                   }else{
                         var time_from=timeToMinute(data[0].time_from);
@@ -1298,18 +1311,21 @@ var dailyReport = function(date,staffID){
                   if(time_from!=null){
                     var range=[time_from,time_to];
                   }else{
-                    var range=[420,960];
+                    var range=[expected_time_in,expected_time_out];
                   }
 
 
-                   leaveAllocatedTap(range,[false, true, false],['white-color'],[360,1020]);
+                   leaveAllocatedTap(range,[false, true, false],['white-color'],[window.range_start,window.range_end]);
                  }else if(data[0].paid_compensation==50){
-                   leaveAllocatedTap(range,[false, true, false],['yello-color'],[360,1020]);
+                   leaveAllocatedTap(range,[false, true, false],['yello-color'],[window.range_start,window.range_end]);
                  }else if(data[0].paid_compensation==100){
-                   leaveAllocatedTap(range,[false, true, false],['black-color'],[360,1020]);
+                   leaveAllocatedTap(range,[false, true, false],['black-color'],[window.range_start,window.range_end]);
                  }else{
-                   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[360,1020]);
+                   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
                  }
+             }else{
+                   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
+
              }
              
              },2000)
@@ -1331,7 +1347,7 @@ var dailyReport = function(date,staffID){
  //=====================================================//
 
  var weeklyTapInTapOut = function(tap,connect1,range){
-       
+       debugger;
        var slider = document.getElementById('weeklySlider');
        slider.noUiSlider.updateOptions({
        start: tap,
