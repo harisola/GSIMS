@@ -19,7 +19,7 @@ var dailyReport = function(date,staffID){
        if(data.length != 0){
 
 
-      
+          data[0].payroll_time_slot=data[0].payroll_time_slot.replace(',,',',');
 
            var expected_time = timeToMinute(data[0].day_time_in);
            localStorage.setItem('expected_time',expected_time);
@@ -643,7 +643,7 @@ var dailyReport = function(date,staffID){
                             }
                          }
                          console.log(payRollAttendanceArray)
-                        PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range);
+                        // PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range);
                       }else if(data[0].holiday != null && data[0].holidayflag == 0){
                         //Case # 1 Holiday and is off for Particular Staff
                         PayRollAttendanceSlider([0,0],[false,false,false],['red-color'],range);
@@ -720,7 +720,7 @@ var dailyReport = function(date,staffID){
                             }
                          }
 
-                        PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range);
+                        // PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range);
                       }
 
                    }else if((data[0].holiday != null && data[0].holidayflag == 0) || isNaN(weekly_time_sheet_in)){
@@ -732,7 +732,7 @@ var dailyReport = function(date,staffID){
                         $('#PayrollAttendance').addClass('noShow');
                         PayRollAttendanceSlider([0,0],[false,false,false],['red-color'],range);
                       }else{
-                        PayRollAttendanceSlider([weekly_time_sheet_in,weekly_time_sheet_out],[false,true,false],['red-color'],range);
+                        // PayRollAttendanceSlider([weekly_time_sheet_in,weekly_time_sheet_out],[false,true,false],['red-color'],range);
                       }
                    }
                 }else{
@@ -891,11 +891,11 @@ var dailyReport = function(date,staffID){
 
 
                             }
-                            PayRollAttendanceSlider(payRollAttendanceArrayFlexy,connectPayRollFlexy,classPayRollFlexy,range);
+                            // PayRollAttendanceSlider(payRollAttendanceArrayFlexy,connectPayRollFlexy,classPayRollFlexy,range);
                          }else if((data[0].holiday != null && data[0].holidayflag == 0) || isNan(weekly_time_sheet_in) ){
                         //Case # 1 Holiday and is off for Particular Staff
                          $('#PayrollAttendance').addClass('noShow');
-                        PayRollAttendanceSlider([0,0],[false,false,false],['red-color'],range);
+                        // PayRollAttendanceSlider([0,0],[false,false,false],['red-color'],range);
                       }else if(data[0].holiday != null && data[0].holidayflag == 1){
                         for(var i = 0 ; i < payRollFlagFlexy.length ; i++){
 
@@ -970,7 +970,7 @@ var dailyReport = function(date,staffID){
 
 
                         }
-                        PayRollAttendanceSlider(payRollAttendanceArrayFlexy,connectPayRollFlexy,classPayRollFlexy,range);
+                        // PayRollAttendanceSlider(payRollAttendanceArrayFlexy,connectPayRollFlexy,classPayRollFlexy,range);
                       }
 
                    }else{
@@ -1393,7 +1393,7 @@ var dailyReport = function(date,staffID){
  
 
     var actualTapInTapOut = function(time,connect1,classes,uihandle,tooltip,range){
-
+      debugger;
                  console.log('time_actual_tap'+time);
                  setTimeout(function(){
                    getAllTimes= window.myTime;
@@ -1604,7 +1604,7 @@ return window.absentia;
     //=============================================================//
 
     function PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range){
-      // debugger;
+      debugger;
            if(payrollSlider != undefined){
             if(payrollSlider.noUiSlider!=undefined){
                               payrollSlider.noUiSlider.destroy();
