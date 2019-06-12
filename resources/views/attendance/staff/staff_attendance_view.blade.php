@@ -44,7 +44,7 @@
     color: #000;
 }
 .timeShow {
-    background: #ccc;
+    background: #ecd004;
     margin: 0 15%;
     font-size: 20px;
     padding: 10px 0;
@@ -174,6 +174,7 @@ ul.childList li.eachChild {
 }
 .ChildName {
     font-size: 14px;
+    display: block;
 }
 .childInfo {
     width: 20%;
@@ -235,6 +236,16 @@ img#staff_photo {
     text-align: center;
     font-size: 26px;
 }
+.fixed-height-NoScroll {
+    height: 81vh;
+    overflow-y: scroll;
+}
+.fatherimg,
+.motherimg {
+    border-radius: 50% !important;
+    width: 60%;
+    border: 1px solid #888;
+}
 </style>
 
 <meta http-equiv="refresh" content="3600; URL=http://localhost/gsims/public/#screening_gate">
@@ -256,7 +267,8 @@ img#staff_photo {
         <div class="col-md-12 no-padding" style="width: 335px; text-align: center; position: absolute; top: 40%; left: 22%; background: rgb(241, 239, 239); border: 1px solid rgb(204, 204, 204); padding: 10px; z-index:99999;display:none" id="Generations_AjaxLoader">
             <img src="http://10.10.10.50/gs//components/image/gsLoader.gif" width="200"><br><hr style="margin: 7px 0;border-top: 1px solid #ccc;"> Please Wait...
         </div>
-            <div class="portlet light bordered padding0 marginBottom0">
+            <!-- <div class="portlet light bordered padding0 marginBottom0"> -->
+            <div class="portlet light bordered fixed-height-NoScroll marginBottom0">
                 <div class="portlet-title">
                     <div class="caption add_profile_label">
                         <span class="caption-subject font-dark sbold uppercase caption_subject_profile text-center">Card Tap - Screening Gate</span>
@@ -281,7 +293,7 @@ img#staff_photo {
                         <!-- Tapin div staff -->
                         <div class="requestTapIn textCenter  rf_tapin">
                             <div class="INImage" >
-                                <img id="tapin_photo" src="" width="380"><br><br>
+                                <img id="tapin_photo" src="" width="340"><br><br>
                             </div><!-- imageCenter get_attendance-->
                             <h2 style="font-weight:normal;color:#000;" class="text-center" id="tapin_name"></h2>
                             <div class="timeShow IN text-center" id="tapin_time"></div>
@@ -289,7 +301,7 @@ img#staff_photo {
                         <!-- Tapout div staff-->
                         <div class="requestTapOut textCenter  rf_tapout">
                             <div class="INImage" >
-                                <img id="tapout_photo" src="" width="380"><br><br>
+                                <img id="tapout_photo" src="" width="340"><br><br>
                             </div><!-- imageCenter get_attendance-->
                             <h2 style="font-weight:normal;color:#000;" class="text-center" id="tapout_name"></h2>
                             <div class="timeShow OUT text-center" id="tapout_time"></div>
@@ -297,7 +309,7 @@ img#staff_photo {
                          <!-- Tapout div admission-->
                         <div class="requestTapOut textCenter  rf_admission_tapout">
                             <div class="INImage" >
-                                <img id="tapout_photo" src="" width="380"><br><br>
+                                <img id="tapout_photo" src="" width="340"><br><br>
                             </div><!-- imageCenter get_attendance-->
                             <h2 style="font-weight:normal;color:#000;" class="text-center" id="admission_tapout_name"></h2>
                             <h3 style="font-weight:normal;color:#000;" class="text-center" id="admission_tapout_cardno"></h3>

@@ -19,7 +19,7 @@
         <li class="eachChild">
             <span class="childInfo">
                 <img id="child1_img" src="http://10.10.10.63/gs/assets/photos/sis/150x150/student/NoPic.png" class="imageCenterDefaultChild">
-                <span class="ChildName ">Child Name Not Found</span><br />
+                <span class="ChildName ">Child Name Not Found</span>
                 <span class="childGS">Null</span> | <span class="stuStatus">Null</span>
             </span><!-- childInfo -->
         </li><!-- eachChild -->
@@ -30,7 +30,7 @@
         <li class="eachChild">
             <span class="childInfo">
                 <img id="child1_img" src="http://10.10.10.63/gs/assets/photos/sis/150x150/student/{{ $student->gr_no }}.png" class="imageCenterDefaultChild">
-                <span class="ChildName ">{{ $student->official_name }}</span><br />
+                <span class="ChildName ">{{ $student->official_name }}</span>
                 <span class="childGS">{{ $student->gs_id }}</span> | <span class="stuStatus">{{ $student->std_status_code }}</span>
             </span><!-- childInfo -->
         </li><!-- eachChild -->

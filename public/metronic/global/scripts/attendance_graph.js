@@ -38,6 +38,7 @@ var dailyReport = function(date,staffID){
                     var first_tap = timeToMinute(data[0].tap_min);
                     var last_tap = timeToMinute(data[0].tap_max);
                     var payRollAttendance = data[0].payroll_time_slot;
+                    payRollAttendance=payRollAttendance.replace(',,',',');
                     debugger;
                     if(data[0].ab_actual_tap!=""){
                         var ab_actual_tap_in=data[0].ab_actual_tap.split(',')[0];
@@ -61,6 +62,7 @@ var dailyReport = function(date,staffID){
                           myString=payRollAttendance;
                           rangestart_timings=payRollAttendance.split(',')[0];
                           myString = myString.substring(myString.indexOf(',')+1)
+                          myString =myString.replace(',','');
                           myNewPayroll=rangestart_timings+','+ab_actual_tap_in+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
                           myNewPayroll = myNewPayroll.split(',')
                           var display_class_sequence=[false,true,true,true,false];
@@ -68,7 +70,9 @@ var dailyReport = function(date,staffID){
                       }else if(ab_set_tap_out==expected_time_out && ab_set_tap_in!=expected_time_in){
                           myString=payRollAttendance;
                           rangestart_timings=payRollAttendance.split(',')[0];
-                          myString = myString.substring(myString.indexOf(',')+1)
+                          myString = myString.substring(myString.indexOf(',')+1);
+                          myString =myString.replace(',','');
+
                           myNewPayroll=rangestart_timings+','+rangestart_timings+','+ab_actual_tap_in+','+data[0].day_time_out;
                           myNewPayroll = myNewPayroll.split(',');
                           var display_class_sequence=[false,true,true,true,false];
@@ -109,6 +113,8 @@ var dailyReport = function(date,staffID){
                                   myString=payRollAttendance;
                                   rangestart_timings=payRollAttendance.split(',')[0];
                                   myString = myString.substring(myString.indexOf(',')+1)
+                                  myString =myString.replace(',','');
+
                                   myNewPayroll=ab_set_tap_in_his_format+','+ab_set_tap_in_his_format+','+ab_set_tap_out_his_format+','+ab_set_tap_out_his_format;
                                   myNewPayroll = myNewPayroll.split(',');
                                   var display_class_sequence=[false,true,true,true,false];
@@ -123,6 +129,8 @@ var dailyReport = function(date,staffID){
                               myString=payRollAttendance;
                               rangestart_timings=payRollAttendance.split(',')[0];
                               myString = myString.substring(myString.indexOf(',')+1)
+                                                        myString =myString.replace(',','');
+
                               myNewPayroll=rangestart_timings+','+rangestart_timings+','+data[0].tap_min+','+data[0].day_time_out;
                               myNewPayroll = myNewPayroll.split(',')
                               var display_class_sequence=[false,true,true,true,false];
@@ -144,6 +152,8 @@ var dailyReport = function(date,staffID){
                               myString=payRollAttendance;
                               rangestart_timings=payRollAttendance.split(',')[0];
                               myString = myString.substring(myString.indexOf(',')+1)
+                              myString =myString.replace(',','');
+
                               myNewPayroll=rangestart_timings+','+ab_set_tap_out_his_format+','+data[0].tap_min+','+data[0].day_time_out;
                               myNewPayroll = myNewPayroll.split(',')
                               var display_class_sequence=[false, true, true, true, false];
@@ -163,7 +173,9 @@ var dailyReport = function(date,staffID){
                                setTimeout(function(){
                                   myString=data[0].payroll_time_slot;
                                   rangestart_timings=data[0].payroll_time_slot.split(',')[0];
-                                  myString = myString.substring(myString.indexOf(',')+1)
+                                  myString = myString.substring(myString.indexOf(',')+1);
+                                  myString =myString.replace(',','');
+
                                   myNewPayroll=rangestart_timings+','+data[0].ab_rec_time.split(',')[1]+','+data[0].tap_min+','+data[0].tap_max+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
                                   myNewPayroll = myNewPayroll.split(',')
                                   var display_class_sequence=[false, true, true, true, true,true,false];
@@ -392,7 +404,9 @@ var dailyReport = function(date,staffID){
                       var payRollAttendance = data[0].payroll_time_slot;
                       myString=payRollAttendance;
                       rangestart_timings=payRollAttendance.split(',')[0];
-                      myString = myString.substring(myString.indexOf(',')+1)
+                      myString = myString.substring(myString.indexOf(',')+1);
+                      myString =myString.replace(',','');
+
                       console.log(rangestart_timings+','+rangestart_timings+','+myString);
 
                       payRollAttendance = payRollAttendance.split(',')
@@ -1291,6 +1305,7 @@ var dailyReport = function(date,staffID){
            url:url+'/masterLayout/getLeaveApprovalUpdate',
            success:function(e){
              setTimeout(function(){
+              debugger
 
                var data = JSON.parse(e);
                var expected_time_in=localStorage.getItem('expected_time');
@@ -1298,31 +1313,33 @@ var dailyReport = function(date,staffID){
                 localStorage.setItem('expected_time','');
                 localStorage.setItem('expected_time_out','');
               if(data.length != 0){
-                 if(data[0].paid_compensation==0){
-                  if(data[0].time_from==null){
-                                            var range=[expected_time_in,expected_time_out];
+
+                   if(data[0].actual_time_from=="00:00:00"){
+                        var range=[expected_time_in,expected_time_out];
 
                   }else{
-                        var time_from=timeToMinute(data[0].time_from);
-                        var time_to=timeToMinute(data[0].time_to);
+                        var time_from=timeToMinute(data[0].actual_time_from);
+                        var time_to=timeToMinute(data[0].actual_time_to);
                   }
 
                   
-                  if(time_from!=null){
-                    var range=[time_from,time_to];
+                   if(data[0].actual_time_from=="00:00:00"){
+                      var range=[expected_time_in,expected_time_out];
+
                   }else{
-                    var range=[expected_time_in,expected_time_out];
+                    var range=[timeToMinute(data[0].actual_time_from),timeToMinute(data[0].actual_time_to)];
                   }
-
-
-                   leaveAllocatedTap(range,[false, true, false],['white-color'],[window.range_start,window.range_end]);
-                 }else if(data[0].paid_compensation==50){
-                   leaveAllocatedTap(range,[false, true, false],['yello-color'],[window.range_start,window.range_end]);
-                 }else if(data[0].paid_compensation==100){
-                   leaveAllocatedTap(range,[false, true, false],['black-color'],[window.range_start,window.range_end]);
-                 }else{
-                   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
+                  debugger;
+                 if(data[0].paid_percentage==0){
+                   leaveAllocatedTap(range,[false, true, false],['white-color','white-color','green-color'],[window.range_start,window.range_end]);
+                 }else if(data[0].paid_percentage==50){
+                   leaveAllocatedTap(range,[false, true, false],['yellow-color','yellow-color','green-color'],[window.range_start,window.range_end]);
+                 }else if(data[0].paid_percentage==100){
+                   leaveAllocatedTap(range,[false, true, false],['black-color','black-color','green-color'],[window.range_start,window.range_end]);
                  }
+                 // else{
+                 //   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
+                 // }
              }else{
                    leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
 

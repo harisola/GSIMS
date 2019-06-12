@@ -1855,8 +1855,8 @@ class Haris extends StaffReportController
         ->whereBetween('date', [$leave_from, $leave_to])
         ->get();
         if($leave_approve_time_from=="" && $leave_approve_time_to==""){
-          $leave_approve_time_from='07:00';
-          $leave_approve_time_to='16:00';
+          $leave_approve_time_from='';
+          $leave_approve_time_to='';
         }
 
        foreach ($period as $key => $value) {
@@ -1884,7 +1884,6 @@ class Haris extends StaffReportController
             $staffInfo->update_data('atif_gs_events.leave_approved',$where,$update);
 
       }
-die;
 
      // Check wheather Leave Approval = 1 then insert or update in leave approval table depend on situation
 

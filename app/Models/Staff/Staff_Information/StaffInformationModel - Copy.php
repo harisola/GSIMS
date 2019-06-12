@@ -2616,7 +2616,7 @@ public function getSinglePenalty($ID){
 		return $result;
 	}
 	public function getLeaveApprovals($staff_id,$from_date){
-		$query = "SELECT * FROM atif_gs_events.leave_approved lp
+		$query = "SELECT lp.*,la.`*`,lp.time_from as actual_time_from,lp.time_to as actual_time_to  FROM atif_gs_events.leave_approved lp
 		inner join atif_gs_events.leave_application la
 		on la.id=lp.leave_application_id
 		where lp.staff_id='$staff_id' and lp.approve_date='$from_date' and la.leave_approve_status=1";
