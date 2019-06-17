@@ -125,11 +125,15 @@ class Adjustment_Approvel_model extends Model
 	public function adjustmentFilter($gt_id="",$adjustment_type="",$from_date="",$to_date="",$approve_status=""){
 		$miss_tap=false;
 		$exceptional=false;
+ 		$leave=false;
+
 		if($adjustment_type=="Miss Tap"){
 			$miss_tap=true;
 		}elseif ($adjustment_type=="Exceptional Adjustment") {
 				$exceptional=true;
 
+		}elseif ($adjustment_type=="Leave Application") {
+				$leave=true;
 		}	
 
 
@@ -140,6 +144,9 @@ class Adjustment_Approvel_model extends Model
 			and ap.approval_type_id=4  and hfs.type='insert'";
 			$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' 
 			and ap.approval_type_id=5  and hfs.type='insert'";
+			$search_leave="WHERE  sr.gt_id ='$gt_id' and hfs.title='Leave Application' 
+			and ap.approval_type_id=2  and hfs.type='insert'";
+
 
 		}
 		if($gt_id!="" && $adjustment_type!="" && $from_date=="" && $to_date=="" && $approve_status==""){
@@ -148,12 +155,18 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5  and hfs.type='insert'";
 				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4  and hfs.type='insert'";
+				$search_leave="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and hfs.type='insert'";
 
 		}
 		if($gt_id!="" && $adjustment_type!="" && $from_date!="" && $to_date!="" && $approve_status==""){
 				$search_miss_tap="WHERE  sr.gt_id ='$gt_id' and hfs.title='Miss Tap' and  ap.approval_type_id=5  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+
+				$search_leave="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+
 
 		}
 		if($gt_id!="" && $adjustment_type!="" && $from_date!="" && $to_date!="" && $approve_status!=""){
@@ -163,6 +176,8 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+				$search_leave="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 
 		}
 		if($gt_id!="" && $adjustment_type=="" && $from_date=="" && $to_date=="" && $approve_status!=""){
@@ -170,6 +185,9 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert'";
 				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert'";
+				$search_leave="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and ap.approve_status=$approve_status and hfs.type='insert'";
+
 		}
 
 		if($gt_id!="" && $adjustment_type!="" && $from_date=="" && $to_date=="" && $approve_status!=""){
@@ -177,24 +195,35 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert'";
 				$search_exceptional="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert'";
+				$search_leave="WHERE  sr.gt_id ='$gt_id' and hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and ap.approve_status=$approve_status and hfs.type='insert'";
 		}
 		if($gt_id=="" && $adjustment_type!="" && $from_date=="" && $to_date=="" && $approve_status==""){
 				$search_miss_tap="WHERE   hfs.title='Miss Tap' 
 				and ap.approval_type_id=5  and hfs.type='insert'";
 				$search_exceptional="WHERE    hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and  hfs.type='insert'";
+				$search_leave="WHERE    hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and  hfs.type='insert'";
+
 		}
 		if($gt_id=="" && $adjustment_type!="" && $from_date!="" && $to_date!="" && $approve_status==""){
 				$search_miss_tap="WHERE   hfs.title='Miss Tap' 
 				and ap.approval_type_id=5  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 				$search_exceptional="WHERE    hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and  hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+				$search_leave="WHERE    hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and  hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+
 		}
 		if($gt_id=="" && $adjustment_type!="" && $from_date!="" && $to_date!="" && $approve_status!=""){
 				$search_miss_tap="WHERE   hfs.title='Miss Tap' 
 				and ap.approval_type_id=5  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date') and ap.approve_status=$approve_status";
 				$search_exceptional="WHERE    hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and  hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date') and ap.approve_status=$approve_status";
+				$search_leave="WHERE    hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and  hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date') and ap.approve_status=$approve_status";
+
 		}
 
 		if($gt_id=="" && $adjustment_type=="" && $from_date=="" && $to_date=="" && $approve_status!=""){
@@ -204,6 +233,11 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert'";
 				$search_exceptional="WHERE   hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert'";
+				$search_leave="WHERE   hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and ap.approve_status=$approve_status and hfs.type='insert'";
+
+
+
 
 		}
 		if($gt_id=="" && $adjustment_type=="" && $from_date!="" && $to_date!="" && $approve_status!=""){
@@ -213,6 +247,8 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 				$search_exceptional="WHERE   hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+				$search_leave="WHERE   hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and ap.approve_status=$approve_status and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 
 		}
 		if($gt_id=="" && $adjustment_type=="" && $from_date!="" && $to_date!="" && $approve_status==""){
@@ -222,6 +258,9 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5  and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
 				$search_exceptional="WHERE   hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+				$search_leave="WHERE   hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and hfs.type='insert' and (hfs.date >= '$from_date' AND hfs.date <= '$to_date')";
+
 
 		}
 		if($gt_id=="" && $adjustment_type!="" && $from_date=="" && $to_date=="" && $approve_status!=""){
@@ -231,6 +270,9 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5 and ap.approve_status=$approve_status and hfs.type='insert'";
 				$search_exceptional="WHERE   hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4 and ap.approve_status=$approve_status and hfs.type='insert'";
+				$search_leave="WHERE   hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2 and ap.approve_status=$approve_status and hfs.type='insert'";
+
 
 		}
 		if($gt_id=="" && $adjustment_type=="" && $from_date=="" && $to_date=="" && $approve_status==""){
@@ -239,6 +281,9 @@ class Adjustment_Approvel_model extends Model
 				and ap.approval_type_id=5  and hfs.type='insert'";
 				$search_exceptional="WHERE   hfs.effected_entry_table='atif_gs_events.exception_adjustment'
 				and ap.approval_type_id=4  and hfs.type='insert'";
+				$search_leave="WHERE   hfs.effected_entry_table='atif_gs_events.leave_application'
+				and ap.approval_type_id=2  and hfs.type='insert'";
+
 		}
 
 
@@ -335,6 +380,51 @@ class Adjustment_Approvel_model extends Model
 
 					 
 			$search_exceptional ORDER BY approval_id DESC";
+	}elseif ($leave==true) {
+		$query="
+ SELECT ap.id as approval_id,
+ 		ap.approve_status as approval_status,
+		hfs.effected_table_id,
+ 		 hfs.time_details,sr.designation,
+ 		 srr.abridged_name as enter_by,
+ 		 srr.name_code as name_code_enter_by,
+		 'Leave Application' as adjustment_type,
+		 hfs.form_number as form_number,
+		 hfs.title AS type_title,
+		  hfs.description as additional_comments,		
+		  date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y') as missed_tap_date,
+		  date_format(Split_string(hfs.time_details, '///', 1),'%a, %b %d %Y') as missed_tap_time, 
+		  hfs.time_details as no_of_days,
+		  '' as leave_to,  
+		  sr.employee_id,
+		  sr.name_code,
+		  sr.gt_id,
+		  hfs.staff_id                               AS id, 
+        sr.name                                    AS NAME, 
+        tp.title                                   AS title, 
+        hfs.date                                   AS date, 
+        hfs.time                                   AS time, 
+        
+        Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
+        hfs.description                            AS d_description, 
+        Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id,'//',sdd.id) AS location_name, 
+        Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
+        hfs.type                                   AS type
+ 
+ FROM   atif_gs_events.hr_forms_logs hfs 
+        inner join atif.staff_registered sr 
+                ON sr.id = hfs.staff_id 
+        inner join atif_gs_sims.users sdd 
+                ON sdd.id = hfs.updated_by 
+        inner join atif.staff_registered srr
+					 ON srr.gg_id=sdd.email
+        left join atif._title_person tp 
+               ON tp.id = sr.title_person_id
+       inner join atif_gs_events.adjustment_approvals ap
+       on ap.table_id=hfs.effected_table_id
+
+					 
+			$search_leave ORDER BY approval_id DESC";
 	}else{
 
 		$query="SELECT * FROM (SELECT
@@ -423,9 +513,55 @@ class Adjustment_Approvel_model extends Model
                ON tp.id = sr.title_person_id
        inner join atif_gs_events.adjustment_approvals ap
        on ap.table_id=hfs.effected_table_id
+
+ 		$search_exceptional
+
+  UNION ALL
+ SELECT ap.id as approval_id,
+ 		ap.approve_status as approval_status,
+		hfs.effected_table_id,
+ 		 hfs.time_details,sr.designation,
+ 		 srr.abridged_name as enter_by,
+ 		 srr.name_code as name_code_enter_by,
+		 'Leave Application' as adjustment_type,
+		 hfs.form_number as form_number,
+		 hfs.title AS type_title,
+		  hfs.description as additional_comments,		
+		  date_format(Split_string(hfs.time_details, '///', 2),'%a, %b %d %Y') as missed_tap_date,
+		  date_format(Split_string(hfs.time_details, '///', 1),'%a, %b %d %Y') as missed_tap_time, 
+		  hfs.time_details as no_of_days,
+		  '' as leave_to,  
+		  sr.employee_id,
+		  sr.name_code,
+		  sr.gt_id,
+		  hfs.staff_id                               AS id, 
+        sr.name                                    AS NAME, 
+        tp.title                                   AS title, 
+        hfs.date                                   AS date, 
+        hfs.time                                   AS time, 
+        
+        Date_format(hfs.date, '%a, %b %d %Y')      AS date_format, 
+        hfs.description                            AS d_description, 
+        Concat( sdd.first_name, ' ',sdd.last_name,'//',srr.employee_id,'//',sdd.id) AS location_name, 
+        Time_format(hfs.time, '%h:%i %p')                AS time_12hr, 
+        hfs.type                                   AS type
+ 
+ FROM   atif_gs_events.hr_forms_logs hfs 
+        inner join atif.staff_registered sr 
+                ON sr.id = hfs.staff_id 
+        inner join atif_gs_sims.users sdd 
+                ON sdd.id = hfs.updated_by 
+        inner join atif.staff_registered srr
+					 ON srr.gg_id=sdd.email
+        left join atif._title_person tp 
+               ON tp.id = sr.title_person_id
+       inner join atif_gs_events.adjustment_approvals ap
+       on ap.table_id=hfs.effected_table_id
 		
 					 
- 		$search_exceptional
+ 	
+ 		 		$search_leave
+
  
  
  ) as miss_tap
@@ -434,6 +570,9 @@ class Adjustment_Approvel_model extends Model
 	
 ORDER  BY approval_id DESC";
       }
+
+     // print_r($query);
+     //  die;
 
     
 		$staff = DB::connection($this->dbCon)->select($query);

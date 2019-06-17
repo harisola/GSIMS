@@ -211,9 +211,9 @@ td.ExceptionalAdjEvent {
                                                                 <div class="">
                                                                    <select class="form-control" id="leave_type_update">
                                                                    <option selected disabled value="0">Select Leave Type</option>
-                                                                   @foreach($leaveType as $type)
-                                                                      <option value="{{$type->id}}">{{$type->leave_type_name}}</option>
-                                                                   @endforeach
+                                                                   <?php $__currentLoopData = $leaveType; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                      <option value="<?php echo e($type->id); ?>"><?php echo e($type->leave_type_name); ?></option>
+                                                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                                    </select>
                                                                    <!-- select -->
                                                                 </div>
@@ -410,18 +410,18 @@ td.ExceptionalAdjEvent {
 
 <script type="text/javascript">
 
-loadScript("{{ URL::to('metronic') }}/global/scripts/datatable.js", function(){
-    loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/datatables.min.js", function(){
-        loadScript("{{ URL::to('metronic') }}/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
-			loadScript("{{ URL::to('metronic') }}/pages/scripts/table-datatables-editable.min.js", function(){
-				loadScript("{{ URL::to('metronic') }}/pages/scripts/profile.js", function(){
-					loadScript("{{ URL::to('metronic') }}/pages/scripts/table-datatables-managed.js", function(){
-						loadScript("{{ URL::to('metronic') }}/global/plugins/bootbox/bootbox.min.js", function(){
-							loadScript("{{ URL::to('metronic') }}/global/plugins/jquery.sparkline.min.js", function(){
-								loadScript("{{ URL::to('metronic') }}/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
-									loadScript("{{ URL::to('metronic') }}/layouts/layout/scripts/demo.min.js", function(){
-										loadScript("{{ URL::to('metronic') }}/pages/scripts/datatable-expand.js", function(){
-                                            loadScript("{{ URL::to('metronic') }}/global/scripts/app.min.js", pagefunction);
+loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/datatable.js", function(){
+    loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/datatables.min.js", function(){
+        loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js", function(){
+			loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/table-datatables-editable.min.js", function(){
+				loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/profile.js", function(){
+					loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/table-datatables-managed.js", function(){
+						loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/bootbox/bootbox.min.js", function(){
+							loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jquery.sparkline.min.js", function(){
+								loadScript("<?php echo e(URL::to('metronic')); ?>/global/plugins/jqvmap/jqvmap/jquery.vmap.js", function(){
+									loadScript("<?php echo e(URL::to('metronic')); ?>/layouts/layout/scripts/demo.min.js", function(){
+										loadScript("<?php echo e(URL::to('metronic')); ?>/pages/scripts/datatable-expand.js", function(){
+                                            loadScript("<?php echo e(URL::to('metronic')); ?>/global/scripts/app.min.js", pagefunction);
                                         });
 									});
 								});
@@ -553,7 +553,7 @@ $("#gt_id").inputmask("mask", {
     $.ajax({
        type:"POST",
        cache:true,
-       url:"{{url('/masterLayout/staff/LeaveUpdate')}}",
+       url:"<?php echo e(url('/masterLayout/staff/LeaveUpdate')); ?>",
        data:{
           "id":id,
           "leave_title":leave_title,
@@ -569,7 +569,7 @@ $("#gt_id").inputmask("mask", {
           "LeaveApproval":LeaveApproval,
           "leave_approve_time_from":time_approval_from_update,
           "leave_approve_time_to":time_approval_to_update,
-          "_token" : "{{ csrf_token() }}"
+          "_token" : "<?php echo e(csrf_token()); ?>"
 
        },
       
@@ -792,10 +792,10 @@ $.ajax({
 
    $.ajax({
        type:"POST",
-       url:"{{url('/masterLayout/staff/get_updateLeave')}}",
+       url:"<?php echo e(url('/masterLayout/staff/get_updateLeave')); ?>",
        data:{
           "id":id,
-          "_token": "{{ csrf_token() }}"
+          "_token": "<?php echo e(csrf_token()); ?>"
        },
        success:function(e){
 
@@ -873,28 +873,28 @@ var pagefunction = function() {
 }
 </script>
 <!-- Start Edit Absenia_id -->
-  @include('attendance.staff.modals.absentia_edit_modal')
+  <?php echo $__env->make('attendance.staff.modals.absentia_edit_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <!-- End Edit Absenia_id-->
 
 <!-- Leave Application Edit Functionality Modal-->
                          
-@include('attendance.staff.modals.leave_application_edit_modal')
+<?php echo $__env->make('attendance.staff.modals.leave_application_edit_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                 
 <!-- End Leave Applicaiton Modal -->
 
 <!-- Exceptional Edit Functionality Modal-->
-@include('attendance.staff.modals.exceptional_adjustment_edit_modal')
+<?php echo $__env->make('attendance.staff.modals.exceptional_adjustment_edit_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <!-- End Exceptional Modal -->
 
 <!-- Edit Penalties -->
-@include('attendance.staff.modals.penalty_edit_modal')
+<?php echo $__env->make('attendance.staff.modals.penalty_edit_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <!-- End Penalties -->
 <!-- Edit Manual Attendance -->
-@include('attendance.staff.modals.miss_tap_edit_modal')
+<?php echo $__env->make('attendance.staff.modals.miss_tap_edit_modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <!-- End Manual Attendance modal -->
-@include('master_layout.footer')
-<script src="{{ URL::to('metronic') }}/global/scripts/hr_forms.js" type="text/javascript"></script>
-<script src="{{ URL::to('metronic') }}/global/scripts/global_functions.js" type="text/javascript"></script>
+<?php echo $__env->make('master_layout.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/hr_forms.js" type="text/javascript"></script>
+<script src="<?php echo e(URL::to('metronic')); ?>/global/scripts/global_functions.js" type="text/javascript"></script>
 

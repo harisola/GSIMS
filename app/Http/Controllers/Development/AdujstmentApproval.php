@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use App\Models\HR_Attendance\Adjustment_Approvel_model;
+use App\Models\Staff\Staff_Information\StaffInformationModel;
 
 class AdujstmentApproval extends Controller
 {
@@ -15,12 +16,17 @@ class AdujstmentApproval extends Controller
 		$AAM = new Adjustment_Approvel_model();
 		$Link = substr(strrchr(url()->current(), "/"), 1);
 		$User_id = Sentinel::getUser()->id;
+        $staffInfo = new StaffInformationModel();
+
 
 		$UPermission = $AAM->Get_Permissions($Link, $User_id);
 		$Staffinfo = $AAM->Get_Ajustment(); 
-	    	 
+	    	
+
+	$leaveType = $staffInfo->get('atif_gs_events.leave_type','');
+
 		$HtmlUPermission =  $this->CreateHtml( $UPermission );
-		$Data_Array =  array( "HtmlUPermission" => $HtmlUPermission, "Staffinfo"  => $Staffinfo );
+		$Data_Array =  array( "HtmlUPermission" => $HtmlUPermission, "Staffinfo"  => $Staffinfo,"leaveType"=>$leaveType );
 		return view('attendance.adjustment_approval.adjustment_approve_full')->with( $Data_Array );
 	}
 
@@ -383,6 +389,7 @@ $Update_Query = "UPDATE `atif_gs_events`.`adjustment_approvals` SET `approve_sta
 			$from_date=$request->from_date;
 			$to_date=$request->to_date;
 			$approve_status=$request->approval_status;
+
 
 			$data=$aam->adjustmentFilter($gt_id,$adjustment_type,$from_date,$to_date,$approve_status);
 

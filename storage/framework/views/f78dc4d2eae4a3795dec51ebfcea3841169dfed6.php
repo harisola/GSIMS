@@ -1,22 +1,16 @@
-<div class="modal fade" id="AddAIAE" tabindex="-1" role="basic" aria-hidden="true">
-    <input type="hidden" name="Edit_Absentia_id_hidden" id="Edit_Absentia_id_hidden" value="0" />
-    <input type="hidden" name="Edit_Absentia_id_staff_id_hidden" id="Edit_Absentia_id_staff_id_hidden" value="0" />
+<div class="modal fade" id="ManualAttendanceFormEdit" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h3 class="modal-title">Edit Absentia</h3>
-            </div>
             <div class="modal-body" style="float:left;width:100%;">
                 <div class="portlet box blue-hoki">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-user"></i><font id="selected_individuals">Attendance in Absentia form</font>
+                            <i class="fa fa-user"></i><font id="">Manual</font>
                         </div>
                     </div>
                     <!-- portlet-title -->
                     <div class="headRightDetailsInner">
-                        <table class="absentia_staff_view">
+                        <table id="manual_staff_view">
                             <tbody>
                                 <tr id="">
                                     <td class="" style="padding-right:10px;">
@@ -30,8 +24,10 @@
                         </table>
                         <!-- col-md-4 -->
                     </div>
+                    <!-- headRightDetailsInner -->
                     <div class="portlet-body fixedHeightmodalPortlet">
-                        <div class="form-body" id="Absenia_Contents"> </div>
+                        <div class="form-body" id="Manual_Form_Entry">
+                        </div>
                         <!-- form-body -->
                     </div>
                     <!-- portlet-body fixedHeightmodalPortlet-->
@@ -39,7 +35,7 @@
             </div>
             <div class="modal-footer text-center" style="text-align:center;">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Cancel</button>
-                <button onclick="addAbsentiaE()" type="button" class="btn dark btn-outline active" data-dismiss="">Update</button>
+                <button type="button" class="btn dark btn-outline active" data-dismiss="" onClick="edit_manual()"> Update </button>
                 <!--button type="button" class="btn green">Add Badge</button -->
             </div>
         </div>

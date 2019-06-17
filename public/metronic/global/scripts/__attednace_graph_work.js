@@ -19,7 +19,7 @@ var dailyReport = function(date,staffID){
        if(data.length != 0){
 
 
-      
+          data[0].payroll_time_slot=data[0].payroll_time_slot.replace(',,',',');
 
            var expected_time = timeToMinute(data[0].day_time_in);
            localStorage.setItem('expected_time',expected_time);
@@ -39,6 +39,7 @@ var dailyReport = function(date,staffID){
                     var last_tap = timeToMinute(data[0].tap_max);
                     var payRollAttendance = data[0].payroll_time_slot;
                     payRollAttendance=payRollAttendance.replace(',,',',');
+                    debugger;
                     if(data[0].ab_actual_tap!=""){
                         var ab_actual_tap_in=data[0].ab_actual_tap.split(',')[0];
                         var ab_actual_tap_out=data[0].ab_actual_tap.split(',')[1];
@@ -119,10 +120,10 @@ var dailyReport = function(date,staffID){
                                   var display_class_sequence=[false,true,true,true,false];
                                   var css_class_name=['red-color','green-color','red-color','green-color'];
                               }
-                              setTimeout(function(){
-                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
-                                      PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
-                                      },2000);
+                              // setTimeout(function(){
+                              //       var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                              //         PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
+                              //         },2000);
                           }
                           if(data[0].ab_rec_time!="" && first_tap<=ab_set_tap_out && expected_time==ab_set_tap_in){
                               myString=payRollAttendance;
@@ -141,10 +142,10 @@ var dailyReport = function(date,staffID){
                               //   var css_class_name=['red-color','green-color','green-color','grey-color'];
                               // }
 
-                               setTimeout(function(){
-                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
-                                    PayRollAttendanceSlider(payRollAttendanceArray,[false,true,true,true,true],['red-color','green-color','green-color','grey-color'],[360,1020]);
-                              },2000);
+                              //  setTimeout(function(){
+                              //       var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                              //       PayRollAttendanceSlider(payRollAttendanceArray,[false,true,true,true,true],['red-color','green-color','green-color','grey-color'],[360,1020]);
+                              // },2000);
                           }
 
                           if(data[0].ab_rec_time!="" && first_tap>ab_set_tap_out && expected_time==ab_set_tap_in){
@@ -158,10 +159,10 @@ var dailyReport = function(date,staffID){
                               var display_class_sequence=[false, true, true, true, false];
                               var css_class_name=['green-color','red-color','green-color','red-color'];
                             
-                               setTimeout(function(){
-                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
-                                    PayRollAttendanceSlider(payRollAttendanceArray,[false, true, true, true, false],['green-color','red-color','green-color','red-color'],[360,1020]);
-                              },2000);
+                              //  setTimeout(function(){
+                              //       var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                              //       PayRollAttendanceSlider(payRollAttendanceArray,[false, true, true, true, false],['green-color','red-color','green-color','red-color'],[360,1020]);
+                              // },2000);
                           }
                           if(data[0].ab_rec_time!="" && first_tap>ab_set_tap_out && expected_time==ab_set_tap_in && last_tap<expected_time_out){
                               
@@ -169,19 +170,19 @@ var dailyReport = function(date,staffID){
                               
 
                               
-                               setTimeout(function(){
-                                  myString=data[0].payroll_time_slot;
-                                  rangestart_timings=data[0].payroll_time_slot.split(',')[0];
-                                  myString = myString.substring(myString.indexOf(',')+1);
-                                  myString =myString.replace(',','');
+                              //  setTimeout(function(){
+                              //     myString=data[0].payroll_time_slot;
+                              //     rangestart_timings=data[0].payroll_time_slot.split(',')[0];
+                              //     myString = myString.substring(myString.indexOf(',')+1);
+                              //     myString =myString.replace(',','');
 
-                                  myNewPayroll=rangestart_timings+','+data[0].ab_rec_time.split(',')[1]+','+data[0].tap_min+','+data[0].tap_max+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
-                                  myNewPayroll = myNewPayroll.split(',')
-                                  var display_class_sequence=[false, true, true, true, true,true,false];
-                                  var css_class_name=["green-color","red-color", "green-color", "red-color","red-color", "red-color"];
-                                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
-                                    PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
-                              },2000);
+                              //     myNewPayroll=rangestart_timings+','+data[0].ab_rec_time.split(',')[1]+','+data[0].tap_min+','+data[0].tap_max+','+ab_set_tap_in_his_format+','+data[0].day_time_out;
+                              //     myNewPayroll = myNewPayroll.split(',')
+                              //     var display_class_sequence=[false, true, true, true, true,true,false];
+                              //     var css_class_name=["green-color","red-color", "green-color", "red-color","red-color", "red-color"];
+                              //       var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                              //       PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
+                              // },2000);
                           }
 
 
@@ -194,16 +195,16 @@ var dailyReport = function(date,staffID){
            // Weekly Time Sheet
                 var weekly_time_sheet_in = timeToMinute(data[0].day_time_in);
                 var weekly_time_sheet_out = timeToMinute(data[0].day_time_out);
-                setTimeout(function(){
-                  if(data[0].ab_rec_time!="" && data[0].tap_min!=""){
-                    var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
-                      PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
-                  }
+                // setTimeout(function(){
+                //   if(data[0].ab_rec_time!="" && data[0].tap_min!=""){
+                //     var  payRollAttendanceArray = timeToMinuteForArray(myNewPayroll);
+                //       PayRollAttendanceSlider(payRollAttendanceArray,display_class_sequence,css_class_name,[360,1020]);
+                //   }
 
 
-                    // PayRollAttendanceSlider(payRollAttendanceArray,[false,true,true,true,false],['green-color','red-color','green-color','red-color'],[360,1020]);
+                //     // PayRollAttendanceSlider(payRollAttendanceArray,[false,true,true,true,false],['green-color','red-color','green-color','red-color'],[360,1020]);
 
-                      },1000);
+                //       },1000);
 
 
                       
@@ -400,14 +401,14 @@ var dailyReport = function(date,staffID){
 
                       // var connectPayRoll = [false];
                       var classPayRoll = [];
-                      var payRollAttendance = data[0].payroll_time_slot;
+                      var payRollAttendance = data[0].payroll_time_slot+','+data[0].ab_rec_time;
                       myString=payRollAttendance;
                       rangestart_timings=payRollAttendance.split(',')[0];
                       myString = myString.substring(myString.indexOf(',')+1);
                       myString =myString.replace(',','');
 
                       console.log(rangestart_timings+','+rangestart_timings+','+myString);
-
+                      payRollAttendance=payRollAttendance++
                       payRollAttendance = payRollAttendance.split(',')
                       var  payRollAttendanceArray = timeToMinuteForArray(payRollAttendance);
 
@@ -425,43 +426,43 @@ var dailyReport = function(date,staffID){
 
                                var taps=  data[0].ab_rec_time.split(",");
                                var total_taps=taps.length;
-                                if(absentia_start_time>expected_time){
-                                    //absentia in middle day
-                                     // absentia_time='after morrning';
-                                        var absentia_in_afternoon=true;
+                                // if(absentia_start_time>expected_time){
+                                //     //absentia in middle day
+                                //      // absentia_time='after morrning';
+                                //         var absentia_in_afternoon=true;
 
                                         
 
-                                        var total_tap_1=data[0].payroll_time_slot.split(absentia_end_time_simple)[0];
-                                        var total_tap_2=data[0].payroll_time_slot.split(absentia_end_time_simple)[1];
-                                        var new_time_slot=total_tap_1+data[0].ab_rec_time+total_tap_2;
-                                        // data[0].payroll_time_slot=new_time_slot;
+                                //         var total_tap_1=data[0].payroll_time_slot.split(absentia_end_time_simple)[0];
+                                //         var total_tap_2=data[0].payroll_time_slot.split(absentia_end_time_simple)[1];
+                                //         var new_time_slot=total_tap_1+data[0].ab_rec_time+total_tap_2;
+                                //         // data[0].payroll_time_slot=new_time_slot;
 
-                                        // payRollAttendance = new_time_slot;
-                                        // payRollAttendance = payRollAttendance.split(',')
-                                        // payRollAttendanceArray = timeToMinuteForArray(payRollAttendance);
-                                        // console.log("Apply Absentia"+payRollAttendanceArray)
-                                        // if(total_taps>2){
-                                        //   //if tap and absentia and user avail absentia
-                                        // }else{
-                                        //     //if tap and absentia and user not avail absentia
-
-
-                                        // }
-                                        // if(absentia_end_time)
+                                //         // payRollAttendance = new_time_slot;
+                                //         // payRollAttendance = payRollAttendance.split(',')
+                                //         // payRollAttendanceArray = timeToMinuteForArray(payRollAttendance);
+                                //         // console.log("Apply Absentia"+payRollAttendanceArray)
+                                //         // if(total_taps>2){
+                                //         //   //if tap and absentia and user avail absentia
+                                //         // }else{
+                                //         //     //if tap and absentia and user not avail absentia
 
 
+                                //         // }
+                                //         // if(absentia_end_time)
 
 
-                                 }else{
-                                    //absentia in morrning 
-                                    //and tap found in morning
 
-                                    if(first_tap<absentia_start_time){
-                                        console.log('absentia will apply in morning')
-                                        var morning_tap_and_absentia=true;
-                                    }
-                                 }
+
+                                //  }else{
+                                //     //absentia in morrning 
+                                //     //and tap found in morning
+
+                                //     if(first_tap<absentia_start_time){
+                                //         console.log('absentia will apply in morning')
+                                //         var morning_tap_and_absentia=true;
+                                //     }
+                                //  }
 
                            }
                       // Arranging PayRoll Flag if Actual Time is Greater Then Expected Time
@@ -552,10 +553,10 @@ var dailyReport = function(date,staffID){
                                 //         classPayRoll.push('orange-color');
 
                                 // }
-                                if(morning_tap_and_absentia==true){
-                                  classPayRoll.push('orange-color');
+                                // if(morning_tap_and_absentia==true){
+                                //   classPayRoll.push('orange-color');
 
-                                }
+                                // }
                                if(TapCount == 1){
                                 classPayRoll.push('red-color');
                                }else{
@@ -602,12 +603,13 @@ var dailyReport = function(date,staffID){
 
                             if(payRollFlag[i] == 'ARi'){
 
-                               if(payRollFlag[i+1] == 'Ai'){
-                                //here i have to place condition for absentia and not check
-                                  classPayRoll.push('orange-color');
-                               }else{
-                                  classPayRoll.push('green-color');
-                               }
+                               // if(payRollFlag[i+1] == 'Ai'){
+                               //  //here i have to place condition for absentia and not check
+                               //    classPayRoll.push('green-color');
+                               // }else{
+                               // }
+                               classPayRoll.push('green-color');
+
                                connectPayRoll.push(true);
                             }
 
@@ -969,19 +971,15 @@ var dailyReport = function(date,staffID){
 
 
                         }
-                        debugger;
                         PayRollAttendanceSlider(payRollAttendanceArrayFlexy,connectPayRollFlexy,classPayRollFlexy,range);
                       }
 
                    }else{
 
                     if(Date.parse(date) > Date.parse(data[0].today_date)){
-                        debugger;
-
                         $('#PayrollAttendance').addClass('noShow');
                         PayRollAttendanceSlider([0,0],[false,false,false],['red-color'],range);
                       }else{
-                        
                         PayRollAttendanceSlider([weekly_time_sheet_in,weekly_time_sheet_out],[false,true,false],['red-color'],range);
                       }
                    }
@@ -1307,48 +1305,48 @@ var dailyReport = function(date,staffID){
            },
            url:url+'/masterLayout/getLeaveApprovalUpdate',
            success:function(e){
-             setTimeout(function(){
-              debugger
+             // setTimeout(function(){
+             //  debugger
 
-               var data = JSON.parse(e);
-               var expected_time_in=localStorage.getItem('expected_time');
-               var expected_time_out=localStorage.getItem('expected_time_out');
-                localStorage.setItem('expected_time','');
-                localStorage.setItem('expected_time_out','');
-              if(data.length != 0){
+             //   var data = JSON.parse(e);
+             //   var expected_time_in=localStorage.getItem('expected_time');
+             //   var expected_time_out=localStorage.getItem('expected_time_out');
+             //    localStorage.setItem('expected_time','');
+             //    localStorage.setItem('expected_time_out','');
+             //  if(data.length != 0){
 
-                   if(data[0].actual_time_from=="00:00:00"){
-                        var range=[expected_time_in,expected_time_out];
+             //       if(data[0].actual_time_from=="00:00:00"){
+             //            var range=[expected_time_in,expected_time_out];
 
-                  }else{
-                        var time_from=timeToMinute(data[0].actual_time_from);
-                        var time_to=timeToMinute(data[0].actual_time_to);
-                  }
+             //      }else{
+             //            var time_from=timeToMinute(data[0].actual_time_from);
+             //            var time_to=timeToMinute(data[0].actual_time_to);
+             //      }
 
                   
-                   if(data[0].actual_time_from=="00:00:00"){
-                      var range=[expected_time_in,expected_time_out];
+             //       if(data[0].actual_time_from=="00:00:00"){
+             //          var range=[expected_time_in,expected_time_out];
 
-                  }else{
-                    var range=[timeToMinute(data[0].actual_time_from),timeToMinute(data[0].actual_time_to)];
-                  }
-                  debugger;
-                 if(data[0].paid_percentage==0){
-                   leaveAllocatedTap(range,[false, true, false],['white-color','white-color','green-color'],[window.range_start,window.range_end]);
-                 }else if(data[0].paid_percentage==50){
-                   leaveAllocatedTap(range,[false, true, false],['yellow-color','yellow-color','green-color'],[window.range_start,window.range_end]);
-                 }else if(data[0].paid_percentage==100){
-                   leaveAllocatedTap(range,[false, true, false],['black-color','black-color','green-color'],[window.range_start,window.range_end]);
-                 }
-                 // else{
-                 //   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
-                 // }
-             }else{
-                   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
+             //      }else{
+             //        var range=[timeToMinute(data[0].actual_time_from),timeToMinute(data[0].actual_time_to)];
+             //      }
+             //      debugger;
+             //     if(data[0].paid_percentage==0){
+             //       leaveAllocatedTap(range,[false, true, false],['white-color','white-color','green-color'],[window.range_start,window.range_end]);
+             //     }else if(data[0].paid_percentage==50){
+             //       leaveAllocatedTap(range,[false, true, false],['yellow-color','yellow-color','green-color'],[window.range_start,window.range_end]);
+             //     }else if(data[0].paid_percentage==100){
+             //       leaveAllocatedTap(range,[false, true, false],['black-color','black-color','green-color'],[window.range_start,window.range_end]);
+             //     }
+             //     // else{
+             //     //   leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
+             //     // }
+             // }else{
+             //       leaveAllocatedTap([0,0],[false, true, false],['black-color'],[window.range_start,window.range_end]);
 
-             }
+             // }
              
-             },2000)
+             // },2000)
 
            }
        })
@@ -1396,7 +1394,7 @@ var dailyReport = function(date,staffID){
  
 
     var actualTapInTapOut = function(time,connect1,classes,uihandle,tooltip,range){
-        debugger;
+      debugger;
                  console.log('time_actual_tap'+time);
                  setTimeout(function(){
                    getAllTimes= window.myTime;
@@ -1607,7 +1605,7 @@ return window.absentia;
     //=============================================================//
 
     function PayRollAttendanceSlider(payRollAttendanceArray,connectPayRoll,classPayRoll,range){
-      // debugger;
+      debugger;
            if(payrollSlider != undefined){
             if(payrollSlider.noUiSlider!=undefined){
                               payrollSlider.noUiSlider.destroy();
