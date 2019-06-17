@@ -464,6 +464,18 @@ $("#gt_id").inputmask("mask", {
             "mask": "99-999"
 });
 
+$('#changeSwitch').on('switchChange.bootstrapSwitch', function (e, data) {
+   var state=$(this).bootstrapSwitch('state');//returns true or false
+    if(state)
+      {
+         $("#paidField").show();
+      }
+    else
+      {
+         $("#paidField").hide();
+      }
+  });
+
  var LeaveUpdateById = function(){
 
     var staffID = $('.staff_id').val();
