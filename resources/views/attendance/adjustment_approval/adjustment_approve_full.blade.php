@@ -335,7 +335,6 @@ td.ExceptionalAdjEvent {
                                                                    <label class="">Paid Percent:</label>
                                                                    <div class="input-group">
                                                                     <select class="form-control" id="paid_compensation_percentage">
-                                                                      <option value="">Paid compensation</option>
                                                                       <option value="0">0</option>
                                                                       <option value="50">50</option>
                                                                       <option value="100">100</option>

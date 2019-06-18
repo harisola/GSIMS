@@ -1308,8 +1308,10 @@ var dailyReport = function(date,staffID){
            url:url+'/masterLayout/getLeaveApprovalUpdate',
            success:function(e){
              setTimeout(function(){
-              debugger
 
+
+
+              debugger;
                var data = JSON.parse(e);
                var expected_time_in=localStorage.getItem('expected_time');
                var expected_time_out=localStorage.getItem('expected_time_out');
@@ -1333,7 +1335,7 @@ var dailyReport = function(date,staffID){
                     var range=[timeToMinute(data[0].actual_time_from),timeToMinute(data[0].actual_time_to)];
                   }
                   debugger;
-                 if(data[0].paid_percentage==0){
+                 if(data[0].paid_percentage==0 || data[0].paid_percentage==null){
                    leaveAllocatedTap(range,[false, true, false],['white-color','white-color','green-color'],[window.range_start,window.range_end]);
                  }else if(data[0].paid_percentage==50){
                    leaveAllocatedTap(range,[false, true, false],['yellow-color','yellow-color','green-color'],[window.range_start,window.range_end]);

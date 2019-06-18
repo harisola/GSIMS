@@ -2913,8 +2913,8 @@ public function getSinglePenalty($ID){
 			group_concat(CONCAT(IF(lp.time_from IS NOT NULL OR lp.time_from != '', CONCAT(IF(la.paid_percentage=100, '10', LEFT(la.paid_percentage, 1)), 'o'),''),',', IF(lp.time_to IS NOT NULL OR lp.time_to != '',CONCAT(IF(la.paid_percentage=100, '10', LEFT(la.paid_percentage, 1)), 'i'),''))) AS leave_time_code,
 			group_concat(concat(lp.time_from,',',lp.time_to)) as leave_time
 			FROM atif_gs_events.leave_application la
-			left join atif_gs_events.leave_approved lp on (lp.leave_application_id = la.id and lp.date = '$date')
-			where la.leave_approve_status = 1  and lp.record_deleted = 0 and la.staff_id = $staff_id and lp.date  = '$date'";
+			left join atif_gs_events.leave_approved lp on (lp.leave_application_id = la.id and lp.approve_date = '$date')
+			where la.leave_approve_status = 1  and lp.record_deleted = 0 and la.staff_id = $staff_id and lp.approve_date  = '$date'";
 			// die;
 		return DB::connection('mysql')->select($query);
  	}
